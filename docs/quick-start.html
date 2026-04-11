@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Start — Weblisk</title>
+  <meta name="description" content="Get started with Weblisk in under a minute. Scaffold a project, write your first island, and preview it — zero dependencies, zero build step.">
+  <link rel="canonical" href="https://weblisk.dev/docs/quick-start.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Quick Start — Weblisk">
+  <meta property="og:description" content="Get started with Weblisk in under a minute. Scaffold a project, write your first island, and preview it — zero dependencies, zero build step.">
+  <meta property="og:url" content="https://weblisk.dev/docs/quick-start.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Quick Start — Weblisk",
+    "description": "Get started with Weblisk in under a minute. Scaffold a project, write your first island, and preview it — zero dependencies, zero build step.",
+    "url": "https://weblisk.dev/docs/quick-start.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html" aria-current="page" class="active">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Quick Start</h1>
+
+      <h2>1. Scaffold a Project</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-f">weblisk</span> new my<span class="syn-a">-app</span> &amp;&amp; <span class="syn-f">cd</span> my<span class="syn-a">-app</span>
+</pre>
+        </div>
+      </div>
+      <p>This creates:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">code</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+my-app/
+├── app/
+│   ├── index.html         ← Home page (full standalone HTML)
+│   ├── about.html         ← About page
+│   ├── 404.html           ← Not found page
+│   ├── js/
+│   │   └── islands/
+│   │       └── shell.js   ← Shell bootstrapper
+│   ├── css/
+│   │   └── styles.css     ← Global styles
+│   ├── images/            ← Image assets
+│   └── sw.js              ← Service Worker
+├── lib/weblisk/           ← The framework (52 modules)
+└── .env                   ← Config
+</pre>
+        </div>
+      </div>
+      <p>Every page is a full standalone HTML document — <code><!DOCTYPE html></code> through <code></html></code>. What
+        you write is what ships.</p>
+      <h2>2. Preview</h2>
+      <p>Open <code>app/index.html</code> directly in a browser, or use any static file server:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-f">weblisk</span> dev                <span class="syn-c"># built-in dev server</span>
+python3 <span class="syn-a">-m</span> http.server     <span class="syn-c"># Python</span>
+</pre>
+        </div>
+      </div>
+      <h2>3. Add a Page</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-f">weblisk</span> add page contact
+</pre>
+        </div>
+      </div>
+      <p>This creates <code>app/contact.html</code> — a full HTML page ready to edit.</p>
+      <h2>4. Make It Interactive</h2>
+      <p>Create an island — a piece of JavaScript that enhances a static HTML region:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-f">weblisk</span> add island counter
+</pre>
+        </div>
+      </div>
+      <p>Add the island to your page HTML:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;/js/islands/counter.js&quot;</span> <span class="syn-a">data-hydrate</span><span class="syn-p">=</span><span class="syn-s">&quot;idle&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>Count: 0<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>Edit <code>app/js/islands/counter.js</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-k">import</span> <span class="syn-p">{</span> signal<span class="syn-p">,</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">export</span> <span class="syn-k">default</span> <span class="syn-k">function</span> <span class="syn-f">counter</span><span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> btn <span class="syn-p">=</span> el<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'button'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+  btn<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">setCount</span><span class="syn-p">(</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span> btn<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`Count: ${count()}`</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span>
+</pre>
+        </div>
+      </div>
+      <h2>5. Build for Production</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-f">weblisk</span> build
+</pre>
+        </div>
+      </div>
+      <p>The <code>dist/</code> folder contains your static files — ready to deploy anywhere.</p>
+      <h2>6. Preview the Build</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-9">
+<span class="syn-f">weblisk</span> preview
+</pre>
+        </div>
+      </div>
+      <p>This serves the <code>dist/</code> folder locally so you can verify everything before deploying.</p>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/installation.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Installation</a>
+        <a href="/docs/project-structure.html">Project Structure <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

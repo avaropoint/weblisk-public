@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integration — Weblisk</title>
+  <meta name="description"
+    content="Weblisk's modules are standard ES modules with zero dependencies. They work in any environment that runs JavaScript in a browser — no build step, no…">
+  <link rel="canonical" href="https://weblisk.dev/docs/integration.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Integration — Weblisk">
+  <meta property="og:description"
+    content="Weblisk's modules are standard ES modules with zero dependencies. They work in any environment that runs JavaScript in a browser — no build step, no…">
+  <meta property="og:url" content="https://weblisk.dev/docs/integration.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Integration — Weblisk",
+    "description": "Weblisk's modules are standard ES modules with zero dependencies. They work in any environment that runs JavaScript in a browser — no build step, no…",
+    "url": "https://weblisk.dev/docs/integration.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html" aria-current="page" class="active">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Integration</h1>
+
+      <p>Weblisk's modules are standard ES modules with zero dependencies. They work in <strong>any</strong> environment
+        that runs JavaScript in a browser — no build step, no adapter, no framework coupling.</p>
+      <p>There are three ways to use Weblisk:</p>
+      <p>| Mode | Use case | Build step? |</p>
+      <p>|------|----------|-------------|</p>
+      <p>| <strong>CDN drop-in</strong> | Add signals/components to any existing site | No |</p>
+      <p>| <strong>Static assets</strong> | Copy <code>lib/weblisk/</code> into your project | No |</p>
+      <p>| <strong>Full Weblisk</strong> | Standalone static site with islands | Optional (optimization) |</p>
+      <h2>The Import Map</h2>
+      <p>Every integration starts with an import map that tells the browser where Weblisk modules live:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+{
+  &quot;imports&quot;: {
+    &quot;weblisk&quot;:  &quot;/assets/weblisk/weblisk.js&quot;,
+    &quot;weblisk/&quot;: &quot;/assets/weblisk/&quot;
+  }
+}
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>Adjust the path to match where you've placed the modules. Then import what you need:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { signal, effect, component } from 'weblisk';
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>No npm install. No bundler. No build step.</p>
+      <h2>Working Without a Server</h2>
+      <p>Weblisk modules work with the <code>file://</code> protocol for local development. Use relative paths in your
+        import map:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+{
+  &quot;imports&quot;: {
+    &quot;weblisk&quot;:  &quot;./lib/weblisk/weblisk.js&quot;,
+    &quot;weblisk/&quot;: &quot;./lib/weblisk/&quot;
+  }
+}
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>Open the HTML file directly in a browser — signals, components, and effects all work. The only features that
+        require a server are Service Workers (browser security restriction) and cross-origin fetch requests.</p>
+      <h2>Rails (Ruby on Rails)</h2>
+      <p>Place the <code>lib/weblisk/</code> directory in <code>public/weblisk/</code> or pipe it through the asset
+        pipeline.</p>
+      <h3>Setup (application layout)</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">erb</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-c">&lt;!-- app/views/layouts/application.html.erb --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+  {
+    &quot;imports&quot;: {
+      &quot;weblisk&quot;:  &quot;<span class="syn-t">&lt;</span>%= <span class="syn-a">asset_path</span>('<span class="syn-a">weblisk</span>/<span class="syn-a">weblisk.js</span><span class="syn-s">') %&gt;</span>&quot;,
+      &quot;weblisk/&quot;: &quot;<span class="syn-t">&lt;</span>%= <span class="syn-a">asset_path</span>('<span class="syn-a">weblisk</span>/') %<span class="syn-t">&gt;</span>&quot;
+    }
+  }
+  <span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Component example</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">erb</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-c">&lt;!-- app/views/orders/show.html.erb --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">wl-live-price</span> <span class="syn-a">product-id</span><span class="syn-p">=</span><span class="syn-s">&quot;&lt;%= @product.id %&gt;</span>&quot; interval=&quot;3000&quot;&gt;
+  <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;price&quot;</span><span class="syn-t">&gt;</span>$<span class="syn-t">&lt;</span>%= <span class="syn-a">@product.price</span> %<span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;updated&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;</span>%= <span class="syn-a">time_ago_in_words</span>(<span class="syn-a">@product.updated_at</span>) %<span class="syn-t">&gt;</span> ago<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-live-price</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { component } from 'weblisk/ui/component.js';
+import { fetchJSON } from 'weblisk/net/fetch.js';
+
+component('wl-live-price', {
+  props: { productId: '', interval: 5000 },
+  setup({ props, $, cleanup }) {
+    const poll = setInterval(async () =&gt; {
+      const data = await fetchJSON(`/api/products/${props.productId()}/price`);
+      $('.price').textContent = `$${data.price}`;
+      $('.updated').textContent = 'just now';
+    }, props.interval());
+    cleanup(() =&gt; clearInterval(poll));
+  }
+});
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>Rails renders the initial HTML with real data. Weblisk polls for updates. The API endpoint is a standard Rails
+        controller — no special adapter needed.</p>
+      <h3>Realtime with ActionCable alternative</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">erb</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;notifications&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { stream } from 'weblisk/net/sse.js';
+import { signal, effect } from 'weblisk';
+
+// Connect to any SSE endpoint — Rails, Rack, or a dedicated Go service
+const messages = stream('/api/notifications/stream');
+
+effect(() =&gt; {
+  const msg = messages();
+  if (!msg) return;
+  const el = document.createElement('div');
+  el.className = 'notification';
+  el.textContent = msg.data;
+  document.getElementById('notifications').prepend(el);
+});
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Django / Jinja2</h2>
+      <p>Place <code>lib/weblisk/</code> in your static files directory.</p>
+      <h3>Setup (base template)</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-c">&lt;!-- templates/base.html --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+  {
+    &quot;imports&quot;: {
+      &quot;weblisk&quot;:  &quot;{% static 'weblisk/weblisk.js' %}&quot;,
+      &quot;weblisk/&quot;: &quot;{% static 'weblisk/' %}&quot;
+    }
+  }
+  <span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Form with CSRF + validation</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-c">&lt;!-- templates/contact.html --&gt</span>;
+{% extends &quot;base.html&quot; %}
+{% block content %}
+<span class="syn-t">&lt;</span><span class="syn-t">form</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;contact-form&quot;</span> <span class="syn-a">method</span><span class="syn-p">=</span><span class="syn-s">&quot;post&quot;</span> <span class="syn-a">action</span><span class="syn-p">=</span><span class="syn-s">&quot;{% url 'contact' %}&quot;</span><span class="syn-t">&gt;</span>
+  {% csrf_token %}
+  <span class="syn-t">&lt;</span><span class="syn-t">input</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;text&quot;</span> <span class="syn-a">name</span><span class="syn-p">=</span><span class="syn-s">&quot;name&quot;</span> <span class="syn-a">required</span> <span class="syn-t">/&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">input</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;email&quot;</span> <span class="syn-a">name</span><span class="syn-p">=</span><span class="syn-s">&quot;email&quot;</span> <span class="syn-a">required</span> <span class="syn-t">/&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">textarea</span> <span class="syn-a">name</span><span class="syn-p">=</span><span class="syn-s">&quot;message&quot;</span> <span class="syn-a">required</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">textarea</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;submit&quot;</span><span class="syn-t">&gt;</span>Send<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;status&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">form</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { enhance } from 'weblisk/core/island.js';
+import { formState } from 'weblisk/state/form.js';
+import { sanitize } from 'weblisk/security/sanitize.js';
+import { announce } from 'weblisk/a11y/aria.js';
+
+enhance('#contact-form', (form, { $ }) =&gt; {
+  form.addEventListener('submit', async (e) =&gt; {
+    e.preventDefault();
+    const data = new FormData(form);
+    // Sanitize user inputs before sending
+    data.set('name', sanitize(data.get('name')));
+    data.set('message', sanitize(data.get('message')));
+
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data });
+      if (res.ok) {
+        $('#status').textContent = 'Message sent!';
+        announce('Contact form submitted successfully');
+        form.reset();
+      }
+    } catch {
+      $('#status').textContent = 'Failed to send. Please try again.';
+    }
+  });
+});
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+{% endblock %}
+</pre>
+        </div>
+      </div>
+      <h2>Go (net/http, Gin, Echo, etc.)</h2>
+      <p>Serve the <code>lib/weblisk/</code> directory as static files. Your Go templates render HTML; Weblisk enhances
+        it client-side.</p>
+      <h3>Setup (Go template)</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-9">
+<span class="syn-c">&lt;!-- templates/layout.html --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+  { &quot;imports&quot;: { &quot;weblisk/&quot;: &quot;/static/weblisk/&quot; } }
+  <span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Real-time dashboard with SSE</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-10">
+<span class="syn-c">&lt;!-- templates/dashboard.html --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;metrics&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;metric&quot;</span><span class="syn-t">&gt;</span>
+    <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;label&quot;</span><span class="syn-t">&gt;</span>Requests/sec<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+    <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;value&quot;</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;rps&quot;</span><span class="syn-t">&gt;</span>{{.RPS}}<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;metric&quot;</span><span class="syn-t">&gt;</span>
+    <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;label&quot;</span><span class="syn-t">&gt;</span>Latency (p99)<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+    <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;value&quot;</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;latency&quot;</span><span class="syn-t">&gt;</span>{{.P99}}ms<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { stream } from 'weblisk/net/sse.js';
+import { effect } from 'weblisk/core/signal.js';
+
+// Go server sends SSE events at /api/metrics/stream
+const metrics = stream('/api/metrics/stream', { parse: JSON.parse });
+
+effect(() =&gt; {
+  const m = metrics();
+  if (!m) return;
+  document.getElementById('rps').textContent = m.rps;
+  document.getElementById('latency').textContent = m.p99 + 'ms';
+});
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>The Go server pushes metrics via standard SSE. Weblisk makes it reactive with zero boilerplate.</p>
+      <h2>Laravel (Blade)</h2>
+      <h3>Setup</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">blade</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-11">
+<span class="syn-c">&lt;!-- resources/views/layouts/app.blade.php --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+  { &quot;imports&quot;: { &quot;weblisk/&quot;: &quot;{{ asset('weblisk/') }}&quot; } }
+  <span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Interactive component</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">blade</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-12">
+<span class="syn-c">&lt;!-- resources/views/products/show.blade.php --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">wl-cart-button</span> <span class="syn-a">product-id</span><span class="syn-p">=</span><span class="syn-s">&quot;{{ $product-&gt;</span>id }}&quot; price=&quot;{{ $product-&gt;price }}&quot;&gt;
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;add&quot;</span><span class="syn-t">&gt;</span>Add to Cart — ${{ $product-&gt;price }}<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;status&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-cart-button</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { component } from 'weblisk/ui/component.js';
+
+component('wl-cart-button', {
+  props: { productId: '', price: 0 },
+  setup({ props, $, effect }) {
+    const btn = $('.add');
+    const status = $('.status');
+
+    btn.onclick = async () =&gt; {
+      btn.disabled = true;
+      const res = await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name=&quot;csrf-token&quot;]').content },
+        body: JSON.stringify({ product_id: props.productId(), qty: 1 })
+      });
+      if (res.ok) {
+        status.textContent = 'Added!';
+        setTimeout(() =&gt; { status.textContent = ''; }, 2000);
+      }
+      btn.disabled = false;
+    };
+  }
+});
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Phoenix (Elixir)</h2>
+      <h3>Setup (root layout)</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">heex</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-13"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-13">
+<span class="syn-c">&lt;!-- lib/my_app_web/components/layouts/root.html.heex --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+  { &quot;imports&quot;: { &quot;weblisk/&quot;: &quot;<span class="syn-t">&lt;</span>%= ~<span class="syn-a">p</span><span class="syn-s">&quot;/assets/weblisk/&quot;</span> %<span class="syn-t">&gt;</span>&quot; } }
+  <span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h3>LiveView-compatible enhancement</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">heex</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-14"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-14">
+<span class="syn-c">&lt;!-- lib/my_app_web/live/chat_live.html.heex --&gt</span>;
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;chat&quot;</span> <span class="syn-a">phx-update</span><span class="syn-p">=</span><span class="syn-s">&quot;stream&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span>%= <span class="syn-a">for</span> {<span class="syn-a">id</span>, <span class="syn-a">message</span>} &<span class="syn-a">lt</span>;<span class="syn-a">-</span> <span class="syn-a">@streams.messages</span> <span class="syn-a">do</span> %<span class="syn-t">&gt;</span>
+    <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">id</span><span class="syn-p">=</span>{<span class="syn-a">id</span>} <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;message&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;</span>%= <span class="syn-a">message.text</span> %<span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span>% <span class="syn-a">end</span> %<span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { installScroll } from 'weblisk/nav/scroll.js';
+import { announce } from 'weblisk/a11y/aria.js';
+
+// Smooth scroll to new messages (Phoenix LiveView handles the DOM)
+installScroll({ container: '#chat', behavior: 'smooth' });
+
+// Announce new messages for screen readers
+new MutationObserver((mutations) =&gt; {
+  for (const m of mutations) {
+    for (const node of m.addedNodes) {
+      if (node.classList?.contains('message')) {
+        announce(`New message: ${node.textContent}`);
+      }
+    }
+  }
+}).observe(document.getElementById('chat'), { childList: true });
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Rust (Axum, Actix, Rocket)</h2>
+      <p>Serve <code>lib/weblisk/</code> from your static files directory. Works the same as Go — Rust renders HTML
+        templates, Weblisk enhances them.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-15"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-15">
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+{ &quot;imports&quot;: { &quot;weblisk/&quot;: &quot;/static/weblisk/&quot; } }
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+import { socket } from 'weblisk/net/ws.js';
+import { effect } from 'weblisk/core/signal.js';
+
+// Connect to Rust WebSocket server
+const { messages, send } = socket('ws://localhost:3000/ws', {
+  heartbeat: 30000,
+  reconnect: true
+});
+
+effect(() =&gt; {
+  const msg = messages();
+  if (msg) handleMessage(JSON.parse(msg));
+});
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Static Site (S3 / Cloudflare / Netlify)</h2>
+      <p>For pure static sites, the Weblisk CLI provides an optional optimization pass:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-16"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-16">
+<span class="syn-f">weblisk</span> build
+</pre>
+        </div>
+      </div>
+      <p>This composes layouts into flat HTML, inlines CSS, fingerprints assets, generates sitemap and RSS, and
+        minifies. The output is a <code>dist/</code> folder you deploy anywhere.</p>
+      <p>But this step is <strong>optional</strong>. Without it, the site still works — the dev server handles
+        composition on-the-fly, or you can compose manually.</p>
+      <h2>What The Server Doesn't Need To Know</h2>
+      <p>Weblisk never requires anything from your server beyond serving files. The communication bridge uses standard
+        protocols:</p>
+      <p>| Protocol | Weblisk Module | Server Requirement |</p>
+      <p>|----------|---------------|-------------------|</p>
+      <p>| HTTP | <code>net/fetch.js</code> | Any REST endpoint |</p>
+      <p>| SSE | <code>net/sse.js</code> | Any SSE endpoint |</p>
+      <p>| WebSocket | <code>net/ws.js</code> | Any WS endpoint |</p>
+      <p>| WebTransport | <code>net/transport.js</code> | HTTP/3 + QUIC |</p>
+      <p>Your server can be Go, Rust, Python, Ruby, Java, PHP, C#, or anything that speaks HTTP. Weblisk doesn't care —
+        it speaks to the standards, not the implementation.</p>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/testing.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Testing</a>
+        <span></span>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

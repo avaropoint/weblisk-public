@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Feature Demos — Weblisk</title>
+  <meta name="description" content="Interactive demos of Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
+  <link rel="canonical" href="https://weblisk.dev/features/pro.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pro Feature Demos — Weblisk">
+  <meta property="og:description" content="Interactive demos of Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
+  <meta property="og:url" content="https://weblisk.dev/features/pro.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/dashboard.html" class="nav-link active" aria-current="page">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="examples-layout">
+    <aside class="examples-sidebar" aria-label="Examples navigation">
+      <a href="/dashboard.html">
+        <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-18"></i> Dashboard
+      </a>
+      <a href="/features.html">
+        <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-18"></i> Features
+      </a>
+      <nav class="examples-subnav" aria-label="Feature categories">
+        <a href="/features/core.html">Core Extensions</a>
+        <a href="/features/state.html">State Management</a>
+        <a href="/features/data.html">Data &amp; Sync</a>
+        <a href="/features/networking.html">Networking</a>
+        <a href="/features/security.html">Security</a>
+        <a href="/features/performance.html">Performance</a>
+        <a href="/features/a11y.html">Accessibility</a>
+        <a href="/features/pwa.html">PWA</a>
+        <a href="/features/pro.html" class="active" aria-current="page">Pro <span class="pro-badge">New</span></a>
+      </nav>
+      <a href="/settings.html">
+        <i aria-hidden="true" class="wl-icon wl-i-gear wl-icon-18"></i> Settings
+      </a>
+    </aside>
+
+    <main class="examples-main" id="main-content">
+      <div class="page-header">
+        <h1>Pro Demos <span class="pro-badge">New</span></h1>
+        <p>Interactive demos of all 10 Pro modules. View the source code to see exactly how each API works before purchasing.</p>
+      </div>
+
+      <section data-island="/js/islands/features-pro.js" data-hydrate="idle">
+        <div class="demo-grid">
+
+          <!-- Analytics -->
+          <div class="demo-card" id="demo-analytics">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-20"></i> Privacy-First Analytics</h3>
+            <p>Cookie-free page view and event tracking via <code>navigator.sendBeacon</code>. Zero impact on page performance.</p>
+            <button class="btn btn-sm" id="btn-track-event">Track Event</button>
+            <button class="btn btn-sm btn-outline" id="btn-track-timing">Track Timing</button>
+            <pre class="demo-output" id="output-analytics">Ready — events queue locally and flush in batches.</pre>
+          </div>
+
+          <!-- A/B Testing -->
+          <div class="demo-card" id="demo-ab">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-20"></i> A/B Testing</h3>
+            <p>Hash-based deterministic variant assignment. Persists across sessions via localStorage.</p>
+            <div class="ab-variants">
+              <div class="ab-variant" data-variant="control">
+                Control
+                <span class="ab-variant-label"></span>
+              </div>
+              <div class="ab-variant" data-variant="blue-cta">
+                Blue CTA
+                <span class="ab-variant-label"></span>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline" id="btn-ab-switch" style="margin:0.75rem 1.25rem 0">Switch Variant</button>
+            <pre class="demo-output" id="output-ab">Assigning variant...</pre>
+          </div>
+
+          <!-- Data Table -->
+          <div class="demo-card" id="demo-table" style="grid-column: span 2">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-box wl-icon-20"></i> Data Table</h3>
+            <p>Sortable, filterable, paginated tables with CSV export — all from a single function call.</p>
+            <div style="display:flex;gap:0.5rem;align-items:center;padding:0 1.25rem;margin:0.5rem 0 0">
+              <button class="btn btn-sm btn-outline" id="btn-table-export">Export CSV</button>
+              <span id="table-row-count" style="font-size:0.75rem;color:var(--wl-text-dim);margin-left:auto"></span>
+            </div>
+            <div id="table-target" style="padding:0.75rem 1.25rem;overflow-x:auto"></div>
+          </div>
+
+          <!-- SVG Charts -->
+          <div class="demo-card" id="demo-chart">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-20"></i> SVG Charts</h3>
+            <p>Pure DOM SVG charts — bar, line, pie, sparkline. No canvas, no dependencies, accessible.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;padding:0.5rem 1.25rem 0">
+              <button class="btn btn-sm" data-chart="bar">Bar</button>
+              <button class="btn btn-sm btn-outline" data-chart="line">Line</button>
+              <button class="btn btn-sm btn-outline" data-chart="pie">Pie</button>
+            </div>
+            <div id="chart-target"></div>
+          </div>
+
+          <!-- Form Validation -->
+          <div class="demo-card" id="demo-form">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-check wl-icon-20"></i> Form Validation</h3>
+            <p>Declarative validation via <code>data-validate</code> attributes. Async submit with loading states.</p>
+            <form id="pro-form" style="margin:0.75rem 1.25rem 0;display:flex;flex-direction:column;gap:0.5rem">
+              <input type="email" name="email" placeholder="Email" data-validate="required|email"
+                style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid var(--wl-border);background:var(--wl-bg);color:var(--wl-text);font-size:0.85rem">
+              <input type="text" name="name" placeholder="Name (min 2 chars)" data-validate="required|min:2"
+                style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid var(--wl-border);background:var(--wl-bg);color:var(--wl-text);font-size:0.85rem">
+              <button type="submit" class="btn btn-sm">Submit</button>
+            </form>
+            <pre class="demo-output" id="output-form">Fill in the form and submit.</pre>
+          </div>
+
+          <!-- Auth -->
+          <div class="demo-card" id="demo-auth">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-20"></i> Client-Side Auth</h3>
+            <p>JWT decode, token lifecycle signals, session management, and auto-refresh — works with any backend.</p>
+            <div style="display:flex;gap:0.5rem;padding:0.5rem 1.25rem 0">
+              <button class="btn btn-sm" id="btn-auth-login">Simulate Login</button>
+              <button class="btn btn-sm btn-outline" id="btn-auth-logout">Logout</button>
+            </div>
+            <pre class="demo-output" id="output-auth">Not authenticated.</pre>
+          </div>
+
+          <!-- Payments -->
+          <div class="demo-card" id="demo-pay">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-star wl-icon-20"></i> Payment Request API</h3>
+            <p>Wraps the browser Payment Request API. One function call for checkout — works with any payment processor.</p>
+            <pre class="demo-output" id="output-pay">import { pay } from 'weblisk/pro/pay.js';
+
+const result = await pay({
+  currency: 'USD',
+  amount: 1999,     // $19.99
+  label: 'Pro License',
+  endpoint: '/api/charge',
+});
+// → { success: true, data: { ... } }</pre>
+          </div>
+
+          <!-- Toasts -->
+          <div class="demo-card" id="demo-toast">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-20"></i> Toast Notifications</h3>
+            <p>Accessible notification system with auto-dismiss, stacking, theming, and aria-live announcements.</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;padding:0.5rem 1.25rem 0">
+              <button class="btn btn-sm" data-toast="info">Info</button>
+              <button class="btn btn-sm" data-toast="success" style="--btn-bg:#16a34a;--btn-border:#16a34a">Success</button>
+              <button class="btn btn-sm" data-toast="warning" style="--btn-bg:#d97706;--btn-border:#d97706">Warning</button>
+              <button class="btn btn-sm" data-toast="error" style="--btn-bg:#dc2626;--btn-border:#dc2626">Error</button>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="demo-card" id="demo-tabs">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-20"></i> Accessible Tabs</h3>
+            <p>ARIA-compliant tablist with keyboard navigation (Arrow keys, Home, End).</p>
+            <div data-tabs class="pro-tabs" style="padding:0 1.25rem">
+              <div role="tablist">
+                <button role="tab" aria-controls="panel-overview">Overview</button>
+                <button role="tab" aria-controls="panel-api">API</button>
+                <button role="tab" aria-controls="panel-usage">Usage</button>
+              </div>
+              <div role="tabpanel" id="panel-overview">
+                <strong>Overview:</strong> Tabs organize content into sections that users switch between. Each panel is only visible when its tab is active. Fully keyboard-navigable with proper ARIA roles.
+              </div>
+              <div role="tabpanel" id="panel-api" hidden>
+                <strong>API:</strong> <code>tabs(container, { defaultIndex, onChange })</code> — Returns <code>{ activate, active }</code>. Active tab index is a signal you can observe with <code>effect()</code>.
+              </div>
+              <div role="tabpanel" id="panel-usage" hidden>
+                <strong>Usage:</strong> <code>import { tabs } from 'weblisk/pro/tabs.js';</code> then call <code>tabs('[data-tabs]')</code>. Tabs auto-bind to <code>[role="tab"]</code> elements inside the container.
+              </div>
+            </div>
+          </div>
+
+          <!-- CRDT -->
+          <div class="demo-card" id="demo-crdt">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-20"></i> CRDT Primitives</h3>
+            <p>Conflict-free replicated data types for offline-first collaboration: LWW Register, G-Counter, PN-Counter, LWW-Map.</p>
+            <div style="display:flex;gap:0.5rem;padding:0.5rem 1.25rem 0">
+              <button class="btn btn-sm" id="btn-crdt-inc">Increment Counter</button>
+              <button class="btn btn-sm btn-outline" id="btn-crdt-merge">Simulate Merge</button>
+            </div>
+            <pre class="demo-output" id="output-crdt">G-Counter ready. Two nodes will count independently.</pre>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Pro Module Reference -->
+      <section style="margin-top:2rem">
+        <div class="page-header">
+          <h2>Pro Module Reference</h2>
+          <p>All 10 Pro modules are ES modules — import what you need, tree-shake the rest.</p>
+        </div>
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-title">javascript</span>
+            <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="pro-code-1"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+          <div class="code-body">
+            <pre id="pro-code-1">
+<span class="syn-k">import</span> { <span class="syn-f">init</span>, <span class="syn-f">track</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">experiment</span> }    <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/ab.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">table</span>, <span class="syn-f">exportCSV</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/table.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">bar</span>, <span class="syn-f">line</span>, <span class="syn-f">pie</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/chart.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">enhance</span> }       <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/form.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">init</span> <span class="syn-k">as</span> <span class="syn-f">authInit</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/auth.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">pay</span> }           <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/pay.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">toast</span> }         <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/toast.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">tabs</span> }          <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/tabs.js'</span>;
+<span class="syn-k">import</span> { <span class="syn-f">gCounter</span> }      <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span>;
+</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Licensing -->
+      <section style="margin-top:2rem">
+        <div class="page-header">
+          <h2>Activate Your License</h2>
+          <p>One command, no build step — register your key and start importing.</p>
+        </div>
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-title">bash</span>
+            <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="pro-code-2"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+          <div class="code-body">
+            <pre id="pro-code-2">
+<span class="syn-f">weblisk</span> license <span class="syn-a">--key</span>=WL-XXXX-XXXX-XXXX
+
+<span class="syn-c"># Or set in .env:</span>
+WL_LICENSE=WL-XXXX-XXXX-XXXX
+
+<span class="syn-c"># That's it — import and use. No build step required.</span>
+<span class="syn-k">import</span> { <span class="syn-f">track</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span>;
+</pre>
+          </div>
+        </div>
+      </section>
+
+      <div style="text-align:center;margin:2rem 0">
+        <a href="/pro.html" class="btn btn-primary">View Plans &amp; Pricing</a>
+        <a href="/docs/index.html" class="btn btn-outline" style="margin-left:0.5rem">Read the Docs</a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Demos — Weblisk</title>
+  <meta name="description" content="Interactive Weblisk security demos: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
+  <link rel="canonical" href="https://weblisk.dev/features/security.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Security Demos — Weblisk">
+  <meta property="og:description" content="Interactive Weblisk security demos: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
+  <meta property="og:url" content="https://weblisk.dev/features/security.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/dashboard.html" class="nav-link active" aria-current="page">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="examples-layout">
+    <aside class="examples-sidebar" aria-label="Examples navigation">
+      <a href="/dashboard.html">
+        <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-18"></i> Dashboard
+      </a>
+      <a href="/features.html">
+        <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-18"></i> Features
+      </a>
+      <nav class="examples-subnav" aria-label="Feature categories">
+        <a href="/features/core.html">Core Extensions</a>
+        <a href="/features/state.html">State Management</a>
+        <a href="/features/data.html">Data &amp; Sync</a>
+        <a href="/features/networking.html">Networking</a>
+        <a href="/features/security.html" class="active" aria-current="page">Security</a>
+        <a href="/features/performance.html">Performance</a>
+        <a href="/features/a11y.html">Accessibility</a>
+        <a href="/features/pwa.html">PWA</a>
+        <a href="/features/pro.html">Pro <span class="pro-badge">New</span></a>
+      </nav>
+      <a href="/settings.html">
+        <i aria-hidden="true" class="wl-icon wl-i-gear wl-icon-18"></i> Settings
+      </a>
+    </aside>
+
+    <main class="examples-main" id="main-content">
+      <div class="page-header">
+        <h1>Security Demos</h1>
+        <p>Input sanitization, Trusted Types, CSRF protection, and Content Security Policy.</p>
+      </div>
+
+      <section data-island="/js/islands/features-security.js" data-hydrate="idle">
+        <div class="demo-grid">
+
+          <div class="demo-card" id="demo-sanitize">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-20"></i> Input Sanitization</h3>
+            <p>Type HTML/script tags below — they'll be sanitized in real-time.</p>
+            <input type="text" class="input" id="sanitize-input" placeholder='Try: <script>alert("xss")</script>'
+              aria-label="HTML to sanitize" />
+            <pre class="demo-output" id="output-sanitize">Sanitized output appears here</pre>
+          </div>
+
+          <div class="demo-card" id="demo-trusted">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-check wl-icon-20"></i> Trusted Types</h3>
+            <p>Trusted Types policy strips dangerous content from HTML strings.</p>
+            <button class="btn btn-sm" id="btn-trusted">Test Trusted HTML</button>
+            <pre class="demo-output" id="output-trusted">Ready...</pre>
+          </div>
+
+          <div class="demo-card" id="demo-csrf">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-lock wl-icon-20"></i> CSRF Tokens</h3>
+            <p>Generate cryptographic tokens and protect forms automatically.</p>
+            <button class="btn btn-sm" id="btn-csrf">Generate Token</button>
+            <pre class="demo-output" id="output-csrf">No token</pre>
+          </div>
+
+          <div class="demo-card" id="demo-csp-perms">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-20"></i> CSP + Permissions</h3>
+            <p>Content Security Policy and Permissions Policy are active (applied at boot).</p>
+            <button class="btn btn-sm" id="btn-check-csp">Check Policies</button>
+            <pre class="demo-output" id="output-csp">Click to inspect active policies</pre>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

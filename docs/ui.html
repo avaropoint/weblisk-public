@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Components — Weblisk</title>
+  <meta name="description"
+    content="UI modules for virtual lists, dialogs, drag-and-drop, animations, clipboard, fullscreen, geolocation, responsive images, and more. Zero dependencies.">
+  <link rel="canonical" href="https://weblisk.dev/docs/ui.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="UI Components — Weblisk">
+  <meta property="og:description"
+    content="UI modules for virtual lists, dialogs, drag-and-drop, animations, clipboard, fullscreen, geolocation, responsive images, and more. Zero dependencies.">
+  <meta property="og:url" content="https://weblisk.dev/docs/ui.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "UI Components — Weblisk",
+    "description": "UI modules for virtual lists, dialogs, drag-and-drop, animations, clipboard, fullscreen, geolocation, responsive images, and more. Zero dependencies.",
+    "url": "https://weblisk.dev/docs/ui.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html" aria-current="page" class="active">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>UI Components</h1>
+
+      <h2>Virtual List</h2>
+      <p>Render huge datasets efficiently with DOM recycling — only items visible in the viewport are in the DOM:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> virtualList <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/virtual-list.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> <span class="syn-p">{</span> refresh<span class="syn-p">,</span> destroy <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">virtualList</span><span class="syn-p">(</span><span class="syn-s">'#item-list'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  items<span class="syn-p">:</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">allItems</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span>  <span class="syn-c">// Signal or array of items</span>
+  itemHeight<span class="syn-p">:</span> <span class="syn-n">48</span><span class="syn-p">,</span>           <span class="syn-c">// Fixed row height in px</span>
+  overscan<span class="syn-p">:</span> <span class="syn-n">5</span><span class="syn-p">,</span>              <span class="syn-c">// Extra rows above/below viewport</span>
+  render<span class="syn-p">:</span> <span class="syn-p">(</span>item<span class="syn-p">,</span> index<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-s">`</span>
+    <span class="syn-t">&lt;div</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">"item"</span><span class="syn-t">&gt;</span>
+      <span class="syn-t">&lt;span&gt;</span>$<span class="syn-p">{</span>item<span class="syn-p">.</span>name<span class="syn-p">}</span><span class="syn-t">&lt;/span&gt;</span>
+      <span class="syn-t">&lt;span&gt;</span>$<span class="syn-p">{</span>item<span class="syn-p">.</span>email<span class="syn-p">}</span><span class="syn-t">&lt;/span&gt;</span>
+    <span class="syn-t">&lt;/div&gt;</span>
+  <span class="syn-s">`,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Updating</h3>
+      <p>When the data source changes (if using a signal), the list auto-updates. For arrays, call
+        <code>refresh()</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+allItems<span class="syn-p">.</span><span class="syn-f">push</span><span class="syn-p">(</span>newItem<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">refresh</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Cleanup</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-f">destroy</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Remove event listeners and DOM nodes</span>
+</pre>
+        </div>
+      </div>
+      <h2>Responsive Images</h2>
+      <h3>Lazy Loading</h3>
+      <p>Enhance images with lazy loading via IntersectionObserver:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-t">&lt;</span><span class="syn-t">img</span> <span class="syn-a">data-wl-src</span><span class="syn-p">=</span><span class="syn-s">&quot;/photos/hero.jpg&quot;</span> <span class="syn-a">alt</span><span class="syn-p">=</span><span class="syn-s">&quot;Hero&quot;</span> <span class="syn-a">width</span><span class="syn-p">=</span><span class="syn-s">&quot;800&quot;</span> <span class="syn-a">height</span><span class="syn-p">=</span><span class="syn-s">&quot;400&quot;</span> <span class="syn-t">/&gt;</span>
+</pre>
+        </div>
+      </div>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-k">import</span> <span class="syn-p">{</span> lazyImages <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/img.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> cleanup <span class="syn-p">=</span> <span class="syn-f">lazyImages</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  selector<span class="syn-p">:</span> <span class="syn-s">'[data-wl-src]'</span><span class="syn-p">,</span>
+  rootMargin<span class="syn-p">:</span> <span class="syn-s">'200px'</span><span class="syn-p">,</span>  <span class="syn-c">// Start loading 200px before visible</span>
+  fade<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>           <span class="syn-c">// CSS fade-in effect</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Srcset Generation</h3>
+      <p>Generate responsive <code>srcset</code> from a URL pattern:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-k">import</span> <span class="syn-p">{</span> srcset <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/img.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> responsive <span class="syn-p">=</span> <span class="syn-f">srcset</span><span class="syn-p">(</span><span class="syn-s">'/images/hero-{w}.jpg'</span><span class="syn-p">,</span> <span class="syn-p">[</span><span class="syn-n">320</span><span class="syn-p">,</span> <span class="syn-n">640</span><span class="syn-p">,</span> <span class="syn-n">1024</span><span class="syn-p">,</span> <span class="syn-n">1920</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-c">// → &quot;/images/hero-320.jpg 320w, /images/hero-640.jpg 640w, ...&quot;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Blur-Up Placeholders</h3>
+      <p>Show a tiny blurred thumbnail while the full image loads:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-k">import</span> <span class="syn-p">{</span> blurUp <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/img.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">blurUp</span><span class="syn-p">(</span><span class="syn-s">'#hero-container'</span><span class="syn-p">,</span> <span class="syn-s">'/images/hero-thumb.jpg'</span><span class="syn-p">,</span> <span class="syn-s">'/images/hero-full.jpg'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>The thumbnail is displayed with a CSS blur filter, then crossfaded to the full image when it loads.</p>
+
+      <h2>Clipboard</h2>
+      <p>Read and write the system clipboard with async support and a reactive <code>lastCopied</code> signal.
+        Falls back to <code>execCommand('copy')</code> in older browsers.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-k">import</span> <span class="syn-p">{</span> writeText<span class="syn-p">,</span> readText<span class="syn-p">,</span> lastCopied <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/clipboard.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Copy text to clipboard</span>
+<span class="syn-k">await</span> <span class="syn-f">writeText</span><span class="syn-p">(</span><span class="syn-s">'Hello, world!'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Read text from clipboard</span>
+<span class="syn-k">const</span> text <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">readText</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive signal — updates whenever writeText() is called</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">lastCopied</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// → 'Hello, world!'</span>
+</pre>
+        </div>
+      </div>
+      <h3>Rich Content</h3>
+      <p>Copy and read arbitrary MIME types via <code>ClipboardItem</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-9">
+<span class="syn-k">import</span> <span class="syn-p">{</span> write<span class="syn-p">,</span> read <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/clipboard.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">await</span> <span class="syn-f">write</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-k">new</span> <span class="syn-f">ClipboardItem</span><span class="syn-p">(</span><span class="syn-p">{</span> <span class="syn-s">'text/html'</span><span class="syn-p">:</span> blob <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> items <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">read</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Resize Observer</h2>
+      <p>Track element dimensions reactively with <code>ResizeObserver</code>. Returns live signals for width and height:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-10">
+<span class="syn-k">import</span> <span class="syn-p">{</span> observeResize<span class="syn-p">,</span> onResize <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/resize.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive signals — update automatically on resize</span>
+<span class="syn-k">const</span> <span class="syn-p">{</span> width<span class="syn-p">,</span> height<span class="syn-p">,</span> cleanup <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">observeResize</span><span class="syn-p">(</span><span class="syn-s">'#panel'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">width</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-f">height</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Callback-based alternative</span>
+<span class="syn-k">const</span> stop <span class="syn-p">=</span> <span class="syn-f">onResize</span><span class="syn-p">(</span><span class="syn-s">'#panel'</span><span class="syn-p">,</span> <span class="syn-p">(</span>entry<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Resized:'</span><span class="syn-p">,</span> entry<span class="syn-p">.</span>contentRect<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Animations</h2>
+      <p>Imperative Web Animations API wrapper with sequencing, parallel execution, and preset helpers:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-11">
+<span class="syn-k">import</span> <span class="syn-p">{</span> animate<span class="syn-p">,</span> fadeIn<span class="syn-p">,</span> slideIn<span class="syn-p">,</span> sequence <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/animate.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Custom animation</span>
+<span class="syn-f">animate</span><span class="syn-p">(</span><span class="syn-s">'#box'</span><span class="syn-p">,</span>
+  <span class="syn-p">[</span><span class="syn-p">{</span> transform<span class="syn-p">:</span> <span class="syn-s">'scale(0)'</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span> transform<span class="syn-p">:</span> <span class="syn-s">'scale(1)'</span> <span class="syn-p">}</span><span class="syn-p">]</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> duration<span class="syn-p">:</span> <span class="syn-n">300</span><span class="syn-p">,</span> easing<span class="syn-p">:</span> <span class="syn-s">'ease-out'</span> <span class="syn-p">}</span>
+<span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Presets</span>
+<span class="syn-f">fadeIn</span><span class="syn-p">(</span><span class="syn-s">'#toast'</span><span class="syn-p">,</span> <span class="syn-n">200</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">slideIn</span><span class="syn-p">(</span><span class="syn-s">'#sidebar'</span><span class="syn-p">,</span> <span class="syn-p">{</span> from<span class="syn-p">:</span> <span class="syn-s">'left'</span><span class="syn-p">,</span> duration<span class="syn-p">:</span> <span class="syn-n">400</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Sequential: each waits for the previous to finish</span>
+<span class="syn-k">await</span> <span class="syn-f">sequence</span><span class="syn-p">(</span><span class="syn-p">[</span>
+  <span class="syn-p">[</span><span class="syn-s">'#a'</span><span class="syn-p">,</span> <span class="syn-p">[</span><span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">0</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">1</span> <span class="syn-p">}</span><span class="syn-p">]</span><span class="syn-p">,</span> <span class="syn-n">200</span><span class="syn-p">]</span><span class="syn-p">,</span>
+  <span class="syn-p">[</span><span class="syn-s">'#b'</span><span class="syn-p">,</span> <span class="syn-p">[</span><span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">0</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">1</span> <span class="syn-p">}</span><span class="syn-p">]</span><span class="syn-p">,</span> <span class="syn-n">200</span><span class="syn-p">]</span><span class="syn-p">,</span>
+<span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Presets</h3>
+      <table class="doc-table">
+        <thead>
+          <tr><th>Function</th><th>Animation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>fadeIn(el, ms?)</code></td><td>Opacity 0 → 1</td></tr>
+          <tr><td><code>fadeOut(el, ms?)</code></td><td>Opacity 1 → 0</td></tr>
+          <tr><td><code>slideIn(el, opts?)</code></td><td>Slide from left/right/top/bottom</td></tr>
+          <tr><td><code>scaleIn(el, ms?)</code></td><td>Scale 0.8 → 1 with fade</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Dialog &amp; Popover</h2>
+      <p>Native <code>&lt;dialog&gt;</code> element wrapper with reactive open state and focus trap integration.
+        Also provides Popover API support with manual fallback:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-12">
+<span class="syn-k">import</span> <span class="syn-p">{</span> dialog<span class="syn-p">,</span> popover <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/dialog.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Modal dialog with focus trap and backdrop close</span>
+<span class="syn-k">const</span> d <span class="syn-p">=</span> <span class="syn-f">dialog</span><span class="syn-p">(</span><span class="syn-s">'#my-dialog'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+d<span class="syn-p">.</span><span class="syn-f">showModal</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>             <span class="syn-c">// Opens as modal</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>d<span class="syn-p">.</span><span class="syn-f">open</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// Reactive signal → true</span>
+d<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Native popover</span>
+<span class="syn-k">const</span> p <span class="syn-p">=</span> <span class="syn-f">popover</span><span class="syn-p">(</span><span class="syn-s">'#tooltip'</span><span class="syn-p">,</span> <span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'auto'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+p<span class="syn-p">.</span><span class="syn-f">toggle</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>               <span class="syn-c">// Show/hide popover</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Fullscreen</h2>
+      <p>Toggle fullscreen mode with a reactive <code>isFullscreen</code> signal:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-13"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-13">
+<span class="syn-k">import</span> <span class="syn-p">{</span> toggleFullscreen<span class="syn-p">,</span> isFullscreen <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/fullscreen.js'</span><span class="syn-p">;</span>
+
+btn<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">toggleFullscreen</span><span class="syn-p">(</span><span class="syn-s">'#video'</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive signal — use in effects or bindings</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">isFullscreen</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// → true/false</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Web Share</h2>
+      <p>Share content via the native share sheet with a clipboard fallback for unsupported browsers:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-14"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-14">
+<span class="syn-k">import</span> <span class="syn-p">{</span> share<span class="syn-p">,</span> canShare <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/share.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">canShare</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-k">await</span> <span class="syn-f">share</span><span class="syn-p">(</span><span class="syn-p">{</span>
+    title<span class="syn-p">:</span> <span class="syn-s">'Check out Weblisk'</span><span class="syn-p">,</span>
+    text<span class="syn-p">:</span> <span class="syn-s">'Zero-dependency JS framework'</span><span class="syn-p">,</span>
+    url<span class="syn-p">:</span> <span class="syn-s">'https://weblisk.dev'</span><span class="syn-p">,</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span>
+</pre>
+        </div>
+      </div>
+      <p>On desktop browsers without Web Share API, the URL is copied to the clipboard as a fallback.</p>
+
+      <h2>Drag &amp; Drop</h2>
+      <p>Simplified drag and drop with reactive state and CSS class management:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-15"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-15">
+<span class="syn-k">import</span> <span class="syn-p">{</span> draggable<span class="syn-p">,</span> dropZone<span class="syn-p">,</span> fileDropZone <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/drag.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Make an element draggable</span>
+<span class="syn-k">const</span> cleanup <span class="syn-p">=</span> <span class="syn-f">draggable</span><span class="syn-p">(</span><span class="syn-s">'#card'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  type<span class="syn-p">:</span> <span class="syn-s">'task'</span><span class="syn-p">,</span>
+  data<span class="syn-p">:</span> <span class="syn-s">'task-42'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Create a drop zone with reactive isOver signal</span>
+<span class="syn-k">const</span> <span class="syn-p">{</span> isOver <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">dropZone</span><span class="syn-p">(</span><span class="syn-s">'#column'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  type<span class="syn-p">:</span> <span class="syn-s">'task'</span><span class="syn-p">,</span>
+  onDrop<span class="syn-p">:</span> <span class="syn-p">(</span>data<span class="syn-p">,</span> e<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">moveTask</span><span class="syn-p">(</span>data<span class="syn-p">)</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// File drop zone — great for upload areas</span>
+<span class="syn-f">fileDropZone</span><span class="syn-p">(</span><span class="syn-s">'#upload'</span><span class="syn-p">,</span> <span class="syn-p">(</span>files<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">handleFiles</span><span class="syn-p">(</span>files<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Media Session</h2>
+      <p>Control OS-level media notifications (lock screen, notification tray) via the MediaSession API:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-16"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-16">
+<span class="syn-k">import</span> <span class="syn-p">{</span> setMetadata<span class="syn-p">,</span> setPlayback<span class="syn-p">,</span> setActionHandlers <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/media-session.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">setMetadata</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  title<span class="syn-p">:</span> <span class="syn-s">'My Track'</span><span class="syn-p">,</span>
+  artist<span class="syn-p">:</span> <span class="syn-s">'Artist'</span><span class="syn-p">,</span>
+  album<span class="syn-p">:</span> <span class="syn-s">'Album'</span><span class="syn-p">,</span>
+  artwork<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-p">{</span> src<span class="syn-p">:</span> <span class="syn-s">'/images/cover.jpg'</span><span class="syn-p">,</span> sizes<span class="syn-p">:</span> <span class="syn-s">'512x512'</span> <span class="syn-p">}</span><span class="syn-p">]</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">setPlayback</span><span class="syn-p">(</span><span class="syn-s">'playing'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> cleanup <span class="syn-p">=</span> <span class="syn-f">setActionHandlers</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  play<span class="syn-p">:</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> audio<span class="syn-p">.</span><span class="syn-f">play</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span>
+  pause<span class="syn-p">:</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> audio<span class="syn-p">.</span><span class="syn-f">pause</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span>
+  previoustrack<span class="syn-p">:</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">prev</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span>
+  nexttrack<span class="syn-p">:</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">next</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Wake Lock</h2>
+      <p>Prevent the screen from dimming or locking. Automatically re-acquires when the page becomes visible again:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-17"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-17">
+<span class="syn-k">import</span> <span class="syn-p">{</span> requestWakeLock<span class="syn-p">,</span> releaseWakeLock<span class="syn-p">,</span> wakeLockActive <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/wakelock.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">await</span> <span class="syn-f">requestWakeLock</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">wakeLockActive</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// → true</span>
+
+<span class="syn-c">// Release when done</span>
+<span class="syn-k">await</span> <span class="syn-f">releaseWakeLock</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Geolocation</h2>
+      <p>Reactive geolocation with one-shot and continuous watch modes:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-18"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-18">
+<span class="syn-k">import</span> <span class="syn-p">{</span> geolocation<span class="syn-p">,</span> getCurrentPosition <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui/geo.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive — updates as position changes</span>
+<span class="syn-k">const</span> <span class="syn-p">{</span> position<span class="syn-p">,</span> error<span class="syn-p">,</span> cleanup <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">geolocation</span><span class="syn-p">(</span><span class="syn-p">{</span> watch<span class="syn-p">:</span> <span class="syn-k">true</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> pos <span class="syn-p">=</span> <span class="syn-f">position</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">if</span> <span class="syn-p">(</span>pos<span class="syn-p">)</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>pos<span class="syn-p">.</span>latitude<span class="syn-p">,</span> pos<span class="syn-p">.</span>longitude<span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Promise-based one-shot</span>
+<span class="syn-k">const</span> loc <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">getCurrentPosition</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Form Validation <span class="pro-pill">Pro</span></h2>
+      <p>Declarative validation via <code>data-validate</code> attributes with async submission, loading states, and inline error display.</p>
+      <h3>Setup</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-19"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-19">
+<span class="syn-t">&lt;</span><span class="syn-t">form</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;signup&quot;</span> <span class="syn-a">action</span><span class="syn-p">=</span><span class="syn-s">&quot;/api/signup&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">input</span> <span class="syn-a">name</span><span class="syn-p">=</span><span class="syn-s">&quot;email&quot;</span> <span class="syn-a">data-validate</span><span class="syn-p">=</span><span class="syn-s">&quot;required|email&quot;</span> <span class="syn-t">/&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">input</span> <span class="syn-a">name</span><span class="syn-p">=</span><span class="syn-s">&quot;password&quot;</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;password&quot;</span> <span class="syn-a">data-validate</span><span class="syn-p">=</span><span class="syn-s">&quot;required|min:8&quot;</span> <span class="syn-t">/&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;submit&quot;</span><span class="syn-t">&gt;</span>Sign Up<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">form</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-20"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-20">
+<span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/form.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> <span class="syn-p">{</span> submitting<span class="syn-p">,</span> errors <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#signup'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  format<span class="syn-p">:</span> <span class="syn-s">'json'</span><span class="syn-p">,</span>
+  onSuccess<span class="syn-p">:</span> <span class="syn-p">(</span>data<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Signed up!'</span><span class="syn-p">,</span> data<span class="syn-p">)</span><span class="syn-p">,</span>
+  onError<span class="syn-p">:</span> <span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span>err<span class="syn-p">)</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// submitting() → reactive boolean</span>
+<span class="syn-c">// errors()    → reactive { fieldName: 'error message' }</span>
+</pre>
+        </div>
+      </div>
+      <h3>Validation Rules</h3>
+      <p>Chain rules with the pipe <code>|</code> separator in <code>data-validate</code>:</p>
+      <table class="doc-table">
+        <thead>
+          <tr><th>Rule</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>required</code></td><td>Field must not be empty</td></tr>
+          <tr><td><code>email</code></td><td>Must be a valid email address</td></tr>
+          <tr><td><code>min:n</code></td><td>Minimum length of <em>n</em> characters</td></tr>
+          <tr><td><code>max:n</code></td><td>Maximum length of <em>n</em> characters</td></tr>
+          <tr><td><code>pattern:regex</code></td><td>Must match the given regex</td></tr>
+          <tr><td><code>match:field</code></td><td>Must match another field's value</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Data Tables <span class="pro-pill">Pro</span></h2>
+      <p>Interactive sortable, filterable, paginated tables from any data source. Renders with ARIA attributes for accessibility, includes CSV export.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-21"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-21">
+<span class="syn-k">import</span> <span class="syn-p">{</span> table<span class="syn-p">,</span> exportCSV <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/table.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> t <span class="syn-p">=</span> <span class="syn-f">table</span><span class="syn-p">(</span><span class="syn-s">'#users'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  data<span class="syn-p">:</span> users<span class="syn-p">,</span>
+  pageSize<span class="syn-p">:</span> <span class="syn-n">20</span><span class="syn-p">,</span>
+  filterable<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  columns<span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'name'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Name'</span><span class="syn-p">,</span> sortable<span class="syn-p">:</span> <span class="syn-k">true</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+    <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'email'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Email'</span><span class="syn-p">,</span> sortable<span class="syn-p">:</span> <span class="syn-k">true</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+    <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'role'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Role'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">]</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>CSV Export</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-22"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-22">
+<span class="syn-c">// Export the current filtered data as a CSV download</span>
+<span class="syn-f">exportCSV</span><span class="syn-p">(</span>t<span class="syn-p">.</span><span class="syn-f">rows</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> columns<span class="syn-p">,</span> <span class="syn-s">'users.csv'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Reactive State</h3>
+      <p>All table state is reactive — <code>page</code>, <code>sort</code>, <code>filter</code>, and <code>rows</code> are signals. Update them programmatically and the table re-renders automatically.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-23"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-23">
+t<span class="syn-p">.</span><span class="syn-f">setPage</span><span class="syn-p">(</span><span class="syn-n">3</span><span class="syn-p">)</span><span class="syn-p">;</span>              <span class="syn-c">// Jump to page 3</span>
+t<span class="syn-p">.</span><span class="syn-f">setSort</span><span class="syn-p">(</span><span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'name'</span><span class="syn-p">,</span> dir<span class="syn-p">:</span> <span class="syn-s">'desc'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+t<span class="syn-p">.</span><span class="syn-f">setFilter</span><span class="syn-p">(</span><span class="syn-s">'admin'</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// Filter rows containing 'admin'</span>
+t<span class="syn-p">.</span><span class="syn-f">setData</span><span class="syn-p">(</span>newUsers<span class="syn-p">)</span><span class="syn-p">;</span>     <span class="syn-c">// Replace data source</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>SVG Charts <span class="pro-pill">Pro</span></h2>
+      <p>Pure DOM SVG chart generation — bar, line, pie, and sparkline. No canvas, no external deps, accessible by default with <code>&lt;title&gt;</code> elements on every data point.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-24"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-24">
+<span class="syn-k">import</span> <span class="syn-p">{</span> bar<span class="syn-p">,</span> line<span class="syn-p">,</span> pie<span class="syn-p">,</span> sparkline <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/chart.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Bar chart</span>
+<span class="syn-f">bar</span><span class="syn-p">(</span><span class="syn-s">'#revenue'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  data<span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span> label<span class="syn-p">:</span> <span class="syn-s">'Jan'</span><span class="syn-p">,</span> value<span class="syn-p">:</span> <span class="syn-n">420</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+    <span class="syn-p">{</span> label<span class="syn-p">:</span> <span class="syn-s">'Feb'</span><span class="syn-p">,</span> value<span class="syn-p">:</span> <span class="syn-n">380</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+    <span class="syn-p">{</span> label<span class="syn-p">:</span> <span class="syn-s">'Mar'</span><span class="syn-p">,</span> value<span class="syn-p">:</span> <span class="syn-n">510</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">]</span><span class="syn-p">,</span>
+  width<span class="syn-p">:</span> <span class="syn-n">400</span><span class="syn-p">,</span>
+  height<span class="syn-p">:</span> <span class="syn-n">250</span><span class="syn-p">,</span>
+  color<span class="syn-p">:</span> <span class="syn-s">'#6366f1'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Line chart with area fill</span>
+<span class="syn-f">line</span><span class="syn-p">(</span><span class="syn-s">'#traffic'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  data<span class="syn-p">:</span> dailyViews<span class="syn-p">,</span>
+  fill<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  dots<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  color<span class="syn-p">:</span> <span class="syn-s">'#10b981'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Chart Types</h3>
+      <table class="doc-table">
+        <thead>
+          <tr><th>Function</th><th>Output</th><th>Options</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>bar(el, opts)</code></td><td>Vertical bar chart</td><td>width, height, color, labels</td></tr>
+          <tr><td><code>line(el, opts)</code></td><td>Line chart with optional area fill</td><td>width, height, color, fill, dots</td></tr>
+          <tr><td><code>pie(el, opts)</code></td><td>Pie/donut chart</td><td>size, donut, colors</td></tr>
+          <tr><td><code>sparkline(el, opts)</code></td><td>Inline sparkline</td><td>width, height, color, strokeWidth</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Toast Notifications <span class="pro-pill">Pro</span></h2>
+      <p>Accessible notification system with auto-dismiss, stacking, and theming. Announces to screen readers via <code>aria-live</code> region.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-25"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-25">
+<span class="syn-k">import</span> <span class="syn-p">{</span> toast <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/toast.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Simple notification</span>
+<span class="syn-f">toast</span><span class="syn-p">(</span><span class="syn-s">'Settings saved successfully'</span><span class="syn-p">,</span> <span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'success'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// With custom duration and action button</span>
+<span class="syn-k">const</span> <span class="syn-p">{</span> dismiss <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">toast</span><span class="syn-p">(</span><span class="syn-s">'Item deleted'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  type<span class="syn-p">:</span> <span class="syn-s">'warning'</span><span class="syn-p">,</span>
+  duration<span class="syn-p">:</span> <span class="syn-n">8000</span><span class="syn-p">,</span>
+  action<span class="syn-p">:</span> <span class="syn-s">'Undo'</span><span class="syn-p">,</span>
+  onAction<span class="syn-p">:</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">restoreItem</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span>
+  position<span class="syn-p">:</span> <span class="syn-s">'top-right'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Programmatic dismiss</span>
+<span class="syn-f">dismiss</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Toast Types</h3>
+      <table class="doc-table">
+        <thead>
+          <tr><th>Type</th><th>Usage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>'info'</code></td><td>General information (default)</td></tr>
+          <tr><td><code>'success'</code></td><td>Operation completed successfully</td></tr>
+          <tr><td><code>'warning'</code></td><td>Caution — action may have side effects</td></tr>
+          <tr><td><code>'error'</code></td><td>Operation failed</td></tr>
+        </tbody>
+      </table>
+      <h3>Positioning</h3>
+      <p>Six positions are supported: <code>top-right</code>, <code>top-left</code>, <code>top-center</code>, <code>bottom-right</code> (default), <code>bottom-left</code>, <code>bottom-center</code>.</p>
+
+      <h2>Accessible Tabs <span class="pro-pill">Pro</span></h2>
+      <p>ARIA-compliant tablist/tab/tabpanel pattern with keyboard navigation (Arrow keys, Home, End).</p>
+      <h3>HTML Structure</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-26"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-26">
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-tabs</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">role</span><span class="syn-p">=</span><span class="syn-s">&quot;tablist&quot;</span><span class="syn-t">&gt;</span>
+    <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">role</span><span class="syn-p">=</span><span class="syn-s">&quot;tab&quot;</span> <span class="syn-a">aria-controls</span><span class="syn-p">=</span><span class="syn-s">&quot;panel-1&quot;</span><span class="syn-t">&gt;</span>Overview<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+    <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">role</span><span class="syn-p">=</span><span class="syn-s">&quot;tab&quot;</span> <span class="syn-a">aria-controls</span><span class="syn-p">=</span><span class="syn-s">&quot;panel-2&quot;</span><span class="syn-t">&gt;</span>Details<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">role</span><span class="syn-p">=</span><span class="syn-s">&quot;tabpanel&quot;</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;panel-1&quot;</span><span class="syn-t">&gt;</span>Overview content<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">role</span><span class="syn-p">=</span><span class="syn-s">&quot;tabpanel&quot;</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;panel-2&quot;</span><span class="syn-t">&gt;</span>Details content<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Initialize</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-27"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-27">
+<span class="syn-k">import</span> <span class="syn-p">{</span> tabs <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/tabs.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> <span class="syn-p">{</span> activate<span class="syn-p">,</span> active <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">tabs</span><span class="syn-p">(</span><span class="syn-s">'[data-tabs]'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  defaultIndex<span class="syn-p">:</span> <span class="syn-n">0</span><span class="syn-p">,</span>
+  onChange<span class="syn-p">:</span> <span class="syn-p">(</span>index<span class="syn-p">,</span> tab<span class="syn-p">,</span> panel<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+    console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Switched to tab'</span><span class="syn-p">,</span> index<span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Programmatic activation</span>
+<span class="syn-f">activate</span><span class="syn-p">(</span><span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">active</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// → 1</span>
+</pre>
+        </div>
+      </div>
+
+      <h2>Payments <span class="pro-pill">Pro</span></h2>
+      <p>Wraps the browser Payment Request API for native checkout UI, with fallback handling. Works with any payment backend.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-28"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-28">
+<span class="syn-k">import</span> <span class="syn-p">{</span> pay<span class="syn-p">,</span> payButton<span class="syn-p">,</span> status <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/pay.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// One-line payment button</span>
+<span class="syn-f">payButton</span><span class="syn-p">(</span><span class="syn-s">'#pay-btn'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  currency<span class="syn-p">:</span> <span class="syn-s">'USD'</span><span class="syn-p">,</span>
+  amount<span class="syn-p">:</span> <span class="syn-n">1999</span><span class="syn-p">,</span>      <span class="syn-c">// $19.99 in cents</span>
+  label<span class="syn-p">:</span> <span class="syn-s">'Pro License'</span><span class="syn-p">,</span>
+  endpoint<span class="syn-p">:</span> <span class="syn-s">'/api/charge'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Or call pay() directly for custom flows</span>
+<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">pay</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  currency<span class="syn-p">:</span> <span class="syn-s">'USD'</span><span class="syn-p">,</span>
+  amount<span class="syn-p">:</span> <span class="syn-n">4999</span><span class="syn-p">,</span>
+  label<span class="syn-p">:</span> <span class="syn-s">'Enterprise Plan'</span><span class="syn-p">,</span>
+  endpoint<span class="syn-p">:</span> <span class="syn-s">'/api/charge'</span><span class="syn-p">,</span>
+  requestEmail<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">if</span> <span class="syn-p">(</span>result<span class="syn-p">.</span>success<span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-f">toast</span><span class="syn-p">(</span><span class="syn-s">'Payment complete!'</span><span class="syn-p">,</span> <span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'success'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span>
+</pre>
+        </div>
+      </div>
+      <h3>Status Signal</h3>
+      <p>The reactive <code>status</code> signal tracks the payment lifecycle: <code>'idle'</code> → <code>'pending'</code> → <code>'success'</code> or <code>'error'</code>.</p>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/pwa.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> PWA</a>
+        <a href="/docs/a11y.html">Accessibility <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

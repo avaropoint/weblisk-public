@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weblisk — Zero-Dependency JavaScript Framework</title>
+  <meta name="description"
+    content="Zero-dependency JavaScript framework built on native browser APIs. Islands architecture, reactive signals, and real HTML — no bundler, no virtual DOM." />
+  <link rel="canonical" href="https://weblisk.dev/" />
+  <meta name="keywords"
+    content="javascript framework, zero dependency, islands architecture, reactive signals, web components, PWA, no build step, ES modules, progressive enhancement" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Weblisk — Zero-Dependency JavaScript Framework" />
+  <meta property="og:description"
+    content="Zero-dependency JavaScript framework built on native browser APIs. Islands architecture, reactive signals, and real HTML — no bundler, no virtual DOM." />
+  <meta property="og:url" content="https://weblisk.dev/" />
+  <meta property="og:site_name" content="Weblisk" />
+  <meta property="og:image" content="https://weblisk.dev/og-image.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Weblisk — Zero-Dependency JavaScript Framework" />
+  <meta name="twitter:description"
+    content="Zero-dependency JavaScript framework. Islands architecture, reactive signals — no bundler required." />
+  <meta name="twitter:image" content="https://weblisk.dev/og-image.png" />
+  <meta name="twitter:site" content="@avaropoint" />
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#3B4F7C" />
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Weblisk",
+        "description": "A zero-dependency, zero-build-step JavaScript framework built on native browser standards. Islands architecture, reactive signals, and modern CSS.",
+        "url": "https://weblisk.dev",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": {
+          "@type": "Organization",
+          "name": "Avaropoint Inc.",
+          "url": "https://avaropoint.com"
+        },
+        "license": "https://opensource.org/licenses/MIT",
+        "softwareVersion": "1.0.0",
+        "programmingLanguage": "JavaScript",
+        "codeRepository": "https://github.com/avaropoint/weblisk"
+      }
+    </script>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script>
+    document.documentElement.dataset.theme =
+      localStorage.getItem("wl-theme") || "light";
+  </script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28" />
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link active" aria-current="page">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- ─── Hero ─── -->
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> v1.0 — Zero
+          dependencies, zero build step</span>
+        <h1>
+          Build for the web.<br />Not <span class="accent">around</span> it.
+        </h1>
+        <p class="hero-sub">
+          The zero-dependency JavaScript framework that uses native browser
+          APIs instead of fighting them. Islands architecture, reactive
+          signals, and real HTML — no bundler, no virtual DOM, no magic.
+        </p>
+        <div class="hero-actions">
+          <a href="/docs/quick-start.html" class="btn btn-primary">
+            Get Started
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+          <a href="/docs/index.html" class="btn btn-outline">Read the Docs</a>
+        </div>
+        <div class="install-cmd">
+          <span class="prompt" aria-hidden="true">$</span>
+          <code>curl -fsSL https://cdn.weblisk.dev/install.sh | sh</code>
+          <button class="copy-btn" type="button" aria-label="Copy install command"
+            data-copy="curl -fsSL https://cdn.weblisk.dev/install.sh | sh">
+            <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-16"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Stats Bar ─── -->
+    <section class="section section-soft" aria-label="Key metrics">
+      <div class="section-inner">
+        <div class="stats-bar">
+          <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Dependencies</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">&lt;5KB</div>
+            <div class="stat-label">Core size (gzip)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100</div>
+            <div class="stat-label">Lighthouse score</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">52</div>
+            <div class="stat-label">Built-in modules</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Features Grid ─── -->
+    <section class="section" aria-labelledby="features-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Features</span>
+          <h2 id="features-heading">
+            Everything you need, nothing you don't
+          </h2>
+          <p>52 modules you import on demand. Zero bloat. Zero lock-in.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <i aria-hidden="true" class="wl-icon wl-i-box wl-icon-24"></i>
+            </div>
+            <h3>Zero Dependencies</h3>
+            <p>
+              No npm install cascade. No node_modules. Just native ES modules
+              and modern browser APIs you already know.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
+            </div>
+            <h3>No Build Step</h3>
+            <p>
+              No Webpack, Vite, or Rollup. Write HTML, CSS, and JS — refresh
+              the browser and it works.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+            </div>
+            <h3>Islands Architecture</h3>
+            <p>
+              HTML renders instantly. JavaScript loads only for interactive
+              regions — true progressive enhancement.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-24"></i>
+            </div>
+            <h3>Reactive Signals</h3>
+            <p>
+              Fine-grained reactivity without a virtual DOM diffing overhead.
+              Change data, DOM updates surgically.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon pink">
+              <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
+            </div>
+            <h3>Security Built In</h3>
+            <p>
+              CSP headers, CSRF tokens, input sanitization, permissions
+              policies — all native modules, not afterthoughts.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon yellow">
+              <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+            </div>
+            <h3>View Transitions</h3>
+            <p>
+              Native cross-document view transitions make multi-page
+              navigation feel like a single-page app.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Code Showcase ─── -->
+    <section class="section section-soft" aria-labelledby="code-heading">
+      <div class="section-inner">
+        <div class="showcase">
+          <div class="showcase-text">
+            <span class="section-label">How it works</span>
+            <h3 id="code-heading">
+              Reactivity without the ceremony
+            </h3>
+            <p>
+              Islands are plain JavaScript functions. Import a signal, wire
+              up an effect, and the DOM updates itself — no JSX, no
+              template language, no framework boilerplate.
+            </p>
+            <ul class="check-list">
+              <li>Works without JavaScript enabled</li>
+              <li>Hydrates on load, idle, visible, or media query</li>
+              <li>Each island loads independently — no global bundle</li>
+              <li>Full TypeScript definitions included</li>
+            </ul>
+          </div>
+          <div class="code-window">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              </div>
+              <span class="code-title">counter.js</span>
+              <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="code-counter">
+                <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i>
+              </button>
+            </div>
+            <div class="code-body">
+              <pre id="code-counter"><span class="syn-k">import</span> <span class="syn-p">{</span> signal<span class="syn-p">,</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">export default function</span> <span class="syn-f">counter</span><span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">0</span><span class="syn-p">);</span>
+  <span class="syn-k">const</span> btn <span class="syn-p">=</span> el.<span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'button'</span><span class="syn-p">);</span>
+
+  btn.<span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">()</span> <span class="syn-k">=&gt;</span>
+    <span class="syn-f">setCount</span><span class="syn-p">(</span><span class="syn-f">count</span><span class="syn-p">()</span> <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span>
+  <span class="syn-p">);</span>
+
+  <span class="syn-f">effect</span><span class="syn-p">(()</span> <span class="syn-k">=&gt;</span> <span class="syn-p">{</span>
+    btn.textContent <span class="syn-p">=</span> <span class="syn-s">`Count: ${<span class="syn-f">count</span><span class="syn-p">()</span>}`</span><span class="syn-p">;</span>
+  <span class="syn-p">});</span>
+<span class="syn-p">}</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── More Features Grid ─── -->
+    <section class="section" aria-labelledby="more-features-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Batteries included</span>
+          <h2 id="more-features-heading">Every module, built in</h2>
+          <p>No npm install. No plugin ecosystem to navigate. It's all here, ready to import.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+            </div>
+            <h3>Client-Side Router</h3>
+            <p>
+              Navigation API interceptor upgrades MPA links to SPA-style
+              content swaps. Prefetch via Speculation Rules.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i>
+            </div>
+            <h3>State Management</h3>
+            <p>
+              Persistent key-value store with <code>localStorage</code> sync.
+              Cross-tab reactivity via <code>BroadcastChannel</code>.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <i aria-hidden="true" class="wl-icon wl-i-star wl-icon-24"></i>
+            </div>
+            <h3>PWA &amp; Offline</h3>
+            <p>
+              Service worker registration, install prompts, cache strategies,
+              and background sync — all built-in modules.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i>
+            </div>
+            <h3>Testing Utilities</h3>
+            <p>
+              DOM assertions, mock signals, mount helpers, and event simulation.
+              Framework-native, no Jest or Vitest required.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon pink">
+              <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
+            </div>
+            <h3>Priority Scheduler</h3>
+            <p>
+              Yield to the main thread between tasks. Critical, high, normal,
+              and low priorities keep your UI responsive.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon yellow">
+              <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+            </div>
+            <h3>Accessibility</h3>
+            <p>
+              Focus trapping, ARIA live regions, reduced-motion detection,
+              and locale-aware Intl formatting — not an afterthought.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-24"></i>
+            </div>
+            <h3>Performance Tooling</h3>
+            <p>
+              Web Vitals observer, lazy images, asset prefetching via
+              Speculation Rules, and a render budget scheduler.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+            </div>
+            <h3>Web Workers</h3>
+            <p>
+              Move heavy computation off the main thread with a simple
+              <code>dispatch</code> / <code>onMessage</code> worker bridge.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <i aria-hidden="true" class="wl-icon wl-i-box wl-icon-24"></i>
+            </div>
+            <h3>CLI Tooling</h3>
+            <p>
+              Scaffold, dev server, build with minification &amp; fingerprinting,
+              and update — one binary, no Node.js needed.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-24"></i>
+            </div>
+            <h3>CDN-First Delivery</h3>
+            <p>
+              Import maps rewrite to your CDN at build time. Ship the framework
+              from the edge — zero latency penalty.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon pink">
+              <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
+            </div>
+            <h3>Network Layer</h3>
+            <p>
+              Fetch wrapper with retries, timeouts, and request deduplication.
+              Real-time via <code>EventSource</code> and WebSocket helpers.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon yellow">
+              <i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-24"></i>
+            </div>
+            <h3>DevTools Overlay</h3>
+            <p>
+              Activate with <code>?wl-debug</code> — see island status,
+              performance markers, and page meta at a glance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── HTML Integration ─── -->
+    <section class="section" aria-labelledby="html-heading">
+      <div class="section-inner">
+        <div class="showcase" style="direction: rtl">
+          <div class="showcase-text" style="direction: ltr">
+            <span class="section-label">Just HTML</span>
+            <h3 id="html-heading">Two attributes. That's the entire API.</h3>
+            <p>
+              Point <code>data-island</code> at your script and choose when to
+              hydrate. No config files, no routing tables, no provider
+              wrappers.
+            </p>
+            <ul class="check-list">
+              <li>Server-rendered HTML works before JS loads</li>
+              <li>
+                Lazy hydration: <code>load</code>, <code>idle</code>,
+                <code>visible</code>, <code>media</code>
+              </li>
+              <li>Drop into any existing page — no rewrite needed</li>
+              <li>Works with any backend: Rails, Django, PHP, static</li>
+            </ul>
+          </div>
+          <div class="code-window" style="direction: ltr">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              </div>
+              <span class="code-title">index.html</span>
+              <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="code-html">
+                <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i>
+              </button>
+            </div>
+            <div class="code-body">
+              <pre
+                id="code-html"><span class="syn-t">&lt;div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">"/islands/counter.js"</span>
+     <span class="syn-a">data-hydrate</span><span class="syn-p">=</span><span class="syn-s">"visible"</span><span class="syn-t">&gt;</span>
+
+  <span class="syn-t">&lt;h2&gt;</span>Live Counter<span class="syn-t">&lt;/h2&gt;</span>
+  <span class="syn-t">&lt;button&gt;</span>Count: 0<span class="syn-t">&lt;/button&gt;</span>
+
+<span class="syn-t">&lt;/div&gt;</span>
+
+<span class="syn-c">&lt;!-- That's it. No build. No bundle. --&gt;</span>
+<span class="syn-t">&lt;script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">"module"</span>
+  <span class="syn-a">src</span><span class="syn-p">=</span><span class="syn-s">"/weblisk/weblisk.js"</span><span class="syn-t">&gt;&lt;/script&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Comparison Table ─── -->
+    <section class="section section-soft" aria-labelledby="compare-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Comparison</span>
+          <h2 id="compare-heading">How Weblisk stacks up</h2>
+          <p>
+            See how Weblisk compares to popular frameworks on the things that
+            matter.
+          </p>
+        </div>
+        <div style="overflow-x: auto">
+          <table class="comparison-table" role="table">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col" class="highlight col-highlight">Weblisk</th>
+                <th scope="col">Next.js</th>
+                <th scope="col">Astro</th>
+                <th scope="col">SvelteKit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Zero dependencies</td>
+                <td class="yes col-highlight">Yes</td>
+                <td class="no">180+</td>
+                <td class="no">100+</td>
+                <td class="no">40+</td>
+              </tr>
+              <tr>
+                <td>No build step required</td>
+                <td class="yes col-highlight">Yes</td>
+                <td class="no">Required</td>
+                <td class="no">Required</td>
+                <td class="no">Required</td>
+              </tr>
+              <tr>
+                <td>Islands architecture</td>
+                <td class="yes col-highlight">Native</td>
+                <td class="no">No</td>
+                <td class="yes">Yes</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Works without JS</td>
+                <td class="yes col-highlight">Yes</td>
+                <td class="partial">Partial</td>
+                <td class="yes">Yes</td>
+                <td class="partial">Partial</td>
+              </tr>
+              <tr>
+                <td>TypeScript types</td>
+                <td class="yes col-highlight">Included</td>
+                <td class="yes">Included</td>
+                <td class="yes">Included</td>
+                <td class="yes">Included</td>
+              </tr>
+              <tr>
+                <td>Security modules</td>
+                <td class="yes col-highlight">Built-in</td>
+                <td class="no">Add-on</td>
+                <td class="no">Add-on</td>
+                <td class="no">Add-on</td>
+              </tr>
+              <tr>
+                <td>PWA support</td>
+                <td class="yes col-highlight">Built-in</td>
+                <td class="no">Add-on</td>
+                <td class="no">Add-on</td>
+                <td class="no">Add-on</td>
+              </tr>
+              <tr>
+                <td>Core size (gzip)</td>
+                <td class="yes col-highlight">&lt;5 KB</td>
+                <td class="no">~90 KB</td>
+                <td class="partial">~30 KB</td>
+                <td class="partial">~15 KB</td>
+              </tr>
+              <tr>
+                <td>View transitions</td>
+                <td class="yes col-highlight">Built-in</td>
+                <td class="no">Add-on</td>
+                <td class="yes">Built-in</td>
+                <td class="no">Add-on</td>
+              </tr>
+              <tr>
+                <td>Drop-in compatible</td>
+                <td class="yes col-highlight">Yes</td>
+                <td class="no">Own project</td>
+                <td class="no">Own project</td>
+                <td class="no">Own project</td>
+              </tr>
+              <tr>
+                <td>Server runtime</td>
+                <td class="yes col-highlight">Any</td>
+                <td class="no">Node.js</td>
+                <td class="no">Node.js</td>
+                <td class="no">Node.js</td>
+              </tr>
+              <tr>
+                <td>Deploy to</td>
+                <td class="yes col-highlight">Any host</td>
+                <td class="no">Node.js hosts</td>
+                <td class="no">Node.js / static</td>
+                <td class="no">Node.js hosts</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Integration ─── -->
+    <section class="section" aria-labelledby="integration-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Drop-in</span>
+          <h2 id="integration-heading">Works with your existing stack</h2>
+          <p>
+            Weblisk doesn't replace your backend. Add it to any project with a
+            single script tag.
+          </p>
+        </div>
+        <div class="integration-grid">
+          <div class="integration-card">
+            <div class="int-logo" style="background: rgba(221, 75, 57, 0.1); color: #e44d26">
+              &#9830;
+            </div>
+            <div>
+              <h3>Plain HTML</h3>
+              <p>Static sites, landing pages, prototypes</p>
+            </div>
+          </div>
+          <div class="integration-card">
+            <div class="int-logo" style="background: rgba(139, 0, 0, 0.1); color: #cc0000">
+              R
+            </div>
+            <div>
+              <h3>Ruby on Rails</h3>
+              <p>Drop into ERB templates</p>
+            </div>
+          </div>
+          <div class="integration-card">
+            <div class="int-logo" style="background: rgba(9, 132, 61, 0.1); color: #09843d">
+              D
+            </div>
+            <div>
+              <h3>Django</h3>
+              <p>Use in Django templates</p>
+            </div>
+          </div>
+          <div class="integration-card">
+            <div class="int-logo" style="background: rgba(119, 123, 180, 0.1); color: #777bb4">
+              P
+            </div>
+            <div>
+              <h3>PHP / Laravel</h3>
+              <p>Add to Blade templates</p>
+            </div>
+          </div>
+          <div class="integration-card">
+            <div class="int-logo" style="background: rgba(0, 122, 204, 0.1); color: #007acc">
+              E
+            </div>
+            <div>
+              <h3>Express / Node</h3>
+              <p>Serve alongside any Node backend</p>
+            </div>
+          </div>
+          <div class="integration-card">
+            <div class="int-logo" style="background: rgba(0, 172, 193, 0.1); color: #00acc1">
+              G
+            </div>
+            <div>
+              <h3>Go / Gin</h3>
+              <p>Static assets in Go backends</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Final Code Example ─── -->
+    <section class="section section-soft" aria-labelledby="signals-heading">
+      <div class="section-inner">
+        <div class="showcase">
+          <div class="showcase-text">
+            <span class="section-label">Reactive</span>
+            <h3 id="signals-heading">
+              Signals that feel like plain variables
+            </h3>
+            <p>
+              No decorators. No observables. No boilerplate. Create a signal,
+              use it, and the DOM updates itself. Derived state and effects
+              are just functions.
+            </p>
+            <ul class="check-list">
+              <li>No virtual DOM overhead</li>
+              <li>Synchronous, predictable updates</li>
+              <li>Automatic dependency tracking</li>
+              <li>Memory-safe — cleaned up on disconnect</li>
+            </ul>
+          </div>
+          <div class="code-window">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              </div>
+              <span class="code-title">todo.js</span>
+              <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="code-todo">
+                <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i>
+              </button>
+            </div>
+            <div class="code-body">
+              <pre id="code-todo"><span class="syn-k">import</span> <span class="syn-p">{</span> signal<span class="syn-p">,</span> computed<span class="syn-p">,</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">export default function</span> <span class="syn-f">todo</span><span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>items<span class="syn-p">,</span> setItems<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">([]);</span>
+  <span class="syn-k">const</span> remaining <span class="syn-p">=</span> <span class="syn-f">computed</span><span class="syn-p">(()</span> <span class="syn-k">=&gt;</span>
+    <span class="syn-f">items</span><span class="syn-p">().</span><span class="syn-f">filter</span><span class="syn-p">(</span>t <span class="syn-k">=&gt;</span> <span class="syn-p">!</span>t.done<span class="syn-p">).</span>length
+  <span class="syn-p">);</span>
+
+  <span class="syn-f">effect</span><span class="syn-p">(()</span> <span class="syn-k">=&gt;</span> <span class="syn-p">{</span>
+    el.<span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'.count'</span><span class="syn-p">)</span>
+      .textContent <span class="syn-p">=</span> <span class="syn-s">`${<span class="syn-f">remaining</span><span class="syn-p">()</span>} left`</span><span class="syn-p">;</span>
+  <span class="syn-p">});</span>
+<span class="syn-p">}</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24" />
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">
+            Zero-dependency framework for the modern web.
+          </p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>
+              document.currentScript.parentElement.insertBefore(
+                document.createTextNode(new Date().getFullYear() + " "),
+                document.currentScript,
+              );
+            </script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by
+            <a href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14" />
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

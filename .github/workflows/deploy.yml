@@ -1,0 +1,73 @@
+# ── Deploy: Public Website ────────────────────────────────────
+#
+# Publishes the static site to the weblisk-public R2 bucket
+# when files change on main. Also supports manual dispatch.
+#
+# Publishes to:
+#   weblisk-public R2 bucket (serves weblisk.dev)
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload to R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: |
+          BUCKET="s3://weblisk-public"
+
+          upload() {
+            aws s3 cp "$1" "${BUCKET}/$2" \
+              --endpoint-url "$R2_ENDPOINT" \
+              --content-type "$3" \
+              --no-progress
+          }
+
+          # Upload all site files preserving directory structure
+          find . -type f \
+            -not -path './.git/*' \
+            -not -path './.github/*' \
+            -not -name '.gitignore' \
+            -not -name 'wrangler.toml' \
+            -not -name 'README.md' \
+          | while read -r file; do
+            # Strip leading ./
+            key="${file#./}"
+
+            # Determine MIME type
+            case "$file" in
+              *.html)  mime="text/html" ;;
+              *.css)   mime="text/css" ;;
+              *.js)    mime="application/javascript" ;;
+              *.json)  mime="application/json" ;;
+              *.svg)   mime="image/svg+xml" ;;
+              *.png)   mime="image/png" ;;
+              *.jpg)   mime="image/jpeg" ;;
+              *.ico)   mime="image/x-icon" ;;
+              *.webp)  mime="image/webp" ;;
+              *.woff2) mime="font/woff2" ;;
+              *.woff)  mime="font/woff" ;;
+              *.txt)   mime="text/plain" ;;
+              *.xml)   mime="application/xml" ;;
+              *)       mime="application/octet-stream" ;;
+            esac
+
+            upload "$file" "$key" "$mime"
+          done
+
+          echo "✓ Site deployed to weblisk-public R2 bucket"

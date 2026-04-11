@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local-First Store — Weblisk</title>
+  <meta name="description" content="IDB-backed collection store with CRUD, reactive queries, and automatic Background Sync. Data lives locally first — reads hit IndexedDB, not the network.">
+  <link rel="canonical" href="https://weblisk.dev/docs/store.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Local-First Store — Weblisk">
+  <meta property="og:description" content="IDB-backed collection store with CRUD, reactive queries, and automatic Background Sync. Data lives locally first — reads hit IndexedDB, not the network.">
+  <meta property="og:url" content="https://weblisk.dev/docs/store.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Local-First Store — Weblisk",
+    "description": "IDB-backed collection store with CRUD, reactive queries, and automatic Background Sync. Data lives locally first — reads hit IndexedDB, not the network.",
+    "url": "https://weblisk.dev/docs/store.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html" aria-current="page" class="active">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Local-First Store</h1>
+
+      <p>The <code>data/store.js</code> module provides a local-first collection store backed by IndexedDB. Data is
+        available offline instantly, with optional background sync to a server.</p>
+      <h2>Creating a Collection</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> collection <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>With server sync:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  syncUrl<span class="syn-p">:</span> <span class="syn-s">'https://api.example.com/todos'</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>CRUD Operations</h2>
+      <h3>Create / Update</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-c">// Auto-generates an ID</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span><span class="syn-p">,</span> done<span class="syn-p">:</span> <span class="syn-k">false</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Provide your own ID</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> id<span class="syn-p">:</span> <span class="syn-s">'abc123'</span><span class="syn-p">,</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span><span class="syn-p">,</span> done<span class="syn-p">:</span> <span class="syn-k">false</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Update existing</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> id<span class="syn-p">:</span> <span class="syn-s">'abc123'</span><span class="syn-p">,</span> done<span class="syn-p">:</span> <span class="syn-k">true</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>Records automatically get an <code>_updated</code> timestamp.</p>
+      <h3>Read</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-c">// Single record</span>
+<span class="syn-k">const</span> todo <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-k">get</span><span class="syn-p">(</span><span class="syn-s">'abc123'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// All records</span>
+<span class="syn-k">const</span> all <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">getAll</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Filtered</span>
+<span class="syn-k">const</span> done <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">getAll</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> r<span class="syn-p">.</span>done <span class="syn-p">=</span><span class="syn-p">=</span><span class="syn-p">=</span> <span class="syn-k">true</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Count</span>
+<span class="syn-k">const</span> total <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Delete</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-c">// Soft-delete (marks _deleted, keeps for sync)</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-k">delete</span><span class="syn-p">(</span><span class="syn-s">'abc123'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Hard-delete all soft-deleted records</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">purgeDeleted</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Reactive Queries</h2>
+      <p>Create a signal that live-updates when the collection changes:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-k">import</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> collection <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> allTodos <span class="syn-p">=</span> todos<span class="syn-p">.</span><span class="syn-f">live</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> items <span class="syn-p">=</span> <span class="syn-f">allTodos</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  document<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'.count'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`${items.length} items`</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>With a filter:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-k">const</span> activeTodos <span class="syn-p">=</span> todos<span class="syn-p">.</span><span class="syn-f">live</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> <span class="syn-p">!</span>r<span class="syn-p">.</span>done<span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Change Events</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-k">const</span> unsub <span class="syn-p">=</span> todos<span class="syn-p">.</span><span class="syn-f">onChange</span><span class="syn-p">(</span><span class="syn-p">(</span>records<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Collection changed:'</span><span class="syn-p">,</span> records<span class="syn-p">.</span>length<span class="syn-p">,</span> <span class="syn-s">'items'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Server Sync</h2>
+      <p>When <code>syncUrl</code> is configured, mutations are queued for Background Sync:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-9">
+<span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  syncUrl<span class="syn-p">:</span> <span class="syn-s">'https://api.example.com/todos'</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-c">// → Saved to IDB immediately</span>
+<span class="syn-c">// → Queued for background sync to server</span>
+</pre>
+        </div>
+      </div>
+      <h3>Merging Server Data</h3>
+      <p>Pull changes from the server and merge (newer timestamps win):</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-10">
+<span class="syn-k">const</span> serverData <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/api/todos'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">then</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> r<span class="syn-p">.</span><span class="syn-f">json</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>serverData<span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Incremental Sync</h3>
+      <p>Get only records changed since a timestamp:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-11">
+<span class="syn-k">const</span> changes <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">changesSince</span><span class="syn-p">(</span>lastSyncTimestamp<span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Listening for Sync Results</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-12">
+<span class="syn-k">import</span> <span class="syn-p">{</span> onSyncResult <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">onSyncResult</span><span class="syn-p">(</span><span class="syn-p">(</span>msg<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span>msg<span class="syn-p">.</span>ok<span class="syn-p">)</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`Synced ${msg.collection}`</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">else</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span><span class="syn-s">`Sync failed:`</span><span class="syn-p">,</span> msg<span class="syn-p">.</span>error<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/state.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> State Management</a>
+        <a href="/docs/routing.html">Routing & Guards <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

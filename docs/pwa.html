@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA — Weblisk</title>
+  <meta name="description"
+    content="Build progressive web apps with Weblisk: runtime manifest generation, connectivity detection, Background Sync engine, and push notifications. Zero dependencies.">
+  <link rel="canonical" href="https://weblisk.dev/docs/pwa.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="PWA — Weblisk">
+  <meta property="og:description"
+    content="Build progressive web apps with Weblisk: runtime manifest generation, connectivity detection, Background Sync engine, and push notifications. Zero dependencies.">
+  <meta property="og:url" content="https://weblisk.dev/docs/pwa.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "PWA — Weblisk",
+    "description": "Weblisk provides progressive web app primitives for offline support, push notifications, and installability.",
+    "url": "https://weblisk.dev/docs/pwa.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html" aria-current="page" class="active">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>PWA</h1>
+
+      <p>Weblisk provides progressive web app primitives for offline support, push notifications, and installability.
+      </p>
+      <h2>Offline State</h2>
+      <p>Track connectivity as a reactive signal:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> online<span class="syn-p">,</span> syncStatus<span class="syn-p">,</span> pendingCount <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-p">!</span><span class="syn-f">online</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-f">showBanner</span><span class="syn-p">(</span><span class="syn-s">'You are offline. Changes are saved locally.'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> status <span class="syn-p">=</span> <span class="syn-f">syncStatus</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'idle', 'syncing', 'error'</span>
+  <span class="syn-k">const</span> count <span class="syn-p">=</span> <span class="syn-f">pendingCount</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span>count <span class="syn-p">&gt;</span> <span class="syn-n">0</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    statusEl<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`${count} changes pending sync`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Manual Sync</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">import</span> <span class="syn-p">{</span> triggerSync <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// Sync a specific collection</span>
+<span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>              <span class="syn-c">// Sync all collections</span>
+</pre>
+        </div>
+      </div>
+      <h3>Periodic Sync</h3>
+      <p>Register background sync that runs on an interval (Chromium only):</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-k">import</span> <span class="syn-p">{</span> registerPeriodicSync <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> success <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">registerPeriodicSync</span><span class="syn-p">(</span><span class="syn-s">'content-refresh'</span><span class="syn-p">,</span> <span class="syn-n">12</span> <span class="syn-p">*</span> <span class="syn-n">60</span> <span class="syn-p">*</span> <span class="syn-n">60</span> <span class="syn-p">*</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Push Notifications</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-k">import</span> <span class="syn-p">{</span> requestPermission<span class="syn-p">,</span> subscribe<span class="syn-p">,</span> notify<span class="syn-p">,</span> permission <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/push.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Check current permission</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Permission:'</span><span class="syn-p">,</span> <span class="syn-f">permission</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Request permission</span>
+<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">requestPermission</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Subscribe to push (server needs to store the subscription)</span>
+<span class="syn-k">const</span> sub <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">subscribe</span><span class="syn-p">(</span><span class="syn-s">'YOUR_VAPID_PUBLIC_KEY'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">await</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/api/push/subscribe'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
+  body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span>sub<span class="syn-p">)</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Show a local notification</span>
+<span class="syn-k">await</span> <span class="syn-f">notify</span><span class="syn-p">(</span><span class="syn-s">'New message'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  body<span class="syn-p">:</span> <span class="syn-s">'You have a new message from Alice'</span><span class="syn-p">,</span>
+  icon<span class="syn-p">:</span> <span class="syn-s">'/icon-192.png'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Web App Manifest</h2>
+      <p>Generate and inject a manifest at runtime:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-k">import</span> <span class="syn-p">{</span> manifest<span class="syn-p">,</span> injectManifest<span class="syn-p">,</span> setThemeColor <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/manifest.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> m <span class="syn-p">=</span> <span class="syn-f">manifest</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  name<span class="syn-p">:</span> <span class="syn-s">'My App'</span><span class="syn-p">,</span>
+  short_name<span class="syn-p">:</span> <span class="syn-s">'App'</span><span class="syn-p">,</span>
+  start_url<span class="syn-p">:</span> <span class="syn-s">'/'</span><span class="syn-p">,</span>
+  display<span class="syn-p">:</span> <span class="syn-s">'standalone'</span><span class="syn-p">,</span>
+  theme_color<span class="syn-p">:</span> <span class="syn-s">'#2563eb'</span><span class="syn-p">,</span>
+  background_color<span class="syn-p">:</span> <span class="syn-s">'#ffffff'</span><span class="syn-p">,</span>
+  icons<span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span> src<span class="syn-p">:</span> <span class="syn-s">'/icon-192.png'</span><span class="syn-p">,</span> sizes<span class="syn-p">:</span> <span class="syn-s">'192x192'</span><span class="syn-p">,</span> type<span class="syn-p">:</span> <span class="syn-s">'image/png'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+    <span class="syn-p">{</span> src<span class="syn-p">:</span> <span class="syn-s">'/icon-512.png'</span><span class="syn-p">,</span> sizes<span class="syn-p">:</span> <span class="syn-s">'512x512'</span><span class="syn-p">,</span> type<span class="syn-p">:</span> <span class="syn-s">'image/png'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">]</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">injectManifest</span><span class="syn-p">(</span>m<span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Update theme color dynamically (e.g., dark mode)</span>
+<span class="syn-f">setThemeColor</span><span class="syn-p">(</span><span class="syn-s">'#1e293b'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/performance.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Performance</a>
+        <a href="/docs/ui.html">UI Components <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workers — Weblisk</title>
+  <meta name="description"
+    content="Run CPU-intensive work off the main thread using inline Web Workers. No separate worker files needed — the function is serialized and executed in a worker…">
+  <link rel="canonical" href="https://weblisk.dev/docs/workers.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Workers — Weblisk">
+  <meta property="og:description"
+    content="Run CPU-intensive work off the main thread using inline Web Workers. No separate worker files needed — the function is serialized and executed in a worker…">
+  <meta property="og:url" content="https://weblisk.dev/docs/workers.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Workers — Weblisk",
+    "description": "Run CPU-intensive work off the main thread using inline Web Workers. No separate worker files needed — the function is serialized and executed in a worker…",
+    "url": "https://weblisk.dev/docs/workers.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html" aria-current="page" class="active">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Workers</h1>
+
+      <p>Run CPU-intensive work off the main thread using inline Web Workers. No separate worker files needed — the
+        function is serialized and executed in a worker automatically.</p>
+      <h2>offload</h2>
+      <p>Create a function that runs in a disposable worker:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> offload <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/worker.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> heavyCalc <span class="syn-p">=</span> <span class="syn-f">offload</span><span class="syn-p">(</span><span class="syn-p">(</span>data<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-c">// This runs in a Web Worker — no access to DOM</span>
+  <span class="syn-k">let</span> result <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span>
+  <span class="syn-k">for</span> <span class="syn-p">(</span><span class="syn-k">let</span> i <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span> i <span class="syn-p">&lt;</span> data<span class="syn-p">.</span>iterations<span class="syn-p">;</span> i<span class="syn-p">+</span><span class="syn-p">+</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    result <span class="syn-p">+</span><span class="syn-p">=</span> Math<span class="syn-p">.</span><span class="syn-f">sqrt</span><span class="syn-p">(</span>i<span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+  <span class="syn-k">return</span> result<span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">heavyCalc</span><span class="syn-p">(</span><span class="syn-p">{</span> iterations<span class="syn-p">:</span> <span class="syn-n">10_000_000</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>Each call spins up a one-shot worker that terminates after returning.</p>
+      <h2>workerPool</h2>
+      <p>For repeated tasks, use a persistent pool of workers:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">import</span> <span class="syn-p">{</span> workerPool <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/worker.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> pool <span class="syn-p">=</span> <span class="syn-f">workerPool</span><span class="syn-p">(</span><span class="syn-p">(</span>imageData<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-c">// Process image data in parallel</span>
+  <span class="syn-k">const</span> pixels <span class="syn-p">=</span> <span class="syn-k">new</span> <span class="syn-f">Uint8ClampedArray</span><span class="syn-p">(</span>imageData<span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">for</span> <span class="syn-p">(</span><span class="syn-k">let</span> i <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span> i <span class="syn-p">&lt;</span> pixels<span class="syn-p">.</span>length<span class="syn-p">;</span> i <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-n">4</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> avg <span class="syn-p">=</span> <span class="syn-p">(</span>pixels<span class="syn-p">[</span>i<span class="syn-p">]</span> <span class="syn-p">+</span> pixels<span class="syn-p">[</span>i<span class="syn-p">+</span><span class="syn-n">1</span><span class="syn-p">]</span> <span class="syn-p">+</span> pixels<span class="syn-p">[</span>i<span class="syn-p">+</span><span class="syn-n">2</span><span class="syn-p">]</span><span class="syn-p">)</span> <span class="syn-p">/</span> <span class="syn-n">3</span><span class="syn-p">;</span>
+    pixels<span class="syn-p">[</span>i<span class="syn-p">]</span> <span class="syn-p">=</span> pixels<span class="syn-p">[</span>i<span class="syn-p">+</span><span class="syn-n">1</span><span class="syn-p">]</span> <span class="syn-p">=</span> pixels<span class="syn-p">[</span>i<span class="syn-p">+</span><span class="syn-n">2</span><span class="syn-p">]</span> <span class="syn-p">=</span> avg<span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+  <span class="syn-k">return</span> pixels<span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">4</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 4 workers</span>
+
+<span class="syn-c">// Process multiple images in parallel</span>
+<span class="syn-k">const</span> results <span class="syn-p">=</span> <span class="syn-k">await</span> Promise<span class="syn-p">.</span><span class="syn-f">all</span><span class="syn-p">(</span>
+  images<span class="syn-p">.</span><span class="syn-f">map</span><span class="syn-p">(</span>img <span class="syn-p">=&gt;</span> pool<span class="syn-p">.</span><span class="syn-f">run</span><span class="syn-p">(</span>img<span class="syn-p">.</span>data<span class="syn-p">)</span><span class="syn-p">)</span>
+<span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Clean up when done</span>
+pool<span class="syn-p">.</span><span class="syn-f">terminate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>The pool size defaults to <code>navigator.hardwareConcurrency</code> (typically 4-16).</p>
+      <h2>Limitations</h2>
+      <p>Functions passed to <code>offload</code> and <code>workerPool</code> must be <strong>self-contained</strong>:
+      </p>
+      <ul>
+        <li>No access to DOM (<code>document</code>, <code>window</code>)</li>
+        <li>No access to outer scope variables (closures)</li>
+        <li>No imports — all logic must be inline</li>
+        <li>Arguments and return values must be structured-cloneable (no functions, DOM nodes)</li>
+      </ul>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/scheduler.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Scheduler</a>
+        <a href="/docs/state.html">State Management <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

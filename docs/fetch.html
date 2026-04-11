@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch — Weblisk</title>
+  <meta name="description" content="Enhanced fetch with typed JSON, streaming, request deduplication, retry with exponential backoff, timeout, and offline queue. Zero dependencies.">
+  <link rel="canonical" href="https://weblisk.dev/docs/fetch.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fetch — Weblisk">
+  <meta property="og:description" content="Enhanced fetch with typed JSON, streaming, request deduplication, retry with exponential backoff, timeout, and offline queue. Zero dependencies.">
+  <meta property="og:url" content="https://weblisk.dev/docs/fetch.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Fetch — Weblisk",
+    "description": "Enhanced fetch with typed JSON, streaming, request deduplication, retry with exponential backoff, timeout, and offline queue. Zero dependencies.",
+    "url": "https://weblisk.dev/docs/fetch.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html" aria-current="page" class="active">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Fetch</h1>
+
+      <p>The <code>net/fetch.js</code> module enhances the native Fetch API with common patterns.</p>
+      <h2>fetchJSON</h2>
+      <p>Typed JSON fetch with timeout, retry, and deduplication:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> fetchJSON <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> user <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchJSON</span><span class="syn-p">(</span><span class="syn-s">'/api/user/123'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Options</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchJSON</span><span class="syn-p">(</span><span class="syn-s">'/api/search'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
+  body<span class="syn-p">:</span> <span class="syn-p">{</span> query<span class="syn-p">:</span> <span class="syn-s">'weblisk'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  timeout<span class="syn-p">:</span> <span class="syn-n">5000</span><span class="syn-p">,</span>     <span class="syn-c">// 5s timeout (default: 10000)</span>
+  retries<span class="syn-p">:</span> <span class="syn-n">3</span><span class="syn-p">,</span>        <span class="syn-c">// Retry on failure (default: 0)</span>
+  dedupe<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>       <span class="syn-c">// Deduplicate concurrent identical requests</span>
+  headers<span class="syn-p">:</span> <span class="syn-p">{</span> Authorization<span class="syn-p">:</span> <span class="syn-s">'Bearer token'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>Retries use exponential backoff (1s, 2s, 4s, ...) and only retry on network errors or 5xx status codes.</p>
+      <h2>fetchStream</h2>
+      <p>Stream NDJSON (newline-delimited JSON) as an async generator:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-k">import</span> <span class="syn-p">{</span> fetchStream <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">for</span> <span class="syn-k">await</span> <span class="syn-p">(</span><span class="syn-k">const</span> event <span class="syn-k">of</span> <span class="syn-f">fetchStream</span><span class="syn-p">(</span><span class="syn-s">'/api/events'</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Event:'</span><span class="syn-p">,</span> event<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span>
+</pre>
+        </div>
+      </div>
+      <p>Works with any API that returns newline-separated JSON objects.</p>
+      <h2>Offline Queue</h2>
+      <p>Queue mutations when offline, flush when connectivity returns:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-k">import</span> <span class="syn-p">{</span> fetchOffline<span class="syn-p">,</span> flushOfflineQueue <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// This works even when offline</span>
+<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchOffline</span><span class="syn-p">(</span><span class="syn-s">'/api/todos'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
+  body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">if</span> <span class="syn-p">(</span>result<span class="syn-p">.</span>queued<span class="syn-p">)</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Saved offline, will sync when online'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span>
+
+<span class="syn-c">// Manually flush the queue</span>
+window<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'online'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> count <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">flushOfflineQueue</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`Flushed ${count} queued requests`</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/transitions.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> View Transitions</a>
+        <a href="/docs/realtime.html">Realtime <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

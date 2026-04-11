@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components — Weblisk</title>
+  <meta name="description"
+    content="Weblisk components are standard Custom Elements with a thin signal bridge. No Shadow DOM. No template compiler. No build step.">
+  <link rel="canonical" href="https://weblisk.dev/docs/components.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Components — Weblisk">
+  <meta property="og:description"
+    content="Weblisk components are standard Custom Elements with a thin signal bridge. No Shadow DOM. No template compiler. No build step.">
+  <meta property="og:url" content="https://weblisk.dev/docs/components.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Components — Weblisk",
+    "description": "Weblisk components are standard Custom Elements with a thin signal bridge. No Shadow DOM. No template compiler. No build step.",
+    "url": "https://weblisk.dev/docs/components.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html" aria-current="page" class="active">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Components</h1>
+
+      <p>Weblisk components are standard <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom
+          Elements</a> with a thin signal bridge. No Shadow DOM. No template compiler. No build step.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> component <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>Also available as a deep import: <code>import { component } from 'weblisk/ui/component.js';</code></p>
+      <h2>Defining a Component</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-counter'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  props<span class="syn-p">:</span> <span class="syn-p">{</span> start<span class="syn-p">:</span> <span class="syn-n">0</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props<span class="syn-p">,</span> $<span class="syn-p">,</span> effect <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.count'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.inc'</span><span class="syn-p">)</span><span class="syn-p">.</span>onclick <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> props<span class="syn-p">.</span>start<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.dec'</span><span class="syn-p">)</span><span class="syn-p">.</span>onclick <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> props<span class="syn-p">.</span>start<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">-</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>Usage — plain HTML:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-t">&lt;</span><span class="syn-t">wl-counter</span> <span class="syn-a">start</span><span class="syn-p">=</span><span class="syn-s">&quot;5&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;dec&quot;</span><span class="syn-t">&gt;</span>-<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;count&quot;</span><span class="syn-t">&gt;</span>5<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;inc&quot;</span><span class="syn-t">&gt;</span>+<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-counter</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>The HTML works before JavaScript loads — the count shows "5", buttons are visible. When the component upgrades,
+        it adds interactivity. This is <strong>progressive enhancement</strong>.</p>
+      <h2>Props</h2>
+      <p>Props are declared with default values. The type of the default determines how attributes are parsed:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-widget'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  props<span class="syn-p">:</span> <span class="syn-p">{</span>
+    label<span class="syn-p">:</span> <span class="syn-s">''</span><span class="syn-p">,</span>        <span class="syn-c">// String — attribute value as-is</span>
+    count<span class="syn-p">:</span> <span class="syn-n">0</span><span class="syn-p">,</span>         <span class="syn-c">// Number — parsed with Number()</span>
+    active<span class="syn-p">:</span> <span class="syn-k">false</span><span class="syn-p">,</span>    <span class="syn-c">// Boolean — &quot;false&quot; and &quot;0&quot; are false, everything else is true</span>
+  <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-k">typeof</span> props<span class="syn-p">.</span><span class="syn-f">label</span><span class="syn-p">(</span><span class="syn-p">)</span>  <span class="syn-c">// 'string'</span>
+    <span class="syn-k">typeof</span> props<span class="syn-p">.</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span>  <span class="syn-c">// 'number'</span>
+    <span class="syn-k">typeof</span> props<span class="syn-p">.</span><span class="syn-f">active</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-c">// 'boolean'</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>Each prop is a <strong>signal</strong> — call it to read, call <code>.set()</code> to write:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+props<span class="syn-p">.</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span>          <span class="syn-c">// read: 0</span>
+props<span class="syn-p">.</span>count<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span><span class="syn-n">5</span><span class="syn-p">)</span>     <span class="syn-c">// write: 5</span>
+props<span class="syn-p">.</span>count<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>n <span class="syn-p">=&gt;</span> n <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span>  <span class="syn-c">// functional update: 6</span>
+</pre>
+        </div>
+      </div>
+      <p>When an HTML attribute changes (e.g. via <code>setAttribute</code>), the prop signal updates automatically.</p>
+      <h2>Setup Context</h2>
+      <p>The <code>setup</code> function receives a context object:</p>
+      <p>| Property | Type | Description |</p>
+      <p>|----------|------|-------------|</p>
+      <p>| <code>props</code> | <code>Object</code> | Signal getters for each declared prop |</p>
+      <p>| <code>el</code> | <code>HTMLElement</code> | The custom element instance |</p>
+      <p>| <code>$</code> | <code>(selector) => Element</code> | <code>querySelector</code> scoped to this element |</p>
+      <p>| <code>$$</code> | <code>(selector) => Element[]</code> | <code>querySelectorAll</code> scoped to this element
+        |</p>
+      <p>| <code>effect</code> | <code>(fn) => dispose</code> | Auto-tracked effect, disposed on disconnect |</p>
+      <p>| <code>emit</code> | <code>(name, detail?) => void</code> | Dispatch a bubbling CustomEvent |</p>
+      <p>| <code>cleanup</code> | <code>(fn) => void</code> | Register a function to call on disconnect |</p>
+      <h2>Effects</h2>
+      <p>Effects created via the context are automatically disposed when the element disconnects from the DOM:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-clock'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> $<span class="syn-p">,</span> effect<span class="syn-p">,</span> cleanup <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> tick <span class="syn-p">=</span> <span class="syn-f">setInterval</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.time'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-k">new</span> <span class="syn-f">Date</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">toLocaleTimeString</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+    <span class="syn-f">cleanup</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">clearInterval</span><span class="syn-p">(</span>tick<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Events</h2>
+      <p>Use <code>emit</code> to dispatch standard CustomEvents that bubble:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-color-picker'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  props<span class="syn-p">:</span> <span class="syn-p">{</span> value<span class="syn-p">:</span> <span class="syn-s">'#000000'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props<span class="syn-p">,</span> $<span class="syn-p">,</span> emit <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">)</span><span class="syn-p">.</span>oninput <span class="syn-p">=</span> <span class="syn-p">(</span>e<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+      props<span class="syn-p">.</span>value<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>e<span class="syn-p">.</span>target<span class="syn-p">.</span>value<span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-f">emit</span><span class="syn-p">(</span><span class="syn-s">'color-change'</span><span class="syn-p">,</span> <span class="syn-p">{</span> color<span class="syn-p">:</span> e<span class="syn-p">.</span>target<span class="syn-p">.</span>value <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>Listen from any parent:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-t">&lt;</span><span class="syn-t">wl-color-picker</span> <span class="syn-a">value</span><span class="syn-p">=</span><span class="syn-s">&quot;#6366f1&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">input</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;color&quot;</span> <span class="syn-t">/&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-color-picker</span><span class="syn-t">&gt;</span>
+
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
+document.querySelector('wl-color-picker').addEventListener('color-change', (e) =&gt; {
+  document.body.style.setProperty('--accent', e.detail.color);
+});
+<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Template Fallback</h2>
+      <p>If the element is empty, an optional <code>template</code> function provides initial DOM:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-9">
+<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-spinner'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  <span class="syn-f">template</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-k">return</span> <span class="syn-s">'&lt;div class=&quot;spinner&quot; role=&quot;status&quot; aria-label=&quot;Loading&quot;&gt;&lt;/div&gt;'</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> el <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-c">// Spinner is already visible — no further setup needed</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>If the element already has children (server-rendered), the template is skipped. This ensures components work
+        with any server template engine.</p>
+      <h2>Working With Any Framework</h2>
+      <p>Components are standard Custom Elements — they work anywhere HTML works:</p>
+      <p><strong>Rails (ERB)</strong></p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">erb</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-10">
+<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;&lt;%= @feature.enabled? %&gt;</span>&quot;&gt;
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;</span>%= <span class="syn-a">@feature.name</span> %<span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p><strong>Django (Jinja2)</strong></p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-11">
+<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;{{ feature.enabled|lower }}&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>{{ feature.name }}<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p><strong>Go (html/template)</strong></p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-12">
+<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;{{.Enabled}}&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>{{.Name}}<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p><strong>Static HTML</strong></p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-13"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-13">
+<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;true&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>Dark Mode<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>All identical. The server renders the HTML. The component enhances it.</p>
+      <h2>Component vs. Island</h2>
+      <p>Both enhance existing HTML. The difference:</p>
+      <p>| | <code>component()</code> | <code>enhance()</code> |</p>
+      <p>|---|---|---|</p>
+      <p>| Registers a Custom Element | Yes | No |</p>
+      <p>| Reusable with attributes | Yes | No (selector-based) |</p>
+      <p>| Works in any template engine | Yes | Yes |</p>
+      <p>| Auto-cleanup on disconnect | Yes | Manual |</p>
+      <p>| When to use | Reusable interactive widgets | One-off page-specific behavior |</p>
+      <p>Use <code>component()</code> for reusable widgets. Use <code>enhance()</code> for page-specific behavior.</p>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/hydration.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Hydration Directives</a>
+        <a href="/docs/scheduler.html">Scheduler <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

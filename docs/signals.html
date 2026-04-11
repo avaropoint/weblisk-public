@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signals — Weblisk</title>
+  <meta name="description"
+    content="Signals are the reactive primitive at the heart of Weblisk. They provide fine-grained reactivity — when a signal changes, only the code that depends on it…">
+  <link rel="canonical" href="https://weblisk.dev/docs/signals.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Signals — Weblisk">
+  <meta property="og:description"
+    content="Signals are the reactive primitive at the heart of Weblisk. They provide fine-grained reactivity — when a signal changes, only the code that depends on it…">
+  <meta property="og:url" content="https://weblisk.dev/docs/signals.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Signals — Weblisk",
+    "description": "Signals are the reactive primitive at the heart of Weblisk. They provide fine-grained reactivity — when a signal changes, only the code that depends on it…",
+    "url": "https://weblisk.dev/docs/signals.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html" aria-current="page" class="active">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Signals</h1>
+
+      <p>Signals are the reactive primitive at the heart of Weblisk. They provide fine-grained reactivity — when a
+        signal changes, only the code that depends on it re-runs. No virtual DOM, no diffing, no re-renders.</p>
+      <h2>Creating a Signal</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> signal <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Read</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 0</span>
+
+<span class="syn-c">// Write</span>
+<span class="syn-f">setCount</span><span class="syn-p">(</span><span class="syn-n">5</span><span class="syn-p">)</span><span class="syn-p">;</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 5</span>
+</pre>
+        </div>
+      </div>
+      <p><code>signal()</code> returns a tuple: a <strong>getter</strong> function and a <strong>setter</strong>
+        function.</p>
+      <h2>Effects</h2>
+      <p>An effect runs a function whenever its tracked signals change:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">import</span> <span class="syn-p">{</span> signal<span class="syn-p">,</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> <span class="syn-p">[</span>name<span class="syn-p">,</span> setName<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-s">'World'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  document<span class="syn-p">.</span>title <span class="syn-p">=</span> <span class="syn-s">`Hello, ${name()}!`</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">setName</span><span class="syn-p">(</span><span class="syn-s">'Weblisk'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// title updates to &quot;Hello, Weblisk!&quot;</span>
+</pre>
+        </div>
+      </div>
+      <p>Effects automatically track which signals were read during execution and re-run when any of them change.</p>
+      <h3>Cleanup</h3>
+      <p><code>effect()</code> returns a dispose function:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-k">const</span> dispose <span class="syn-p">=</span> <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">name</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">dispose</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Stop tracking, stop re-running</span>
+</pre>
+        </div>
+      </div>
+      <h2>Computed Signals</h2>
+      <p>A computed signal derives its value from other signals. It's lazy (only recalculated when read) and cached:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-k">import</span> <span class="syn-p">{</span> signal<span class="syn-p">,</span> computed <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> <span class="syn-p">[</span>price<span class="syn-p">,</span> setPrice<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">100</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> <span class="syn-p">[</span>tax<span class="syn-p">,</span> setTax<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">0.1</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> total <span class="syn-p">=</span> <span class="syn-f">computed</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">price</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">*</span> <span class="syn-p">(</span><span class="syn-n">1</span> <span class="syn-p">+</span> <span class="syn-f">tax</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">total</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 110</span>
+<span class="syn-f">setTax</span><span class="syn-p">(</span><span class="syn-n">0.2</span><span class="syn-p">)</span><span class="syn-p">;</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">total</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 120</span>
+</pre>
+        </div>
+      </div>
+      <h2>Store</h2>
+      <p>A store is a reactive object — each property is a signal under the hood:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-k">import</span> <span class="syn-p">{</span> store<span class="syn-p">,</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> user <span class="syn-p">=</span> <span class="syn-f">store</span><span class="syn-p">(</span><span class="syn-p">{</span> name<span class="syn-p">:</span> <span class="syn-s">'Alice'</span><span class="syn-p">,</span> age<span class="syn-p">:</span> <span class="syn-n">30</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`${user.name} is ${user.age}`</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+user<span class="syn-p">.</span>name <span class="syn-p">=</span> <span class="syn-s">'Bob'</span><span class="syn-p">;</span>   <span class="syn-c">// Logs: &quot;Bob is 30&quot;</span>
+user<span class="syn-p">.</span>age <span class="syn-p">=</span> <span class="syn-n">31</span><span class="syn-p">;</span>       <span class="syn-c">// Logs: &quot;Bob is 31&quot;</span>
+</pre>
+        </div>
+      </div>
+      <p>Stores use a <code>Proxy</code> so you can read/write properties with normal syntax.</p>
+      <h2>Advanced</h2>
+      <h3>Peeking (Non-Tracking Read)</h3>
+      <p>Read a signal without creating a dependency:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-c">// count.peek() doesn't track — this effect won't re-run when count changes</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Current count:'</span><span class="syn-p">,</span> count<span class="syn-p">.</span><span class="syn-f">peek</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Subscribing</h3>
+      <p>Listen to changes outside of effects:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> unsub <span class="syn-p">=</span> count<span class="syn-p">.</span><span class="syn-f">subscribe</span><span class="syn-p">(</span><span class="syn-p">(</span>value<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Changed to:'</span><span class="syn-p">,</span> value<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">setCount</span><span class="syn-p">(</span><span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Logs: &quot;Changed to: 1&quot;</span>
+<span class="syn-f">unsub</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>     <span class="syn-c">// Stop listening</span>
+</pre>
+        </div>
+      </div>
+      <h2>Patterns</h2>
+      <h3>Derived State</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-k">const</span> <span class="syn-p">[</span>items<span class="syn-p">,</span> setItems<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> count <span class="syn-p">=</span> <span class="syn-f">computed</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">items</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">.</span>length<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> empty <span class="syn-p">=</span> <span class="syn-f">computed</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">items</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">.</span>length <span class="syn-p">=</span><span class="syn-p">=</span><span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Toggle</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-9">
+<span class="syn-k">const</span> <span class="syn-p">[</span>open<span class="syn-p">,</span> setOpen<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-k">false</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> toggle <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">setOpen</span><span class="syn-p">(</span><span class="syn-p">!</span><span class="syn-f">open</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>DOM Binding</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-10">
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;search&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $<span class="syn-p">,</span> effect <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>query<span class="syn-p">,</span> setQuery<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-s">''</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> input <span class="syn-p">=</span> <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> results <span class="syn-p">=</span> <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.results'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+  input<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">,</span> <span class="syn-p">(</span>e<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">setQuery</span><span class="syn-p">(</span>e<span class="syn-p">.</span>target<span class="syn-p">.</span>value<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+    results<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-f">query</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">?</span> <span class="syn-s">`Searching: ${query()}`</span> <span class="syn-p">:</span> <span class="syn-s">''</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/project-structure.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Project Structure</a>
+        <a href="/docs/islands.html">Islands <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

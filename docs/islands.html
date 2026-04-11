@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islands — Weblisk</title>
+  <meta name="description"
+    content="Islands are the core pattern in Weblisk. HTML renders first as static content — then small JavaScript modules &quot;enhance&quot; specific regions with…">
+  <link rel="canonical" href="https://weblisk.dev/docs/islands.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Islands — Weblisk">
+  <meta property="og:description"
+    content="Islands are the core pattern in Weblisk. HTML renders first as static content — then small JavaScript modules &quot;enhance&quot; specific regions with…">
+  <meta property="og:url" content="https://weblisk.dev/docs/islands.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Islands — Weblisk",
+    "description": "Islands are the core pattern in Weblisk. HTML renders first as static content — then small JavaScript modules &quot;enhance&quot; specific regions with…",
+    "url": "https://weblisk.dev/docs/islands.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html" aria-current="page" class="active">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Islands</h1>
+
+      <p>Islands are the core pattern in Weblisk. HTML renders first as static content — then small JavaScript modules
+        "enhance" specific regions with interactivity. Only the interactive parts ship JavaScript.</p>
+      <h2>Basic Island</h2>
+      <p>HTML:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;counter&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>Count: 0<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span> <span class="syn-a">src</span><span class="syn-p">=</span><span class="syn-s">&quot;/js/islands/counter.js&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>JavaScript:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">import</span> <span class="syn-p">{</span> signal<span class="syn-p">,</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;counter&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">signal</span><span class="syn-p">(</span><span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> btn <span class="syn-p">=</span> <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'button'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+  btn<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">setCount</span><span class="syn-p">(</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span> btn<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`Count: ${count()}`</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>The <code>enhance()</code> Function</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-f">enhance</span><span class="syn-p">(</span>target<span class="syn-p">,</span> setup<span class="syn-p">)</span>
+</pre>
+        </div>
+      </div>
+      <p>| Parameter | Type | Description |</p>
+      <p>|-----------|------|-------------|</p>
+      <p>| <code>target</code> | <code>string \| Element</code> | CSS selector or DOM element to enhance |</p>
+      <p>| <code>setup</code> | <code>(el, ctx) => cleanup \| void</code> | Setup function with element and context |
+      </p>
+      <h3>Context Object</h3>
+      <p>The second argument to your setup function provides helpers:</p>
+      <p>| Property | Description |</p>
+      <p>|----------|-------------|</p>
+      <p>| <code>$</code> | <code>querySelector</code> scoped to the island element |</p>
+      <p>| <code>$$</code> | <code>querySelectorAll</code> scoped to the island element |</p>
+      <p>| <code>effect</code> | Scoped <code>effect()</code> — auto-cleaned when island is destroyed |</p>
+      <h3>Cleanup</h3>
+      <p>Return a function from <code>setup</code> to clean up when the island is removed:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;timer&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> id <span class="syn-p">=</span> <span class="syn-f">setInterval</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span> <span class="syn-p">/</span><span class="syn-p">*</span> <span class="syn-p">.</span><span class="syn-p">.</span><span class="syn-p">.</span> <span class="syn-p">*</span><span class="syn-p">/</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+  <span class="syn-k">return</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">clearInterval</span><span class="syn-p">(</span>id<span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Called on cleanup</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Lazy Islands</h2>
+      <p>For islands below the fold, load them only when they become visible:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-k">import</span> <span class="syn-p">{</span> lazyEnhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/lazy-island.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">lazyEnhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;chart&quot;]'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">{</span> setupChart <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-k">import</span><span class="syn-p">(</span><span class="syn-s">'./chart-setup.js'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">return</span> setupChart<span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Lazy Enhance All</h3>
+      <p>Enhance multiple islands matching the same selector:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-k">import</span> <span class="syn-p">{</span> lazyEnhanceAll <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/lazy-island.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">lazyEnhanceAll</span><span class="syn-p">(</span><span class="syn-s">'.card[data-island]'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> type <span class="syn-p">=</span> el<span class="syn-p">.</span>dataset<span class="syn-p">.</span>island<span class="syn-p">;</span>
+  <span class="syn-k">const</span> mod <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-k">import</span><span class="syn-p">(</span><span class="syn-s">`./cards/${type}.js`</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  mod<span class="syn-p">.</span><span class="syn-f">setup</span><span class="syn-p">(</span>el<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Error Boundaries</h2>
+      <p>Wrap islands in error boundaries to gracefully handle failures:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-k">import</span> <span class="syn-p">{</span> boundary <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/error.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">boundary</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;chart&quot;]'</span><span class="syn-p">,</span> setupChart<span class="syn-p">,</span> <span class="syn-p">{</span>
+  fallback<span class="syn-p">:</span> <span class="syn-s">'&lt;p&gt;Chart failed to load. &lt;button data-retry&gt;Retry&lt;/button&gt;&lt;/p&gt;'</span><span class="syn-p">,</span>
+  onError<span class="syn-p">:</span> <span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span><span class="syn-s">'Chart error:'</span><span class="syn-p">,</span> err<span class="syn-p">)</span><span class="syn-p">,</span>
+  retry<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>If the setup function throws, the fallback HTML is shown. With <code>retry: true</code>, clicking
+        <code>[data-retry]</code> re-runs setup.</p>
+      <h2>Multiple Islands on a Page</h2>
+      <p>Each island is independent — they don't share state unless you explicitly connect them:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">html</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;header&quot;</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;search&quot;</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;results&quot;</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
+</pre>
+        </div>
+      </div>
+      <p>To share state between islands, use a shared store:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-9">
+<span class="syn-c">// shared.js</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> store <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">export</span> <span class="syn-k">const</span> appState <span class="syn-p">=</span> <span class="syn-f">store</span><span class="syn-p">(</span><span class="syn-p">{</span> query<span class="syn-p">:</span> <span class="syn-s">''</span><span class="syn-p">,</span> results<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-p">]</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-10">
+<span class="syn-c">// search.js</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> appState <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'./shared.js'</span><span class="syn-p">;</span>
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;search&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">,</span> <span class="syn-p">(</span>e<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+    appState<span class="syn-p">.</span>query <span class="syn-p">=</span> e<span class="syn-p">.</span>target<span class="syn-p">.</span>value<span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-11">
+<span class="syn-c">// results.js</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> appState <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'./shared.js'</span><span class="syn-p">;</span>
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;results&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+    el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> appState<span class="syn-p">.</span>results<span class="syn-p">.</span><span class="syn-f">map</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> <span class="syn-s">`&lt;li&gt;${r}&lt;/li&gt;`</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">''</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Generating Islands</h2>
+      <p>The CLI can scaffold an island for you:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-12">
+<span class="syn-f">weblisk</span> add island my<span class="syn-a">-widget</span>
+</pre>
+        </div>
+      </div>
+      <p>This creates <code>app/js/islands/my-widget.js</code> with the <code>enhance()</code> boilerplate.</p>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/signals.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Signals</a>
+        <a href="/docs/hydration.html">Hydration Directives <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

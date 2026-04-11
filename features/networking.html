@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Networking Demos — Weblisk</title>
+  <meta name="description" content="Interactive Weblisk networking demos: enhanced Fetch with retry and dedup, reactive WebSocket, Server-Sent Events, and WebTransport streams.">
+  <link rel="canonical" href="https://weblisk.dev/features/networking.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Networking Demos — Weblisk">
+  <meta property="og:description" content="Interactive Weblisk networking demos: enhanced Fetch with retry and dedup, reactive WebSocket, Server-Sent Events, and WebTransport streams.">
+  <meta property="og:url" content="https://weblisk.dev/features/networking.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/dashboard.html" class="nav-link active" aria-current="page">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="examples-layout">
+    <aside class="examples-sidebar" aria-label="Examples navigation">
+      <a href="/dashboard.html">
+        <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-18"></i> Dashboard
+      </a>
+      <a href="/features.html">
+        <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-18"></i> Features
+      </a>
+      <nav class="examples-subnav" aria-label="Feature categories">
+        <a href="/features/core.html">Core Extensions</a>
+        <a href="/features/state.html">State Management</a>
+        <a href="/features/data.html">Data &amp; Sync</a>
+        <a href="/features/networking.html" class="active" aria-current="page">Networking</a>
+        <a href="/features/security.html">Security</a>
+        <a href="/features/performance.html">Performance</a>
+        <a href="/features/a11y.html">Accessibility</a>
+        <a href="/features/pwa.html">PWA</a>
+        <a href="/features/pro.html">Pro <span class="pro-badge">New</span></a>
+      </nav>
+      <a href="/settings.html">
+        <i aria-hidden="true" class="wl-icon wl-i-gear wl-icon-18"></i> Settings
+      </a>
+    </aside>
+
+    <main class="examples-main" id="main-content">
+      <div class="page-header">
+        <h1>Networking Demos</h1>
+        <p>Enhanced Fetch, WebSocket, SSE, and WebTransport demos.</p>
+      </div>
+
+      <section data-island="/js/islands/features-networking.js" data-hydrate="idle">
+        <div class="demo-grid">
+
+          <div class="demo-card" id="demo-fetch">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-20"></i> Enhanced Fetch</h3>
+            <p>fetchJSON with retry, dedup, timeout. fetchOffline queues when offline.</p>
+            <button class="btn btn-sm" id="btn-fetch">Fetch demo API</button>
+            <button class="btn btn-sm" id="btn-fetch-offline">Queue Offline</button>
+            <pre class="demo-output" id="output-fetch">Ready...</pre>
+          </div>
+
+          <div class="demo-card" id="demo-ws">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-20"></i> WebSocket</h3>
+            <p>Reactive WebSocket with auto-reconnect, heartbeat, and message buffering.</p>
+            <button class="btn btn-sm" id="btn-ws">Simulate Socket</button>
+            <pre class="demo-output" id="output-ws">Disconnected</pre>
+          </div>
+
+          <div class="demo-card" id="demo-sse">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-20"></i> Server-Sent Events</h3>
+            <p>Reactive SSE with named event channels and auto-reconnect.</p>
+            <button class="btn btn-sm" id="btn-sse">Simulate Events</button>
+            <pre class="demo-output" id="output-sse">No events</pre>
+          </div>
+
+          <div class="demo-card" id="demo-transport">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-20"></i> Real-Time Transport</h3>
+            <p>Unified WebTransport (HTTP/3) → WebSocket fallback. Multiplexed channels, auto-reconnect.</p>
+            <button class="btn btn-sm" id="btn-transport">Check Transport</button>
+            <pre class="demo-output" id="output-transport">Ready...</pre>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

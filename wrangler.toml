@@ -1,0 +1,10 @@
+# Weblisk Public Website — Cloudflare R2 Static Deployment
+# No Worker required — files served directly from R2 bucket.
+# account_id read from CLOUDFLARE_ACCOUNT_ID env var
+
+name = "weblisk-public"
+compatibility_date = "2024-01-01"
+
+[[r2_buckets]]
+binding = "SITE"
+bucket_name = "weblisk-public"

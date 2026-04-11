@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weblisk Pro — Premium Modules &amp; Priority Support</title>
+  <meta name="description"
+    content="Weblisk Pro: 10 premium modules including analytics, A/B testing, data tables, charts, and more. One-time per-domain license with lifetime updates.">
+  <link rel="canonical" href="https://weblisk.dev/pro.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weblisk Pro — Premium Modules &amp; Priority Support">
+  <meta property="og:description"
+    content="Weblisk Pro: 10 premium modules including analytics, A/B testing, data tables, charts, and more. One-time per-domain license with lifetime updates.">
+  <meta property="og:url" content="https://weblisk.dev/pro.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link active" aria-current="page">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ─── Pro Hero ─── -->
+    <section class="pro-hero">
+      <h1>Weblisk <span class="accent">Pro</span></h1>
+      <p>Premium plugins, advanced tooling, and priority support for teams building production applications.</p>
+      <div class="hero-actions" style="margin-top:1rem">
+        <a href="#pricing" class="btn btn-primary">View Plans</a>
+        <a href="/docs/index.html" class="btn btn-outline">Documentation</a>
+      </div>
+    </section>
+
+    <!-- ─── Pro Features ─── -->
+    <section class="pro-features" aria-labelledby="pro-features-heading">
+      <div class="pro-features-inner">
+        <div class="section-header">
+          <span class="section-label">What's Included</span>
+          <h2 id="pro-features-heading">10 production-grade modules</h2>
+          <p>Everything in the free 52-module core, plus 10 advanced modules for teams shipping real products.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon purple"><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-24"></i></div>
+            <h3>Privacy-First Analytics</h3>
+            <p>Cookie-free page views, custom events, and session tracking. Batched via <code>sendBeacon</code> for zero perf impact.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan"><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i></div>
+            <h3>A/B Testing</h3>
+            <p>Hash-based deterministic variant assignment. Persists across sessions with built-in conversion tracking.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green"><i aria-hidden="true" class="wl-icon wl-i-box wl-icon-24"></i></div>
+            <h3>Data Tables</h3>
+            <p>Interactive sortable, filterable, paginated tables from any data source. One-click CSV export.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange"><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-24"></i></div>
+            <h3>SVG Charts</h3>
+            <p>Pure DOM SVG bar, line, pie, and sparkline charts. No canvas, fully accessible, zero dependencies.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon pink"><i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i></div>
+            <h3>Form Validation</h3>
+            <p>Declarative validation via <code>data-validate</code> attributes. Async submission with loading states and error display.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon yellow"><i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i></div>
+            <h3>Client-Side Auth</h3>
+            <p>JWT decode, token lifecycle signals, auto-refresh, and route guards. Works with any JWT-issuing backend.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon purple"><i aria-hidden="true" class="wl-icon wl-i-star wl-icon-24"></i></div>
+            <h3>Payment Request API</h3>
+            <p>Browser-native checkout with one function call. Works with Stripe, PayPal, or any payment processor.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan"><i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-24"></i></div>
+            <h3>Toast Notifications</h3>
+            <p>Accessible notification system with auto-dismiss, stacking, positioning, and screen reader announcements.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green"><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i></div>
+            <h3>Accessible Tabs</h3>
+            <p>ARIA-compliant tablist/tab/tabpanel pattern with full keyboard navigation — Arrow keys, Home, End.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange"><i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-24"></i></div>
+            <h3>CRDT Primitives</h3>
+            <p>Conflict-free replicated data types for offline-first collaboration. LWW Register, G-Counter, PN-Counter, LWW-Map.</p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:1.5rem">
+          <a href="/features/pro.html" class="btn btn-outline">Try the Interactive Demos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Pro Code Showcase: Analytics ─── -->
+    <section class="section" aria-labelledby="pro-analytics-heading">
+      <div class="section-inner">
+        <div class="showcase">
+          <div class="showcase-text">
+            <span class="section-label">Privacy-First</span>
+            <h3 id="pro-analytics-heading">Analytics without the guilt</h3>
+            <p>
+              Cookie-free, GDPR-friendly page view and event tracking.
+              Batched via <code>sendBeacon</code> so it never blocks rendering
+              or slows navigation.
+            </p>
+            <ul class="check-list">
+              <li>No cookies, no consent banner needed</li>
+              <li>Automatic page view tracking</li>
+              <li>Custom events with structured data</li>
+              <li>Session duration signals — reactive out of the box</li>
+            </ul>
+          </div>
+          <div class="code-window">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              </div>
+              <span class="code-title">analytics-island.js</span>
+              <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="code-analytics">
+                <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i>
+              </button>
+            </div>
+            <div class="code-body">
+              <pre id="code-analytics"><span class="syn-k">import</span> <span class="syn-p">{</span> init<span class="syn-p">,</span> track<span class="syn-p">,</span> session <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Start tracking — zero cookies, zero consent</span>
+<span class="syn-f">init</span><span class="syn-p">(</span><span class="syn-s">'/api/collect'</span><span class="syn-p">);</span>
+
+<span class="syn-c">// Track custom events</span>
+document.<span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'.cta'</span><span class="syn-p">)</span>
+  .<span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">()</span> <span class="syn-k">=&gt;</span>
+    <span class="syn-f">track</span><span class="syn-p">(</span><span class="syn-s">'cta_click'</span><span class="syn-p">,</span> <span class="syn-p">{</span> plan<span class="syn-p">:</span> <span class="syn-s">'pro'</span> <span class="syn-p">})</span>
+  <span class="syn-p">);</span>
+
+<span class="syn-c">// Reactive session duration</span>
+<span class="syn-k">const</span> <span class="syn-p">[</span>duration<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">session</span><span class="syn-p">();</span>
+<span class="syn-f">effect</span><span class="syn-p">(()</span> <span class="syn-k">=&gt;</span> console.<span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`Session: ${<span class="syn-f">duration</span><span class="syn-p">()</span>}s`</span><span class="syn-p">));</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Pro Code Showcase: Data Tables ─── -->
+    <section class="section section-soft" aria-labelledby="pro-table-heading">
+      <div class="section-inner">
+        <div class="showcase" style="direction:rtl">
+          <div class="showcase-text" style="direction:ltr">
+            <span class="section-label">Production Data</span>
+            <h3 id="pro-table-heading">Data tables in one function call</h3>
+            <p>
+              Sort, filter, paginate, and export any dataset. Built with
+              real DOM — no virtual scrolling tricks, no canvas hacks.
+              Debounced filtering preserves focus while you type.
+            </p>
+            <ul class="check-list">
+              <li>Click-to-sort with directional indicators</li>
+              <li>Live filtering with input debounce</li>
+              <li>Configurable page sizes and navigation</li>
+              <li>One-click CSV export of filtered data</li>
+            </ul>
+          </div>
+          <div class="code-window" style="direction:ltr">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              </div>
+              <span class="code-title">team-table.js</span>
+              <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="code-table">
+                <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i>
+              </button>
+            </div>
+            <div class="code-body">
+              <pre id="code-table"><span class="syn-k">import</span> <span class="syn-p">{</span> table <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/table.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-p">[</span>
+  <span class="syn-p">{</span> name<span class="syn-p">:</span> <span class="syn-s">'Alice Chen'</span><span class="syn-p">,</span>   role<span class="syn-p">:</span> <span class="syn-s">'Engineer'</span><span class="syn-p">,</span>  status<span class="syn-p">:</span> <span class="syn-s">'Active'</span> <span class="syn-p">},</span>
+  <span class="syn-p">{</span> name<span class="syn-p">:</span> <span class="syn-s">'Bob Patel'</span><span class="syn-p">,</span>    role<span class="syn-p">:</span> <span class="syn-s">'Designer'</span><span class="syn-p">,</span> status<span class="syn-p">:</span> <span class="syn-s">'Active'</span> <span class="syn-p">},</span>
+  <span class="syn-p">{</span> name<span class="syn-p">:</span> <span class="syn-s">'Clara López'</span><span class="syn-p">,</span> role<span class="syn-p">:</span> <span class="syn-s">'PM'</span><span class="syn-p">,</span>       status<span class="syn-p">:</span> <span class="syn-s">'On Leave'</span> <span class="syn-p">}</span>
+<span class="syn-p">];</span>
+
+<span class="syn-f">table</span><span class="syn-p">(</span>document.<span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'#team'</span><span class="syn-p">),</span> <span class="syn-p">{</span>
+  columns<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'name'</span><span class="syn-p">,</span> <span class="syn-s">'role'</span><span class="syn-p">,</span> <span class="syn-s">'status'</span><span class="syn-p">],</span>
+  data<span class="syn-p">,</span>
+  pageSize<span class="syn-p">:</span> <span class="syn-n">10</span><span class="syn-p">,</span>
+  sortable<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  filterable<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  exportCsv<span class="syn-p">:</span> <span class="syn-k">true</span>
+<span class="syn-p">});</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Pro Code Showcase: Charts ─── -->
+    <section class="section" aria-labelledby="pro-chart-heading">
+      <div class="section-inner">
+        <div class="showcase">
+          <div class="showcase-text">
+            <span class="section-label">Visualization</span>
+            <h3 id="pro-chart-heading">SVG charts, zero canvas</h3>
+            <p>
+              Bar, line, pie, and sparkline charts rendered as pure SVG.
+              Accessible by default, styleable with CSS, and responsive
+              without a resize observer.
+            </p>
+            <ul class="check-list">
+              <li>4 chart types — bar, line, pie, sparkline</li>
+              <li>Pure SVG — text is selectable, links are clickable</li>
+              <li>Accessible with ARIA labels and roles</li>
+              <li>Style with CSS — colors, fonts, animations</li>
+            </ul>
+          </div>
+          <div class="code-window">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              </div>
+              <span class="code-title">dashboard-charts.js</span>
+              <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="code-chart">
+                <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i>
+              </button>
+            </div>
+            <div class="code-body">
+              <pre id="code-chart"><span class="syn-k">import</span> <span class="syn-p">{</span> bar<span class="syn-p">,</span> line<span class="syn-p">,</span> pie <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/chart.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Bar chart — revenue by quarter</span>
+<span class="syn-f">bar</span><span class="syn-p">(</span><span class="syn-s">'#revenue'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  labels<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'Q1'</span><span class="syn-p">,</span> <span class="syn-s">'Q2'</span><span class="syn-p">,</span> <span class="syn-s">'Q3'</span><span class="syn-p">,</span> <span class="syn-s">'Q4'</span><span class="syn-p">],</span>
+  values<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-n">42</span><span class="syn-p">,</span> <span class="syn-n">68</span><span class="syn-p">,</span> <span class="syn-n">55</span><span class="syn-p">,</span> <span class="syn-n">91</span><span class="syn-p">]</span>
+<span class="syn-p">});</span>
+
+<span class="syn-c">// Line chart — monthly active users</span>
+<span class="syn-f">line</span><span class="syn-p">(</span><span class="syn-s">'#users'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  labels<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'Jan'</span><span class="syn-p">,</span> <span class="syn-s">'Feb'</span><span class="syn-p">,</span> <span class="syn-s">'Mar'</span><span class="syn-p">,</span> <span class="syn-s">'Apr'</span><span class="syn-p">,</span> <span class="syn-s">'May'</span><span class="syn-p">],</span>
+  values<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-n">1200</span><span class="syn-p">,</span> <span class="syn-n">1800</span><span class="syn-p">,</span> <span class="syn-n">2400</span><span class="syn-p">,</span> <span class="syn-n">3100</span><span class="syn-p">,</span> <span class="syn-n">4200</span><span class="syn-p">]</span>
+<span class="syn-p">});</span>
+
+<span class="syn-c">// Pie chart — traffic sources</span>
+<span class="syn-f">pie</span><span class="syn-p">(</span><span class="syn-s">'#traffic'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  labels<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'Organic'</span><span class="syn-p">,</span> <span class="syn-s">'Direct'</span><span class="syn-p">,</span> <span class="syn-s">'Referral'</span><span class="syn-p">,</span> <span class="syn-s">'Social'</span><span class="syn-p">],</span>
+  values<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-n">45</span><span class="syn-p">,</span> <span class="syn-n">25</span><span class="syn-p">,</span> <span class="syn-n">20</span><span class="syn-p">,</span> <span class="syn-n">10</span><span class="syn-p">]</span>
+<span class="syn-p">});</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Pro Code Showcase: Auth + A/B ─── -->
+    <section class="section section-soft" aria-labelledby="pro-auth-heading">
+      <div class="section-inner">
+        <div class="showcase" style="direction:rtl">
+          <div class="showcase-text" style="direction:ltr">
+            <span class="section-label">Ship Faster</span>
+            <h3 id="pro-auth-heading">Auth &amp; A/B testing — two imports</h3>
+            <p>
+              Client-side JWT auth with reactive user signals that update
+              your UI automatically. Pair it with deterministic A/B testing
+              that persists across sessions — no third-party scripts.
+            </p>
+            <ul class="check-list">
+              <li>JWT decode with auto-refresh and route guards</li>
+              <li>Reactive <code>user()</code> and <code>authenticated()</code> signals</li>
+              <li>Hash-based A/B bucketing — deterministic, no flicker</li>
+              <li>Built-in conversion tracking per variant</li>
+            </ul>
+          </div>
+          <div class="code-window" style="direction:ltr">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+              </div>
+              <span class="code-title">protected-page.js</span>
+              <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="code-auth">
+                <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i>
+              </button>
+            </div>
+            <div class="code-body">
+              <pre id="code-auth"><span class="syn-k">import</span> <span class="syn-p">{</span> login<span class="syn-p">,</span> user<span class="syn-p">,</span> authenticated <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/auth.js'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> assign<span class="syn-p">,</span> convert <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/ab.js'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Auth — reactive user state</span>
+<span class="syn-f">login</span><span class="syn-p">(</span><span class="syn-s">'eyJhbGciOi...'</span><span class="syn-p">);</span>
+<span class="syn-f">effect</span><span class="syn-p">(()</span> <span class="syn-k">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">authenticated</span><span class="syn-p">())</span>
+    greeting.textContent <span class="syn-p">=</span> <span class="syn-s">`Hi, ${<span class="syn-f">user</span><span class="syn-p">()</span>.sub}`</span><span class="syn-p">;</span>
+<span class="syn-p">});</span>
+
+<span class="syn-c">// A/B test — deterministic, no flicker</span>
+<span class="syn-k">const</span> variant <span class="syn-p">=</span> <span class="syn-f">assign</span><span class="syn-p">(</span><span class="syn-s">'pricing-test'</span><span class="syn-p">,</span> <span class="syn-p">[</span><span class="syn-s">'A'</span><span class="syn-p">,</span> <span class="syn-s">'B'</span><span class="syn-p">]);</span>
+cta.textContent <span class="syn-p">=</span> variant <span class="syn-p">===</span> <span class="syn-s">'A'</span>
+  <span class="syn-p">?</span> <span class="syn-s">'Start Free Trial'</span>
+  <span class="syn-p">:</span> <span class="syn-s">'Get Started Now'</span><span class="syn-p">;</span>
+cta.<span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">()</span> <span class="syn-k">=&gt;</span> <span class="syn-f">convert</span><span class="syn-p">(</span><span class="syn-s">'pricing-test'</span><span class="syn-p">));</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Pricing ─── -->
+    <section class="section section-soft" id="pricing" aria-labelledby="pricing-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 id="pricing-heading">Simple, transparent pricing</h2>
+          <p>Start free. Upgrade per domain when you're ready — one-time purchase, lifetime updates.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3 class="pricing-tier">Community</h3>
+            <div class="price">Free</div>
+            <p class="pricing-desc">Forever, for everyone</p>
+            <ul>
+              <li>52 core modules</li>
+              <li>Islands architecture &amp; signals</li>
+              <li>Security, state, networking</li>
+              <li>PWA &amp; accessibility modules</li>
+              <li>CLI scaffolding &amp; build</li>
+              <li>TypeScript definitions</li>
+              <li>Community support (GitHub)</li>
+            </ul>
+            <a href="/docs/quick-start.html" class="btn btn-outline pricing-btn">Get Started</a>
+          </div>
+          <div class="pricing-card featured">
+            <h3 class="pricing-tier">Pro</h3>
+            <div class="price">$149<span>/domain</span></div>
+            <p class="pricing-desc">One-time purchase — lifetime updates included</p>
+            <ul>
+              <li>Everything in Community</li>
+              <li>10 pro modules per domain</li>
+              <li>Analytics &amp; A/B testing</li>
+              <li>Data tables &amp; SVG charts</li>
+              <li>Form validation &amp; client auth</li>
+              <li>Toasts, tabs &amp; CRDTs</li>
+              <li>Priority email support</li>
+              <li>All future Pro updates</li>
+            </ul>
+            <a href="#" class="btn btn-primary pricing-btn">Coming Soon</a>
+          </div>
+          <div class="pricing-card">
+            <h3 class="pricing-tier">Team</h3>
+            <div class="price">$499<span>/5 domains</span></div>
+            <p class="pricing-desc">One-time — for agencies and teams</p>
+            <ul>
+              <li>Everything in Pro</li>
+              <li>5 domain licenses</li>
+              <li>Priority support with SLA</li>
+              <li>Source code access (no CDN dependency)</li>
+              <li>Self-hosted deployment</li>
+              <li>Invoice billing available</li>
+              <li>Onboarding call</li>
+              <li>All future Pro updates</li>
+            </ul>
+            <a href="mailto:team@avaropoint.com" class="btn btn-outline pricing-btn">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

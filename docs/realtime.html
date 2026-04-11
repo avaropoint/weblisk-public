@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realtime — Weblisk</title>
+  <meta name="description" content="Signal-driven WebSocket, Server-Sent Events, and WebTransport wrappers in Weblisk. Auto-reconnect, typed messages, and reactive state — zero dependencies.">
+  <link rel="canonical" href="https://weblisk.dev/docs/realtime.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Realtime — Weblisk">
+  <meta property="og:description"
+    content="Signal-driven WebSocket, Server-Sent Events, and WebTransport wrappers in Weblisk. Auto-reconnect, typed messages, and reactive state — zero dependencies.">
+  <meta property="og:url" content="https://weblisk.dev/docs/realtime.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Realtime — Weblisk",
+    "description": "Weblisk provides signal-driven wrappers for real-time communication protocols.",
+    "url": "https://weblisk.dev/docs/realtime.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html" aria-current="page" class="active">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Realtime</h1>
+
+      <p>Weblisk provides signal-driven wrappers for real-time communication protocols.</p>
+      <h2>WebSocket</h2>
+      <p>Reactive WebSocket with auto-reconnect and heartbeat:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> socket <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/ws.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> ws <span class="syn-p">=</span> <span class="syn-f">socket</span><span class="syn-p">(</span><span class="syn-s">'wss://api.example.com/ws'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  reconnect<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>   <span class="syn-c">// Auto-reconnect on disconnect</span>
+  maxRetries<span class="syn-p">:</span> <span class="syn-n">10</span><span class="syn-p">,</span>    <span class="syn-c">// Max reconnection attempts</span>
+  heartbeat<span class="syn-p">:</span> <span class="syn-n">30000</span><span class="syn-p">,</span>  <span class="syn-c">// Heartbeat ping every 30s</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive message signal</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> msgs <span class="syn-p">=</span> ws<span class="syn-p">.</span><span class="syn-f">messages</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span>msgs<span class="syn-p">.</span>length<span class="syn-p">)</span> <span class="syn-p">{</span>
+    console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Latest:'</span><span class="syn-p">,</span> msgs<span class="syn-p">[</span>msgs<span class="syn-p">.</span>length <span class="syn-p">-</span> <span class="syn-n">1</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Connection state</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'WS state:'</span><span class="syn-p">,</span> ws<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'connecting', 'open', 'closed'</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Send data</span>
+ws<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'subscribe'</span><span class="syn-p">,</span> channel<span class="syn-p">:</span> <span class="syn-s">'updates'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Close</span>
+ws<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Server-Sent Events (SSE)</h2>
+      <p>Signal-driven SSE connection:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">import</span> <span class="syn-p">{</span> stream<span class="syn-p">,</span> latest <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/sse.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> sse <span class="syn-p">=</span> <span class="syn-f">stream</span><span class="syn-p">(</span><span class="syn-s">'/api/events'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  channels<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'notifications'</span><span class="syn-p">,</span> <span class="syn-s">'updates'</span><span class="syn-p">]</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// All events</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Events:'</span><span class="syn-p">,</span> sse<span class="syn-p">.</span><span class="syn-f">events</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Just the latest event</span>
+<span class="syn-k">const</span> lastEvent <span class="syn-p">=</span> <span class="syn-f">latest</span><span class="syn-p">(</span>sse<span class="syn-p">.</span>events<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> event <span class="syn-p">=</span> <span class="syn-f">lastEvent</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span>event<span class="syn-p">)</span> <span class="syn-f">showNotification</span><span class="syn-p">(</span>event<span class="syn-p">.</span>data<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Connection state</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'SSE:'</span><span class="syn-p">,</span> sse<span class="syn-p">.</span><span class="syn-f">status</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'connecting', 'open', 'closed'</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+sse<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>WebTransport</h2>
+      <p>HTTP/3 bidirectional transport with WebSocket fallback:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-k">import</span> <span class="syn-p">{</span> transport <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/transport.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> conn <span class="syn-p">=</span> <span class="syn-f">transport</span><span class="syn-p">(</span><span class="syn-s">'https://api.example.com/transport'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  wsUrl<span class="syn-p">:</span> <span class="syn-s">'wss://api.example.com/ws'</span><span class="syn-p">,</span> <span class="syn-c">// Fallback URL</span>
+  reconnect<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  heartbeat<span class="syn-p">:</span> <span class="syn-n">15000</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Connection state</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'State:'</span><span class="syn-p">,</span> conn<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Send data</span>
+conn<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'message'</span><span class="syn-p">,</span> text<span class="syn-p">:</span> <span class="syn-s">'hello'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Listen for messages</span>
+conn<span class="syn-p">.</span><span class="syn-f">on</span><span class="syn-p">(</span><span class="syn-s">'message'</span><span class="syn-p">,</span> <span class="syn-p">(</span>data<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Received:'</span><span class="syn-p">,</span> data<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Named channels</span>
+<span class="syn-k">const</span> chat <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">channel</span><span class="syn-p">(</span><span class="syn-s">'chat'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+chat<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Hi!'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+chat<span class="syn-p">.</span><span class="syn-f">on</span><span class="syn-p">(</span><span class="syn-s">'message'</span><span class="syn-p">,</span> <span class="syn-p">(</span>msg<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>msg<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+conn<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>The transport module automatically selects WebTransport when available, falling back to WebSocket in all
+        browsers.</p>
+
+      <h2>CRDT Primitives <span class="pro-pill">Pro</span></h2>
+      <p>Conflict-free replicated data types for offline-first collaboration. Resolve concurrent writes automatically without a central server — sync state between peers, tabs, or devices.</p>
+      <h3>LWW Register</h3>
+      <p>Last-Writer-Wins Register — resolves concurrent writes by timestamp. Ties broken by node ID.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-k">import</span> <span class="syn-p">{</span> lwwRegister <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> title <span class="syn-p">=</span> <span class="syn-f">lwwRegister</span><span class="syn-p">(</span><span class="syn-s">'Untitled'</span><span class="syn-p">,</span> <span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Local write</span>
+title<span class="syn-p">.</span><span class="syn-f">set</span><span class="syn-p">(</span><span class="syn-s">'Meeting Notes'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Merge a remote state received over WebSocket</span>
+title<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>remoteState<span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Export state for syncing to other nodes</span>
+ws<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span>title<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Counters</h3>
+      <p>Grow-Only (G-Counter) and Positive-Negative (PN-Counter) for distributed counts:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-k">import</span> <span class="syn-p">{</span> gCounter<span class="syn-p">,</span> pnCounter <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Grow-only counter (likes, page views)</span>
+<span class="syn-k">const</span> likes <span class="syn-p">=</span> <span class="syn-f">gCounter</span><span class="syn-p">(</span><span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+likes<span class="syn-p">.</span><span class="syn-f">increment</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+likes<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>remoteLikes<span class="syn-p">)</span><span class="syn-p">;</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>likes<span class="syn-p">.</span><span class="syn-f">value</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Total across all nodes</span>
+
+<span class="syn-c">// PN counter (inventory, votes — supports decrement)</span>
+<span class="syn-k">const</span> stock <span class="syn-p">=</span> <span class="syn-f">pnCounter</span><span class="syn-p">(</span><span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+stock<span class="syn-p">.</span><span class="syn-f">increment</span><span class="syn-p">(</span><span class="syn-n">10</span><span class="syn-p">)</span><span class="syn-p">;</span>
+stock<span class="syn-p">.</span><span class="syn-f">decrement</span><span class="syn-p">(</span><span class="syn-n">3</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>LWW Map</h3>
+      <p>A key-value map where each key is an independent LWW Register — ideal for collaborative document fields:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-k">import</span> <span class="syn-p">{</span> lwwMap <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> doc <span class="syn-p">=</span> <span class="syn-f">lwwMap</span><span class="syn-p">(</span><span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+doc<span class="syn-p">.</span><span class="syn-f">set</span><span class="syn-p">(</span><span class="syn-s">'title'</span><span class="syn-p">,</span> <span class="syn-s">'Sprint Retro'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+doc<span class="syn-p">.</span><span class="syn-f">set</span><span class="syn-p">(</span><span class="syn-s">'status'</span><span class="syn-p">,</span> <span class="syn-s">'in-progress'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Merge remote changes</span>
+doc<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>remoteState<span class="syn-p">)</span><span class="syn-p">;</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>doc<span class="syn-p">.</span><span class="syn-f">get</span><span class="syn-p">(</span><span class="syn-s">'title'</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>   <span class="syn-c">// Latest value</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>doc<span class="syn-p">.</span><span class="syn-f">entries</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>   <span class="syn-c">// All key-value pairs</span>
+</pre>
+        </div>
+      </div>
+      <h3>CRDT Types</h3>
+      <table class="doc-table">
+        <thead>
+          <tr><th>Type</th><th>Use Case</th><th>Operations</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>lwwRegister</code></td><td>Single value (name, status)</td><td>get, set, merge, state</td></tr>
+          <tr><td><code>gCounter</code></td><td>Grow-only counts (likes, views)</td><td>increment, value, merge, state</td></tr>
+          <tr><td><code>pnCounter</code></td><td>Counts with decrement (stock, votes)</td><td>increment, decrement, value, merge, state</td></tr>
+          <tr><td><code>lwwMap</code></td><td>Key-value document fields</td><td>get, set, delete, entries, merge, state</td></tr>
+        </tbody>
+      </table>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/fetch.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> Fetch</a>
+        <a href="/docs/security.html">Security <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

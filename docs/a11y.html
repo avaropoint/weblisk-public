@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility — Weblisk</title>
+  <meta name="description" content="Built-in accessibility modules for ARIA live regions, focus trapping, roving tabindex, reduced motion, locale detection, and RTL support. No dependencies.">
+  <link rel="canonical" href="https://weblisk.dev/docs/a11y.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Accessibility — Weblisk">
+  <meta property="og:description" content="Built-in accessibility modules for ARIA live regions, focus trapping, roving tabindex, reduced motion, locale detection, and RTL support. No dependencies.">
+  <meta property="og:url" content="https://weblisk.dev/docs/a11y.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Accessibility — Weblisk",
+    "description": "Built-in accessibility modules for ARIA live regions, focus trapping, roving tabindex, reduced motion, locale detection, and RTL support. No dependencies.",
+    "url": "https://weblisk.dev/docs/a11y.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
+    "publisher": { "@type": "Organization", "name": "Weblisk" }
+  }
+  </script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link active" aria-current="page">Docs</a>
+        <a href="/dashboard.html" class="nav-link">Examples</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/index.html">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quick-start.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Core</h3>
+      <nav aria-label="Core documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+        <a href="/docs/analytics.html">Analytics <span class="pro-pill">Pro</span></a>
+      </nav>
+      <h3>Security</h3>
+      <nav aria-label="Security documentation links">
+        <a href="/docs/security.html">Security</a>
+      </nav>
+      <h3>Performance &amp; PWA</h3>
+      <nav aria-label="Performance documentation links">
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html" aria-current="page" class="active">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+        <a href="/docs/integration.html">Integration</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Accessibility</h1>
+
+      <h2>ARIA Live Regions</h2>
+      <p>Announce messages to screen readers:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-1">
+<span class="syn-k">import</span> <span class="syn-p">{</span> announce<span class="syn-p">,</span> aria<span class="syn-p">,</span> role <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/aria.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Polite announcement (waits for user to finish reading)</span>
+<span class="syn-f">announce</span><span class="syn-p">(</span><span class="syn-s">'3 new items loaded'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Assertive announcement (interrupts)</span>
+<span class="syn-f">announce</span><span class="syn-p">(</span><span class="syn-s">'Error: Connection lost'</span><span class="syn-p">,</span> <span class="syn-s">'assertive'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Declarative ARIA attributes</span>
+<span class="syn-f">aria</span><span class="syn-p">(</span><span class="syn-s">'#dialog'</span><span class="syn-p">,</span> <span class="syn-p">{</span> modal<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> labelledby<span class="syn-p">:</span> <span class="syn-s">'dialog-title'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Set a role with required attributes</span>
+<span class="syn-f">role</span><span class="syn-p">(</span><span class="syn-s">'#tab-panel'</span><span class="syn-p">,</span> <span class="syn-s">'tabpanel'</span><span class="syn-p">,</span> <span class="syn-p">{</span> labelledby<span class="syn-p">:</span> <span class="syn-s">'tab-1'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Focus Management</h2>
+      <h3>Focus Trap</h3>
+      <p>Trap focus within a container (modals, dialogs):</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-2">
+<span class="syn-k">import</span> <span class="syn-p">{</span> focusTrap <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> trap <span class="syn-p">=</span> <span class="syn-f">focusTrap</span><span class="syn-p">(</span><span class="syn-s">'#modal'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+trap<span class="syn-p">.</span><span class="syn-f">activate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>   <span class="syn-c">// Tab now cycles within #modal</span>
+trap<span class="syn-p">.</span><span class="syn-f">deactivate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Release focus</span>
+</pre>
+        </div>
+      </div>
+      <h3>Roving Tabindex</h3>
+      <p>Arrow key navigation within a group (tabs, toolbars, menus):</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-3">
+<span class="syn-k">import</span> <span class="syn-p">{</span> rovingIndex <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> cleanup <span class="syn-p">=</span> <span class="syn-f">rovingIndex</span><span class="syn-p">(</span><span class="syn-s">'#toolbar'</span><span class="syn-p">,</span> <span class="syn-s">'button'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  horizontal<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  wrap<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>    <span class="syn-c">// Arrow keys wrap around</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Skip Link</h3>
+      <p>Add a "Skip to main content" link for keyboard navigation:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-4">
+<span class="syn-k">import</span> <span class="syn-p">{</span> skipLink <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">skipLink</span><span class="syn-p">(</span><span class="syn-s">'main-content'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-c">// Creates: &lt;a class=&quot;wl-skip&quot; href=&quot;#main-content&quot;&gt;Skip to main content&lt;/a&gt;</span>
+</pre>
+        </div>
+      </div>
+      <h2>Reduced Motion</h2>
+      <p>Respect the user's motion preference:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-5">
+<span class="syn-k">import</span> <span class="syn-p">{</span> motionReduced<span class="syn-p">,</span> motion<span class="syn-p">,</span> safeTransition<span class="syn-p">,</span> ifMotion <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/motion.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive signal</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">motionReduced</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'User prefers reduced motion'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Choose value based on preference</span>
+<span class="syn-k">const</span> duration <span class="syn-p">=</span> <span class="syn-f">motion</span><span class="syn-p">(</span><span class="syn-s">'0.3s'</span><span class="syn-p">,</span> <span class="syn-s">'0s'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Only set transition if motion is allowed</span>
+<span class="syn-f">safeTransition</span><span class="syn-p">(</span><span class="syn-s">'#panel'</span><span class="syn-p">,</span> <span class="syn-s">'transform 0.3s ease'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Run function only if motion is allowed</span>
+<span class="syn-f">ifMotion</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  el<span class="syn-p">.</span><span class="syn-f">animate</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">0</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">1</span> <span class="syn-p">}</span><span class="syn-p">]</span><span class="syn-p">,</span> <span class="syn-p">{</span> duration<span class="syn-p">:</span> <span class="syn-n">300</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <h3>Global CSS Override</h3>
+      <p>Inject CSS that disables all animations when reduced motion is preferred:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-6">
+<span class="syn-k">import</span> <span class="syn-p">{</span> injectReducedMotionCSS <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/motion.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">injectReducedMotionCSS</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+</pre>
+        </div>
+      </div>
+      <p>This adds:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">css</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-7">
+<span class="syn-k">@media</span> (<span class="syn-a">prefers-reduced-motion</span>: reduce) {
+  *, *::before, *::after {
+    <span class="syn-a">animation-duration</span>: <span class="syn-n">0.01ms</span> !important;
+    <span class="syn-a">transition-duration</span>: <span class="syn-n">0.01ms</span> !important;
+  }
+}
+</pre>
+        </div>
+      </div>
+
+      <h2>Locale &amp; Internationalization</h2>
+      <p>Signal-driven locale detection and Intl API formatting wrappers:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">js</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-8">
+<span class="syn-k">import</span> <span class="syn-p">{</span> locale<span class="syn-p">,</span> setLocale<span class="syn-p">,</span> textDirection<span class="syn-p">,</span> formatter <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/locale.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive locale signal (reads html[lang] or navigator.language)</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">locale</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'en-US'</span>
+
+<span class="syn-c">// Switch locale — all formatters update reactively</span>
+<span class="syn-f">setLocale</span><span class="syn-p">(</span><span class="syn-s">'fr'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Text direction signal for RTL support</span>
+<span class="syn-k">const</span> dir <span class="syn-p">=</span> <span class="syn-f">textDirection</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'ltr' or 'rtl'</span>
+
+<span class="syn-c">// Intl formatters tied to the locale signal</span>
+<span class="syn-k">const</span> fmt <span class="syn-p">=</span> <span class="syn-f">formatter</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+fmt<span class="syn-p">.</span><span class="syn-f">number</span><span class="syn-p">(</span><span class="syn-n">1234.5</span><span class="syn-p">)</span><span class="syn-p">;</span>              <span class="syn-c">// '1,234.5' or '1 234,5'</span>
+fmt<span class="syn-p">.</span><span class="syn-f">date</span><span class="syn-p">(</span><span class="syn-k">new</span> <span class="syn-f">Date</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>             <span class="syn-c">// locale-formatted date</span>
+fmt<span class="syn-p">.</span><span class="syn-f">currency</span><span class="syn-p">(</span><span class="syn-n">99.99</span><span class="syn-p">,</span> <span class="syn-s">'USD'</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// '$99.99' or '99,99 $US'</span>
+fmt<span class="syn-p">.</span><span class="syn-f">relative</span><span class="syn-p">(</span><span class="syn-n">-2</span><span class="syn-p">,</span> <span class="syn-s">'day'</span><span class="syn-p">)</span><span class="syn-p">;</span>         <span class="syn-c">// '2 days ago' or 'il y a 2 jours'</span>
+fmt<span class="syn-p">.</span><span class="syn-f">list</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-s">'A'</span><span class="syn-p">,</span> <span class="syn-s">'B'</span><span class="syn-p">,</span> <span class="syn-s">'C'</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>        <span class="syn-c">// 'A, B, and C' or 'A, B et C'</span>
+</pre>
+        </div>
+      </div>
+      <p>No translation dictionaries — uses the browser's native <code>Intl</code> API for locale-aware formatting.</p>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/ui.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
+            style="transform:rotate(180deg)"></i> UI Components</a>
+        <a href="/docs/cli.html">CLI Reference <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/dashboard.html">Examples</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

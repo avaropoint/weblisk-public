@@ -25,20 +25,20 @@
   --wl-primary-hover: #2D3E64;
   --wl-primary-light: rgba(59, 79, 124, 0.08);
   --wl-primary-glow: rgba(59, 79, 124, 0.2);
-  --wl-accent: #06b6d4;
-  --wl-accent-light: rgba(6, 182, 212, 0.08);
+  --wl-accent: #0b7d97;
+  --wl-accent-light: rgba(11, 125, 151, 0.08);
 
   --wl-bg: #ffffff;
   --wl-bg-soft: #f8fafc;
   --wl-surface: #ffffff;
   --wl-text: #0f172a;
   --wl-text-muted: #64748b;
-  --wl-text-dim: #94a3b8;
+  --wl-text-dim: #627384;
   --wl-border: #e2e8f0;
 
-  --wl-success: #10b981;
-  --wl-warning: #f59e0b;
-  --wl-danger: #ef4444;
+  --wl-success: #047857;
+  --wl-warning: #b45309;
+  --wl-danger: #dc2626;
 
   --wl-code-bg: #0f172a;
   --wl-code-surface: #1e293b;
@@ -467,7 +467,7 @@ h6 {
 }
 
 .pro-badge {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -479,7 +479,7 @@ h6 {
 
 .pro-pill {
   display: inline-block;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -493,7 +493,7 @@ h6 {
 }
 
 .docs-sidebar .pro-pill {
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   padding: 0.1rem 0.3rem;
   margin-left: 0.25rem;
 }
@@ -514,8 +514,8 @@ h6 {
   background: none;
   border: none;
   padding: 0.5rem;
-  min-height: 40px;
-  min-width: 40px;
+  min-height: 48px;
+  min-width: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -548,7 +548,7 @@ h6 {
 }
 
 .version-badge {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--wl-text-dim);
   padding: 0.2rem 0.45rem;
@@ -594,7 +594,7 @@ h6 {
   }
 
   .nav-sidebar-heading {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1448,7 +1448,7 @@ h6 {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--wl-text-muted);
   letter-spacing: 0.02em;
@@ -1924,7 +1924,7 @@ h6 {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--wl-text-muted);
   margin-bottom: 4px;
@@ -2216,7 +2216,7 @@ select.input {
 /* ── New badge pill ────────────────────────────────────────── */
 
 .new-badge {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -2329,7 +2329,7 @@ select.input {
   gap: 0.3rem;
   padding: 0.15rem 0.5rem;
   border-radius: 9999px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
@@ -2465,7 +2465,7 @@ select.input {
 
 .ab-variant-label {
   display: block;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 0.35rem;

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Catalog — Weblisk</title>
+  <meta name="description" content="Browse all official Weblisk agents — background sync, scheduled tasks, webhooks, AI integration, and more.">
+  <link rel="canonical" href="https://weblisk.dev/agents/catalog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Agent Catalog — Weblisk">
+  <meta property="og:description" content="Browse all official Weblisk agents — background sync, scheduled tasks, webhooks, AI integration, and more.">
+  <meta property="og:url" content="https://weblisk.dev/agents/catalog.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link active" aria-current="page">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Agents navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Agent overview links">
+        <a href="/agents/index.html">Introduction</a>
+        <a href="/agents/catalog.html" aria-current="page" class="active">Catalog</a>
+        <a href="/agents/building.html">Building Agents</a>
+        <a href="/agents/protocols.html">Agent Protocol</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/index.html">Server Framework</a>
+        <a href="/blueprints/index.html">Blueprints</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Agent Catalog</h1>
+      <p class="lead">Official agents for common server-side patterns. Free agents ship with every Weblisk server implementation.</p>
+
+      <h2>Free Agents</h2>
+      <table>
+        <thead>
+          <tr><th>Agent</th><th>Description</th><th>Triggers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>sync-agent</strong></td>
+            <td>Background data synchronisation between client-side IDB store and server database. Supports conflict resolution strategies.</td>
+            <td>Event + Schedule</td>
+          </tr>
+          <tr>
+            <td><strong>cron-agent</strong></td>
+            <td>Scheduled task execution with cron-style expressions. Supports one-time and recurring tasks with retry logic.</td>
+            <td>Schedule</td>
+          </tr>
+          <tr>
+            <td><strong>webhook-agent</strong></td>
+            <td>Inbound and outbound webhook processing with signature verification, retries, and delivery tracking.</td>
+            <td>Event (HTTP)</td>
+          </tr>
+          <tr>
+            <td><strong>email-agent</strong></td>
+            <td>Transactional email with template rendering, queuing, and delivery status tracking. Supports SMTP and API-based providers.</td>
+            <td>Event</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Pro Agents</h2>
+      <table>
+        <thead>
+          <tr><th>Agent</th><th>Description</th><th>Triggers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ai-agent</strong></td>
+            <td>LLM integration with prompt management, tool use, streaming responses, and conversation history.</td>
+            <td>Event + API</td>
+          </tr>
+          <tr>
+            <td><strong>search-agent</strong></td>
+            <td>Full-text and semantic search indexing with incremental updates, faceted results, and highlighting.</td>
+            <td>Event + Schedule</td>
+          </tr>
+          <tr>
+            <td><strong>media-agent</strong></td>
+            <td>Image and video processing — thumbnails, format conversion, optimisation, and CDN upload.</td>
+            <td>Event</td>
+          </tr>
+          <tr>
+            <td><strong>analytics-agent</strong></td>
+            <td>Privacy-first analytics collection, aggregation, and reporting. No third-party tracking.</td>
+            <td>Event + Schedule</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip">Want to build a custom agent? See the <a href="/agents/building.html">Building Agents</a> guide.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/agents/index.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Introduction</a>
+        <a href="/agents/building.html">Building Agents <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

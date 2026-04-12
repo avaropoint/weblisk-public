@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blueprint Catalog — Weblisk</title>
+  <meta name="description" content="Browse all official Weblisk blueprints — declarative API, authentication, real-time, and data sync specifications.">
+  <link rel="canonical" href="https://weblisk.dev/blueprints/catalog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blueprint Catalog — Weblisk">
+  <meta property="og:description" content="Browse all official Weblisk blueprints — declarative API, authentication, real-time, and data sync specifications.">
+  <meta property="og:url" content="https://weblisk.dev/blueprints/catalog.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link">Server</a>
+        <a href="/blueprints/index.html" class="nav-link active" aria-current="page">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Blueprints navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Blueprint overview links">
+        <a href="/blueprints/index.html">Introduction</a>
+        <a href="/blueprints/catalog.html" aria-current="page" class="active">Catalog</a>
+        <a href="/blueprints/authoring.html">Authoring</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/index.html">Server Framework</a>
+        <a href="/agents/index.html">Agents</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Blueprint Catalog</h1>
+      <p class="lead">Official blueprints covering the most common server-side patterns. Free blueprints are included with every Weblisk server implementation.</p>
+
+      <h2>Free Blueprints</h2>
+      <table>
+        <thead>
+          <tr><th>Blueprint</th><th>Description</th><th>Endpoints Generated</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>api-rest</strong></td>
+            <td>Standard REST API with CRUD, pagination, filtering, and sorting</td>
+            <td>5 per model</td>
+          </tr>
+          <tr>
+            <td><strong>realtime-chat</strong></td>
+            <td>WebSocket-based messaging with channels, presence, and history</td>
+            <td>4 + WebSocket</td>
+          </tr>
+          <tr>
+            <td><strong>auth-session</strong></td>
+            <td>Session-based authentication with secure cookies, CSRF protection, and logout</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td><strong>auth-token</strong></td>
+            <td>JWT and API key authentication with refresh tokens and scoped permissions</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td><strong>webhook-inbound</strong></td>
+            <td>Receive, validate, and route inbound webhooks from third-party services</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><strong>webhook-outbound</strong></td>
+            <td>Send webhooks with retries, signatures, and delivery tracking</td>
+            <td>3</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Pro Blueprints</h2>
+      <table>
+        <thead>
+          <tr><th>Blueprint</th><th>Description</th><th>Endpoints Generated</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>file-storage</strong></td>
+            <td>Upload, download, and manage files with S3-compatible backends. Presigned URLs, thumbnails, and quotas.</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td><strong>crdt-sync</strong></td>
+            <td>Conflict-free replicated data types with offline-first sync, merge strategies, and version vectors</td>
+            <td>4 + WebSocket</td>
+          </tr>
+          <tr>
+            <td><strong>search-index</strong></td>
+            <td>Full-text and semantic search with incremental indexing, facets, and highlighted results</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td><strong>email-transactional</strong></td>
+            <td>Template-based transactional email with queuing, retries, and delivery tracking</td>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Using a Blueprint</h2>
+      <p>Add a blueprint to your project by placing its YAML file in the <code>blueprints/</code> directory.
+        The server implementation automatically loads and generates endpoints on startup.</p>
+
+      <div class="tip">Want to create your own? See the <a href="/blueprints/authoring.html">Authoring Guide</a>.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/blueprints/index.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Introduction</a>
+        <a href="/blueprints/authoring.html">Authoring <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

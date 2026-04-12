@@ -4,15 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Server Framework — Weblisk</title>
-  <meta name="description"
-    content="Weblisk Server is an open specification for building lightweight, standards-based server implementations. Reference implementation in Go.">
-  <link rel="canonical" href="https://weblisk.dev/server/">
+  <title>Server Implementations — Weblisk</title>
+  <meta name="description" content="Language-specific implementations of the Weblisk server specification.">
+  <link rel="canonical" href="https://weblisk.dev/server/implementations.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Server Framework — Weblisk">
-  <meta property="og:description"
-    content="Weblisk Server is an open specification for building lightweight, standards-based server implementations. Reference implementation in Go.">
-  <meta property="og:url" content="https://weblisk.dev/server/">
+  <meta property="og:title" content="Server Implementations — Weblisk">
+  <meta property="og:description" content="Language-specific implementations of the Weblisk server specification.">
+  <meta property="og:url" content="https://weblisk.dev/server/implementations.html">
   <meta property="og:site_name" content="Weblisk">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@avaropoint">
@@ -28,7 +26,6 @@
 <body>
 
   <a href="#main-content" class="wl-skip-link">Skip to main content</a>
-
   <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
     <div class="navbar-inner">
       <a href="/index.html" class="brand">
@@ -63,18 +60,17 @@
       </div>
     </div>
   </nav>
-
   <div class="docs-layout">
     <aside class="docs-sidebar" aria-label="Server navigation">
       <h3>Overview</h3>
       <nav aria-label="Server overview links">
-        <a href="/server/index.html" aria-current="page" class="active">Introduction</a>
+        <a href="/server/index.html">Introduction</a>
         <a href="/server/specification.html">Specification</a>
         <a href="/server/protocols.html">Protocols</a>
       </nav>
       <h3>Implementations</h3>
       <nav aria-label="Server implementation links">
-        <a href="/server/implementations.html">Overview</a>
+        <a href="/server/implementations.html" aria-current="page" class="active">Overview</a>
         <a href="/server/go.html">Go <span class="pro-pill">Ref</span></a>
       </nav>
       <h3>Related</h3>
@@ -85,119 +81,66 @@
     </aside>
 
     <main class="docs-content" id="main-content">
-      <h1>Weblisk Server</h1>
-      <p class="lead">An open specification for building lightweight, standards-based server implementations that
-        complement the Weblisk client framework.</p>
+      <h1>Implementations</h1>
+      <p class="lead">The Weblisk server specification can be implemented in any language. Here are the official and community implementations.</p>
 
-      <h2>Philosophy</h2>
-      <p>The Weblisk client framework is zero-dependency and runs anywhere. The server side follows the same
-        principles — but as a <strong>specification</strong>, not a monolithic framework.</p>
-      <p>We define the protocols, data formats, and behaviour contracts. You implement them in whatever language
-        or platform fits your stack. Every release ships a reference implementation so you're never guessing.</p>
-
-      <div class="feature-grid" style="margin-top:2rem">
-        <div class="feature-card">
-          <div class="feature-icon purple">
-            <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
-          </div>
-          <h3>Specification-First</h3>
-          <p>The server spec defines endpoints, message formats, and lifecycle hooks. Build your own implementation
-            or use an existing one — the spec is the contract.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon cyan">
-            <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
-          </div>
-          <h3>Language Agnostic</h3>
-          <p>Go, Rust, Python, Node.js, Java — implement the spec in any language. The reference implementation
-            is in Go, but you're not locked in.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon green">
-            <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
-          </div>
-          <h3>Blueprint-Driven</h3>
-          <p>Server implementations consume <a href="/blueprints/index.html">Blueprints</a> — declarative
-            definitions of APIs, data models, and workflows that generate boilerplate-free endpoints.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon orange">
-            <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
-          </div>
-          <h3>Agent-Ready</h3>
-          <p>Server implementations natively support <a href="/agents/index.html">Weblisk Agents</a> —
-            autonomous services that extend your application with background processing, AI, and integrations.</p>
-        </div>
-      </div>
-
-      <h2>Reference Implementation</h2>
-      <p>The official Go implementation demonstrates the full spec in a production-ready package:</p>
-
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">terminal</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="server-install"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="server-install"><span class="syn-c"># Install the Weblisk server (Go)</span>
-<span class="syn-f">go</span> install github.com/avaropoint/weblisk-server@latest
-
-<span class="syn-c"># Scaffold a new project from a blueprint</span>
-<span class="syn-f">weblisk-server</span> init --blueprint api-rest
-
-<span class="syn-c"># Start the dev server</span>
-<span class="syn-f">weblisk-server</span> dev</pre>
-        </div>
-      </div>
-
-      <h2>How It Fits Together</h2>
+      <h2>Official</h2>
       <table>
         <thead>
-          <tr>
-            <th>Layer</th>
-            <th>What It Is</th>
-            <th>Example</th>
-          </tr>
+          <tr><th>Language</th><th>Package</th><th>Status</th><th>Spec Version</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Client Framework</strong></td>
-            <td>Zero-dependency JS running in the browser</td>
-            <td><code>weblisk</code>, <code>weblisk/signals</code></td>
-          </tr>
-          <tr>
-            <td><strong>Server Spec</strong></td>
-            <td>Protocol and API contracts</td>
-            <td>REST endpoints, WebSocket channels</td>
-          </tr>
-          <tr>
-            <td><strong>Blueprints</strong></td>
-            <td>Declarative definitions of APIs, models, workflows</td>
-            <td><code>api-rest</code>, <code>realtime-chat</code></td>
-          </tr>
-          <tr>
-            <td><strong>Agents</strong></td>
-            <td>Autonomous server-side services</td>
-            <td>Background sync, AI assistants, webhooks</td>
-          </tr>
-          <tr>
-            <td><strong>Implementations</strong></td>
-            <td>Concrete server in a specific language</td>
-            <td><code>weblisk-server</code> (Go)</td>
+            <td><strong>Go</strong></td>
+            <td><code>github.com/avaropoint/weblisk-server</code></td>
+            <td class="yes">Stable</td>
+            <td>1.0.0</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="tip">The server specification is open and versioned. You can implement it in any language — the
-        <a href="/server/go.html">Go reference implementation</a> is a starting point, not a requirement.</div>
+      <h2>Community</h2>
+      <p>Community implementations follow the same specification. If you've built one, <a href="https://github.com/avaropoint/weblisk/discussions">let us know</a>.</p>
+      <table>
+        <thead>
+          <tr><th>Language</th><th>Package</th><th>Status</th><th>Spec Version</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Node.js</td>
+            <td><em>Coming soon</em></td>
+            <td class="partial">Planned</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Python</td>
+            <td><em>Coming soon</em></td>
+            <td class="partial">Planned</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Rust</td>
+            <td><em>Coming soon</em></td>
+            <td class="partial">Planned</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Building Your Own</h2>
+      <p>Implementing the spec in a new language requires:</p>
+      <ol>
+        <li>The <a href="/server/specification.html">required endpoints</a> (health, manifest, sync, rpc)</li>
+        <li>A <a href="/blueprints/index.html">blueprint loader</a> that parses YAML definitions into route handlers</li>
+        <li>An <a href="/agents/protocols.html">agent host</a> that manages agent lifecycle and message dispatch</li>
+        <li>The <a href="/server/protocols.html">communication protocols</a> (REST, WebSocket, SSE)</li>
+      </ol>
+
+      <div class="tip">Start from the <a href="/server/go.html">Go reference implementation</a> — it's the most complete and well-documented.</div>
 
       <div class="docs-nav-footer">
-        <span></span>
-        <a href="/server/specification.html">Specification <i aria-hidden="true"
-            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+        <a href="/server/protocols.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Protocols</a>
+        <a href="/server/go.html">Go Implementation <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
       </div>
     </main>
   </div>

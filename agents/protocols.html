@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Protocol — Weblisk</title>
+  <meta name="description" content="The Weblisk Agent Protocol defines how agents register, receive work, and report results.">
+  <link rel="canonical" href="https://weblisk.dev/agents/protocols.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Agent Protocol — Weblisk">
+  <meta property="og:description" content="The Weblisk Agent Protocol defines how agents register, receive work, and report results.">
+  <meta property="og:url" content="https://weblisk.dev/agents/protocols.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link active" aria-current="page">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Agents navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Agent overview links">
+        <a href="/agents/index.html">Introduction</a>
+        <a href="/agents/catalog.html">Catalog</a>
+        <a href="/agents/building.html">Building Agents</a>
+        <a href="/agents/protocols.html" aria-current="page" class="active">Agent Protocol</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/index.html">Server Framework</a>
+        <a href="/blueprints/index.html">Blueprints</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Agent Protocol</h1>
+      <p class="lead">A standardised protocol for agent-server communication. Implement it in any language to build portable agents.</p>
+
+      <h2>Overview</h2>
+      <p>The Agent Protocol defines how agents register with a server, receive tasks, and report results.
+        Communication happens over a local channel (in-process for embedded agents) or WebSocket (for standalone agents).</p>
+
+      <h2>Lifecycle</h2>
+      <ol>
+        <li><strong>Register</strong> — agent declares its name, version, and capabilities</li>
+        <li><strong>Ready</strong> — server acknowledges and grants access to requested resources</li>
+        <li><strong>Dispatch</strong> — server sends work items when triggers fire</li>
+        <li><strong>Result</strong> — agent reports task completion (success, failure, or retry)</li>
+        <li><strong>Heartbeat</strong> — periodic health checks to detect stuck agents</li>
+        <li><strong>Shutdown</strong> — graceful stop with drain period for in-flight tasks</li>
+      </ol>
+
+      <h2>Message Format</h2>
+      <p>All messages are JSON objects with a <code>type</code> field:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">protocol.json</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="proto-msg"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="proto-msg"><span class="syn-c">// Agent → Server: register on startup</span>
+<span class="syn-p">{</span>
+  <span class="syn-a">"type"</span><span class="syn-p">:</span>    <span class="syn-s">"register"</span><span class="syn-p">,</span>
+  <span class="syn-a">"agent"</span><span class="syn-p">:</span>   <span class="syn-s">"cleanup-agent"</span><span class="syn-p">,</span>
+  <span class="syn-a">"version"</span><span class="syn-p">:</span> <span class="syn-s">"1.0.0"</span><span class="syn-p">,</span>
+  <span class="syn-a">"capabilities"</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">"database:read"</span><span class="syn-p">,</span> <span class="syn-s">"database:write"</span><span class="syn-p">]</span>
+<span class="syn-p">}</span>
+
+<span class="syn-c">// Server → Agent: dispatch work</span>
+<span class="syn-p">{</span>
+  <span class="syn-a">"type"</span><span class="syn-p">:</span>    <span class="syn-s">"dispatch"</span><span class="syn-p">,</span>
+  <span class="syn-a">"task_id"</span><span class="syn-p">:</span> <span class="syn-s">"abc-123"</span><span class="syn-p">,</span>
+  <span class="syn-a">"trigger"</span><span class="syn-p">:</span> <span class="syn-s">"schedule"</span><span class="syn-p">,</span>
+  <span class="syn-a">"config"</span><span class="syn-p">:</span>  <span class="syn-p">{</span> <span class="syn-a">"retention_days"</span><span class="syn-p">:</span> <span class="syn-n">30</span> <span class="syn-p">}</span>
+<span class="syn-p">}</span>
+
+<span class="syn-c">// Agent → Server: report result</span>
+<span class="syn-p">{</span>
+  <span class="syn-a">"type"</span><span class="syn-p">:</span>    <span class="syn-s">"result"</span><span class="syn-p">,</span>
+  <span class="syn-a">"task_id"</span><span class="syn-p">:</span> <span class="syn-s">"abc-123"</span><span class="syn-p">,</span>
+  <span class="syn-a">"status"</span><span class="syn-p">:</span>  <span class="syn-s">"success"</span><span class="syn-p">,</span>
+  <span class="syn-a">"data"</span><span class="syn-p">:</span>    <span class="syn-p">{</span> <span class="syn-a">"deleted"</span><span class="syn-p">:</span> <span class="syn-n">42</span> <span class="syn-p">}</span>
+<span class="syn-p">}</span></pre>
+        </div>
+      </div>
+
+      <h2>Message Types</h2>
+      <table>
+        <thead>
+          <tr><th>Type</th><th>Direction</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>register</code></td><td>Agent → Server</td><td>Agent announces itself and requests capabilities</td></tr>
+          <tr><td><code>ready</code></td><td>Server → Agent</td><td>Server confirms registration and grants resources</td></tr>
+          <tr><td><code>dispatch</code></td><td>Server → Agent</td><td>Server sends a task for the agent to execute</td></tr>
+          <tr><td><code>result</code></td><td>Agent → Server</td><td>Agent reports task outcome</td></tr>
+          <tr><td><code>heartbeat</code></td><td>Both</td><td>Periodic liveness check</td></tr>
+          <tr><td><code>shutdown</code></td><td>Server → Agent</td><td>Request graceful stop</td></tr>
+          <tr><td><code>error</code></td><td>Both</td><td>Error notification</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Result Statuses</h2>
+      <table>
+        <thead>
+          <tr><th>Status</th><th>Description</th><th>Server Action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>success</code></td><td>Task completed</td><td>Mark done, emit completion event</td></tr>
+          <tr><td><code>failure</code></td><td>Task failed permanently</td><td>Mark failed, emit error event</td></tr>
+          <tr><td><code>retry</code></td><td>Temporary failure</td><td>Re-queue with exponential backoff</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip">The protocol is transport-agnostic. In-process agents use function calls; standalone agents communicate over WebSocket.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/agents/building.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Building Agents</a>
+        <span></span>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

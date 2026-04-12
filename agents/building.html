@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Agents — Weblisk</title>
+  <meta name="description" content="Learn how to create custom Weblisk agents with YAML definitions and language-specific implementations.">
+  <link rel="canonical" href="https://weblisk.dev/agents/building.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Building Agents — Weblisk">
+  <meta property="og:description" content="Learn how to create custom Weblisk agents with YAML definitions and language-specific implementations.">
+  <meta property="og:url" content="https://weblisk.dev/agents/building.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link active" aria-current="page">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Agents navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Agent overview links">
+        <a href="/agents/index.html">Introduction</a>
+        <a href="/agents/catalog.html">Catalog</a>
+        <a href="/agents/building.html" aria-current="page" class="active">Building Agents</a>
+        <a href="/agents/protocols.html">Agent Protocol</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/index.html">Server Framework</a>
+        <a href="/blueprints/index.html">Blueprints</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Building Agents</h1>
+      <p class="lead">Create custom agents to handle domain-specific background work, integrations, and automation.</p>
+
+      <h2>Agent Definition</h2>
+      <p>Every agent starts with a YAML definition that declares its triggers, capabilities, and configuration:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">agents/cleanup-agent.yaml</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="agent-def"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="agent-def"><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">cleanup-agent</span>
+<span class="syn-a">version</span><span class="syn-p">:</span> <span class="syn-s">1.0.0</span>
+<span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Removes expired records and orphaned files</span>
+
+<span class="syn-a">triggers</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-a">schedule</span><span class="syn-p">:</span> <span class="syn-s">"0 3 * * *"</span>    <span class="syn-c"># daily at 3 AM</span>
+
+<span class="syn-a">capabilities</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-s">database:read</span>
+  <span class="syn-p">-</span> <span class="syn-s">database:write</span>
+  <span class="syn-p">-</span> <span class="syn-s">storage:delete</span>
+
+<span class="syn-a">config</span><span class="syn-p">:</span>
+  <span class="syn-a">retention_days</span><span class="syn-p">:</span> <span class="syn-n">30</span>
+  <span class="syn-a">dry_run</span><span class="syn-p">:</span> <span class="syn-s">false</span>
+  <span class="syn-a">batch_size</span><span class="syn-p">:</span> <span class="syn-n">500</span></pre>
+        </div>
+      </div>
+
+      <h2>Definition Fields</h2>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Required</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>name</strong></td><td>Yes</td><td>Unique agent identifier</td></tr>
+          <tr><td><strong>version</strong></td><td>Yes</td><td>Semantic version</td></tr>
+          <tr><td><strong>triggers</strong></td><td>Yes</td><td>What starts the agent — events, schedules, or API calls</td></tr>
+          <tr><td><strong>capabilities</strong></td><td>Yes</td><td>Explicit resource grants (database, storage, network, realtime)</td></tr>
+          <tr><td><strong>config</strong></td><td>No</td><td>Agent-specific configuration values</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Trigger Types</h2>
+      <table>
+        <thead>
+          <tr><th>Trigger</th><th>Format</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>event</strong></td><td><code>namespace.action</code></td><td>Fires when a matching event is emitted (e.g. <code>client.sync.push</code>)</td></tr>
+          <tr><td><strong>schedule</strong></td><td>Cron expression</td><td>Fires on a time schedule (e.g. <code>"*/5 * * * *"</code>)</td></tr>
+          <tr><td><strong>api</strong></td><td>HTTP endpoint</td><td>Fires when the agent's API endpoint is called</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Implementation (Go)</h2>
+      <p>The Go reference implementation requires a struct that implements the <code>agent.Runner</code> interface:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">cleanup.go</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="agent-go"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="agent-go"><span class="syn-c">// agents/cleanup/cleanup.go</span>
+<span class="syn-k">package</span> cleanup
+
+<span class="syn-k">import</span> <span class="syn-p">(</span>
+  <span class="syn-s">"context"</span>
+  <span class="syn-s">"github.com/avaropoint/weblisk-server/agent"</span>
+<span class="syn-p">)</span>
+
+<span class="syn-k">type</span> CleanupAgent <span class="syn-k">struct</span> <span class="syn-p">{</span>
+  <span class="syn-a">RetentionDays</span> <span class="syn-k">int</span>
+  <span class="syn-a">BatchSize</span>     <span class="syn-k">int</span>
+<span class="syn-p">}</span>
+
+<span class="syn-k">func</span> <span class="syn-p">(</span>a <span class="syn-p">*</span>CleanupAgent<span class="syn-p">)</span> <span class="syn-f">Run</span><span class="syn-p">(</span>ctx context<span class="syn-p">.</span>Context<span class="syn-p">,</span> env agent<span class="syn-p">.</span>Env<span class="syn-p">)</span> <span class="syn-k">error</span> <span class="syn-p">{</span>
+  db <span class="syn-p">:=</span> env<span class="syn-p">.</span><span class="syn-f">Database</span><span class="syn-p">()</span>
+  <span class="syn-c">// Delete records older than retention period</span>
+  deleted<span class="syn-p">,</span> err <span class="syn-p">:=</span> db<span class="syn-p">.</span><span class="syn-f">DeleteExpired</span><span class="syn-p">(</span>ctx<span class="syn-p">,</span> a<span class="syn-p">.</span>RetentionDays<span class="syn-p">,</span> a<span class="syn-p">.</span>BatchSize<span class="syn-p">)</span>
+  <span class="syn-k">if</span> err <span class="syn-p">!=</span> <span class="syn-k">nil</span> <span class="syn-p">{</span>
+    <span class="syn-k">return</span> err
+  <span class="syn-p">}</span>
+  env<span class="syn-p">.</span><span class="syn-f">Log</span><span class="syn-p">(</span><span class="syn-s">"Cleaned up %d records"</span><span class="syn-p">,</span> deleted<span class="syn-p">)</span>
+  <span class="syn-k">return</span> <span class="syn-k">nil</span>
+<span class="syn-p">}</span></pre>
+        </div>
+      </div>
+
+      <h2>Capabilities</h2>
+      <p>Agents are sandboxed — they can only access explicitly granted resources:</p>
+      <ul>
+        <li><code>database:read</code> / <code>database:write</code> — database access</li>
+        <li><code>storage:read</code> / <code>storage:write</code> / <code>storage:delete</code> — file storage</li>
+        <li><code>network:outbound</code> — make HTTP requests to external services</li>
+        <li><code>realtime:publish</code> — send messages to WebSocket channels</li>
+        <li><code>email:send</code> — send transactional email</li>
+      </ul>
+
+      <div class="tip">Test agents locally with <code>weblisk-server dev</code> — it watches for YAML changes and restarts agents automatically.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/agents/catalog.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Catalog</a>
+        <a href="/agents/protocols.html">Agent Protocol <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

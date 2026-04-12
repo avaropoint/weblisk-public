@@ -58,7 +58,18 @@ function respond(object, key) {
   if (!headers.has("content-type")) {
     headers.set("content-type", mimeType(key));
   }
-  // Cache static assets aggressively, HTML briefly
+
+  // ── Security headers (all responses) ──
+  headers.set("x-content-type-options", "nosniff");
+  headers.set("x-frame-options", "DENY");
+  headers.set("referrer-policy", "strict-origin-when-cross-origin");
+  headers.set("strict-transport-security", "max-age=31536000; includeSubDomains; preload");
+  headers.set(
+    "permissions-policy",
+    "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  );
+
+  // ── Cache + CSP ──
   if (key.endsWith(".html")) {
     headers.set("cache-control", "public, max-age=60, s-maxage=300");
     headers.set(

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Framework — Weblisk</title>
+  <meta name="description"
+    content="Weblisk Server is an open specification for building lightweight, standards-based server implementations. Reference implementation in Go.">
+  <link rel="canonical" href="https://weblisk.dev/server/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Server Framework — Weblisk">
+  <meta property="og:description"
+    content="Weblisk Server is an open specification for building lightweight, standards-based server implementations. Reference implementation in Go.">
+  <meta property="og:url" content="https://weblisk.dev/server/">
+  <meta property="og:site_name" content="Weblisk">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@avaropoint">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link active" aria-current="page">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+          <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+        </a>
+        <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Server navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Server overview links">
+        <a href="/server/index.html" aria-current="page" class="active">Introduction</a>
+        <a href="/server/specification.html">Specification</a>
+        <a href="/server/protocols.html">Protocols</a>
+      </nav>
+      <h3>Implementations</h3>
+      <nav aria-label="Server implementation links">
+        <a href="/server/implementations.html">Overview</a>
+        <a href="/server/go.html">Go <span class="pro-pill">Ref</span></a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/blueprints/index.html">Blueprints</a>
+        <a href="/agents/index.html">Agents</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Weblisk Server</h1>
+      <p class="lead">An open specification for building lightweight, standards-based server implementations that
+        complement the Weblisk client framework.</p>
+
+      <h2>Philosophy</h2>
+      <p>The Weblisk client framework is zero-dependency and runs anywhere. The server side follows the same
+        principles — but as a <strong>specification</strong>, not a monolithic framework.</p>
+      <p>We define the protocols, data formats, and behaviour contracts. You implement them in whatever language
+        or platform fits your stack. Every release ships a reference implementation so you're never guessing.</p>
+
+      <div class="feature-grid" style="margin-top:2rem">
+        <div class="feature-card">
+          <div class="feature-icon purple">
+            <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
+          </div>
+          <h3>Specification-First</h3>
+          <p>The server spec defines endpoints, message formats, and lifecycle hooks. Build your own implementation
+            or use an existing one — the spec is the contract.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon cyan">
+            <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+          </div>
+          <h3>Language Agnostic</h3>
+          <p>Go, Rust, Python, Node.js, Java — implement the spec in any language. The reference implementation
+            is in Go, but you're not locked in.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+          </div>
+          <h3>Blueprint-Driven</h3>
+          <p>Server implementations consume <a href="/blueprints/index.html">Blueprints</a> — declarative
+            definitions of APIs, data models, and workflows that generate boilerplate-free endpoints.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon orange">
+            <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
+          </div>
+          <h3>Agent-Ready</h3>
+          <p>Server implementations natively support <a href="/agents/index.html">Weblisk Agents</a> —
+            autonomous services that extend your application with background processing, AI, and integrations.</p>
+        </div>
+      </div>
+
+      <h2>Reference Implementation</h2>
+      <p>The official Go implementation demonstrates the full spec in a production-ready package:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># Install the Weblisk server (Go)</span>
+<span class="syn-f">go</span> install github.com/avaropoint/weblisk-server@latest
+
+<span class="syn-c"># Scaffold a new project from a blueprint</span>
+<span class="syn-f">weblisk-server</span> init --blueprint api-rest
+
+<span class="syn-c"># Start the dev server</span>
+<span class="syn-f">weblisk-server</span> dev</pre>
+        </div>
+      </div>
+
+      <h2>How It Fits Together</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>What It Is</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Client Framework</strong></td>
+            <td>Zero-dependency JS running in the browser</td>
+            <td><code>weblisk</code>, <code>weblisk/signals</code></td>
+          </tr>
+          <tr>
+            <td><strong>Server Spec</strong></td>
+            <td>Protocol and API contracts</td>
+            <td>REST endpoints, WebSocket channels</td>
+          </tr>
+          <tr>
+            <td><strong>Blueprints</strong></td>
+            <td>Declarative definitions of APIs, models, workflows</td>
+            <td><code>api-rest</code>, <code>realtime-chat</code></td>
+          </tr>
+          <tr>
+            <td><strong>Agents</strong></td>
+            <td>Autonomous server-side services</td>
+            <td>Background sync, AI assistants, webhooks</td>
+          </tr>
+          <tr>
+            <td><strong>Implementations</strong></td>
+            <td>Concrete server in a specific language</td>
+            <td><code>weblisk-server</code> (Go)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip">The server specification is open and versioned. You can implement it in any language — the
+        <a href="/server/go.html">Go reference implementation</a> is a starting point, not a requirement.</div>
+
+      <div class="docs-nav-footer">
+        <span></span>
+        <a href="/server/specification.html">Specification <i aria-hidden="true"
+            class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            <script>document.currentScript.parentElement.insertBefore(document.createTextNode(new Date().getFullYear() + ' '), document.currentScript)</script>
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <img src="/images/logo.svg" alt="" width="14" height="14">
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

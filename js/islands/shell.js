@@ -6,18 +6,16 @@
 import { hydrateIslands } from "weblisk/core/hydrate.js";
 hydrateIslands();
 
-// ─── Service Worker: register early so it's active for all features ───
-// Registration is non-blocking (fire-and-forget). The SW installs/activates
-// in the background while the page continues rendering.
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").catch(() => {});
-}
-
 // ─── Deferred: security, a11y, perf, PWA, navigation ───
 // Loaded after first paint via requestIdleCallback (or setTimeout fallback).
 const whenIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 
 whenIdle(async () => {
+  // Service Worker — deferred so it never blocks first paint
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  }
+
   const { effect } = await import("weblisk");
   const { theme } = await import("../state.js");
 

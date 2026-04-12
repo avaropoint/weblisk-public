@@ -4,29 +4,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Example — Weblisk</title>
+  <title>View Transitions — Weblisk</title>
   <meta name="description"
-    content="Real-time data dashboard demonstrating reactive signals, Web Vitals, and interactive islands.">
-  <link rel="canonical" href="https://weblisk.dev/dashboard.html">
+    content="Interactive Weblisk view transition demos: page navigation with crossfade, shared element animations, and typed transition classes.">
+  <link rel="canonical" href="https://weblisk.dev/features/transitions.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Dashboard Example — Weblisk">
+  <meta property="og:title" content="View Transitions — Weblisk">
   <meta property="og:description"
-    content="Real-time data dashboard demonstrating reactive signals, Web Vitals, and interactive islands.">
-  <meta property="og:url" content="https://weblisk.dev/dashboard.html">
+    content="Interactive Weblisk view transition demos: page navigation with crossfade, shared element animations, and typed transition classes.">
+  <meta property="og:url" content="https://weblisk.dev/features/transitions.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Dashboard Example — Weblisk">
+  <meta name="twitter:title" content="View Transitions — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Real-time data dashboard demonstrating reactive signals, Web Vitals, and interactive islands.">
+  <meta name="twitter:description"
+    content="Interactive Weblisk view transition demos: page navigation with crossfade, shared element animations, and typed transition classes.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <meta name="theme-color" content="#3B4F7C">
-    <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
   <link rel="stylesheet" href="/css/styles.css">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
@@ -36,9 +37,9 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Dashboard Example — Weblisk",
-    "description": "Real-time data dashboard demonstrating reactive signals, Web Vitals, and interactive islands.",
-    "url": "https://weblisk.dev/dashboard.html",
+    "name": "View Transitions — Weblisk",
+    "description": "Interactive Weblisk view transition demos: page navigation with crossfade, shared element animations, and typed transition classes.",
+    "url": "https://weblisk.dev/features/transitions.html",
     "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" }
   }
   </script>
@@ -62,7 +63,6 @@
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
-
       </div>
       <div class="nav-actions">
         <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
@@ -86,12 +86,26 @@
 
   <div class="examples-layout">
     <aside class="examples-sidebar" aria-label="Examples navigation">
-      <a href="/dashboard.html" class="active" aria-current="page">
+      <a href="/dashboard.html">
         <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-18"></i> Dashboard
       </a>
       <a href="/features.html">
         <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-18"></i> Features
       </a>
+      <nav class="examples-subnav" aria-label="Feature categories">
+        <a href="/features/core.html">Core Extensions</a>
+        <a href="/features/state.html">State Management</a>
+        <a href="/features/data.html">Data &amp; Sync</a>
+        <a href="/features/networking.html">Networking</a>
+        <a href="/features/security.html">Security</a>
+        <a href="/features/performance.html">Performance</a>
+        <a href="/features/a11y.html">Accessibility</a>
+        <a href="/features/transitions.html" class="active" aria-current="page">Transitions</a>
+        <a href="/features/routing.html">Routing</a>
+        <a href="/features/components.html">Components</a>
+        <a href="/features/pwa.html">PWA</a>
+        <a href="/features/pro.html">Pro <span class="pro-badge">New</span></a>
+      </nav>
       <a href="/settings.html">
         <i aria-hidden="true" class="wl-icon wl-i-gear wl-icon-18"></i> Settings
       </a>
@@ -99,78 +113,63 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>Dashboard</h1>
-        <p>Real-time data dashboard built with Web Vitals, IDB-backed signals, and virtual lists.</p>
+        <h1>View Transitions</h1>
+        <p>Smooth page and element transitions using the native View Transitions API.</p>
       </div>
 
-      <section data-island="/js/islands/dashboard.js" data-hydrate="idle">
-        <div class="stats-row">
-          <div class="stat-card" id="stat-lcp">
-            <span class="stat-label">LCP</span>
-            <span class="stat-value">…</span>
-          </div>
-          <div class="stat-card" id="stat-cls">
-            <span class="stat-label">CLS</span>
-            <span class="stat-value">…</span>
-          </div>
-          <div class="stat-card" id="stat-fcp">
-            <span class="stat-label">FCP</span>
-            <span class="stat-value">…</span>
-          </div>
-          <div class="stat-card" id="stat-ttfb">
-            <span class="stat-label">TTFB</span>
-            <span class="stat-value">…</span>
-          </div>
-        </div>
+      <section data-island="/js/islands/features-transitions.js" data-hydrate="idle">
+        <div class="demo-grid">
 
-        <div class="dashboard-grid">
-          <div class="panel" id="chart-panel">
-            <div class="panel-header">
-              <h2>Traffic Overview</h2>
-              <div class="panel-actions">
-                <button class="btn btn-sm" id="chart-refresh" title="Refresh data" aria-label="Refresh data">
-                  <i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-16"></i>
-                </button>
-              </div>
+          <div class="demo-card" id="demo-navigate">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-20"></i> Navigate with Transition</h3>
+            <p>Swap content with a smooth crossfade — uses <code>document.startViewTransition()</code> if supported.</p>
+            <div id="navigate-panel"
+              style="min-height:80px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:1rem;margin:0.75rem 1.25rem 0;background:var(--wl-primary);transition:none">
+              <h4 style="margin:0;font-size:1rem">Home</h4>
+              <p style="margin:0.25rem 0 0;font-size:0.85rem;opacity:0.85">Welcome to the homepage</p>
             </div>
-            <div class="chart-area" id="chart-area">
-              <div class="chart-bars" id="chart-bars"></div>
-              <div class="chart-labels" id="chart-labels"></div>
-            </div>
+            <button class="btn btn-sm" id="btn-navigate" style="margin-top:0.75rem">Navigate →</button>
+            <pre class="demo-output" id="output-navigate">Click to navigate between pages</pre>
           </div>
 
-          <div class="panel" id="activity-panel">
-            <div class="panel-header">
-              <h2>Recent Activity</h2>
+          <div class="demo-card" id="demo-shared">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-20"></i> Shared Element Transitions</h3>
+            <p>Click a card — it expands into a detail view with a shared element animation.</p>
+            <div style="display:flex;gap:0.5rem;margin:0.75rem 1.25rem 0;flex-wrap:wrap">
+              <div class="transition-card"
+                style="flex:1;min-width:80px;padding:0.75rem;border-radius:8px;background:var(--wl-primary);color:#fff;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600">
+                Signals</div>
+              <div class="transition-card"
+                style="flex:1;min-width:80px;padding:0.75rem;border-radius:8px;background:var(--wl-accent,#6b7bf7);color:#fff;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600">
+                Islands</div>
+              <div class="transition-card"
+                style="flex:1;min-width:80px;padding:0.75rem;border-radius:8px;background:var(--success,#22c55e);color:#fff;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600">
+                Security</div>
             </div>
-            <div class="activity-list" id="activity-list">
-              <div class="activity-item">
-                <span class="activity-dot green"></span>
-                <span>New user signup — <strong>alice@example.com</strong></span>
-                <time>2 min ago</time>
-              </div>
-              <div class="activity-item">
-                <span class="activity-dot blue"></span>
-                <span>Dashboard viewed by <strong>bob</strong></span>
-                <time>5 min ago</time>
-              </div>
-              <div class="activity-item">
-                <span class="activity-dot yellow"></span>
-                <span>Settings updated by <strong>carol</strong></span>
-                <time>12 min ago</time>
-              </div>
-              <div class="activity-item">
-                <span class="activity-dot green"></span>
-                <span>New user signup — <strong>dave@example.com</strong></span>
-                <time>18 min ago</time>
-              </div>
-              <div class="activity-item">
-                <span class="activity-dot red"></span>
-                <span>Failed login attempt — <strong>unknown</strong></span>
-                <time>25 min ago</time>
-              </div>
+            <div id="shared-detail" hidden
+              style="margin:0.75rem 1.25rem 0;padding:1rem;border-radius:8px;background:var(--wl-surface);border:1px solid var(--wl-border)">
+              <h4 style="margin:0 0 0.5rem"></h4>
+              <p style="margin:0;font-size:0.85rem;color:var(--wl-text-muted)"></p>
+              <button class="btn btn-sm" id="btn-back" style="margin-top:0.75rem">← Back</button>
             </div>
+            <pre class="demo-output" id="output-shared">Click a card to expand</pre>
           </div>
+
+          <div class="demo-card" id="demo-types">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-star wl-icon-20"></i> Transition Types</h3>
+            <p>Apply named transition types to control the animation style.</p>
+            <div id="types-stage"
+              style="min-height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;margin:0.75rem 1.25rem 0;background:var(--wl-primary);font-size:0.85rem">
+              fade</div>
+            <div style="display:flex;gap:0.5rem;margin:0.75rem 1.25rem 0;flex-wrap:wrap">
+              <button class="btn btn-sm" data-transition="fade">Fade</button>
+              <button class="btn btn-sm" data-transition="slide-left">Slide Left</button>
+              <button class="btn btn-sm" data-transition="slide-right">Slide Right</button>
+              <button class="btn btn-sm" data-transition="scale">Scale</button>
+            </div>
+            <pre class="demo-output" id="output-types">Choose a transition type</pre>
+          </div>
+
         </div>
       </section>
     </main>
@@ -221,7 +220,10 @@
           </span>
         </div>
         <a href="/docs/index.html" class="powered-by">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg>
           Powered by Weblisk
         </a>
       </div>

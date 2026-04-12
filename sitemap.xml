@@ -45,6 +45,7 @@
   <url><loc>https://weblisk.dev/features/pwa.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://weblisk.dev/features/data.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://weblisk.dev/features/pro.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://weblisk.dev/features/transitions.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   <!-- Server Framework -->
   <url><loc>https://weblisk.dev/server/index.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

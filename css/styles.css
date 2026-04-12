@@ -82,7 +82,7 @@
   --wl-surface: #1a2332;
   --wl-text: #e8ecf4;
   --wl-text-muted: #9ca8bc;
-  --wl-text-dim: #6b7a90;
+  --wl-text-dim: #8294a8;
   --wl-border: #243044;
   --wl-success: #34d399;
   --wl-warning: #fbbf24;
@@ -92,11 +92,11 @@
   --syn-keyword: #c4a0fc;
   --syn-string: #5eead4;
   --syn-number: #fdba74;
-  --syn-comment: #5a6b7f;
+  --syn-comment: #7e8fa3;
   --syn-function: #7ab8ff;
   --syn-tag: #f9a8d4;
   --syn-attr: #fde68a;
-  --syn-punctuation: #64748b;
+  --syn-punctuation: #7e8fa3;
 
   --wl-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --wl-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);

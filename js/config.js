@@ -233,6 +233,12 @@ export const routes = [
     desc: "Manifest, Connectivity, Push",
   },
   {
+    path: "/features/transitions.html",
+    label: "Transitions Demos",
+    icon: "refresh",
+    desc: "View Transitions, Shared Elements, Transition Types",
+  },
+  {
     path: "/features/pro.html",
     label: "Pro Demos",
     icon: "star",

@@ -25,6 +25,8 @@ export default function nav(el) {
 
   // Mobile menu toggle
   if (mobileBtn && navLinks) {
+    mobileBtn.setAttribute("aria-controls", "nav-links");
+    navLinks.id = navLinks.id || "nav-links";
     mobileBtn.addEventListener("click", () => {
       const expanded = mobileBtn.getAttribute("aria-expanded") === "true";
       mobileBtn.setAttribute("aria-expanded", String(!expanded));

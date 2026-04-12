@@ -536,7 +536,7 @@ h6 {
   gap: 0.25rem;
 }
 
-.nav-toggle {
+button.nav-toggle {
   display: none;
   background: none;
   border: none;
@@ -641,7 +641,7 @@ h6 {
     border-radius: var(--wl-radius);
   }
 
-  .nav-toggle {
+  button.nav-toggle {
     display: flex;
   }
 

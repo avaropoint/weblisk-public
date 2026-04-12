@@ -1,29 +1,74 @@
-// Minimal static-site Worker — serves files from R2 with index.html fallback.
+// Weblisk static-site Worker — secure HTTP server backed by R2.
+// All responses pass through securityHeaders() before reaching the client.
 
+// ── MIME map ──
 const MIME = {
   html: "text/html;charset=utf-8",
-  css: "text/css;charset=utf-8",
-  js: "application/javascript;charset=utf-8",
+  css:  "text/css;charset=utf-8",
+  js:   "application/javascript;charset=utf-8",
+  mjs:  "application/javascript;charset=utf-8",
   json: "application/json;charset=utf-8",
-  svg: "image/svg+xml",
-  png: "image/png",
-  jpg: "image/jpeg",
+  svg:  "image/svg+xml",
+  png:  "image/png",
+  jpg:  "image/jpeg",
   jpeg: "image/jpeg",
-  ico: "image/x-icon",
+  gif:  "image/gif",
+  ico:  "image/x-icon",
   webp: "image/webp",
+  avif: "image/avif",
   woff2: "font/woff2",
-  woff: "font/woff",
-  txt: "text/plain",
-  xml: "application/xml",
+  woff:  "font/woff",
+  ttf:   "font/ttf",
+  txt:  "text/plain;charset=utf-8",
+  xml:  "application/xml",
+  webmanifest: "application/manifest+json",
 };
 
-function mimeType(path) {
-  const ext = path.split(".").pop();
+function mimeFor(key) {
+  const ext = key.split(".").pop().toLowerCase();
   return MIME[ext] || "application/octet-stream";
 }
 
+// ── Security headers applied to EVERY response ──
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://cdn.weblisk.dev https://static.cloudflareinsights.com",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "connect-src 'self' https: ws: wss:",
+  "worker-src 'self' blob:",
+  "manifest-src 'self' blob:",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
+
+function securityHeaders(headers, isHTML) {
+  headers.set("x-content-type-options", "nosniff");
+  headers.set("x-frame-options", "DENY");
+  headers.set("referrer-policy", "strict-origin-when-cross-origin");
+  headers.set("strict-transport-security", "max-age=31536000; includeSubDomains; preload");
+  headers.set("permissions-policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()");
+  headers.set("x-dns-prefetch-control", "off");
+  headers.set("cross-origin-opener-policy", "same-origin");
+  headers.set("cross-origin-resource-policy", "same-origin");
+  if (isHTML) {
+    headers.set("content-security-policy", CSP);
+    headers.set("x-permitted-cross-domain-policies", "none");
+  }
+}
+
+// ── Request handler ──
 export default {
   async fetch(request, env) {
+    // Only allow safe methods
+    if (request.method !== "GET" && request.method !== "HEAD") {
+      return new Response("Method Not Allowed", {
+        status: 405,
+        headers: { allow: "GET, HEAD", "content-type": "text/plain" },
+      });
+    }
+
     const url = new URL(request.url);
     let key = url.pathname.slice(1); // strip leading /
 
@@ -32,52 +77,50 @@ export default {
       key += "index.html";
     }
 
-    const object = await env.SITE.get(key);
-    if (!object) {
-      // Try .html fallback for clean URLs (e.g. /docs/signals → docs/signals.html)
-      const fallback = await env.SITE.get(key + ".html");
-      if (fallback) {
-        return respond(fallback, key + ".html");
-      }
-      // 404
-      const notFound = await env.SITE.get("404.html");
-      return new Response(notFound ? notFound.body : "Not Found", {
-        status: 404,
-        headers: { "content-type": "text/html;charset=utf-8" },
-      });
+    // Resolve object from R2
+    let object = await env.SITE.get(key);
+
+    // Clean-URL fallback: /docs/signals → docs/signals.html
+    if (!object && !key.includes(".")) {
+      object = await env.SITE.get(key + ".html");
+      if (object) key += ".html";
     }
 
-    return respond(object, key);
+    if (!object) {
+      return notFound(env);
+    }
+
+    return respond(object, key, request.method === "HEAD");
   },
 };
 
-function respond(object, key) {
+// ── Build response with security + cache headers ──
+function respond(object, key, headOnly) {
+  const isHTML = key.endsWith(".html");
   const headers = new Headers();
   object.writeHttpMetadata(headers);
   headers.set("etag", object.httpEtag);
   if (!headers.has("content-type")) {
-    headers.set("content-type", mimeType(key));
+    headers.set("content-type", mimeFor(key));
   }
 
-  // ── Security headers (all responses) ──
-  headers.set("x-content-type-options", "nosniff");
-  headers.set("x-frame-options", "DENY");
-  headers.set("referrer-policy", "strict-origin-when-cross-origin");
-  headers.set("strict-transport-security", "max-age=31536000; includeSubDomains; preload");
+  // Security first
+  securityHeaders(headers, isHTML);
+
+  // Cache: HTML briefly, assets aggressively
   headers.set(
-    "permissions-policy",
-    "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    "cache-control",
+    isHTML ? "public, max-age=60, s-maxage=300" : "public, max-age=31536000, immutable"
   );
 
-  // ── Cache + CSP ──
-  if (key.endsWith(".html")) {
-    headers.set("cache-control", "public, max-age=60, s-maxage=300");
-    headers.set(
-      "content-security-policy",
-      "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.weblisk.dev https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https: ws: wss:; worker-src 'self' blob:; manifest-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-    );
-  } else {
-    headers.set("cache-control", "public, max-age=31536000, immutable");
-  }
-  return new Response(object.body, { headers });
+  return new Response(headOnly ? null : object.body, { headers });
+}
+
+// ── 404 with full security headers ──
+async function notFound(env) {
+  const page = await env.SITE.get("404.html");
+  const headers = new Headers({ "content-type": "text/html;charset=utf-8" });
+  securityHeaders(headers, true);
+  headers.set("cache-control", "no-store");
+  return new Response(page ? page.body : "Not Found", { status: 404, headers });
 }

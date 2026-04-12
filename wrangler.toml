@@ -4,7 +4,7 @@
 
 name = "weblisk-public"
 main = "workers/site.js"
-compatibility_date = "2024-01-01"
+compatibility_date = "2026-04-01"
 
 # Serve weblisk.dev via this Worker
 routes = [

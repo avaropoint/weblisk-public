@@ -1445,28 +1445,28 @@ h6 {
 }
 
 .powered-by {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.75rem;
-  color: var(--wl-text-dim);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--wl-text-muted);
+  letter-spacing: 0.02em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--wl-border);
+  border-radius: 100px;
+  background: var(--wl-bg-soft);
+  transition: all 0.25s;
 }
 
-.powered-by img {
-  filter: brightness(0.4) saturate(1.2);
-  transition: filter 0.15s;
+.powered-by:hover {
+  color: var(--wl-primary);
+  border-color: var(--wl-primary);
+  background: var(--wl-primary-light);
 }
 
-[data-theme="dark"] .powered-by img {
-  filter: brightness(2.2) saturate(0.6);
-}
-
-.powered-by:hover img {
-  filter: brightness(0.2) saturate(1.4);
-}
-
-[data-theme="dark"] .powered-by:hover img {
-  filter: brightness(2.6) saturate(0.8);
+.powered-by svg {
+  color: var(--wl-primary);
 }
 
 .heart {

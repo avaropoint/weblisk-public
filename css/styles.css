@@ -530,6 +530,12 @@ h6 {
   background: var(--wl-primary-light);
 }
 
+.nav-social {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 .nav-toggle {
   display: none;
   background: none;
@@ -637,6 +643,10 @@ h6 {
 
   .nav-toggle {
     display: flex;
+  }
+
+  .nav-social {
+    display: none;
   }
 
   .nav-spacer {

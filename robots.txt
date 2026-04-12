@@ -1,0 +1,6 @@
+# Weblisk — https://weblisk.dev
+User-agent: *
+Allow: /
+Disallow: /cdn-cgi/
+
+Sitemap: https://weblisk.dev/sitemap.xml

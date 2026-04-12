@@ -42,6 +42,7 @@ jobs:
           find . -type f \
             -not -path './.git/*' \
             -not -path './.github/*' \
+            -not -path './.vscode/*' \
             -not -name '.gitignore' \
             -not -name 'wrangler.toml' \
             -not -name 'README.md' \

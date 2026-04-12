@@ -1,10 +1,11 @@
 # ── Deploy: Public Website ────────────────────────────────────
 #
 # Publishes the static site to the weblisk-public R2 bucket
-# when files change on main. Also supports manual dispatch.
+# and deploys the Worker that serves weblisk.dev.
 #
 # Publishes to:
-#   weblisk-public R2 bucket (serves weblisk.dev)
+#   weblisk-public R2 bucket (static files)
+#   weblisk-public Worker (serves weblisk.dev)
 
 name: Deploy
 
@@ -43,6 +44,7 @@ jobs:
             -not -path './.git/*' \
             -not -path './.github/*' \
             -not -path './.vscode/*' \
+            -not -path './workers/*' \
             -not -name '.gitignore' \
             -not -name 'wrangler.toml' \
             -not -name 'README.md' \
@@ -72,3 +74,9 @@ jobs:
           done
 
           echo "✓ Site deployed to weblisk-public R2 bucket"
+
+      - name: Deploy Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: npx wrangler deploy

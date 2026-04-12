@@ -26,7 +26,7 @@ whenIdle(async () => {
   const { applyPermissionsPolicy } =
     await import("weblisk/security/permissions.js");
   applyCSP({
-    "script-src": ["'self'", "'unsafe-inline'", "https://cdn.weblisk.dev"],
+    "script-src": ["'self'", "'unsafe-inline'", "https://cdn.weblisk.dev", "https://static.cloudflareinsights.com"],
     "style-src": ["'self'", "'unsafe-inline'"],
     "img-src": ["'self'", "data:", "blob:"],
     "connect-src": ["'self'", "https:", "ws:", "wss:"],

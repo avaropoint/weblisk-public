@@ -61,6 +61,10 @@ function respond(object, key) {
   // Cache static assets aggressively, HTML briefly
   if (key.endsWith(".html")) {
     headers.set("cache-control", "public, max-age=60, s-maxage=300");
+    headers.set(
+      "content-security-policy",
+      "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.weblisk.dev https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https: ws: wss:; worker-src 'self' blob:; manifest-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    );
   } else {
     headers.set("cache-control", "public, max-age=31536000, immutable");
   }

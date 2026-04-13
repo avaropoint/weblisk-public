@@ -1195,9 +1195,7 @@ button.nav-toggle {
 }
 
 .feature-card h3 a {
-  text-decoration: underline;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 2px;
+  text-decoration: none;
   color: var(--wl-primary);
 }
 
@@ -1436,9 +1434,7 @@ button.nav-toggle {
 
 .footer-bottom a {
   color: var(--wl-text-muted);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-decoration: none;
   transition: color 0.15s;
 }
 

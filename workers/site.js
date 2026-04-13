@@ -72,6 +72,11 @@ export default {
     const url = new URL(request.url);
     let key = url.pathname.slice(1); // strip leading /
 
+    // Redirect /index.html → / to match canonical URL
+    if (key === "index.html") {
+      return Response.redirect(url.origin + "/" + (url.search || ""), 301);
+    }
+
     // Root or trailing slash → index.html
     if (key === "" || key.endsWith("/")) {
       key += "index.html";

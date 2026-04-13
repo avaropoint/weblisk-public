@@ -1194,6 +1194,17 @@ button.nav-toggle {
   margin-bottom: 0.5rem;
 }
 
+.feature-card h3 a {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  color: var(--wl-primary);
+}
+
+.feature-card h3 a:hover {
+  color: var(--wl-accent);
+}
+
 .feature-card p {
   font-size: 0.925rem;
   color: var(--wl-text-muted);
@@ -1425,6 +1436,9 @@ button.nav-toggle {
 
 .footer-bottom a {
   color: var(--wl-text-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
   transition: color 0.15s;
 }
 
@@ -1448,6 +1462,7 @@ button.nav-toggle {
   display: inline-flex;
   align-items: center;
   color: var(--wl-text-dim);
+  text-decoration: none;
 }
 
 .footer-copyright .footer-inline-social a:hover {
@@ -1467,6 +1482,7 @@ button.nav-toggle {
   border-radius: 100px;
   background: var(--wl-bg-soft);
   transition: all 0.25s;
+  text-decoration: none;
 }
 
 .powered-by:hover {

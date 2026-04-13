@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Demos — Weblisk</title>
+  <meta name="description"
+    content="Interactive Weblisk component demos: reactive counter with props, live clock with lifecycle cleanup, and toggle switches with state callbacks.">
+  <link rel="canonical" href="https://weblisk.dev/features/components.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Component Demos — Weblisk">
+  <meta property="og:description"
+    content="Interactive Weblisk component demos: reactive counter with props, live clock with lifecycle cleanup, and toggle switches with state callbacks.">
+  <meta property="og:url" content="https://weblisk.dev/features/components.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Component Demos — Weblisk">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="twitter:description"
+    content="Interactive Weblisk component demos: reactive counter with props, live clock with lifecycle cleanup, and toggle switches with state callbacks.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#3B4F7C">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Component Demos — Weblisk",
+    "description": "Interactive Weblisk component demos: reactive counter with props, live clock with lifecycle cleanup, and toggle switches with state callbacks.",
+    "url": "https://weblisk.dev/features/components.html",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" }
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="examples-layout">
+    <aside class="examples-sidebar" aria-label="Examples navigation">
+      <a href="/dashboard.html">
+        <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-18"></i> Dashboard
+      </a>
+      <a href="/features.html">
+        <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-18"></i> Features
+      </a>
+      <nav class="examples-subnav" aria-label="Feature categories">
+        <a href="/features/core.html">Core Extensions</a>
+        <a href="/features/state.html">State Management</a>
+        <a href="/features/data.html">Data &amp; Sync</a>
+        <a href="/features/networking.html">Networking</a>
+        <a href="/features/security.html">Security</a>
+        <a href="/features/performance.html">Performance</a>
+        <a href="/features/a11y.html">Accessibility</a>
+        <a href="/features/transitions.html">Transitions</a>
+        <a href="/features/routing.html">Routing</a>
+        <a href="/features/components.html" class="active" aria-current="page">Components</a>
+        <a href="/features/pwa.html">PWA</a>
+        <a href="/features/pro.html">Pro <span class="pro-badge">New</span></a>
+      </nav>
+      <a href="/settings.html">
+        <i aria-hidden="true" class="wl-icon wl-i-gear wl-icon-18"></i> Settings
+      </a>
+    </aside>
+
+    <main class="examples-main" id="main-content">
+      <div class="page-header">
+        <h1>Components</h1>
+        <p>Encapsulated UI components with props, lifecycle, and state management.</p>
+      </div>
+
+      <section data-island="/js/islands/features-components.js" data-hydrate="idle">
+        <div class="demo-grid">
+
+          <div class="demo-card" id="demo-counter">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-plus wl-icon-20"></i> Counter</h3>
+            <p>A reactive counter component with increment, decrement, and reset props.</p>
+            <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin:0.75rem 1.25rem 0">
+              <button class="btn btn-sm" id="btn-dec">−</button>
+              <span id="counter-value" style="font-size:2rem;font-weight:700;min-width:3rem;text-align:center">0</span>
+              <button class="btn btn-sm" id="btn-inc">+</button>
+            </div>
+            <button class="btn btn-sm" id="btn-reset" style="margin-top:0.5rem">Reset</button>
+            <pre class="demo-output" id="output-counter">Click +, −, or Reset</pre>
+          </div>
+
+          <div class="demo-card" id="demo-clock">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-clock wl-icon-20"></i> Live Clock</h3>
+            <p>A clock component with <code>setup()</code> and <code>cleanup()</code> lifecycle hooks.</p>
+            <div id="clock-display"
+              style="min-height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;margin:0.75rem 1.25rem 0;background:var(--wl-surface);border:1px solid var(--wl-border)">
+              --:--:--</div>
+            <div style="display:flex;gap:0.5rem;margin:0.75rem 1.25rem 0">
+              <button class="btn btn-sm" id="btn-start-clock">Start</button>
+              <button class="btn btn-sm" id="btn-stop-clock" disabled>Stop</button>
+            </div>
+            <pre class="demo-output" id="output-clock">Start the clock to see lifecycle in action</pre>
+          </div>
+
+          <div class="demo-card" id="demo-toggle">
+            <h3><i aria-hidden="true" class="wl-icon wl-i-toggle wl-icon-20"></i> Toggle Switches</h3>
+            <p>Custom toggle components with <code>props.onChange</code> callbacks.</p>
+            <div style="display:flex;flex-direction:column;gap:0.75rem;margin:0.75rem 1.25rem 0">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:0.85rem;font-weight:600">Wi-Fi</span>
+                <button class="toggle-switch" data-toggle="wifi" role="switch" aria-checked="false" aria-label="Toggle Wi-Fi">
+                  <span class="toggle-dot"></span>
+                </button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:0.85rem;font-weight:600">Bluetooth</span>
+                <button class="toggle-switch" data-toggle="bluetooth" role="switch" aria-checked="false" aria-label="Toggle Bluetooth">
+                  <span class="toggle-dot"></span>
+                </button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:0.85rem;font-weight:600">Dark Mode</span>
+                <button class="toggle-switch" data-toggle="darkMode" role="switch" aria-checked="false" aria-label="Toggle Dark Mode">
+                  <span class="toggle-dot"></span>
+                </button>
+              </div>
+            </div>
+            <div id="toggle-status" style="margin:0.5rem 1.25rem 0;font-size:0.8rem;color:var(--wl-text-dim)"></div>
+            <pre class="demo-output" id="output-toggle">Flip a toggle to see state changes</pre>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            2026 
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

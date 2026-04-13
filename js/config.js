@@ -239,6 +239,18 @@ export const routes = [
     desc: "View Transitions, Shared Elements, Transition Types",
   },
   {
+    path: "/features/routing.html",
+    label: "Routing Demos",
+    icon: "arrow",
+    desc: "Route Guards, Hash Routing, Navigation API",
+  },
+  {
+    path: "/features/components.html",
+    label: "Component Demos",
+    icon: "box",
+    desc: "Counter, Live Clock, Toggle Switches",
+  },
+  {
     path: "/features/pro.html",
     label: "Pro Demos",
     icon: "star",

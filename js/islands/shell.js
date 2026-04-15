@@ -1,17 +1,16 @@
 // Shell Island — App bootstrap.
-// Critical path: hydrate islands immediately.
+// Critical path: hydrate all islands immediately.
 // Everything else defers to idle time so it never blocks first paint.
 
-// ─── Critical: hydrate all islands on the page ───
 import { hydrateIslands } from "weblisk/core/hydrate.js";
 hydrateIslands();
 
-// ─── Deferred: security, a11y, perf, PWA, navigation ───
+// Deferred: security, a11y, perf, PWA, navigation.
 // Loaded after first paint via requestIdleCallback (or setTimeout fallback).
 const whenIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 
 whenIdle(async () => {
-  // Service Worker — deferred so it never blocks first paint
+  // Service Worker
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/sw.js").catch(() => {});
   }
@@ -29,7 +28,7 @@ whenIdle(async () => {
     "img-src": ["'self'", "data:", "blob:"],
     "connect-src": ["'self'", "https:", "ws:", "wss:"],
     "worker-src": ["'self'", "blob:"],
-    "manifest-src": ["'self'", "blob:"],
+    "manifest-src": ["'self'"],
   });
   applyPermissionsPolicy();
 
@@ -47,19 +46,8 @@ whenIdle(async () => {
   mark("shell:hydrate");
   reporter({ endpoint: "/api/perf", sampleRate: 1 });
 
-  // PWA
-  const { manifest, injectManifest, setThemeColor } =
-    await import("weblisk/pwa/manifest.js");
-  injectManifest(
-    manifest({
-      name: "Weblisk Demo",
-      short_name: "Weblisk",
-      start_url: location.origin + "/",
-      display: "standalone",
-      theme_color: "#3B4F7C",
-      background_color: "#ffffff",
-    }),
-  );
+  // PWA theme color sync
+  const { setThemeColor } = await import("weblisk/pwa/manifest.js");
 
   // Navigation
   const { installScroll } = await import("weblisk/nav/scroll.js");
@@ -95,10 +83,9 @@ whenIdle(async () => {
   mark("shell:ready");
 });
 
-// ─── Version badge: fetch latest from CDN ───
-// Runs after everything else. Updates .version-badge elements
-// with the latest released version. Falls back to the hardcoded
-// value baked into the HTML if the fetch fails.
+// Version badge: fetch latest from CDN.
+// Updates .version-badge elements with the released version.
+// Falls back to the hardcoded value in the HTML if the fetch fails.
 whenIdle(async () => {
   try {
     const { app } = await import("../config.js");

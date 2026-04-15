@@ -1,7 +1,6 @@
 // Weblisk static-site Worker — secure HTTP server backed by R2.
 // All responses pass through securityHeaders() before reaching the client.
 
-// ── MIME map ──
 const MIME = {
   html: "text/html;charset=utf-8",
   css:  "text/css;charset=utf-8",
@@ -29,7 +28,7 @@ function mimeFor(key) {
   return MIME[ext] || "application/octet-stream";
 }
 
-// ── Security headers applied to EVERY response ──
+// Security headers applied to every response.
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://cdn.weblisk.dev https://static.cloudflareinsights.com",
@@ -37,7 +36,7 @@ const CSP = [
   "img-src 'self' data: blob:",
   "connect-src 'self' https: ws: wss:",
   "worker-src 'self' blob:",
-  "manifest-src 'self' blob:",
+  "manifest-src 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -58,7 +57,7 @@ function securityHeaders(headers, isHTML) {
   }
 }
 
-// ── Request handler ──
+// Request handler.
 export default {
   async fetch(request, env) {
     // Only allow safe methods
@@ -99,7 +98,7 @@ export default {
   },
 };
 
-// ── Build response with security + cache headers ──
+// Build response with security and cache headers.
 function respond(object, key, headOnly) {
   const isHTML = key.endsWith(".html");
   const headers = new Headers();
@@ -121,7 +120,7 @@ function respond(object, key, headOnly) {
   return new Response(headOnly ? null : object.body, { headers });
 }
 
-// ── 404 with full security headers ──
+// 404 with full security headers.
 async function notFound(env) {
   const page = await env.SITE.get("404.html");
   const headers = new Headers({ "content-type": "text/html;charset=utf-8" });

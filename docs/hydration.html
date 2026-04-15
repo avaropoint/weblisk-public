@@ -33,15 +33,43 @@
     "headline": "Hydration Directives — Weblisk",
     "description": "Control when islands hydrate with data attributes: load, idle, visible, media, event, or never. Includes declarative event binding with data-on attributes.",
     "url": "https://weblisk.dev/docs/hydration.html",
-    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
-    "publisher": { "@type": "Organization", "name": "Weblisk" }
+    "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" },
+    "publisher": { "@type": "Organization", "name": "Weblisk", "url": "https://weblisk.dev" },
+    "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
   }
   </script>
+    <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
   <link rel="stylesheet" href="/css/styles.css?v=2">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Weblisk",
+        "item": "https://weblisk.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Documentation",
+        "item": "https://weblisk.dev/docs/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Hydration Directives",
+        "item": "https://weblisk.dev/docs/hydration.html"
+      }
+    ]
+  }
   </script>
 </head>
 

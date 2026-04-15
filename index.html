@@ -32,26 +32,59 @@
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <meta name="theme-color" content="#3B4F7C" />
   <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
       {
-        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://avaropoint.com/#org",
+        "name": "Avaropoint Inc.",
+        "url": "https://avaropoint.com",
+        "logo": "https://weblisk.dev/images/icon-dark-512.png",
+        "sameAs": [
+          "https://github.com/avaropoint",
+          "https://x.com/avaropoint"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://weblisk.dev/#website",
+        "name": "Weblisk",
+        "url": "https://weblisk.dev",
+        "description": "Zero-dependency JavaScript framework built on native browser APIs.",
+        "publisher": { "@id": "https://avaropoint.com/#org" },
+        "inLanguage": "en"
+      },
+      {
         "@type": "SoftwareApplication",
+        "@id": "https://weblisk.dev/#app",
         "name": "Weblisk",
         "description": "A zero-dependency, zero-build-step JavaScript framework built on native browser standards. Islands architecture, reactive signals, and modern CSS.",
         "url": "https://weblisk.dev",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "author": {
-          "@type": "Organization",
-          "name": "Avaropoint Inc.",
-          "url": "https://avaropoint.com"
-        },
+        "author": { "@id": "https://avaropoint.com/#org" },
         "license": "https://opensource.org/licenses/MIT",
         "softwareVersion": "1.0.0",
         "programmingLanguage": "JavaScript",
-        "codeRepository": "https://github.com/avaropoint/weblisk"
+        "codeRepository": "https://github.com/avaropoint/weblisk",
+        "isPartOf": { "@id": "https://weblisk.dev/#website" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://weblisk.dev/",
+        "name": "Weblisk — Zero-Dependency JavaScript Framework",
+        "url": "https://weblisk.dev/",
+        "description": "Zero-dependency JavaScript framework built on native browser APIs. Islands architecture, reactive signals, and real HTML — no bundler, no virtual DOM.",
+        "isPartOf": { "@id": "https://weblisk.dev/#website" },
+        "about": { "@id": "https://weblisk.dev/#app" },
+        "inLanguage": "en"
       }
-    </script>
+    ]
+  }
+  </script>
+  <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
   <link rel="stylesheet" href="/css/styles.css?v=2" />
   <script>

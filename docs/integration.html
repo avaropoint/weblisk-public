@@ -33,15 +33,43 @@
     "headline": "Integration — Weblisk",
     "description": "Weblisk's modules are standard ES modules with zero dependencies. They work in any environment that runs JavaScript in a browser — no build step, no…",
     "url": "https://weblisk.dev/docs/integration.html",
-    "author": { "@type": "Organization", "name": "Avaropoint Inc." },
-    "publisher": { "@type": "Organization", "name": "Weblisk" }
+    "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" },
+    "publisher": { "@type": "Organization", "name": "Weblisk", "url": "https://weblisk.dev" },
+    "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
   }
   </script>
+    <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
   <link rel="stylesheet" href="/css/styles.css?v=2">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Weblisk",
+        "item": "https://weblisk.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Documentation",
+        "item": "https://weblisk.dev/docs/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Integration",
+        "item": "https://weblisk.dev/docs/integration.html"
+      }
+    ]
+  }
   </script>
 </head>
 

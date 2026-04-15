@@ -27,7 +27,8 @@
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <meta name="theme-color" content="#3B4F7C">
-  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
   <link rel="stylesheet" href="/css/styles.css?v=2">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
@@ -40,7 +41,34 @@
     "name": "Routing Demos — Weblisk",
     "description": "Interactive Weblisk routing demos: route guards that block unsaved navigation, hash-based anchor routing, and the Navigation API with history traversal.",
     "url": "https://weblisk.dev/features/routing.html",
-    "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" }
+    "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" },
+    "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Weblisk",
+        "item": "https://weblisk.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Features",
+        "item": "https://weblisk.dev/features/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Routing Demos",
+        "item": "https://weblisk.dev/features/routing.html"
+      }
+    ]
   }
   </script>
 </head>

@@ -1,7 +1,7 @@
 {
   "name": "Weblisk",
   "short_name": "Weblisk",
-  "description": "Zero-dependency JavaScript framework built on native browser APIs.",
+  "description": "The zero-dependency web platform — from browser to federated agent intelligence.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b1121",

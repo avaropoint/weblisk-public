@@ -299,6 +299,18 @@ export const routes = [
     desc: "Reference implementation in Go",
   },
   {
+    path: "/server/hub.html",
+    label: "Hub Network",
+    icon: "globe",
+    desc: "Self-sovereign hubs and federated collaboration",
+  },
+  {
+    path: "/server/comparison.html",
+    label: "Comparison",
+    icon: "chart",
+    desc: "How Weblisk compares to LangChain, CrewAI, AutoGen, and more",
+  },
+  {
     path: "/blueprints/index.html",
     label: "Blueprints",
     icon: "book",

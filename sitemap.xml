@@ -55,6 +55,8 @@
   <url><loc>https://weblisk.dev/server/protocols.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://weblisk.dev/server/implementations.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://weblisk.dev/server/go.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://weblisk.dev/server/hub.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://weblisk.dev/server/comparison.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   <!-- Blueprints -->
   <url><loc>https://weblisk.dev/blueprints/index.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

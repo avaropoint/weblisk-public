@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hub Network — Weblisk</title>
+  <meta name="description"
+    content="Every Weblisk deployment is a self-sovereign hub. Hubs federate to form a global network — cryptographic data contracts, cross-org collaboration, and EDI replacement.">
+  <link rel="canonical" href="https://weblisk.dev/server/hub.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hub Network — Weblisk">
+  <meta property="og:description"
+    content="Every Weblisk deployment is a self-sovereign hub. Hubs federate to form a global network with cryptographic data contracts.">
+  <meta property="og:url" content="https://weblisk.dev/server/hub.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hub Network — Weblisk">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="twitter:description" content="Self-sovereign hubs that federate to form a global network of economic intelligence.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css?v=2">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Hub Network — Weblisk",
+    "description": "Self-sovereign hubs that federate to form a global network of economic intelligence with cryptographic data contracts.",
+    "url": "https://weblisk.dev/server/hub.html",
+    "headline": "Hub Network — Weblisk",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" },
+    "publisher": { "@type": "Organization", "name": "Weblisk", "url": "https://weblisk.dev" },
+    "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Server", "item": "https://weblisk.dev/server/" },
+      { "@type": "ListItem", "position": 3, "name": "Hub Network", "item": "https://weblisk.dev/server/hub.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link active">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Server navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Server overview links">
+        <a href="/server/index.html">Introduction</a>
+        <a href="/server/specification.html">Specification</a>
+        <a href="/server/protocols.html">Protocols</a>
+      </nav>
+      <h3>Architecture</h3>
+      <nav aria-label="Architecture links">
+        <a href="/server/hub.html" aria-current="page" class="active">Hub Network</a>
+        <a href="/server/comparison.html">Comparison</a>
+      </nav>
+      <h3>Implementations</h3>
+      <nav aria-label="Server implementation links">
+        <a href="/server/implementations.html">Overview</a>
+        <a href="/server/go.html">Go <span class="pro-pill">Ref</span></a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/blueprints/index.html">Blueprints</a>
+        <a href="/agents/index.html">Agents</a>
+      </nav>
+    </aside>
+
+    <article class="docs-content" id="main-content">
+      <div class="docs-breadcrumb" aria-label="Breadcrumb">
+        <a href="/index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/server/index.html">Server</a>
+        <span aria-hidden="true">/</span>
+        <span>Hub Network</span>
+      </div>
+
+      <h1>Hub Network</h1>
+      <p class="docs-lead">
+        Every Weblisk deployment is a <strong>hub</strong> — a self-sovereign node
+        that owns its orchestrators, domains, agents, logic, and data. Hubs connect
+        to form a global network where businesses collaborate through cryptographically
+        enforced data contracts.
+      </p>
+
+      <!-- ─── What Is a Hub ─── -->
+      <h2 id="what-is-a-hub">What Is a Hub?</h2>
+      <p>
+        A hub is a complete Weblisk deployment. It includes an orchestrator,
+        domain controllers, work agents, infrastructure agents, and all associated
+        data. The owner of a hub has full sovereignty — no external authority can
+        access data, modify behavior, or override policies.
+      </p>
+
+      <div class="feature-grid" style="margin-top: 1rem">
+        <div class="feature-card">
+          <div class="feature-icon purple">
+            <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
+          </div>
+          <h3>Self-Sovereign</h3>
+          <p>
+            Your hub, your rules. Data never leaves your boundary without an
+            explicit data contract. No vendor can access your orchestrator
+            or override your domain policies.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon cyan">
+            <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+          </div>
+          <h3>Domain-Organized</h3>
+          <p>
+            Each hub runs domain controllers for its business functions.
+            Three domains ship free — SEO, Content Quality, and Health
+            Monitoring. Add custom domains for your industry.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
+          </div>
+          <h3>Agent-Powered</h3>
+          <p>
+            Specialized work agents run under domain controllers. Infrastructure
+            agents provide shared services. All agents are sandboxed with
+            explicit capability grants.
+          </p>
+        </div>
+      </div>
+
+      <!-- ─── Architecture ─── -->
+      <h2 id="architecture">Hub Architecture</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">architecture</span>
+        </div>
+        <div class="code-body">
+          <pre>Hub (self-sovereign deployment)
+├── Orchestrator (coordinator)
+│   ├── Domain: SEO
+│   │   ├── seo-analyzer (work agent)
+│   │   └── a11y-checker (work agent)
+│   ├── Domain: Content
+│   │   ├── content-analyzer (work agent)
+│   │   └── meta-checker (work agent)
+│   ├── Domain: Health
+│   │   ├── uptime-checker (work agent)
+│   │   └── perf-auditor (work agent)
+│   └── Infrastructure Agents
+│       ├── sync
+│       ├── cron
+│       ├── webhook
+│       └── email-send
+└── Federation (hub-to-hub)
+    ├── Discovery &amp; trust establishment
+    ├── Data boundary contracts
+    └── Cross-org task execution</pre>
+        </div>
+      </div>
+
+      <!-- ─── Federation ─── -->
+      <h2 id="federation">Federation</h2>
+      <p>
+        Federation is the protocol that lets hubs collaborate. When two organizations
+        want to work together, their hubs establish trust through Ed25519 identity
+        signing, negotiate data boundary contracts, and then coordinate agent work
+        across organizational boundaries.
+      </p>
+
+      <h3>How Federation Works</h3>
+      <ol>
+        <li><strong>Discovery</strong> — Hubs find each other through the hub directory
+          or direct invitation. Each hub publishes its capabilities and available domains.</li>
+        <li><strong>Trust Establishment</strong> — Ed25519 key exchange with behavioral
+          fingerprinting. Trust is cryptographically verified, not assumed.</li>
+        <li><strong>Data Contract</strong> — Before any data crosses a hub boundary,
+          both parties sign a data boundary contract specifying exactly what data can
+          be shared, for what purpose, and for how long.</li>
+        <li><strong>Collaboration</strong> — Agents on Hub A can delegate tasks to
+          agents on Hub B through the federation protocol. All cross-boundary
+          communication is signed and audited.</li>
+      </ol>
+
+      <div class="tip">
+        <strong>EDI replacement.</strong> Traditional B2B integration requires EDI documents,
+        translation middleware, and months of custom development. Weblisk federation replaces
+        this with a native, AI-ready protocol that organizations can adopt incrementally.
+      </div>
+
+      <!-- ─── Data Sovereignty ─── -->
+      <h2 id="data-sovereignty">Data Sovereignty</h2>
+      <p>
+        Data sovereignty isn't a feature — it's the foundation. Every piece of data
+        in a Weblisk hub has an owner, a purpose, and a boundary.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Principle</th>
+            <th>How It Works</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Owner control</strong></td>
+            <td>Data never leaves a hub without the owner's explicit, signed consent</td>
+          </tr>
+          <tr>
+            <td><strong>Purpose limitation</strong></td>
+            <td>Data contracts specify exactly what data is shared and for what purpose</td>
+          </tr>
+          <tr>
+            <td><strong>Time-bounded</strong></td>
+            <td>Contracts include expiry dates — shared data is automatically revoked</td>
+          </tr>
+          <tr>
+            <td><strong>Audit trail</strong></td>
+            <td>Every cross-boundary data access is cryptographically logged</td>
+          </tr>
+          <tr>
+            <td><strong>Behavioral integrity</strong></td>
+            <td>Agents that deviate from established patterns are flagged before they can cause harm</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ─── Use Cases ─── -->
+      <h2 id="use-cases">Use Cases</h2>
+
+      <div class="feature-grid" style="margin-top: 1rem">
+        <div class="feature-card">
+          <div class="feature-icon purple">
+            <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+          </div>
+          <h3>Supply Chain</h3>
+          <p>
+            Manufacturer, distributor, and retailer each run their own hub.
+            Inventory agents collaborate across hubs with data contracts
+            that protect each party's pricing and customer data.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon cyan">
+            <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
+          </div>
+          <h3>B2B Integration</h3>
+          <p>
+            Replace EDI documents and translation middleware with native
+            federation. Partners connect their hubs, define data contracts,
+            and agents handle the rest — no custom integration code.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i>
+          </div>
+          <h3>Multi-Tenant SaaS</h3>
+          <p>
+            Each customer gets their own hub with full data sovereignty.
+            Your platform hub coordinates features and updates. Customers
+            keep their data under their own control.
+          </p>
+        </div>
+      </div>
+
+      <!-- ─── Endpoints ─── -->
+      <h2 id="endpoints">Hub API Endpoints</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/v1/hub/manifest</code></td>
+            <td>GET</td>
+            <td>Public hub identity, capabilities, and available domains</td>
+          </tr>
+          <tr>
+            <td><code>/v1/hub/health</code></td>
+            <td>GET</td>
+            <td>Health score and status for federation routing</td>
+          </tr>
+          <tr>
+            <td><code>/v1/federation/handshake</code></td>
+            <td>POST</td>
+            <td>Initiate trust establishment with another hub</td>
+          </tr>
+          <tr>
+            <td><code>/v1/federation/contract</code></td>
+            <td>POST</td>
+            <td>Propose or accept a data boundary contract</td>
+          </tr>
+          <tr>
+            <td><code>/v1/federation/delegate</code></td>
+            <td>POST</td>
+            <td>Delegate a task to a federated hub's agent</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip">
+        For the complete federation protocol specification, see the
+        <a href="https://github.com/avaropoint/weblisk-blueprints/blob/main/protocol/federation.md">federation blueprint</a>
+        in the weblisk-blueprints repository.
+      </div>
+
+      <!-- ─── Next steps ─── -->
+      <div class="docs-nav-footer">
+        <a href="/server/protocols.html" class="nav-prev">
+          <span class="nav-direction">Previous</span>
+          <span class="nav-label">Protocols</span>
+        </a>
+        <a href="/server/comparison.html" class="nav-next">
+          <span class="nav-direction">Next</span>
+          <span class="nav-label">Comparison</span>
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">
+            The AI-ready platform for building and connecting autonomous agents.
+          </p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026
+            Made with <span class="heart" aria-label="love">&hearts;</span> by
+            <a href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

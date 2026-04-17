@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Weblisk Compares — Weblisk</title>
+  <meta name="description"
+    content="See how Weblisk's server-side agent architecture compares to LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, MCP, and A2A.">
+  <link rel="canonical" href="https://weblisk.dev/server/comparison.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How Weblisk Compares — Weblisk">
+  <meta property="og:description"
+    content="See how Weblisk's server-side agent architecture compares to LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, MCP, and A2A.">
+  <meta property="og:url" content="https://weblisk.dev/server/comparison.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Weblisk Compares — Weblisk">
+  <meta name="twitter:site" content="@avaropoint">
+  <meta name="twitter:description" content="See how Weblisk's server-side agent architecture compares to LangChain, CrewAI, AutoGen, and more.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css?v=2">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "How Weblisk Compares",
+    "description": "Architecture comparison between Weblisk and LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, MCP, and A2A.",
+    "url": "https://weblisk.dev/server/comparison.html",
+    "headline": "How Weblisk Compares",
+    "author": { "@type": "Organization", "name": "Avaropoint Inc.", "url": "https://avaropoint.com" },
+    "publisher": { "@type": "Organization", "name": "Weblisk", "url": "https://weblisk.dev" },
+    "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Server", "item": "https://weblisk.dev/server/" },
+      { "@type": "ListItem", "position": 3, "name": "Comparison", "item": "https://weblisk.dev/server/comparison.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/server/index.html" class="nav-link active">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/agents/index.html" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/avaropoint" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Server navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Server overview links">
+        <a href="/server/index.html">Introduction</a>
+        <a href="/server/specification.html">Specification</a>
+        <a href="/server/protocols.html">Protocols</a>
+      </nav>
+      <h3>Architecture</h3>
+      <nav aria-label="Architecture links">
+        <a href="/server/hub.html">Hub Network</a>
+        <a href="/server/comparison.html" aria-current="page" class="active">Comparison</a>
+      </nav>
+      <h3>Implementations</h3>
+      <nav aria-label="Server implementation links">
+        <a href="/server/implementations.html">Overview</a>
+        <a href="/server/go.html">Go <span class="pro-pill">Ref</span></a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/blueprints/index.html">Blueprints</a>
+        <a href="/agents/index.html">Agents</a>
+      </nav>
+    </aside>
+
+    <article class="docs-content" id="main-content">
+      <div class="docs-breadcrumb" aria-label="Breadcrumb">
+        <a href="/index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/server/index.html">Server</a>
+        <span aria-hidden="true">/</span>
+        <span>Comparison</span>
+      </div>
+
+      <h1>How Weblisk Compares</h1>
+      <p class="docs-lead">
+        Weblisk isn't competing with agent-building libraries — it's solving a
+        different problem. Most frameworks help you build <strong>one agent</strong>.
+        Weblisk defines how <strong>agents work together across organizations</strong>.
+      </p>
+
+      <!-- ─── Positioning ─── -->
+      <h2 id="positioning">Different Problem, Different Layer</h2>
+      <p>
+        The AI agent ecosystem has converged around a common pattern: give an LLM
+        access to tools, wrap it in a loop, and call it an agent. Weblisk operates
+        at a different layer — it's a <strong>protocol and architecture</strong>
+        for orchestrating autonomous agents that collaborate across organizational
+        boundaries, with or without LLMs.
+      </p>
+
+      <div class="tip">
+        <strong>Key insight:</strong> LangChain is how you build an agent.
+        Weblisk is how agents work together across organizations. They're
+        complementary — a Weblisk work agent could use LangChain internally.
+      </div>
+
+      <!-- ─── Quick Comparison Table ─── -->
+      <h2 id="comparison-table">At a Glance</h2>
+      <div style="overflow-x: auto">
+        <table class="comparison-table" role="table">
+          <thead>
+            <tr>
+              <th scope="col">Dimension</th>
+              <th scope="col" class="highlight col-highlight">Weblisk</th>
+              <th scope="col">LangChain</th>
+              <th scope="col">CrewAI</th>
+              <th scope="col">AutoGen</th>
+              <th scope="col">OpenAI Agents SDK</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Primary purpose</strong></td>
+              <td class="col-highlight">Cross-org agent collaboration</td>
+              <td>Build LLM-powered chains</td>
+              <td>Multi-agent role play</td>
+              <td>Agent conversations</td>
+              <td>Build OpenAI agents</td>
+            </tr>
+            <tr>
+              <td><strong>Architecture</strong></td>
+              <td class="yes col-highlight">Protocol specification</td>
+              <td>Python library</td>
+              <td>Python library</td>
+              <td>Python library</td>
+              <td>Python library</td>
+            </tr>
+            <tr>
+              <td><strong>Language</strong></td>
+              <td class="yes col-highlight">Any (runtime-agnostic)</td>
+              <td class="no">Python / JS</td>
+              <td class="no">Python only</td>
+              <td class="no">Python / .NET</td>
+              <td class="no">Python only</td>
+            </tr>
+            <tr>
+              <td><strong>LLM required?</strong></td>
+              <td class="yes col-highlight">Optional</td>
+              <td class="no">Required</td>
+              <td class="no">Required</td>
+              <td class="no">Required</td>
+              <td class="no">Required</td>
+            </tr>
+            <tr>
+              <td><strong>Multi-org federation</strong></td>
+              <td class="yes col-highlight">Native</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td><strong>Data sovereignty</strong></td>
+              <td class="yes col-highlight">Cryptographic contracts</td>
+              <td class="no">None</td>
+              <td class="no">None</td>
+              <td class="no">None</td>
+              <td class="no">None</td>
+            </tr>
+            <tr>
+              <td><strong>Identity model</strong></td>
+              <td class="yes col-highlight">Ed25519 + behavioral</td>
+              <td class="no">None</td>
+              <td class="no">None</td>
+              <td class="no">None</td>
+              <td class="no">API keys only</td>
+            </tr>
+            <tr>
+              <td><strong>Domain model</strong></td>
+              <td class="yes col-highlight">Built-in (SEO, Content, Health)</td>
+              <td class="no">None</td>
+              <td class="partial">Crew roles</td>
+              <td class="no">None</td>
+              <td class="no">None</td>
+            </tr>
+            <tr>
+              <td><strong>Self-sovereign deploy</strong></td>
+              <td class="yes col-highlight">Every instance is a hub</td>
+              <td class="no">Centralized</td>
+              <td class="no">Centralized</td>
+              <td class="no">Centralized</td>
+              <td class="no">OpenAI hosted</td>
+            </tr>
+            <tr>
+              <td><strong>Vendor lock-in</strong></td>
+              <td class="yes col-highlight">None</td>
+              <td class="partial">Moderate</td>
+              <td class="partial">Moderate</td>
+              <td class="partial">Moderate</td>
+              <td class="no">OpenAI only</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ─── vs LangChain ─── -->
+      <h2 id="vs-langchain">vs LangChain</h2>
+      <p>
+        LangChain is the most popular framework for building LLM-powered
+        applications. It provides chains, agents, tools, and memory abstractions
+        — everything you need to wire an LLM to external data sources and actions.
+      </p>
+
+      <h3>Where they differ</h3>
+      <div class="feature-grid" style="margin-top: 1rem">
+        <div class="feature-card">
+          <h4>Architecture</h4>
+          <p>
+            LangChain is a <strong>Python/JS library</strong> — you import it
+            and build. Weblisk is a <strong>protocol specification</strong> —
+            you implement it in any language. A Weblisk agent could use LangChain
+            internally.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h4>LLM Dependency</h4>
+          <p>
+            Every LangChain chain starts with an LLM call. Weblisk agents
+            <strong>optionally</strong> use LLMs — the SEO analyzer runs
+            entirely on heuristics. The AI gateway blueprint adds LLM
+            capabilities when needed.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h4>Multi-Organization</h4>
+          <p>
+            LangChain operates within one process. Weblisk's federation
+            protocol lets agents on <strong>different organizations'
+            servers</strong> collaborate through cryptographically enforced
+            data contracts.
+          </p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Complementary, not competitive.</strong> Use LangChain to build
+        an LLM-powered work agent. Deploy it as a Weblisk agent. Now it can
+        collaborate with agents on other organizations' hubs through the
+        federation protocol.
+      </div>
+
+      <!-- ─── vs CrewAI ─── -->
+      <h2 id="vs-crewai">vs CrewAI</h2>
+      <p>
+        CrewAI brings role-based multi-agent collaboration to Python. You define
+        agents with roles, goals, and backstories, then combine them into a
+        "crew" that executes tasks sequentially or in parallel.
+      </p>
+
+      <h3>Where they differ</h3>
+      <ul>
+        <li>
+          <strong>Scope:</strong> CrewAI orchestrates agents within one Python
+          process. Weblisk orchestrates agents across organizations, languages,
+          and networks.
+        </li>
+        <li>
+          <strong>Role model:</strong> CrewAI uses narrative role prompting.
+          Weblisk uses a formal domain controller model — domains own business
+          functions and dispatch to specialized work agents.
+        </li>
+        <li>
+          <strong>Trust:</strong> CrewAI agents trust each other implicitly.
+          Weblisk agents operate under cryptographic identity, capability
+          sandboxes, and data boundary contracts.
+        </li>
+      </ul>
+
+      <!-- ─── vs AutoGen ─── -->
+      <h2 id="vs-autogen">vs AutoGen (Microsoft)</h2>
+      <p>
+        AutoGen enables multi-agent conversations where agents can chat with
+        each other, execute code, and collaborate on complex tasks. It's
+        particularly strong at code generation workflows.
+      </p>
+
+      <h3>Where they differ</h3>
+      <ul>
+        <li>
+          <strong>Communication:</strong> AutoGen uses conversational message
+          passing between agents. Weblisk uses a structured protocol with
+          typed messages, capability declarations, and audit trails.
+        </li>
+        <li>
+          <strong>Deployment:</strong> AutoGen runs in a single Python runtime.
+          Weblisk agents run as independent processes — each can be a different
+          language, on a different server, owned by a different organization.
+        </li>
+        <li>
+          <strong>Production readiness:</strong> AutoGen is optimized for
+          research and experimentation. Weblisk is designed for production
+          deployments with lifecycle management, health monitoring, and
+          federation.
+        </li>
+      </ul>
+
+      <!-- ─── vs Protocols ─── -->
+      <h2 id="vs-protocols">vs MCP and A2A</h2>
+      <p>
+        MCP (Model Context Protocol) and A2A (Agent-to-Agent) are protocols,
+        like Weblisk — but they solve different problems.
+      </p>
+
+      <div style="overflow-x: auto">
+        <table class="comparison-table" role="table">
+          <thead>
+            <tr>
+              <th scope="col">Dimension</th>
+              <th scope="col" class="highlight col-highlight">Weblisk</th>
+              <th scope="col">MCP</th>
+              <th scope="col">A2A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td class="col-highlight">Full platform (orchestrator → domains → agents → federation)</td>
+              <td>Connect LLMs to data/tools</td>
+              <td>Agent-to-agent communication</td>
+            </tr>
+            <tr>
+              <td><strong>Scope</strong></td>
+              <td class="yes col-highlight">End-to-end architecture</td>
+              <td class="partial">Tool integration layer</td>
+              <td class="partial">Communication protocol</td>
+            </tr>
+            <tr>
+              <td><strong>Domain model</strong></td>
+              <td class="yes col-highlight">Built-in (SEO, Content, Health)</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td><strong>Business logic</strong></td>
+              <td class="yes col-highlight">Workflows, scoring, feedback loops</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td><strong>Federation</strong></td>
+              <td class="yes col-highlight">Native hub-to-hub</td>
+              <td class="no">No</td>
+              <td class="partial">Agent cards</td>
+            </tr>
+            <tr>
+              <td><strong>Data sovereignty</strong></td>
+              <td class="yes col-highlight">Cryptographic contracts</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td><strong>Lifecycle management</strong></td>
+              <td class="yes col-highlight">Built-in</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip">
+        <strong>Weblisk can incorporate MCP and A2A.</strong> A Weblisk work
+        agent could expose an MCP interface for LLM tool access, or use A2A
+        to communicate with non-Weblisk agents. The protocol is extensible
+        by design.
+      </div>
+
+      <!-- ─── Unique to Weblisk ─── -->
+      <h2 id="unique">What's Unique to Weblisk</h2>
+
+      <div class="feature-grid" style="margin-top: 1rem">
+        <div class="feature-card">
+          <div class="feature-icon purple">
+            <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+          </div>
+          <h3>Hub Federation</h3>
+          <p>
+            Every Weblisk deployment is a self-sovereign hub. Hubs discover
+            each other, establish trust through Ed25519 signing, and
+            collaborate through data boundary contracts. No central
+            authority controls the network.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon cyan">
+            <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+          </div>
+          <h3>Domain Controllers</h3>
+          <p>
+            Agents don't operate in isolation — they're organized under
+            domain controllers that own business functions. Domains define
+            workflows, dispatch work, aggregate results, and drive
+            continuous optimization.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
+          </div>
+          <h3>Behavioral Integrity</h3>
+          <p>
+            Beyond cryptographic identity, Weblisk uses behavioral
+            fingerprinting to detect compromised agents. Agents that
+            deviate from established patterns are flagged before they
+            can cause harm.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon orange">
+            <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
+          </div>
+          <h3>Protocol-First Design</h3>
+          <p>
+            Weblisk is a specification, not a library. The same blueprint
+            can be implemented in Go, Rust, Python, TypeScript, or
+            Cloudflare Workers. No language lock-in, no runtime coupling.
+          </p>
+        </div>
+      </div>
+
+      <!-- ─── When to Use What ─── -->
+      <h2 id="when-to-use">When to Use What</h2>
+
+      <div style="overflow-x: auto">
+        <table class="comparison-table" role="table">
+          <thead>
+            <tr>
+              <th scope="col">If you need to...</th>
+              <th scope="col">Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Build an LLM-powered chain or RAG pipeline</td>
+              <td><strong>LangChain</strong> — best-in-class for LLM orchestration</td>
+            </tr>
+            <tr>
+              <td>Prototype multi-agent role play</td>
+              <td><strong>CrewAI</strong> — fast setup with narrative roles</td>
+            </tr>
+            <tr>
+              <td>Run multi-agent code generation research</td>
+              <td><strong>AutoGen</strong> — purpose-built for agent conversations</td>
+            </tr>
+            <tr>
+              <td>Connect an LLM to external tools</td>
+              <td><strong>MCP</strong> — standardized tool integration</td>
+            </tr>
+            <tr>
+              <td>Let agents from different systems talk</td>
+              <td><strong>A2A</strong> — agent-to-agent protocol</td>
+            </tr>
+            <tr>
+              <td>Deploy autonomous agents in production that collaborate across organizations</td>
+              <td><strong>Weblisk</strong> — protocol, orchestration, federation, and data sovereignty</td>
+            </tr>
+            <tr>
+              <td>Replace EDI/B2B middleware with AI-native collaboration</td>
+              <td><strong>Weblisk</strong> — hub network with cryptographic data contracts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ─── Next steps ─── -->
+      <div class="docs-nav-footer">
+        <a href="/server/index.html" class="nav-prev">
+          <span class="nav-direction">Previous</span>
+          <span class="nav-label">Introduction</span>
+        </a>
+        <a href="/server/hub.html" class="nav-next">
+          <span class="nav-direction">Next</span>
+          <span class="nav-label">Hub Network</span>
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">
+            The AI-ready platform for building and connecting autonomous agents.
+          </p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/avaropoint">X (Twitter)</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026
+            Made with <span class="heart" aria-label="love">&hearts;</span> by
+            <a href="https://avaropoint.com">Avaropoint Inc.</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/avaropoint" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

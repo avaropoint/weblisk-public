@@ -127,16 +127,13 @@
 
     <main class="docs-content" id="main-content">
       <h1>Agents</h1>
-      <p class="lead">Autonomous server-side services that extend your application with background processing, AI
-        integration, webhooks, and more.</p>
+      <p class="lead">Autonomous services that extend your hub with background processing, domain intelligence,
+        health monitoring, and more. Organized under domain controllers or as shared infrastructure.</p>
 
       <h2>What Is a Weblisk Agent?</h2>
-      <p>An Agent is an independent service that plugs into a <a href="/server/index.html">Weblisk server
-          implementation</a> via a standardised protocol. Agents handle work that doesn't belong in a request/response
-        cycle — background jobs, scheduled tasks, event-driven workflows, AI assistants, and third-party integrations.
-      </p>
-      <p>Like everything in Weblisk, agents follow a specification. The protocol defines how agents register, communicate,
-        receive work, and report results — so agents are portable across any server implementation.</p>
+      <p>An Agent is an independent service that plugs into a <a href="/server/index.html">Weblisk hub</a> via a standardised protocol. Agents handle work that doesn't belong in a request/response
+        cycle — SEO analysis, content quality auditing, health monitoring, background jobs, scheduled tasks, event-driven workflows, and third-party integrations.</p>
+      <p>Agents come in two kinds: <strong>work agents</strong> operate under a domain controller's direction, and <strong>infrastructure agents</strong> provide shared system services used by any domain.</p>
 
       <div class="feature-grid" style="margin-top:2rem">
         <div class="feature-card">
@@ -174,49 +171,93 @@
       </div>
 
       <h2>Agent Catalog</h2>
-      <p>Weblisk provides official agents for common server-side patterns:</p>
+      <p>Weblisk ships with three domain agent families and four infrastructure agents:</p>
 
       <table>
         <thead>
           <tr>
             <th>Agent</th>
+            <th>Kind</th>
             <th>Description</th>
             <th>Tier</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>sync-agent</strong></td>
+            <td><strong>seo-analyzer</strong></td>
+            <td>Work (SEO)</td>
+            <td>Title tags, meta descriptions, heading hierarchy, structured data</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>a11y-checker</strong></td>
+            <td>Work (SEO)</td>
+            <td>WCAG compliance, color contrast, ARIA roles, focus management</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>content-analyzer</strong></td>
+            <td>Work (Content)</td>
+            <td>Readability scoring, heading structure, paragraph balance</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>meta-checker</strong></td>
+            <td>Work (Content)</td>
+            <td>Open Graph, Twitter cards, JSON-LD, canonical URL validation</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>uptime-checker</strong></td>
+            <td>Work (Health)</td>
+            <td>Endpoint availability, response time, TLS certificate grading</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>perf-auditor</strong></td>
+            <td>Work (Health)</td>
+            <td>Core Web Vitals, resource budgets, load performance</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>sync</strong></td>
+            <td>Infrastructure</td>
             <td>Background data synchronisation between client store and server</td>
             <td>Free</td>
           </tr>
           <tr>
-            <td><strong>cron-agent</strong></td>
+            <td><strong>cron</strong></td>
+            <td>Infrastructure</td>
             <td>Scheduled task execution with cron-style expressions</td>
             <td>Free</td>
           </tr>
           <tr>
-            <td><strong>webhook-agent</strong></td>
+            <td><strong>webhook</strong></td>
+            <td>Infrastructure</td>
             <td>Inbound and outbound webhook processing with retries</td>
             <td>Free</td>
           </tr>
           <tr>
-            <td><strong>email-agent</strong></td>
+            <td><strong>email-send</strong></td>
+            <td>Infrastructure</td>
             <td>Transactional email sending with templates and queuing</td>
             <td>Free</td>
           </tr>
           <tr>
             <td><strong>ai-agent</strong></td>
+            <td>Work</td>
             <td>LLM integration with prompt management, tool use, and streaming</td>
             <td>Pro</td>
           </tr>
           <tr>
             <td><strong>search-agent</strong></td>
+            <td>Work</td>
             <td>Full-text and semantic search indexing with incremental updates</td>
             <td>Pro</td>
           </tr>
           <tr>
             <td><strong>media-agent</strong></td>
+            <td>Work</td>
             <td>Image/video processing, thumbnails, and format conversion</td>
             <td>Pro</td>
           </tr>
@@ -229,12 +270,12 @@
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
-          <span class="code-title">agents/sync-agent.yaml</span>
+          <span class="code-title">agents/sync.yaml</span>
           <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="agent-sync"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
-          <pre id="agent-sync"><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">sync-agent</span>
+          <pre id="agent-sync"><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">sync</span>
 <span class="syn-a">version</span><span class="syn-p">:</span> <span class="syn-s">1.0.0</span>
 <span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Syncs client-side IDB store with server database</span>
 
@@ -272,7 +313,7 @@
             <img src="/images/logo.svg" alt="" width="24" height="24">
             <span>Weblisk</span>
           </a>
-          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+          <p class="footer-tagline">The AI-ready platform for building and connecting autonomous agents.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-col">

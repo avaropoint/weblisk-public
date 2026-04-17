@@ -131,31 +131,102 @@
       <h1>Agent Catalog</h1>
       <p class="lead">Official agents for common server-side patterns. Free agents ship with every Weblisk server implementation.</p>
 
-      <h2>Free Agents</h2>
+      <h2>Infrastructure Agents <span class="pro-pill">Free</span></h2>
+      <p>System-level services available to all domains. Ship with every Weblisk hub.</p>
       <table>
         <thead>
-          <tr><th>Agent</th><th>Description</th><th>Triggers</th></tr>
+          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>sync-agent</strong></td>
+            <td><strong>sync</strong></td>
+            <td>Infrastructure</td>
             <td>Background data synchronisation between client-side IDB store and server database. Supports conflict resolution strategies.</td>
             <td>Event + Schedule</td>
           </tr>
           <tr>
-            <td><strong>cron-agent</strong></td>
+            <td><strong>cron</strong></td>
+            <td>Infrastructure</td>
             <td>Scheduled task execution with cron-style expressions. Supports one-time and recurring tasks with retry logic.</td>
             <td>Schedule</td>
           </tr>
           <tr>
-            <td><strong>webhook-agent</strong></td>
+            <td><strong>webhook</strong></td>
+            <td>Infrastructure</td>
             <td>Inbound and outbound webhook processing with signature verification, retries, and delivery tracking.</td>
             <td>Event (HTTP)</td>
           </tr>
           <tr>
-            <td><strong>email-agent</strong></td>
+            <td><strong>email-send</strong></td>
+            <td>Infrastructure</td>
             <td>Transactional email with template rendering, queuing, and delivery status tracking. Supports SMTP and API-based providers.</td>
             <td>Event</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Domain Work Agents <span class="pro-pill">Free</span></h2>
+      <p>Specialized agents dispatched by domain controllers. Each agent serves a specific business function.</p>
+
+      <h3>SEO Domain</h3>
+      <table>
+        <thead>
+          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>seo-analyzer</strong></td>
+            <td>Work</td>
+            <td>Audits pages for title tags, meta descriptions, heading hierarchy, keyword density, and structured data.</td>
+            <td>Domain dispatch</td>
+          </tr>
+          <tr>
+            <td><strong>a11y-checker</strong></td>
+            <td>Work</td>
+            <td>Validates accessibility compliance — ARIA roles, color contrast, alt text, focus management, and WCAG guidelines.</td>
+            <td>Domain dispatch</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Content Domain</h3>
+      <table>
+        <thead>
+          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>content-analyzer</strong></td>
+            <td>Work</td>
+            <td>Measures readability (Flesch-Kincaid), heading structure, paragraph balance, and content quality signals.</td>
+            <td>Domain dispatch</td>
+          </tr>
+          <tr>
+            <td><strong>meta-checker</strong></td>
+            <td>Work</td>
+            <td>Validates HTML metadata completeness — Open Graph, Twitter cards, structured data (JSON-LD), and canonical URLs.</td>
+            <td>Domain dispatch</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Health Domain</h3>
+      <table>
+        <thead>
+          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>uptime-checker</strong></td>
+            <td>Work</td>
+            <td>Checks endpoint availability, response time, DNS resolution, and TLS certificate status with grading.</td>
+            <td>Domain dispatch</td>
+          </tr>
+          <tr>
+            <td><strong>perf-auditor</strong></td>
+            <td>Work</td>
+            <td>Measures page load performance, Core Web Vitals (LCP, FID, CLS), resource budgets, and optimization opportunities.</td>
+            <td>Domain dispatch</td>
           </tr>
         </tbody>
       </table>
@@ -206,7 +277,7 @@
             <img src="/images/logo.svg" alt="" width="24" height="24">
             <span>Weblisk</span>
           </a>
-          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+          <p class="footer-tagline">The AI-ready platform for building and connecting autonomous agents.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-col">

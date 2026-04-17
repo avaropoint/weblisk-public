@@ -117,6 +117,11 @@
         <a href="/server/specification.html">Specification</a>
         <a href="/server/protocols.html">Protocols</a>
       </nav>
+      <h3>Architecture</h3>
+      <nav aria-label="Architecture links">
+        <a href="/server/hub.html">Hub Network</a>
+        <a href="/server/comparison.html">Comparison</a>
+      </nav>
       <h3>Implementations</h3>
       <nav aria-label="Server implementation links">
         <a href="/server/implementations.html">Overview</a>
@@ -131,8 +136,8 @@
 
     <main class="docs-content" id="main-content">
       <h1>Weblisk Server</h1>
-      <p class="lead">An open specification for building lightweight, standards-based server implementations that
-        complement the Weblisk client framework.</p>
+      <p class="lead">An open specification for building lightweight server implementations — orchestrating domains,
+        agents, and federated hubs that collaborate across organizations.</p>
 
       <h2>Philosophy</h2>
       <p>The Weblisk client framework is zero-dependency and runs anywhere. The server side follows the same
@@ -225,8 +230,23 @@
           </tr>
           <tr>
             <td><strong>Agents</strong></td>
-            <td>Autonomous server-side services</td>
-            <td>Background sync, AI assistants, webhooks</td>
+            <td>Autonomous server-side services organized under domains</td>
+            <td>SEO analyzer, content analyzer, uptime checker</td>
+          </tr>
+          <tr>
+            <td><strong>Domains</strong></td>
+            <td>Business function controllers that coordinate work agents</td>
+            <td>SEO domain, Content domain, Health domain</td>
+          </tr>
+          <tr>
+            <td><strong>Hub</strong></td>
+            <td>Self-sovereign deployment with orchestrator, domains, agents, and data</td>
+            <td>Your production Weblisk instance</td>
+          </tr>
+          <tr>
+            <td><strong>Federation</strong></td>
+            <td>Hub-to-hub trust, data contracts, and cross-org collaboration</td>
+            <td>Supply chain integration, B2B automation</td>
           </tr>
           <tr>
             <td><strong>Implementations</strong></td>
@@ -255,7 +275,7 @@
             <img src="/images/logo.svg" alt="" width="24" height="24">
             <span>Weblisk</span>
           </a>
-          <p class="footer-tagline">Zero-dependency framework for the modern web.</p>
+          <p class="footer-tagline">The AI-ready platform for building and connecting autonomous agents.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-col">

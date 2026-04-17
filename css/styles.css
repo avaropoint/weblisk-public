@@ -1734,6 +1734,7 @@ button.nav-toggle {
   border-radius: var(--wl-radius);
   background: var(--wl-accent-light);
   border-left: 3px solid var(--wl-accent);
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 

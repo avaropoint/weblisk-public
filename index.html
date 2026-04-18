@@ -86,7 +86,7 @@
   </script>
   <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=4" />
+  <link rel="stylesheet" href="/css/styles.css?v=5" />
   <script>
     document.documentElement.dataset.theme =
       localStorage.getItem("wl-theme") || "light";
@@ -111,9 +111,9 @@
         <a href="/index.html" class="nav-link active" aria-current="page">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
         <a href="/templates/index.html" class="nav-link">Templates</a>
+        <a href="/features.html" class="nav-link">Features</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
-        <a href="/features.html" class="nav-link">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -274,8 +274,8 @@
     <!-- ─── Code Showcase ─── -->
     <section class="section section-soft" aria-labelledby="code-heading">
       <div class="section-inner">
-        <div class="showcase">
-          <div class="showcase-text">
+        <div class="code-showcase">
+          <div class="code-showcase-text">
             <span class="section-label">How it works</span>
             <h3 id="code-heading">
               Reactivity without the ceremony
@@ -326,8 +326,8 @@
     <!-- ─── HTML Integration ─── -->
     <section class="section" aria-labelledby="html-heading">
       <div class="section-inner">
-        <div class="showcase" style="direction: rtl">
-          <div class="showcase-text" style="direction: ltr">
+        <div class="code-showcase" style="direction: rtl">
+          <div class="code-showcase-text" style="direction: ltr">
             <span class="section-label">Just HTML</span>
             <h3 id="html-heading">Two attributes. That's the entire API.</h3>
             <p>
@@ -510,8 +510,8 @@
     <!-- ─── Signals Code Example ─── -->
     <section class="section" aria-labelledby="signals-heading">
       <div class="section-inner">
-        <div class="showcase">
-          <div class="showcase-text">
+        <div class="code-showcase">
+          <div class="code-showcase-text">
             <span class="section-label">Reactive</span>
             <h3 id="signals-heading">
               Signals that feel like plain variables

@@ -1,16 +1,16 @@
-// Showcase Island — Preview/Code toggle, viewport switching, copy button, code tabs.
+// Feature Demo Island — Preview/Code toggle, viewport switching, copy button, code tabs.
 
-export default function showcase(el) {
-  // Handle all showcase blocks within this section
-  const blocks = el.querySelectorAll('.showcase');
-  blocks.forEach(initShowcase);
+export default function featureDemo(el) {
+  // Handle all feature-demo blocks within this section
+  const blocks = el.querySelectorAll('.feature-demo');
+  blocks.forEach(initFeatureDemo);
 }
 
-function initShowcase(block) {
+function initFeatureDemo(block) {
   // Preview / Code tabs
-  const tabs = block.querySelectorAll('.showcase-tab');
-  const preview = block.querySelector('.showcase-preview');
-  const code = block.querySelector('.showcase-code');
+  const tabs = block.querySelectorAll('.feature-demo-tab');
+  const preview = block.querySelector('.feature-demo-preview');
+  const code = block.querySelector('.feature-demo-code');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -29,7 +29,7 @@ function initShowcase(block) {
   });
 
   // Viewport toggle buttons (mobile / tablet / desktop)
-  const vpBtns = block.querySelectorAll('.showcase-viewport-btn');
+  const vpBtns = block.querySelectorAll('.feature-demo-viewport-btn');
   vpBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       vpBtns.forEach(b => b.classList.remove('active'));
@@ -44,29 +44,31 @@ function initShowcase(block) {
   });
 
   // Code sub-tabs (HTML / CSS / JS)
-  const codeTabs = block.querySelectorAll('.showcase-code-tab');
-  const codePanels = block.querySelectorAll('.showcase-code-panel');
+  const codeTabs = block.querySelectorAll('.feature-demo-code-tab');
+  const codePanels = block.querySelectorAll('.feature-demo-code-panel');
   codeTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       codeTabs.forEach(t => t.classList.remove('active'));
       codePanels.forEach(p => p.classList.remove('active'));
       tab.classList.add('active');
-      const panel = block.querySelector(`.showcase-code-panel[data-lang="${tab.dataset.lang}"]`);
+      const panel = block.querySelector(`.feature-demo-code-panel[data-lang="${tab.dataset.lang}"]`);
       if (panel) panel.classList.add('active');
     });
   });
 
   // Copy button
-  const copyBtn = block.querySelector('.showcase-copy-btn');
+  const copyBtn = block.querySelector('.feature-demo-copy-btn');
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
-      const activePanel = block.querySelector('.showcase-code-panel.active pre');
+      const activePanel = block.querySelector('.feature-demo-code-panel.active pre');
       if (!activePanel) return;
       const text = activePanel.textContent;
       navigator.clipboard.writeText(text).then(() => {
-        const orig = copyBtn.innerHTML;
-        copyBtn.textContent = 'Copied!';
-        setTimeout(() => { copyBtn.innerHTML = orig; }, 1500);
+        const icon = copyBtn.querySelector('.wl-icon');
+        if (icon) {
+          icon.classList.replace('wl-i-copy', 'wl-i-check');
+          setTimeout(() => icon.classList.replace('wl-i-check', 'wl-i-copy'), 1500);
+        }
       });
     });
   }

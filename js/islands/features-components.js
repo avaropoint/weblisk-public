@@ -22,13 +22,13 @@ enhance("#demo-counter", (el, { $ }) => {
   incBtn.addEventListener("click", () => {
     count++;
     render();
-    output.textContent = `✅ component("wl-counter") → count = ${count}`;
+    output.textContent = `component("wl-counter") → count = ${count}`;
   });
 
   decBtn.addEventListener("click", () => {
     count--;
     render();
-    output.textContent = `✅ component("wl-counter") → count = ${count}`;
+    output.textContent = `component("wl-counter") → count = ${count}`;
   });
 
   resetBtn.addEventListener("click", () => {
@@ -57,7 +57,7 @@ enhance("#demo-clock", (el, { $ }) => {
     interval = setInterval(tick, 1000);
     startBtn.disabled = true;
     stopBtn.disabled = false;
-    output.textContent = "✅ Clock started — setup() registered setInterval\n   cleanup() will clear it on destroy";
+    output.textContent = "Clock started — setup() registered setInterval\n   cleanup() will clear it on destroy";
   });
 
   stopBtn.addEventListener("click", () => {
@@ -108,7 +108,7 @@ enhance("#demo-toggle", (el, { $ }) => {
       sw.classList.toggle("on", state[key]);
       sw.setAttribute("aria-checked", String(state[key]));
       renderStatus();
-      output.textContent = `✅ props.onChange("${key}", ${state[key]})\n   Component re-rendered with new state`;
+      output.textContent = `props.onChange("${key}", ${state[key]})\n   Component re-rendered with new state`;
     });
   });
 });

@@ -24,14 +24,14 @@ enhance("#demo-navigate", (el, { $ }) => {
         panel.querySelector("h4").textContent = page.title;
         panel.querySelector("p").textContent = page.text;
       });
-      output.textContent = `✅ View Transition to "${page.title}" — native API used`;
+      output.textContent = `View Transition to "${page.title}" — native API used`;
       await transition.finished;
       output.textContent += "\n   Transition complete!";
     } else {
       panel.style.background = page.bg;
       panel.querySelector("h4").textContent = page.title;
       panel.querySelector("p").textContent = page.text;
-      output.textContent = `⚠️ Navigated to "${page.title}" — fallback (no View Transitions API)`;
+      output.textContent = `Navigated to "${page.title}" — fallback (no View Transitions API)`;
     }
   });
 });
@@ -62,13 +62,13 @@ enhance("#demo-shared", (el, { $ }) => {
           detailTitle.textContent = items[i].name;
           detailDesc.textContent = items[i].desc;
         });
-        output.textContent = `✅ Shared element transition for "${items[i].name}"`;
+        output.textContent = `Shared element transition for "${items[i].name}"`;
       } else {
         cards.forEach((c) => (c.hidden = true));
         detail.hidden = false;
         detailTitle.textContent = items[i].name;
         detailDesc.textContent = items[i].desc;
-        output.textContent = `⚠️ Expanded "${items[i].name}" — fallback mode`;
+        output.textContent = `Expanded "${items[i].name}" — fallback mode`;
       }
     });
   });
@@ -111,11 +111,11 @@ enhance("#demo-types", (el, { $ }) => {
           },
           types: [type],
         });
-        output.textContent = `✅ Transition type: "${type}" — applied`;
+        output.textContent = `Transition type: "${type}" — applied`;
       } else {
         stage.style.background = colors[colorIdx];
         stage.textContent = type;
-        output.textContent = `⚠️ Type "${type}" — View Transitions API not available`;
+        output.textContent = `Type "${type}" — View Transitions API not available`;
       }
     });
   });

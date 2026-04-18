@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=6">
+  <link rel="stylesheet" href="/css/styles.css?v=8">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -149,32 +149,32 @@
 
       <section data-island="/js/islands/features-pro.js" data-hydrate="idle">
 
-        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature-demo.js" data-hydrate="idle">
 
           <!-- Analytics -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Privacy-First Analytics <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Privacy-First Analytics <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-analytics" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Cookie-free page view and event tracking via <code>navigator.sendBeacon</code>. Zero impact on page performance.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
@@ -184,11 +184,11 @@
                   <pre class="demo-output" id="output-analytics">Ready — events queue locally and flush in batches.</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> init<span class="syn-p">,</span> track<span class="syn-p">,</span> timing <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Init with your endpoint</span>
@@ -203,39 +203,39 @@
 <span class="syn-c">// Track performance timings</span>
 <span class="syn-f">timing</span><span class="syn-p">(</span><span class="syn-s">'api_latency'</span><span class="syn-p">,</span> <span class="syn-n">142</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- A/B Testing -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">A/B Testing <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">A/B Testing <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-ab" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Hash-based deterministic variant assignment. Persists across sessions via localStorage.</p>
                   <div class="ab-variants">
@@ -246,11 +246,11 @@
                   <pre class="demo-output" id="output-ab">Assigning variant...</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> experiment<span class="syn-p">,</span> convert <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/ab.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> exp <span class="syn-p">=</span> <span class="syn-f">experiment</span><span class="syn-p">(</span><span class="syn-s">'cta-color'</span><span class="syn-p">,</span> <span class="syn-p">[</span><span class="syn-s">'control'</span><span class="syn-p">,</span> <span class="syn-s">'blue-cta'</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
@@ -259,39 +259,39 @@
 <span class="syn-c">// On conversion</span>
 <span class="syn-f">convert</span><span class="syn-p">(</span><span class="syn-s">'cta-color'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Data Table -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Data Table <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Data Table <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-table" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Sortable, filterable, paginated tables with CSV export — all from a single function call.</p>
                   <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem">
@@ -301,11 +301,11 @@
                   <div id="table-target" style="overflow-x:auto"></div>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> table<span class="syn-p">,</span> exportCSV <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/table.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> columns <span class="syn-p">=</span> <span class="syn-p">[</span>
@@ -326,39 +326,39 @@
 <span class="syn-f">table</span><span class="syn-p">(</span><span class="syn-s">'#table-target'</span><span class="syn-p">,</span> <span class="syn-p">{</span> data<span class="syn-p">,</span> columns<span class="syn-p">,</span> pageSize<span class="syn-p">:</span> <span class="syn-n">5</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-f">exportCSV</span><span class="syn-p">(</span>data<span class="syn-p">,</span> columns<span class="syn-p">,</span> <span class="syn-s">'export.csv'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- SVG Charts -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">SVG Charts <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">SVG Charts <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-chart" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Pure DOM SVG charts — bar, line, pie. No canvas, no dependencies, accessible.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
@@ -369,11 +369,11 @@
                   <div id="chart-target"></div>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> bar<span class="syn-p">,</span> line<span class="syn-p">,</span> pie <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/chart.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-p">[</span>
@@ -387,39 +387,39 @@
 <span class="syn-f">line</span><span class="syn-p">(</span><span class="syn-s">'#chart'</span><span class="syn-p">,</span> <span class="syn-p">{</span> data<span class="syn-p">,</span> width<span class="syn-p">:</span> <span class="syn-n">400</span><span class="syn-p">,</span> height<span class="syn-p">:</span> <span class="syn-n">200</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-f">pie</span><span class="syn-p">(</span><span class="syn-s">'#chart'</span><span class="syn-p">,</span> <span class="syn-p">{</span> data<span class="syn-p">,</span> size<span class="syn-p">:</span> <span class="syn-n">200</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Form Validation -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Form Validation <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Form Validation <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-form" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Declarative validation via <code>data-validate</code> attributes. Async submit with loading states.</p>
                   <form id="pro-form" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.5rem">
@@ -432,11 +432,11 @@
                   <pre class="demo-output" id="output-form">Fill in the form and submit.</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/form.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> <span class="syn-p">{</span> submitting<span class="syn-p">,</span> errors <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#pro-form'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
@@ -445,39 +445,39 @@
   onError<span class="syn-p">:</span> err <span class="syn-p">=</span><span class="syn-p">&gt;</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span>err<span class="syn-p">.</span>message<span class="syn-p">)</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Auth -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Client-Side Auth <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Client-Side Auth <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-auth" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">JWT decode, token lifecycle signals, session management. Works with any backend.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
@@ -487,11 +487,11 @@
                   <pre class="demo-output" id="output-auth">Not authenticated.</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> init<span class="syn-p">,</span> setToken<span class="syn-p">,</span> logout<span class="syn-p">,</span> user<span class="syn-p">,</span> authenticated <span class="syn-p">}</span>
   <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/auth.js'</span><span class="syn-p">;</span>
 
@@ -510,39 +510,39 @@
 <span class="syn-c">// Logout</span>
 <span class="syn-f">logout</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Toast Notifications -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Toast Notifications <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Toast Notifications <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-toast" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Accessible notification system with auto-dismiss, stacking, and theming.</p>
                   <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
@@ -553,11 +553,11 @@
                   </div>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> toast <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/toast.js'</span><span class="syn-p">;</span>
 
 <span class="syn-f">toast</span><span class="syn-p">(</span><span class="syn-s">'Operation completed!'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
@@ -566,39 +566,39 @@
   position<span class="syn-p">:</span> <span class="syn-s">'bottom-right'</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Accessible Tabs -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Accessible Tabs <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Accessible Tabs <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-tabs" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">ARIA-compliant tablist with keyboard navigation (Arrow keys, Home, End).</p>
                   <div data-tabs class="pro-tabs">
@@ -619,11 +619,11 @@
                   </div>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> tabs <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/tabs.js'</span><span class="syn-p">;</span>
 
 <span class="syn-f">tabs</span><span class="syn-p">(</span><span class="syn-s">'[data-tabs]'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
@@ -631,39 +631,39 @@
   onChange<span class="syn-p">:</span> i <span class="syn-p">=</span><span class="syn-p">&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Switched to tab'</span><span class="syn-p">,</span> i<span class="syn-p">)</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- CRDT Primitives -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">CRDT Primitives <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">CRDT Primitives <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-crdt" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Conflict-free replicated data types for offline-first collaboration.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
@@ -673,11 +673,11 @@
                   <pre class="demo-output" id="output-crdt">G-Counter ready. Two nodes will count independently.</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> gCounter <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> nodeA <span class="syn-p">=</span> <span class="syn-f">gCounter</span><span class="syn-p">(</span><span class="syn-s">'node-A'</span><span class="syn-p">)</span><span class="syn-p">;</span>
@@ -691,39 +691,39 @@ nodeA<span class="syn-p">.</span><span class="syn-f">merge</span><span class="sy
 nodeB<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>nodeA<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-c">// Both now agree on the total count</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Payment Request API -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Payment Request API <span class="pro-badge">Pro</span></span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Payment Request API <span class="pro-badge">Pro</span></span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-pay" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Wraps the browser Payment Request API. One function call for checkout — works with any payment processor.</p>
                   <pre class="demo-output" id="output-pay">import { pay } from 'weblisk/pro/pay.js';
@@ -737,11 +737,11 @@ const result = await pay({
 // → { success: true, data: { ... } }</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> pay <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/pay.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">pay</span><span class="syn-p">(</span><span class="syn-p">{</span>
@@ -755,11 +755,11 @@ const result = await pay({
   <span class="syn-f">toast</span><span class="syn-p">(</span><span class="syn-s">'Payment successful!'</span><span class="syn-p">,</span> <span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'success'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span></pre>
                 </div>
-                <div class="showcase-pro-overlay">
+                <div class="feature-demo-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
                   <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
@@ -780,8 +780,7 @@ const result = await pay({
             <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="pro-code-1"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
           </div>
           <div class="code-body">
-            <pre id="pro-code-1">
-<span class="syn-k">import</span> { <span class="syn-f">init</span>, <span class="syn-f">track</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span>;
+            <pre id="pro-code-1"><span class="syn-k">import</span> { <span class="syn-f">init</span>, <span class="syn-f">track</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span>;
 <span class="syn-k">import</span> { <span class="syn-f">experiment</span> }    <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/ab.js'</span>;
 <span class="syn-k">import</span> { <span class="syn-f">table</span>, <span class="syn-f">exportCSV</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/table.js'</span>;
 <span class="syn-k">import</span> { <span class="syn-f">bar</span>, <span class="syn-f">line</span>, <span class="syn-f">pie</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/chart.js'</span>;
@@ -790,8 +789,7 @@ const result = await pay({
 <span class="syn-k">import</span> { <span class="syn-f">pay</span> }           <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/pay.js'</span>;
 <span class="syn-k">import</span> { <span class="syn-f">toast</span> }         <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/toast.js'</span>;
 <span class="syn-k">import</span> { <span class="syn-f">tabs</span> }          <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/tabs.js'</span>;
-<span class="syn-k">import</span> { <span class="syn-f">gCounter</span> }      <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span>;
-</pre>
+<span class="syn-k">import</span> { <span class="syn-f">gCounter</span> }      <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span>;</pre>
           </div>
         </div>
       </section>
@@ -809,15 +807,13 @@ const result = await pay({
             <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="pro-code-2"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
           </div>
           <div class="code-body">
-            <pre id="pro-code-2">
-<span class="syn-f">weblisk</span> license <span class="syn-a">--key</span>=WL-XXXX-XXXX-XXXX
+            <pre id="pro-code-2"><span class="syn-f">weblisk</span> license <span class="syn-a">--key</span>=WL-XXXX-XXXX-XXXX
 
 <span class="syn-c"># Or set in .env:</span>
 WL_LICENSE=WL-XXXX-XXXX-XXXX
 
 <span class="syn-c"># That's it — import and use. No build step required.</span>
-<span class="syn-k">import</span> { <span class="syn-f">track</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span>;
-</pre>
+<span class="syn-k">import</span> { <span class="syn-f">track</span> } <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span>;</pre>
           </div>
         </div>
       </section>

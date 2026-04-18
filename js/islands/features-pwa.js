@@ -11,9 +11,9 @@ enhance("#demo-pwa-manifest", (el, { $ }) => {
   btn.addEventListener("click", () => {
     const link = document.querySelector('link[rel="manifest"]');
     if (link) {
-      output.textContent = `✅ Manifest injected at:\n  ${link.href}\n\n(Generated at runtime by shell.js via pwa/manifest.js)`;
+      output.textContent = `Manifest injected at:\n  ${link.href}\n\n(Generated at runtime by shell.js via pwa/manifest.js)`;
     } else {
-      output.textContent = "❌ No manifest <link> found";
+      output.textContent = "No manifest <link> found";
     }
   });
 });
@@ -26,8 +26,8 @@ enhance("#demo-pwa-offline", (el, { $ }) => {
     const isOnline = online();
     const status = syncStatus();
     const pending = pendingCount();
-    output.textContent = `Network:  ${isOnline ? "🟢 Online" : "🔴 Offline"}\n`;
-    output.textContent += `Sync:     ${status === "idle" ? "✅" : status === "syncing" ? "⏳" : "❌"} ${status}\n`;
+    output.textContent = `Network:  ${isOnline ? "Online" : "Offline"}\n`;
+    output.textContent += `Sync:     ${status}\n`;
     output.textContent += `Pending:  ${pending} mutation(s) in queue\n\n`;
     output.textContent += "Toggle network in DevTools → Network → Offline";
   });
@@ -51,7 +51,7 @@ enhance("#demo-pwa-push", (el, { $ }) => {
   btnNotify.addEventListener("click", async () => {
     if (permission() !== "granted") {
       output.textContent =
-        '⚠️ Permission not granted — click "Request Permission" first';
+        'Permission not granted — click "Request Permission" first';
       return;
     }
     try {
@@ -59,9 +59,9 @@ enhance("#demo-pwa-push", (el, { $ }) => {
         body: "This is a local notification from the Features page!",
         icon: "/images/favicon.svg",
       });
-      output.textContent = `Permission: ${permission()}\n${result !== null ? "✅ Notification shown (Notification API)" : "✅ Notification shown (Service Worker)"}`;
+      output.textContent = `Permission: ${permission()}\n${result !== null ? "Notification shown (Notification API)" : "Notification shown (Service Worker)"}`;
     } catch (err) {
-      output.textContent = `Permission: ${permission()}\n❌ Error: ${err.message}`;
+      output.textContent = `Permission: ${permission()}\nError: ${err.message}`;
     }
   });
 });

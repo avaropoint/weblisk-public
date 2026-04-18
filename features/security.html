@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=6">
+  <link rel="stylesheet" href="/css/styles.css?v=8">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -149,43 +149,43 @@
 
       <section data-island="/js/islands/features-security.js" data-hydrate="idle">
 
-        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature-demo.js" data-hydrate="idle">
 
           <!-- Input Sanitization -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Input Sanitization</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Input Sanitization</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-sanitize" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Type HTML/script tags below — they'll be sanitized in real-time.</p>
                   <input type="text" class="input" id="sanitize-input" placeholder='Try: &lt;script&gt;alert("xss")&lt;/script&gt;' aria-label="HTML to sanitize" style="margin-bottom:0.5rem" />
                   <pre class="demo-output" id="output-sanitize">Sanitized output appears here</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> sanitize<span class="syn-p">,</span> escapeHTML <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/sanitize.js'</span><span class="syn-p">;</span>
 
@@ -199,46 +199,46 @@
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Trusted Types -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Trusted Types</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Trusted Types</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-trusted" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Trusted Types policy strips dangerous content from HTML strings.</p>
                   <button class="btn btn-sm" id="btn-trusted">Test Trusted HTML</button>
                   <pre class="demo-output" id="output-trusted">Ready...</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> trustedHTML <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/trusted.js'</span><span class="syn-p">;</span>
 
@@ -252,7 +252,7 @@
       <span class="syn-k">const</span> safe <span class="syn-p">=</span> <span class="syn-f">trustedHTML</span><span class="syn-p">(</span>dangerous<span class="syn-p">)</span><span class="syn-p">;</span>
       $<span class="syn-p">(</span><span class="syn-s">'#output-trusted'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
         <span class="syn-s">`Input:  ${dangerous}\nOutput: ${safe}\n\n`</span> <span class="syn-p">+</span>
-        <span class="syn-s">'✅ Scripts and handlers stripped'</span><span class="syn-p">;</span>
+        <span class="syn-s">'Scripts and handlers stripped'</span><span class="syn-p">;</span>
     <span class="syn-p">}</span> <span class="syn-k">catch</span> <span class="syn-p">(</span>e<span class="syn-p">)</span> <span class="syn-p">{</span>
       $<span class="syn-p">(</span><span class="syn-s">'#output-trusted'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
         <span class="syn-s">`Trusted Types: ${e.message}`</span><span class="syn-p">;</span>
@@ -260,46 +260,46 @@
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- CSRF Tokens -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">CSRF Tokens</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">CSRF Tokens</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-csrf" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Generate cryptographic tokens and protect forms automatically.</p>
                   <button class="btn btn-sm" id="btn-csrf">Generate Token</button>
                   <pre class="demo-output" id="output-csrf">No token</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> generateToken<span class="syn-p">,</span> csrfToken <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csrf.js'</span><span class="syn-p">;</span>
 
@@ -311,50 +311,50 @@
       <span class="syn-s">`Token:    ${token}\n`</span> <span class="syn-p">+</span>
       <span class="syn-s">`Reactive: ${reactiveToken}\n`</span> <span class="syn-p">+</span>
       <span class="syn-s">`Length:   ${token.length} chars (64 hex = 32 bytes)\n\n`</span> <span class="syn-p">+</span>
-      <span class="syn-s">'✅ Cryptographically random'</span><span class="syn-p">;</span>
+      <span class="syn-s">'Cryptographically random'</span><span class="syn-p">;</span>
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- CSP + Permissions -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">CSP + Permissions</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">CSP + Permissions</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-csp-perms" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Content Security Policy and Permissions Policy are active (applied at boot).</p>
                   <button class="btn btn-sm" id="btn-check-csp">Check Policies</button>
                   <pre class="demo-output" id="output-csp">Click to inspect active policies</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> buildCSP <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csp.js'</span><span class="syn-p">;</span>
 
@@ -368,15 +368,15 @@
     <span class="syn-p">)</span><span class="syn-p">;</span>
     <span class="syn-k">const</span> generated <span class="syn-p">=</span> <span class="syn-f">buildCSP</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-    <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`CSP Meta:  ${cspMeta ? '✅ Applied' : '⚠️ Not found'}\n`</span><span class="syn-p">;</span>
+    <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`CSP Meta:  ${cspMeta ? 'Applied' : 'Not found'}\n`</span><span class="syn-p">;</span>
     <span class="syn-k">if</span> <span class="syn-p">(</span>cspMeta<span class="syn-p">)</span> text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`  ${cspMeta.content.substring(0, 80)}...\n\n`</span><span class="syn-p">;</span>
-    text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Permissions: ${permMeta ? '✅ Applied' : '⚠️ Not found'}\n`</span><span class="syn-p">;</span>
+    text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Permissions: ${permMeta ? 'Applied' : 'Not found'}\n`</span><span class="syn-p">;</span>
     text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`\nbuildCSP() default:\n  ${generated.substring(0, 100)}...`</span><span class="syn-p">;</span>
     $<span class="syn-p">(</span><span class="syn-s">'#output-csp'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> text<span class="syn-p">;</span>
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>

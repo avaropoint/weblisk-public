@@ -18,9 +18,9 @@ enhance("#demo-fetch", (el, { $ }) => {
         "https://jsonplaceholder.typicode.com/posts?_limit=5",
         { timeout: 5000 },
       );
-      output.textContent = `✅ Loaded ${data.length} posts:\n${data.map((p) => p.title).join("\n")}`;
+      output.textContent = `Loaded ${data.length} posts:\n${data.map((p) => p.title).join("\n")}`;
     } catch (err) {
-      output.textContent = `❌ Error: ${err.message}`;
+      output.textContent = `Error: ${err.message}`;
     }
   });
 
@@ -31,10 +31,10 @@ enhance("#demo-fetch", (el, { $ }) => {
         body: JSON.stringify({ event: "demo", timestamp: Date.now() }),
       });
       output.textContent = result.queued
-        ? "📦 Request queued for when back online"
-        : `✅ Sent (status ${result.status})`;
+        ? "Request queued for when back online"
+        : `Sent (status ${result.status})`;
     } catch (err) {
-      output.textContent = `📦 Queued: ${err.message}`;
+      output.textContent = `Queued: ${err.message}`;
     }
   });
 });
@@ -70,7 +70,7 @@ enhance("#demo-ws", (el, { $ }) => {
           .join("\n");
       }
       if (s === "closed") {
-        output.textContent += "\n\n✅ Real socket() API used\n";
+        output.textContent += "\n\nReal socket() API used\n";
         output.textContent += "(No echo server available — closed as expected)";
       }
     });
@@ -113,7 +113,7 @@ enhance("#demo-sse", (el, { $ }) => {
           output.textContent += `Latest: ${JSON.stringify(recent.data)}`;
       }
       if (s === "closed") {
-        output.textContent += "\n\n✅ Real stream() + latest() API used\n";
+        output.textContent += "\n\nReal stream() + latest() API used\n";
         output.textContent += "(No SSE endpoint — closed as expected)";
       }
     });
@@ -136,8 +136,8 @@ enhance("#demo-transport", (el, { $ }) => {
     const hasWS = typeof WebSocket !== "undefined";
 
     output.textContent = "🔄 transport() — unified real-time API:\n\n";
-    output.textContent += `  WebTransport (HTTP/3): ${hasWT ? "✅ Available" : "❌ Not available"}\n`;
-    output.textContent += `  WebSocket fallback:    ${hasWS ? "✅ Available" : "❌ Not available"}\n\n`;
+    output.textContent += `  WebTransport (HTTP/3): ${hasWT ? "Available" : "Not available"}\n`;
+    output.textContent += `  WebSocket fallback:    ${hasWS ? "Available" : "Not available"}\n\n`;
     output.textContent += "Connecting...\n";
 
     conn = createTransport("wss://echo.websocket.org", {
@@ -154,7 +154,7 @@ enhance("#demo-transport", (el, { $ }) => {
       }
       if (s === "closed") {
         output.textContent += `\nState: ${s}\n`;
-        output.textContent += `\n✅ Real transport() API used\n`;
+        output.textContent += `\nReal transport() API used\n`;
         output.textContent += `Will use: ${hasWT ? "WebTransport" : hasWS ? "WebSocket" : "none"}`;
       }
     });

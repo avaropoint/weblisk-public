@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=6">
+  <link rel="stylesheet" href="/css/styles.css?v=8">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -149,32 +149,32 @@
 
       <section data-island="/js/islands/features-state.js" data-hydrate="idle">
 
-        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature-demo.js" data-hydrate="idle">
 
           <!-- IndexedDB Signals -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">IndexedDB Signals</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">IndexedDB Signals</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-idb" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Signal backed by IndexedDB — survives page refresh, handles large data.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
@@ -184,19 +184,19 @@
                   <pre class="demo-output" id="output-idb">No data stored</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
-                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="feature-demo-code-tab" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="html">
+                <div class="feature-demo-code-panel active" data-lang="html">
                   <pre><span class="syn-t">&lt;div</span> <span class="syn-a">id=</span><span class="syn-s">"demo-idb"</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-idb-set"</span><span class="syn-t">&gt;</span>Store Value<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-idb-get"</span><span class="syn-t">&gt;</span>Read Value<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;pre</span> <span class="syn-a">id=</span><span class="syn-s">"output-idb"</span><span class="syn-t">&gt;</span>No data stored<span class="syn-t">&lt;/pre</span><span class="syn-t">&gt;</span>
 <span class="syn-t">&lt;/div</span><span class="syn-t">&gt;</span></pre>
                 </div>
-                <div class="showcase-code-panel" data-lang="js">
+                <div class="feature-demo-code-panel" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> idbSignal <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/idb.js'</span><span class="syn-p">;</span>
 
@@ -224,46 +224,46 @@
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Cross-Tab Sync -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Cross-Tab Sync</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Cross-Tab Sync</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-sync" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Open this page in another tab — changes sync instantly via BroadcastChannel.</p>
                   <button class="btn btn-sm" id="btn-sync">Update Shared Counter</button>
                   <pre class="demo-output" id="output-sync">Counter: 0</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> synced <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/sync.js'</span><span class="syn-p">;</span>
 
@@ -280,35 +280,35 @@
   <span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Undo / Redo -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Undo / Redo</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Undo / Redo</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-undo" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Edit the text, then undo/redo with the buttons or keyboard shortcuts.</p>
                   <input type="text" class="input" id="undo-input" placeholder="Type something..." aria-label="Text with undo support" style="margin-bottom:0.5rem" />
@@ -319,18 +319,18 @@
                   <pre class="demo-output" id="output-undo">History: 1 entry</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
-                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="feature-demo-code-tab" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="html">
+                <div class="feature-demo-code-panel active" data-lang="html">
                   <pre><span class="syn-t">&lt;input</span> <span class="syn-a">type=</span><span class="syn-s">"text"</span> <span class="syn-a">id=</span><span class="syn-s">"undo-input"</span> <span class="syn-a">placeholder=</span><span class="syn-s">"Type something..."</span> /<span class="syn-t">&gt;</span>
 <span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-undo"</span><span class="syn-t">&gt;</span>↩ Undo<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
 <span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-redo"</span><span class="syn-t">&gt;</span>↪ Redo<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
 <span class="syn-t">&lt;pre</span> <span class="syn-a">id=</span><span class="syn-s">"output-undo"</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/pre</span><span class="syn-t">&gt;</span></pre>
                 </div>
-                <div class="showcase-code-panel" data-lang="js">
+                <div class="feature-demo-code-panel" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> undoable <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/history.js'</span><span class="syn-p">;</span>
 
@@ -358,35 +358,35 @@
   $<span class="syn-p">(</span><span class="syn-s">'#btn-redo'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> redo<span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Form State Machine -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Form State Machine</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Form State Machine</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-form" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Declarative form with built-in validation, submit state, and error tracking.</p>
                   <form id="demo-form-el" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.5rem">
@@ -397,11 +397,11 @@
                   <pre class="demo-output" id="output-form">Fill out the form above</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> formState <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/form.js'</span><span class="syn-p">;</span>
 
@@ -437,13 +437,13 @@
     text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Valid: ${fs.valid()} | Dirty: ${fs.dirty()}\n`</span><span class="syn-p">;</span>
     <span class="syn-k">if</span> <span class="syn-p">(</span>Object<span class="syn-p">.</span><span class="syn-f">keys</span><span class="syn-p">(</span>errs<span class="syn-p">)</span><span class="syn-p">.</span>length<span class="syn-p">)</span>
       text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Errors: ${JSON.stringify(errs)}`</span><span class="syn-p">;</span>
-    <span class="syn-k">if</span> <span class="syn-p">(</span>fs<span class="syn-p">.</span><span class="syn-f">submitted</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">'\n✅ Form submitted!'</span><span class="syn-p">;</span>
-    <span class="syn-k">if</span> <span class="syn-p">(</span>fs<span class="syn-p">.</span><span class="syn-f">submitting</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> text <span class="syn-p">=</span> <span class="syn-s">'⏳ Submitting...'</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>fs<span class="syn-p">.</span><span class="syn-f">submitted</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">'\nForm submitted!'</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>fs<span class="syn-p">.</span><span class="syn-f">submitting</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> text <span class="syn-p">=</span> <span class="syn-s">'Submitting...'</span><span class="syn-p">;</span>
     $<span class="syn-p">(</span><span class="syn-s">'#output-form'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> text<span class="syn-p">;</span>
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>

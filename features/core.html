@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=6">
+  <link rel="stylesheet" href="/css/styles.css?v=8">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -149,109 +149,109 @@
 
       <section data-island="/js/islands/features-core.js" data-hydrate="idle">
 
-        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature-demo.js" data-hydrate="idle">
 
           <!-- Lazy Islands -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Lazy Islands</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Lazy Islands</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-lazy" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Scroll down — the widget below loads its script only when visible (check console).</p>
                   <div id="lazy-target"
                     style="min-height:60px;border:2px dashed var(--wl-border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--wl-text-muted);font-size:0.85rem">
-                    ⏳ Waiting to enter viewport...
+                    Waiting to enter viewport...
                   </div>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
-                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="feature-demo-code-tab" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="html">
+                <div class="feature-demo-code-panel active" data-lang="html">
                   <pre><span class="syn-t">&lt;div</span> <span class="syn-a">id=</span><span class="syn-s">"lazy-target"</span>
   <span class="syn-a">style=</span><span class="syn-s">"min-height:60px;border:2px dashed var(--wl-border);
          border-radius:8px;display:flex;align-items:center;
          justify-content:center;font-size:0.85rem"</span><span class="syn-t">&gt;</span>
-  ⏳ Waiting to enter viewport...
+  Waiting to enter viewport...
 <span class="syn-t">&lt;/div</span><span class="syn-t">&gt;</span></pre>
                 </div>
-                <div class="showcase-code-panel" data-lang="js">
+                <div class="feature-demo-code-panel" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> lazyEnhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/lazy-island.js'</span><span class="syn-p">;</span>
 
 <span class="syn-f">lazyEnhance</span><span class="syn-p">(</span><span class="syn-s">'#lazy-target'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
   <span class="syn-k">const</span> el <span class="syn-p">=</span> document<span class="syn-p">.</span><span class="syn-f">getElementById</span><span class="syn-p">(</span><span class="syn-s">'lazy-target'</span><span class="syn-p">)</span><span class="syn-p">;</span>
   el<span class="syn-p">.</span>style<span class="syn-p">.</span>borderColor <span class="syn-p">=</span> <span class="syn-s">'var(--success, green)'</span><span class="syn-p">;</span>
   el<span class="syn-p">.</span>style<span class="syn-p">.</span>borderStyle <span class="syn-p">=</span> <span class="syn-s">'solid'</span><span class="syn-p">;</span>
-  el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> <span class="syn-s">'✅ &lt;strong&gt;Lazy island loaded!&lt;/strong&gt;'</span><span class="syn-p">;</span>
+  el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> <span class="syn-s">'&lt;strong&gt;Lazy island loaded!&lt;/strong&gt;'</span><span class="syn-p">;</span>
   <span class="syn-k">return</span> Promise<span class="syn-p">.</span><span class="syn-f">resolve</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span> rootMargin<span class="syn-p">:</span> <span class="syn-s">'50px'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Error Boundaries -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Error Boundaries</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Error Boundaries</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-error" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Click to trigger an error inside a boundary — it catches it gracefully.</p>
                   <button class="btn btn-sm" id="btn-error">Trigger Error</button>
                   <div id="error-target" style="min-height:40px;padding:0.75rem 0;margin-top:0.5rem;font-size:0.85rem;color:var(--wl-text-muted)">No errors yet.</div>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
-                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="feature-demo-code-tab" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="html">
+                <div class="feature-demo-code-panel active" data-lang="html">
                   <pre><span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"btn btn-sm"</span> <span class="syn-a">id=</span><span class="syn-s">"btn-error"</span><span class="syn-t">&gt;</span>Trigger Error<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
 <span class="syn-t">&lt;div</span> <span class="syn-a">id=</span><span class="syn-s">"error-target"</span><span class="syn-t">&gt;</span>No errors yet.<span class="syn-t">&lt;/div</span><span class="syn-t">&gt;</span></pre>
                 </div>
-                <div class="showcase-code-panel" data-lang="js">
+                <div class="feature-demo-code-panel" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> boundary <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/error.js'</span><span class="syn-p">;</span>
 
@@ -268,53 +268,53 @@
     <span class="syn-f">boundary</span><span class="syn-p">(</span><span class="syn-s">'#temp-error-demo'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
       <span class="syn-k">throw</span> <span class="syn-k">new</span> <span class="syn-f">Error</span><span class="syn-p">(</span><span class="syn-s">'Intentional demo error!'</span><span class="syn-p">)</span><span class="syn-p">;</span>
     <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-      fallback<span class="syn-p">:</span> <span class="syn-s">'&lt;div&gt;🛡️ &lt;strong&gt;Error caught!&lt;/strong&gt;&lt;/div&gt;'</span><span class="syn-p">,</span>
+      fallback<span class="syn-p">:</span> <span class="syn-s">'&lt;div&gt;&lt;strong&gt;Error caught!&lt;/strong&gt;&lt;/div&gt;'</span><span class="syn-p">,</span>
       retry<span class="syn-p">:</span> false<span class="syn-p">,</span>
       onError<span class="syn-p">:</span> <span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Caught:'</span><span class="syn-p">,</span> err<span class="syn-p">.</span>message<span class="syn-p">)</span>
     <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Web Workers -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Web Workers</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Web Workers</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-worker" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Offload heavy computation to a Web Worker — main thread stays smooth.</p>
                   <button class="btn btn-sm" id="btn-worker">Compute Fibonacci(40)</button>
                   <pre class="demo-output" id="output-worker">Ready...</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> offload <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/worker.js'</span><span class="syn-p">;</span>
 
@@ -328,54 +328,54 @@
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
   btn<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
-    output<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">'⏳ Computing on Web Worker...'</span><span class="syn-p">;</span>
+    output<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">'Computing on Web Worker...'</span><span class="syn-p">;</span>
     <span class="syn-k">const</span> start <span class="syn-p">=</span> performance<span class="syn-p">.</span><span class="syn-f">now</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
     <span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fib</span><span class="syn-p">(</span><span class="syn-n">40</span><span class="syn-p">)</span><span class="syn-p">;</span>
     <span class="syn-k">const</span> elapsed <span class="syn-p">=</span> <span class="syn-p">(</span>performance<span class="syn-p">.</span><span class="syn-f">now</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">-</span> start<span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">toFixed</span><span class="syn-p">(</span><span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
-    output<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`✅ fib(40) = ${result}\nTime: ${elapsed}ms`</span><span class="syn-p">;</span>
+    output<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`fib(40) = ${result}\nTime: ${elapsed}ms`</span><span class="syn-p">;</span>
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Task Scheduler -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Task Scheduler</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Task Scheduler</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-scheduler" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Priority-based scheduling using scheduler.postTask → rIC → rAF fallback.</p>
                   <button class="btn btn-sm" id="btn-scheduler">Schedule Tasks</button>
                   <pre class="demo-output" id="output-scheduler">Ready...</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> scheduleTask <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/scheduler.js'</span><span class="syn-p">;</span>
 
@@ -388,16 +388,16 @@
     <span class="syn-k">const</span> log <span class="syn-p">=</span> <span class="syn-p">[</span><span class="syn-p">]</span><span class="syn-p">;</span>
 
     <span class="syn-k">await</span> Promise<span class="syn-p">.</span><span class="syn-f">all</span><span class="syn-p">(</span><span class="syn-p">[</span>
-      <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span> log<span class="syn-p">.</span><span class="syn-f">push</span><span class="syn-p">(</span><span class="syn-s">'🔴 background'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-s">'background'</span><span class="syn-p">)</span><span class="syn-p">,</span>
-      <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span> log<span class="syn-p">.</span><span class="syn-f">push</span><span class="syn-p">(</span><span class="syn-s">'🟡 user-visible'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-s">'user-visible'</span><span class="syn-p">)</span><span class="syn-p">,</span>
-      <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span> log<span class="syn-p">.</span><span class="syn-f">push</span><span class="syn-p">(</span><span class="syn-s">'🟢 user-blocking'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-s">'user-blocking'</span><span class="syn-p">)</span><span class="syn-p">,</span>
+      <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span> log<span class="syn-p">.</span><span class="syn-f">push</span><span class="syn-p">(</span><span class="syn-s">'[3] background'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-s">'background'</span><span class="syn-p">)</span><span class="syn-p">,</span>
+      <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span> log<span class="syn-p">.</span><span class="syn-f">push</span><span class="syn-p">(</span><span class="syn-s">'[2] user-visible'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-s">'user-visible'</span><span class="syn-p">)</span><span class="syn-p">,</span>
+      <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span> log<span class="syn-p">.</span><span class="syn-f">push</span><span class="syn-p">(</span><span class="syn-s">'[1] user-blocking'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-s">'user-blocking'</span><span class="syn-p">)</span><span class="syn-p">,</span>
     <span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-    output<span class="syn-p">.</span>textContent <span class="syn-p">+</span><span class="syn-p">=</span> log<span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">'\n'</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-s">'\n\n✅ Tasks executed by priority'</span><span class="syn-p">;</span>
+    output<span class="syn-p">.</span>textContent <span class="syn-p">+</span><span class="syn-p">=</span> log<span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">'\n'</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-s">'\n\nDone — tasks executed by priority'</span><span class="syn-p">;</span>
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>

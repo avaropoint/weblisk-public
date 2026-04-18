@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=6">
+  <link rel="stylesheet" href="/css/styles.css?v=8">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -149,43 +149,43 @@
 
       <section data-island="/js/islands/features-pwa.js" data-hydrate="idle">
 
-        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature-demo.js" data-hydrate="idle">
 
           <!-- Runtime Manifest -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Runtime Manifest</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Runtime Manifest</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-pwa-manifest" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Web App Manifest generated and injected at runtime — no static JSON file needed.</p>
                   <button class="btn btn-sm" id="btn-manifest">Check Manifest</button>
                   <pre class="demo-output" id="output-manifest">Manifest injected at boot (see &lt;head&gt;)</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 
 <span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-pwa-manifest'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
@@ -193,54 +193,54 @@
     <span class="syn-k">const</span> link <span class="syn-p">=</span> document<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'link[rel="manifest"]'</span><span class="syn-p">)</span><span class="syn-p">;</span>
     <span class="syn-k">if</span> <span class="syn-p">(</span>link<span class="syn-p">)</span> <span class="syn-p">{</span>
       $<span class="syn-p">(</span><span class="syn-s">'#output-manifest'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
-        <span class="syn-s">`✅ Manifest injected at:\n  ${link.href}\n\n`</span> <span class="syn-p">+</span>
+        <span class="syn-s">`Manifest injected at:\n  ${link.href}\n\n`</span> <span class="syn-p">+</span>
         <span class="syn-s">'(Generated at runtime by shell.js via pwa/manifest.js)'</span><span class="syn-p">;</span>
     <span class="syn-p">}</span> <span class="syn-k">else</span> <span class="syn-p">{</span>
       $<span class="syn-p">(</span><span class="syn-s">'#output-manifest'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
-        <span class="syn-s">'❌ No manifest &lt;link&gt; found'</span><span class="syn-p">;</span>
+        <span class="syn-s">'No manifest &lt;link&gt; found'</span><span class="syn-p">;</span>
     <span class="syn-p">}</span>
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Connectivity & Sync -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Connectivity &amp; Sync</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Connectivity &amp; Sync</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-pwa-offline" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Reactive online/offline signal plus sync engine status. Toggle network in DevTools.</p>
                   <pre class="demo-output" id="output-offline">Checking...</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> online<span class="syn-p">,</span> syncStatus<span class="syn-p">,</span> pendingCount <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
 
@@ -249,7 +249,7 @@
     <span class="syn-k">const</span> isOnline <span class="syn-p">=</span> <span class="syn-f">online</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
     <span class="syn-k">const</span> status <span class="syn-p">=</span> <span class="syn-f">syncStatus</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
     <span class="syn-k">const</span> pending <span class="syn-p">=</span> <span class="syn-f">pendingCount</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-    <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`Network:  ${isOnline ? '🟢 Online' : '🔴 Offline'}\n`</span><span class="syn-p">;</span>
+    <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`Network:  ${isOnline ? 'Online' : 'Offline'}\n`</span><span class="syn-p">;</span>
     text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Sync:     ${status}\n`</span><span class="syn-p">;</span>
     text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Pending:  ${pending} mutation(s) in queue\n\n`</span><span class="syn-p">;</span>
     text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">'Toggle network in DevTools → Network → Offline'</span><span class="syn-p">;</span>
@@ -257,35 +257,35 @@
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>
 
           <!-- Push Notifications -->
-          <div class="showcase">
-            <div class="showcase-header">
-              <span class="showcase-title">Push Notifications</span>
-              <div class="showcase-actions">
-                <div class="showcase-tabs">
-                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
-                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+          <div class="feature-demo">
+            <div class="feature-demo-header">
+              <span class="feature-demo-title">Push Notifications</span>
+              <div class="feature-demo-actions">
+                <div class="feature-demo-tabs">
+                  <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
                 </div>
-                <div class="showcase-viewport-btns">
-                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <div class="feature-demo-viewport-btns">
+                  <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                  <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
-                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                  <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   </button>
                 </div>
 </div>
             </div>
-            <div class="showcase-body">
-              <div class="showcase-preview">
+            <div class="feature-demo-body">
+              <div class="feature-demo-preview">
                 <div id="demo-pwa-push" style="width:100%">
                   <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Request permission and show local notifications.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
@@ -295,11 +295,11 @@
                   <pre class="demo-output" id="output-push">Permission: checking...</pre>
                 </div>
               </div>
-              <div class="showcase-code">
-                <div class="showcase-code-tabs">
-                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <div class="feature-demo-code">
+                <div class="feature-demo-code-tabs">
+                  <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
-                <div class="showcase-code-panel active" data-lang="js">
+                <div class="feature-demo-code-panel active" data-lang="js">
                   <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span>
   permission<span class="syn-p">,</span> requestPermission<span class="syn-p">,</span> notify
@@ -319,7 +319,7 @@
   $<span class="syn-p">(</span><span class="syn-s">'#btn-notify'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
     <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">permission</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">!</span><span class="syn-p">=</span><span class="syn-p">=</span> <span class="syn-s">'granted'</span><span class="syn-p">)</span> <span class="syn-p">{</span>
       $<span class="syn-p">(</span><span class="syn-s">'#output-push'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
-        <span class="syn-s">'⚠️ Permission not granted — click "Request Permission" first'</span><span class="syn-p">;</span>
+        <span class="syn-s">'Permission not granted — click "Request Permission" first'</span><span class="syn-p">;</span>
       <span class="syn-k">return</span><span class="syn-p">;</span>
     <span class="syn-p">}</span>
     <span class="syn-k">await</span> <span class="syn-f">notify</span><span class="syn-p">(</span><span class="syn-s">'Weblisk Demo'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
@@ -329,7 +329,7 @@
   <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
-                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+                <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
               </div>
             </div>
           </div>

@@ -19,7 +19,7 @@ enhance("#demo-guard", (el, { $ }) => {
     if (isDirty) {
       output.textContent = "🛑 Navigation blocked — beforeNavigate guard rejected.\n   \"You have unsaved changes!\"";
     } else {
-      output.textContent = "✅ Navigation allowed — guard passed.\n   Navigated to /dashboard";
+      output.textContent = "Navigation allowed — guard passed.\n   Navigated to /dashboard";
     }
   });
 });
@@ -46,7 +46,7 @@ enhance("#demo-hash", (el, { $ }) => {
 
       // Update hash without scrolling
       history.replaceState(null, "", `#${target}`);
-      output.textContent = `✅ Hash updated → #${target}\n   Section "${target}" now visible`;
+      output.textContent = `Hash updated → #${target}\n   Section "${target}" now visible`;
     });
   });
 });
@@ -89,9 +89,9 @@ enhance("#demo-navapi", (el, { $ }) => {
       renderRoute(path);
 
       if (window.navigation) {
-        output.textContent = `✅ navigation.navigate("${path}")\n   Navigation API is supported`;
+        output.textContent = `navigation.navigate("${path}")\n   Navigation API is supported`;
       } else {
-        output.textContent = `✅ Navigated to "${path}"\n   ⚠️ Navigation API not available — using fallback`;
+        output.textContent = `Navigated to "${path}"\n   Navigation API not available — using fallback`;
       }
     });
   });

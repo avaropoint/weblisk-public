@@ -15,7 +15,7 @@ enhance("#demo-marks", (el, { $ }) => {
     });
 
     const entries = getEntries();
-    output.textContent = `⏱️ time('demo-task') completed:\n`;
+    output.textContent = `time('demo-task') completed:\n`;
     output.textContent += `  Result: ${result}\n`;
     output.textContent += `  Duration: ${duration.toFixed(2)}ms\n\n`;
     output.textContent += `Total wl: marks: ${entries.marks.length}\n`;

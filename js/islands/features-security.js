@@ -32,7 +32,7 @@ enhance("#demo-trusted", (el, { $ }) => {
       '<img src=x onerror="alert(1)"><p>Safe content</p><script>evil()</script>';
     try {
       const safe = trustedHTML(dangerous);
-      output.textContent = `Input:  ${dangerous}\nOutput: ${safe}\n\n✅ Scripts and handlers stripped`;
+      output.textContent = `Input:  ${dangerous}\nOutput: ${safe}\n\nScripts and handlers stripped`;
     } catch (e) {
       output.textContent = `Trusted Types: ${e.message}`;
     }
@@ -47,7 +47,7 @@ enhance("#demo-csrf", (el, { $ }) => {
   btn.addEventListener("click", () => {
     const token = generateToken();
     const reactiveToken = csrfToken();
-    output.textContent = `Token:    ${token}\nReactive: ${reactiveToken}\nLength:   ${token.length} chars (64 hex = 32 bytes)\n\n✅ Cryptographically random`;
+    output.textContent = `Token:    ${token}\nReactive: ${reactiveToken}\nLength:   ${token.length} chars (64 hex = 32 bytes)\n\nCryptographically random`;
   });
 });
 
@@ -66,10 +66,10 @@ enhance("#demo-csp-perms", (el, { $ }) => {
 
     // Show actual CSP built by framework
     const generated = buildCSP();
-    output.textContent = `CSP Meta:  ${cspMeta ? "✅ Applied" : "⚠️ Not found"}\n`;
+    output.textContent = `CSP Meta:  ${cspMeta ? "Applied" : "Not found"}\n`;
     if (cspMeta)
       output.textContent += `  ${cspMeta.content.substring(0, 80)}...\n\n`;
-    output.textContent += `Permissions: ${permMeta ? "✅ Applied" : "⚠️ Not found"}\n`;
+    output.textContent += `Permissions: ${permMeta ? "Applied" : "Not found"}\n`;
     if (permMeta)
       output.textContent += `  ${permMeta.content.substring(0, 80)}...\n\n`;
     output.textContent += `buildCSP() default:\n  ${generated.substring(0, 100)}...`;

@@ -29,7 +29,7 @@ enhance("#demo-store", (el, { $ }) => {
           (i) => `• ${i.text} (${new Date(i._updated).toLocaleTimeString()})`,
         )
         .join("\n");
-      output.textContent += `\n\n📦 ${items.length} item(s) in IDB — survives refresh`;
+      output.textContent += `\n\n${items.length} item(s) in IDB — survives refresh`;
     }
   });
 
@@ -70,9 +70,9 @@ enhance("#demo-sync-status", (el, { $ }) => {
   });
 
   btnTrigger.addEventListener("click", async () => {
-    output.textContent = "⏳ Triggering sync...";
+    output.textContent = "Triggering sync...";
     await triggerSync();
-    output.textContent = "✅ Sync triggered (SW will process queue)";
+    output.textContent = "Sync triggered (SW will process queue)";
   });
 
   btnCount.addEventListener("click", async () => {

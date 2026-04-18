@@ -26,7 +26,7 @@ enhance("#demo-idb", (el, { $ }) => {
       ts: Date.now(),
     };
     setVal(data);
-    output.textContent = `✅ Stored: ${JSON.stringify(data, null, 2)}\n(Persisted to IndexedDB — survives refresh)`;
+    output.textContent = `Stored: ${JSON.stringify(data, null, 2)}\n(Persisted to IndexedDB — survives refresh)`;
   });
 
   btnGet.addEventListener("click", () => {
@@ -108,8 +108,8 @@ enhance("#demo-form", (el, { $ }) => {
     let text = `Values: ${JSON.stringify(vals)}\n`;
     text += `Valid: ${fs.valid()} | Dirty: ${fs.dirty()}\n`;
     if (Object.keys(errs).length) text += `Errors: ${JSON.stringify(errs)}`;
-    if (fs.submitted()) text += "\n✅ Form submitted successfully!";
-    if (fs.submitting()) text = "⏳ Submitting...";
+    if (fs.submitted()) text += "\nForm submitted successfully!";
+    if (fs.submitting()) text = "Submitting...";
     output.textContent = text;
   });
 });

@@ -45,7 +45,7 @@ enhance("#demo-motion", (el, { $ }) => {
 
   effect(() => {
     const reduced = motionReduced();
-    output.textContent = `prefers-reduced-motion: ${reduced ? "✅ REDUCE" : "❌ no-preference"}\n`;
+    output.textContent = `prefers-reduced-motion: ${reduced ? "REDUCE" : "no-preference"}\n`;
     output.textContent += reduced
       ? "Animations are disabled/minimized"
       : "Animations running normally";

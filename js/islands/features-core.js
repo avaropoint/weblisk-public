@@ -13,7 +13,7 @@ lazyEnhance(
     el.style.borderColor = "var(--success, green)";
     el.style.borderStyle = "solid";
     el.innerHTML =
-      "✅ &nbsp;<strong>Lazy island loaded!</strong> (IntersectionObserver triggered)";
+      "<strong>Lazy island loaded!</strong> (IntersectionObserver triggered)";
     console.log(
       "[lazy-island.js] lazyEnhance fired — element entered viewport",
     );
@@ -40,7 +40,7 @@ enhance("#demo-error", (el, { $ }) => {
       },
       {
         fallback:
-          '<div style="color:var(--danger)">🛡️ <strong>Error caught by boundary!</strong> The app keeps running.</div>',
+          '<div style="color:var(--danger)"><strong>Error caught by boundary!</strong> The app keeps running.</div>',
         retry: false,
         onError: (err) => console.log("[error.js] Caught:", err.message),
       },
@@ -61,11 +61,11 @@ enhance("#demo-worker", (el, { $ }) => {
   });
 
   btn.addEventListener("click", async () => {
-    output.textContent = "⏳ Computing on Web Worker (main thread free)...";
+    output.textContent = "Computing on Web Worker (main thread free)...";
     const start = performance.now();
     const result = await fib(40);
     const elapsed = (performance.now() - start).toFixed(1);
-    output.textContent = `✅ fib(40) = ${result}\nTime: ${elapsed}ms (on worker, not main thread)`;
+    output.textContent = `fib(40) = ${result}\nTime: ${elapsed}ms (on worker, not main thread)`;
   });
 });
 
@@ -80,16 +80,16 @@ enhance("#demo-scheduler", (el, { $ }) => {
 
     await Promise.all([
       scheduleTask(() => {
-        log.push("🔴 background");
+        log.push("[3] background");
       }, "background"),
       scheduleTask(() => {
-        log.push("🟡 user-visible");
+        log.push("[2] user-visible");
       }, "user-visible"),
       scheduleTask(() => {
-        log.push("🟢 user-blocking");
+        log.push("[1] user-blocking");
       }, "user-blocking"),
     ]);
 
-    output.textContent += log.join("\n") + "\n\n✅ Tasks executed by priority";
+    output.textContent += log.join("\n") + "\n\nDone — tasks executed by priority";
   });
 });

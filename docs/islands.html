@@ -411,23 +411,26 @@
 </pre>
         </div>
       </div>
-      <h2>Generating Islands</h2>
-      <p>The CLI can scaffold an island for you:</p>
+      <h2>Creating Islands</h2>
+      <p>Create a new file in <code>js/islands/</code> with an <code>export default function</code>:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
-          <span class="code-title">bash</span>
+          <span class="code-title">js</span>
           <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
           <pre id="doc-code-12">
-<span class="syn-f">weblisk</span> add island my<span class="syn-a">-widget</span>
+<span class="syn-c">// js/islands/my-widget.js</span>
+<span class="syn-k">export</span> <span class="syn-k">default</span> <span class="syn-k">function</span> <span class="syn-f">myWidget</span><span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-c">// el is the element with [data-island]</span>
+<span class="syn-p">}</span>
 </pre>
         </div>
       </div>
-      <p>This creates <code>app/js/islands/my-widget.js</code> with the <code>enhance()</code> boilerplate.</p>
+      <p>Then reference it in your HTML with <code>data-island="/js/islands/my-widget.js"</code>.</p>
 
       <div class="docs-nav-footer">
         <a href="/docs/signals.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

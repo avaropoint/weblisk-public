@@ -205,6 +205,27 @@
       <p>| <code>--template <type></code> | Use a starter template (<code>blog</code>, <code>dashboard</code>,
         <code>docs</code>) |</p>
       <p>| <code>--local</code> | Include framework files locally instead of CDN |</p>
+      <p>| <code>--lib &lt;path&gt;</code> | Custom path for local framework files |</p>
+      <h3><code>weblisk dev [root]</code></h3>
+      <p>Start a development server with live reload:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-dev"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-dev">
+<span class="syn-f">weblisk</span> dev
+<span class="syn-f">weblisk</span> dev -<span class="syn-a">-port</span> 3000
+</pre>
+        </div>
+      </div>
+      <p>| Flag | Description |</p>
+      <p>|------|-------------|</p>
+      <p>| <code>--port &lt;number&gt;</code> | Port to serve on (default: <code>5500</code> or <code>WL_PORT</code>) |</p>
       <h3><code>weblisk build [root]</code></h3>
       <p>Build a production-ready static site:</p>
       <div class="code-window">
@@ -232,42 +253,6 @@
       <p>No composition, no transformation — what you write is what ships. The build only copies files and optionally
         optimizes them.</p>
       <p>Output directory: <code>dist/</code> (configure via <code>WL_DIST</code> in <code>.env</code>)</p>
-      <h3><code>weblisk add page <name></code></h3>
-      <p>Add a new page to an existing project:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">bash</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-f">weblisk</span> add page contact
-<span class="syn-f">weblisk</span> add page blog/post
-</pre>
-        </div>
-      </div>
-      <p>Creates a full standalone HTML page at <code>app/<name>.html</code> with import map and shell script
-        included.</p>
-      <h3><code>weblisk add island <name></code></h3>
-      <p>Add a new island script:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">bash</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-f">weblisk</span> add island carousel
-</pre>
-        </div>
-      </div>
-      <p>Creates <code>app/js/islands/<name>.js</code> with an <code>export default function</code> skeleton.</p>
       <h3><code>weblisk vendor</code></h3>
       <p>Download all framework modules from the CDN into your project for local use:</p>
       <div class="code-window">
@@ -289,6 +274,69 @@
       <p>| Flag | Description |</p>
       <p>|------|-------------|</p>
       <p>| <code>--dest &lt;path&gt;</code> | Destination directory (default: <code>lib/weblisk</code>) |</p>
+      <h3><code>weblisk server</code></h3>
+      <p>Manage the AI agent orchestration server:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-server"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-server">
+<span class="syn-f">weblisk</span> server init      <span class="syn-c"># Initialize server configuration</span>
+<span class="syn-f">weblisk</span> server start     <span class="syn-c"># Start the agent server</span>
+<span class="syn-f">weblisk</span> server verify    <span class="syn-c"># Verify server health</span>
+<span class="syn-f">weblisk</span> server status    <span class="syn-c"># Check server status</span>
+</pre>
+        </div>
+      </div>
+      <h3><code>weblisk agent</code></h3>
+      <p>Manage AI agents:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-agent"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-agent">
+<span class="syn-f">weblisk</span> agent create    <span class="syn-c"># Create a new agent</span>
+<span class="syn-f">weblisk</span> agent start     <span class="syn-c"># Start an agent</span>
+<span class="syn-f">weblisk</span> agent verify    <span class="syn-c"># Verify agent health</span>
+<span class="syn-f">weblisk</span> agent list      <span class="syn-c"># List running agents</span>
+</pre>
+        </div>
+      </div>
+      <h3><code>weblisk license</code></h3>
+      <p>Activate or manage a Pro license:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-license"><i
+              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+        </div>
+        <div class="code-body">
+          <pre id="doc-code-license">
+<span class="syn-f">weblisk</span> license -<span class="syn-a">-key</span> YOUR_KEY -<span class="syn-a">-domain</span> example.com
+<span class="syn-f">weblisk</span> pro -<span class="syn-a">-key</span> YOUR_KEY        <span class="syn-c"># alias for license</span>
+</pre>
+        </div>
+      </div>
+      <p>| Flag | Description |</p>
+      <p>|------|-------------|</p>
+      <p>| <code>--key &lt;key&gt;</code> | Your Pro license key |</p>
+      <p>| <code>--domain &lt;domain&gt;</code> | Domain to activate for |</p>
+      <h3><code>weblisk update</code></h3>
+      <p>Re-download the latest framework files and Pro modules (if licensed).</p>
+      <h3><code>weblisk version</code></h3>
+      <p>Print the CLI version.</p>
       <h3><code>weblisk help</code></h3>
       <p>Show available commands and usage.</p>
       <h2>Configuration</h2>
@@ -306,6 +354,11 @@
 WL_ORIGIN=http://localhost:5500   <span class="syn-c"># Base URL</span>
 WL_PORT=5500                       <span class="syn-c"># Dev server port</span>
 WL_DIST=dist                       <span class="syn-c"># Build output directory</span>
+WL_AI_PROVIDER=openai              <span class="syn-c"># AI provider for agents</span>
+WL_AI_MODEL=gpt-4o                 <span class="syn-c"># AI model name</span>
+WL_AI_KEY=sk-...                   <span class="syn-c"># AI API key</span>
+WL_TEMPLATE_SOURCES=owner/repo     <span class="syn-c"># Custom template repositories</span>
+WL_BLUEPRINT_SOURCES=owner/repo    <span class="syn-c"># Custom blueprint repositories</span>
 </pre>
         </div>
       </div>

@@ -203,17 +203,17 @@
         <div class="code-body">
           <pre id="doc-code-2">
 my-app/
-├── app/
-│   ├── index.html         ← Home page (full standalone HTML)
-│   ├── about.html         ← About page
-│   ├── 404.html           ← Not found page
-│   ├── js/
-│   │   └── islands/
-│   │       └── shell.js   ← Shell bootstrapper
-│   ├── css/
-│   │   └── styles.css     ← Global styles
-│   ├── images/            ← Image assets
-│   └── sw.js              ← Service Worker
+├── index.html             ← Home page (full standalone HTML)
+├── about.html             ← About page
+├── 404.html               ← Not found page
+├── js/
+│   └── islands/
+│       └── shell.js   ← Shell bootstrapper
+├── css/
+│   └── styles.css     ← Global styles
+├── images/                ← Image assets
+├── sw.js                  ← Service Worker
+├── weblisk.json           ← Project config
 ├── lib/weblisk/           ← The framework (52 modules)
 └── .env                   ← Config
 </pre>
@@ -222,7 +222,7 @@ my-app/
       <p>Every page is a full standalone HTML document — <code><!DOCTYPE html></code> through <code></html></code>. What
         you write is what ships.</p>
       <h2>2. Preview</h2>
-      <p>Open <code>app/index.html</code> directly in a browser, or use any static file server:</p>
+      <p>Open <code>index.html</code> directly in a browser, or use any static file server:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -239,37 +239,38 @@ python3 <span class="syn-a">-m</span> http.server     <span class="syn-c"># Pyth
         </div>
       </div>
       <h2>3. Add a Page</h2>
+      <p>Create a new HTML file at the project root — every page is a full standalone document:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
-          <span class="code-title">bash</span>
+          <span class="code-title">html</span>
           <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
           <pre id="doc-code-4">
-<span class="syn-f">weblisk</span> add page contact
+<span class="syn-t">&lt;</span>!<span class="syn-a">DOCTYPE</span> <span class="syn-a">html</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;</span><span class="syn-t">html</span> <span class="syn-a">lang</span><span class="syn-p">=</span><span class="syn-s">&quot;en&quot;</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">meta</span> <span class="syn-a">charset</span><span class="syn-p">=</span><span class="syn-s">&quot;UTF-8&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">title</span><span class="syn-t">&gt;</span>Contact<span class="syn-t">&lt;/</span><span class="syn-t">title</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">link</span> <span class="syn-a">rel</span><span class="syn-p">=</span><span class="syn-s">&quot;stylesheet&quot;</span> <span class="syn-a">href</span><span class="syn-p">=</span><span class="syn-s">&quot;/css/styles.css&quot;</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
+  { &quot;imports&quot;: { &quot;weblisk&quot;: &quot;/lib/weblisk/weblisk.js&quot;, &quot;weblisk/&quot;: &quot;/lib/weblisk/&quot; } }
+  <span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;</span><span class="syn-t">body</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">h1</span><span class="syn-t">&gt;</span>Contact<span class="syn-t">&lt;/</span><span class="syn-t">h1</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span> <span class="syn-a">src</span><span class="syn-p">=</span><span class="syn-s">&quot;/js/islands/shell.js&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">body</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/</span><span class="syn-t">html</span><span class="syn-t">&gt;</span>
 </pre>
         </div>
       </div>
-      <p>This creates <code>app/contact.html</code> — a full HTML page ready to edit.</p>
+      <p>Save it as <code>contact.html</code> — it maps directly to <code>/contact.html</code>.</p>
       <h2>4. Make It Interactive</h2>
       <p>Create an island — a piece of JavaScript that enhances a static HTML region:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">bash</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
-<span class="syn-f">weblisk</span> add island counter
-</pre>
-        </div>
-      </div>
       <p>Add the island to your page HTML:</p>
       <div class="code-window">
         <div class="code-header">
@@ -287,7 +288,7 @@ python3 <span class="syn-a">-m</span> http.server     <span class="syn-c"># Pyth
 </pre>
         </div>
       </div>
-      <p>Edit <code>app/js/islands/counter.js</code>:</p>
+      <p>Edit <code>js/islands/counter.js</code>:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -337,7 +338,7 @@ python3 <span class="syn-a">-m</span> http.server     <span class="syn-c"># Pyth
         </div>
         <div class="code-body">
           <pre id="doc-code-9">
-<span class="syn-f">weblisk</span> preview
+<span class="syn-f">weblisk</span> dev dist            <span class="syn-c"># serve the build output</span>
 </pre>
         </div>
       </div>

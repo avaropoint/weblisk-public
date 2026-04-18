@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Structure — Weblisk</title>
-  <meta name="description" content="Understand the Weblisk project layout: app directory with HTML pages, islands for interactivity, lib for framework modules, and the Go CLI for builds.">
+  <meta name="description" content="Understand the Weblisk project layout: HTML pages at the project root, islands for interactivity, lib for framework modules, and the Go CLI for builds.">
   <link rel="canonical" href="https://weblisk.dev/docs/project-structure.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Project Structure — Weblisk">
-  <meta property="og:description" content="Understand the Weblisk project layout: app directory with HTML pages, islands for interactivity, lib for framework modules, and the Go CLI for builds.">
+  <meta property="og:description" content="Understand the Weblisk project layout: HTML pages at the project root, islands for interactivity, lib for framework modules, and the Go CLI for builds.">
   <meta property="og:url" content="https://weblisk.dev/docs/project-structure.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Project Structure — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Understand the Weblisk project layout: app directory with HTML pages, islands for interactivity, lib for framework modules, and the Go CLI for builds.">
+  <meta name="twitter:description" content="Understand the Weblisk project layout: HTML pages at the project root, islands for interactivity, lib for framework modules, and the Go CLI for builds.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="theme-color" content="#1a1f36">
   <meta name="robots" content="index, follow">
@@ -29,7 +29,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "Project Structure — Weblisk",
-    "description": "Understand the Weblisk project layout: app directory with HTML pages, islands for interactivity, lib for framework modules, and the Go CLI for builds.",
+    "description": "Understand the Weblisk project layout: HTML pages at the project root, islands for interactivity, lib for framework modules, and the Go CLI for builds.",
     "url": "https://weblisk.dev/docs/project-structure.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "publisher": { "@type": "Organization", "name": "Weblisk", "url": "https://weblisk.dev" },
@@ -188,35 +188,35 @@
         <div class="code-body">
           <pre id="doc-code-1">
 my-app/
-├── app/
-│   ├── index.html         ← Home page (full standalone HTML)
-│   ├── about.html         ← About page
-│   ├── 404.html           ← Not found page
-│   ├── docs/
-│   │   └── index.html     ← Docs landing
-│   ├── js/
-│   │   └── islands/       ← Interactive islands
-│   │       └── shell.js   ← Shell bootstrapper
-│   ├── css/
-│   │   └── styles.css     ← App styles
-│   ├── images/            ← Image assets (SVGs, favicons)
-│   └── sw.js              ← Service Worker
+├── index.html             ← Home page (full standalone HTML)
+├── about.html             ← About page
+├── 404.html               ← Not found page
+├── docs/
+│   └── index.html         ← Docs landing
+├── js/
+│   └── islands/           ← Interactive islands
+│       └── shell.js       ← Shell bootstrapper
+├── css/
+│   └── styles.css         ← App styles
+├── images/                ← Image assets (SVGs, favicons)
+├── sw.js                  ← Service Worker
+├── weblisk.json           ← Project config
 ├── lib/weblisk/           ← Framework modules (zero deps)
 └── .env                   ← Environment config
 </pre>
         </div>
       </div>
-      <h2>app/</h2>
-      <p>Every page is a <strong>full standalone HTML document</strong> — <code><!DOCTYPE html></code>,
-        <code><head></code>, <code><body></code>, everything. What you write is what ships. No composition, no layout
+      <h2>Pages</h2>
+      <p>Every page is a <strong>full standalone HTML document</strong> — <code>&lt;!DOCTYPE html&gt;</code>,
+        <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, everything. What you write is what ships. No composition, no layout
         cascade, no build-time transformation.</p>
-      <p>Each file in <code>app/</code> maps directly to a URL path:</p>
+      <p>Each file in the project root maps directly to a URL path:</p>
       <p>| File | URL |</p>
       <p>|------|-----|</p>
-      <p>| <code>app/index.html</code> | <code>/index.html</code> |</p>
-      <p>| <code>app/about.html</code> | <code>/about.html</code> |</p>
-      <p>| <code>app/blog.html</code> | <code>/blog.html</code> |</p>
-      <p>| <code>app/docs/index.html</code> | <code>/docs/index.html</code> |</p>
+      <p>| <code>index.html</code> | <code>/index.html</code> |</p>
+      <p>| <code>about.html</code> | <code>/about.html</code> |</p>
+      <p>| <code>blog.html</code> | <code>/blog.html</code> |</p>
+      <p>| <code>docs/index.html</code> | <code>/docs/index.html</code> |</p>
       <p>Your web server can map cleaner URLs (e.g. <code>/about</code> → <code>/about.html</code>) if desired —
         that's a server concern, not a framework concern.</p>
       <h3>Page Template</h3>
@@ -253,7 +253,7 @@ my-app/
       </div>
       <h2>Islands</h2>
       <p>Islands are JavaScript files that enhance static HTML using <code>data-island</code> and
-        <code>data-hydrate</code> attributes. They live in <code>app/js/islands/</code> by convention.</p>
+        <code>data-hydrate</code> attributes. They live in <code>js/islands/</code> by convention.</p>
       <p>An island script exports a default function that receives the DOM element:</p>
       <div class="code-window">
         <div class="code-header">
@@ -265,7 +265,7 @@ my-app/
         </div>
         <div class="code-body">
           <pre id="doc-code-3">
-<span class="syn-c">// app/js/islands/counter.js</span>
+<span class="syn-c">// js/islands/counter.js</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> signal<span class="syn-p">,</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 
 <span class="syn-k">export</span> <span class="syn-k">default</span> <span class="syn-k">function</span> <span class="syn-f">counter</span><span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">{</span>
@@ -296,6 +296,8 @@ my-app/
       </div>
       <p>The <code>data-hydrate</code> attribute controls when the island loads: <code>load</code>, <code>idle</code>,
         <code>visible</code>, <code>media</code>, <code>event</code>, or <code>never</code>.</p>
+      <h2>weblisk.json</h2>
+      <p>Project configuration file created by <code>weblisk new</code>. Identifies the directory as a Weblisk project.</p>
       <h2>.env</h2>
       <p>Environment configuration (loaded automatically by the CLI):</p>
       <div class="code-window">

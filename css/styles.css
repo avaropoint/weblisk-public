@@ -2824,3 +2824,341 @@ select.input {
   max-height: 50vh;
   overflow-y: auto;
 }
+
+
+/* ── Showcase Component (Preview / Code toggle) ──────────── */
+
+.showcase {
+  background: var(--wl-surface);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-lg);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.showcase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--wl-border);
+  background: var(--wl-bg-soft);
+  min-height: 44px;
+  gap: 0.75rem;
+}
+
+.showcase-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--wl-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.showcase-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.showcase-tabs {
+  display: inline-flex;
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius);
+  overflow: hidden;
+}
+
+.showcase-tab {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  color: var(--wl-text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  min-height: 32px;
+}
+
+.showcase-tab:hover {
+  color: var(--wl-text);
+  background: var(--wl-primary-light);
+}
+
+.showcase-tab.active {
+  background: var(--wl-primary);
+  color: #fff;
+}
+
+.showcase-tab + .showcase-tab {
+  border-left: 1px solid var(--wl-border);
+}
+
+.showcase-viewport-btns {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.showcase-viewport-btn {
+  padding: 0.3rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--wl-radius);
+  color: var(--wl-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.showcase-viewport-btn:hover {
+  color: var(--wl-text);
+}
+
+.showcase-viewport-btn.active {
+  color: var(--wl-primary);
+  border-color: var(--wl-border);
+}
+
+.showcase-copy-btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: none;
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius);
+  color: var(--wl-text-muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.showcase-copy-btn:hover {
+  color: var(--wl-text);
+  border-color: var(--wl-text-muted);
+}
+
+.showcase-body {
+  position: relative;
+}
+
+.showcase-preview {
+  padding: 2rem;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  transition: max-width 0.3s ease;
+  margin: 0 auto;
+}
+
+.showcase-preview.viewport-mobile {
+  max-width: 375px;
+  border-right: 1px dashed var(--wl-border);
+}
+
+.showcase-preview.viewport-tablet {
+  max-width: 768px;
+  border-right: 1px dashed var(--wl-border);
+}
+
+.showcase-code {
+  display: none;
+  position: relative;
+}
+
+.showcase-code.active {
+  display: block;
+}
+
+.showcase-code .showcase-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  z-index: 5;
+}
+
+.showcase-code-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--wl-border);
+  background: var(--wl-bg-soft);
+  overflow-x: auto;
+}
+
+.showcase-code-tab {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--wl-mono);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--wl-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.showcase-code-tab:hover {
+  color: var(--wl-text);
+}
+
+.showcase-code-tab.active {
+  color: var(--wl-primary);
+  border-bottom-color: var(--wl-primary);
+}
+
+.showcase-code-panel {
+  display: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.showcase-code-panel.active {
+  display: block;
+}
+
+.showcase-code-panel pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  font-family: var(--wl-mono);
+  color: var(--wl-text);
+  background: transparent;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* Pro overlay */
+.showcase-pro-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--wl-bg);
+  opacity: 0.92;
+  backdrop-filter: blur(8px);
+  gap: 0.75rem;
+}
+
+.showcase-pro-overlay .pro-lock-icon {
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+.showcase-pro-overlay p {
+  font-size: 0.9rem;
+  color: var(--wl-text-muted);
+  text-align: center;
+  max-width: 280px;
+}
+
+.showcase-pro-overlay .btn {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 640px) {
+  .showcase-viewport-btns {
+    display: none;
+  }
+
+  .showcase-preview {
+    padding: 1rem;
+  }
+}
+
+
+/* ── Template Showcase Cards ─────────────────────────────── */
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.template-card {
+  background: var(--wl-surface);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius-lg);
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.template-card:hover {
+  box-shadow: var(--wl-shadow-md);
+  transform: translateY(-2px);
+}
+
+.template-card-img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-bottom: 1px solid var(--wl-border);
+  background: var(--wl-bg-soft);
+}
+
+.template-card-body {
+  padding: 1rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.template-card-body h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+
+.template-card-body p {
+  font-size: 0.85rem;
+  color: var(--wl-text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.template-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--wl-border);
+  font-size: 0.8rem;
+}
+
+.template-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.template-badge.free {
+  background: var(--wl-success-light, #dcfce7);
+  color: var(--wl-success, #16a34a);
+}
+
+.template-badge.pro {
+  background: var(--wl-primary-light);
+  color: var(--wl-primary);
+}

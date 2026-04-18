@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Demos — Weblisk</title>
-  <meta name="description" content="Interactive Weblisk security demos: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
+  <title>Security — Weblisk</title>
+  <meta name="description" content="Weblisk security features: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
   <link rel="canonical" href="https://weblisk.dev/features/security.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Security Demos — Weblisk">
-  <meta property="og:description" content="Interactive Weblisk security demos: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
+  <meta property="og:title" content="Security — Weblisk">
+  <meta property="og:description" content="Weblisk security features: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
   <meta property="og:url" content="https://weblisk.dev/features/security.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Security Demos — Weblisk">
+  <meta name="twitter:title" content="Security — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Interactive Weblisk security demos: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
+  <meta name="twitter:description" content="Weblisk security features: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=3">
+  <link rel="stylesheet" href="/css/styles.css?v=4">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -35,8 +35,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Security Demos — Weblisk",
-    "description": "Interactive Weblisk security demos: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.",
+    "name": "Security — Weblisk",
+    "description": "Weblisk security features: HTML input sanitization, Trusted Types policies, CSRF token management, and nonce-based Content Security Policy.",
     "url": "https://weblisk.dev/features/security.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
@@ -62,7 +62,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Security Demos",
+        "name": "Security",
         "item": "https://weblisk.dev/features/security.html"
       }
     ]
@@ -84,8 +84,10 @@
       <div class="nav-links">
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/templates/index.html" class="nav-link">Templates</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/features.html" class="nav-link active" aria-current="page">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -141,41 +143,211 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>Security Demos</h1>
+        <h1>Security</h1>
         <p>Input sanitization, Trusted Types, CSRF protection, and Content Security Policy.</p>
       </div>
 
       <section data-island="/js/islands/features-security.js" data-hydrate="idle">
-        <div class="demo-grid">
 
-          <div class="demo-card" id="demo-sanitize">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-20"></i> Input Sanitization</h3>
-            <p>Type HTML/script tags below — they'll be sanitized in real-time.</p>
-            <input type="text" class="input" id="sanitize-input" placeholder='Try: <script>alert("xss")</script>'
-              aria-label="HTML to sanitize" />
-            <pre class="demo-output" id="output-sanitize">Sanitized output appears here</pre>
+        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+
+          <!-- Input Sanitization -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Input Sanitization</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-sanitize" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Type HTML/script tags below — they'll be sanitized in real-time.</p>
+                  <input type="text" class="input" id="sanitize-input" placeholder='Try: &lt;script&gt;alert("xss")&lt;/script&gt;' aria-label="HTML to sanitize" style="margin-bottom:0.5rem" />
+                  <pre class="demo-output" id="output-sanitize">Sanitized output appears here</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { sanitize, escapeHTML } from 'weblisk/security/sanitize.js';
+
+enhance('#demo-sanitize', (el, { $ }) =&gt; {
+  $('#sanitize-input').addEventListener('input', () =&gt; {
+    const raw = $('#sanitize-input').value;
+    const clean = sanitize(raw);
+    const escaped = escapeHTML(raw);
+    $('#output-sanitize').textContent =
+      `Raw:       ${raw}\nSanitized: ${clean}\nEscaped:   ${escaped}`;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-trusted">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-check wl-icon-20"></i> Trusted Types</h3>
-            <p>Trusted Types policy strips dangerous content from HTML strings.</p>
-            <button class="btn btn-sm" id="btn-trusted">Test Trusted HTML</button>
-            <pre class="demo-output" id="output-trusted">Ready...</pre>
+          <!-- Trusted Types -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Trusted Types</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-trusted" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Trusted Types policy strips dangerous content from HTML strings.</p>
+                  <button class="btn btn-sm" id="btn-trusted">Test Trusted HTML</button>
+                  <pre class="demo-output" id="output-trusted">Ready...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { trustedHTML } from 'weblisk/security/trusted.js';
+
+enhance('#demo-trusted', (el, { $ }) =&gt; {
+  $('#btn-trusted').addEventListener('click', () =&gt; {
+    const dangerous =
+      '&lt;img src=x onerror="alert(1)"&gt;' +
+      '&lt;p&gt;Safe content&lt;/p&gt;' +
+      '&lt;script&gt;evil()&lt;/script&gt;';
+    try {
+      const safe = trustedHTML(dangerous);
+      $('#output-trusted').textContent =
+        `Input:  ${dangerous}\nOutput: ${safe}\n\n` +
+        '✅ Scripts and handlers stripped';
+    } catch (e) {
+      $('#output-trusted').textContent =
+        `Trusted Types: ${e.message}`;
+    }
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-csrf">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-lock wl-icon-20"></i> CSRF Tokens</h3>
-            <p>Generate cryptographic tokens and protect forms automatically.</p>
-            <button class="btn btn-sm" id="btn-csrf">Generate Token</button>
-            <pre class="demo-output" id="output-csrf">No token</pre>
+          <!-- CSRF Tokens -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">CSRF Tokens</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-csrf" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Generate cryptographic tokens and protect forms automatically.</p>
+                  <button class="btn btn-sm" id="btn-csrf">Generate Token</button>
+                  <pre class="demo-output" id="output-csrf">No token</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { generateToken, csrfToken } from 'weblisk/security/csrf.js';
+
+enhance('#demo-csrf', (el, { $ }) =&gt; {
+  $('#btn-csrf').addEventListener('click', () =&gt; {
+    const token = generateToken();
+    const reactiveToken = csrfToken();
+    $('#output-csrf').textContent =
+      `Token:    ${token}\n` +
+      `Reactive: ${reactiveToken}\n` +
+      `Length:   ${token.length} chars (64 hex = 32 bytes)\n\n` +
+      '✅ Cryptographically random';
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-csp-perms">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-20"></i> CSP + Permissions</h3>
-            <p>Content Security Policy and Permissions Policy are active (applied at boot).</p>
-            <button class="btn btn-sm" id="btn-check-csp">Check Policies</button>
-            <pre class="demo-output" id="output-csp">Click to inspect active policies</pre>
+          <!-- CSP + Permissions -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">CSP + Permissions</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-csp-perms" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Content Security Policy and Permissions Policy are active (applied at boot).</p>
+                  <button class="btn btn-sm" id="btn-check-csp">Check Policies</button>
+                  <pre class="demo-output" id="output-csp">Click to inspect active policies</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { buildCSP } from 'weblisk/security/csp.js';
+
+enhance('#demo-csp-perms', (el, { $ }) =&gt; {
+  $('#btn-check-csp').addEventListener('click', () =&gt; {
+    const cspMeta = document.querySelector(
+      'meta[http-equiv="Content-Security-Policy"]'
+    );
+    const permMeta = document.querySelector(
+      'meta[http-equiv="Permissions-Policy"]'
+    );
+    const generated = buildCSP();
+
+    let text = `CSP Meta:  ${cspMeta ? '✅ Applied' : '⚠️ Not found'}\n`;
+    if (cspMeta) text += `  ${cspMeta.content.substring(0, 80)}...\n\n`;
+    text += `Permissions: ${permMeta ? '✅ Applied' : '⚠️ Not found'}\n`;
+    text += `\nbuildCSP() default:\n  ${generated.substring(0, 100)}...`;
+    $('#output-csp').textContent = text;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
     </main>
@@ -199,6 +371,7 @@
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
+            <a href="/templates/index.html">Templates</a>
             <a href="/pro.html">Pro</a>
           </div>
           <div class="footer-col">

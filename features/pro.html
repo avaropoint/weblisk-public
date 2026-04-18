@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pro Feature Demos — Weblisk</title>
-  <meta name="description" content="Interactive demos of Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
+  <title>Pro Features — Weblisk</title>
+  <meta name="description" content="Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
   <link rel="canonical" href="https://weblisk.dev/features/pro.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Pro Feature Demos — Weblisk">
-  <meta property="og:description" content="Interactive demos of Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
+  <meta property="og:title" content="Pro Features — Weblisk">
+  <meta property="og:description" content="Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
   <meta property="og:url" content="https://weblisk.dev/features/pro.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pro Feature Demos — Weblisk">
+  <meta name="twitter:title" content="Pro Features — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Interactive demos of Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
+  <meta name="twitter:description" content="Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=3">
+  <link rel="stylesheet" href="/css/styles.css?v=4">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -35,8 +35,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Pro Feature Demos — Weblisk",
-    "description": "Interactive demos of Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.",
+    "name": "Pro Features — Weblisk",
+    "description": "Weblisk Pro modules: analytics, A/B testing, data tables, charts, forms, auth, payments, toasts, tabs, and CRDT collaboration.",
     "url": "https://weblisk.dev/features/pro.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
@@ -62,7 +62,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Pro Feature Demos",
+        "name": "Pro Features",
         "item": "https://weblisk.dev/features/pro.html"
       }
     ]
@@ -84,8 +84,10 @@
       <div class="nav-links">
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/templates/index.html" class="nav-link">Templates</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/features.html" class="nav-link active" aria-current="page">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -141,93 +143,491 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>Pro Demos <span class="pro-badge">New</span></h1>
-        <p>Interactive demos of all 10 Pro modules. View the source code to see exactly how each API works before purchasing.</p>
+        <h1>Pro Features <span class="pro-badge">New</span></h1>
+        <p>All 10 Pro modules with live examples. View the source code to see exactly how each API works.</p>
       </div>
 
       <section data-island="/js/islands/features-pro.js" data-hydrate="idle">
-        <div class="demo-grid">
+
+        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
 
           <!-- Analytics -->
-          <div class="demo-card" id="demo-analytics">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-20"></i> Privacy-First Analytics</h3>
-            <p>Cookie-free page view and event tracking via <code>navigator.sendBeacon</code>. Zero impact on page performance.</p>
-            <button class="btn btn-sm" id="btn-track-event">Track Event</button>
-            <button class="btn btn-sm btn-outline" id="btn-track-timing">Track Timing</button>
-            <pre class="demo-output" id="output-analytics">Ready — events queue locally and flush in batches.</pre>
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Privacy-First Analytics <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-analytics" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Cookie-free page view and event tracking via <code>navigator.sendBeacon</code>. Zero impact on page performance.</p>
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" id="btn-track-event">Track Event</button>
+                    <button class="btn btn-sm btn-outline" id="btn-track-timing">Track Timing</button>
+                  </div>
+                  <pre class="demo-output" id="output-analytics">Ready — events queue locally and flush in batches.</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { init, track, timing } from 'weblisk/pro/analytics.js';
+
+// Init with your endpoint
+init('/api/analytics', {
+  pageViews: true,
+  flushInterval: 30000
+});
+
+// Track custom events
+track('cta_click', { button: 'signup', page: 'home' });
+
+// Track performance timings
+timing('api_latency', 142);</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
           <!-- A/B Testing -->
-          <div class="demo-card" id="demo-ab">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-20"></i> A/B Testing</h3>
-            <p>Hash-based deterministic variant assignment. Persists across sessions via localStorage.</p>
-            <div class="ab-variants">
-              <div class="ab-variant" data-variant="control">
-                Control
-                <span class="ab-variant-label"></span>
-              </div>
-              <div class="ab-variant" data-variant="blue-cta">
-                Blue CTA
-                <span class="ab-variant-label"></span>
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">A/B Testing <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
               </div>
             </div>
-            <button class="btn btn-sm btn-outline" id="btn-ab-switch" style="margin:0.75rem 1.25rem 0">Switch Variant</button>
-            <pre class="demo-output" id="output-ab">Assigning variant...</pre>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-ab" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Hash-based deterministic variant assignment. Persists across sessions via localStorage.</p>
+                  <div class="ab-variants">
+                    <div class="ab-variant" data-variant="control">Control <span class="ab-variant-label"></span></div>
+                    <div class="ab-variant" data-variant="blue-cta">Blue CTA <span class="ab-variant-label"></span></div>
+                  </div>
+                  <button class="btn btn-sm btn-outline" id="btn-ab-switch" style="margin-top:0.5rem">Switch Variant</button>
+                  <pre class="demo-output" id="output-ab">Assigning variant...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { experiment, convert } from 'weblisk/pro/ab.js';
+
+const exp = experiment('cta-color', ['control', 'blue-cta']);
+const variant = exp.variant(); // deterministic assignment
+
+// On conversion
+convert('cta-color');</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
           <!-- Data Table -->
-          <div class="demo-card" id="demo-table" style="grid-column: span 2">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-box wl-icon-20"></i> Data Table</h3>
-            <p>Sortable, filterable, paginated tables with CSV export — all from a single function call.</p>
-            <div style="display:flex;gap:0.5rem;align-items:center;padding:0 1.25rem;margin:0.5rem 0 0">
-              <button class="btn btn-sm btn-outline" id="btn-table-export">Export CSV</button>
-              <span id="table-row-count" style="font-size:0.75rem;color:var(--wl-text-dim);margin-left:auto"></span>
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Data Table <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
             </div>
-            <div id="table-target" style="padding:0.75rem 1.25rem;overflow-x:auto"></div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-table" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Sortable, filterable, paginated tables with CSV export — all from a single function call.</p>
+                  <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem">
+                    <button class="btn btn-sm btn-outline" id="btn-table-export">Export CSV</button>
+                    <span id="table-row-count" style="font-size:0.75rem;color:var(--wl-text-dim);margin-left:auto"></span>
+                  </div>
+                  <div id="table-target" style="overflow-x:auto"></div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { table, exportCSV } from 'weblisk/pro/table.js';
+
+const columns = [
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'role', label: 'Role', sortable: true },
+  { key: 'dept', label: 'Department', sortable: true },
+  { key: 'status', label: 'Status', sortable: true,
+    render: val =&gt; {
+      const badge = document.createElement('span');
+      badge.className = `status-badge status-${val.toLowerCase()}`;
+      badge.textContent = val;
+      return badge;
+    }
+  },
+  { key: 'score', label: 'Score', sortable: true }
+];
+
+table('#table-target', { data, columns, pageSize: 5 });
+exportCSV(data, columns, 'export.csv');</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
           <!-- SVG Charts -->
-          <div class="demo-card" id="demo-chart">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-20"></i> SVG Charts</h3>
-            <p>Pure DOM SVG charts — bar, line, pie, sparkline. No canvas, no dependencies, accessible.</p>
-            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;padding:0.5rem 1.25rem 0">
-              <button class="btn btn-sm" data-chart="bar">Bar</button>
-              <button class="btn btn-sm btn-outline" data-chart="line">Line</button>
-              <button class="btn btn-sm btn-outline" data-chart="pie">Pie</button>
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">SVG Charts <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
             </div>
-            <div id="chart-target"></div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-chart" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Pure DOM SVG charts — bar, line, pie. No canvas, no dependencies, accessible.</p>
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" data-chart="bar">Bar</button>
+                    <button class="btn btn-sm btn-outline" data-chart="line">Line</button>
+                    <button class="btn btn-sm btn-outline" data-chart="pie">Pie</button>
+                  </div>
+                  <div id="chart-target"></div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { bar, line, pie } from 'weblisk/pro/chart.js';
+
+const data = [
+  { label: 'Jan', value: 30 },
+  { label: 'Feb', value: 45 },
+  { label: 'Mar', value: 28 },
+  { label: 'Apr', value: 62 },
+];
+
+bar('#chart', { data, width: 400, height: 200 });
+line('#chart', { data, width: 400, height: 200 });
+pie('#chart', { data, size: 200 });</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
           <!-- Form Validation -->
-          <div class="demo-card" id="demo-form">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-check wl-icon-20"></i> Form Validation</h3>
-            <p>Declarative validation via <code>data-validate</code> attributes. Async submit with loading states.</p>
-            <form id="pro-form" style="margin:0.75rem 1.25rem 0;display:flex;flex-direction:column;gap:0.5rem">
-              <input type="email" name="email" placeholder="Email" data-validate="required|email"
-                style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid var(--wl-border);background:var(--wl-bg);color:var(--wl-text);font-size:0.85rem">
-              <input type="text" name="name" placeholder="Name (min 2 chars)" data-validate="required|min:2"
-                style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid var(--wl-border);background:var(--wl-bg);color:var(--wl-text);font-size:0.85rem">
-              <button type="submit" class="btn btn-sm">Submit</button>
-            </form>
-            <pre class="demo-output" id="output-form">Fill in the form and submit.</pre>
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Form Validation <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-form" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Declarative validation via <code>data-validate</code> attributes. Async submit with loading states.</p>
+                  <form id="pro-form" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.5rem">
+                    <input type="email" name="email" placeholder="Email" data-validate="required|email"
+                      style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid var(--wl-border);background:var(--wl-bg);color:var(--wl-text);font-size:0.85rem">
+                    <input type="text" name="name" placeholder="Name (min 2 chars)" data-validate="required|min:2"
+                      style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid var(--wl-border);background:var(--wl-bg);color:var(--wl-text);font-size:0.85rem">
+                    <button type="submit" class="btn btn-sm">Submit</button>
+                  </form>
+                  <pre class="demo-output" id="output-form">Fill in the form and submit.</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk/pro/form.js';
+
+const { submitting, errors } = enhance('#pro-form', {
+  format: 'json',
+  onSuccess: () =&gt; console.log('Submitted!'),
+  onError: err =&gt; console.error(err.message)
+});</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
           <!-- Auth -->
-          <div class="demo-card" id="demo-auth">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-20"></i> Client-Side Auth</h3>
-            <p>JWT decode, token lifecycle signals, session management, and auto-refresh — works with any backend.</p>
-            <div style="display:flex;gap:0.5rem;padding:0.5rem 1.25rem 0">
-              <button class="btn btn-sm" id="btn-auth-login">Simulate Login</button>
-              <button class="btn btn-sm btn-outline" id="btn-auth-logout">Logout</button>
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Client-Side Auth <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
             </div>
-            <pre class="demo-output" id="output-auth">Not authenticated.</pre>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-auth" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">JWT decode, token lifecycle signals, session management. Works with any backend.</p>
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" id="btn-auth-login">Simulate Login</button>
+                    <button class="btn btn-sm btn-outline" id="btn-auth-logout">Logout</button>
+                  </div>
+                  <pre class="demo-output" id="output-auth">Not authenticated.</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { init, setToken, logout, user, authenticated }
+  from 'weblisk/pro/auth.js';
+
+init({ storageKey: 'wl-token' });
+
+// On login — store JWT from your API
+setToken(jwtFromServer);
+
+// Reactive signals
+effect(() =&gt; {
+  if (authenticated()) {
+    console.log('User:', user().name);
+  }
+});
+
+// Logout
+logout();</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <!-- Payments -->
-          <div class="demo-card" id="demo-pay">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-star wl-icon-20"></i> Payment Request API</h3>
-            <p>Wraps the browser Payment Request API. One function call for checkout — works with any payment processor.</p>
-            <pre class="demo-output" id="output-pay">import { pay } from 'weblisk/pro/pay.js';
+          <!-- Toast Notifications -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Toast Notifications <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-toast" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Accessible notification system with auto-dismiss, stacking, and theming.</p>
+                  <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+                    <button class="btn btn-sm" data-toast="info">Info</button>
+                    <button class="btn btn-sm" data-toast="success" style="--btn-bg:#16a34a;--btn-border:#16a34a">Success</button>
+                    <button class="btn btn-sm" data-toast="warning" style="--btn-bg:#d97706;--btn-border:#d97706">Warning</button>
+                    <button class="btn btn-sm" data-toast="error" style="--btn-bg:#dc2626;--btn-border:#dc2626">Error</button>
+                  </div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { toast } from 'weblisk/pro/toast.js';
+
+toast('Operation completed!', {
+  type: 'success',     // info | success | warning | error
+  duration: 3000,
+  position: 'bottom-right'
+});</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accessible Tabs -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Accessible Tabs <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-tabs" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">ARIA-compliant tablist with keyboard navigation (Arrow keys, Home, End).</p>
+                  <div data-tabs class="pro-tabs">
+                    <div role="tablist">
+                      <button role="tab" aria-controls="panel-overview">Overview</button>
+                      <button role="tab" aria-controls="panel-api">API</button>
+                      <button role="tab" aria-controls="panel-usage">Usage</button>
+                    </div>
+                    <div role="tabpanel" id="panel-overview">
+                      <strong>Overview:</strong> Tabs organize content into sections. Fully keyboard-navigable with proper ARIA roles.
+                    </div>
+                    <div role="tabpanel" id="panel-api" hidden>
+                      <strong>API:</strong> <code>tabs(container, { defaultIndex, onChange })</code> — Returns <code>{ activate, active }</code>.
+                    </div>
+                    <div role="tabpanel" id="panel-usage" hidden>
+                      <strong>Usage:</strong> <code>import { tabs } from 'weblisk/pro/tabs.js';</code> then call <code>tabs('[data-tabs]')</code>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { tabs } from 'weblisk/pro/tabs.js';
+
+tabs('[data-tabs]', {
+  defaultIndex: 0,
+  onChange: i =&gt; console.log('Switched to tab', i)
+});</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CRDT Primitives -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">CRDT Primitives <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-crdt" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Conflict-free replicated data types for offline-first collaboration.</p>
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" id="btn-crdt-inc">Increment Counter</button>
+                    <button class="btn btn-sm btn-outline" id="btn-crdt-merge">Simulate Merge</button>
+                  </div>
+                  <pre class="demo-output" id="output-crdt">G-Counter ready. Two nodes will count independently.</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { gCounter } from 'weblisk/pro/crdt.js';
+
+const nodeA = gCounter('node-A');
+const nodeB = gCounter('node-B');
+
+nodeA.increment();
+nodeB.increment();
+
+// Sync state between nodes
+nodeA.merge(nodeB.state());
+nodeB.merge(nodeA.state());
+// Both now agree on the total count</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Request API -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Payment Request API <span class="pro-badge">Pro</span></span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-pay" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Wraps the browser Payment Request API. One function call for checkout — works with any payment processor.</p>
+                  <pre class="demo-output" id="output-pay">import { pay } from 'weblisk/pro/pay.js';
 
 const result = await pay({
   currency: 'USD',
@@ -236,51 +636,33 @@ const result = await pay({
   endpoint: '/api/charge',
 });
 // → { success: true, data: { ... } }</pre>
-          </div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { pay } from 'weblisk/pro/pay.js';
 
-          <!-- Toasts -->
-          <div class="demo-card" id="demo-toast">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-20"></i> Toast Notifications</h3>
-            <p>Accessible notification system with auto-dismiss, stacking, theming, and aria-live announcements.</p>
-            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;padding:0.5rem 1.25rem 0">
-              <button class="btn btn-sm" data-toast="info">Info</button>
-              <button class="btn btn-sm" data-toast="success" style="--btn-bg:#16a34a;--btn-border:#16a34a">Success</button>
-              <button class="btn btn-sm" data-toast="warning" style="--btn-bg:#d97706;--btn-border:#d97706">Warning</button>
-              <button class="btn btn-sm" data-toast="error" style="--btn-bg:#dc2626;--btn-border:#dc2626">Error</button>
-            </div>
-          </div>
+const result = await pay({
+  currency: 'USD',
+  amount: 1999,
+  label: 'Pro License',
+  endpoint: '/api/charge'
+});
 
-          <!-- Tabs -->
-          <div class="demo-card" id="demo-tabs">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-20"></i> Accessible Tabs</h3>
-            <p>ARIA-compliant tablist with keyboard navigation (Arrow keys, Home, End).</p>
-            <div data-tabs class="pro-tabs" style="padding:0 1.25rem">
-              <div role="tablist">
-                <button role="tab" aria-controls="panel-overview">Overview</button>
-                <button role="tab" aria-controls="panel-api">API</button>
-                <button role="tab" aria-controls="panel-usage">Usage</button>
-              </div>
-              <div role="tabpanel" id="panel-overview">
-                <strong>Overview:</strong> Tabs organize content into sections that users switch between. Each panel is only visible when its tab is active. Fully keyboard-navigable with proper ARIA roles.
-              </div>
-              <div role="tabpanel" id="panel-api" hidden>
-                <strong>API:</strong> <code>tabs(container, { defaultIndex, onChange })</code> — Returns <code>{ activate, active }</code>. Active tab index is a signal you can observe with <code>effect()</code>.
-              </div>
-              <div role="tabpanel" id="panel-usage" hidden>
-                <strong>Usage:</strong> <code>import { tabs } from 'weblisk/pro/tabs.js';</code> then call <code>tabs('[data-tabs]')</code>. Tabs auto-bind to <code>[role="tab"]</code> elements inside the container.
+if (result.success) {
+  toast('Payment successful!', { type: 'success' });
+}</pre>
+                </div>
+                <div class="showcase-pro-overlay">
+                  <p>Full source available with Weblisk Pro</p>
+                  <a href="/pro.html" class="btn btn-sm">Get Pro Access</a>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
             </div>
-          </div>
-
-          <!-- CRDT -->
-          <div class="demo-card" id="demo-crdt">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-20"></i> CRDT Primitives</h3>
-            <p>Conflict-free replicated data types for offline-first collaboration: LWW Register, G-Counter, PN-Counter, LWW-Map.</p>
-            <div style="display:flex;gap:0.5rem;padding:0.5rem 1.25rem 0">
-              <button class="btn btn-sm" id="btn-crdt-inc">Increment Counter</button>
-              <button class="btn btn-sm btn-outline" id="btn-crdt-merge">Simulate Merge</button>
-            </div>
-            <pre class="demo-output" id="output-crdt">G-Counter ready. Two nodes will count independently.</pre>
           </div>
 
         </div>
@@ -366,6 +748,7 @@ WL_LICENSE=WL-XXXX-XXXX-XXXX
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
+            <a href="/templates/index.html">Templates</a>
             <a href="/pro.html">Pro</a>
           </div>
           <div class="footer-col">

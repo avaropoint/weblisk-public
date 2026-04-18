@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>State Management Demos — Weblisk</title>
-  <meta name="description" content="Interactive Weblisk state demos: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.">
+  <title>State Management — Weblisk</title>
+  <meta name="description" content="Weblisk state features: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.">
   <link rel="canonical" href="https://weblisk.dev/features/state.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="State Management Demos — Weblisk">
-  <meta property="og:description" content="Interactive Weblisk state demos: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.">
+  <meta property="og:title" content="State Management — Weblisk">
+  <meta property="og:description" content="Weblisk state features: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.">
   <meta property="og:url" content="https://weblisk.dev/features/state.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="State Management Demos — Weblisk">
+  <meta name="twitter:title" content="State Management — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Interactive Weblisk state demos: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.">
+  <meta name="twitter:description" content="Weblisk state features: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=3">
+  <link rel="stylesheet" href="/css/styles.css?v=4">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -35,8 +35,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "State Management Demos — Weblisk",
-    "description": "Interactive Weblisk state demos: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.",
+    "name": "State Management — Weblisk",
+    "description": "Weblisk state features: IndexedDB-backed persistent signals, cross-tab BroadcastChannel sync, undo/redo history stacks, and form state machines.",
     "url": "https://weblisk.dev/features/state.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
@@ -62,7 +62,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "State Management Demos",
+        "name": "State Management",
         "item": "https://weblisk.dev/features/state.html"
       }
     ]
@@ -84,8 +84,10 @@
       <div class="nav-links">
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/templates/index.html" class="nav-link">Templates</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/features.html" class="nav-link active" aria-current="page">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -141,50 +143,278 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>State Management Demos</h1>
+        <h1>State Management</h1>
         <p>IndexedDB signals, cross-tab sync, undo/redo history, and form state machines.</p>
       </div>
 
       <section data-island="/js/islands/features-state.js" data-hydrate="idle">
-        <div class="demo-grid">
 
-          <div class="demo-card" id="demo-idb">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-box wl-icon-20"></i> IndexedDB Signals</h3>
-            <p>Signal backed by IndexedDB — survives page refresh, handles large data.</p>
-            <button class="btn btn-sm" id="btn-idb-set">Store Value</button>
-            <button class="btn btn-sm" id="btn-idb-get">Read Value</button>
-            <pre class="demo-output" id="output-idb">No data stored</pre>
-          </div>
+        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
 
-          <div class="demo-card" id="demo-sync">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-20"></i> Cross-Tab Sync</h3>
-            <p>Open this page in another tab — changes sync instantly via BroadcastChannel.</p>
-            <button class="btn btn-sm" id="btn-sync">Update Shared Counter</button>
-            <pre class="demo-output" id="output-sync">Counter: 0</pre>
-          </div>
-
-          <div class="demo-card" id="demo-undo">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-20"></i> Undo / Redo</h3>
-            <p>Edit the text, then use Cmd+Z / Cmd+Shift+Z to undo/redo.</p>
-            <input type="text" class="input" id="undo-input" placeholder="Type something..."
-              aria-label="Text with undo support" />
-            <div>
-              <button class="btn btn-sm" id="btn-undo">↩ Undo</button>
-              <button class="btn btn-sm" id="btn-redo">↪ Redo</button>
+          <!-- IndexedDB Signals -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">IndexedDB Signals</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <pre class="demo-output" id="output-undo">History: 1 entry</pre>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-idb" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Signal backed by IndexedDB — survives page refresh, handles large data.</p>
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" id="btn-idb-set">Store Value</button>
+                    <button class="btn btn-sm" id="btn-idb-get">Read Value</button>
+                  </div>
+                  <pre class="demo-output" id="output-idb">No data stored</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="html">
+                  <pre>&lt;div id="demo-idb"&gt;
+  &lt;button id="btn-idb-set"&gt;Store Value&lt;/button&gt;
+  &lt;button id="btn-idb-get"&gt;Read Value&lt;/button&gt;
+  &lt;pre id="output-idb"&gt;No data stored&lt;/pre&gt;
+&lt;/div&gt;</pre>
+                </div>
+                <div class="showcase-code-panel" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { idbSignal } from 'weblisk/state/idb.js';
+
+enhance('#demo-idb', (el, { $ }) =&gt; {
+  const [val, setVal, { ready }] = idbSignal('demo-idb-value', {
+    message: 'none', ts: 0
+  });
+
+  ready.then(() =&gt; {
+    $('#output-idb').textContent =
+      `Current: ${JSON.stringify(val(), null, 2)}`;
+  });
+
+  $('#btn-idb-set').addEventListener('click', () =&gt; {
+    const data = {
+      message: `Stored at ${new Date().toLocaleTimeString()}`,
+      ts: Date.now()
+    };
+    setVal(data);
+  });
+
+  $('#btn-idb-get').addEventListener('click', () =&gt; {
+    $('#output-idb').textContent =
+      `Current: ${JSON.stringify(val(), null, 2)}`;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-form">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-check wl-icon-20"></i> Form State Machine</h3>
-            <p>Declarative form with built-in validation, submit state, and error tracking.</p>
-            <form id="demo-form-el" style="display:flex;flex-direction:column;gap:0.5rem">
-              <input type="text" name="email" class="input" placeholder="Email (required)" aria-label="Email" />
-              <input type="text" name="age" class="input" placeholder="Age (1-120)" aria-label="Age" />
-              <button type="submit" class="btn btn-sm">Submit</button>
-            </form>
-            <pre class="demo-output" id="output-form">Fill out the form above</pre>
+          <!-- Cross-Tab Sync -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Cross-Tab Sync</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-sync" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Open this page in another tab — changes sync instantly via BroadcastChannel.</p>
+                  <button class="btn btn-sm" id="btn-sync">Update Shared Counter</button>
+                  <pre class="demo-output" id="output-sync">Counter: 0</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { effect, enhance } from 'weblisk';
+import { synced } from 'weblisk/state/sync.js';
+
+enhance('#demo-sync', (el, { $ }) =&gt; {
+  const [count, setCount] = synced('demo-counter', 0);
+
+  effect(() =&gt; {
+    $('#output-sync').textContent =
+      `Counter: ${count()}\n(Open another tab to see sync!)`;
+  });
+
+  $('#btn-sync').addEventListener('click',
+    () =&gt; setCount(c =&gt; c + 1)
+  );
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
+
+          <!-- Undo / Redo -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Undo / Redo</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-undo" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Edit the text, then undo/redo with the buttons or keyboard shortcuts.</p>
+                  <input type="text" class="input" id="undo-input" placeholder="Type something..." aria-label="Text with undo support" style="margin-bottom:0.5rem" />
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" id="btn-undo">↩ Undo</button>
+                    <button class="btn btn-sm" id="btn-redo">↪ Redo</button>
+                  </div>
+                  <pre class="demo-output" id="output-undo">History: 1 entry</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="html">
+                  <pre>&lt;input type="text" id="undo-input" placeholder="Type something..." /&gt;
+&lt;button id="btn-undo"&gt;↩ Undo&lt;/button&gt;
+&lt;button id="btn-redo"&gt;↪ Redo&lt;/button&gt;
+&lt;pre id="output-undo"&gt;&lt;/pre&gt;</pre>
+                </div>
+                <div class="showcase-code-panel" data-lang="js">
+                  <pre>import { effect, enhance } from 'weblisk';
+import { undoable } from 'weblisk/state/history.js';
+
+enhance('#demo-undo', (el, { $ }) =&gt; {
+  const [text, setText, { undo, redo, canUndo, canRedo }] =
+    undoable('');
+
+  let debounce;
+  $('#undo-input').addEventListener('input', () =&gt; {
+    clearTimeout(debounce);
+    debounce = setTimeout(
+      () =&gt; setText($('#undo-input').value), 300
+    );
+  });
+
+  effect(() =&gt; {
+    const val = text();
+    if ($('#undo-input').value !== val)
+      $('#undo-input').value = val;
+    $('#output-undo').textContent =
+      `Value: "${val}"\nCan undo: ${canUndo()} | Can redo: ${canRedo()}`;
+  });
+
+  $('#btn-undo').addEventListener('click', undo);
+  $('#btn-redo').addEventListener('click', redo);
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form State Machine -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Form State Machine</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-form" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Declarative form with built-in validation, submit state, and error tracking.</p>
+                  <form id="demo-form-el" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.5rem">
+                    <input type="text" name="email" class="input" placeholder="Email (required)" aria-label="Email" />
+                    <input type="text" name="age" class="input" placeholder="Age (1-120)" aria-label="Age" />
+                    <button type="submit" class="btn btn-sm">Submit</button>
+                  </form>
+                  <pre class="demo-output" id="output-form">Fill out the form above</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { effect, enhance } from 'weblisk';
+import { formState } from 'weblisk/state/form.js';
+
+enhance('#demo-form', (el, { $ }) =&gt; {
+  const fs = formState({
+    fields: {
+      email: {
+        required: true,
+        pattern: /^[^\s@]+@[^\s@]+$/,
+        message: 'Invalid email'
+      },
+      age: {
+        required: true,
+        validate: v =&gt; {
+          const n = parseInt(v);
+          if (isNaN(n) || n &lt; 1 || n &gt; 120) return 'Must be 1-120';
+          return null;
+        }
+      }
+    },
+    onSubmit: async (values) =&gt; {
+      await new Promise(r =&gt; setTimeout(r, 500));
+      console.log('Submitted:', values);
+    }
+  });
+
+  fs.bind($('#demo-form-el'));
+
+  effect(() =&gt; {
+    const errs = fs.errors();
+    const vals = fs.values();
+    let text = `Values: ${JSON.stringify(vals)}\n`;
+    text += `Valid: ${fs.valid()} | Dirty: ${fs.dirty()}\n`;
+    if (Object.keys(errs).length)
+      text += `Errors: ${JSON.stringify(errs)}`;
+    if (fs.submitted()) text += '\n✅ Form submitted!';
+    if (fs.submitting()) text = '⏳ Submitting...';
+    $('#output-form').textContent = text;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>
@@ -208,6 +438,7 @@
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
+            <a href="/templates/index.html">Templates</a>
             <a href="/pro.html">Pro</a>
           </div>
           <div class="footer-col">

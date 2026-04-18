@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Core Extension Demos — Weblisk</title>
-  <meta name="description" content="Interactive Weblisk core demos: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.">
+  <title>Core Extensions — Weblisk</title>
+  <meta name="description" content="Weblisk core features: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.">
   <link rel="canonical" href="https://weblisk.dev/features/core.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Core Extension Demos — Weblisk">
-  <meta property="og:description" content="Interactive Weblisk core demos: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.">
+  <meta property="og:title" content="Core Extensions — Weblisk">
+  <meta property="og:description" content="Weblisk core features: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.">
   <meta property="og:url" content="https://weblisk.dev/features/core.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Core Extension Demos — Weblisk">
+  <meta name="twitter:title" content="Core Extensions — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Interactive Weblisk core demos: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.">
+  <meta name="twitter:description" content="Weblisk core features: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=3">
+  <link rel="stylesheet" href="/css/styles.css?v=4">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -35,8 +35,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Core Extension Demos — Weblisk",
-    "description": "Interactive Weblisk core demos: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.",
+    "name": "Core Extensions — Weblisk",
+    "description": "Weblisk core features: lazy island hydration, error boundaries, Web Worker offloading, priority task scheduling, and DevTools overlay.",
     "url": "https://weblisk.dev/features/core.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
@@ -62,7 +62,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Core Extension Demos",
+        "name": "Core Extensions",
         "item": "https://weblisk.dev/features/core.html"
       }
     ]
@@ -84,8 +84,10 @@
       <div class="nav-links">
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/templates/index.html" class="nav-link">Templates</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/features.html" class="nav-link active" aria-current="page">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -141,42 +143,232 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>Core Extension Demos</h1>
+        <h1>Core Extensions</h1>
         <p>Lazy islands, error boundaries, Web Workers, and task scheduling.</p>
       </div>
 
       <section data-island="/js/islands/features-core.js" data-hydrate="idle">
-        <div class="demo-grid">
 
-          <div class="demo-card" id="demo-lazy">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-box wl-icon-20"></i> Lazy Islands</h3>
-            <p>Scroll down — the widget below loads its script only when visible (check console).</p>
-            <div id="lazy-target"
-              style="min-height:60px;border:2px dashed var(--wl-border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--wl-text-muted);font-size:0.85rem;margin:0.75rem 1.25rem 0">
-              ⏳ Waiting to enter viewport...
+        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+
+          <!-- Lazy Islands -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Lazy Islands</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-lazy" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Scroll down — the widget below loads its script only when visible (check console).</p>
+                  <div id="lazy-target"
+                    style="min-height:60px;border:2px dashed var(--wl-border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--wl-text-muted);font-size:0.85rem">
+                    ⏳ Waiting to enter viewport...
+                  </div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="html">
+                  <pre>&lt;div id="lazy-target"
+  style="min-height:60px;border:2px dashed var(--wl-border);
+         border-radius:8px;display:flex;align-items:center;
+         justify-content:center;font-size:0.85rem"&gt;
+  ⏳ Waiting to enter viewport...
+&lt;/div&gt;</pre>
+                </div>
+                <div class="showcase-code-panel" data-lang="js">
+                  <pre>import { lazyEnhance } from 'weblisk/core/lazy-island.js';
+
+lazyEnhance('#lazy-target', () =&gt; {
+  const el = document.getElementById('lazy-target');
+  el.style.borderColor = 'var(--success, green)';
+  el.style.borderStyle = 'solid';
+  el.innerHTML = '✅ &lt;strong&gt;Lazy island loaded!&lt;/strong&gt;';
+  return Promise.resolve();
+}, { rootMargin: '50px' });</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
             </div>
           </div>
 
-          <div class="demo-card" id="demo-error">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-close wl-icon-20"></i> Error Boundaries</h3>
-            <p>Click to trigger an error inside a boundary — it catches it gracefully.</p>
-            <button class="btn btn-sm" id="btn-error">Trigger Error</button>
-            <div id="error-target" style="min-height:40px;padding:0.75rem 1rem;margin:0.75rem 1.25rem 0;font-size:0.85rem;color:var(--wl-text-muted)">No errors yet.</div>
+          <!-- Error Boundaries -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Error Boundaries</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-error" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Click to trigger an error inside a boundary — it catches it gracefully.</p>
+                  <button class="btn btn-sm" id="btn-error">Trigger Error</button>
+                  <div id="error-target" style="min-height:40px;padding:0.75rem 0;margin-top:0.5rem;font-size:0.85rem;color:var(--wl-text-muted)">No errors yet.</div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="html">
+                  <pre>&lt;button class="btn btn-sm" id="btn-error"&gt;Trigger Error&lt;/button&gt;
+&lt;div id="error-target"&gt;No errors yet.&lt;/div&gt;</pre>
+                </div>
+                <div class="showcase-code-panel" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { boundary } from 'weblisk/core/error.js';
+
+enhance('#demo-error', (el, { $ }) =&gt; {
+  const btn = $('#btn-error');
+  const target = $('#error-target');
+
+  btn.addEventListener('click', () =&gt; {
+    target.innerHTML = '';
+    const throwingEl = document.createElement('div');
+    throwingEl.id = 'temp-error-demo';
+    target.appendChild(throwingEl);
+
+    boundary('#temp-error-demo', () =&gt; {
+      throw new Error('Intentional demo error!');
+    }, {
+      fallback: '&lt;div&gt;🛡️ &lt;strong&gt;Error caught!&lt;/strong&gt;&lt;/div&gt;',
+      retry: false,
+      onError: (err) =&gt; console.log('Caught:', err.message)
+    });
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-worker">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-gear wl-icon-20"></i> Web Workers</h3>
-            <p>Offload heavy computation to a Web Worker — main thread stays smooth.</p>
-            <button class="btn btn-sm" id="btn-worker">Compute Fibonacci(40)</button>
-            <pre class="demo-output" id="output-worker">Ready...</pre>
+          <!-- Web Workers -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Web Workers</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-worker" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Offload heavy computation to a Web Worker — main thread stays smooth.</p>
+                  <button class="btn btn-sm" id="btn-worker">Compute Fibonacci(40)</button>
+                  <pre class="demo-output" id="output-worker">Ready...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { offload } from 'weblisk/core/worker.js';
+
+enhance('#demo-worker', (el, { $ }) =&gt; {
+  const output = $('#output-worker');
+  const btn = $('#btn-worker');
+
+  const fib = offload(function (n) {
+    function f(n) { return n &lt;= 1 ? n : f(n - 1) + f(n - 2); }
+    return f(n);
+  });
+
+  btn.addEventListener('click', async () =&gt; {
+    output.textContent = '⏳ Computing on Web Worker...';
+    const start = performance.now();
+    const result = await fib(40);
+    const elapsed = (performance.now() - start).toFixed(1);
+    output.textContent = `✅ fib(40) = ${result}\nTime: ${elapsed}ms`;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-scheduler">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-20"></i> Task Scheduler</h3>
-            <p>Priority-based scheduling using scheduler.postTask → rIC → rAF fallback.</p>
-            <button class="btn btn-sm" id="btn-scheduler">Schedule Tasks</button>
-            <pre class="demo-output" id="output-scheduler">Ready...</pre>
+          <!-- Task Scheduler -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Task Scheduler</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-scheduler" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Priority-based scheduling using scheduler.postTask → rIC → rAF fallback.</p>
+                  <button class="btn btn-sm" id="btn-scheduler">Schedule Tasks</button>
+                  <pre class="demo-output" id="output-scheduler">Ready...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { scheduleTask } from 'weblisk/core/scheduler.js';
+
+enhance('#demo-scheduler', (el, { $ }) =&gt; {
+  const output = $('#output-scheduler');
+  const btn = $('#btn-scheduler');
+
+  btn.addEventListener('click', async () =&gt; {
+    output.textContent = 'Scheduling 3 tasks...\n';
+    const log = [];
+
+    await Promise.all([
+      scheduleTask(() =&gt; { log.push('🔴 background'); }, 'background'),
+      scheduleTask(() =&gt; { log.push('🟡 user-visible'); }, 'user-visible'),
+      scheduleTask(() =&gt; { log.push('🟢 user-blocking'); }, 'user-blocking'),
+    ]);
+
+    output.textContent += log.join('\n') + '\n\n✅ Tasks executed by priority';
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
     </main>
@@ -200,6 +392,7 @@
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
+            <a href="/templates/index.html">Templates</a>
             <a href="/pro.html">Pro</a>
           </div>
           <div class="footer-col">

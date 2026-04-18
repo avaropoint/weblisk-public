@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Performance Demos — Weblisk</title>
-  <meta name="description" content="Interactive Weblisk performance demos: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.">
+  <title>Performance — Weblisk</title>
+  <meta name="description" content="Weblisk performance features: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.">
   <link rel="canonical" href="https://weblisk.dev/features/performance.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Performance Demos — Weblisk">
-  <meta property="og:description" content="Interactive Weblisk performance demos: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.">
+  <meta property="og:title" content="Performance — Weblisk">
+  <meta property="og:description" content="Weblisk performance features: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.">
   <meta property="og:url" content="https://weblisk.dev/features/performance.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Performance Demos — Weblisk">
+  <meta name="twitter:title" content="Performance — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Interactive Weblisk performance demos: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.">
+  <meta name="twitter:description" content="Weblisk performance features: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=3">
+  <link rel="stylesheet" href="/css/styles.css?v=4">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -35,8 +35,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Performance Demos — Weblisk",
-    "description": "Interactive Weblisk performance demos: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.",
+    "name": "Performance — Weblisk",
+    "description": "Weblisk performance features: User Timing marks and measures, live Core Web Vitals monitoring, beacon reporting, and Speculation Rules prefetch.",
     "url": "https://weblisk.dev/features/performance.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
@@ -62,7 +62,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Performance Demos",
+        "name": "Performance",
         "item": "https://weblisk.dev/features/performance.html"
       }
     ]
@@ -84,8 +84,10 @@
       <div class="nav-links">
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/templates/index.html" class="nav-link">Templates</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/features.html" class="nav-link active" aria-current="page">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -141,25 +143,122 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>Performance Demos</h1>
+        <h1>Performance</h1>
         <p>User Timing marks, measures, and live Core Web Vitals monitoring.</p>
       </div>
 
       <section data-island="/js/islands/features-perf.js" data-hydrate="idle">
-        <div class="demo-grid">
 
-          <div class="demo-card" id="demo-marks">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-20"></i> User Timing</h3>
-            <p>Marks + measures using the Performance API with wl: prefix.</p>
-            <button class="btn btn-sm" id="btn-marks">Run Timed Task</button>
-            <pre class="demo-output" id="output-marks">Ready...</pre>
+        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+
+          <!-- User Timing -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">User Timing</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-marks" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Marks + measures using the Performance API with wl: prefix.</p>
+                  <button class="btn btn-sm" id="btn-marks">Run Timed Task</button>
+                  <pre class="demo-output" id="output-marks">Ready...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { time, getEntries } from 'weblisk/perf/marks.js';
+
+enhance('#demo-marks', (el, { $ }) =&gt; {
+  $('#btn-marks').addEventListener('click', async () =&gt; {
+    const [result, duration] = await time('demo-task', async () =&gt; {
+      await new Promise(r =&gt;
+        setTimeout(r, Math.random() * 200 + 50)
+      );
+      return 42;
+    });
+
+    const entries = getEntries();
+    $('#output-marks').textContent =
+      `⏱️ time('demo-task') completed:\n` +
+      `  Result: ${result}\n` +
+      `  Duration: ${duration.toFixed(2)}ms\n\n` +
+      `Total wl: marks: ${entries.marks.length}\n` +
+      `Total wl: measures: ${entries.measures.length}`;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-vitals">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-20"></i> Core Web Vitals</h3>
-            <p>Live LCP, CLS, FCP, TTFB signals from PerformanceObserver.</p>
-            <pre class="demo-output" id="output-vitals">Collecting metrics...</pre>
+          <!-- Core Web Vitals -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Core Web Vitals</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-vitals" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Live LCP, CLS, FCP, TTFB signals from PerformanceObserver.</p>
+                  <pre class="demo-output" id="output-vitals">Collecting metrics...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { effect, enhance } from 'weblisk';
+import { vitals } from 'weblisk/perf/vitals.js';
+
+enhance('#demo-vitals', (el, { $ }) =&gt; {
+  const v = vitals();
+
+  effect(() =&gt; {
+    $('#output-vitals').textContent = [
+      `LCP:  ${Math.round(v.lcp())}ms`,
+      `CLS:  ${v.cls().toFixed(4)}`,
+      `FID:  ${Math.round(v.fid())}ms`,
+      `INP:  ${Math.round(v.inp())}ms`,
+      `FCP:  ${Math.round(v.fcp())}ms`,
+      `TTFB: ${Math.round(v.ttfb())}ms`,
+    ].join('\n');
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
     </main>
@@ -183,6 +282,7 @@
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
+            <a href="/templates/index.html">Templates</a>
             <a href="/pro.html">Pro</a>
           </div>
           <div class="footer-col">

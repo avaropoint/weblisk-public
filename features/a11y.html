@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accessibility Demos — Weblisk</title>
-  <meta name="description" content="Interactive Weblisk accessibility demos: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.">
+  <title>Accessibility — Weblisk</title>
+  <meta name="description" content="Weblisk accessibility features: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.">
   <link rel="canonical" href="https://weblisk.dev/features/a11y.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Accessibility Demos — Weblisk">
-  <meta property="og:description" content="Interactive Weblisk accessibility demos: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.">
+  <meta property="og:title" content="Accessibility — Weblisk">
+  <meta property="og:description" content="Weblisk accessibility features: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.">
   <meta property="og:url" content="https://weblisk.dev/features/a11y.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Accessibility Demos — Weblisk">
+  <meta name="twitter:title" content="Accessibility — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Interactive Weblisk accessibility demos: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.">
+  <meta name="twitter:description" content="Weblisk accessibility features: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=3">
+  <link rel="stylesheet" href="/css/styles.css?v=4">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -35,8 +35,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Accessibility Demos — Weblisk",
-    "description": "Interactive Weblisk accessibility demos: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.",
+    "name": "Accessibility — Weblisk",
+    "description": "Weblisk accessibility features: ARIA live announcements, focus traps, roving tabindex, reduced motion detection, and locale formatting.",
     "url": "https://weblisk.dev/features/a11y.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
@@ -62,7 +62,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Accessibility Demos",
+        "name": "Accessibility",
         "item": "https://weblisk.dev/features/a11y.html"
       }
     ]
@@ -84,8 +84,10 @@
       <div class="nav-links">
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/templates/index.html" class="nav-link">Templates</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/features.html" class="nav-link active" aria-current="page">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -141,38 +143,163 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>Accessibility Demos</h1>
+        <h1>Accessibility</h1>
         <p>ARIA announcements, focus traps, and reduced motion detection.</p>
       </div>
 
       <section data-island="/js/islands/features-a11y.js" data-hydrate="idle">
-        <div class="demo-grid">
 
-          <div class="demo-card" id="demo-announce">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-20"></i> ARIA Announcements</h3>
-            <p>Screen reader announcements via ARIA live region (check accessibility tree).</p>
-            <button class="btn btn-sm" id="btn-announce">Announce Message</button>
-            <pre class="demo-output" id="output-announce">No announcements yet</pre>
-          </div>
+        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
 
-          <div class="demo-card" id="demo-focus">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-lock wl-icon-20"></i> Focus Management</h3>
-            <p>Focus trap + roving tabindex. Click "Open Trap" then Tab to cycle focus.</p>
-            <button class="btn btn-sm" id="btn-focus-trap">Open Focus Trap</button>
-            <div id="focus-trap-target" hidden
-              style="border:2px solid var(--wl-primary);border-radius:8px;padding:1rem;margin:0.75rem 1.25rem 0;gap:0.5rem;flex-wrap:wrap;">
-              <button class="btn btn-sm">Button A</button>
-              <button class="btn btn-sm">Button B</button>
-              <button class="btn btn-sm">Button C</button>
-              <button class="btn btn-sm" id="btn-focus-release">✕ Close Trap</button>
+          <!-- ARIA Announcements -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">ARIA Announcements</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-announce" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Screen reader announcements via ARIA live region.</p>
+                  <button class="btn btn-sm" id="btn-announce">Announce Message</button>
+                  <pre class="demo-output" id="output-announce">No announcements yet</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { announce } from 'weblisk/a11y/aria.js';
+
+enhance('#demo-announce', (el, { $ }) =&gt; {
+  const output = $('#output-announce');
+  const btn = $('#btn-announce');
+  let count = 0;
+
+  btn.addEventListener('click', () =&gt; {
+    count++;
+    const msg = `Announcement #${count}: Hello from Weblisk!`;
+    announce(msg);
+    output.textContent = `📢 Announced: "${msg}"`;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
             </div>
           </div>
 
-          <div class="demo-card" id="demo-motion">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-sun wl-icon-20"></i> Reduced Motion</h3>
-            <p>Detects prefers-reduced-motion. Toggle in OS settings to see it change live.</p>
-            <pre class="demo-output" id="output-motion">Checking...</pre>
+          <!-- Focus Management -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Focus Management</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-focus" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Focus trap + roving tabindex. Click "Open Trap" then Tab to cycle.</p>
+                  <button class="btn btn-sm" id="btn-focus-trap">Open Focus Trap</button>
+                  <div id="focus-trap-target" hidden
+                    style="border:2px solid var(--wl-primary);border-radius:8px;padding:1rem;margin-top:0.75rem;gap:0.5rem;flex-wrap:wrap;">
+                    <button class="btn btn-sm">Button A</button>
+                    <button class="btn btn-sm">Button B</button>
+                    <button class="btn btn-sm">Button C</button>
+                    <button class="btn btn-sm" id="btn-focus-release">✕ Close Trap</button>
+                  </div>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="html" type="button">HTML</button>
+                  <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="html">
+                  <pre>&lt;button class="btn btn-sm" id="btn-focus-trap"&gt;Open Focus Trap&lt;/button&gt;
+&lt;div id="focus-trap-target" hidden&gt;
+  &lt;button class="btn btn-sm"&gt;Button A&lt;/button&gt;
+  &lt;button class="btn btn-sm"&gt;Button B&lt;/button&gt;
+  &lt;button class="btn btn-sm"&gt;Button C&lt;/button&gt;
+  &lt;button class="btn btn-sm" id="btn-focus-release"&gt;✕ Close&lt;/button&gt;
+&lt;/div&gt;</pre>
+                </div>
+                <div class="showcase-code-panel" data-lang="js">
+                  <pre>import { enhance } from 'weblisk';
+import { focusTrap } from 'weblisk/a11y/focus.js';
+
+enhance('#demo-focus', (el, { $ }) =&gt; {
+  const btn = $('#btn-focus-trap');
+  const target = $('#focus-trap-target');
+  const releaseBtn = $('#btn-focus-release');
+
+  const trap = focusTrap(target);
+
+  btn.addEventListener('click', () =&gt; {
+    target.hidden = false;
+    target.style.display = 'flex';
+    trap.activate();
+  });
+
+  releaseBtn.addEventListener('click', () =&gt; {
+    trap.deactivate();
+    target.hidden = true;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
+
+          <!-- Reduced Motion -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Reduced Motion</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-motion" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Detects prefers-reduced-motion. Toggle in OS settings to see it change live.</p>
+                  <pre class="demo-output" id="output-motion">Checking...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { effect } from 'weblisk';
+import { motionReduced } from 'weblisk/a11y/motion.js';
+
+effect(() =&gt; {
+  const reduced = motionReduced();
+  console.log('prefers-reduced-motion:', reduced);
+  // Conditionally disable animations
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>
@@ -196,6 +323,7 @@
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
+            <a href="/templates/index.html">Templates</a>
             <a href="/pro.html">Pro</a>
           </div>
           <div class="footer-col">

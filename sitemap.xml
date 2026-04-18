@@ -35,6 +35,9 @@
   <url><loc>https://weblisk.dev/docs/ui.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://weblisk.dev/docs/integration.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
+  <!-- Templates -->
+  <url><loc>https://weblisk.dev/templates/index.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
   <!-- Feature Demos -->
   <url><loc>https://weblisk.dev/features/core.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://weblisk.dev/features/state.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

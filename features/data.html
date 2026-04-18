@@ -4,21 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data &amp; Sync Demos — Weblisk</title>
-  <meta name="description" content="Interactive Weblisk data demos: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.">
+  <title>Data &amp; Sync — Weblisk</title>
+  <meta name="description" content="Weblisk data features: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.">
   <link rel="canonical" href="https://weblisk.dev/features/data.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Data &amp; Sync Demos — Weblisk">
-  <meta property="og:description" content="Interactive Weblisk data demos: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.">
+  <meta property="og:title" content="Data &amp; Sync — Weblisk">
+  <meta property="og:description" content="Weblisk data features: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.">
   <meta property="og:url" content="https://weblisk.dev/features/data.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Data &amp; Sync Demos — Weblisk">
+  <meta name="twitter:title" content="Data &amp; Sync — Weblisk">
   <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Interactive Weblisk data demos: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.">
+  <meta name="twitter:description" content="Weblisk data features: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.">
   <meta name="twitter:image" content="https://weblisk.dev/images/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=3">
+  <link rel="stylesheet" href="/css/styles.css?v=4">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -35,8 +35,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Data &amp; Sync Demos — Weblisk",
-    "description": "Interactive Weblisk data demos: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.",
+    "name": "Data &amp; Sync — Weblisk",
+    "description": "Weblisk data features: local-first IndexedDB store with CRUD operations, reactive live queries, and automatic Background Sync to server.",
     "url": "https://weblisk.dev/features/data.html",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
@@ -62,7 +62,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Data &amp; Sync Demos",
+        "name": "Data &amp; Sync",
         "item": "https://weblisk.dev/features/data.html"
       }
     ]
@@ -84,8 +84,10 @@
       <div class="nav-links">
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/templates/index.html" class="nav-link">Templates</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/features.html" class="nav-link active" aria-current="page">Features</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
 
@@ -141,29 +143,149 @@
 
     <main class="examples-main" id="main-content">
       <div class="page-header">
-        <h1>Data &amp; Sync Demos</h1>
+        <h1>Data &amp; Sync</h1>
         <p>Local-first IndexedDB store with CRUD, live queries, and Background Sync.</p>
       </div>
 
       <section data-island="/js/islands/features-data.js" data-hydrate="idle">
-        <div class="demo-grid">
 
-          <div class="demo-card" id="demo-store">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-box wl-icon-20"></i> Local-First Store</h3>
-            <p>IDB-backed collection with CRUD, reactive queries, and automatic Background Sync queuing.</p>
-            <button class="btn btn-sm" id="btn-store-add">Add Item</button>
-            <button class="btn btn-sm" id="btn-store-list">List All</button>
-            <button class="btn btn-sm" id="btn-store-clear">Clear</button>
-            <pre class="demo-output" id="output-store">No items</pre>
+        <div data-island="/js/islands/showcase.js" data-hydrate="idle">
+
+          <!-- Local-First Store -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Local-First Store</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-store" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">IDB-backed collection with CRUD, reactive queries, and automatic Background Sync queuing.</p>
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" id="btn-store-add">Add Item</button>
+                    <button class="btn btn-sm" id="btn-store-list">List All</button>
+                    <button class="btn btn-sm" id="btn-store-clear">Clear</button>
+                  </div>
+                  <pre class="demo-output" id="output-store">No items</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { effect, enhance } from 'weblisk';
+import { collection } from 'weblisk/data/store.js';
+
+enhance('#demo-store', (el, { $ }) =&gt; {
+  const todos = collection('demo-todos');
+  const live = todos.live();
+  let itemNum = 0;
+
+  effect(() =&gt; {
+    const items = live();
+    if (items.length === 0) {
+      $('#output-store').textContent = 'No items';
+    } else {
+      $('#output-store').textContent = items
+        .map(i =&gt; `• ${i.text}`)
+        .join('\n');
+    }
+  });
+
+  $('#btn-store-add').addEventListener('click', async () =&gt; {
+    itemNum++;
+    await todos.put({
+      text: `Task #${itemNum} — ${new Date().toLocaleTimeString()}`
+    });
+  });
+
+  $('#btn-store-clear').addEventListener('click', async () =&gt; {
+    const all = await todos.getAll();
+    for (const item of all) await todos.delete(item.id);
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
 
-          <div class="demo-card" id="demo-sync-status">
-            <h3><i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-20"></i> Sync Status</h3>
-            <p>Reactive sync status, pending mutation count, and manual sync trigger.</p>
-            <button class="btn btn-sm" id="btn-sync-trigger">Trigger Sync</button>
-            <button class="btn btn-sm" id="btn-sync-count">Count Pending</button>
-            <pre class="demo-output" id="output-sync-status">Checking...</pre>
+          <!-- Sync Status -->
+          <div class="showcase">
+            <div class="showcase-header">
+              <span class="showcase-title">Sync Status</span>
+              <div class="showcase-actions">
+                <div class="showcase-tabs">
+                  <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
+                  <button class="showcase-tab" data-tab="code" type="button">Code</button>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-body">
+              <div class="showcase-preview">
+                <div id="demo-sync-status" style="width:100%">
+                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Reactive sync status, pending mutation count, and manual sync trigger.</p>
+                  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                    <button class="btn btn-sm" id="btn-sync-trigger">Trigger Sync</button>
+                    <button class="btn btn-sm" id="btn-sync-count">Count Pending</button>
+                  </div>
+                  <pre class="demo-output" id="output-sync-status">Checking...</pre>
+                </div>
+              </div>
+              <div class="showcase-code">
+                <div class="showcase-code-tabs">
+                  <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
+                </div>
+                <div class="showcase-code-panel active" data-lang="js">
+                  <pre>import { effect, enhance } from 'weblisk';
+import {
+  syncStatus, pendingCount,
+  countPending, triggerSync
+} from 'weblisk/pwa/offline.js';
+
+enhance('#demo-sync-status', (el, { $ }) =&gt; {
+  effect(() =&gt; {
+    const status = syncStatus();
+    const pending = pendingCount();
+    $('#output-sync-status').textContent =
+      `Sync Status: ${status}\nPending: ${pending} mutation(s)\n` +
+      '\nMutations queue via Background Sync.\n' +
+      'SW replays them when connectivity returns.';
+  });
+
+  $('#btn-sync-trigger').addEventListener('click', async () =&gt; {
+    await triggerSync();
+  });
+
+  $('#btn-sync-count').addEventListener('click', async () =&gt; {
+    const count = await countPending();
+    $('#output-sync-status').textContent =
+      `Pending mutations: ${count}`;
+  });
+});</pre>
+                </div>
+                <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
     </main>
@@ -187,6 +309,7 @@
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
+            <a href="/templates/index.html">Templates</a>
             <a href="/pro.html">Pro</a>
           </div>
           <div class="footer-col">

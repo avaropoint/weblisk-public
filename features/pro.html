@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=5">
+  <link rel="stylesheet" href="/css/styles.css?v=6">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -189,19 +189,19 @@
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { init, track, timing } from 'weblisk/pro/analytics.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> init<span class="syn-p">,</span> track<span class="syn-p">,</span> timing <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/analytics.js'</span><span class="syn-p">;</span>
 
-// Init with your endpoint
-init('/api/analytics', {
-  pageViews: true,
-  flushInterval: 30000
-});
+<span class="syn-c">// Init with your endpoint</span>
+<span class="syn-f">init</span><span class="syn-p">(</span><span class="syn-s">'/api/analytics'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  pageViews<span class="syn-p">:</span> true<span class="syn-p">,</span>
+  flushInterval<span class="syn-p">:</span> <span class="syn-n">30000</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-// Track custom events
-track('cta_click', { button: 'signup', page: 'home' });
+<span class="syn-c">// Track custom events</span>
+<span class="syn-f">track</span><span class="syn-p">(</span><span class="syn-s">'cta_click'</span><span class="syn-p">,</span> <span class="syn-p">{</span> button<span class="syn-p">:</span> <span class="syn-s">'signup'</span><span class="syn-p">,</span> page<span class="syn-p">:</span> <span class="syn-s">'home'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-// Track performance timings
-timing('api_latency', 142);</pre>
+<span class="syn-c">// Track performance timings</span>
+<span class="syn-f">timing</span><span class="syn-p">(</span><span class="syn-s">'api_latency'</span><span class="syn-p">,</span> <span class="syn-n">142</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -221,7 +221,18 @@ timing('api_latency', 142);</pre>
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -240,13 +251,13 @@ timing('api_latency', 142);</pre>
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { experiment, convert } from 'weblisk/pro/ab.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> experiment<span class="syn-p">,</span> convert <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/ab.js'</span><span class="syn-p">;</span>
 
-const exp = experiment('cta-color', ['control', 'blue-cta']);
-const variant = exp.variant(); // deterministic assignment
+<span class="syn-k">const</span> exp <span class="syn-p">=</span> <span class="syn-f">experiment</span><span class="syn-p">(</span><span class="syn-s">'cta-color'</span><span class="syn-p">,</span> <span class="syn-p">[</span><span class="syn-s">'control'</span><span class="syn-p">,</span> <span class="syn-s">'blue-cta'</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> variant <span class="syn-p">=</span> exp<span class="syn-p">.</span><span class="syn-f">variant</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// deterministic assignment</span>
 
-// On conversion
-convert('cta-color');</pre>
+<span class="syn-c">// On conversion</span>
+<span class="syn-f">convert</span><span class="syn-p">(</span><span class="syn-s">'cta-color'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -266,7 +277,18 @@ convert('cta-color');</pre>
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -284,25 +306,25 @@ convert('cta-color');</pre>
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { table, exportCSV } from 'weblisk/pro/table.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> table<span class="syn-p">,</span> exportCSV <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/table.js'</span><span class="syn-p">;</span>
 
-const columns = [
-  { key: 'name', label: 'Name', sortable: true },
-  { key: 'role', label: 'Role', sortable: true },
-  { key: 'dept', label: 'Department', sortable: true },
-  { key: 'status', label: 'Status', sortable: true,
-    render: val =&gt; {
-      const badge = document.createElement('span');
-      badge.className = `status-badge status-${val.toLowerCase()}`;
-      badge.textContent = val;
-      return badge;
-    }
-  },
-  { key: 'score', label: 'Score', sortable: true }
-];
+<span class="syn-k">const</span> columns <span class="syn-p">=</span> <span class="syn-p">[</span>
+  <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'name'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Name'</span><span class="syn-p">,</span> sortable<span class="syn-p">:</span> true <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'role'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Role'</span><span class="syn-p">,</span> sortable<span class="syn-p">:</span> true <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'dept'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Department'</span><span class="syn-p">,</span> sortable<span class="syn-p">:</span> true <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'status'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Status'</span><span class="syn-p">,</span> sortable<span class="syn-p">:</span> true<span class="syn-p">,</span>
+    render<span class="syn-p">:</span> val <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> badge <span class="syn-p">=</span> document<span class="syn-p">.</span><span class="syn-f">createElement</span><span class="syn-p">(</span><span class="syn-s">'span'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      badge<span class="syn-p">.</span>className <span class="syn-p">=</span> <span class="syn-s">`status-badge status-${val.toLowerCase()}`</span><span class="syn-p">;</span>
+      badge<span class="syn-p">.</span>textContent <span class="syn-p">=</span> val<span class="syn-p">;</span>
+      <span class="syn-k">return</span> badge<span class="syn-p">;</span>
+    <span class="syn-p">}</span>
+  <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> key<span class="syn-p">:</span> <span class="syn-s">'score'</span><span class="syn-p">,</span> label<span class="syn-p">:</span> <span class="syn-s">'Score'</span><span class="syn-p">,</span> sortable<span class="syn-p">:</span> true <span class="syn-p">}</span>
+<span class="syn-p">]</span><span class="syn-p">;</span>
 
-table('#table-target', { data, columns, pageSize: 5 });
-exportCSV(data, columns, 'export.csv');</pre>
+<span class="syn-f">table</span><span class="syn-p">(</span><span class="syn-s">'#table-target'</span><span class="syn-p">,</span> <span class="syn-p">{</span> data<span class="syn-p">,</span> columns<span class="syn-p">,</span> pageSize<span class="syn-p">:</span> <span class="syn-n">5</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">exportCSV</span><span class="syn-p">(</span>data<span class="syn-p">,</span> columns<span class="syn-p">,</span> <span class="syn-s">'export.csv'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -322,7 +344,18 @@ exportCSV(data, columns, 'export.csv');</pre>
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -341,18 +374,18 @@ exportCSV(data, columns, 'export.csv');</pre>
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { bar, line, pie } from 'weblisk/pro/chart.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> bar<span class="syn-p">,</span> line<span class="syn-p">,</span> pie <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/chart.js'</span><span class="syn-p">;</span>
 
-const data = [
-  { label: 'Jan', value: 30 },
-  { label: 'Feb', value: 45 },
-  { label: 'Mar', value: 28 },
-  { label: 'Apr', value: 62 },
-];
+<span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-p">[</span>
+  <span class="syn-p">{</span> label<span class="syn-p">:</span> <span class="syn-s">'Jan'</span><span class="syn-p">,</span> value<span class="syn-p">:</span> <span class="syn-n">30</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> label<span class="syn-p">:</span> <span class="syn-s">'Feb'</span><span class="syn-p">,</span> value<span class="syn-p">:</span> <span class="syn-n">45</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> label<span class="syn-p">:</span> <span class="syn-s">'Mar'</span><span class="syn-p">,</span> value<span class="syn-p">:</span> <span class="syn-n">28</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-p">{</span> label<span class="syn-p">:</span> <span class="syn-s">'Apr'</span><span class="syn-p">,</span> value<span class="syn-p">:</span> <span class="syn-n">62</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+<span class="syn-p">]</span><span class="syn-p">;</span>
 
-bar('#chart', { data, width: 400, height: 200 });
-line('#chart', { data, width: 400, height: 200 });
-pie('#chart', { data, size: 200 });</pre>
+<span class="syn-f">bar</span><span class="syn-p">(</span><span class="syn-s">'#chart'</span><span class="syn-p">,</span> <span class="syn-p">{</span> data<span class="syn-p">,</span> width<span class="syn-p">:</span> <span class="syn-n">400</span><span class="syn-p">,</span> height<span class="syn-p">:</span> <span class="syn-n">200</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">line</span><span class="syn-p">(</span><span class="syn-s">'#chart'</span><span class="syn-p">,</span> <span class="syn-p">{</span> data<span class="syn-p">,</span> width<span class="syn-p">:</span> <span class="syn-n">400</span><span class="syn-p">,</span> height<span class="syn-p">:</span> <span class="syn-n">200</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">pie</span><span class="syn-p">(</span><span class="syn-s">'#chart'</span><span class="syn-p">,</span> <span class="syn-p">{</span> data<span class="syn-p">,</span> size<span class="syn-p">:</span> <span class="syn-n">200</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -372,7 +405,18 @@ pie('#chart', { data, size: 200 });</pre>
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -393,13 +437,13 @@ pie('#chart', { data, size: 200 });</pre>
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk/pro/form.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/form.js'</span><span class="syn-p">;</span>
 
-const { submitting, errors } = enhance('#pro-form', {
-  format: 'json',
-  onSuccess: () =&gt; console.log('Submitted!'),
-  onError: err =&gt; console.error(err.message)
-});</pre>
+<span class="syn-k">const</span> <span class="syn-p">{</span> submitting<span class="syn-p">,</span> errors <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#pro-form'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  format<span class="syn-p">:</span> <span class="syn-s">'json'</span><span class="syn-p">,</span>
+  onSuccess<span class="syn-p">:</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Submitted!'</span><span class="syn-p">)</span><span class="syn-p">,</span>
+  onError<span class="syn-p">:</span> err <span class="syn-p">=</span><span class="syn-p">&gt;</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span>err<span class="syn-p">.</span>message<span class="syn-p">)</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -419,7 +463,18 @@ const { submitting, errors } = enhance('#pro-form', {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -437,23 +492,23 @@ const { submitting, errors } = enhance('#pro-form', {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { init, setToken, logout, user, authenticated }
-  from 'weblisk/pro/auth.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> init<span class="syn-p">,</span> setToken<span class="syn-p">,</span> logout<span class="syn-p">,</span> user<span class="syn-p">,</span> authenticated <span class="syn-p">}</span>
+  <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/auth.js'</span><span class="syn-p">;</span>
 
-init({ storageKey: 'wl-token' });
+<span class="syn-f">init</span><span class="syn-p">(</span><span class="syn-p">{</span> storageKey<span class="syn-p">:</span> <span class="syn-s">'wl-token'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-// On login — store JWT from your API
-setToken(jwtFromServer);
+<span class="syn-c">// On login — store JWT from your API</span>
+<span class="syn-f">setToken</span><span class="syn-p">(</span>jwtFromServer<span class="syn-p">)</span><span class="syn-p">;</span>
 
-// Reactive signals
-effect(() =&gt; {
-  if (authenticated()) {
-    console.log('User:', user().name);
-  }
-});
+<span class="syn-c">// Reactive signals</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">authenticated</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'User:'</span><span class="syn-p">,</span> <span class="syn-f">user</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">.</span>name<span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-// Logout
-logout();</pre>
+<span class="syn-c">// Logout</span>
+<span class="syn-f">logout</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -473,7 +528,18 @@ logout();</pre>
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -492,13 +558,13 @@ logout();</pre>
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { toast } from 'weblisk/pro/toast.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> toast <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/toast.js'</span><span class="syn-p">;</span>
 
-toast('Operation completed!', {
-  type: 'success',     // info | success | warning | error
-  duration: 3000,
-  position: 'bottom-right'
-});</pre>
+<span class="syn-f">toast</span><span class="syn-p">(</span><span class="syn-s">'Operation completed!'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  type<span class="syn-p">:</span> <span class="syn-s">'success'</span><span class="syn-p">,</span>     <span class="syn-c">// info | success | warning | error</span>
+  duration<span class="syn-p">:</span> <span class="syn-n">3000</span><span class="syn-p">,</span>
+  position<span class="syn-p">:</span> <span class="syn-s">'bottom-right'</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -518,7 +584,18 @@ toast('Operation completed!', {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -547,12 +624,12 @@ toast('Operation completed!', {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { tabs } from 'weblisk/pro/tabs.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> tabs <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/tabs.js'</span><span class="syn-p">;</span>
 
-tabs('[data-tabs]', {
-  defaultIndex: 0,
-  onChange: i =&gt; console.log('Switched to tab', i)
-});</pre>
+<span class="syn-f">tabs</span><span class="syn-p">(</span><span class="syn-s">'[data-tabs]'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  defaultIndex<span class="syn-p">:</span> <span class="syn-n">0</span><span class="syn-p">,</span>
+  onChange<span class="syn-p">:</span> i <span class="syn-p">=</span><span class="syn-p">&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Switched to tab'</span><span class="syn-p">,</span> i<span class="syn-p">)</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -572,7 +649,18 @@ tabs('[data-tabs]', {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -590,18 +678,18 @@ tabs('[data-tabs]', {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { gCounter } from 'weblisk/pro/crdt.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> gCounter <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
 
-const nodeA = gCounter('node-A');
-const nodeB = gCounter('node-B');
+<span class="syn-k">const</span> nodeA <span class="syn-p">=</span> <span class="syn-f">gCounter</span><span class="syn-p">(</span><span class="syn-s">'node-A'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> nodeB <span class="syn-p">=</span> <span class="syn-f">gCounter</span><span class="syn-p">(</span><span class="syn-s">'node-B'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-nodeA.increment();
-nodeB.increment();
+nodeA<span class="syn-p">.</span><span class="syn-f">increment</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+nodeB<span class="syn-p">.</span><span class="syn-f">increment</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-// Sync state between nodes
-nodeA.merge(nodeB.state());
-nodeB.merge(nodeA.state());
-// Both now agree on the total count</pre>
+<span class="syn-c">// Sync state between nodes</span>
+nodeA<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>nodeB<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+nodeB<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>nodeA<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-c">// Both now agree on the total count</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>
@@ -621,7 +709,18 @@ nodeB.merge(nodeA.state());
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -643,18 +742,18 @@ const result = await pay({
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { pay } from 'weblisk/pro/pay.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> pay <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/pay.js'</span><span class="syn-p">;</span>
 
-const result = await pay({
-  currency: 'USD',
-  amount: 1999,
-  label: 'Pro License',
-  endpoint: '/api/charge'
-});
+<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">pay</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  currency<span class="syn-p">:</span> <span class="syn-s">'USD'</span><span class="syn-p">,</span>
+  amount<span class="syn-p">:</span> <span class="syn-n">1999</span><span class="syn-p">,</span>
+  label<span class="syn-p">:</span> <span class="syn-s">'Pro License'</span><span class="syn-p">,</span>
+  endpoint<span class="syn-p">:</span> <span class="syn-s">'/api/charge'</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-if (result.success) {
-  toast('Payment successful!', { type: 'success' });
-}</pre>
+<span class="syn-k">if</span> <span class="syn-p">(</span>result<span class="syn-p">.</span>success<span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-f">toast</span><span class="syn-p">(</span><span class="syn-s">'Payment successful!'</span><span class="syn-p">,</span> <span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'success'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span></pre>
                 </div>
                 <div class="showcase-pro-overlay">
                   <p>Full source available with Weblisk Pro</p>

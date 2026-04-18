@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=5">
+  <link rel="stylesheet" href="/css/styles.css?v=6">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -186,18 +186,18 @@
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { sanitize, escapeHTML } from 'weblisk/security/sanitize.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> sanitize<span class="syn-p">,</span> escapeHTML <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/sanitize.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-sanitize', (el, { $ }) =&gt; {
-  $('#sanitize-input').addEventListener('input', () =&gt; {
-    const raw = $('#sanitize-input').value;
-    const clean = sanitize(raw);
-    const escaped = escapeHTML(raw);
-    $('#output-sanitize').textContent =
-      `Raw:       ${raw}\nSanitized: ${clean}\nEscaped:   ${escaped}`;
-  });
-});</pre>
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-sanitize'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#sanitize-input'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> raw <span class="syn-p">=</span> $<span class="syn-p">(</span><span class="syn-s">'#sanitize-input'</span><span class="syn-p">)</span><span class="syn-p">.</span>value<span class="syn-p">;</span>
+    <span class="syn-k">const</span> clean <span class="syn-p">=</span> <span class="syn-f">sanitize</span><span class="syn-p">(</span>raw<span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> escaped <span class="syn-p">=</span> <span class="syn-f">escapeHTML</span><span class="syn-p">(</span>raw<span class="syn-p">)</span><span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-sanitize'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Raw:       ${raw}\nSanitized: ${clean}\nEscaped:   ${escaped}`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -213,7 +213,18 @@ enhance('#demo-sanitize', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -228,26 +239,26 @@ enhance('#demo-sanitize', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { trustedHTML } from 'weblisk/security/trusted.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> trustedHTML <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/trusted.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-trusted', (el, { $ }) =&gt; {
-  $('#btn-trusted').addEventListener('click', () =&gt; {
-    const dangerous =
-      '&lt;img src=x onerror="alert(1)"&gt;' +
-      '&lt;p&gt;Safe content&lt;/p&gt;' +
-      '&lt;script&gt;evil()&lt;/script&gt;';
-    try {
-      const safe = trustedHTML(dangerous);
-      $('#output-trusted').textContent =
-        `Input:  ${dangerous}\nOutput: ${safe}\n\n` +
-        '✅ Scripts and handlers stripped';
-    } catch (e) {
-      $('#output-trusted').textContent =
-        `Trusted Types: ${e.message}`;
-    }
-  });
-});</pre>
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-trusted'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-trusted'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> dangerous <span class="syn-p">=</span>
+      <span class="syn-s">'&lt;img src=x onerror="alert(1)"&gt;'</span> <span class="syn-p">+</span>
+      <span class="syn-s">'&lt;p&gt;Safe content&lt;/p&gt;'</span> <span class="syn-p">+</span>
+      <span class="syn-s">'&lt;script&gt;evil()&lt;/script&gt;'</span><span class="syn-p">;</span>
+    <span class="syn-k">try</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> safe <span class="syn-p">=</span> <span class="syn-f">trustedHTML</span><span class="syn-p">(</span>dangerous<span class="syn-p">)</span><span class="syn-p">;</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-trusted'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+        <span class="syn-s">`Input:  ${dangerous}\nOutput: ${safe}\n\n`</span> <span class="syn-p">+</span>
+        <span class="syn-s">'✅ Scripts and handlers stripped'</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span> <span class="syn-k">catch</span> <span class="syn-p">(</span>e<span class="syn-p">)</span> <span class="syn-p">{</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-trusted'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+        <span class="syn-s">`Trusted Types: ${e.message}`</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -263,7 +274,18 @@ enhance('#demo-trusted', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -278,20 +300,20 @@ enhance('#demo-trusted', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { generateToken, csrfToken } from 'weblisk/security/csrf.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> generateToken<span class="syn-p">,</span> csrfToken <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csrf.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-csrf', (el, { $ }) =&gt; {
-  $('#btn-csrf').addEventListener('click', () =&gt; {
-    const token = generateToken();
-    const reactiveToken = csrfToken();
-    $('#output-csrf').textContent =
-      `Token:    ${token}\n` +
-      `Reactive: ${reactiveToken}\n` +
-      `Length:   ${token.length} chars (64 hex = 32 bytes)\n\n` +
-      '✅ Cryptographically random';
-  });
-});</pre>
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-csrf'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-csrf'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> token <span class="syn-p">=</span> <span class="syn-f">generateToken</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> reactiveToken <span class="syn-p">=</span> <span class="syn-f">csrfToken</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-csrf'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Token:    ${token}\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">`Reactive: ${reactiveToken}\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">`Length:   ${token.length} chars (64 hex = 32 bytes)\n\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">'✅ Cryptographically random'</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -307,7 +329,18 @@ enhance('#demo-csrf', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -322,26 +355,26 @@ enhance('#demo-csrf', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { buildCSP } from 'weblisk/security/csp.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> buildCSP <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csp.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-csp-perms', (el, { $ }) =&gt; {
-  $('#btn-check-csp').addEventListener('click', () =&gt; {
-    const cspMeta = document.querySelector(
-      'meta[http-equiv="Content-Security-Policy"]'
-    );
-    const permMeta = document.querySelector(
-      'meta[http-equiv="Permissions-Policy"]'
-    );
-    const generated = buildCSP();
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-csp-perms'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-check-csp'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> cspMeta <span class="syn-p">=</span> document<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span>
+      <span class="syn-s">'meta[http-equiv="Content-Security-Policy"]'</span>
+    <span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> permMeta <span class="syn-p">=</span> document<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span>
+      <span class="syn-s">'meta[http-equiv="Permissions-Policy"]'</span>
+    <span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> generated <span class="syn-p">=</span> <span class="syn-f">buildCSP</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-    let text = `CSP Meta:  ${cspMeta ? '✅ Applied' : '⚠️ Not found'}\n`;
-    if (cspMeta) text += `  ${cspMeta.content.substring(0, 80)}...\n\n`;
-    text += `Permissions: ${permMeta ? '✅ Applied' : '⚠️ Not found'}\n`;
-    text += `\nbuildCSP() default:\n  ${generated.substring(0, 100)}...`;
-    $('#output-csp').textContent = text;
-  });
-});</pre>
+    <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`CSP Meta:  ${cspMeta ? '✅ Applied' : '⚠️ Not found'}\n`</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>cspMeta<span class="syn-p">)</span> text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`  ${cspMeta.content.substring(0, 80)}...\n\n`</span><span class="syn-p">;</span>
+    text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Permissions: ${permMeta ? '✅ Applied' : '⚠️ Not found'}\n`</span><span class="syn-p">;</span>
+    text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`\nbuildCSP() default:\n  ${generated.substring(0, 100)}...`</span><span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-csp'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> text<span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>

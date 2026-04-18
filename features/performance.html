@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=5">
+  <link rel="stylesheet" href="/css/styles.css?v=6">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -186,27 +186,27 @@
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { time, getEntries } from 'weblisk/perf/marks.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> time<span class="syn-p">,</span> getEntries <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/perf/marks.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-marks', (el, { $ }) =&gt; {
-  $('#btn-marks').addEventListener('click', async () =&gt; {
-    const [result, duration] = await time('demo-task', async () =&gt; {
-      await new Promise(r =&gt;
-        setTimeout(r, Math.random() * 200 + 50)
-      );
-      return 42;
-    });
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-marks'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-marks'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> <span class="syn-p">[</span>result<span class="syn-p">,</span> duration<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">time</span><span class="syn-p">(</span><span class="syn-s">'demo-task'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-k">await</span> <span class="syn-k">new</span> <span class="syn-f">Promise</span><span class="syn-p">(</span>r <span class="syn-p">=</span><span class="syn-p">&gt;</span>
+        <span class="syn-f">setTimeout</span><span class="syn-p">(</span>r<span class="syn-p">,</span> Math<span class="syn-p">.</span><span class="syn-f">random</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">*</span> <span class="syn-n">200</span> <span class="syn-p">+</span> <span class="syn-n">50</span><span class="syn-p">)</span>
+      <span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-k">return</span> <span class="syn-n">42</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-    const entries = getEntries();
-    $('#output-marks').textContent =
-      `⏱️ time('demo-task') completed:\n` +
-      `  Result: ${result}\n` +
-      `  Duration: ${duration.toFixed(2)}ms\n\n` +
-      `Total wl: marks: ${entries.marks.length}\n` +
-      `Total wl: measures: ${entries.measures.length}`;
-  });
-});</pre>
+    <span class="syn-k">const</span> entries <span class="syn-p">=</span> <span class="syn-f">getEntries</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-marks'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`⏱️ time('demo-task') completed:\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">`  Result: ${result}\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">`  Duration: ${duration.toFixed(2)}ms\n\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">`Total wl: marks: ${entries.marks.length}\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">`Total wl: measures: ${entries.measures.length}`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -222,7 +222,18 @@ enhance('#demo-marks', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -236,23 +247,23 @@ enhance('#demo-marks', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { vitals } from 'weblisk/perf/vitals.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> vitals <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/perf/vitals.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-vitals', (el, { $ }) =&gt; {
-  const v = vitals();
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-vitals'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> v <span class="syn-p">=</span> <span class="syn-f">vitals</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  effect(() =&gt; {
-    $('#output-vitals').textContent = [
-      `LCP:  ${Math.round(v.lcp())}ms`,
-      `CLS:  ${v.cls().toFixed(4)}`,
-      `FID:  ${Math.round(v.fid())}ms`,
-      `INP:  ${Math.round(v.inp())}ms`,
-      `FCP:  ${Math.round(v.fcp())}ms`,
-      `TTFB: ${Math.round(v.ttfb())}ms`,
-    ].join('\n');
-  });
-});</pre>
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-vitals'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-p">[</span>
+      <span class="syn-s">`LCP:  ${Math.round(v.lcp())}ms`</span><span class="syn-p">,</span>
+      <span class="syn-s">`CLS:  ${v.cls().toFixed(4)}`</span><span class="syn-p">,</span>
+      <span class="syn-s">`FID:  ${Math.round(v.fid())}ms`</span><span class="syn-p">,</span>
+      <span class="syn-s">`INP:  ${Math.round(v.inp())}ms`</span><span class="syn-p">,</span>
+      <span class="syn-s">`FCP:  ${Math.round(v.fcp())}ms`</span><span class="syn-p">,</span>
+      <span class="syn-s">`TTFB: ${Math.round(v.ttfb())}ms`</span><span class="syn-p">,</span>
+    <span class="syn-p">]</span><span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">'\n'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>

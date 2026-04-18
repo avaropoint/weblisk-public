@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=5">
+  <link rel="stylesheet" href="/css/styles.css?v=6">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -190,37 +190,37 @@
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { collection } from 'weblisk/data/store.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> collection <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-store', (el, { $ }) =&gt; {
-  const todos = collection('demo-todos');
-  const live = todos.live();
-  let itemNum = 0;
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-store'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'demo-todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> live <span class="syn-p">=</span> todos<span class="syn-p">.</span><span class="syn-f">live</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">let</span> itemNum <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span>
 
-  effect(() =&gt; {
-    const items = live();
-    if (items.length === 0) {
-      $('#output-store').textContent = 'No items';
-    } else {
-      $('#output-store').textContent = items
-        .map(i =&gt; `• ${i.text}`)
-        .join('\n');
-    }
-  });
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> items <span class="syn-p">=</span> <span class="syn-f">live</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>items<span class="syn-p">.</span>length <span class="syn-p">=</span><span class="syn-p">=</span><span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-store'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">'No items'</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span> <span class="syn-k">else</span> <span class="syn-p">{</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-store'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> items
+        <span class="syn-p">.</span><span class="syn-f">map</span><span class="syn-p">(</span>i <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-s">`• ${i.text}`</span><span class="syn-p">)</span>
+        <span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">'\n'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-store-add').addEventListener('click', async () =&gt; {
-    itemNum++;
-    await todos.put({
-      text: `Task #${itemNum} — ${new Date().toLocaleTimeString()}`
-    });
-  });
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-store-add'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    itemNum<span class="syn-p">+</span><span class="syn-p">+</span><span class="syn-p">;</span>
+    <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span>
+      text<span class="syn-p">:</span> <span class="syn-s">`Task #${itemNum} — ${new Date().toLocaleTimeString()}`</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-store-clear').addEventListener('click', async () =&gt; {
-    const all = await todos.getAll();
-    for (const item of all) await todos.delete(item.id);
-  });
-});</pre>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-store-clear'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> all <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">getAll</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">for</span> <span class="syn-p">(</span><span class="syn-k">const</span> item <span class="syn-k">of</span> all<span class="syn-p">)</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">delete</span><span class="syn-p">(</span>item<span class="syn-p">.</span>id<span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -236,7 +236,18 @@ enhance('#demo-store', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -254,32 +265,32 @@ enhance('#demo-store', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import {
-  syncStatus, pendingCount,
-  countPending, triggerSync
-} from 'weblisk/pwa/offline.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span>
+  syncStatus<span class="syn-p">,</span> pendingCount<span class="syn-p">,</span>
+  countPending<span class="syn-p">,</span> triggerSync
+<span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-sync-status', (el, { $ }) =&gt; {
-  effect(() =&gt; {
-    const status = syncStatus();
-    const pending = pendingCount();
-    $('#output-sync-status').textContent =
-      `Sync Status: ${status}\nPending: ${pending} mutation(s)\n` +
-      '\nMutations queue via Background Sync.\n' +
-      'SW replays them when connectivity returns.';
-  });
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-sync-status'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> status <span class="syn-p">=</span> <span class="syn-f">syncStatus</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> pending <span class="syn-p">=</span> <span class="syn-f">pendingCount</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-sync-status'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Sync Status: ${status}\nPending: ${pending} mutation(s)\n`</span> <span class="syn-p">+</span>
+      <span class="syn-s">'\nMutations queue via Background Sync.\n'</span> <span class="syn-p">+</span>
+      <span class="syn-s">'SW replays them when connectivity returns.'</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-sync-trigger').addEventListener('click', async () =&gt; {
-    await triggerSync();
-  });
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-sync-trigger'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-sync-count').addEventListener('click', async () =&gt; {
-    const count = await countPending();
-    $('#output-sync-status').textContent =
-      `Pending mutations: ${count}`;
-  });
-});</pre>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-sync-count'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> count <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">countPending</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-sync-status'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Pending mutations: ${count}`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>

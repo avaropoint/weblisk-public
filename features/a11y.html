@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=5">
+  <link rel="stylesheet" href="/css/styles.css?v=6">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -160,7 +160,18 @@
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -175,21 +186,21 @@
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { announce } from 'weblisk/a11y/aria.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> announce <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/aria.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-announce', (el, { $ }) =&gt; {
-  const output = $('#output-announce');
-  const btn = $('#btn-announce');
-  let count = 0;
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-announce'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> output <span class="syn-p">=</span> $<span class="syn-p">(</span><span class="syn-s">'#output-announce'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> btn <span class="syn-p">=</span> $<span class="syn-p">(</span><span class="syn-s">'#btn-announce'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">let</span> count <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span>
 
-  btn.addEventListener('click', () =&gt; {
-    count++;
-    const msg = `Announcement #${count}: Hello from Weblisk!`;
-    announce(msg);
-    output.textContent = `📢 Announced: "${msg}"`;
-  });
-});</pre>
+  btn<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    count<span class="syn-p">+</span><span class="syn-p">+</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> msg <span class="syn-p">=</span> <span class="syn-s">`Announcement #${count}: Hello from Weblisk!`</span><span class="syn-p">;</span>
+    <span class="syn-f">announce</span><span class="syn-p">(</span>msg<span class="syn-p">)</span><span class="syn-p">;</span>
+    output<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`📢 Announced: "${msg}"`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -205,7 +216,18 @@ enhance('#demo-announce', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -227,36 +249,36 @@ enhance('#demo-announce', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="html">
-                  <pre>&lt;button class="btn btn-sm" id="btn-focus-trap"&gt;Open Focus Trap&lt;/button&gt;
-&lt;div id="focus-trap-target" hidden&gt;
-  &lt;button class="btn btn-sm"&gt;Button A&lt;/button&gt;
-  &lt;button class="btn btn-sm"&gt;Button B&lt;/button&gt;
-  &lt;button class="btn btn-sm"&gt;Button C&lt;/button&gt;
-  &lt;button class="btn btn-sm" id="btn-focus-release"&gt;✕ Close&lt;/button&gt;
-&lt;/div&gt;</pre>
+                  <pre><span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"btn btn-sm"</span> <span class="syn-a">id=</span><span class="syn-s">"btn-focus-trap"</span><span class="syn-t">&gt;</span>Open Focus Trap<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;div</span> <span class="syn-a">id=</span><span class="syn-s">"focus-trap-target"</span> hidden<span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"btn btn-sm"</span><span class="syn-t">&gt;</span>Button A<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"btn btn-sm"</span><span class="syn-t">&gt;</span>Button B<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"btn btn-sm"</span><span class="syn-t">&gt;</span>Button C<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"btn btn-sm"</span> <span class="syn-a">id=</span><span class="syn-s">"btn-focus-release"</span><span class="syn-t">&gt;</span>✕ Close<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/div</span><span class="syn-t">&gt;</span></pre>
                 </div>
                 <div class="showcase-code-panel" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { focusTrap } from 'weblisk/a11y/focus.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> focusTrap <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-focus', (el, { $ }) =&gt; {
-  const btn = $('#btn-focus-trap');
-  const target = $('#focus-trap-target');
-  const releaseBtn = $('#btn-focus-release');
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-focus'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> btn <span class="syn-p">=</span> $<span class="syn-p">(</span><span class="syn-s">'#btn-focus-trap'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> target <span class="syn-p">=</span> $<span class="syn-p">(</span><span class="syn-s">'#focus-trap-target'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-k">const</span> releaseBtn <span class="syn-p">=</span> $<span class="syn-p">(</span><span class="syn-s">'#btn-focus-release'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  const trap = focusTrap(target);
+  <span class="syn-k">const</span> trap <span class="syn-p">=</span> <span class="syn-f">focusTrap</span><span class="syn-p">(</span>target<span class="syn-p">)</span><span class="syn-p">;</span>
 
-  btn.addEventListener('click', () =&gt; {
-    target.hidden = false;
-    target.style.display = 'flex';
-    trap.activate();
-  });
+  btn<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    target<span class="syn-p">.</span>hidden <span class="syn-p">=</span> false<span class="syn-p">;</span>
+    target<span class="syn-p">.</span>style<span class="syn-p">.</span>display <span class="syn-p">=</span> <span class="syn-s">'flex'</span><span class="syn-p">;</span>
+    trap<span class="syn-p">.</span><span class="syn-f">activate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  releaseBtn.addEventListener('click', () =&gt; {
-    trap.deactivate();
-    target.hidden = true;
-  });
-});</pre>
+  releaseBtn<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    trap<span class="syn-p">.</span><span class="syn-f">deactivate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    target<span class="syn-p">.</span>hidden <span class="syn-p">=</span> true<span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -272,7 +294,18 @@ enhance('#demo-focus', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -286,14 +319,14 @@ enhance('#demo-focus', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect } from 'weblisk';
-import { motionReduced } from 'weblisk/a11y/motion.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> motionReduced <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/motion.js'</span><span class="syn-p">;</span>
 
-effect(() =&gt; {
-  const reduced = motionReduced();
-  console.log('prefers-reduced-motion:', reduced);
-  // Conditionally disable animations
-});</pre>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> reduced <span class="syn-p">=</span> <span class="syn-f">motionReduced</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'prefers-reduced-motion:'</span><span class="syn-p">,</span> reduced<span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-c">// Conditionally disable animations</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>

@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=5">
+  <link rel="stylesheet" href="/css/styles.css?v=6">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -189,39 +189,39 @@
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { fetchJSON, fetchOffline } from 'weblisk/net/fetch.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> fetchJSON<span class="syn-p">,</span> fetchOffline <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-fetch', (el, { $ }) =&gt; {
-  $('#btn-fetch').addEventListener('click', async () =&gt; {
-    $('#output-fetch').textContent = 'Fetching...';
-    try {
-      const data = await fetchJSON(
-        'https://jsonplaceholder.typicode.com/posts?_limit=5',
-        { timeout: 5000 }
-      );
-      $('#output-fetch').textContent =
-        `✅ Loaded ${data.length} posts:\n` +
-        data.map(p =&gt; p.title).join('\n');
-    } catch (err) {
-      $('#output-fetch').textContent = `❌ Error: ${err.message}`;
-    }
-  });
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-fetch'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-fetch'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-fetch'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">'Fetching...'</span><span class="syn-p">;</span>
+    <span class="syn-k">try</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchJSON</span><span class="syn-p">(</span>
+        <span class="syn-s">'https://jsonplaceholder.typicode.com/posts?_limit=5'</span><span class="syn-p">,</span>
+        <span class="syn-p">{</span> timeout<span class="syn-p">:</span> <span class="syn-n">5000</span> <span class="syn-p">}</span>
+      <span class="syn-p">)</span><span class="syn-p">;</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-fetch'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+        <span class="syn-s">`✅ Loaded ${data.length} posts:\n`</span> <span class="syn-p">+</span>
+        data<span class="syn-p">.</span><span class="syn-f">map</span><span class="syn-p">(</span>p <span class="syn-p">=</span><span class="syn-p">&gt;</span> p<span class="syn-p">.</span>title<span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">'\n'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span> <span class="syn-k">catch</span> <span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">{</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-fetch'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`❌ Error: ${err.message}`</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-fetch-offline').addEventListener('click', async () =&gt; {
-    try {
-      const result = await fetchOffline('/api/analytics', {
-        method: 'POST',
-        body: JSON.stringify({ event: 'demo', timestamp: Date.now() })
-      });
-      $('#output-fetch').textContent = result.queued
-        ? '📦 Request queued for when back online'
-        : `✅ Sent (status ${result.status})`;
-    } catch (err) {
-      $('#output-fetch').textContent = `📦 Queued: ${err.message}`;
-    }
-  });
-});</pre>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-fetch-offline'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">try</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchOffline</span><span class="syn-p">(</span><span class="syn-s">'/api/analytics'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+        method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
+        body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span><span class="syn-p">{</span> event<span class="syn-p">:</span> <span class="syn-s">'demo'</span><span class="syn-p">,</span> timestamp<span class="syn-p">:</span> Date<span class="syn-p">.</span><span class="syn-f">now</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">}</span><span class="syn-p">)</span>
+      <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-fetch'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> result<span class="syn-p">.</span>queued
+        ? <span class="syn-s">'📦 Request queued for when back online'</span>
+        <span class="syn-p">:</span> <span class="syn-s">`✅ Sent (status ${result.status})`</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span> <span class="syn-k">catch</span> <span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">{</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-fetch'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`📦 Queued: ${err.message}`</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -237,7 +237,18 @@ enhance('#demo-fetch', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -252,34 +263,34 @@ enhance('#demo-fetch', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { socket } from 'weblisk/net/ws.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> socket <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/ws.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-ws', (el, { $ }) =&gt; {
-  let conn = null;
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-ws'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">let</span> conn <span class="syn-p">=</span> null<span class="syn-p">;</span>
 
-  $('#btn-ws').addEventListener('click', () =&gt; {
-    if (conn) { conn.close(); conn = null; }
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-ws'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>conn<span class="syn-p">)</span> <span class="syn-p">{</span> conn<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> conn <span class="syn-p">=</span> null<span class="syn-p">;</span> <span class="syn-p">}</span>
 
-    conn = socket('wss://echo.websocket.org', {
-      reconnect: false,
-      heartbeat: 0
-    });
+    conn <span class="syn-p">=</span> <span class="syn-f">socket</span><span class="syn-p">(</span><span class="syn-s">'wss://echo.websocket.org'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+      reconnect<span class="syn-p">:</span> false<span class="syn-p">,</span>
+      heartbeat<span class="syn-p">:</span> <span class="syn-n">0</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-    effect(() =&gt; {
-      const s = conn.state();
-      let text = `State: ${s}\n`;
-      const msgs = conn.messages();
-      if (msgs.length) {
-        text += `Messages: ${msgs.length}\n`;
-        text += msgs.slice(-3)
-          .map(m =&gt; `  → ${JSON.stringify(m)}`)
-          .join('\n');
-      }
-      $('#output-ws').textContent = text;
-    });
-  });
-});</pre>
+    <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> s <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`State: ${s}\n`</span><span class="syn-p">;</span>
+      <span class="syn-k">const</span> msgs <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">messages</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-k">if</span> <span class="syn-p">(</span>msgs<span class="syn-p">.</span>length<span class="syn-p">)</span> <span class="syn-p">{</span>
+        text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Messages: ${msgs.length}\n`</span><span class="syn-p">;</span>
+        text <span class="syn-p">+</span><span class="syn-p">=</span> msgs<span class="syn-p">.</span><span class="syn-f">slice</span><span class="syn-p">(</span><span class="syn-p">-</span><span class="syn-n">3</span><span class="syn-p">)</span>
+          <span class="syn-p">.</span><span class="syn-f">map</span><span class="syn-p">(</span>m <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-s">`  → ${JSON.stringify(m)}`</span><span class="syn-p">)</span>
+          <span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">'\n'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-p">}</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-ws'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> text<span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -295,7 +306,18 @@ enhance('#demo-ws', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -310,32 +332,32 @@ enhance('#demo-ws', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { stream, latest } from 'weblisk/net/sse.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> stream<span class="syn-p">,</span> latest <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/sse.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-sse', (el, { $ }) =&gt; {
-  let conn = null;
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-sse'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">let</span> conn <span class="syn-p">=</span> null<span class="syn-p">;</span>
 
-  $('#btn-sse').addEventListener('click', () =&gt; {
-    if (conn) { conn.close(); conn = null; }
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-sse'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>conn<span class="syn-p">)</span> <span class="syn-p">{</span> conn<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> conn <span class="syn-p">=</span> null<span class="syn-p">;</span> <span class="syn-p">}</span>
 
-    conn = stream('/api/events');
-    const last = latest(conn.events);
+    conn <span class="syn-p">=</span> <span class="syn-f">stream</span><span class="syn-p">(</span><span class="syn-s">'/api/events'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> last <span class="syn-p">=</span> <span class="syn-f">latest</span><span class="syn-p">(</span>conn<span class="syn-p">.</span>events<span class="syn-p">)</span><span class="syn-p">;</span>
 
-    effect(() =&gt; {
-      const s = conn.status();
-      let text = `Status: ${s}\n`;
-      const evts = conn.events();
-      if (evts.length) {
-        text += `Events: ${evts.length}\n`;
-        const recent = last();
-        if (recent)
-          text += `Latest: ${JSON.stringify(recent.data)}`;
-      }
-      $('#output-sse').textContent = text;
-    });
-  });
-});</pre>
+    <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> s <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">status</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`Status: ${s}\n`</span><span class="syn-p">;</span>
+      <span class="syn-k">const</span> evts <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">events</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-k">if</span> <span class="syn-p">(</span>evts<span class="syn-p">.</span>length<span class="syn-p">)</span> <span class="syn-p">{</span>
+        text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Events: ${evts.length}\n`</span><span class="syn-p">;</span>
+        <span class="syn-k">const</span> recent <span class="syn-p">=</span> <span class="syn-f">last</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+        <span class="syn-k">if</span> <span class="syn-p">(</span>recent<span class="syn-p">)</span>
+          text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Latest: ${JSON.stringify(recent.data)}`</span><span class="syn-p">;</span>
+      <span class="syn-p">}</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-sse'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> text<span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -351,7 +373,18 @@ enhance('#demo-sse', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -366,29 +399,29 @@ enhance('#demo-sse', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { transport } from 'weblisk/net/transport.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> transport <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/transport.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-transport', (el, { $ }) =&gt; {
-  $('#btn-transport').addEventListener('click', () =&gt; {
-    const hasWT = typeof WebTransport !== 'undefined';
-    const hasWS = typeof WebSocket !== 'undefined';
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-transport'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-transport'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> hasWT <span class="syn-p">=</span> <span class="syn-k">typeof</span> WebTransport <span class="syn-p">!</span><span class="syn-p">=</span><span class="syn-p">=</span> <span class="syn-s">'undefined'</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> hasWS <span class="syn-p">=</span> <span class="syn-k">typeof</span> WebSocket <span class="syn-p">!</span><span class="syn-p">=</span><span class="syn-p">=</span> <span class="syn-s">'undefined'</span><span class="syn-p">;</span>
 
-    const conn = transport('wss://echo.websocket.org', {
-      reconnect: false,
-      heartbeat: 0
-    });
+    <span class="syn-k">const</span> conn <span class="syn-p">=</span> <span class="syn-f">transport</span><span class="syn-p">(</span><span class="syn-s">'wss://echo.websocket.org'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+      reconnect<span class="syn-p">:</span> false<span class="syn-p">,</span>
+      heartbeat<span class="syn-p">:</span> <span class="syn-n">0</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-    effect(() =&gt; {
-      const s = conn.state();
-      let text = `WebTransport: ${hasWT ? '✅' : '❌'}\n`;
-      text += `WebSocket: ${hasWS ? '✅' : '❌'}\n`;
-      text += `State: ${s}\n`;
-      text += `Using: ${hasWT ? 'WebTransport' : 'WebSocket'}`;
-      $('#output-transport').textContent = text;
-    });
-  });
-});</pre>
+    <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> s <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`WebTransport: ${hasWT ? '✅' : '❌'}\n`</span><span class="syn-p">;</span>
+      text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`WebSocket: ${hasWS ? '✅' : '❌'}\n`</span><span class="syn-p">;</span>
+      text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`State: ${s}\n`</span><span class="syn-p">;</span>
+      text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Using: ${hasWT ? 'WebTransport' : 'WebSocket'}`</span><span class="syn-p">;</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#output-transport'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> text<span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>

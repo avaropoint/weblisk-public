@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#1a1f36">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=5">
+  <link rel="stylesheet" href="/css/styles.css?v=6">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
   { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
@@ -190,39 +190,39 @@
                   <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="html">
-                  <pre>&lt;div id="demo-idb"&gt;
-  &lt;button id="btn-idb-set"&gt;Store Value&lt;/button&gt;
-  &lt;button id="btn-idb-get"&gt;Read Value&lt;/button&gt;
-  &lt;pre id="output-idb"&gt;No data stored&lt;/pre&gt;
-&lt;/div&gt;</pre>
+                  <pre><span class="syn-t">&lt;div</span> <span class="syn-a">id=</span><span class="syn-s">"demo-idb"</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-idb-set"</span><span class="syn-t">&gt;</span>Store Value<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-idb-get"</span><span class="syn-t">&gt;</span>Read Value<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;pre</span> <span class="syn-a">id=</span><span class="syn-s">"output-idb"</span><span class="syn-t">&gt;</span>No data stored<span class="syn-t">&lt;/pre</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;/div</span><span class="syn-t">&gt;</span></pre>
                 </div>
                 <div class="showcase-code-panel" data-lang="js">
-                  <pre>import { enhance } from 'weblisk';
-import { idbSignal } from 'weblisk/state/idb.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> idbSignal <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/idb.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-idb', (el, { $ }) =&gt; {
-  const [val, setVal, { ready }] = idbSignal('demo-idb-value', {
-    message: 'none', ts: 0
-  });
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-idb'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>val<span class="syn-p">,</span> setVal<span class="syn-p">,</span> <span class="syn-p">{</span> ready <span class="syn-p">}</span><span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">idbSignal</span><span class="syn-p">(</span><span class="syn-s">'demo-idb-value'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+    message<span class="syn-p">:</span> <span class="syn-s">'none'</span><span class="syn-p">,</span> ts<span class="syn-p">:</span> <span class="syn-n">0</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  ready.then(() =&gt; {
-    $('#output-idb').textContent =
-      `Current: ${JSON.stringify(val(), null, 2)}`;
-  });
+  ready<span class="syn-p">.</span><span class="syn-f">then</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-idb'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Current: ${JSON.stringify(val(), null, 2)}`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-idb-set').addEventListener('click', () =&gt; {
-    const data = {
-      message: `Stored at ${new Date().toLocaleTimeString()}`,
-      ts: Date.now()
-    };
-    setVal(data);
-  });
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-idb-set'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-p">{</span>
+      message<span class="syn-p">:</span> <span class="syn-s">`Stored at ${new Date().toLocaleTimeString()}`</span><span class="syn-p">,</span>
+      ts<span class="syn-p">:</span> Date<span class="syn-p">.</span><span class="syn-f">now</span><span class="syn-p">(</span><span class="syn-p">)</span>
+    <span class="syn-p">}</span><span class="syn-p">;</span>
+    <span class="syn-f">setVal</span><span class="syn-p">(</span>data<span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-idb-get').addEventListener('click', () =&gt; {
-    $('#output-idb').textContent =
-      `Current: ${JSON.stringify(val(), null, 2)}`;
-  });
-});</pre>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-idb-get'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-idb'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Current: ${JSON.stringify(val(), null, 2)}`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -238,7 +238,18 @@ enhance('#demo-idb', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -253,21 +264,21 @@ enhance('#demo-idb', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { synced } from 'weblisk/state/sync.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> synced <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/sync.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-sync', (el, { $ }) =&gt; {
-  const [count, setCount] = synced('demo-counter', 0);
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-sync'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">synced</span><span class="syn-p">(</span><span class="syn-s">'demo-counter'</span><span class="syn-p">,</span> <span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  effect(() =&gt; {
-    $('#output-sync').textContent =
-      `Counter: ${count()}\n(Open another tab to see sync!)`;
-  });
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-sync'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Counter: ${count()}\n(Open another tab to see sync!)`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-sync').addEventListener('click',
-    () =&gt; setCount(c =&gt; c + 1)
-  );
-});</pre>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-sync'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span>
+    <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-f">setCount</span><span class="syn-p">(</span>c <span class="syn-p">=</span><span class="syn-p">&gt;</span> c <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span>
+  <span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -283,7 +294,18 @@ enhance('#demo-sync', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -303,38 +325,38 @@ enhance('#demo-sync', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="html">
-                  <pre>&lt;input type="text" id="undo-input" placeholder="Type something..." /&gt;
-&lt;button id="btn-undo"&gt;↩ Undo&lt;/button&gt;
-&lt;button id="btn-redo"&gt;↪ Redo&lt;/button&gt;
-&lt;pre id="output-undo"&gt;&lt;/pre&gt;</pre>
+                  <pre><span class="syn-t">&lt;input</span> <span class="syn-a">type=</span><span class="syn-s">"text"</span> <span class="syn-a">id=</span><span class="syn-s">"undo-input"</span> <span class="syn-a">placeholder=</span><span class="syn-s">"Type something..."</span> /<span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-undo"</span><span class="syn-t">&gt;</span>↩ Undo<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;button</span> <span class="syn-a">id=</span><span class="syn-s">"btn-redo"</span><span class="syn-t">&gt;</span>↪ Redo<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;pre</span> <span class="syn-a">id=</span><span class="syn-s">"output-undo"</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/pre</span><span class="syn-t">&gt;</span></pre>
                 </div>
                 <div class="showcase-code-panel" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { undoable } from 'weblisk/state/history.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> undoable <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/history.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-undo', (el, { $ }) =&gt; {
-  const [text, setText, { undo, redo, canUndo, canRedo }] =
-    undoable('');
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-undo'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> <span class="syn-p">[</span>text<span class="syn-p">,</span> setText<span class="syn-p">,</span> <span class="syn-p">{</span> undo<span class="syn-p">,</span> redo<span class="syn-p">,</span> canUndo<span class="syn-p">,</span> canRedo <span class="syn-p">}</span><span class="syn-p">]</span> <span class="syn-p">=</span>
+    <span class="syn-f">undoable</span><span class="syn-p">(</span><span class="syn-s">''</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  let debounce;
-  $('#undo-input').addEventListener('input', () =&gt; {
-    clearTimeout(debounce);
-    debounce = setTimeout(
-      () =&gt; setText($('#undo-input').value), 300
-    );
-  });
+  <span class="syn-k">let</span> debounce<span class="syn-p">;</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#undo-input'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-f">clearTimeout</span><span class="syn-p">(</span>debounce<span class="syn-p">)</span><span class="syn-p">;</span>
+    debounce <span class="syn-p">=</span> <span class="syn-f">setTimeout</span><span class="syn-p">(</span>
+      <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-f">setText</span><span class="syn-p">(</span>$<span class="syn-p">(</span><span class="syn-s">'#undo-input'</span><span class="syn-p">)</span><span class="syn-p">.</span>value<span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-n">300</span>
+    <span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  effect(() =&gt; {
-    const val = text();
-    if ($('#undo-input').value !== val)
-      $('#undo-input').value = val;
-    $('#output-undo').textContent =
-      `Value: "${val}"\nCan undo: ${canUndo()} | Can redo: ${canRedo()}`;
-  });
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> val <span class="syn-p">=</span> <span class="syn-f">text</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>$<span class="syn-p">(</span><span class="syn-s">'#undo-input'</span><span class="syn-p">)</span><span class="syn-p">.</span>value <span class="syn-p">!</span><span class="syn-p">=</span><span class="syn-p">=</span> val<span class="syn-p">)</span>
+      $<span class="syn-p">(</span><span class="syn-s">'#undo-input'</span><span class="syn-p">)</span><span class="syn-p">.</span>value <span class="syn-p">=</span> val<span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-undo'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+      <span class="syn-s">`Value: "${val}"\nCan undo: ${canUndo()} | Can redo: ${canRedo()}`</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  $('#btn-undo').addEventListener('click', undo);
-  $('#btn-redo').addEventListener('click', redo);
-});</pre>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-undo'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> undo<span class="syn-p">)</span><span class="syn-p">;</span>
+  $<span class="syn-p">(</span><span class="syn-s">'#btn-redo'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> redo<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>
@@ -350,7 +372,18 @@ enhance('#demo-undo', (el, { $ }) =&gt; {
                   <button class="showcase-tab active" data-tab="preview" type="button">Preview</button>
                   <button class="showcase-tab" data-tab="code" type="button">Code</button>
                 </div>
-              </div>
+                <div class="showcase-viewport-btns">
+                  <button class="showcase-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                  <button class="showcase-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </button>
+                </div>
+</div>
             </div>
             <div class="showcase-body">
               <div class="showcase-preview">
@@ -369,46 +402,46 @@ enhance('#demo-undo', (el, { $ }) =&gt; {
                   <button class="showcase-code-tab active" data-lang="js" type="button">JavaScript</button>
                 </div>
                 <div class="showcase-code-panel active" data-lang="js">
-                  <pre>import { effect, enhance } from 'weblisk';
-import { formState } from 'weblisk/state/form.js';
+                  <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> formState <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/form.js'</span><span class="syn-p">;</span>
 
-enhance('#demo-form', (el, { $ }) =&gt; {
-  const fs = formState({
-    fields: {
-      email: {
-        required: true,
-        pattern: /^[^\s@]+@[^\s@]+$/,
-        message: 'Invalid email'
-      },
-      age: {
-        required: true,
-        validate: v =&gt; {
-          const n = parseInt(v);
-          if (isNaN(n) || n &lt; 1 || n &gt; 120) return 'Must be 1-120';
-          return null;
-        }
-      }
-    },
-    onSubmit: async (values) =&gt; {
-      await new Promise(r =&gt; setTimeout(r, 500));
-      console.log('Submitted:', values);
-    }
-  });
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'#demo-form'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> fs <span class="syn-p">=</span> <span class="syn-f">formState</span><span class="syn-p">(</span><span class="syn-p">{</span>
+    fields<span class="syn-p">:</span> <span class="syn-p">{</span>
+      email<span class="syn-p">:</span> <span class="syn-p">{</span>
+        required<span class="syn-p">:</span> true<span class="syn-p">,</span>
+        pattern<span class="syn-p">:</span> <span class="syn-p">/</span>^<span class="syn-p">[</span>^\s@<span class="syn-p">]</span><span class="syn-p">+</span>@<span class="syn-p">[</span>^\s@<span class="syn-p">]</span><span class="syn-p">+</span>$<span class="syn-p">/</span><span class="syn-p">,</span>
+        message<span class="syn-p">:</span> <span class="syn-s">'Invalid email'</span>
+      <span class="syn-p">}</span><span class="syn-p">,</span>
+      age<span class="syn-p">:</span> <span class="syn-p">{</span>
+        required<span class="syn-p">:</span> true<span class="syn-p">,</span>
+        validate<span class="syn-p">:</span> v <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+          <span class="syn-k">const</span> n <span class="syn-p">=</span> <span class="syn-f">parseInt</span><span class="syn-p">(</span>v<span class="syn-p">)</span><span class="syn-p">;</span>
+          <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">isNaN</span><span class="syn-p">(</span>n<span class="syn-p">)</span> <span class="syn-p">||</span> n <span class="syn-p">&lt;</span> <span class="syn-n">1</span> <span class="syn-p">||</span> n <span class="syn-p">&gt;</span> <span class="syn-n">120</span><span class="syn-p">)</span> <span class="syn-k">return</span> <span class="syn-s">'Must be 1-120'</span><span class="syn-p">;</span>
+          <span class="syn-k">return</span> null<span class="syn-p">;</span>
+        <span class="syn-p">}</span>
+      <span class="syn-p">}</span>
+    <span class="syn-p">}</span><span class="syn-p">,</span>
+    onSubmit<span class="syn-p">:</span> <span class="syn-k">async</span> <span class="syn-p">(</span>values<span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-k">await</span> <span class="syn-k">new</span> <span class="syn-f">Promise</span><span class="syn-p">(</span>r <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-f">setTimeout</span><span class="syn-p">(</span>r<span class="syn-p">,</span> <span class="syn-n">500</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Submitted:'</span><span class="syn-p">,</span> values<span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  fs.bind($('#demo-form-el'));
+  fs<span class="syn-p">.</span><span class="syn-f">bind</span><span class="syn-p">(</span>$<span class="syn-p">(</span><span class="syn-s">'#demo-form-el'</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-  effect(() =&gt; {
-    const errs = fs.errors();
-    const vals = fs.values();
-    let text = `Values: ${JSON.stringify(vals)}\n`;
-    text += `Valid: ${fs.valid()} | Dirty: ${fs.dirty()}\n`;
-    if (Object.keys(errs).length)
-      text += `Errors: ${JSON.stringify(errs)}`;
-    if (fs.submitted()) text += '\n✅ Form submitted!';
-    if (fs.submitting()) text = '⏳ Submitting...';
-    $('#output-form').textContent = text;
-  });
-});</pre>
+  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> errs <span class="syn-p">=</span> fs<span class="syn-p">.</span><span class="syn-f">errors</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">const</span> vals <span class="syn-p">=</span> fs<span class="syn-p">.</span><span class="syn-f">values</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-k">let</span> text <span class="syn-p">=</span> <span class="syn-s">`Values: ${JSON.stringify(vals)}\n`</span><span class="syn-p">;</span>
+    text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Valid: ${fs.valid()} | Dirty: ${fs.dirty()}\n`</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>Object<span class="syn-p">.</span><span class="syn-f">keys</span><span class="syn-p">(</span>errs<span class="syn-p">)</span><span class="syn-p">.</span>length<span class="syn-p">)</span>
+      text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">`Errors: ${JSON.stringify(errs)}`</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>fs<span class="syn-p">.</span><span class="syn-f">submitted</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> text <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-s">'\n✅ Form submitted!'</span><span class="syn-p">;</span>
+    <span class="syn-k">if</span> <span class="syn-p">(</span>fs<span class="syn-p">.</span><span class="syn-f">submitting</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> text <span class="syn-p">=</span> <span class="syn-s">'⏳ Submitting...'</span><span class="syn-p">;</span>
+    $<span class="syn-p">(</span><span class="syn-s">'#output-form'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> text<span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
                 </div>
                 <button class="showcase-copy-btn" type="button"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i> Copy</button>
               </div>

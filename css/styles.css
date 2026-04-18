@@ -2971,7 +2971,6 @@ select.input {
 .showcase-code {
   display: none;
   position: relative;
-  border-top: 1px solid var(--wl-border);
 }
 
 .showcase-code.active {
@@ -2983,12 +2982,19 @@ select.input {
   top: 0.5rem;
   right: 0.75rem;
   z-index: 5;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.showcase-code .showcase-copy-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .showcase-code-tabs {
   display: flex;
-  border-bottom: 1px solid var(--wl-border);
-  background: var(--wl-bg-soft);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--wl-code-bg);
   overflow-x: auto;
 }
 
@@ -3000,14 +3006,14 @@ select.input {
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
-  color: var(--wl-text-muted);
+  color: rgba(255, 255, 255, 0.45);
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.15s, border-color 0.15s;
 }
 
 .showcase-code-tab:hover {
-  color: var(--wl-text);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .showcase-code-tab.active {
@@ -3021,6 +3027,7 @@ select.input {
   margin: 0;
   max-height: 400px;
   overflow: auto;
+  background: var(--wl-code-bg);
 }
 
 .showcase-code-panel.active {
@@ -3029,14 +3036,15 @@ select.input {
 
 .showcase-code-panel pre {
   margin: 0;
-  padding: 1rem 1.25rem;
-  font-size: 0.82rem;
-  line-height: 1.6;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.7;
   font-family: var(--wl-mono);
-  color: var(--wl-text);
+  color: var(--wl-code-text);
   background: transparent;
   white-space: pre;
   overflow-x: auto;
+  tab-size: 2;
 }
 
 /* Pro overlay */

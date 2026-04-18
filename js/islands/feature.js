@@ -1,6 +1,6 @@
-// Feature Demo Island — Preview/Code toggle, viewport switching, copy button, code tabs.
+// Feature Island — Preview/Code toggle, viewport switching, copy button, code tabs.
 
-export default function featureDemo(el) {
+export default function feature(el) {
   // Handle all feature-demo blocks within this section
   const blocks = el.querySelectorAll('.feature-demo');
   blocks.forEach(initFeatureDemo);

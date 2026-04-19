@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320">
-  <polyline points="160,32 32,160 160,288" fill="none" stroke="#93AEDB" stroke-width="29" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="211,32 339,160 211,288" fill="none" stroke="#93AEDB" stroke-width="29" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="147,96 166,224 186,141 205,224 224,96" fill="none" stroke="#93AEDB" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="395" y="210" font-family="system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="160" font-weight="800" fill="#fff" letter-spacing="-4">Weblisk</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320">
+  <polyline points="97,103 40,160 97,218" fill="none" stroke="#93AEDB" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="120,103 178,160 120,218" fill="none" stroke="#93AEDB" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="92,131 100,189 109,151 118,189 126,131" fill="none" stroke="#93AEDB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="206" y="218" font-family="system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="160" font-weight="800" fill="#fff" letter-spacing="-4">Weblisk</text>
 </svg>

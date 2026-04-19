@@ -267,7 +267,7 @@ import { signal, effect, component } from 'weblisk';
         </div>
         <div class="code-body">
           <pre id="doc-code-4">
-<span class="syn-c">&lt;!-- app/views/layouts/application.html.erb --&gt</span>;
+<span class="syn-c">&lt;!-- app/views/layouts/application.html.erb --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
   {
@@ -292,7 +292,7 @@ import { signal, effect, component } from 'weblisk';
         </div>
         <div class="code-body">
           <pre id="doc-code-5">
-<span class="syn-c">&lt;!-- app/views/orders/show.html.erb --&gt</span>;
+<span class="syn-c">&lt;!-- app/views/orders/show.html.erb --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">wl-live-price</span> <span class="syn-a">product-id</span><span class="syn-p">=</span><span class="syn-s">&quot;&lt;%= @product.id %&gt;</span>&quot; interval=&quot;3000&quot;&gt;
   <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;price&quot;</span><span class="syn-t">&gt;</span>$<span class="syn-t">&lt;</span>%= <span class="syn-a">@product.price</span> %<span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;updated&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;</span>%= <span class="syn-a">time_ago_in_words</span>(<span class="syn-a">@product.updated_at</span>) %<span class="syn-t">&gt;</span> ago<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
@@ -364,7 +364,7 @@ effect(() =&gt; {
         </div>
         <div class="code-body">
           <pre id="doc-code-7">
-<span class="syn-c">&lt;!-- templates/base.html --&gt</span>;
+<span class="syn-c">&lt;!-- templates/base.html --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
   {
@@ -389,7 +389,7 @@ effect(() =&gt; {
         </div>
         <div class="code-body">
           <pre id="doc-code-8">
-<span class="syn-c">&lt;!-- templates/contact.html --&gt</span>;
+<span class="syn-c">&lt;!-- templates/contact.html --&gt;</span>
 {% extends &quot;base.html&quot; %}
 {% block content %}
 <span class="syn-t">&lt;</span><span class="syn-t">form</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;contact-form&quot;</span> <span class="syn-a">method</span><span class="syn-p">=</span><span class="syn-s">&quot;post&quot;</span> <span class="syn-a">action</span><span class="syn-p">=</span><span class="syn-s">&quot;{% url 'contact' %}&quot;</span><span class="syn-t">&gt;</span>
@@ -446,7 +446,7 @@ enhance('#contact-form', (form, { $ }) =&gt; {
         </div>
         <div class="code-body">
           <pre id="doc-code-9">
-<span class="syn-c">&lt;!-- templates/layout.html --&gt</span>;
+<span class="syn-c">&lt;!-- templates/layout.html --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
   { &quot;imports&quot;: { &quot;weblisk/&quot;: &quot;/static/weblisk/&quot; } }
@@ -466,7 +466,7 @@ enhance('#contact-form', (form, { $ }) =&gt; {
         </div>
         <div class="code-body">
           <pre id="doc-code-10">
-<span class="syn-c">&lt;!-- templates/dashboard.html --&gt</span>;
+<span class="syn-c">&lt;!-- templates/dashboard.html --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;metrics&quot;</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;metric&quot;</span><span class="syn-t">&gt;</span>
     <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;label&quot;</span><span class="syn-t">&gt;</span>Requests/sec<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
@@ -508,7 +508,7 @@ effect(() =&gt; {
         </div>
         <div class="code-body">
           <pre id="doc-code-11">
-<span class="syn-c">&lt;!-- resources/views/layouts/app.blade.php --&gt</span>;
+<span class="syn-c">&lt;!-- resources/views/layouts/app.blade.php --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
   { &quot;imports&quot;: { &quot;weblisk/&quot;: &quot;{{ asset('weblisk/') }}&quot; } }
@@ -528,7 +528,7 @@ effect(() =&gt; {
         </div>
         <div class="code-body">
           <pre id="doc-code-12">
-<span class="syn-c">&lt;!-- resources/views/products/show.blade.php --&gt</span>;
+<span class="syn-c">&lt;!-- resources/views/products/show.blade.php --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">wl-cart-button</span> <span class="syn-a">product-id</span><span class="syn-p">=</span><span class="syn-s">&quot;{{ $product-&gt;</span>id }}&quot; price=&quot;{{ $product-&gt;price }}&quot;&gt;
   <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;add&quot;</span><span class="syn-t">&gt;</span>Add to Cart — ${{ $product-&gt;price }}<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;status&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
@@ -574,7 +574,7 @@ component('wl-cart-button', {
         </div>
         <div class="code-body">
           <pre id="doc-code-13">
-<span class="syn-c">&lt;!-- lib/my_app_web/components/layouts/root.html.heex --&gt</span>;
+<span class="syn-c">&lt;!-- lib/my_app_web/components/layouts/root.html.heex --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">head</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;importmap&quot;</span><span class="syn-t">&gt;</span>
   { &quot;imports&quot;: { &quot;weblisk/&quot;: &quot;<span class="syn-t">&lt;</span>%= ~<span class="syn-a">p</span><span class="syn-s">&quot;/assets/weblisk/&quot;</span> %<span class="syn-t">&gt;</span>&quot; } }
@@ -594,7 +594,7 @@ component('wl-cart-button', {
         </div>
         <div class="code-body">
           <pre id="doc-code-14">
-<span class="syn-c">&lt;!-- lib/my_app_web/live/chat_live.html.heex --&gt</span>;
+<span class="syn-c">&lt;!-- lib/my_app_web/live/chat_live.html.heex --&gt;</span>
 <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">id</span><span class="syn-p">=</span><span class="syn-s">&quot;chat&quot;</span> <span class="syn-a">phx-update</span><span class="syn-p">=</span><span class="syn-s">&quot;stream&quot;</span><span class="syn-t">&gt;</span>
   <span class="syn-t">&lt;</span>%= <span class="syn-a">for</span> {<span class="syn-a">id</span>, <span class="syn-a">message</span>} &<span class="syn-a">lt</span>;<span class="syn-a">-</span> <span class="syn-a">@streams.messages</span> <span class="syn-a">do</span> %<span class="syn-t">&gt;</span>
     <span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">id</span><span class="syn-p">=</span>{<span class="syn-a">id</span>} <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;message&quot;</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;</span>%= <span class="syn-a">message.text</span> %<span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>

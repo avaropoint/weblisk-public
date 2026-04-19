@@ -4,30 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings Example — Weblisk</title>
-  <meta name="description" content="Settings form demonstrating form state, undo/redo, CSRF, and push notifications.">
-  <link rel="canonical" href="https://weblisk.dev/settings.html">
+  <title>Marketplace — Weblisk</title>
+  <meta name="description" content="Discover, buy, and sell templates, agents, and more for the Weblisk platform. Free and premium resources from the community.">
+  <link rel="canonical" href="https://weblisk.dev/marketplace/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Settings Example — Weblisk">
-  <meta property="og:description"
-    content="Settings form demonstrating form state, undo/redo, CSRF, and push notifications.">
-  <meta property="og:url" content="https://weblisk.dev/settings.html">
+  <meta property="og:title" content="Marketplace — Weblisk">
+  <meta property="og:description" content="Discover, buy, and sell templates, agents, and more for the Weblisk platform. Free and premium resources from the community.">
+  <meta property="og:url" content="https://weblisk.dev/marketplace/">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Settings Example — Weblisk">
-  <meta name="twitter:site" content="@avaropoint">
-  <meta name="twitter:description" content="Settings form demonstrating form state, undo/redo, CSRF, and push notifications.">
+  <meta name="twitter:title" content="Marketplace — Weblisk">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description" content="Discover, buy, and sell templates, agents, and more for the Weblisk platform.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <meta name="theme-color" content="#1a1f36">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
   <link rel="stylesheet" href="/css/styles.css?v=8">
   <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
   <script type="importmap">
@@ -36,10 +35,10 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Settings Example — Weblisk",
-    "description": "Settings form demonstrating form state, undo/redo, CSRF, and push notifications.",
-    "url": "https://weblisk.dev/settings.html",
+    "@type": "CollectionPage",
+    "name": "Marketplace — Weblisk",
+    "description": "Discover, buy, and sell templates, agents, and more for the Weblisk platform.",
+    "url": "https://weblisk.dev/marketplace/",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
     "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
   }
@@ -49,18 +48,8 @@
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Weblisk",
-        "item": "https://weblisk.dev/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Settings Example",
-        "item": "https://weblisk.dev/settings.html"
-      }
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Marketplace", "item": "https://weblisk.dev/marketplace/" }
     ]
   }
   </script>
@@ -81,13 +70,12 @@
         <a href="/index.html" class="nav-link">Home</a>
         <a href="/docs/index.html" class="nav-link">Docs</a>
         <a href="/features.html" class="nav-link">Features</a>
-        <a href="/marketplace/index.html" class="nav-link">Marketplace</a>
+        <a href="/marketplace/index.html" class="nav-link active" aria-current="page">Marketplace</a>
         <a href="/hub/index.html" class="nav-link">Hub</a>
         <a href="/server/index.html" class="nav-link">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
-
       </div>
       <div class="nav-actions">
         <div class="nav-social">
@@ -96,9 +84,8 @@
           </a>
           <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
           </a>
         </div>
         <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
@@ -111,75 +98,79 @@
     </div>
   </nav>
 
-  <div class="examples-layout">
-    <aside class="examples-sidebar" aria-label="Examples navigation">
-      <a href="/dashboard.html">
-        <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-18"></i> Dashboard
-      </a>
-      <a href="/features.html">
-        <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-18"></i> Features
-      </a>
-      <a href="/settings.html" class="active" aria-current="page">
-        <i aria-hidden="true" class="wl-icon wl-i-gear wl-icon-18"></i> Settings
-      </a>
-    </aside>
+  <main id="main-content" style="max-width:1100px;margin:0 auto;padding:2rem 1.5rem">
 
-    <main class="examples-main" id="main-content">
-      <div class="page-header">
-        <h1>Settings</h1>
-        <p>Auto-saving form with undo/redo, CSRF protection, and push notification support.</p>
+    <div class="page-header" style="text-align:center;margin-bottom:2.5rem">
+      <h1>Marketplace</h1>
+      <p style="color:var(--wl-text-muted);max-width:600px;margin:0.75rem auto 0">Discover, buy, and sell templates, agents, merchandise, and more — built by the Weblisk community.</p>
+    </div>
+
+    <!-- ─── Categories ─── -->
+    <div class="feature-grid" style="margin-bottom:3rem">
+
+      <!-- Templates — live now -->
+      <a href="/templates/index.html" class="feature-card" style="text-decoration:none">
+        <div class="feature-icon purple">
+          <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+        </div>
+        <h3>Templates</h3>
+        <p>Production-ready starters — blogs, dashboards, landing pages, and more. Free and Pro.</p>
+        <span class="btn btn-sm" style="margin-top:0.75rem">Browse Templates</span>
+      </a>
+
+      <!-- Agents — coming soon -->
+      <div class="feature-card" style="opacity:0.7">
+        <div class="feature-icon cyan">
+          <i aria-hidden="true" class="wl-icon wl-i-cpu wl-icon-24"></i>
+        </div>
+        <h3>Agents <span class="new-badge" style="background:var(--wl-primary)">Coming Soon</span></h3>
+        <p>Autonomous agents for SEO, content, analytics, and more. Buy pre-built agents or sell your own on the marketplace.</p>
       </div>
 
-      <section data-island="/js/islands/settings.js" data-hydrate="load">
-        <form class="settings-form" id="settings-form" autocomplete="off">
-          <fieldset class="settings-group">
-            <legend>Profile</legend>
-            <label class="field">
-              <span class="field-label">Display Name</span>
-              <input type="text" id="setting-username" class="input" placeholder="Enter your name" />
-            </label>
-          </fieldset>
+      <!-- Merchandise — coming soon -->
+      <div class="feature-card" style="opacity:0.7">
+        <div class="feature-icon orange">
+          <i aria-hidden="true" class="wl-icon wl-i-box wl-icon-24"></i>
+        </div>
+        <h3>Merchandise <span class="new-badge" style="background:var(--wl-primary)">Coming Soon</span></h3>
+        <p>Official Weblisk gear and community merchandise. Rep the zero-dependency movement.</p>
+      </div>
 
-          <fieldset class="settings-group">
-            <legend>Appearance</legend>
-            <label class="field">
-              <span class="field-label">Theme</span>
-              <select id="setting-theme" class="input">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
-            </label>
-          </fieldset>
+    </div>
 
-          <fieldset class="settings-group">
-            <legend>Notifications</legend>
-            <label class="field row">
-              <span class="field-label">Email Alerts</span>
-              <input type="checkbox" id="setting-email" class="toggle" checked />
-            </label>
-            <label class="field row">
-              <span class="field-label">Push Notifications</span>
-              <input type="checkbox" id="setting-push" class="toggle" />
-            </label>
-            <span class="field-hint" id="push-status">Permission: checking...</span>
-          </fieldset>
+    <!-- ─── Coming Soon: Categories ─── -->
+    <div class="section-header" style="text-align:center;margin-bottom:2rem">
+      <span class="section-label">Coming Soon</span>
+      <h2>Template Categories</h2>
+      <p>Browse templates by type — with community and third-party listings on the way.</p>
+    </div>
 
-          <div class="form-actions">
-            <div class="undo-redo-group">
-              <button type="button" class="btn btn-sm" id="btn-undo-settings" disabled title="Undo (Cmd+Z)">↩
-                Undo</button>
-              <button type="button" class="btn btn-sm" id="btn-redo-settings" disabled title="Redo (Cmd+Shift+Z)">↪
-                Redo</button>
-            </div>
-            <span class="save-indicator" id="save-indicator" hidden>
-              <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-16"></i>
-              Saved
-            </span>
-          </div>
-        </form>
-      </section>
-    </main>
-  </div>
+    <div class="feature-grid" style="margin-bottom:3rem">
+      <div class="feature-card">
+        <h3>All Templates</h3>
+        <p>Every template in one place. Filter by category, stack, and license.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Free</h3>
+        <p>Open-source starters maintained by the Weblisk team. Always free, always updated.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Pro</h3>
+        <p>Premium templates with advanced features, multi-page layouts, and priority support.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Community</h3>
+        <p>Templates built and shared by the community. Submit your own or fork and customize.</p>
+      </div>
+    </div>
+
+    <!-- ─── CTA ─── -->
+    <div style="text-align:center;padding:3rem 0 1rem">
+      <p style="color:var(--wl-text-muted);margin-bottom:1rem">Want to sell on the Weblisk Marketplace?</p>
+      <a href="https://discord.gg/5CetAq9EgZ" class="btn btn-primary">Join the Community</a>
+    </div>
+
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -215,19 +206,13 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-copyright">
-          <span>&copy;
-            2026 
-            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
-              href="https://avaropoint.com">Avaropoint</a>
+          <span>&copy; 2026
+            Made with <span class="heart" aria-label="love">&hearts;</span> by
+            <a href="https://avaropoint.com">Avaropoint</a>
           </span>
           <span class="footer-inline-social">
-            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true"
-                class="wl-icon wl-i-github wl-icon-16"></i></a>
-            <a href="https://x.com/weblisk" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24"
-                fill="currentColor" aria-hidden="true">
-                <path
-                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg></a>
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
             <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
           </span>
         </div>
@@ -240,7 +225,6 @@
   </footer>
 
   <script type="module" src="/js/islands/shell.js"></script>
-
 </body>
 
 </html>

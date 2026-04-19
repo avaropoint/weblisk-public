@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Server Comparisons — Weblisk</title>
   <meta name="description"
-    content="See how the server-side agent architecture compares to LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, MCP, and A2A.">
+    content="See how the server-side agent architecture compares to LangChain, CrewAI, AutoGen, OpenAI Agents SDK, OpenClaw, Google ADK, MCP, and A2A.">
   <link rel="canonical" href="https://weblisk.dev/server/comparison.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Server Comparisons — Weblisk">
   <meta property="og:description"
-    content="See how the server-side agent architecture compares to LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, MCP, and A2A.">
+    content="See how the server-side agent architecture compares to LangChain, CrewAI, AutoGen, OpenAI Agents SDK, OpenClaw, Google ADK, MCP, and A2A.">
   <meta property="og:url" content="https://weblisk.dev/server/comparison.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png">
@@ -39,7 +39,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Server Comparisons",
-    "description": "Architecture comparison between Weblisk and LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, MCP, and A2A.",
+    "description": "Architecture comparison between Weblisk and LangChain, CrewAI, AutoGen, OpenAI Agents SDK, OpenClaw, Google ADK, MCP, and A2A.",
     "url": "https://weblisk.dev/server/comparison.html",
     "headline": "Server Comparisons",
     "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
@@ -77,7 +77,8 @@
         <a href="/features.html" class="nav-link">Features</a>
         <a href="/server/index.html" class="nav-link active">Server</a>
         <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
-        <a href="/templates/index.html" class="nav-link">Templates</a>
+        <a href="/marketplace/index.html" class="nav-link">Marketplace</a>
+        <a href="/hub/index.html" class="nav-link">Hub</a>
         <a href="/agents/index.html" class="nav-link">Agents</a>
         <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
       </div>
@@ -172,6 +173,7 @@
               <th scope="col">CrewAI</th>
               <th scope="col">AutoGen</th>
               <th scope="col">OpenAI Agents SDK</th>
+              <th scope="col">OpenClaw</th>
             </tr>
           </thead>
           <tbody>
@@ -182,6 +184,7 @@
               <td>Multi-agent role play</td>
               <td>Agent conversations</td>
               <td>Build OpenAI agents</td>
+              <td>Personal AI assistant</td>
             </tr>
             <tr>
               <td><strong>Architecture</strong></td>
@@ -190,6 +193,7 @@
               <td>Python library</td>
               <td>Python library</td>
               <td>Python library</td>
+              <td>TypeScript app</td>
             </tr>
             <tr>
               <td><strong>Language</strong></td>
@@ -198,10 +202,12 @@
               <td class="no">Python only</td>
               <td class="no">Python / .NET</td>
               <td class="no">Python only</td>
+              <td class="no">TypeScript / Node.js</td>
             </tr>
             <tr>
               <td><strong>LLM required?</strong></td>
               <td class="yes col-highlight">Optional</td>
+              <td class="no">Required</td>
               <td class="no">Required</td>
               <td class="no">Required</td>
               <td class="no">Required</td>
@@ -214,6 +220,7 @@
               <td class="no">No</td>
               <td class="no">No</td>
               <td class="no">No</td>
+              <td class="no">No</td>
             </tr>
             <tr>
               <td><strong>Data sovereignty</strong></td>
@@ -222,6 +229,7 @@
               <td class="no">None</td>
               <td class="no">None</td>
               <td class="no">None</td>
+              <td class="partial">Local-first</td>
             </tr>
             <tr>
               <td><strong>Identity model</strong></td>
@@ -230,6 +238,7 @@
               <td class="no">None</td>
               <td class="no">None</td>
               <td class="no">API keys only</td>
+              <td class="no">None</td>
             </tr>
             <tr>
               <td><strong>Domain model</strong></td>
@@ -238,6 +247,7 @@
               <td class="partial">Crew roles</td>
               <td class="no">None</td>
               <td class="no">None</td>
+              <td class="partial">Skills / plugins</td>
             </tr>
             <tr>
               <td><strong>Self-sovereign deploy</strong></td>
@@ -246,6 +256,7 @@
               <td class="no">Centralized</td>
               <td class="no">Centralized</td>
               <td class="no">OpenAI hosted</td>
+              <td class="yes">Self-hosted</td>
             </tr>
             <tr>
               <td><strong>Vendor lock-in</strong></td>
@@ -254,6 +265,7 @@
               <td class="partial">Moderate</td>
               <td class="partial">Moderate</td>
               <td class="no">OpenAI only</td>
+              <td class="yes">Low (open source)</td>
             </tr>
           </tbody>
         </table>
@@ -359,6 +371,50 @@
           federation.
         </li>
       </ul>
+
+      <!-- ─── vs OpenClaw ─── -->
+      <h2 id="vs-openclaw">vs OpenClaw</h2>
+      <p>
+        <a href="https://openclaw.ai" rel="noopener">OpenClaw</a> is an open-source personal AI assistant
+        that runs on your local machine and communicates through chat apps like
+        WhatsApp, Telegram, Discord, Slack, and iMessage. It's LLM-powered,
+        extensible through skills and plugins, and designed for individual
+        productivity.
+      </p>
+
+      <h3>Where they differ</h3>
+      <ul>
+        <li>
+          <strong>Scope:</strong> OpenClaw is a <strong>personal assistant</strong>
+          for a single user on a single machine. Weblisk is a
+          <strong>multi-agent platform</strong> for cross-organization
+          collaboration across federated hubs.
+        </li>
+        <li>
+          <strong>Agent model:</strong> OpenClaw runs one LLM-powered agent
+          with extensible skills. Weblisk orchestrates many autonomous agents
+          under domain controllers, with or without LLMs.
+        </li>
+        <li>
+          <strong>Federation:</strong> OpenClaw has no concept of multi-org
+          federation — it's designed for personal use. Weblisk's hub network
+          enables agents across different organizations to collaborate through
+          cryptographic data contracts.
+        </li>
+        <li>
+          <strong>Interface:</strong> OpenClaw surfaces through messaging apps
+          (chat-first). Weblisk agents communicate through a typed protocol
+          with capability declarations, audit trails, and structured messages.
+        </li>
+      </ul>
+
+      <div class="tip">
+        <strong>Different goals, different layers.</strong> OpenClaw gives you
+        a powerful personal AI assistant. Weblisk gives you a protocol for
+        autonomous agents that collaborate at organizational scale. You could
+        build a personal assistant on Weblisk, but Weblisk's real strength is
+        what happens when agents need to work across trust boundaries.
+      </div>
 
       <!-- ─── vs Protocols ─── -->
       <h2 id="vs-protocols">vs MCP and A2A</h2>
@@ -509,6 +565,10 @@
               <td><strong>AutoGen</strong> — purpose-built for agent conversations</td>
             </tr>
             <tr>
+              <td>Run a personal AI assistant on your machine</td>
+              <td><strong>OpenClaw</strong> — self-hosted chat-app assistant with skills</td>
+            </tr>
+            <tr>
               <td>Connect an LLM to external tools</td>
               <td><strong>MCP</strong> — standardized tool integration</td>
             </tr>
@@ -562,7 +622,8 @@
             <a href="/docs/quick-start.html">Get Started</a>
             <a href="/docs/index.html">Documentation</a>
             <a href="/features.html">Features</a>
-            <a href="/templates/index.html">Templates</a>
+            <a href="/marketplace/index.html">Marketplace</a>
+            <a href="/hub/index.html">Hub</a>
             <a href="/server/index.html">Server</a>
             <a href="/blueprints/index.html">Blueprints</a>
             <a href="/agents/index.html">Agents</a>
@@ -573,6 +634,7 @@
             <a href="https://github.com/avaropoint/weblisk">GitHub</a>
             <a href="https://x.com/weblisk">X (Twitter)</a>
             <a href="https://discord.gg/5CetAq9EgZ">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint">Sponsor</a>
           </div>
         </div>
       </div>

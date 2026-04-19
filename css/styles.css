@@ -2562,7 +2562,7 @@ select.input {
 }
 
 .pro-hero .accent {
-  color: var(--wl-accent);
+  color: var(--wl-primary);
 }
 
 .pro-hero p {

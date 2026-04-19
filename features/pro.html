@@ -177,7 +177,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-analytics" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Cookie-free page view and event tracking via <code>navigator.sendBeacon</code>. Zero impact on page performance.</p>
+                  <p class="feature-demo-desc">Cookie-free page view and event tracking via <code>navigator.sendBeacon</code>. Zero impact on page performance.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
                     <button class="btn btn-sm" id="btn-track-event">Track Event</button>
                     <button class="btn btn-sm btn-outline" id="btn-track-timing">Track Timing</button>
@@ -239,7 +239,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-ab" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Hash-based deterministic variant assignment. Persists across sessions via localStorage.</p>
+                  <p class="feature-demo-desc">Hash-based deterministic variant assignment. Persists across sessions via localStorage.</p>
                   <div class="ab-variants">
                     <div class="ab-variant" data-variant="control">Control <span class="ab-variant-label"></span></div>
                     <div class="ab-variant" data-variant="blue-cta">Blue CTA <span class="ab-variant-label"></span></div>
@@ -296,7 +296,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-table" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Sortable, filterable, paginated tables with CSV export — all from a single function call.</p>
+                  <p class="feature-demo-desc">Sortable, filterable, paginated tables with CSV export — all from a single function call.</p>
                   <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem">
                     <button class="btn btn-sm btn-outline" id="btn-table-export">Export CSV</button>
                     <span id="table-row-count" style="font-size:0.75rem;color:var(--wl-text-dim);margin-left:auto"></span>
@@ -364,7 +364,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-chart" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Pure DOM SVG charts — bar, line, pie. No canvas, no dependencies, accessible.</p>
+                  <p class="feature-demo-desc">Pure DOM SVG charts — bar, line, pie. No canvas, no dependencies, accessible.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
                     <button class="btn btn-sm" data-chart="bar">Bar</button>
                     <button class="btn btn-sm btn-outline" data-chart="line">Line</button>
@@ -426,7 +426,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-form" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Declarative validation via <code>data-validate</code> attributes. Async submit with loading states.</p>
+                  <p class="feature-demo-desc">Declarative validation via <code>data-validate</code> attributes. Async submit with loading states.</p>
                   <form id="pro-form" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.5rem">
                     <input type="email" name="email" placeholder="Email" data-validate="required|email"
                       style="padding:0.45rem 0.75rem;border-radius:6px;border:1px solid var(--wl-border);background:var(--wl-bg);color:var(--wl-text);font-size:0.85rem">
@@ -485,7 +485,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-auth" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">JWT decode, token lifecycle signals, session management. Works with any backend.</p>
+                  <p class="feature-demo-desc">JWT decode, token lifecycle signals, session management. Works with any backend.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
                     <button class="btn btn-sm" id="btn-auth-login">Simulate Login</button>
                     <button class="btn btn-sm btn-outline" id="btn-auth-logout">Logout</button>
@@ -551,7 +551,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-toast" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Accessible notification system with auto-dismiss, stacking, and theming.</p>
+                  <p class="feature-demo-desc">Accessible notification system with auto-dismiss, stacking, and theming.</p>
                   <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
                     <button class="btn btn-sm" data-toast="info">Info</button>
                     <button class="btn btn-sm" data-toast="success" style="--btn-bg:#16a34a;--btn-border:#16a34a">Success</button>
@@ -608,7 +608,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-tabs" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">ARIA-compliant tablist with keyboard navigation (Arrow keys, Home, End).</p>
+                  <p class="feature-demo-desc">ARIA-compliant tablist with keyboard navigation (Arrow keys, Home, End).</p>
                   <div data-tabs class="pro-tabs">
                     <div role="tablist">
                       <button role="tab" aria-controls="panel-overview">Overview</button>
@@ -674,7 +674,7 @@
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-crdt" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Conflict-free replicated data types for offline-first collaboration.</p>
+                  <p class="feature-demo-desc">Conflict-free replicated data types for offline-first collaboration.</p>
                   <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
                     <button class="btn btn-sm" id="btn-crdt-inc">Increment Counter</button>
                     <button class="btn btn-sm btn-outline" id="btn-crdt-merge">Simulate Merge</button>
@@ -735,7 +735,7 @@ nodeB<span class="syn-p">.</span><span class="syn-f">merge</span><span class="sy
             <div class="feature-demo-body">
               <div class="feature-demo-preview">
                 <div id="demo-pay" style="width:100%">
-                  <p style="font-size:0.85rem;color:var(--wl-text-muted);margin:0 0 0.5rem">Wraps the browser Payment Request API. One function call for checkout — works with any payment processor.</p>
+                  <p class="feature-demo-desc">Wraps the browser Payment Request API. One function call for checkout — works with any payment processor.</p>
                   <pre class="demo-output" id="output-pay">import { pay } from 'weblisk/pro/pay.js';
 
 const result = await pay({

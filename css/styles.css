@@ -1121,7 +1121,7 @@ button.nav-toggle {
 }
 
 .feature-card p {
-  font-size: 0.925rem;
+  font-size: 0.9rem;
   color: var(--wl-text-muted);
   line-height: 1.6;
 }
@@ -1204,7 +1204,7 @@ button.nav-toggle {
 .comparison-table td {
   padding: 1rem 1.25rem;
   text-align: left;
-  font-size: 0.925rem;
+  font-size: 0.9rem;
 }
 
 .comparison-table thead {
@@ -1734,13 +1734,13 @@ button.nav-toggle {
 }
 
 .page-header h1 {
-  font-size: 1.75rem;
+  font-size: 2rem;
   margin-bottom: 0.25rem;
 }
 
 .page-header p {
   color: var(--wl-text-muted);
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 
@@ -2042,7 +2042,7 @@ select.input {
 
 .demo-card h3 {
   padding: 1rem 1.25rem 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -2050,7 +2050,7 @@ select.input {
 
 .demo-card>p {
   padding: 0.5rem 1.25rem 0;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--wl-text-muted);
   line-height: 1.5;
 }
@@ -2188,7 +2188,7 @@ select.input {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 0.82rem;
+  font-size: 0.8125rem;
   border: 1px solid var(--wl-border);
   border-radius: var(--wl-radius);
   overflow: hidden;
@@ -2309,7 +2309,7 @@ select.input {
   justify-content: center;
   gap: 0.75rem;
   padding: 0.75rem 0 0.25rem;
-  font-size: 0.82rem;
+  font-size: 0.8125rem;
   color: var(--wl-text-dim);
 }
 
@@ -2319,7 +2319,7 @@ select.input {
   border-radius: var(--wl-radius);
   background: var(--wl-surface);
   color: var(--wl-text);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
@@ -2380,7 +2380,7 @@ select.input {
   padding: 0.75rem 1rem;
   border-radius: var(--wl-radius);
   border: 2px solid var(--wl-border);
-  font-size: 0.82rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--wl-text-dim);
   transition: all 0.25s;
@@ -2434,7 +2434,7 @@ select.input {
   background: none;
   cursor: pointer;
   color: var(--wl-text-dim);
-  font-size: 0.82rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
@@ -2542,7 +2542,7 @@ select.input {
 }
 
 .integration-card p {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--wl-text-muted);
 }
 
@@ -2736,6 +2736,12 @@ select.input {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.feature-demo-desc {
+  font-size: 0.85rem;
+  color: var(--wl-text-muted);
+  margin: 0 0 0.5rem;
 }
 
 .feature-demo-actions {
@@ -3053,6 +3059,6 @@ select.input {
 
 .template-cmd {
   font-family: var(--wl-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--wl-text-muted);
 }

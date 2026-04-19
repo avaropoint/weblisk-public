@@ -38,6 +38,12 @@
   <!-- Templates -->
   <url><loc>https://weblisk.dev/templates/index.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
+  <!-- Marketplace -->
+  <url><loc>https://weblisk.dev/marketplace/index.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Hub -->
+  <url><loc>https://weblisk.dev/hub/index.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
   <!-- Feature Demos -->
   <url><loc>https://weblisk.dev/features/core.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://weblisk.dev/features/state.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Controllers — Weblisk</title>
+  <meta name="description"
+    content="Domain controllers are the business intelligence layer — receiving tasks, decomposing them into multi-agent workflows, dispatching to specialised agents, and aggregating results.">
+  <link rel="canonical" href="https://weblisk.dev/server/domains.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Domain Controllers — Weblisk">
+  <meta property="og:description"
+    content="Domain controllers are the business intelligence layer — receiving tasks, decomposing them into multi-agent workflows, dispatching to specialised agents, and aggregating results.">
+  <meta property="og:url" content="https://weblisk.dev/server/domains.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Domain Controllers — Weblisk">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description" content="Domain controllers — business intelligence layer for multi-agent workflows, agent dispatch, result aggregation, and quality gates.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css?v=11">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Domain Controllers — Weblisk",
+    "description": "Domain controllers are the business intelligence layer — receiving tasks, decomposing them into multi-agent workflows, dispatching to specialised agents, and aggregating results.",
+    "url": "https://weblisk.dev/server/domains.html",
+    "datePublished": "2026-01-15",
+    "dateModified": "2026-04-20",
+    "headline": "Domain Controllers — Weblisk",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Server", "item": "https://weblisk.dev/server/" },
+      { "@type": "ListItem", "position": 3, "name": "Domain Controllers", "item": "https://weblisk.dev/server/domains.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/index.html" class="brand">
+        <img src="/images/mark/logo.svg" alt="" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/docs/index.html" class="nav-link">Docs</a>
+        <a href="/features.html" class="nav-link">Features</a>
+        <a href="/server/index.html" class="nav-link active">Server</a>
+        <a href="/blueprints/index.html" class="nav-link">Blueprints</a>
+        <a href="/marketplace/index.html" class="nav-link">Marketplace</a>
+        <a href="/hub/index.html" class="nav-link">Hub</a>
+        <a href="/agents/index.html" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Server navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Server overview links">
+        <a href="/server/index.html">Introduction</a>
+        <a href="/server/specification.html">Specification</a>
+        <a href="/server/protocols.html">Protocols</a>
+      </nav>
+      <h3>Architecture</h3>
+      <nav aria-label="Architecture links">
+        <a href="/server/hub.html">Hub</a>
+        <a href="/server/domains.html" aria-current="page" class="active">Domains</a>
+        <a href="/server/comparison.html">Comparison</a>
+        <a href="/server/security.html">Security</a>
+      </nav>
+      <h3>Implementations</h3>
+      <nav aria-label="Server implementation links">
+        <a href="/server/implementations.html">Overview</a>
+        <a href="/server/go.html">Go <span class="pro-pill">Ref</span></a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/blueprints/index.html">Blueprints</a>
+        <a href="/agents/index.html">Agents</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <div class="docs-breadcrumb" aria-label="Breadcrumb">
+        <a href="/index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/server/index.html">Server</a>
+        <span aria-hidden="true">/</span>
+        <span>Domain Controllers</span>
+      </div>
+
+      <h1>Domain Controllers</h1>
+      <p class="lead">The business intelligence layer of the Weblisk architecture. Domain controllers sit between
+        the orchestrator and work agents — receiving business-level tasks, decomposing them into discrete work units,
+        dispatching those units to specialised agents, aggregating results, and feeding outcomes back into the
+        continuous optimisation lifecycle.</p>
+
+      <p>Nothing enters or leaves a business function without the domain controller's knowledge and approval.
+        It is the director: it understands the process, the rules, the data contracts, and the quality gates
+        that make each business function operate correctly.</p>
+
+      <!-- ─── Architecture ─── -->
+      <h2 id="architecture">Architecture</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Relationship to other components</span>
+        </div>
+        <div class="code-body">
+          <pre>┌──────────────────────────────────────────────────────┐
+│                   Orchestrator                       │
+│    Registration · Routing · Security · Discovery     │
+└────────────┬────────────────────┬────────────────────┘
+             │ task               │ task
+             ▼                    ▼
+ ┌─────────────────┐  ┌─────────────────┐
+ │  SEO Domain      │  │  Ops Domain      │
+ │  (controller)    │  │  (controller)    │
+ └──┬──────┬───────┘  └──┬──────┬───────┘
+    │      │              │      │
+    ▼      ▼              ▼      ▼
+ ┌─────┐┌─────┐       ┌─────┐┌─────┐
+ │ seo ││a11y │       │ cron││email│
+ │ anlz││chkr │       │ agnt││agnt │
+ └─────┘└─────┘       └─────┘└─────┘
+  work     work        infra   infra
+  agents   agents      agents  agents</pre>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Orchestrator</strong></td><td>Coordinates between domains. Manages registration, discovery, security, and audit for the entire system.</td></tr>
+          <tr><td><strong>Domain controller</strong></td><td>Directs a business function. Owns one or more workflows, dispatches to agents, aggregates results, enforces quality gates. A domain IS an agent (implements the same 5 protocol endpoints) but with additional responsibilities.</td></tr>
+          <tr><td><strong>Work agents</strong></td><td>Perform specific tasks dispatched by a domain. They have no independent initiative — they receive input, execute, return output.</td></tr>
+          <tr><td><strong>Infrastructure agents</strong></td><td>System-level utilities (sync, cron, webhook, email). Any domain or the orchestrator can use them. They are not owned by a specific domain.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ─── Manifest ─── -->
+      <h2 id="manifest">Domain Manifest</h2>
+      <p>A domain controller registers with the orchestrator using the standard <code>POST /v1/register</code> flow.
+        Its manifest uses the same <code>AgentManifest</code> structure with domain-specific fields:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">SEO domain manifest</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">{</span>
+  <span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"seo"</span><span class="syn-p">,</span>
+  <span class="syn-a">"type"</span><span class="syn-p">:</span> <span class="syn-s">"domain"</span><span class="syn-p">,</span>
+  <span class="syn-a">"version"</span><span class="syn-p">:</span> <span class="syn-s">"1.0.0"</span><span class="syn-p">,</span>
+  <span class="syn-a">"description"</span><span class="syn-p">:</span> <span class="syn-s">"SEO optimization — audits, recommendations, and automated fixes"</span><span class="syn-p">,</span>
+  <span class="syn-a">"url"</span><span class="syn-p">:</span> <span class="syn-s">"http://localhost:9700"</span><span class="syn-p">,</span>
+  <span class="syn-a">"public_key"</span><span class="syn-p">:</span> <span class="syn-s">"&lt;hex Ed25519 public key&gt;"</span><span class="syn-p">,</span>
+  <span class="syn-a">"capabilities"</span><span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"agent:message"</span><span class="syn-p">,</span> <span class="syn-a">"resources"</span><span class="syn-p">:</span> <span class="syn-p">[]},</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"workflow:execute"</span><span class="syn-p">,</span> <span class="syn-a">"resources"</span><span class="syn-p">:</span> <span class="syn-p">[]}</span>
+  <span class="syn-p">],</span>
+  <span class="syn-a">"inputs"</span><span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"target_files"</span><span class="syn-p">,</span> <span class="syn-a">"type"</span><span class="syn-p">:</span> <span class="syn-s">"file_list"</span><span class="syn-p">,</span> <span class="syn-a">"description"</span><span class="syn-p">:</span> <span class="syn-s">"Files to optimize"</span><span class="syn-p">}</span>
+  <span class="syn-p">],</span>
+  <span class="syn-a">"outputs"</span><span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"domain_report"</span><span class="syn-p">,</span> <span class="syn-a">"type"</span><span class="syn-p">:</span> <span class="syn-s">"json"</span><span class="syn-p">,</span> <span class="syn-a">"description"</span><span class="syn-p">:</span> <span class="syn-s">"Aggregated results with recommendations"</span><span class="syn-p">}</span>
+  <span class="syn-p">],</span>
+  <span class="syn-a">"approval"</span><span class="syn-p">:</span> <span class="syn-s">"required"</span><span class="syn-p">,</span>
+  <span class="syn-a">"required_agents"</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">"seo-analyzer"</span><span class="syn-p">,</span> <span class="syn-s">"a11y-checker"</span><span class="syn-p">],</span>
+  <span class="syn-a">"workflows"</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">"seo-audit"</span><span class="syn-p">,</span> <span class="syn-s">"seo-optimize"</span><span class="syn-p">]</span>
+<span class="syn-p">}</span></pre>
+        </div>
+      </div>
+
+      <h3>Domain-Specific Fields</h3>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>type</code></td><td>string</td><td>Yes</td><td>MUST be <code>"domain"</code> (vs <code>"agent"</code> or <code>"infrastructure"</code>)</td></tr>
+          <tr><td><code>required_agents</code></td><td>[]string</td><td>Yes</td><td>Agent names this domain dispatches to</td></tr>
+          <tr><td><code>workflows</code></td><td>[]string</td><td>Yes</td><td>Workflow names this domain supports</td></tr>
+        </tbody>
+      </table>
+      <p>The <code>type</code> field tells the orchestrator how to route tasks and track dependencies.</p>
+
+      <!-- ─── Registration ─── -->
+      <h2 id="registration">Registration &amp; Dependency Verification</h2>
+      <p>Domain registration follows the standard protocol with additional orchestrator behaviour:</p>
+      <ol>
+        <li>Domain sends <code>RegisterRequest</code> (same as any agent)</li>
+        <li>Orchestrator verifies signature and identity (standard flow)</li>
+        <li>Orchestrator reads <code>manifest.type = "domain"</code></li>
+        <li>Orchestrator reads <code>manifest.required_agents</code></li>
+        <li>For each required agent: check if present in the registry
+          <ul>
+            <li>If ALL present → domain status = <code>"online"</code></li>
+            <li>If ANY missing → domain status = <code>"degraded"</code> (log warning with missing agents)</li>
+          </ul>
+        </li>
+        <li>Issue token and respond (standard flow)</li>
+        <li>Broadcast service directory (standard flow)</li>
+      </ol>
+      <p><strong>Late agent registration:</strong> when a missing agent registers later, the orchestrator checks if any
+        domain requires it. If the domain was degraded and all required agents are now present, the domain is promoted
+        to <code>"online"</code>. This allows agents and domains to start in any order.</p>
+
+      <!-- ─── Workflows ─── -->
+      <h2 id="workflows">Workflow Specification</h2>
+      <p>Every domain defines one or more workflows — multi-step, multi-agent processes that accomplish a business function.
+        Workflows are defined in the domain's blueprint file (in <code>domains/</code>), not in the runtime manifest
+        (which only lists workflow names).</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">seo-audit workflow</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-a">workflow</span><span class="syn-p">:</span> seo-audit
+<span class="syn-a">description</span><span class="syn-p">:</span> Full SEO audit — scan, analyze, check accessibility, report
+<span class="syn-a">trigger</span><span class="syn-p">:</span> action = <span class="syn-s">"audit"</span>
+
+<span class="syn-a">phases</span><span class="syn-p">:</span>
+  - <span class="syn-a">name</span><span class="syn-p">:</span> scan
+    <span class="syn-a">agent</span><span class="syn-p">:</span> seo-analyzer
+    <span class="syn-a">action</span><span class="syn-p">:</span> scan_html
+    <span class="syn-a">input</span><span class="syn-p">:</span>
+      <span class="syn-a">html_files</span><span class="syn-p">:</span> $task.payload.files
+    <span class="syn-a">output</span><span class="syn-p">:</span> scan_results
+    <span class="syn-a">timeout</span><span class="syn-p">:</span> <span class="syn-n">60</span>
+
+  - <span class="syn-a">name</span><span class="syn-p">:</span> analyze
+    <span class="syn-a">agent</span><span class="syn-p">:</span> seo-analyzer
+    <span class="syn-a">action</span><span class="syn-p">:</span> analyze_metadata
+    <span class="syn-a">input</span><span class="syn-p">:</span>
+      <span class="syn-a">metadata</span><span class="syn-p">:</span> $phases.scan.output.metadata
+    <span class="syn-a">output</span><span class="syn-p">:</span> analysis_results
+    <span class="syn-a">timeout</span><span class="syn-p">:</span> <span class="syn-n">120</span>
+    <span class="syn-a">depends_on</span><span class="syn-p">:</span> <span class="syn-p">[</span>scan<span class="syn-p">]</span>
+
+  - <span class="syn-a">name</span><span class="syn-p">:</span> accessibility
+    <span class="syn-a">agent</span><span class="syn-p">:</span> a11y-checker
+    <span class="syn-a">action</span><span class="syn-p">:</span> check_images
+    <span class="syn-a">input</span><span class="syn-p">:</span>
+      <span class="syn-a">images</span><span class="syn-p">:</span> $phases.scan.output.images
+    <span class="syn-a">output</span><span class="syn-p">:</span> a11y_results
+    <span class="syn-a">timeout</span><span class="syn-p">:</span> <span class="syn-n">60</span>
+    <span class="syn-a">depends_on</span><span class="syn-p">:</span> <span class="syn-p">[</span>scan<span class="syn-p">]</span>
+
+  - <span class="syn-a">name</span><span class="syn-p">:</span> synthesize
+    <span class="syn-a">agent</span><span class="syn-p">:</span> self
+    <span class="syn-a">action</span><span class="syn-p">:</span> aggregate_results
+    <span class="syn-a">input</span><span class="syn-p">:</span>
+      <span class="syn-a">analysis</span><span class="syn-p">:</span> $phases.analyze.output
+      <span class="syn-a">a11y</span><span class="syn-p">:</span> $phases.accessibility.output
+    <span class="syn-a">output</span><span class="syn-p">:</span> final_report
+    <span class="syn-a">depends_on</span><span class="syn-p">:</span> <span class="syn-p">[</span>analyze<span class="syn-p">,</span> accessibility<span class="syn-p">]</span>
+    <span class="syn-a">approval</span><span class="syn-p">:</span> required</pre>
+        </div>
+      </div>
+
+      <h3>Phase Fields</h3>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Required</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>name</code></td><td>Yes</td><td>Unique identifier within this workflow</td></tr>
+          <tr><td><code>agent</code></td><td>Yes</td><td>Target agent name, or <code>"self"</code> for domain-internal logic</td></tr>
+          <tr><td><code>action</code></td><td>Yes</td><td><code>HandleMessage</code> action to invoke on target</td></tr>
+          <tr><td><code>input</code></td><td>Yes</td><td>Reference expressions binding data from task, phases, entity, or config</td></tr>
+          <tr><td><code>output</code></td><td>Yes</td><td>Key name for phase result — used in <code>$phases.&lt;output&gt;</code> references</td></tr>
+          <tr><td><code>depends_on</code></td><td>No</td><td>Phases that must complete first; drives execution order</td></tr>
+          <tr><td><code>timeout</code></td><td>No</td><td>Phase timeout in seconds (default: 300)</td></tr>
+          <tr><td><code>approval</code></td><td>No</td><td><code>"required"</code> or <code>"auto"</code> (default: <code>"auto"</code>)</td></tr>
+          <tr><td><code>on_error</code></td><td>No</td><td><code>"fail"</code> (default), <code>"skip"</code>, or <code>"retry"</code></td></tr>
+          <tr><td><code>max_retries</code></td><td>No</td><td>Retry count when on_error = <code>"retry"</code> (default: 0)</td></tr>
+          <tr><td><code>condition</code></td><td>No</td><td>Expression that must be truthy to execute phase</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Execution Order</h3>
+      <ol>
+        <li>Phases with no <code>depends_on</code> run first (in parallel if multiple)</li>
+        <li>A phase starts only after ALL of its <code>depends_on</code> phases complete</li>
+        <li>If a phase fails and <code>on_error = "fail"</code>, the entire workflow fails</li>
+        <li>If <code>on_error = "skip"</code>, the phase is marked skipped and dependents proceed without its output</li>
+        <li>If <code>on_error = "retry"</code>, the phase retries up to <code>max_retries</code> with 1s, 2s, 4s backoff</li>
+        <li>Phases with <code>agent: "self"</code> execute within the domain controller itself (for aggregation, validation, decisions)</li>
+        <li>If <code>approval: "required"</code>, execution pauses until approval is received before exposing results</li>
+      </ol>
+
+      <!-- ─── Reference Expressions ─── -->
+      <h2 id="reference-expressions">Reference Expressions</h2>
+      <p>Phase inputs use reference expressions to bind data from the task, previous phase outputs, entity context,
+        or domain configuration:</p>
+      <table>
+        <thead>
+          <tr><th>Root</th><th>Resolves To</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>$task.payload.&lt;key&gt;</code></td><td>Field from the original <code>TaskRequest.payload</code></td></tr>
+          <tr><td><code>$task.context.&lt;key&gt;</code></td><td>Field from the <code>TaskContext</code></td></tr>
+          <tr><td><code>$phases.&lt;name&gt;.output</code></td><td>Full output map of a completed phase</td></tr>
+          <tr><td><code>$phases.&lt;name&gt;.output.&lt;key&gt;</code></td><td>Specific key from a phase's output map</td></tr>
+          <tr><td><code>$entity.&lt;key&gt;</code></td><td>Field from <code>EntityContext</code> (injected via task context)</td></tr>
+          <tr><td><code>$config.&lt;key&gt;</code></td><td>Domain-specific configuration value (set at startup)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Syntax</h3>
+      <ul>
+        <li><strong>Dot access:</strong> <code>$phases.scan.output.summary.score</code> — traverses nested maps</li>
+        <li><strong>Array index:</strong> <code>$phases.scan.output.files[0]</code> — access by index (out of bounds → <code>null</code>)</li>
+        <li><strong>Array expansion:</strong> <code>$phases.scan.output.files[*].metadata.images</code> — collects a nested field from every element into a flat array</li>
+        <li><strong>Literal passthrough:</strong> strings without <code>$</code> prefix are passed as-is (allows mixing references with constants)</li>
+      </ul>
+
+      <h3>Resolution Rules</h3>
+      <ol>
+        <li>Expressions MUST start with <code>$</code> — literals without <code>$</code> are passed through</li>
+        <li>Unresolvable references resolve to <code>null</code> (not an error)</li>
+        <li>If a <strong>required</strong> input resolves to <code>null</code>, the domain controller fails the phase with <code>"unresolved reference"</code></li>
+        <li>No type coercion — the resolved JSON value is passed as-is</li>
+        <li>Circular references are impossible by construction (<code>depends_on</code> creates a DAG)</li>
+      </ol>
+
+      <!-- ─── Execution Flow ─── -->
+      <h2 id="execution-flow">Workflow Execution Flow</h2>
+      <p>When a domain controller receives a task via <code>POST /v1/execute</code>:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Execution phases</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c">Phase 1 — Select workflow</span>
+  Match task.action against workflow triggers
+  If no match → return failed result: "unknown action"
+
+<span class="syn-c">Phase 2 — Initialize execution</span>
+  Create WorkflowExecution record:
+    id, workflow_name, domain_name, task_id
+    status: "running", started_at: now()
+
+<span class="syn-c">Phase 3 — Resolve execution order</span>
+  Topological sort of phases by depends_on
+  Group into levels: L0 (no deps), L1 (depend on L0), etc.
+  Verify no cycles (fail if circular dependency)
+
+<span class="syn-c">Phase 4 — Execute levels</span>
+  For each level (L0, L1, L2, ...):
+    For each phase in this level (<span class="syn-k">concurrently</span>):
+      a. Check condition (if set) — skip if falsy
+      b. Resolve input references from task + previous outputs
+      c. If agent = "self":
+           Execute domain's own HandleMessage
+         Else:
+           Look up agent in service directory
+           Build AgentMessage (from, to, action, payload)
+           Sign with domain's private key
+           POST to agent_url + /v1/message
+           Wait for response (with timeout)
+      d. Store phase result
+      e. If failed: apply on_error strategy
+
+<span class="syn-c">Phase 5 — Aggregate</span>
+  Collect all phase results
+  Build final TaskResult:
+    status: "success" | "failed" | "pending_approval"
+    summary, changes, observations, recommendations
+    metrics: {phases_total, completed, failed, duration_ms}
+  Sign result with domain's private key
+
+<span class="syn-c">Phase 6 — Record</span>
+  Store WorkflowExecution with all phase results
+  Emit observations and recommendations (for lifecycle)
+  Return TaskResult</pre>
+        </div>
+      </div>
+
+      <!-- ─── Agent Dispatch ─── -->
+      <h2 id="agent-dispatch">Agent Dispatch</h2>
+      <p>When a domain dispatches work to an agent, it uses direct messaging (<code>POST /v1/message</code>),
+        not the orchestrator's task endpoint. This keeps the orchestrator as a coordinator and the domain as the executor.</p>
+      <ol>
+        <li>Look up agent in service directory (populated during registration and updated via <code>/v1/services</code> broadcasts)</li>
+        <li>Build <code>AgentMessage</code>: from, to, type: "request", action, payload</li>
+        <li>Sign: <code>JSON.stringify({from, to, action, payload})</code></li>
+        <li><code>POST</code> to <code>agent_url + /v1/message</code></li>
+        <li>Parse response <code>AgentMessage</code></li>
+        <li>Extract <code>response.payload</code> as phase output</li>
+        <li>If agent unreachable:
+          <ol type="a">
+            <li>Check if channel exists → use channel</li>
+            <li>Request new channel from orchestrator → retry</li>
+            <li>If still unreachable → fail phase</li>
+          </ol>
+        </li>
+      </ol>
+
+      <div class="tip"><strong>No bypass:</strong> business tasks MUST flow through domain controllers. Work agents do not accept
+        tasks from arbitrary sources — only from their owning domain. Infrastructure agents accept tasks from any
+        authenticated source.</div>
+
+      <!-- ─── Result Aggregation ─── -->
+      <h2 id="result-aggregation">Result Aggregation</h2>
+      <p>The domain controller merges results from multiple agents into a coherent outcome:</p>
+      <ol>
+        <li>Collect all phase outputs</li>
+        <li>Merge observations: concatenate, deduplicate by target + element</li>
+        <li>Merge recommendations: concatenate, sort by priority, deduplicate</li>
+        <li>Merge proposed changes: group by file path, apply in order</li>
+        <li>Compute summary metrics: total observations, recommendations by priority, changes by action type, workflow duration</li>
+        <li>Apply domain-specific validation: reject conflicting recommendations, enforce business constraints, apply quality gates</li>
+        <li>Set overall status:
+          <ul>
+            <li><code>"success"</code> if all phases completed and no approval needed</li>
+            <li><code>"pending_approval"</code> if any phase or the workflow requires approval</li>
+            <li><code>"failed"</code> if any critical phase failed</li>
+          </ul>
+        </li>
+      </ol>
+
+      <!-- ─── HandleMessage Actions ─── -->
+      <h2 id="actions">Standard Actions</h2>
+      <p>Every domain controller MUST implement these actions:</p>
+      <table>
+        <thead>
+          <tr><th>Action</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>execute_workflow</code></td><td>Primary entry point. Invoked by the orchestrator via <code>POST /v1/execute</code>. Runs a named workflow and returns aggregated results.</td></tr>
+          <tr><td><code>get_status</code></td><td>Returns domain state: online/degraded, required agent availability, active and completed workflow counts.</td></tr>
+          <tr><td><code>get_workflows</code></td><td>Returns full workflow definitions. Runtime introspection endpoint for the orchestrator, CLI, and external tools.</td></tr>
+          <tr><td><code>workflow_history</code></td><td>Returns recent workflow executions with results.</td></tr>
+        </tbody>
+      </table>
+      <p>Custom actions are domain-specific and defined in each domain's blueprint file.</p>
+
+      <!-- ─── Entity Context ─── -->
+      <h2 id="entity-context">Entity Context</h2>
+      <p>Domains operate within the context of a business entity. The <code>EntityContext</code> provides:</p>
+      <ul>
+        <li>Entity identity (name, type, industry)</li>
+        <li>Market positioning and brand voice</li>
+        <li>Target audiences and their pain points</li>
+        <li>Competitors</li>
+        <li>Core keywords and topics</li>
+        <li>Digital assets</li>
+      </ul>
+      <p>Every domain SHOULD use entity context to ground its decisions in business reality. For example,
+        an SEO domain uses keywords and audiences to evaluate whether page titles target the right terms.
+        Entity context is injected via <code>TaskContext.entity</code> on every task execution.</p>
+
+      <!-- ─── Configuration ─── -->
+      <h2 id="configuration">Configuration</h2>
+      <p>Domains accept configuration at startup via environment variables (prefix <code>WL_DOMAIN_</code>)
+        or configuration files. Values are accessible in workflow reference expressions as <code>$config.&lt;key&gt;</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Environment variables</span>
+        </div>
+        <div class="code-body">
+          <pre>WL_DOMAIN_MAX_ISSUES_PER_FILE=50
+WL_DOMAIN_SCORE_THRESHOLD=70
+WL_DOMAIN_MEASUREMENT_WINDOW=86400</pre>
+        </div>
+      </div>
+      <p>Domain configuration is NOT part of the manifest or wire protocol — it is local to the domain process.</p>
+
+      <!-- ─── Port Convention ─── -->
+      <h2 id="ports">Port Convention</h2>
+      <table>
+        <thead>
+          <tr><th>Range</th><th>Assigned To</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>9700–9709</code></td><td>Domain controllers (SEO = 9700, future domains = 9701+)</td></tr>
+          <tr><td><code>9710+</code></td><td>Work agents</td></tr>
+          <tr><td><code>9750+</code></td><td>Infrastructure agents</td></tr>
+          <tr><td><code>9800</code></td><td>Orchestrator</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ─── Reference Domains ─── -->
+      <h2 id="reference-domains">Reference Domains</h2>
+      <p>Three reference domains ship with the specification:</p>
+      <div class="feature-grid" style="margin-top: 1rem">
+        <div class="feature-card">
+          <div class="feature-icon purple">
+            <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+          </div>
+          <h3>SEO</h3>
+          <p>Audits, recommendations, and automated fixes for search engine optimisation. Dispatches to
+            <code>seo-analyzer</code> and <code>a11y-checker</code>. Workflows: <code>seo-audit</code>, <code>seo-optimize</code>.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon cyan">
+            <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
+          </div>
+          <h3>Content</h3>
+          <p>Content analysis, metadata validation, and quality assessment. Dispatches to
+            <code>content-analyzer</code> and <code>meta-checker</code>.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">
+            <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i>
+          </div>
+          <h3>Health</h3>
+          <p>Uptime monitoring, performance auditing, and availability tracking. Dispatches to
+            <code>uptime-checker</code> and <code>perf-auditor</code>.</p>
+        </div>
+      </div>
+
+      <!-- ─── Implementation Notes ─── -->
+      <h2 id="implementation-notes">Implementation Notes</h2>
+      <ul>
+        <li><strong>Domain as agent:</strong> a domain controller implements the same 5 protocol endpoints as any agent. The workflow logic lives in <code>Execute</code> and <code>HandleMessage</code>.</li>
+        <li><strong>Generic workflow engine:</strong> the execution loop (resolve order, dispatch phases, collect results) is generic. A single implementation can serve any domain — only the workflow definitions and aggregation rules are domain-specific.</li>
+        <li><strong>Parallelism:</strong> phases at the same dependency level SHOULD execute concurrently.</li>
+        <li><strong>State persistence:</strong> workflow execution state SHOULD be persisted so that workflows survive restarts.</li>
+        <li><strong>Timeout cascade:</strong> a workflow-level timeout SHOULD be enforced in addition to per-phase timeouts.</li>
+        <li><strong>Idempotency:</strong> phases SHOULD be idempotent — if retried, the agent should produce the same output for the same input.</li>
+      </ul>
+
+      <!-- ─── Verification Checklist ─── -->
+      <h2 id="verification">Verification Checklist</h2>
+      <ul>
+        <li>Domain registers with <code>type: "domain"</code> in manifest</li>
+        <li>Orchestrator tracks domain status based on <code>required_agents</code> availability</li>
+        <li>Domain dispatches phases to agents via <code>POST /v1/message</code></li>
+        <li>Phases with <code>depends_on</code> wait for dependencies before executing</li>
+        <li>Phases at the same level execute concurrently</li>
+        <li>Phase outputs are resolvable via <code>$phases.&lt;name&gt;.output</code> references</li>
+        <li>Failed phases respect <code>on_error</code> strategy (fail, skip, retry)</li>
+        <li><code>agent: "self"</code> phases execute within the domain controller</li>
+        <li>Results from all phases are aggregated into a single <code>TaskResult</code></li>
+        <li>Observations and recommendations are emitted per workflow</li>
+        <li>Domain responds to <code>get_status</code> with agent availability</li>
+        <li>Domain responds to <code>get_workflows</code> with available workflows</li>
+        <li><code>WorkflowExecution</code> is recorded with all phase results</li>
+        <li>Workflow timeout cancels all remaining phases</li>
+        <li>Approval gates pause execution until approval is received</li>
+      </ul>
+
+      <div class="docs-nav-footer">
+        <a href="/server/hub.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Hub</a>
+        <a href="/server/comparison.html">Comparison <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/index.html" class="brand">
+            <img src="/images/mark/logo.svg" alt="" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">
+            The zero-dependency web platform — from browser to federated agent intelligence.
+          </p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/index.html">Documentation</a>
+            <a href="/features.html">Features</a>
+            <a href="/marketplace/index.html">Marketplace</a>
+            <a href="/hub/index.html">Hub</a>
+            <a href="/server/index.html">Server</a>
+            <a href="/blueprints/index.html">Blueprints</a>
+            <a href="/agents/index.html">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk">GitHub</a>
+            <a href="https://x.com/weblisk">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026
+            Made with <span class="heart" aria-label="love">&hearts;</span> by
+            <a href="https://avaropoint.com">Avaropoint</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/index.html" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Server Specification — Weblisk</title>
-  <meta name="description" content="The Weblisk Server Specification defines protocols, endpoints, and behaviour contracts for server implementations.">
+  <meta name="description" content="Weblisk Agent Protocol v1 — 5 agent endpoints, 11 orchestrator endpoints, Ed25519 identity, WLT tokens, structured errors, observability, and verification checklist.">
   <link rel="canonical" href="https://weblisk.dev/server/specification.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Server Specification — Weblisk">
-  <meta property="og:description" content="The Weblisk Server Specification defines protocols, endpoints, and behaviour contracts for server implementations.">
+  <meta property="og:description" content="Weblisk Agent Protocol v1 — 5 agent endpoints, 11 orchestrator endpoints, Ed25519 identity, WLT tokens, structured errors, observability, and verification checklist.">
   <meta property="og:url" content="https://weblisk.dev/server/specification.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Server Specification — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="The Weblisk Server Specification defines protocols, endpoints, and behaviour contracts for server implementations.">
+  <meta name="twitter:description" content="Weblisk Agent Protocol v1 — 5 agent endpoints, 11 orchestrator endpoints, Ed25519 identity, WLT tokens, structured errors, observability, and verification checklist.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -37,7 +37,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Server Specification — Weblisk",
-    "description": "The Weblisk Server Specification defines protocols, endpoints, and behaviour contracts for server implementations.",
+    "description": "Weblisk Agent Protocol v1 — 5 agent endpoints, 11 orchestrator endpoints, Ed25519 identity, WLT tokens, structured errors, observability, and verification checklist.",
     "url": "https://weblisk.dev/server/specification.html",
     "datePublished": "2026-01-15",
     "dateModified": "2026-04-20",
@@ -145,78 +145,371 @@
 
     <main class="docs-content" id="main-content">
       <h1>Server Specification</h1>
-      <p class="lead">The formal contract that every Weblisk server implementation must fulfil.</p>
+      <p class="lead">The formal contract that every Weblisk server implementation must fulfil — agent protocol, orchestrator endpoints, identity, and error handling.</p>
 
       <h2>Overview</h2>
-      <p>The Weblisk Server Specification defines a minimal set of endpoints, message formats, and lifecycle
-        behaviours. Any server that implements this spec is compatible with the Weblisk client framework,
-        any blueprint, and any agent.</p>
+      <p>The Weblisk Agent Protocol v1 defines how autonomous agents register with an orchestrator, receive tasks,
+        execute domain-specific logic, communicate with each other, and report results. All communication is
+        <strong>HTTP + JSON</strong>. Any implementation — regardless of language or platform — that conforms to
+        this specification is compatible with the Weblisk client framework, any blueprint, and any agent.</p>
+      <p>The specification covers two component types:</p>
+      <ul>
+        <li><strong>Agents</strong> — autonomous processes that expose 5 standard endpoints for describing themselves, executing tasks, reporting health, receiving messages, and accepting service directory updates</li>
+        <li><strong>Orchestrator</strong> — the central coordination service that manages registration, task routing, channel brokering, service discovery, audit logging, strategies, and approvals</li>
+      </ul>
+      <p>The protocol supports the continuous optimisation lifecycle: <strong>strategise → observe → recommend → execute → feedback</strong>.</p>
+
+      <h2>Conventions</h2>
+      <ul>
+        <li>All paths are prefixed with <code>/v1</code></li>
+        <li>All request/response bodies are <code>application/json</code></li>
+        <li>All timestamps are Unix epoch seconds (<code>int64</code>)</li>
+        <li>All signatures are hex-encoded Ed25519 signatures (128 hex chars)</li>
+        <li>All public keys are hex-encoded Ed25519 public keys (64 hex chars)</li>
+        <li>IDs are 32-character hex strings (16 random bytes)</li>
+        <li>Unknown JSON fields MUST be ignored (forward compatibility)</li>
+        <li>Request body limits: 1 MB default, 10 MB for task execution</li>
+        <li>Errors return <code>ErrorResponse</code> JSON — at minimum <code>{"error": "message"}</code></li>
+      </ul>
 
       <h2>Design Principles</h2>
       <ul>
         <li><strong>Minimal surface</strong> — only endpoints that every implementation needs</li>
         <li><strong>Transport agnostic</strong> — works over HTTP/1.1, HTTP/2, or HTTP/3</li>
-        <li><strong>Discovery-based</strong> — clients discover capabilities via a well-known manifest</li>
-        <li><strong>Versioned</strong> — every release is semantically versioned with backward compatibility guarantees</li>
+        <li><strong>Discovery-based</strong> — agents discover each other via the orchestrator's service directory</li>
+        <li><strong>Versioned</strong> — protocol versions are negotiated at registration; breaking changes only in major versions</li>
+        <li><strong>Signed everything</strong> — manifests, results, messages, and channel grants are all Ed25519-signed</li>
+        <li><strong>Forward compatible</strong> — unknown JSON fields are ignored; new optional fields can be added without breaking existing agents</li>
       </ul>
 
-      <h2>Required Endpoints</h2>
+      <h2>Agent Endpoints</h2>
+      <p>Every agent MUST serve these 5 endpoints on a single HTTP port:</p>
       <table>
         <thead>
-          <tr><th>Endpoint</th><th>Method</th><th>Description</th></tr>
+          <tr><th>Path</th><th>Method</th><th>Auth</th><th>Purpose</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>/.well-known/weblisk/health</code></td><td>GET</td><td>Health check — returns status and version</td></tr>
-          <tr><td><code>/.well-known/weblisk/manifest</code></td><td>GET</td><td>Server capabilities, loaded blueprints, active agents</td></tr>
-          <tr><td><code>/api/sync</code></td><td>POST</td><td>Client-to-server data synchronisation</td></tr>
-          <tr><td><code>/api/rpc</code></td><td>POST</td><td>Blueprint-generated RPC dispatch</td></tr>
+          <tr><td><code>/v1/describe</code></td><td>POST</td><td>No</td><td>Return the agent's <code>AgentManifest</code> — identity, capabilities, inputs, outputs</td></tr>
+          <tr><td><code>/v1/execute</code></td><td>POST</td><td>Yes</td><td>Execute a task; accepts <code>TaskRequest</code>, returns signed <code>TaskResult</code></td></tr>
+          <tr><td><code>/v1/health</code></td><td>GET</td><td>No</td><td>Health check — returns <code>HealthStatus</code> with name, version, uptime, metrics</td></tr>
+          <tr><td><code>/v1/message</code></td><td>POST</td><td>Yes</td><td>Agent-to-agent messaging — dispatches to handler by <code>action</code> field</td></tr>
+          <tr><td><code>/v1/services</code></td><td>POST</td><td>Yes</td><td>Accept service directory updates pushed by the orchestrator</td></tr>
         </tbody>
       </table>
 
-      <h2>Manifest Format</h2>
+      <h3>POST /v1/describe</h3>
+      <p>Returns the agent's full manifest. No auth required — this is how the orchestrator discovers agent capabilities.</p>
       <div class="code-window">
         <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">specification.yaml</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="spec-manifest"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">AgentManifest response</span>
         </div>
         <div class="code-body">
-          <pre id="spec-manifest"><span class="syn-c"># Weblisk Server Specification v1.0</span>
-
-<span class="syn-a">version</span><span class="syn-p">:</span> <span class="syn-s">1.0.0</span>
-<span class="syn-a">status</span><span class="syn-p">:</span> <span class="syn-s">stable</span>
-
-<span class="syn-a">endpoints</span><span class="syn-p">:</span>
-  <span class="syn-a">health</span><span class="syn-p">:</span>
-    <span class="syn-a">method</span><span class="syn-p">:</span> <span class="syn-s">GET</span>
-    <span class="syn-a">path</span><span class="syn-p">:</span>   <span class="syn-s">/.well-known/weblisk/health</span>
-    <span class="syn-a">response</span><span class="syn-p">:</span> <span class="syn-s">{ "status": "ok", "version": "1.0.0" }</span>
-
-  <span class="syn-a">manifest</span><span class="syn-p">:</span>
-    <span class="syn-a">method</span><span class="syn-p">:</span> <span class="syn-s">GET</span>
-    <span class="syn-a">path</span><span class="syn-p">:</span>   <span class="syn-s">/.well-known/weblisk/manifest</span>
-    <span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Returns server capabilities and loaded blueprints</span>
-
-  <span class="syn-a">sync</span><span class="syn-p">:</span>
-    <span class="syn-a">method</span><span class="syn-p">:</span> <span class="syn-s">POST</span>
-    <span class="syn-a">path</span><span class="syn-p">:</span>   <span class="syn-s">/api/sync</span>
-    <span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Client-to-server data synchronisation</span></pre>
+          <pre><span class="syn-p">{</span>
+  <span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"seo-analyzer"</span><span class="syn-p">,</span>
+  <span class="syn-a">"type"</span><span class="syn-p">:</span> <span class="syn-s">"agent"</span><span class="syn-p">,</span>
+  <span class="syn-a">"version"</span><span class="syn-p">:</span> <span class="syn-s">"1.0.0"</span><span class="syn-p">,</span>
+  <span class="syn-a">"description"</span><span class="syn-p">:</span> <span class="syn-s">"Scans HTML files and analyzes SEO metadata"</span><span class="syn-p">,</span>
+  <span class="syn-a">"url"</span><span class="syn-p">:</span> <span class="syn-s">"http://localhost:9710"</span><span class="syn-p">,</span>
+  <span class="syn-a">"public_key"</span><span class="syn-p">:</span> <span class="syn-s">"&lt;64-char hex Ed25519 public key&gt;"</span><span class="syn-p">,</span>
+  <span class="syn-a">"capabilities"</span><span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"file:read"</span><span class="syn-p">,</span> <span class="syn-a">"resources"</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">"app/**/*.html"</span><span class="syn-p">]},</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"llm:chat"</span><span class="syn-p">,</span> <span class="syn-a">"resources"</span><span class="syn-p">:</span> <span class="syn-p">[]},</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"agent:message"</span><span class="syn-p">,</span> <span class="syn-a">"resources"</span><span class="syn-p">:</span> <span class="syn-p">[]}</span>
+  <span class="syn-p">],</span>
+  <span class="syn-a">"inputs"</span><span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"html_files"</span><span class="syn-p">,</span> <span class="syn-a">"type"</span><span class="syn-p">:</span> <span class="syn-s">"file_list"</span><span class="syn-p">,</span> <span class="syn-a">"description"</span><span class="syn-p">:</span> <span class="syn-s">"HTML files to analyze"</span><span class="syn-p">}</span>
+  <span class="syn-p">],</span>
+  <span class="syn-a">"outputs"</span><span class="syn-p">:</span> <span class="syn-p">[</span>
+    <span class="syn-p">{</span><span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"seo_report"</span><span class="syn-p">,</span> <span class="syn-a">"type"</span><span class="syn-p">:</span> <span class="syn-s">"json"</span><span class="syn-p">,</span> <span class="syn-a">"description"</span><span class="syn-p">:</span> <span class="syn-s">"SEO analysis with proposed changes"</span><span class="syn-p">}</span>
+  <span class="syn-p">],</span>
+  <span class="syn-a">"collaborators"</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">"a11y-checker"</span><span class="syn-p">],</span>
+  <span class="syn-a">"approval"</span><span class="syn-p">:</span> <span class="syn-s">"required"</span><span class="syn-p">,</span>
+  <span class="syn-a">"max_concurrent"</span><span class="syn-p">:</span> <span class="syn-n">5</span>
+<span class="syn-p">}</span></pre>
         </div>
       </div>
 
-      <h2>Lifecycle</h2>
-      <p>A compliant server follows this lifecycle:</p>
+      <h3>POST /v1/execute</h3>
+      <p>Executes a task. The agent MUST validate the request has a non-empty <code>id</code> and <code>token</code>,
+        update its internal service directory from <code>context.services</code>, execute domain-specific logic,
+        and return a signed <code>TaskResult</code> with <code>task_id</code> matching the request <code>id</code>.</p>
+      <p>Task results include a <code>status</code> of <code>success</code>, <code>failed</code>, or <code>pending_approval</code>.
+        Results MAY contain <code>changes</code> (proposed file modifications), <code>observations</code> (measurements),
+        and <code>recommendations</code> (suggested actions).</p>
+
+      <h3>POST /v1/message</h3>
+      <p>Direct agent-to-agent messaging. The agent MUST verify the sender's signature against their public key from
+        the service directory, dispatch to the appropriate handler based on the <code>action</code> field, and sign
+        the response. Signature covers: <code>JSON.stringify({from, to, action, payload})</code>.</p>
+
+      <h2>Orchestrator Endpoints</h2>
+      <p>The orchestrator is the central coordination service. It does NOT execute agent logic — it manages registration, routing, security, and discovery.</p>
+      <table>
+        <thead>
+          <tr><th>Path</th><th>Method</th><th>Auth</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/v1/register</code></td><td>POST</td><td>No</td><td>Agent registration — this is how agents get auth tokens</td></tr>
+          <tr><td><code>/v1/register</code></td><td>DELETE</td><td>Yes</td><td>Agent deregistration — removes from registry and broadcasts</td></tr>
+          <tr><td><code>/v1/task</code></td><td>POST</td><td>Yes</td><td>Submit a task — routes to target agent via domain or directly</td></tr>
+          <tr><td><code>/v1/channel</code></td><td>POST</td><td>Yes</td><td>Broker a secure agent-to-agent channel (requires <code>agent:message</code> capability)</td></tr>
+          <tr><td><code>/v1/services</code></td><td>GET</td><td>Yes</td><td>Current service directory — all registered agents</td></tr>
+          <tr><td><code>/v1/health</code></td><td>GET</td><td>No</td><td>Orchestrator health with agent/domain/channel counts</td></tr>
+          <tr><td><code>/v1/audit</code></td><td>GET</td><td>Yes</td><td>Append-only audit log — every operation recorded</td></tr>
+          <tr><td><code>/v1/strategy</code></td><td>GET/POST</td><td>Yes</td><td>Create, update, and list business strategies</td></tr>
+          <tr><td><code>/v1/context</code></td><td>GET/POST</td><td>Yes</td><td>Set and retrieve entity context (company, project, site)</td></tr>
+          <tr><td><code>/v1/observations</code></td><td>GET</td><td>Yes</td><td>Observation history with filtering and pagination</td></tr>
+          <tr><td><code>/v1/approve</code></td><td>GET/POST</td><td>Yes</td><td>List pending recommendations; approve or reject them</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Registration Flow</h3>
+      <p>Agents register by sending their signed manifest to <code>POST /v1/register</code>:</p>
       <ol>
-        <li><strong>Boot</strong> — load configuration and validate environment</li>
-        <li><strong>Load Blueprints</strong> — parse and register all API blueprints</li>
-        <li><strong>Start Agents</strong> — initialise and connect all registered agents</li>
-        <li><strong>Listen</strong> — begin accepting requests</li>
-        <li><strong>Shutdown</strong> — gracefully drain connections and stop agents</li>
+        <li>Agent builds its <code>AgentManifest</code> and signs it with its Ed25519 private key</li>
+        <li>Sends <code>{manifest, signature, timestamp}</code> to the orchestrator</li>
+        <li>Orchestrator verifies the signature against <code>manifest.public_key</code></li>
+        <li>Enforces replay protection — rejects if <code>|now - timestamp| > 300 seconds</code></li>
+        <li>Generates a unique <code>agent_id</code> and issues a WLT auth token (24-hour TTL)</li>
+        <li>If <code>manifest.type = "domain"</code>: evaluates <code>required_agents</code> availability</li>
+        <li>Logs audit entry and broadcasts updated <code>ServiceDirectory</code> to all other agents</li>
+        <li>Returns <code>RegisterResponse</code> with token, service directory, and negotiated protocol version</li>
       </ol>
 
-      <div class="tip">The specification is versioned alongside the framework. Breaking changes only occur in major versions.</div>
+      <h3>Task Routing</h3>
+      <p>When a task is submitted to <code>POST /v1/task</code>, the orchestrator routes it based on the target agent's type:</p>
+      <ul>
+        <li><strong>Domain controller</strong> (<code>type: "domain"</code>) — standard path for business tasks; the domain decomposes them into multi-agent workflows</li>
+        <li><strong>Infrastructure agent</strong> (<code>type: "infrastructure"</code>) — routed directly</li>
+        <li><strong>Work agent</strong> (<code>type: "agent"</code>) — direct routing with an advisory log suggesting routing through the domain instead</li>
+      </ul>
+      <p>The orchestrator injects context (<code>workspace_root</code>, service directory, entity context) and a
+        <code>trace_id</code> for distributed tracing. If the response contains observations or recommendations,
+        they are stored for the lifecycle loop.</p>
+
+      <h3>Channel Brokering</h3>
+      <p>Agents that need direct communication request a channel via <code>POST /v1/channel</code>.
+        The orchestrator verifies the requester has the <code>agent:message</code> capability,
+        generates a channel ID and a time-limited channel token (1-hour TTL), stores the active channel,
+        signs the grant, and returns a <code>ChannelGrant</code> with the target agent's URL and public key.</p>
+
+      <h3>Strategy &amp; Lifecycle Endpoints</h3>
+      <p>The orchestrator manages the continuous optimisation loop through several supporting endpoints:</p>
+      <ul>
+        <li><strong>POST /v1/strategy</strong> — create or update a business strategy with measurable targets</li>
+        <li><strong>GET /v1/strategy</strong> — list strategies, filterable by status (<code>active</code>, <code>paused</code>, <code>completed</code>)</li>
+        <li><strong>POST /v1/context</strong> — set or update entity context that grounds agent decisions in business reality</li>
+        <li><strong>GET /v1/observations</strong> — query observation history with <code>agent</code>, <code>target</code>, <code>strategy</code>, <code>since</code> filters and cursor pagination</li>
+        <li><strong>POST /v1/approve</strong> — accept or reject pending recommendations; accepted recommendations on paused workflows trigger a resume</li>
+        <li><strong>GET /v1/approve</strong> — list pending recommendations with filters for agent, target, strategy, and priority</li>
+      </ul>
+
+      <h2>Identity &amp; Security</h2>
+      <p>Every agent and orchestrator generates an Ed25519 key pair (RFC 8032) on first startup.
+        Keys are stored in <code>.weblisk/keys/</code> with restricted permissions.
+        See <a href="/server/protocols.html">Protocols</a> for the full signing and token specification.</p>
+
+      <h3>WLT Token Format</h3>
+      <p>Tokens follow the format: <code>base64url(header).base64url(payload).base64url(signature)</code></p>
+      <table>
+        <thead>
+          <tr><th>Claim</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>sub</code></td><td>string</td><td>Agent name or identity</td></tr>
+          <tr><td><code>iss</code></td><td>string</td><td>Issuer — <code>"orchestrator"</code> or agent name</td></tr>
+          <tr><td><code>iat</code></td><td>int64</td><td>Issued at (Unix epoch seconds)</td></tr>
+          <tr><td><code>exp</code></td><td>int64</td><td>Expiry (Unix epoch seconds); 0 = no expiry</td></tr>
+          <tr><td><code>cap</code></td><td>[]string</td><td>Granted capabilities (e.g. <code>file:read</code>, <code>llm:chat</code>)</td></tr>
+          <tr><td><code>cid</code></td><td>string</td><td>Channel ID — for channel-scoped tokens</td></tr>
+        </tbody>
+      </table>
+      <p>Token lifetimes: agent auth tokens last 24 hours; channel tokens last 1 hour.</p>
+      <p>The header <code>alg</code> field enables future algorithm agility — e.g. ML-DSA / FIPS 204 (post-quantum)
+        with zero protocol changes.</p>
+
+      <h3>Auth Middleware</h3>
+      <p>Applied to ALL orchestrator endpoints except <code>GET /v1/health</code> and <code>POST /v1/register</code>:</p>
+      <ol>
+        <li>Check <code>Authorization: Bearer &lt;token&gt;</code> header</li>
+        <li>If no header, check request body for <code>token</code> field</li>
+        <li>Verify token signature against orchestrator's public key</li>
+        <li>Check token expiry</li>
+        <li>On failure → <code>401 {"error": "valid token required — register first"}</code></li>
+        <li>On success → pass decoded claims to handler</li>
+      </ol>
+
+      <h3>Standard Capabilities</h3>
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>file:read</code></td><td>Read files — scoped by glob patterns in <code>resources</code></td></tr>
+          <tr><td><code>file:write</code></td><td>Write or modify files</td></tr>
+          <tr><td><code>llm:chat</code></td><td>Use LLM for analysis</td></tr>
+          <tr><td><code>agent:message</code></td><td>Communicate with other agents</td></tr>
+          <tr><td><code>workflow:execute</code></td><td>Execute multi-agent workflows (domain controllers)</td></tr>
+          <tr><td><code>http:get</code> / <code>http:send</code></td><td>Make external HTTP requests</td></tr>
+          <tr><td><code>http:receive</code></td><td>Receive inbound HTTP requests</td></tr>
+          <tr><td><code>database:read</code> / <code>database:write</code></td><td>Read from or write to data stores</td></tr>
+          <tr><td><code>realtime:publish</code></td><td>Publish to real-time channels</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Error Handling</h2>
+      <p>All errors MUST return JSON using the <code>ErrorResponse</code> format. Implementations SHOULD include
+        <code>code</code>, <code>category</code>, and <code>retryable</code> when available.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">ErrorResponse example</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">{</span>
+  <span class="syn-a">"error"</span><span class="syn-p">:</span> <span class="syn-s">"forwarding to agent failed — connection refused"</span><span class="syn-p">,</span>
+  <span class="syn-a">"code"</span><span class="syn-p">:</span> <span class="syn-s">"AGENT_UNREACHABLE"</span><span class="syn-p">,</span>
+  <span class="syn-a">"category"</span><span class="syn-p">:</span> <span class="syn-s">"transient"</span><span class="syn-p">,</span>
+  <span class="syn-a">"retryable"</span><span class="syn-p">:</span> <span class="syn-k">true</span>
+<span class="syn-p">}</span></pre>
+        </div>
+      </div>
+
+      <h3>Error Categories</h3>
+      <ul>
+        <li><strong>transient</strong> — temporary failure; retry is safe (network timeout, agent overloaded, upstream 503)</li>
+        <li><strong>permanent</strong> — will not succeed on retry (invalid input, capability not available, unknown action)</li>
+        <li><strong>partial</strong> — request partially succeeded; <code>detail</code> SHOULD include <code>completed</code> and <code>failed</code> sub-results</li>
+      </ul>
+
+      <h3>Standard Error Codes</h3>
+      <table>
+        <thead>
+          <tr><th>Code</th><th>HTTP</th><th>Category</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>INVALID_REQUEST</code></td><td>400</td><td>permanent</td><td>Missing or malformed fields</td></tr>
+          <tr><td><code>INVALID_SIGNATURE</code></td><td>401</td><td>permanent</td><td>Ed25519 signature verification failed</td></tr>
+          <tr><td><code>TOKEN_EXPIRED</code></td><td>401</td><td>transient</td><td>Token past expiry — re-register to get a new one</td></tr>
+          <tr><td><code>FORBIDDEN</code></td><td>403</td><td>permanent</td><td>Missing required capability</td></tr>
+          <tr><td><code>NOT_FOUND</code></td><td>404</td><td>permanent</td><td>Agent or resource not in registry</td></tr>
+          <tr><td><code>RATE_LIMITED</code></td><td>429</td><td>transient</td><td>Too many requests — respect <code>Retry-After</code> header</td></tr>
+          <tr><td><code>INTERNAL_ERROR</code></td><td>500</td><td>transient</td><td>Unexpected server error</td></tr>
+          <tr><td><code>AGENT_UNREACHABLE</code></td><td>502</td><td>transient</td><td>Orchestrator could not reach target agent</td></tr>
+          <tr><td><code>AGENT_TIMEOUT</code></td><td>504</td><td>transient</td><td>Target agent did not respond within timeout</td></tr>
+          <tr><td><code>UNSUPPORTED_VERSION</code></td><td>400</td><td>permanent</td><td>Agent requested an unsupported protocol version</td></tr>
+          <tr><td><code>PHASE_FAILED</code></td><td>500</td><td>varies</td><td>Workflow phase failed — check <code>detail.phase_name</code></td></tr>
+          <tr><td><code>PARTIAL_FAILURE</code></td><td>207</td><td>partial</td><td>Some phases succeeded, some failed</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Observability</h2>
+
+      <h3>Trace ID Propagation</h3>
+      <p>Every task submission SHOULD include a <code>trace_id</code> in <code>TaskContext</code>.
+        If the caller does not provide one, the orchestrator MUST generate a unique <code>trace_id</code>
+        (32 hex chars) and inject it before forwarding. The trace ID is propagated through all downstream calls:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Trace propagation</span>
+        </div>
+        <div class="code-body">
+          <pre>Client → POST /v1/task (trace_id in context)
+  → Orchestrator forwards to domain → POST /v1/execute (same trace_id)
+    → Domain dispatches to agent → POST /v1/message (same trace_id)</pre>
+        </div>
+      </div>
+
+      <h3>Structured Logging</h3>
+      <p>All components SHOULD emit structured JSON logs to stderr. Required fields:</p>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ts</code></td><td>Unix epoch seconds</td></tr>
+          <tr><td><code>level</code></td><td><code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code></td></tr>
+          <tr><td><code>msg</code></td><td>Human-readable message</td></tr>
+          <tr><td><code>component</code></td><td>Component name (e.g. <code>orchestrator</code>, <code>seo</code>, <code>seo-analyzer</code>)</td></tr>
+          <tr><td><code>trace_id</code></td><td>Correlation ID (when available)</td></tr>
+        </tbody>
+      </table>
+      <p>Audit log entries (see <code>GET /v1/audit</code>) are a separate persistent record.
+        Structured logs are operational and ephemeral — for debugging and monitoring, not compliance.</p>
+
+      <h3>Audit Logging</h3>
+      <p>Every orchestrator operation creates an <code>AuditEntry</code> with actor, action, target, and status.
+        Entries are logged to stderr in real-time AND stored in an append-only in-memory log.</p>
+      <table>
+        <thead>
+          <tr><th>Action</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>register</code></td><td>Agent registered</td></tr>
+          <tr><td><code>deregister</code></td><td>Agent deregistered</td></tr>
+          <tr><td><code>task</code></td><td>Task submitted or forwarded</td></tr>
+          <tr><td><code>channel</code></td><td>Channel brokered</td></tr>
+          <tr><td><code>message</code></td><td>Message relayed</td></tr>
+          <tr><td><code>strategy</code></td><td>Strategy created or updated</td></tr>
+          <tr><td><code>approval</code></td><td>Recommendation accepted or rejected</td></tr>
+          <tr><td><code>observation</code></td><td>Observation recorded</td></tr>
+          <tr><td><code>recommendation</code></td><td>Recommendation stored</td></tr>
+          <tr><td><code>feedback</code></td><td>Feedback received</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Version Negotiation</h2>
+      <p>On registration, the orchestrator reads the agent's <code>manifest.protocol_version</code> (default <code>"1"</code>
+        if omitted). If the orchestrator supports that version, registration succeeds and
+        <code>RegisterResponse.protocol_version</code> confirms the negotiated version. If the requested version is
+        not in <code>supported_versions</code>, the orchestrator rejects with 400 and error code
+        <code>UNSUPPORTED_VERSION</code>.</p>
+
+      <h2>Server Lifecycle</h2>
+      <p>A compliant orchestrator follows this startup sequence:</p>
+      <ol>
+        <li><strong>Load Identity</strong> — load or generate an Ed25519 key pair (name: <code>"orchestrator"</code>); keys stored in <code>.weblisk/keys/</code></li>
+        <li><strong>Initialise Stores</strong> — empty agent registry, channel registry, audit log, strategy/observation/recommendation stores</li>
+        <li><strong>Register Routes</strong> — bind HTTP handlers for all protocol endpoints</li>
+        <li><strong>Start HTTP Server</strong> — listen on configured port (default 9800, configurable via <code>--port</code> or <code>WL_ORCH_PORT</code>)</li>
+        <li><strong>Print Startup Info</strong> — URL, public key, instructions for registering agents</li>
+        <li><strong>Serve</strong> — block and handle requests; agents register themselves after startup</li>
+      </ol>
+      <p>On shutdown, the orchestrator drains active connections, deregisters agents, and flushes the audit log.</p>
+
+      <h2>Verification Checklist</h2>
+      <p>Every compliant implementation MUST pass these checks:</p>
+      <h3>Agent Verification</h3>
+      <ul>
+        <li>Responds to <code>POST /v1/describe</code> with valid <code>AgentManifest</code></li>
+        <li>Responds to <code>GET /v1/health</code> with valid <code>HealthStatus</code></li>
+        <li>Accepts <code>POST /v1/services</code> and updates internal directory</li>
+        <li>Handles <code>POST /v1/message</code> with signature verification</li>
+        <li>Returns signed <code>TaskResult</code> from <code>POST /v1/execute</code></li>
+        <li>Returns 429 with <code>RATE_LIMITED</code> when at <code>max_concurrent</code> capacity</li>
+      </ul>
+      <h3>Orchestrator Verification</h3>
+      <ul>
+        <li><code>GET /v1/health</code> returns without auth</li>
+        <li><code>POST /v1/register</code> validates signature and enforces 300s replay window</li>
+        <li><code>DELETE /v1/register</code> removes agent and broadcasts</li>
+        <li><code>POST /v1/task</code> routes to correct agent based on type</li>
+        <li><code>POST /v1/channel</code> verifies <code>agent:message</code> capability</li>
+        <li><code>POST /v1/approve</code> transitions pending → accepted/rejected; rejects empty reason on reject</li>
+        <li><code>POST /v1/strategy</code> stores and returns strategy</li>
+        <li><code>POST /v1/context</code> stores entity context</li>
+        <li><code>GET /v1/observations</code> returns observations with pagination</li>
+        <li>Generates <code>trace_id</code> if not provided by caller</li>
+        <li><code>trace_id</code> propagated through task forwarding and agent dispatch</li>
+        <li>Structured logs include <code>ts</code>, <code>level</code>, <code>msg</code>, <code>component</code> fields</li>
+        <li><code>RegisterResponse</code> includes negotiated <code>protocol_version</code></li>
+        <li>All error responses use <code>ErrorResponse</code> format with <code>error</code> field</li>
+        <li>All protected endpoints reject requests without valid tokens</li>
+      </ul>
+
+      <div class="tip">The specification is versioned alongside the framework. Breaking changes only occur in major versions. The protocol's forward-compatibility rule (ignore unknown fields) means new optional fields can be added in minor versions without breaking existing agents.</div>
 
       <div class="docs-nav-footer">
         <a href="/server/index.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Introduction</a>

@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blueprint Catalog — Weblisk</title>
-  <meta name="description" content="Browse all official Weblisk blueprints — declarative API, authentication, real-time, and data sync specifications.">
+  <meta name="description" content="Official Weblisk blueprint catalog with detailed specs for REST APIs, session and token authentication, AI gateway, real-time messaging, and webhooks. YAML config, endpoints, and security details for each pattern.">
   <link rel="canonical" href="https://weblisk.dev/blueprints/catalog.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Blueprint Catalog — Weblisk">
-  <meta property="og:description" content="Browse all official Weblisk blueprints — declarative API, authentication, real-time, and data sync specifications.">
+  <meta property="og:description" content="Official Weblisk blueprint catalog with detailed specs for REST APIs, session and token authentication, AI gateway, real-time messaging, and webhooks.">
   <meta property="og:url" content="https://weblisk.dev/blueprints/catalog.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blueprint Catalog — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="Browse all official Weblisk blueprints — declarative API, authentication, real-time, and data sync specifications.">
+  <meta name="twitter:description" content="Official Weblisk blueprint catalog with detailed specs for REST APIs, session and token authentication, AI gateway, real-time messaging, and webhooks.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -37,7 +37,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Blueprint Catalog — Weblisk",
-    "description": "Browse all official Weblisk blueprints — declarative API, authentication, real-time, and data sync specifications.",
+    "description": "Official Weblisk blueprint catalog with detailed specs for REST APIs, session and token authentication, AI gateway, real-time messaging, and webhooks.",
     "url": "https://weblisk.dev/blueprints/catalog.html",
     "datePublished": "2026-01-15",
     "dateModified": "2026-04-20",
@@ -134,56 +134,351 @@
 
     <main class="docs-content" id="main-content">
       <h1>Blueprint Catalog</h1>
-      <p class="lead">Official blueprints covering the most common server-side patterns. Free blueprints are included with every Weblisk server implementation.</p>
+      <p class="lead">Official blueprints covering the most common server-side patterns. Every blueprint is a declarative YAML specification — define what you need, and any Weblisk server implementation generates the endpoints automatically. No boilerplate, no vendor lock-in.</p>
+
+      <h2>How Blueprints Work</h2>
+      <p>Blueprints are implementation-agnostic specifications. They describe <em>what</em> endpoints must do — not how they do it in any particular language. Place a YAML file in your project's <code>blueprints/</code> directory and the server generates spec-compliant endpoints on startup.</p>
+      <p>Blueprints compose naturally. Combine <strong>auth-session</strong> with <strong>api-rest</strong> for a traditional web application. Pair <strong>auth-token</strong> with <strong>api-ai</strong> for a scoped AI gateway. Add <strong>webhook-inbound</strong> to receive events from third-party services and <strong>webhook-outbound</strong> to notify subscribers — the patterns work together without conflicting.</p>
 
       <h2>Free Blueprints</h2>
+      <p>Included with every Weblisk server implementation. These match the <a href="https://github.com/avaropoint/weblisk-blueprints/tree/main/patterns">patterns directory</a> in the weblisk-blueprints repository.</p>
+
       <table>
         <thead>
-          <tr><th>Blueprint</th><th>Description</th><th>Endpoints Generated</th></tr>
+          <tr><th>Blueprint</th><th>Description</th><th>Endpoints</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>api-rest</strong></td>
-            <td>Standard REST API with CRUD, pagination, filtering, and sorting</td>
-            <td>5 per model</td>
-          </tr>
-          <tr>
-            <td><strong>realtime-chat</strong></td>
-            <td>WebSocket-based messaging with channels, presence, and history</td>
-            <td>4 + WebSocket</td>
-          </tr>
-          <tr>
-            <td><strong>auth-session</strong></td>
-            <td>Session-based authentication with secure cookies, CSRF protection, and logout</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td><strong>auth-token</strong></td>
-            <td>JWT and API key authentication with refresh tokens and scoped permissions</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td><strong>api-ai</strong></td>
-            <td>AI gateway with chat completions, entity extraction, embeddings, and multi-provider routing</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td><strong>webhook-inbound</strong></td>
-            <td>Receive, validate, and route inbound webhooks from third-party services</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td><strong>webhook-outbound</strong></td>
-            <td>Send webhooks with retries, signatures, and delivery tracking</td>
-            <td>3</td>
-          </tr>
+          <tr><td><a href="#api-rest"><strong>api-rest</strong></a></td><td>Standard REST API with CRUD, pagination, filtering, and sorting</td><td>5 per model</td></tr>
+          <tr><td><a href="#auth-session"><strong>auth-session</strong></a></td><td>Session-based authentication with secure cookies, CSRF protection, and logout</td><td>4</td></tr>
+          <tr><td><a href="#auth-token"><strong>auth-token</strong></a></td><td>JWT and API key authentication with refresh tokens and scoped permissions</td><td>5</td></tr>
+          <tr><td><a href="#api-ai"><strong>api-ai</strong></a></td><td>AI gateway with chat completions, entity extraction, embeddings, and multi-provider routing</td><td>6</td></tr>
+          <tr><td><a href="#realtime-chat"><strong>realtime-chat</strong></a></td><td>WebSocket-based messaging with channels, presence, and history</td><td>4 + WebSocket</td></tr>
+          <tr><td><a href="#webhook-inbound"><strong>webhook-inbound</strong></a></td><td>Receive, validate, and route inbound webhooks from third-party services</td><td>2</td></tr>
+          <tr><td><a href="#webhook-outbound"><strong>webhook-outbound</strong></a></td><td>Send webhooks with retries, signatures, and delivery tracking</td><td>3</td></tr>
         </tbody>
       </table>
 
+      <!-- ─── api-rest ──────────────────────────────────────── -->
+      <h3 id="api-rest">api-rest</h3>
+      <p>Define your data models once and generate spec-compliant CRUD endpoints automatically. Every generated endpoint follows Weblisk protocol conventions: JSON bodies, consistent error shapes, and deterministic URL patterns. Pagination, filtering, and sorting are built-in — not bolted on.</p>
+
+      <h4>Blueprint Format</h4>
+      <pre><code>name: api-rest
+version: 1.0.0
+
+models:
+  Task:
+    fields:
+      id:        uuid
+      title:     string, required, max:255
+      done:      boolean, default:false
+      created:   timestamp, auto
+      updated:   timestamp, auto</code></pre>
+
+      <h4>Generated Endpoints (per model)</h4>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>GET</td><td>/tasks</td><td>List with pagination, filtering, sorting</td></tr>
+          <tr><td>POST</td><td>/tasks</td><td>Create a new resource</td></tr>
+          <tr><td>GET</td><td>/tasks/:id</td><td>Read a single resource by ID</td></tr>
+          <tr><td>PUT</td><td>/tasks/:id</td><td>Update (full replace) a resource by ID</td></tr>
+          <tr><td>DELETE</td><td>/tasks/:id</td><td>Delete a resource by ID</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Pagination:</strong> Cursor-based via <code>limit</code> and <code>cursor</code> query parameters. <strong>Filtering:</strong> Field-level via query params (<code>?done=false&amp;owner_id=abc</code>). <strong>Sorting:</strong> Via <code>sort</code> param (<code>?sort=created:desc,title:asc</code>).</p>
+
+      <!-- ─── auth-session ──────────────────────────────────── -->
+      <h3 id="auth-session">auth-session</h3>
+      <p>Server-side session authentication for traditional web applications. Users authenticate with credentials, receive a secure HTTP-only cookie, and subsequent requests are authenticated via that cookie. CSRF protection is included by default for all state-changing operations.</p>
+
+      <h4>Blueprint Format</h4>
+      <pre><code>name: auth-session
+version: 1.0.0
+
+config:
+  session_duration: 86400       # 24 hours
+  cookie_name: wl_session
+  csrf_header: X-CSRF-Token
+  max_sessions_per_user: 5
+  password_min_length: 8</code></pre>
+
+      <h4>Endpoints</h4>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/auth/register</td><td>Create a new user account</td></tr>
+          <tr><td>POST</td><td>/auth/login</td><td>Authenticate and create session</td></tr>
+          <tr><td>POST</td><td>/auth/logout</td><td>Destroy current session</td></tr>
+          <tr><td>GET</td><td>/auth/me</td><td>Get current authenticated user</td></tr>
+        </tbody>
+      </table>
+
+      <h4>How It Works</h4>
+      <ol>
+        <li>User sends credentials to <code>POST /auth/login</code></li>
+        <li>Server creates a session record and sets a <code>Set-Cookie</code> header: <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Lax</code></li>
+        <li>Server returns a CSRF token in the response body</li>
+        <li>Client includes the CSRF token in the <code>X-CSRF-Token</code> header on all state-changing requests (POST, PUT, DELETE)</li>
+        <li>On logout, the server destroys the session and clears the cookie</li>
+      </ol>
+
+      <h4>Security</h4>
+      <ul>
+        <li>Passwords hashed with bcrypt (cost ≥ 12) or argon2id — never stored in plaintext</li>
+        <li>Session IDs are 256-bit crypto-random values</li>
+        <li>Failed login returns a generic message — never reveals whether an email exists</li>
+        <li>Constant-time comparison for session IDs and CSRF tokens</li>
+        <li>Login rate-limiting recommended (10 attempts/minute per IP)</li>
+        <li>Oldest sessions evicted when <code>max_sessions_per_user</code> is exceeded</li>
+      </ul>
+
+      <!-- ─── auth-token ────────────────────────────────────── -->
+      <h3 id="auth-token">auth-token</h3>
+      <p>Stateless authentication using JWTs for short-lived access and opaque refresh tokens for session continuity. API keys are also supported for service-to-service communication. Permissions are scoped — each token declares exactly what it can access.</p>
+
+      <h4>Blueprint Format</h4>
+      <pre><code>name: auth-token
+version: 1.0.0
+
+config:
+  access_token_duration: 900     # 15 minutes
+  refresh_token_duration: 604800 # 7 days
+  issuer: weblisk
+  scopes:
+    - read
+    - write
+    - admin</code></pre>
+
+      <h4>Endpoints</h4>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/auth/register</td><td>Create a new user account</td></tr>
+          <tr><td>POST</td><td>/auth/token</td><td>Exchange credentials for access + refresh token pair</td></tr>
+          <tr><td>POST</td><td>/auth/refresh</td><td>Exchange refresh token for new access token</td></tr>
+          <tr><td>DELETE</td><td>/auth/token</td><td>Revoke a refresh token</td></tr>
+          <tr><td>POST</td><td>/auth/apikey</td><td>Create an API key with scoped permissions</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Authentication Flow</h4>
+      <ol>
+        <li>Client sends credentials to <code>POST /auth/token</code> with requested scopes</li>
+        <li>Server returns a signed JWT (15-min TTL) + opaque refresh token (7-day TTL)</li>
+        <li>Client sends <code>Authorization: Bearer &lt;jwt&gt;</code> on protected requests</li>
+        <li>When the JWT expires, client exchanges the refresh token at <code>POST /auth/refresh</code> for a new pair</li>
+        <li>Refresh token rotation: old token invalidated on every refresh (prevents replay attacks)</li>
+      </ol>
+
+      <h4>JWT Claims</h4>
+      <pre><code>{
+  "sub": "user-id",
+  "iss": "weblisk",
+  "iat": 1713264000,
+  "exp": 1713264900,
+  "scopes": ["read", "write"]
+}</code></pre>
+
+      <h4>Scope Enforcement</h4>
+      <p>Endpoints declare required scopes. The token's scopes must be a superset. Insufficient scopes return 403 Forbidden (not 401).</p>
+      <pre><code>GET  /tasks       → requires: [read]
+POST /tasks       → requires: [write]
+POST /auth/apikey → requires: [admin]</code></pre>
+
+      <h4>API Keys</h4>
+      <p>For service-to-service communication. Created via <code>POST /auth/apikey</code> (requires <code>admin</code> scope). Keys use the same <code>Authorization: Bearer</code> header as JWTs — the server distinguishes them by the <code>wl_key_</code> prefix. Full key returned only on creation.</p>
+
+      <h4>Security</h4>
+      <ul>
+        <li>Refresh tokens stored as SHA-256 hashes — raw token never persisted</li>
+        <li>API keys also stored as hashes with only a prefix shown on lookup</li>
+        <li>JWT signing: HS256 for single-server, ES256 for distributed systems</li>
+        <li>30-second clock skew tolerance on JWT expiration</li>
+        <li>Token endpoint rate-limited (10 requests/minute per IP)</li>
+      </ul>
+
+      <!-- ─── api-ai ────────────────────────────────────────── -->
+      <h3 id="api-ai">api-ai</h3>
+      <p>The intelligence backbone of a Weblisk server. Abstracts provider-specific details (OpenAI, Anthropic, Ollama, Cloudflare Workers AI) behind a universal contract so agents, domains, and application code interact with LLMs through a single interface. Rather than each agent implementing its own provider integration, the api-ai pattern provides a centralised gateway that enforces rate limits, tracks usage, and routes to the configured provider.</p>
+
+      <h4>Blueprint Format</h4>
+      <pre><code>name: api-ai
+version: 1.0.0
+
+providers:
+  ollama:
+    type: local
+    base_url: http://localhost:11434
+    models: [llama3, codellama]
+  openai:
+    type: remote
+    auth: bearer
+    env_key: WL_AI_OPENAI_KEY
+    models: [gpt-4o, gpt-4o-mini]
+  anthropic:
+    type: remote
+    auth: x-api-key
+    env_key: WL_AI_ANTHROPIC_KEY
+    models: [claude-sonnet-4-20250514, claude-haiku-4-20250414]
+
+defaults:
+  provider: ollama
+  model: llama3
+  temperature: 0.7
+  max_tokens: 4096</code></pre>
+
+      <h4>Endpoints</h4>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/ai/chat</td><td>Multi-turn conversational inference with optional tool use</td></tr>
+          <tr><td>POST</td><td>/ai/complete</td><td>Single-shot text completion</td></tr>
+          <tr><td>POST</td><td>/ai/extract</td><td>Structured data extraction via JSON schema</td></tr>
+          <tr><td>POST</td><td>/ai/embed</td><td>Generate vector embeddings for text</td></tr>
+          <tr><td>GET</td><td>/ai/models</td><td>List available models and providers</td></tr>
+          <tr><td>GET</td><td>/ai/health</td><td>Provider connectivity and latency</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Key Capabilities</h4>
+      <ul>
+        <li><strong>Provider failover:</strong> If the primary provider returns a 5xx or times out, falls back to a secondary provider transparently</li>
+        <li><strong>Tool calling:</strong> <code>/ai/chat</code> supports tool definitions — the model can request function calls, and provider-specific formats are normalised automatically</li>
+        <li><strong>Streaming:</strong> <code>stream: true</code> returns Server-Sent Events with incremental tokens</li>
+        <li><strong>Schema validation:</strong> <code>/ai/extract</code> validates the returned JSON against the provided schema and retries once on validation failure</li>
+        <li><strong>Token tracking:</strong> Usage data is tracked per-agent via <code>trace_id</code> for cost attribution</li>
+        <li><strong>Multi-provider:</strong> Configure local (Ollama), remote (OpenAI, Anthropic), and platform (Cloudflare Workers AI) providers simultaneously</li>
+      </ul>
+
+      <!-- ─── realtime-chat ─────────────────────────────────── -->
+      <h3 id="realtime-chat">realtime-chat</h3>
+      <p>Real-time messaging built on WebSockets with named channels, presence awareness, and persistent message history. HTTP endpoints handle channel management and history retrieval; the WebSocket connection handles live messaging.</p>
+
+      <h4>Blueprint Format</h4>
+      <pre><code>name: realtime-chat
+version: 1.0.0
+
+channels:
+  general:
+    description: Default public channel
+    max_members: 1000
+    history_limit: 500
+    auth: none
+  team:
+    description: Authenticated team channel
+    max_members: 100
+    history_limit: 1000
+    auth: token</code></pre>
+
+      <h4>Endpoints</h4>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>GET</td><td>/channels</td><td>List available channels</td></tr>
+          <tr><td>GET</td><td>/channels/:name</td><td>Get channel details and presence</td></tr>
+          <tr><td>GET</td><td>/channels/:name/history</td><td>Retrieve paginated message history</td></tr>
+          <tr><td>POST</td><td>/channels/:name/send</td><td>Send a message (HTTP fallback)</td></tr>
+          <tr><td>WS</td><td>/ws?channel=general</td><td>Real-time WebSocket connection</td></tr>
+        </tbody>
+      </table>
+
+      <h4>WebSocket Frame Types</h4>
+      <p><strong>Client → Server:</strong> <code>message</code> (send to channel), <code>typing</code> (typing indicator), <code>ping</code> (keep-alive).</p>
+      <p><strong>Server → Client:</strong> <code>connected</code> (initial payload with members + history), <code>message</code> (new message), <code>typing</code> (another user typing), <code>presence</code> (user joined/left), <code>pong</code>, <code>error</code>.</p>
+      <p>Channel auth modes: <code>none</code> (public) or <code>token</code> (requires valid auth token from auth-session or auth-token blueprint).</p>
+
+      <!-- ─── webhook-inbound ───────────────────────────────── -->
+      <h3 id="webhook-inbound">webhook-inbound</h3>
+      <p>Receive webhook payloads from external services (Stripe, GitHub, Twilio, etc.). Each source is configured with its own validation scheme (HMAC signatures, IP allowlists) and routed to a handler.</p>
+
+      <h4>Blueprint Format</h4>
+      <pre><code>name: webhook-inbound
+version: 1.0.0
+
+sources:
+  stripe:
+    path: /webhooks/stripe
+    signature:
+      header: Stripe-Signature
+      algorithm: hmac-sha256
+      secret_env: STRIPE_WEBHOOK_SECRET
+    events:
+      - payment_intent.succeeded
+      - invoice.paid
+  github:
+    path: /webhooks/github
+    signature:
+      header: X-Hub-Signature-256
+      algorithm: hmac-sha256
+      secret_env: GITHUB_WEBHOOK_SECRET
+    events:
+      - push
+      - pull_request</code></pre>
+
+      <h4>Endpoints</h4>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/webhooks/:source</td><td>Receive webhook from named source</td></tr>
+          <tr><td>GET</td><td>/webhooks/log</td><td>View recent delivery log (metadata only)</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Validation Flow</h4>
+      <ol>
+        <li>Read raw request body (preserve for signature verification)</li>
+        <li>Look up source configuration — 404 for unknown sources</li>
+        <li>Validate HMAC signature with constant-time comparison — 401 if invalid</li>
+        <li>Check event type against allowed list — filtered events return 200 (prevents retry loops)</li>
+        <li>Route to handler asynchronously</li>
+      </ol>
+
+      <!-- ─── webhook-outbound ──────────────────────────────── -->
+      <h3 id="webhook-outbound">webhook-outbound</h3>
+      <p>Send webhook notifications to registered subscriber endpoints. Events are signed with HMAC for integrity, delivered with exponential backoff retries, and tracked for observability.</p>
+
+      <h4>Blueprint Format</h4>
+      <pre><code>name: webhook-outbound
+version: 1.0.0
+
+config:
+  signing_algorithm: hmac-sha256
+  max_retries: 5
+  retry_backoff: exponential   # 1s, 2s, 4s, 8s, 16s
+  timeout: 10
+  event_types:
+    - user.created
+    - order.placed
+    - order.shipped</code></pre>
+
+      <h4>Endpoints</h4>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/webhooks/subscribers</td><td>Register a new subscriber</td></tr>
+          <tr><td>GET</td><td>/webhooks/subscribers</td><td>List registered subscribers</td></tr>
+          <tr><td>DELETE</td><td>/webhooks/subscribers/:id</td><td>Remove a subscriber</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Delivery Flow</h4>
+      <ol>
+        <li>Event occurs — find all active subscribers for that event type</li>
+        <li>Build payload, compute HMAC-SHA256 with subscriber's secret</li>
+        <li>POST to subscriber URL with <code>X-Webhook-Signature</code>, <code>X-Webhook-ID</code>, <code>X-Webhook-Timestamp</code> headers</li>
+        <li>2xx response → delivered. Non-2xx → retry with exponential backoff (up to 5 retries)</li>
+        <li>All delivery attempts logged with status, response code, and duration</li>
+      </ol>
+
+      <hr>
+
       <h2>Pro Blueprints</h2>
+      <p>Available through <a href="/pro.html">Weblisk Pro</a> or via <a href="https://avaropoint.com">Avaropoint</a> for enterprise engagements.</p>
+
       <table>
         <thead>
-          <tr><th>Blueprint</th><th>Description</th><th>Endpoints Generated</th></tr>
+          <tr><th>Blueprint</th><th>Description</th><th>Endpoints</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -209,11 +504,33 @@
         </tbody>
       </table>
 
-      <h2>Using a Blueprint</h2>
-      <p>Add a blueprint to your project by placing its YAML file in the <code>blueprints/</code> directory.
-        The server implementation automatically loads and generates endpoints on startup.</p>
+      <hr>
 
-      <div class="tip">Want to create your own? See the <a href="/blueprints/authoring.html">Authoring Guide</a>.</div>
+      <h2>Using a Blueprint</h2>
+      <p>Add a blueprint to your project by placing its YAML file in the <code>blueprints/</code> directory. The server implementation automatically loads and generates endpoints on startup.</p>
+      <pre><code># Scaffold a project with the REST and auth blueprints
+weblisk server init --platform go
+
+# The CLI resolves blueprints in priority order:
+# 1. Local project — ./patterns/ in your project
+# 2. Custom sources — additional repos via WL_BLUEPRINT_SOURCES
+# 3. Core — avaropoint/weblisk-blueprints (always present)</code></pre>
+
+      <h2>Multiple Blueprint Sources</h2>
+      <p>The CLI supports multiple distribution models. Custom sources override core blueprints with the same path — a customer's <code>domains/checkout.md</code> takes precedence over the core version.</p>
+
+      <table>
+        <thead><tr><th>Source</th><th>Repository</th><th>Access</th></tr></thead>
+        <tbody>
+          <tr><td>Core (open source)</td><td>avaropoint/weblisk-blueprints</td><td>Public, always available</td></tr>
+          <tr><td>Vertical/partner</td><td>avaropoint/weblisk-blueprints-ecommerce</td><td>Granted per-customer</td></tr>
+          <tr><td>Customer-owned</td><td>acme-corp/acme-blueprints</td><td>Customer's own repo</td></tr>
+          <tr><td>Local project</td><td>./patterns/</td><td>Project-scoped, checked in</td></tr>
+        </tbody>
+      </table>
+      <p>Access control is handled entirely by Git — private repos require the user's existing credentials (SSH key or GitHub CLI auth).</p>
+
+      <div class="tip">Want to create your own? See the <a href="/blueprints/authoring.html">Authoring Guide</a>. Every blueprint follows a <a href="https://github.com/avaropoint/weblisk-blueprints/blob/main/SCHEMA.md">standard schema</a> with required sections: metadata, overview, specification, types, implementation notes, and verification checklist.</div>
 
       <div class="docs-nav-footer">
         <a href="/blueprints/index.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Introduction</a>

@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agent Catalog — Weblisk</title>
-  <meta name="description" content="Browse all official Weblisk agents — background sync, scheduled tasks, webhooks, AI integration, and more.">
+  <meta name="description" content="Official Weblisk agent catalog — infrastructure agents (sync, cron, webhook, email), domain controllers, and work agents with capabilities, configs, and protocol details.">
   <link rel="canonical" href="https://weblisk.dev/agents/catalog.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Agent Catalog — Weblisk">
-  <meta property="og:description" content="Browse all official Weblisk agents — background sync, scheduled tasks, webhooks, AI integration, and more.">
+  <meta property="og:description" content="Official Weblisk agent catalog — infrastructure agents, domain controllers, and work agents with capabilities, configs, and protocol details.">
   <meta property="og:url" content="https://weblisk.dev/agents/catalog.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Agent Catalog — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="Browse all official Weblisk agents — background sync, scheduled tasks, webhooks, AI integration, and more.">
+  <meta name="twitter:description" content="Official Weblisk agent catalog — infrastructure agents, domain controllers, and work agents with capabilities, configs, and protocol details.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -37,7 +37,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Agent Catalog — Weblisk",
-    "description": "Browse all official Weblisk agents — background sync, scheduled tasks, webhooks, AI integration, and more.",
+    "description": "Official Weblisk agent catalog — infrastructure agents, domain controllers, and work agents with capabilities, configs, and protocol details.",
     "url": "https://weblisk.dev/agents/catalog.html",
     "datePublished": "2026-01-15",
     "dateModified": "2026-04-20",
@@ -135,109 +135,277 @@
 
     <main class="docs-content" id="main-content">
       <h1>Agent Catalog</h1>
-      <p class="lead">Official agents for common server-side patterns. Free agents ship with every Weblisk server implementation.</p>
+      <p class="lead">Official agents for common server-side patterns. Every agent implements the same 5 protocol endpoints (describe, execute, health, message, services) and communicates via Ed25519-signed messages. The developer implements only the custom logic — the framework handles registration, messaging, and security.</p>
+
+      <h2>Agent Architecture</h2>
+      <p>Weblisk distinguishes three kinds of agents. Each kind implements the same protocol but serves a different role in the system:</p>
+      <table>
+        <thead><tr><th>Kind</th><th>Manifest Type</th><th>Role</th><th>Dispatched By</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Domain controller</strong></td><td><code>"domain"</code></td><td>Directs a business function, owns workflows, aggregates results</td><td>Orchestrator</td></tr>
+          <tr><td><strong>Work agent</strong></td><td><code>"agent"</code></td><td>Performs specific tasks — receives input, executes, returns output</td><td>Domain controller</td></tr>
+          <tr><td><strong>Infrastructure agent</strong></td><td><code>"infrastructure"</code></td><td>System-level utilities available to all domains</td><td>Any authenticated agent</td></tr>
+        </tbody>
+      </table>
+      <p>Business tasks flow: <strong>Orchestrator → Domain Controller → Work Agents</strong>. Infrastructure agents are available to any authenticated caller. Work agents do not accept tasks from arbitrary sources — only from their owning domain.</p>
+
+      <h3>Agent Logic Interface</h3>
+      <p>Every agent implements two methods:</p>
+      <ul>
+        <li><strong>Execute(task, context) → result</strong> — The agent's core intelligence. Receives a task with full runtime context (identity, services, LLM provider, workspace). Returns status, summary, proposed changes, and metrics.</li>
+        <li><strong>HandleMessage(message, context) → response</strong> — Handles direct messages from other agents. Used for collaboration and queries.</li>
+      </ul>
+
+      <h3>Protocol Endpoints</h3>
+      <p>Every agent exposes these 5 HTTP endpoints:</p>
+      <table>
+        <thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>POST /v1/describe</code></td><td>Return the agent's manifest (capabilities, inputs, outputs)</td></tr>
+          <tr><td><code>POST /v1/execute</code></td><td>Execute a task — the primary work endpoint</td></tr>
+          <tr><td><code>GET /v1/health</code></td><td>Health status with uptime and metrics</td></tr>
+          <tr><td><code>POST /v1/message</code></td><td>Agent-to-agent messaging with signature verification</td></tr>
+          <tr><td><code>POST /v1/services</code></td><td>Receive service directory updates from orchestrator</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Port Assignment Convention</h3>
+      <table>
+        <thead><tr><th>Range</th><th>Kind</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>9700–9709</td><td>Domain controllers</td><td>seo: 9700</td></tr>
+          <tr><td>9710–9749</td><td>Work agents</td><td>seo-analyzer: 9710, a11y-checker: 9711</td></tr>
+          <tr><td>9750–9799</td><td>Infrastructure agents</td><td>sync: 9750, cron: 9751, webhook: 9752, email: 9753</td></tr>
+          <tr><td>9800</td><td>Orchestrator</td><td>orchestrator: 9800</td></tr>
+          <tr><td>9820+</td><td>Custom agents</td><td>hash(name) % 80 + 9820</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <h2>Domain Controllers</h2>
+      <p>A domain controller is the business intelligence layer. It sits between the orchestrator and work agents — receiving business-level tasks, decomposing them into multi-agent workflows, dispatching phases, aggregating results, and enforcing quality gates. Nothing enters or leaves a business function without the domain controller's knowledge.</p>
+
+      <h3>How Domains Work</h3>
+      <ol>
+        <li>Domain registers with the orchestrator, declaring <code>required_agents</code> and <code>workflows</code></li>
+        <li>Orchestrator routes a business task to the domain (e.g. "audit this site for SEO")</li>
+        <li>Domain selects the matching workflow and resolves the phase execution order</li>
+        <li>Phases with no dependencies run in parallel; dependent phases wait for their inputs</li>
+        <li>Domain dispatches each phase to the target agent via <code>POST /v1/message</code></li>
+        <li>Domain aggregates all phase results into a single <code>TaskResult</code></li>
+      </ol>
+
+      <h4>SEO Domain — Example Workflow</h4>
+      <pre><code>workflow: seo-audit
+description: Full SEO audit — scan, analyze, check accessibility, report
+
+phases:
+  - name: scan
+    agent: seo-analyzer
+    action: scan_html
+    input:
+      html_files: $task.payload.files
+    timeout: 60
+
+  - name: analyze
+    agent: seo-analyzer
+    action: analyze_metadata
+    input:
+      metadata: $phases.scan.output.metadata
+    depends_on: [scan]
+    timeout: 120
+
+  - name: accessibility
+    agent: a11y-checker
+    action: check_images
+    input:
+      images: $phases.scan.output.images
+    depends_on: [scan]
+    timeout: 60
+
+  - name: synthesize
+    agent: self
+    action: aggregate_results
+    depends_on: [analyze, accessibility]
+    approval: required</code></pre>
+      <p>Phase inputs use <strong>reference expressions</strong> (<code>$task.payload.*</code>, <code>$phases.*.output</code>, <code>$entity.*</code>, <code>$config.*</code>) to bind data between phases. Phases at the same dependency level execute concurrently. <code>agent: "self"</code> means the domain controller runs that phase internally.</p>
+
+      <h4>Current Domains</h4>
+      <table>
+        <thead><tr><th>Domain</th><th>Port</th><th>Required Agents</th><th>Workflows</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SEO</strong></td><td>9700</td><td>seo-analyzer, a11y-checker</td><td>seo-audit, seo-optimize</td></tr>
+          <tr><td><strong>Content</strong></td><td>9701</td><td>content-analyzer, meta-checker</td><td>content-audit, content-optimize</td></tr>
+          <tr><td><strong>Health</strong></td><td>9702</td><td>uptime-checker, perf-auditor</td><td>health-check, performance-audit</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
 
       <h2>Infrastructure Agents <span class="pro-pill">Free</span></h2>
-      <p>System-level services available to all domains. Ship with every Weblisk hub.</p>
+      <p>System-level services available to all domains and authenticated agents. Ship with every Weblisk server.</p>
+
+      <!-- ─── sync ──────────────────────────────────────────── -->
+      <h3 id="sync">sync</h3>
+      <p>Bridges offline-capable clients with the server's persistent store. Clients accumulate changes in IndexedDB while offline and push them when connectivity resumes. The agent also runs on schedule to pull server-side changes and push them to connected clients via real-time channels.</p>
+
+      <h4>Capabilities &amp; Triggers</h4>
       <table>
-        <thead>
-          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
-        </thead>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>sync</strong></td>
-            <td>Infrastructure</td>
-            <td>Background data synchronisation between client-side IDB store and server database. Supports conflict resolution strategies.</td>
-            <td>Event + Schedule</td>
-          </tr>
-          <tr>
-            <td><strong>cron</strong></td>
-            <td>Infrastructure</td>
-            <td>Scheduled task execution with cron-style expressions. Supports one-time and recurring tasks with retry logic.</td>
-            <td>Schedule</td>
-          </tr>
-          <tr>
-            <td><strong>webhook</strong></td>
-            <td>Infrastructure</td>
-            <td>Inbound and outbound webhook processing with signature verification, retries, and delivery tracking.</td>
-            <td>Event (HTTP)</td>
-          </tr>
-          <tr>
-            <td><strong>email-send</strong></td>
-            <td>Infrastructure</td>
-            <td>Transactional email with template rendering, queuing, and delivery status tracking. Supports SMTP and API-based providers.</td>
-            <td>Event</td>
-          </tr>
+          <tr><td><code>database:read</code></td><td>All tables</td></tr>
+          <tr><td><code>database:write</code></td><td>All tables</td></tr>
+          <tr><td><code>realtime:publish</code></td><td><code>sync/*</code> channels</td></tr>
         </tbody>
       </table>
+      <p><strong>Triggers:</strong> <code>client.sync.push</code> (client pushes offline changes) · Schedule: <code>*/5 * * * *</code> (pull server changes every 5 min)</p>
 
-      <h2>Domain Work Agents <span class="pro-pill">Free</span></h2>
-      <p>Specialized agents dispatched by domain controllers. Each agent serves a specific business function.</p>
+      <h4>Configuration</h4>
+      <pre><code>config:
+  conflict_resolution: last-write-wins   # last-write-wins | client-wins | server-wins | manual
+  batch_size: 100                        # max records per sync batch
+  sync_interval: 300                     # seconds between scheduled syncs
+  max_payload_size: 1048576              # 1 MB max per push</code></pre>
+
+      <h4>Conflict Resolution Strategies</h4>
+      <table>
+        <thead><tr><th>Strategy</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>last-write-wins</code></td><td>Record with the latest timestamp wins</td></tr>
+          <tr><td><code>client-wins</code></td><td>Client version always takes priority</td></tr>
+          <tr><td><code>server-wins</code></td><td>Server version always takes priority</td></tr>
+          <tr><td><code>manual</code></td><td>Conflict is flagged — both versions returned for manual resolution</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Actions:</strong> <code>sync_push</code> (push offline changes), <code>sync_pull</code> (pull server changes since checkpoint), <code>get_status</code> (connected clients, pending conflicts)</p>
+
+      <!-- ─── cron ──────────────────────────────────────────── -->
+      <h3 id="cron">cron</h3>
+      <p>Scheduled task execution with cron-style expressions. Other agents and application code register tasks; the cron agent evaluates schedules, dispatches tasks at the correct time, tracks results, and retries failed tasks.</p>
+
+      <h4>Capabilities &amp; Triggers</h4>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents (dispatches tasks)</td></tr>
+          <tr><td><code>database:read</code></td><td><code>cron_tasks</code>, <code>cron_history</code></td></tr>
+          <tr><td><code>database:write</code></td><td><code>cron_tasks</code>, <code>cron_history</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Triggers:</strong> Schedule: <code>* * * * *</code> (tick every minute) · <code>cron.register</code> (new task) · <code>cron.cancel</code> (task cancelled)</p>
+
+      <h4>Configuration</h4>
+      <pre><code>config:
+  tick_interval: 60              # seconds between schedule checks
+  max_retries: 3                 # default retries per task
+  retry_backoff: exponential     # fixed | exponential
+  max_concurrent: 10             # max tasks executing simultaneously
+  history_retention: 604800      # 7 days in seconds</code></pre>
+
+      <h4>Cron Expression Format</h4>
+      <pre><code>┌───────── minute (0-59)
+│ ┌───────── hour (0-23)
+│ │ ┌───────── day of month (1-31)
+│ │ │ ┌───────── month (1-12)
+│ │ │ │ ┌───────── day of week (0-6, 0=Sunday)
+│ │ │ │ │
+* * * * *</code></pre>
+      <p><strong>Actions:</strong> <code>register</code> (schedule a task), <code>cancel</code>, <code>list</code> (active tasks), <code>history</code> (execution log), <code>pause</code> / <code>resume</code>. For one-time tasks, use <code>"once"</code> with a <code>fire_at</code> timestamp.</p>
+
+      <!-- ─── webhook ───────────────────────────────────────── -->
+      <h3 id="webhook">webhook</h3>
+      <p>Runtime counterpart to the <a href="/blueprints/catalog.html#webhook-inbound">webhook-inbound</a> and <a href="/blueprints/catalog.html#webhook-outbound">webhook-outbound</a> blueprints. While those blueprints define the API surface, this agent handles the asynchronous work: verifying inbound signatures, routing events to handlers, sending outbound webhooks with retries, and tracking delivery status.</p>
+
+      <h4>Capabilities &amp; Triggers</h4>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>http:receive</code></td><td><code>/webhooks/*</code></td></tr>
+          <tr><td><code>http:send</code></td><td><code>https://*</code></td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>webhook_subscribers</code>, <code>webhook_deliveries</code></td></tr>
+          <tr><td><code>agent:message</code></td><td>All agents</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Triggers:</strong> <code>webhook.received</code> (inbound webhook) · <code>webhook.send</code> (outbound event) · Schedule: <code>*/1 * * * *</code> (retry failed deliveries). <strong>Collaborates with:</strong> cron agent.</p>
+      <p><strong>Actions:</strong> <code>process_inbound</code> (verify signature, route to handler), <code>send_event</code> (queue outbound delivery to subscribers), <code>register_subscriber</code>, <code>list_subscribers</code>, <code>delivery_status</code></p>
+
+      <!-- ─── email-send ────────────────────────────────────── -->
+      <h3 id="email-send">email-send</h3>
+      <p>Transactional email with template rendering, queuing, and delivery tracking. Other agents and application code send messages to this agent, which renders templates, queues emails, delivers via the configured provider, and tracks delivery status.</p>
+
+      <h4>Capabilities &amp; Triggers</h4>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents</td></tr>
+          <tr><td><code>http:send</code></td><td><code>https://*</code></td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>email_queue</code>, <code>email_templates</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Triggers:</strong> <code>email.send</code> (application requests email) · Schedule: <code>*/1 * * * *</code> (process queue, retry failures). <strong>Collaborates with:</strong> cron agent.</p>
+
+      <h4>Configuration</h4>
+      <pre><code>config:
+  provider: smtp                 # smtp | sendgrid | ses | mailgun
+  from_address: noreply@example.com
+  from_name: My App
+  queue_batch_size: 50           # emails per processing cycle
+  max_retries: 3
+  retry_backoff: exponential     # 1m, 2m, 4m
+  rate_limit: 100                # max sends per minute</code></pre>
+
+      <h4>Template System</h4>
+      <p>Simple mustache-style variable substitution: <code>Hello {{name}}, your order #{{order_id}} has shipped.</code> Templates are stored in the database and versioned. No logic — pure substitution.</p>
+      <p><strong>Actions:</strong> <code>send</code> (queue email with template + variables), <code>send_raw</code> (send with raw HTML body), <code>status</code> (check delivery), <code>register_template</code>, <code>list_templates</code></p>
+
+      <hr>
+
+      <h2>Work Agents <span class="pro-pill">Free</span></h2>
+      <p>Specialized agents dispatched by domain controllers. Each agent serves a specific business function. They register with the orchestrator but business tasks route through their owning domain.</p>
 
       <h3>SEO Domain</h3>
+
+      <h4 id="seo-analyzer">seo-analyzer</h4>
+      <p>Scans HTML files, extracts metadata, analyzes quality via LLM, validates findings against rules, and proposes changes. Dispatched by the SEO domain controller.</p>
       <table>
-        <thead>
-          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
-        </thead>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>seo-analyzer</strong></td>
-            <td>Work</td>
-            <td>Audits pages for title tags, meta descriptions, heading hierarchy, keyword density, and structured data.</td>
-            <td>Domain dispatch</td>
-          </tr>
-          <tr>
-            <td><strong>a11y-checker</strong></td>
-            <td>Work</td>
-            <td>Validates accessibility compliance — ARIA roles, color contrast, alt text, focus management, and WCAG guidelines.</td>
-            <td>Domain dispatch</td>
-          </tr>
+          <tr><td><code>file:read</code></td><td><code>**/*.html</code></td></tr>
+          <tr><td><code>llm:chat</code></td><td>Configured AI provider</td></tr>
+          <tr><td><code>agent:message</code></td><td>Other agents</td></tr>
         </tbody>
       </table>
+      <p><strong>Actions:</strong> <code>scan_html</code> (extract metadata — title, description, headings, images, OG tags, canonical), <code>analyze_metadata</code> (LLM-powered analysis with recommendations), <code>generate_report</code> (unified SEO report with scores and proposed changes), <code>review_seo</code> (quick review of content without LLM)</p>
+
+      <h4 id="a11y-checker">a11y-checker</h4>
+      <p>Validates accessibility compliance — ARIA roles, color contrast, alt text, focus management, and WCAG guidelines. Dispatched by the SEO domain controller.</p>
+      <p><strong>Actions:</strong> <code>check_images</code> (validate alt text presence and quality), <code>check_contrast</code> (color contrast ratios), <code>check_aria</code> (ARIA roles and landmarks), <code>full_audit</code> (comprehensive WCAG check)</p>
 
       <h3>Content Domain</h3>
-      <table>
-        <thead>
-          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>content-analyzer</strong></td>
-            <td>Work</td>
-            <td>Measures readability (Flesch-Kincaid), heading structure, paragraph balance, and content quality signals.</td>
-            <td>Domain dispatch</td>
-          </tr>
-          <tr>
-            <td><strong>meta-checker</strong></td>
-            <td>Work</td>
-            <td>Validates HTML metadata completeness — Open Graph, Twitter cards, structured data (JSON-LD), and canonical URLs.</td>
-            <td>Domain dispatch</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <h4 id="content-analyzer">content-analyzer</h4>
+      <p>Measures readability (Flesch-Kincaid), heading structure, paragraph balance, and content quality signals. Dispatched by the Content domain controller.</p>
+      <p><strong>Actions:</strong> <code>analyze_readability</code> (Flesch-Kincaid score, sentence complexity), <code>check_structure</code> (heading hierarchy, paragraph balance), <code>grade_quality</code> (content signals and engagement metrics)</p>
+
+      <h4 id="meta-checker">meta-checker</h4>
+      <p>Validates HTML metadata completeness — Open Graph, Twitter Cards, structured data (JSON-LD), and canonical URLs. Dispatched by the Content domain controller.</p>
+      <p><strong>Actions:</strong> <code>check_og</code> (Open Graph tags), <code>check_twitter</code> (Twitter Card tags), <code>check_jsonld</code> (structured data validation), <code>check_canonical</code> (canonical URL presence and correctness)</p>
 
       <h3>Health Domain</h3>
-      <table>
-        <thead>
-          <tr><th>Agent</th><th>Kind</th><th>Description</th><th>Triggers</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>uptime-checker</strong></td>
-            <td>Work</td>
-            <td>Checks endpoint availability, response time, DNS resolution, and TLS certificate status with grading.</td>
-            <td>Domain dispatch</td>
-          </tr>
-          <tr>
-            <td><strong>perf-auditor</strong></td>
-            <td>Work</td>
-            <td>Measures page load performance, Core Web Vitals (LCP, FID, CLS), resource budgets, and optimization opportunities.</td>
-            <td>Domain dispatch</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <h4 id="uptime-checker">uptime-checker</h4>
+      <p>Checks endpoint availability, response time, DNS resolution, and TLS certificate status with grading. Dispatched by the Health domain controller.</p>
+      <p><strong>Actions:</strong> <code>check_endpoint</code> (HTTP response time and status), <code>check_dns</code> (DNS resolution and propagation), <code>check_tls</code> (certificate validity, expiry, chain), <code>grade</code> (composite health grade)</p>
+
+      <h4 id="perf-auditor">perf-auditor</h4>
+      <p>Measures page load performance, Core Web Vitals (LCP, FID, CLS), resource budgets, and optimization opportunities. Dispatched by the Health domain controller.</p>
+      <p><strong>Actions:</strong> <code>measure_vitals</code> (LCP, FID, CLS), <code>check_budgets</code> (resource size budgets), <code>audit_performance</code> (full performance audit with recommendations), <code>compare</code> (before/after comparison)</p>
+
+      <hr>
 
       <h2>Pro Agents</h2>
+      <p>Available through <a href="/pro.html">Weblisk Pro</a> or via <a href="https://avaropoint.com">Avaropoint</a> for enterprise engagements.</p>
       <table>
         <thead>
           <tr><th>Agent</th><th>Description</th><th>Triggers</th></tr>
@@ -266,7 +434,21 @@
         </tbody>
       </table>
 
-      <div class="tip">Want to build a custom agent? See the <a href="/agents/building.html">Building Agents</a> guide.</div>
+      <hr>
+
+      <h2>Concurrency &amp; Backpressure</h2>
+      <p>Every agent enforces a maximum number of concurrent executions. When at capacity, agents return <code>429 Too Many Requests</code> with a <code>Retry-After</code> header.</p>
+      <table>
+        <thead><tr><th>Kind</th><th>Default Max Concurrent</th><th>Override</th></tr></thead>
+        <tbody>
+          <tr><td>Domain controller</td><td>10</td><td><code>WL_MAX_CONCURRENT</code></td></tr>
+          <tr><td>Work agent</td><td>5</td><td><code>WL_MAX_CONCURRENT</code></td></tr>
+          <tr><td>Infrastructure agent</td><td>20</td><td><code>WL_MAX_CONCURRENT</code></td></tr>
+        </tbody>
+      </table>
+      <p>Domain controllers respect agent capacity by tracking in-flight requests and queuing excess work. After 3 consecutive 429s for the same agent, domains degrade gracefully — serializing remaining phases instead of parallel dispatch.</p>
+
+      <div class="tip">Want to build a custom agent? See the <a href="/agents/building.html">Building Agents</a> guide. Every agent follows the same <a href="/agents/protocols.html">Agent Protocol</a> — implement Execute + HandleMessage and the framework handles the rest.</div>
 
       <div class="docs-nav-footer">
         <a href="/agents/index.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Introduction</a>

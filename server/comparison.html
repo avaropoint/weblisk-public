@@ -547,51 +547,126 @@
 
       <!-- ─── When to Use What ─── -->
       <h2 id="when-to-use">When to Use What</h2>
+      <p>Every tool in this space solves a different slice of the problem. The matrix below shows where each excels.</p>
 
       <div style="overflow-x: auto">
         <table class="comparison-table" role="table">
           <thead>
             <tr>
-              <th scope="col">If you need to...</th>
-              <th scope="col">Use</th>
+              <th scope="col">Capability</th>
+              <th scope="col">LangChain</th>
+              <th scope="col">CrewAI</th>
+              <th scope="col">AutoGen</th>
+              <th scope="col">MCP</th>
+              <th scope="col">A2A</th>
+              <th scope="col">Weblisk</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Build an LLM-powered chain or RAG pipeline</td>
-              <td><strong>LangChain</strong> for chaining LLM calls and prompt engineering; <strong>Weblisk</strong> when agents need to collaborate beyond a single pipeline — with orchestration, lifecycle, and data contracts</td>
+              <td>LLM prompt chaining / RAG</td>
+              <td><strong>Best fit</strong></td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>Via agents</td>
             </tr>
             <tr>
-              <td>Prototype multi-agent role play</td>
-              <td><strong>CrewAI</strong> for quick throwaway prototypes; <strong>Weblisk</strong> when those agents need to reach production with real orchestration</td>
+              <td>Multi-agent prototyping</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
+              <td>Good</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
             </tr>
             <tr>
-              <td>Run multi-agent code generation research</td>
-              <td><strong>AutoGen</strong> for research experiments; <strong>Weblisk</strong> when the workflow needs to run autonomously in production</td>
+              <td>Multi-agent research</td>
+              <td>—</td>
+              <td>Good</td>
+              <td><strong>Best fit</strong></td>
+              <td>—</td>
+              <td>—</td>
+              <td>Good</td>
             </tr>
             <tr>
-              <td>Run a personal AI assistant on your machine</td>
-              <td><strong>OpenClaw</strong> for a chat-app experience; <strong>Weblisk</strong> for a self-sovereign hub with agents that federate when you're ready</td>
+              <td>Tool integration for LLMs</td>
+              <td>Good</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
+              <td>—</td>
+              <td>Via capabilities</td>
             </tr>
             <tr>
-              <td>Connect an LLM to external tools</td>
-              <td><strong>MCP</strong> for standardised tool integration; <strong>Weblisk</strong> when tools need orchestration, data contracts, and agent lifecycle</td>
+              <td>Cross-system agent communication</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
+              <td><strong>Best fit</strong></td>
             </tr>
             <tr>
-              <td>Let agents from different systems talk</td>
-              <td><strong>A2A</strong> or <strong>Weblisk</strong> — A2A defines a wire protocol; Weblisk adds federation with data contracts, trust tiers, and sovereignty</td>
+              <td>Production orchestration</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
             </tr>
             <tr>
-              <td>Deploy autonomous agents in production that collaborate across organisations</td>
-              <td><strong>Weblisk</strong> — protocol, orchestration, federation, and data sovereignty</td>
+              <td>Data contracts &amp; sovereignty</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
             </tr>
             <tr>
-              <td>Replace EDI/B2B middleware with AI-native collaboration</td>
-              <td><strong>Weblisk</strong> — hub network with cryptographic data contracts</td>
+              <td>Continuous optimisation lifecycle</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
+            </tr>
+            <tr>
+              <td>Cross-org federation</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>Good</td>
+              <td><strong>Best fit</strong></td>
+            </tr>
+            <tr>
+              <td>Self-sovereign deployment</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
+            </tr>
+            <tr>
+              <td>EDI / B2B replacement</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td><strong>Best fit</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p><strong>Best fit</strong> = purpose-built for this. <strong>Good</strong> = capable, not primary focus. <strong>Via&nbsp;…</strong> = supported through a different mechanism. <strong>—</strong> = not addressed.</p>
+      <p>Most of these tools are complementary, not competing. LangChain can power an LLM call inside a Weblisk agent. MCP can expose tools that Weblisk agents consume. A2A can serve as a wire format between Weblisk hubs and non-Weblisk systems. The difference is scope: the others solve one layer, Weblisk provides the full stack — from protocol to orchestration to federation.</p>
 
       <!-- ─── Next steps ─── -->
       <div class="docs-nav-footer">

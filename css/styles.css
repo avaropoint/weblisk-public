@@ -1035,7 +1035,7 @@ button.nav-toggle {
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 1.5rem;
 }
 
@@ -1261,7 +1261,7 @@ button.nav-toggle {
 
 .stats-bar {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
   gap: 2rem;
   text-align: center;
 }
@@ -1498,6 +1498,7 @@ button.nav-toggle {
   min-width: 0;
   padding: 2rem 3rem;
   max-width: var(--wl-content-width);
+  overflow-x: hidden;
 }
 
 .docs-content h1 {
@@ -1596,6 +1597,14 @@ button.nav-toggle {
   border-radius: var(--wl-radius-lg);
   border: 1px solid var(--wl-border);
   overflow: hidden;
+  display: table;
+}
+
+/* Wrap tables for horizontal scroll on overflow */
+.docs-content .table-responsive,
+.docs-content table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .docs-content th,
@@ -2028,7 +2037,7 @@ select.input {
 
 .demo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 1.25rem;
 }
 
@@ -2505,7 +2514,7 @@ select.input {
 
 .integration-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: 1rem;
 }
 
@@ -2574,7 +2583,7 @@ select.input {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 1.5rem;
   max-width: 960px;
   margin: 0 auto;
@@ -2976,7 +2985,7 @@ select.input {
 
 .template-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   gap: 1.5rem;
 }
 
@@ -3061,4 +3070,549 @@ select.input {
   font-family: var(--wl-mono);
   font-size: 0.75rem;
   color: var(--wl-text-muted);
+}
+
+
+/* ─── Missing Component Styles ───────────────────────────── */
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1.5rem;
+}
+
+.table-responsive table {
+  min-width: 600px;
+}
+
+.callout {
+  padding: 1rem 1.25rem;
+  border-radius: var(--wl-radius);
+  border-left: 3px solid var(--wl-border);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.callout strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--wl-text);
+}
+
+.callout-info {
+  background: var(--wl-primary-light);
+  border-left-color: var(--wl-primary);
+}
+
+.callout-tip {
+  background: var(--wl-accent-light);
+  border-left-color: var(--wl-accent);
+}
+
+.callout-warning {
+  background: rgba(180, 83, 9, 0.08);
+  border-left-color: var(--wl-warning);
+}
+
+.docs-lead {
+  font-size: 1.15rem;
+  color: var(--wl-text-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+
+/* ─── Responsive: Tablet (max 1024px) ───────────────────── */
+
+@media (max-width: 1024px) {
+  .docs-content {
+    padding: 2rem 2rem;
+  }
+
+  .docs-sidebar {
+    width: 220px;
+  }
+
+  .feature-highlight {
+    gap: 2rem;
+  }
+
+  .footer-nav {
+    gap: 2.5rem;
+  }
+}
+
+
+/* ─── Responsive: Tablet Portrait / Large Phone Landscape (max 860px) ── */
+/* Note: existing 860px query handles feature-highlight and docs-sidebar.
+   Additional rules added here for completeness. */
+
+@media (max-width: 860px) {
+  .docs-content {
+    padding: 1.5rem 1.25rem;
+    max-width: 100%;
+  }
+
+  .docs-layout {
+    display: block;
+  }
+
+  .hero {
+    padding: 5rem 1.5rem 4rem;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+  }
+
+  .section {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .template-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
+  }
+}
+
+
+/* ─── Responsive: Phone Portrait (max 480px) ────────────── */
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 1rem 2.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero-sub {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem 0.25rem 0.4rem;
+  }
+
+  .section {
+    padding: 2.5rem 1rem;
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.35rem;
+  }
+
+  .section-header p {
+    font-size: 0.875rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .feature-card {
+    padding: 1.25rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-item .stat-number {
+    font-size: 1.75rem;
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .integration-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-card {
+    padding: 1.5rem;
+  }
+
+  .template-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .code-window {
+    margin: 0 -0.5rem;
+    border-radius: var(--wl-radius);
+  }
+
+  .code-body {
+    padding: 0.75rem 1rem;
+  }
+
+  .code-body pre {
+    font-size: 0.75rem;
+  }
+
+  .install-cmd {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.25rem;
+  }
+
+  .footer {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-col {
+    gap: 0.35rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .footer-copyright {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pro-hero {
+    padding: 3rem 1rem;
+  }
+
+  .pro-hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .pro-hero p {
+    font-size: 1rem;
+  }
+
+  /* Docs content on small phones */
+  .docs-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .docs-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .docs-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .docs-content h3 {
+    font-size: 1.05rem;
+  }
+
+  .docs-lead {
+    font-size: 1rem;
+  }
+
+  .docs-content .lead {
+    font-size: 1rem;
+  }
+
+  .docs-breadcrumb {
+    font-size: 0.75rem;
+  }
+
+  .docs-nav-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .docs-nav-footer a {
+    font-size: 0.85rem;
+  }
+
+  /* Tables: force horizontal scroll on small screens */
+  .docs-content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .docs-content th,
+  .docs-content td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .comparison-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .table-responsive table {
+    min-width: 480px;
+  }
+
+  .callout {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  /* Stats row (dashboard) */
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-card .stat-value {
+    font-size: 1.35rem;
+  }
+}
+
+
+/* ─── Responsive: Very Small Phones (max 360px) ─────────── */
+
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-sub {
+    font-size: 0.875rem;
+  }
+
+  .stats-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .feature-card {
+    padding: 1rem;
+  }
+
+  .section {
+    padding: 2rem 0.75rem;
+  }
+
+  .footer {
+    padding: 1.5rem 0.75rem 1rem;
+  }
+
+  .navbar {
+    padding: 0 0.75rem;
+  }
+
+  .install-cmd {
+    font-size: 0.7rem;
+  }
+}
+
+
+/* ─── Responsive: Landscape Mode ─────────────────────────── */
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .hero {
+    padding: 2rem 2rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-sub {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-badge {
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-actions {
+    margin-bottom: 0.75rem;
+  }
+
+  .section {
+    padding: 2.5rem 2rem;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .pro-hero {
+    padding: 2.5rem 2rem;
+  }
+
+  .navbar {
+    --wl-nav-height: 52px;
+  }
+
+  /* Use horizontal space in landscape */
+  .feature-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .integration-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .footer-top {
+    flex-direction: row;
+  }
+
+  .footer-nav {
+    flex-direction: row;
+  }
+}
+
+/* Landscape phones specifically */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 920px) {
+  .hero {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-sub {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .hero-actions .btn {
+    width: auto;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .section {
+    padding: 2rem 1.25rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.35rem;
+  }
+
+  .pro-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .pro-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Docs in landscape: content wider since sidebar is hidden */
+  .docs-content {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .footer {
+    padding: 1.5rem 1.25rem 1rem;
+  }
+}
+
+
+/* ─── Responsive: Tablet Landscape (1024-1280px) ────────── */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .feature-highlight {
+    gap: 2rem;
+  }
+
+  .section {
+    padding: 4rem 2rem;
+  }
+}
+
+
+/* ─── Touch & hover media queries ────────────────────────── */
+
+@media (hover: none) {
+  .feature-card:hover {
+    border-color: var(--wl-border);
+    box-shadow: none;
+  }
+
+  .integration-card:hover {
+    border-color: var(--wl-border);
+    box-shadow: none;
+  }
+
+  .template-card:hover {
+    box-shadow: none;
+    transform: none;
+  }
 }

@@ -37,30 +37,93 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Weblisk Pro — Premium Modules &amp; Priority Support",
-    "description": "Weblisk Pro: 10 premium modules including analytics, A/B testing, data tables, charts, and more. One-time per-domain license with lifetime updates.",
-    "url": "https://weblisk.dev/pro.html",
-    "author": { "@type": "Organization", "name": "Avaropoint", "url": "https://avaropoint.com" },
-    "isPartOf": { "@type": "WebSite", "name": "Weblisk", "url": "https://weblisk.dev" }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
+    "@graph": [
       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Weblisk",
-        "item": "https://weblisk.dev/"
+        "@type": "WebPage",
+        "name": "Weblisk Pro — Premium Modules &amp; Priority Support",
+        "description": "Weblisk Pro: 10 premium modules including analytics, A/B testing, data tables, charts, and more. One-time per-domain license with lifetime updates.",
+        "url": "https://weblisk.dev/pro.html",
+        "isPartOf": { "@id": "https://weblisk.dev/#website" },
+        "author": { "@id": "https://avaropoint.com/#org" },
+        "mainEntity": {
+          "@type": "Product",
+          "name": "Weblisk Pro",
+          "description": "10 premium modules including analytics, A/B testing, data tables, charts, and more. One-time per-domain license with lifetime updates.",
+          "brand": { "@type": "Brand", "name": "Weblisk" },
+          "url": "https://weblisk.dev/pro.html",
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Community",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "52 core modules — islands, signals, security, state, networking, PWA, a11y, CLI, and TypeScript definitions. Free forever.",
+              "availability": "https://schema.org/InStock"
+            },
+            {
+              "@type": "Offer",
+              "name": "Pro",
+              "price": "149",
+              "priceCurrency": "USD",
+              "description": "One-time per-domain license with 10 pro modules: analytics, A/B testing, data tables, charts, form validation, and more. Lifetime updates included.",
+              "availability": "https://schema.org/PreOrder",
+              "priceValidUntil": "2027-12-31"
+            },
+            {
+              "@type": "Offer",
+              "name": "Team",
+              "price": "499",
+              "priceCurrency": "USD",
+              "description": "5 domain licenses with priority SLA support, source code access, self-hosted deployment, and onboarding call. One-time purchase.",
+              "availability": "https://schema.org/PreOrder",
+              "priceValidUntil": "2027-12-31"
+            }
+          ]
+        }
       },
       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Weblisk Pro — Premium Modules &amp; Priority Support",
-        "item": "https://weblisk.dev/pro.html"
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is included in Weblisk Pro?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Weblisk Pro includes 10 premium modules per domain: analytics, A/B testing, data tables, SVG charts, form validation, client auth, toasts, tabs, CRDTs, and all future Pro updates. Everything in the free Community tier is also included."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Weblisk Pro a subscription?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Weblisk Pro is a one-time purchase per domain. You pay once and get lifetime updates — no recurring fees, no subscription."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use Weblisk Pro on multiple domains?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Pro license covers one domain. For multiple domains, the Team plan covers 5 domains for $499 (one-time). Additional domains can be added individually."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Weblisk free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The Community tier with 52 core modules is completely free and always will be. It includes islands architecture, signals, security, state management, networking, PWA, accessibility, CLI tooling, and TypeScript definitions."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+          { "@type": "ListItem", "position": 2, "name": "Weblisk Pro", "item": "https://weblisk.dev/pro.html" }
+        ]
       }
     ]
   }

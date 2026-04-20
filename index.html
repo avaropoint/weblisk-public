@@ -44,7 +44,8 @@
         "logo": "https://weblisk.dev/images/mark/dark/icon-dark-512.png",
         "sameAs": [
           "https://github.com/avaropoint",
-          "https://x.com/weblisk"
+          "https://x.com/weblisk",
+          "https://discord.gg/5CetAq9EgZ"
         ]
       },
       {
@@ -81,6 +82,51 @@
         "isPartOf": { "@id": "https://weblisk.dev/#website" },
         "about": { "@id": "https://weblisk.dev/#app" },
         "inLanguage": "en"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Weblisk?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Weblisk is a zero-dependency web platform — a security-first, AI-native full-stack framework with a reactive client, protocol server, autonomous agents, and a federated hub network. It uses native ES modules and modern browser APIs with no npm, no bundler, and no node_modules."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does Weblisk have zero dependencies?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Modern web frameworks pull in hundreds of open source packages — each one a potential security exposure, breaking change, or abandoned repo. Weblisk is entirely first-party code. No supply chain risk, no npm audit vulnerabilities, no dependency tree to manage."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Weblisk need a build step?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Weblisk uses native ES modules and import maps. Every page is a standalone HTML document that works directly in the browser. You can optionally run 'weblisk build' for production optimization, but it's not required for development."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Weblisk free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The Community tier with 52 core modules is completely free and MIT-licensed. Weblisk Pro adds 10 premium modules (analytics, A/B testing, data tables, charts, etc.) for a one-time per-domain fee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What browsers does Weblisk support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Weblisk targets modern evergreen browsers that support ES modules, import maps, and the Navigation API — Chrome, Edge, Firefox, and Safari. It leverages native browser capabilities instead of polyfilling them."
+            }
+          }
+        ]
       }
     ]
   }

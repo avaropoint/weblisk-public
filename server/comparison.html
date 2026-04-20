@@ -547,126 +547,67 @@
 
       <!-- ─── When to Use What ─── -->
       <h2 id="when-to-use">When to Use What</h2>
-      <p>Every tool in this space solves a different slice of the problem. The matrix below shows where each excels.</p>
+      <p>Most agent tools solve one layer. Weblisk provides the full stack — from protocol to orchestration to federation.</p>
 
       <div style="overflow-x: auto">
         <table class="comparison-table" role="table">
           <thead>
             <tr>
               <th scope="col">Capability</th>
-              <th scope="col">LangChain</th>
-              <th scope="col">CrewAI</th>
-              <th scope="col">AutoGen</th>
-              <th scope="col">MCP</th>
-              <th scope="col">A2A</th>
-              <th scope="col">Weblisk</th>
+              <th scope="col">Traditional Approach</th>
+              <th scope="col">Weblisk Approach</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>LLM prompt chaining / RAG</td>
-              <td><strong>Best fit</strong></td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>Via agents</td>
+              <td>LangChain — chain LLM calls into pipelines</td>
+              <td>Agents use LLMs internally; LangChain can power an agent's logic</td>
             </tr>
             <tr>
-              <td>Multi-agent prototyping</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
-              <td>Good</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
+              <td>Multi-agent orchestration</td>
+              <td>CrewAI / AutoGen — define roles, run conversations</td>
+              <td>Domain controllers orchestrate agents through structured workflows with lifecycle tracking</td>
             </tr>
             <tr>
-              <td>Multi-agent research</td>
-              <td>—</td>
-              <td>Good</td>
-              <td><strong>Best fit</strong></td>
-              <td>—</td>
-              <td>—</td>
-              <td>Good</td>
-            </tr>
-            <tr>
-              <td>Tool integration for LLMs</td>
-              <td>Good</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
-              <td>—</td>
-              <td>Via capabilities</td>
+              <td>Tool integration</td>
+              <td>MCP — standardised tool protocol for LLMs</td>
+              <td>Agent capabilities with data contracts; MCP tools can be consumed by Weblisk agents</td>
             </tr>
             <tr>
               <td>Cross-system agent communication</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
-              <td><strong>Best fit</strong></td>
+              <td>A2A — wire protocol for agent interop</td>
+              <td>Federation protocol with trust tiers, data boundary contracts, and behavioural verification</td>
             </tr>
             <tr>
-              <td>Production orchestration</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
+              <td>Production deployment</td>
+              <td>Build your own infra around research frameworks</td>
+              <td>Self-sovereign hubs with built-in orchestration, security, and observability</td>
             </tr>
             <tr>
               <td>Data contracts &amp; sovereignty</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
+              <td>Manual policy enforcement, no standard</td>
+              <td>Fail-closed field filtering at every boundary — structurally enforced, not policy-dependent</td>
             </tr>
             <tr>
-              <td>Continuous optimisation lifecycle</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
+              <td>Continuous optimisation</td>
+              <td>Manual monitoring and tuning</td>
+              <td>6-phase lifecycle — strategise, observe, recommend, execute, measure, learn</td>
             </tr>
             <tr>
               <td>Cross-org federation</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>Good</td>
-              <td><strong>Best fit</strong></td>
+              <td>Custom API integrations per partner</td>
+              <td>Cryptographic peering with Ed25519 identity, trust expiry, and jurisdiction enforcement</td>
             </tr>
             <tr>
-              <td>Self-sovereign deployment</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
-            </tr>
-            <tr>
-              <td>EDI / B2B replacement</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td><strong>Best fit</strong></td>
+              <td>B2B / EDI replacement</td>
+              <td>Legacy middleware, point-to-point integrations</td>
+              <td>Hub network with cryptographic data contracts and autonomous agent collaboration</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p><strong>Best fit</strong> = purpose-built for this. <strong>Good</strong> = capable, not primary focus. <strong>Via&nbsp;…</strong> = supported through a different mechanism. <strong>—</strong> = not addressed.</p>
-      <p>Most of these tools are complementary, not competing. LangChain can power an LLM call inside a Weblisk agent. MCP can expose tools that Weblisk agents consume. A2A can serve as a wire format between Weblisk hubs and non-Weblisk systems. The difference is scope: the others solve one layer, Weblisk provides the full stack — from protocol to orchestration to federation.</p>
+      <p>These tools are complementary, not competing. LangChain can power an LLM call inside a Weblisk agent. MCP can expose tools that Weblisk agents consume. A2A can serve as a wire format between Weblisk hubs and non-Weblisk systems. The difference is scope.</p>
 
       <!-- ─── Next steps ─── -->
       <div class="docs-nav-footer">

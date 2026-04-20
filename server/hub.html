@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hub — Weblisk</title>
   <meta name="description"
-    content="Every Weblisk deployment is a self-sovereign hub. Hubs federate to form a global network — cryptographic data contracts, cross-org collaboration, and EDI replacement.">
+    content="Self-sovereign Weblisk hubs with hub roles, capability listings, free vs pro tiers, discovery, federation, behavioural change management, registry architecture, EDI replacement, and security.">
   <link rel="canonical" href="https://weblisk.dev/server/hub.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Hub — Weblisk">
   <meta property="og:description"
-    content="Every Weblisk deployment is a self-sovereign hub. Hubs federate to form a global network with cryptographic data contracts.">
+    content="Self-sovereign Weblisk hubs with hub roles, capability listings, free vs pro tiers, discovery, federation, behavioural change management, registry architecture, and EDI replacement.">
   <meta property="og:url" content="https://weblisk.dev/server/hub.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -21,7 +21,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hub — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="Self-sovereign hubs that federate to form a global network with cryptographic data contracts and cross-org collaboration.">
+  <meta name="twitter:description" content="Self-sovereign Weblisk hubs — hub roles, capability listings, free vs pro tiers, discovery, federation, behavioural change management, registry architecture, and security.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -39,7 +39,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Hub — Weblisk",
-    "description": "Self-sovereign hubs that federate to form a global network with cryptographic data contracts and cross-org collaboration.",
+    "description": "Self-sovereign Weblisk hubs with hub roles, capability listings, free vs pro tiers, discovery, federation, behavioural change management, registry architecture, EDI replacement, and security.",
     "url": "https://weblisk.dev/server/hub.html",
     "datePublished": "2026-01-15",
     "dateModified": "2026-04-20",
@@ -225,27 +225,50 @@
         </div>
       </div>
 
+      <!-- ─── Hub Roles ─── -->
+      <h2 id="hub-roles">Hub Roles</h2>
+      <p>Every hub can serve one or more roles simultaneously:</p>
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Description</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Provider</strong></td><td>Publishes agent capabilities for others to consume</td><td>A logistics company offering shipment tracking</td></tr>
+          <tr><td><strong>Consumer</strong></td><td>Discovers and invokes capabilities from other hubs</td><td>A retailer consuming shipment tracking from a logistics partner</td></tr>
+          <tr><td><strong>Registry</strong></td><td>Indexes published capabilities and serves discovery queries</td><td>Avaropoint's global registry, a regional or vertical registry</td></tr>
+        </tbody>
+      </table>
+      <p>A manufacturing hub might provide inventory intelligence to retail hubs, consume compliance checking from an
+        audit hub, and operate a private registry for its supplier network — all simultaneously.</p>
+
       <!-- ─── Federation ─── -->
       <h2 id="federation">Federation</h2>
       <p>
         Federation is the protocol that lets hubs collaborate. When two organizations
         want to work together, their hubs establish trust through Ed25519 identity
         signing, negotiate data boundary contracts, and then coordinate agent work
-        across organizational boundaries.
+        across organizational boundaries. See <a href="/server/protocols.html">Protocols</a> for the
+        full federation wire protocol, data contracts, and behavioural integrity specification.
       </p>
 
-      <h3>How Federation Works</h3>
+      <h3>Collaboration Flow</h3>
       <ol>
-        <li><strong>Discovery</strong> — Hubs find each other through the hub directory
-          or direct invitation. Each hub publishes its capabilities and available domains.</li>
-        <li><strong>Trust Establishment</strong> — Ed25519 key exchange with behavioral
-          fingerprinting. Trust is cryptographically verified, not assumed.</li>
-        <li><strong>Data Contract</strong> — Before any data crosses a hub boundary,
-          both parties sign a data boundary contract specifying exactly what data can
-          be shared, for what purpose, and for how long.</li>
-        <li><strong>Collaboration</strong> — Agents on Hub A can delegate tasks to
-          agents on Hub B through the federation protocol. All cross-boundary
-          communication is signed and audited.</li>
+        <li><strong>Discover</strong> — Consumer hub searches the registry or queries a provider directly.
+          Reviews listing: capability, data contract, SLA, pricing, behavioural metrics, jurisdiction.</li>
+        <li><strong>Review Data Contract</strong> — Consumer downloads the data contract. Reviews what inbound data
+          is required/permitted, what outbound data will be returned, what fields are forbidden, jurisdiction
+          requirements, and retention policy. Legal/compliance team approves.</li>
+        <li><strong>Initiate Peering</strong> — Consumer hub sends a peering request (<code>POST /v1/federation/peer</code>)
+          with its orchestrator manifest, requested capabilities, and accepted data contracts.</li>
+        <li><strong>Provider Review</strong> — Provider hub reviews the consumer's identity, jurisdiction,
+          and requested capabilities. Provider approves or rejects.</li>
+        <li><strong>Trust Established</strong> — Provider sends peer-accept. Both hubs exchange manifests
+          and public keys. Federation link is live.</li>
+        <li><strong>First Collaboration</strong> — Consumer's domain controller includes the federated capability
+          in its workflow. First federated task executes with full data contract enforcement, behavioural
+          verification, and audit logging.</li>
+        <li><strong>Ongoing Monitoring</strong> — Both hubs monitor usage against quotas and SLAs, behavioural
+          fingerprint stability, data contract compliance, error rates, and latency.</li>
       </ol>
 
       <div class="tip">
@@ -253,6 +276,106 @@
         translation middleware, and months of custom development. Weblisk federation replaces
         this with a native, AI-ready protocol that organizations can adopt incrementally.
       </div>
+
+      <!-- ─── Capability Listings ─── -->
+      <h2 id="capability-listings">Capability Listings</h2>
+      <p>When a hub publishes a capability to the network, the listing includes verifiable metadata —
+        not marketing text, but cryptographically signed facts:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">ListingEntry (abbreviated)</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">{</span>
+  <span class="syn-a">"listing_id"</span><span class="syn-p">:</span> <span class="syn-s">"avaropoint:seo-audit"</span><span class="syn-p">,</span>
+  <span class="syn-a">"provider"</span><span class="syn-p">:</span> <span class="syn-p">{</span>
+    <span class="syn-a">"hub_name"</span><span class="syn-p">:</span> <span class="syn-s">"avaropoint-prod"</span><span class="syn-p">,</span>
+    <span class="syn-a">"public_key"</span><span class="syn-p">:</span> <span class="syn-s">"&lt;hex Ed25519 public key&gt;"</span><span class="syn-p">,</span>
+    <span class="syn-a">"federation_url"</span><span class="syn-p">:</span> <span class="syn-s">"https://agents.avaropoint.com/v1/federation"</span><span class="syn-p">,</span>
+    <span class="syn-a">"jurisdiction"</span><span class="syn-p">:</span> <span class="syn-s">"US"</span>
+  <span class="syn-p">},</span>
+  <span class="syn-a">"capability"</span><span class="syn-p">:</span> <span class="syn-p">{</span>
+    <span class="syn-a">"domain"</span><span class="syn-p">:</span> <span class="syn-s">"seo"</span><span class="syn-p">,</span> <span class="syn-a">"action"</span><span class="syn-p">:</span> <span class="syn-s">"audit"</span><span class="syn-p">,</span> <span class="syn-a">"version"</span><span class="syn-p">:</span> <span class="syn-s">"1.2.0"</span><span class="syn-p">,</span>
+    <span class="syn-a">"data_contract"</span><span class="syn-p">:</span> <span class="syn-s">"seo-audit-v1"</span>
+  <span class="syn-p">},</span>
+  <span class="syn-a">"tier"</span><span class="syn-p">:</span> <span class="syn-s">"pro"</span><span class="syn-p">,</span>
+  <span class="syn-a">"pricing"</span><span class="syn-p">:</span> <span class="syn-p">{</span><span class="syn-a">"model"</span><span class="syn-p">:</span> <span class="syn-s">"per_invocation"</span><span class="syn-p">,</span> <span class="syn-a">"unit_price"</span><span class="syn-p">:</span> <span class="syn-n">0.05</span><span class="syn-p">,</span> <span class="syn-a">"free_quota"</span><span class="syn-p">:</span> <span class="syn-n">100</span><span class="syn-p">},</span>
+  <span class="syn-a">"sla"</span><span class="syn-p">:</span> <span class="syn-p">{</span><span class="syn-a">"availability_target"</span><span class="syn-p">:</span> <span class="syn-n">99.9</span><span class="syn-p">,</span> <span class="syn-a">"p95_latency_ms"</span><span class="syn-p">:</span> <span class="syn-n">5000</span><span class="syn-p">},</span>
+  <span class="syn-a">"metrics"</span><span class="syn-p">:</span> <span class="syn-p">{</span>
+    <span class="syn-a">"uptime_30d"</span><span class="syn-p">:</span> <span class="syn-n">99.95</span><span class="syn-p">,</span> <span class="syn-a">"p95_latency_30d_ms"</span><span class="syn-p">:</span> <span class="syn-n">3200</span><span class="syn-p">,</span>
+    <span class="syn-a">"total_invocations_30d"</span><span class="syn-p">:</span> <span class="syn-n">142000</span><span class="syn-p">,</span> <span class="syn-a">"error_rate_30d"</span><span class="syn-p">:</span> <span class="syn-n">0.002</span><span class="syn-p">,</span>
+    <span class="syn-a">"behavioral_changes_90d"</span><span class="syn-p">:</span> <span class="syn-n">1</span>
+  <span class="syn-p">},</span>
+  <span class="syn-a">"compliance"</span><span class="syn-p">:</span> <span class="syn-p">{</span><span class="syn-a">"jurisdiction"</span><span class="syn-p">:</span> <span class="syn-s">"US"</span><span class="syn-p">,</span> <span class="syn-a">"retention_hours"</span><span class="syn-p">:</span> <span class="syn-n">24</span><span class="syn-p">},</span>
+  <span class="syn-a">"signature"</span><span class="syn-p">:</span> <span class="syn-s">"&lt;provider's Ed25519 signature over listing&gt;"</span>
+<span class="syn-p">}</span></pre>
+        </div>
+      </div>
+
+      <!-- ─── Free vs Pro ─── -->
+      <h2 id="free-vs-pro">Free vs Pro Tiers</h2>
+      <p>Tier separation is about capability scope and service levels, not security or quality.
+        Both tiers use the same federation protocol, data contracts, and trust enforcement.</p>
+      <table>
+        <thead>
+          <tr><th>Aspect</th><th>Free</th><th>Pro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Federation protocol</strong></td><td>Full</td><td>Full</td></tr>
+          <tr><td><strong>Data contracts</strong></td><td>Full enforcement</td><td>Full enforcement</td></tr>
+          <tr><td><strong>Behavioural verification</strong></td><td>Full</td><td>Full</td></tr>
+          <tr><td><strong>Concurrency</strong></td><td>Limited (5 concurrent)</td><td>Configurable (up to SLA)</td></tr>
+          <tr><td><strong>Rate limiting</strong></td><td>Strict (100/hour)</td><td>Per-contract</td></tr>
+          <tr><td><strong>SLA</strong></td><td>Best-effort</td><td>Contractual (99.9%+)</td></tr>
+          <tr><td><strong>Support</strong></td><td>Community</td><td>Business hours or 24/7</td></tr>
+          <tr><td><strong>Metering</strong></td><td>Usage-capped (free quota)</td><td>Pay-per-use or subscription</td></tr>
+          <tr><td><strong>Priority routing</strong></td><td>Standard</td><td>Priority queue</td></tr>
+          <tr><td><strong>Audit access</strong></td><td>Self-only</td><td>Shared audit with provider</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Pricing Models</h3>
+      <table>
+        <thead>
+          <tr><th>Model</th><th>Description</th><th>Suited For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>per_invocation</strong></td><td>Charge per federated task execution</td><td>High-volume, low-cost tasks</td></tr>
+          <tr><td><strong>monthly_subscription</strong></td><td>Flat fee for unlimited or capped access</td><td>Predictable workloads</td></tr>
+          <tr><td><strong>tiered</strong></td><td>Price brackets based on volume</td><td>Variable workloads</td></tr>
+          <tr><td><strong>custom</strong></td><td>Negotiated pricing for enterprise</td><td>Large partnerships</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Usage Metering</h3>
+      <p>Both hubs independently track usage for reconciliation. Metering records are <strong>dual-signed</strong> by both
+        consumer and provider, ensuring neither party can dispute usage unilaterally. Discrepancies are flagged
+        for manual resolution.</p>
+
+      <!-- ─── Discovery ─── -->
+      <h2 id="discovery">Discovery</h2>
+      <h3>Registry Search</h3>
+      <p>Hubs search the registry by capability, domain, jurisdiction, and tier via <code>GET /v1/hub/search</code>:</p>
+      <table>
+        <thead>
+          <tr><th>Parameter</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>domain</code></td><td>Filter by domain (e.g. <code>"seo"</code>)</td></tr>
+          <tr><td><code>action</code></td><td>Filter by action (e.g. <code>"audit"</code>)</td></tr>
+          <tr><td><code>tier</code></td><td><code>"free"</code>, <code>"pro"</code>, or <code>"all"</code></td></tr>
+          <tr><td><code>jurisdiction</code></td><td>Filter by provider jurisdiction (ISO 3166-1)</td></tr>
+          <tr><td><code>min_uptime</code></td><td>Minimum 30-day uptime percentage</td></tr>
+          <tr><td><code>max_latency</code></td><td>Maximum p95 latency in ms</td></tr>
+          <tr><td><code>sort</code></td><td><code>"relevance"</code>, <code>"uptime"</code>, <code>"latency"</code>, <code>"price"</code>, <code>"invocations"</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Direct Discovery</h3>
+      <p>Without a registry, one hub can query another hub's published capabilities directly via
+        <code>GET /v1/federation/contracts</code>, which returns the data contracts and capabilities the
+        target hub offers to peers at the requester's trust tier.</p>
 
       <!-- ─── Data Sovereignty ─── -->
       <h2 id="data-sovereignty">Data Sovereignty</h2>
@@ -292,6 +415,120 @@
         </tbody>
       </table>
 
+      <!-- ─── Behavioural Change ─── -->
+      <h2 id="behavioral-change">Behavioural Change Management</h2>
+      <p>Behavioural integrity is especially critical across hubs because each hub relies on capabilities it
+        does not own or control.</p>
+
+      <h3>Provider Obligations</h3>
+      <p>When a provider updates an agent that backs a published capability:</p>
+      <ul>
+        <li><strong>BENIGN changes:</strong> Publish updated metrics. No disruption.</li>
+        <li><strong>NOTABLE changes:</strong> Update hub listing, notify collaborating hubs via <code>POST /v1/hub/notify</code>,
+          allow 7-day parallel running of old + new version.</li>
+        <li><strong>BREAKING changes:</strong> Publish new listing version alongside old, notify all collaborators
+          with detailed changelog, provide 30-day deprecation window. Collaborators must explicitly opt-in.</li>
+        <li><strong>CRITICAL changes:</strong> Immediately suspend the listing, notify all collaborators with
+          <code>BEHAVIORAL_CHANGE_CRITICAL</code>, require re-approval from all active collaborators.</li>
+      </ul>
+
+      <h3>Collaborator Protections</h3>
+      <ul>
+        <li><strong>Version pinning</strong> — collaborators can pin to a specific version; providers MUST continue serving it during deprecation</li>
+        <li><strong>Change notifications</strong> — all changes above BENIGN trigger a notification to the collaborating hub</li>
+        <li><strong>Automatic suspension</strong> — CRITICAL behavioural changes automatically suspend federated tasks until admin review</li>
+        <li><strong>Audit trail</strong> — full history of behavioural changes visible in the listing's metrics</li>
+      </ul>
+
+      <!-- ─── Revocation ─── -->
+      <h2 id="revocation">Revocation &amp; Removal</h2>
+      <h3>Collaborator Disconnects</h3>
+      <p>A collaborator can revoke trust at any time via <code>POST /v1/federation/peer-revoke</code>.
+        In-flight tasks complete with timeout, no new tasks are dispatched, metering finalises at
+        revocation, and the data retention clock starts on both sides.</p>
+
+      <h3>Provider Delists</h3>
+      <p>A provider can remove a capability via <code>POST /v1/hub/delist</code>.
+        Active collaborators receive a 30-day warning. Existing collaborators continue for the
+        deprecation window. After deprecation, trust relationships expire and the listing
+        is removed from registry search results.</p>
+
+      <h3>Emergency Revocation</h3>
+      <p>In case of a security incident (compromised key, data breach, malicious behaviour),
+        immediate revocation terminates the trust relationship with no grace period, cancels
+        all in-flight tasks, purges all cross-boundary data per retention policy, logs the
+        incident in both audit trails, and notifies the registry.</p>
+
+      <!-- ─── Registry Architecture ─── -->
+      <h2 id="registry">Registry Architecture</h2>
+      <p>A registry is itself a Weblisk hub — an orchestrator with specialised agents for indexing and discovery:</p>
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Index Agent</strong></td><td>Crawls and indexes hub manifests from known providers</td></tr>
+          <tr><td><strong>Search Agent</strong></td><td>Handles discovery queries with ranking and filtering</td></tr>
+          <tr><td><strong>Metrics Agent</strong></td><td>Collects and aggregates uptime, latency, and usage metrics</td></tr>
+          <tr><td><strong>Verification Agent</strong></td><td>Validates hub identity and manifest signatures</td></tr>
+          <tr><td><strong>Alert Agent</strong></td><td>Monitors behavioural changes and notifies affected collaborators</td></tr>
+        </tbody>
+      </table>
+      <p>The registry NEVER handles actual federated task data. It only indexes metadata (listings, metrics, contracts).
+        All data exchange happens directly between hubs through the federation protocol.</p>
+
+      <h3>Registry Federation</h3>
+      <p>Multiple registries can federate with each other, sharing listing indexes. This prevents a single
+        point of failure and supports regional or vertical-specific registries:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Registry topology</span>
+        </div>
+        <div class="code-body">
+          <pre>Global Registry (Avaropoint)
+  ├── EU Registry (regional)
+  ├── APAC Registry (regional)
+  └── Healthcare Registry (vertical)</pre>
+        </div>
+      </div>
+      <p>Each registry independently verifies hub signatures. A listing appearing in multiple registries
+        carries the same cryptographic proof regardless of which registry serves it.</p>
+
+      <!-- ─── Hub Network ─── -->
+      <h2 id="hub-network">Hub Network</h2>
+      <p>At scale, the hub network forms a topology analogous to the internet — decentralised, resilient,
+        and self-organising. Key properties:</p>
+      <ul>
+        <li><strong>No single point of failure</strong> — if any hub or registry goes offline, the remaining
+          network continues. Existing trust relationships are peer-to-peer and do not depend on the registry.</li>
+        <li><strong>Organic growth</strong> — new hubs join by peering with existing hubs. No central authority
+          approves membership.</li>
+        <li><strong>Domain specialisation</strong> — each hub excels at its own domains. Collaboration lets every
+          hub access capabilities beyond its own specialisation.</li>
+        <li><strong>Data stays home</strong> — each hub processes data within its own jurisdiction. Only the
+          minimum required data (per data contracts) crosses boundaries, cryptographically controlled at every step.</li>
+      </ul>
+
+      <!-- ─── EDI Replacement ─── -->
+      <h2 id="edi-replacement">Replacing EDI &amp; Traditional B2B</h2>
+      <table>
+        <thead>
+          <tr><th>Traditional (EDI/B2B)</th><th>Weblisk Hub Network</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Fixed message formats (X12, EDIFACT)</td><td>Flexible data contracts with explicit boundaries</td></tr>
+          <tr><td>Point-to-point VAN connections</td><td>Federated mesh with peer discovery</td></tr>
+          <tr><td>Opaque data pipelines</td><td>Full audit trail on both sides</td></tr>
+          <tr><td>No behavioural guarantees</td><td>Behavioural fingerprinting and change detection</td></tr>
+          <tr><td>Manual integration per partner</td><td>Agents negotiate and execute autonomously</td></tr>
+          <tr><td>Data ownership unclear</td><td>Data ownership explicit in every contract</td></tr>
+          <tr><td>Months to onboard a partner</td><td>Peering flow: discover → review → connect</td></tr>
+          <tr><td>No AI-native processing</td><td>Agents understand content, context, and intent</td></tr>
+          <tr><td>Vendor lock-in</td><td>Open protocol, self-sovereign hubs</td></tr>
+        </tbody>
+      </table>
+
       <!-- ─── Use Cases ─── -->
       <h2 id="use-cases">Use Cases</h2>
 
@@ -304,7 +541,9 @@
           <p>
             Manufacturer, distributor, and retailer each run their own hub.
             Inventory agents collaborate across hubs with data contracts
-            that protect each party's pricing and customer data.
+            that protect each party's pricing and customer data. The manufacturer's
+            procurement agent can invoke the supplier's <code>inventory:check</code> without
+            the supplier ever seeing the manufacturer's production schedule.
           </p>
         </div>
         <div class="feature-card">
@@ -333,48 +572,43 @@
 
       <!-- ─── Endpoints ─── -->
       <h2 id="endpoints">Hub API Endpoints</h2>
+      <p>Hub-specific endpoints (in addition to <a href="/server/protocols.html#federation-protocol">federation endpoints</a>):</p>
       <table>
         <thead>
           <tr>
-            <th>Endpoint</th>
+            <th>Path</th>
             <th>Method</th>
+            <th>Auth</th>
             <th>Description</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><code>/v1/hub/manifest</code></td>
-            <td>GET</td>
-            <td>Public hub identity, capabilities, and available domains</td>
-          </tr>
-          <tr>
-            <td><code>/v1/hub/health</code></td>
-            <td>GET</td>
-            <td>Health score and status for federation routing</td>
-          </tr>
-          <tr>
-            <td><code>/v1/federation/handshake</code></td>
-            <td>POST</td>
-            <td>Initiate trust establishment with another hub</td>
-          </tr>
-          <tr>
-            <td><code>/v1/federation/contract</code></td>
-            <td>POST</td>
-            <td>Propose or accept a data boundary contract</td>
-          </tr>
-          <tr>
-            <td><code>/v1/federation/delegate</code></td>
-            <td>POST</td>
-            <td>Delegate a task to a federated hub's agent</td>
-          </tr>
+          <tr><td><code>/v1/hub/search</code></td><td>GET</td><td>Public</td><td>Search capability listings across the network</td></tr>
+          <tr><td><code>/v1/hub/listing/{id}</code></td><td>GET</td><td>Public</td><td>Get listing details with metrics and compliance info</td></tr>
+          <tr><td><code>/v1/hub/publish</code></td><td>POST</td><td>Hub-auth</td><td>Publish or update a capability listing</td></tr>
+          <tr><td><code>/v1/hub/delist</code></td><td>POST</td><td>Hub-auth</td><td>Remove a listing (30-day deprecation for active collaborators)</td></tr>
+          <tr><td><code>/v1/hub/metrics/{id}</code></td><td>GET</td><td>Public</td><td>Get listing performance metrics</td></tr>
+          <tr><td><code>/v1/hub/contracts/{name}</code></td><td>GET</td><td>Public</td><td>Download a data contract</td></tr>
+          <tr><td><code>/v1/hub/notify</code></td><td>POST</td><td>Hub-auth</td><td>Send change notification to collaborators</td></tr>
+          <tr><td><code>/v1/hub/usage</code></td><td>GET</td><td>Peer-auth</td><td>Usage metering for billing period</td></tr>
         </tbody>
       </table>
 
-      <div class="tip">
-        For the complete federation protocol specification, see the
-        <a href="https://github.com/avaropoint/weblisk-blueprints/blob/main/protocol/federation.md">federation blueprint</a>
-        in the weblisk-blueprints repository.
-      </div>
+      <!-- ─── Security ─── -->
+      <h2 id="security">Security Considerations</h2>
+      <table>
+        <thead>
+          <tr><th>Threat</th><th>Mitigation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Listing integrity</strong></td><td>Listings are signed by the provider hub. Registries and collaborators verify signatures before indexing or peering.</td></tr>
+          <tr><td><strong>Sybil attacks</strong></td><td>Each listing requires a valid hub identity with a verifiable key pair. Registries MAY require additional identity verification.</td></tr>
+          <tr><td><strong>Price manipulation</strong></td><td>Usage metering is dual-signed by both hubs. Neither party can unilaterally alter usage records.</td></tr>
+          <tr><td><strong>Bait-and-switch</strong></td><td>Behavioural fingerprinting detects when a provider changes agent behaviour. BREAKING and CRITICAL changes trigger notifications and suspension.</td></tr>
+          <tr><td><strong>Data harvesting</strong></td><td>Data contracts are enforced by the consumer's own hub before data crosses the boundary. A malicious provider cannot request more data than the contract permits.</td></tr>
+          <tr><td><strong>Supply chain attacks</strong></td><td>Behavioural change detection flags anomalies. Key rotation requires dual-signature proof. Emergency revocation enables immediate disconnection.</td></tr>
+        </tbody>
+      </table>
 
       <!-- ─── Next steps ─── -->
       <div class="docs-nav-footer">

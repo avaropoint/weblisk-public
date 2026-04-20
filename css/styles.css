@@ -463,7 +463,9 @@ button.nav-toggle {
   border-radius: 9999px;
 }
 
-@media (max-width: 768px) {
+/* ─── Mobile Navigation ─── */
+/* 9 nav links need ~950px+ to render inline; collapse to hamburger at 1024px */
+@media (max-width: 1024px) {
   .navbar {
     padding: 0 1rem;
   }
@@ -561,7 +563,50 @@ button.nav-toggle {
   .nav-actions {
     gap: 0.25rem;
   }
+}
 
+/* Landscape mobile: compact nav menu — 2 columns, capped height */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 1024px) {
+  .nav-links {
+    max-height: calc(100dvh - var(--wl-nav-height));
+    padding: 0.5rem 1rem;
+    gap: 0.15rem;
+  }
+
+  .nav-links.open {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.15rem 0.75rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    min-height: 36px;
+  }
+
+  .nav-sidebar-section {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--wl-border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.1rem 0.75rem;
+  }
+
+  .nav-sidebar-heading {
+    grid-column: 1 / -1;
+    padding: 0.35rem 0.75rem 0.1rem;
+    font-size: 0.7rem;
+  }
+
+  .nav-sidebar-link {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    min-height: 32px;
+  }
+}
+
+@media (max-width: 768px) {
   .hero {
     padding: 4rem 1.25rem 3rem;
   }

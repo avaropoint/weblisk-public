@@ -464,8 +464,8 @@ button.nav-toggle {
 }
 
 /* ─── Mobile Navigation ─── */
-/* 9 nav links need ~950px+ to render inline; collapse to hamburger at 1024px */
-@media (max-width: 1024px) {
+/* 9 nav links need ~950px+ to render inline; collapse to hamburger at 1200px */
+@media (max-width: 1200px) {
   .navbar {
     padding: 0 1rem;
   }
@@ -566,7 +566,7 @@ button.nav-toggle {
 }
 
 /* Landscape mobile: compact nav menu — 2 columns, capped height */
-@media (orientation: landscape) and (max-height: 500px) and (max-width: 1024px) {
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 1200px) {
   .nav-links {
     max-height: calc(100dvh - var(--wl-nav-height));
     padding: 0.5rem 1rem;

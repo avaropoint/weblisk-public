@@ -1,0 +1,69 @@
+# Weblisk
+
+> The zero-dependency web platform — a security-first, AI-native full-stack framework with a reactive client, protocol server, autonomous agents, and a federated hub network.
+
+## About
+
+Weblisk is a complete web platform built with zero external dependencies. It uses native ES modules, import maps, and modern browser APIs — no npm, no bundler, no node_modules. The framework ships 52 built-in modules covering reactivity, routing, state management, security, PWA support, accessibility, and more.
+
+Weblisk is created and maintained by Avaropoint.
+
+## Core Concepts
+
+- **Islands Architecture**: HTML renders instantly; JavaScript hydrates only interactive regions on load, idle, visible, or media query.
+- **Reactive Signals**: Fine-grained reactivity without a virtual DOM. Change data, DOM updates surgically.
+- **Zero Dependencies**: Every module is first-party code. No supply chain risk, no npm audit vulnerabilities.
+- **No Build Step**: Write HTML, CSS, and JS — refresh the browser and it works. Optional production optimization via `weblisk build`.
+
+## Server & Protocol
+
+Weblisk includes an open specification for lightweight servers. Define the protocol once — implement in Go, Rust, Python, or any language. Runtime-agnostic by design.
+
+- **Blueprints**: Declarative specifications for APIs, domains, and workflows.
+- **Agents**: Autonomous services for SEO analysis, content quality, health monitoring, background sync, and scheduled tasks.
+- **Hub Network**: Every deployment is a self-sovereign hub. Hubs federate to form a global network with cryptographic data contracts for cross-organization collaboration.
+- **Domain Controllers**: Orchestrate agents through structured workflows within functional domains (SEO, content quality, health monitoring).
+- **Federation Protocol**: Ed25519 identity signing, behavioral fingerprinting, trust tiers, and data boundary contracts.
+
+## Key Pages
+
+- Homepage: https://weblisk.dev/
+- Documentation: https://weblisk.dev/docs/
+- Quick Start: https://weblisk.dev/docs/quick-start.html
+- Features: https://weblisk.dev/features.html
+- Server Framework: https://weblisk.dev/server/
+- Server Specification: https://weblisk.dev/server/specification.html
+- Blueprints: https://weblisk.dev/blueprints/
+- Agents: https://weblisk.dev/agents/
+- Hub Network: https://weblisk.dev/server/hub.html
+- Comparison: https://weblisk.dev/server/comparison.html
+- Pro: https://weblisk.dev/pro.html
+
+## Documentation
+
+- Installation: https://weblisk.dev/docs/installation.html
+- Project Structure: https://weblisk.dev/docs/project-structure.html
+- Signals: https://weblisk.dev/docs/signals.html
+- Islands: https://weblisk.dev/docs/islands.html
+- Hydration: https://weblisk.dev/docs/hydration.html
+- Components: https://weblisk.dev/docs/components.html
+- State Management: https://weblisk.dev/docs/state.html
+- Routing: https://weblisk.dev/docs/routing.html
+- Networking: https://weblisk.dev/docs/fetch.html
+- Security: https://weblisk.dev/docs/security.html
+- Accessibility: https://weblisk.dev/docs/a11y.html
+- Performance: https://weblisk.dev/docs/performance.html
+- PWA: https://weblisk.dev/docs/pwa.html
+- Testing: https://weblisk.dev/docs/testing.html
+- CLI: https://weblisk.dev/docs/cli.html
+
+## Source Code
+
+- GitHub: https://github.com/avaropoint/weblisk
+- License: MIT
+
+## Contact
+
+- Website: https://avaropoint.com
+- Twitter: https://x.com/weblisk
+- Discord: https://discord.gg/5CetAq9EgZ

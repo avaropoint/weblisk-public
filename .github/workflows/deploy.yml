@@ -39,16 +39,37 @@ jobs:
               --no-progress
           }
 
-          # Upload all site files preserving directory structure
-          find . -type f \
+          # Build list of site files to upload (allowlist approach)
+          SITE_FILES=$(mktemp)
+          find . -type f \( \
+            -name '*.html' -o \
+            -name '*.css' -o \
+            -name '*.svg' -o \
+            -name '*.png' -o \
+            -name '*.jpg' -o \
+            -name '*.jpeg' -o \
+            -name '*.webp' -o \
+            -name '*.ico' -o \
+            -name '*.woff2' -o \
+            -name '*.woff' -o \
+            -name '*.xml' -o \
+            -name 'manifest.webmanifest' -o \
+            -name 'robots.txt' -o \
+            -name 'llms.txt' \
+          \) \
             -not -path './.git/*' \
             -not -path './.github/*' \
             -not -path './.vscode/*' \
             -not -path './workers/*' \
-            -not -name '.gitignore' \
-            -not -name 'wrangler.toml' \
-            -not -name 'README.md' \
-          | while read -r file; do
+          > "$SITE_FILES"
+
+          # Also include JS files under js/ only (not workers/, not root)
+          find ./js -type f -name '*.js' >> "$SITE_FILES" 2>/dev/null || true
+
+          # Include sw.js at root
+          [ -f ./sw.js ] && echo "./sw.js" >> "$SITE_FILES"
+
+          cat "$SITE_FILES" | while read -r file; do
             # Strip leading ./
             key="${file#./}"
 
@@ -58,9 +79,10 @@ jobs:
               *.css)   mime="text/css" ;;
               *.js)    mime="application/javascript" ;;
               *.json)  mime="application/json" ;;
+              *.webmanifest) mime="application/manifest+json" ;;
               *.svg)   mime="image/svg+xml" ;;
               *.png)   mime="image/png" ;;
-              *.jpg)   mime="image/jpeg" ;;
+              *.jpg|*.jpeg) mime="image/jpeg" ;;
               *.ico)   mime="image/x-icon" ;;
               *.webp)  mime="image/webp" ;;
               *.woff2) mime="font/woff2" ;;
@@ -73,7 +95,62 @@ jobs:
             upload "$file" "$key" "$mime"
           done
 
-          echo "✓ Site deployed to weblisk-public R2 bucket"
+          rm -f "$SITE_FILES"
+          echo "✓ Site files uploaded to R2"
+
+      - name: Clean stale files from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: |
+          BUCKET="s3://weblisk-public"
+
+          # Build set of local keys (same allowlist as upload step)
+          LOCAL_KEYS=$(mktemp)
+          find . -type f \( \
+            -name '*.html' -o \
+            -name '*.css' -o \
+            -name '*.svg' -o \
+            -name '*.png' -o \
+            -name '*.jpg' -o \
+            -name '*.jpeg' -o \
+            -name '*.webp' -o \
+            -name '*.ico' -o \
+            -name '*.woff2' -o \
+            -name '*.woff' -o \
+            -name '*.xml' -o \
+            -name 'manifest.webmanifest' -o \
+            -name 'robots.txt' -o \
+            -name 'llms.txt' \
+          \) \
+            -not -path './.git/*' \
+            -not -path './.github/*' \
+            -not -path './.vscode/*' \
+            -not -path './workers/*' \
+          | sed 's|^\./||' > "$LOCAL_KEYS"
+          find ./js -type f -name '*.js' 2>/dev/null | sed 's|^\./||' >> "$LOCAL_KEYS" || true
+          [ -f ./sw.js ] && echo "sw.js" >> "$LOCAL_KEYS"
+          sort -o "$LOCAL_KEYS" "$LOCAL_KEYS"
+
+          # List all keys currently in R2
+          REMOTE_KEYS=$(mktemp)
+          aws s3 ls "${BUCKET}/" --recursive --endpoint-url "$R2_ENDPOINT" \
+            | awk '{print $4}' | sort > "$REMOTE_KEYS"
+
+          # Delete keys in R2 that don't exist locally
+          STALE=$(comm -23 "$REMOTE_KEYS" "$LOCAL_KEYS")
+          if [ -n "$STALE" ]; then
+            echo "Removing stale files from R2:"
+            echo "$STALE" | while read -r key; do
+              echo "  - $key"
+              aws s3 rm "${BUCKET}/${key}" --endpoint-url "$R2_ENDPOINT"
+            done
+          else
+            echo "✓ R2 is clean — no stale files"
+          fi
+
+          rm -f "$LOCAL_KEYS" "$REMOTE_KEYS"
 
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3

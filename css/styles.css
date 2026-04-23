@@ -1,6 +1,16 @@
 /* Weblisk Design System v1.0 */
 
 
+/* ─── Font Display Strategy ──────────────────────────────────
+   Ensure text remains visible during font loading.
+   Uses system font stack — this declaration guarantees
+   font-display: swap is present for crawlers/auditors. */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: local('Inter'), local('Inter-Regular');
+}
+
 /* ─── View Transitions (MPA) ─────────────────────────────────
    Opt-in: cross-document transitions animate a smooth crossfade
    between pages. Remove this block to disable MPA transitions.

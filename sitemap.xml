@@ -1,85 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Homepage -->
-  <url><loc>https://weblisk.dev/</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Core Pages -->
-  <url><loc>https://weblisk.dev/features.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/pro.html</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/features.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/pro.html</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Documentation -->
-  <url><loc>https://weblisk.dev/docs/</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/quick-start.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/installation.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/project-structure.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/signals.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/islands.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/hydration.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/components.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/state.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/store.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/routing.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/fetch.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/realtime.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/security.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/a11y.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/performance.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/pwa.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/transitions.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/scheduler.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/workers.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/testing.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/cli.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/devtools.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/analytics.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/ui.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/docs/integration.html</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/quick-start.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/installation.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/project-structure.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/signals.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/islands.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/hydration.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/components.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/state.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/store.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/routing.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/fetch.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/realtime.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/security.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/a11y.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/performance.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/pwa.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/transitions.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/scheduler.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/workers.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/testing.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/cli.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/devtools.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/analytics.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/ui.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/docs/integration.html</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Templates -->
-  <url><loc>https://weblisk.dev/templates/</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/templates/</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Marketplace -->
-  <url><loc>https://weblisk.dev/marketplace/</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/marketplace/</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Hub -->
-  <url><loc>https://weblisk.dev/hub/</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/hub/</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Feature Demos -->
-  <url><loc>https://weblisk.dev/features/core.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/state.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/networking.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/security.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/a11y.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/performance.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/pwa.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/data.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/pro.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/transitions.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/routing.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/features/components.html</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/features/core.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/state.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/networking.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/security.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/a11y.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/performance.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/pwa.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/data.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/pro.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/transitions.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/routing.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/features/components.html</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Server Framework -->
-  <url><loc>https://weblisk.dev/server/</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/server/specification.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/server/protocols.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/server/implementations.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/server/go.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/server/hub.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/server/comparison.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/server/security.html</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/server/</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/specification.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/protocols.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/implementations.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/go.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/hub.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/comparison.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/security.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/domains.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/server/lifecycle.html</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Blueprints -->
-  <url><loc>https://weblisk.dev/blueprints/</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/blueprints/catalog.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/blueprints/authoring.html</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/blueprints/</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/blueprints/catalog.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/blueprints/authoring.html</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Agents -->
-  <url><loc>https://weblisk.dev/agents/</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/agents/catalog.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/agents/building.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/agents/protocols.html</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/agents/</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/agents/catalog.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/agents/building.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/agents/protocols.html</loc><lastmod>2026-04-23</lastmod></url>
 
   <!-- Examples -->
-  <url><loc>https://weblisk.dev/dashboard.html</loc><lastmod>2026-04-20</lastmod></url>
-  <url><loc>https://weblisk.dev/settings.html</loc><lastmod>2026-04-20</lastmod></url>
+  <url><loc>https://weblisk.dev/dashboard.html</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://weblisk.dev/settings.html</loc><lastmod>2026-04-23</lastmod></url>
 </urlset>

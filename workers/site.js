@@ -1,6 +1,9 @@
 // Weblisk static-site Worker — secure HTTP server backed by R2.
 // All responses pass through securityHeaders() before reaching the client.
 
+// Frozen at deploy time — every `wrangler deploy` yields a new value.
+const DEPLOY_VERSION = Date.now().toString(36);
+
 const MIME = {
   html: "text/html;charset=utf-8",
   css:  "text/css;charset=utf-8",
@@ -99,7 +102,7 @@ export default {
 };
 
 // Build response with security and cache headers.
-function respond(object, key, headOnly) {
+async function respond(object, key, headOnly) {
   const isHTML = key.endsWith(".html");
   const headers = new Headers();
   object.writeHttpMetadata(headers);
@@ -117,7 +120,24 @@ function respond(object, key, headOnly) {
     isHTML ? "public, max-age=60, s-maxage=300" : "public, max-age=31536000, immutable"
   );
 
+  // For HTML: inject deploy version on CSS/JS references so browsers
+  // always fetch the latest assets after each deploy.
+  if (isHTML && !headOnly) {
+    const html = await object.text();
+    const versioned = injectVersion(html);
+    return new Response(versioned, { headers });
+  }
+
   return new Response(headOnly ? null : object.body, { headers });
+}
+
+// Replace any existing ?v=… and append ?v=DEPLOY_VERSION to local CSS/JS refs.
+// Matches href/src/data-island="/….css|.js" with optional existing ?v= param.
+// Skips absolute URLs (https://) so CDN refs are untouched.
+const VERSION_RE = /((?:href|src|data-island)\s*=\s*["'])(\/[^"']*\.(?:css|js))(\?v=[^"']*)?(?=["'])/g;
+
+function injectVersion(html) {
+  return html.replace(VERSION_RE, `$1$2?v=${DEPLOY_VERSION}`);
 }
 
 // 404 with full security headers.

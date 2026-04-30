@@ -324,6 +324,35 @@ WL_DIST=dist
         </div>
       </div>
 
+      <h2>Blueprint-Driven Layout</h2>
+      <p>When using the <code>client/blueprint-site</code> template, the project structure is declaration-first — YAML files describe the site, and code is generated:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">code</span>
+        </div>
+        <div class="code-body">
+          <pre>
+my-site/
+├── global.yaml            ← Project identity, navigation, SEO
+├── code.yaml              ← Code conventions, formatting rules
+├── theme.yaml             ← Design tokens (colors, typography, spacing)
+├── pages/                 ← Page declarations (YAML)
+│   ├── index.yaml
+│   ├── features.yaml
+│   └── docs.yaml
+├── components/            ← Component declarations (YAML)
+│   ├── hero.yaml
+│   └── pricing-card.yaml
+├── weblisk.json           ← Project config
+├── .env                   ← Config
+└── dist/                  ← Generated output (build artifact)
+</pre>
+        </div>
+      </div>
+      <p>Run <code>weblisk generate</code> to produce the full site from these declarations. See <a href="/blueprints/standards.html">Project Standards</a> for details.</p>
+
       <div class="docs-nav-footer">
         <a href="/docs/quick-start.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"
             style="transform:rotate(180deg)"></i> Quick Start</a>

@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Authoring Blueprints — Weblisk</title>
-  <meta name="description" content="Learn how to create custom Weblisk blueprints — define models, endpoints, hooks, and validation rules.">
+  <meta name="description" content="Author Weblisk blueprints — schema governance, 6 blueprint types, compliance levels, extends inheritance, and the validation pipeline.">
   <link rel="canonical" href="https://weblisk.dev/blueprints/authoring.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Authoring Blueprints — Weblisk">
-  <meta property="og:description" content="Learn how to create custom Weblisk blueprints — define models, endpoints, hooks, and validation rules.">
+  <meta property="og:description" content="Author Weblisk blueprints — schema governance, compliance levels, extends inheritance, and the validation pipeline.">
   <meta property="og:url" content="https://weblisk.dev/blueprints/authoring.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -19,12 +19,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Authoring Blueprints — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="Learn how to create custom Weblisk blueprints — define models, endpoints, hooks, and validation rules.">
+  <meta name="twitter:description" content="Author Weblisk blueprints — schema governance, compliance levels, extends inheritance, and the validation pipeline.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Avaropoint">
   <meta property="article:published_time" content="2026-04-23T00:00:00Z">
-  <meta property="article:modified_time" content="2026-04-23T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <meta name="theme-color" content="#1a1f36">
@@ -126,123 +126,221 @@
       <nav aria-label="Blueprint overview links">
         <a href="/blueprints/">Introduction</a>
         <a href="/blueprints/catalog.html">Catalog</a>
+        <a href="/blueprints/standards.html">Standards</a>
         <a href="/blueprints/authoring.html" aria-current="page" class="active">Authoring</a>
       </nav>
       <h3>Related</h3>
       <nav aria-label="Related links">
         <a href="/server/">Server Framework</a>
         <a href="/agents/">Agents</a>
+        <a href="/templates/">Templates</a>
       </nav>
     </aside>
 
     <main class="docs-content" id="main-content">
       <h1>Authoring Blueprints</h1>
-      <p class="lead">Create your own blueprints to define APIs, data models, and workflows in a declarative, language-agnostic format.</p>
+      <p class="lead">Every blueprint follows a schema that enforces required sections, field constraints, and compliance levels. This guide covers the governance system, blueprint types, inheritance via <code>extends</code>, and the validation pipeline.</p>
 
-      <h2>Blueprint Structure</h2>
-      <p>A blueprint is a YAML file with four main sections:</p>
+      <h2>Blueprint Types</h2>
+      <p>There are six schema-governed blueprint types, each with its own required sections and validation rules:</p>
       <table>
         <thead>
-          <tr><th>Section</th><th>Required</th><th>Description</th></tr>
+          <tr><th>Type</th><th>Schema</th><th>Purpose</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>name / version</strong></td><td>Yes</td><td>Identity and semantic version</td></tr>
-          <tr><td><strong>models</strong></td><td>Yes</td><td>Data types with typed, validated fields</td></tr>
-          <tr><td><strong>endpoints</strong></td><td>Yes</td><td>REST routes mapped to model operations</td></tr>
-          <tr><td><strong>hooks</strong></td><td>No</td><td>Lifecycle callbacks for custom logic</td></tr>
+          <tr><td><strong>Protocol</strong></td><td><code>schemas/protocol.yaml</code></td><td>Wire protocol definitions — endpoints, identity, types, federation</td></tr>
+          <tr><td><strong>Architecture</strong></td><td><code>schemas/architecture.yaml</code></td><td>System components — orchestrator, domains, agents, gateways</td></tr>
+          <tr><td><strong>Pattern</strong></td><td><code>schemas/pattern.yaml</code></td><td>Cross-cutting contracts — API, auth, governance, infrastructure</td></tr>
+          <tr><td><strong>Agent</strong></td><td><code>schemas/agent.yaml</code></td><td>Infrastructure agent specifications — endpoints, lifecycle, triggers</td></tr>
+          <tr><td><strong>Platform</strong></td><td><code>schemas/platform.yaml</code></td><td>Implementation bindings — Go, Cloudflare, Node.js, Rust</td></tr>
+          <tr><td><strong>Standard</strong></td><td><code>schemas/standard.yaml</code></td><td>Project conventions — structure, config, code gen, theme</td></tr>
         </tbody>
       </table>
 
-      <h2>Full Example</h2>
+      <h2>Required Sections</h2>
+      <p>Every blueprint — regardless of type — must include these sections:</p>
+
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
-          <span class="code-title">blueprints/articles.yaml</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="bp-articles"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          <span class="code-title">Blueprint Structure (Markdown)</span>
         </div>
         <div class="code-body">
-          <pre id="bp-articles"><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">my-blueprint</span>
-<span class="syn-a">version</span><span class="syn-p">:</span> <span class="syn-s">1.0.0</span>
-<span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">A custom API blueprint</span>
+          <pre><span class="syn-c"># Blueprint Title</span>
 
-<span class="syn-c"># Data models with typed fields</span>
-<span class="syn-a">models</span><span class="syn-p">:</span>
-  <span class="syn-a">Article</span><span class="syn-p">:</span>
-    <span class="syn-a">fields</span><span class="syn-p">:</span>
-      <span class="syn-a">id</span><span class="syn-p">:</span>        <span class="syn-s">uuid</span>
-      <span class="syn-a">title</span><span class="syn-p">:</span>     <span class="syn-s">string, required, max:200</span>
-      <span class="syn-a">body</span><span class="syn-p">:</span>      <span class="syn-s">text, required</span>
-      <span class="syn-a">author</span><span class="syn-p">:</span>    <span class="syn-s">string, required</span>
-      <span class="syn-a">published</span><span class="syn-p">:</span> <span class="syn-s">boolean, default:false</span>
-      <span class="syn-a">created</span><span class="syn-p">:</span>   <span class="syn-s">timestamp, auto</span>
-      <span class="syn-a">updated</span><span class="syn-p">:</span>   <span class="syn-s">timestamp, auto</span>
+<span class="syn-a">## Metadata</span>
+<span class="syn-s">- Type: pattern | architecture | agent | protocol | platform | standard</span>
+<span class="syn-s">- Category: (e.g., governance, infrastructure, api)</span>
+<span class="syn-s">- Version: 1.0.0</span>
+<span class="syn-s">- Status: draft | active | deprecated</span>
+<span class="syn-s">- Extends: [list of parent blueprints]</span>
 
-<span class="syn-c"># REST endpoints</span>
-<span class="syn-a">endpoints</span><span class="syn-p">:</span>
-  <span class="syn-a">/articles</span><span class="syn-p">:</span>
-    <span class="syn-a">GET</span><span class="syn-p">:</span>  <span class="syn-s">list Article, paginate:true, filter:[author, published]</span>
-    <span class="syn-a">POST</span><span class="syn-p">:</span> <span class="syn-s">create Article</span>
-  <span class="syn-a">/articles/:id</span><span class="syn-p">:</span>
-    <span class="syn-a">GET</span><span class="syn-p">:</span>    <span class="syn-s">read Article</span>
-    <span class="syn-a">PUT</span><span class="syn-p">:</span>    <span class="syn-s">update Article</span>
-    <span class="syn-a">DELETE</span><span class="syn-p">:</span> <span class="syn-s">delete Article</span>
+<span class="syn-a">## Overview</span>
+<span class="syn-s">What this blueprint specifies and why it exists.</span>
 
-<span class="syn-c"># Hooks for custom logic</span>
-<span class="syn-a">hooks</span><span class="syn-p">:</span>
-  <span class="syn-a">beforeCreate</span><span class="syn-p">:</span> <span class="syn-s">validate, sanitize</span>
-  <span class="syn-a">afterCreate</span><span class="syn-p">:</span>  <span class="syn-s">notify</span></pre>
+<span class="syn-a">## Specification</span>
+<span class="syn-s">The normative contract — what implementations MUST do.</span>
+
+<span class="syn-a">## Types</span>
+<span class="syn-s">Data structures, envelopes, enums used by this spec.</span>
+
+<span class="syn-a">## Implementation Notes</span>
+<span class="syn-s">Non-normative guidance for implementers.</span>
+
+<span class="syn-a">## Verification</span>
+<span class="syn-s">Checklist for conformance testing.</span></pre>
         </div>
       </div>
 
-      <h2>Field Types</h2>
+      <h2>Compliance Levels</h2>
+      <p>Blueprints are validated against their schema and assigned a compliance level:</p>
       <table>
         <thead>
-          <tr><th>Type</th><th>Description</th><th>Modifiers</th></tr>
+          <tr><th>Level</th><th>Meaning</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>string</code></td><td>Text value</td><td><code>required</code>, <code>min:N</code>, <code>max:N</code>, <code>pattern:regex</code></td></tr>
-          <tr><td><code>text</code></td><td>Long-form text</td><td><code>required</code></td></tr>
-          <tr><td><code>integer</code></td><td>Whole number</td><td><code>required</code>, <code>min:N</code>, <code>max:N</code></td></tr>
-          <tr><td><code>float</code></td><td>Decimal number</td><td><code>required</code>, <code>min:N</code>, <code>max:N</code></td></tr>
-          <tr><td><code>boolean</code></td><td>True/false</td><td><code>default:value</code></td></tr>
-          <tr><td><code>uuid</code></td><td>Auto-generated unique ID</td><td>—</td></tr>
-          <tr><td><code>timestamp</code></td><td>Date/time</td><td><code>auto</code> (set on create/update)</td></tr>
-          <tr><td><code>enum</code></td><td>Fixed set of values</td><td><code>values:[a,b,c]</code></td></tr>
+          <tr><td><strong>Certified</strong></td><td>All required sections present, all field constraints met, verification checklist complete</td></tr>
+          <tr><td><strong>Compliant</strong></td><td>All required sections present, minor field issues (e.g., missing optional metadata)</td></tr>
+          <tr><td><strong>Partial</strong></td><td>Some required sections missing or incomplete — usable but not deployment-ready</td></tr>
+          <tr><td><strong>Draft</strong></td><td>Work in progress — schema validation skipped</td></tr>
+          <tr><td><strong>Rejected</strong></td><td>Fails schema validation — structural errors, missing mandatory sections</td></tr>
         </tbody>
       </table>
 
-      <h2>Hooks</h2>
-      <p>Hooks let server implementations inject custom logic at key points in the request lifecycle:</p>
+      <h2>Inheritance with <code>extends</code></h2>
+      <p>Blueprints inherit cross-cutting concerns through the <code>extends</code> field. This eliminates copy-paste and prevents drift across related specs.</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">patterns/api-rest.md (excerpt)</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># API REST Pattern</span>
+
+<span class="syn-a">## Metadata</span>
+<span class="syn-s">- Type: pattern</span>
+<span class="syn-s">- Category: api</span>
+<span class="syn-s">- Version: 1.0.0</span>
+<span class="syn-s">- Extends:</span>
+<span class="syn-s">  - patterns/scope</span>
+<span class="syn-s">  - patterns/policy</span>
+<span class="syn-s">  - patterns/rate-limiting</span>
+<span class="syn-s">  - patterns/observability</span></pre>
+        </div>
+      </div>
+
+      <p>When a blueprint extends others, the inherited constraints are merged:</p>
       <ul>
-        <li><code>beforeCreate</code> / <code>afterCreate</code></li>
-        <li><code>beforeUpdate</code> / <code>afterUpdate</code></li>
-        <li><code>beforeDelete</code> / <code>afterDelete</code></li>
-        <li><code>beforeRead</code> — useful for access control</li>
+        <li><strong>Scope</strong> — classification levels propagate to all endpoints</li>
+        <li><strong>Policy</strong> — declarative rules apply to all operations</li>
+        <li><strong>Safety</strong> — protection gates inherited for destructive operations</li>
+        <li><strong>Observability</strong> — health endpoints and metrics required by default</li>
       </ul>
 
-      <h2>Composing Blueprints</h2>
-      <p>Blueprints can extend other blueprints using the <code>extends</code> keyword:</p>
+      <h2>Validation Pipeline</h2>
+      <p>Run <code>weblisk validate</code> to check all blueprints against their schemas:</p>
 
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
-          <span class="code-title">blueprints/blog.yaml</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="bp-compose"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre id="bp-compose"><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">blog</span>
-<span class="syn-a">extends</span><span class="syn-p">:</span> <span class="syn-s">api-rest</span>
-<span class="syn-a">mixins</span><span class="syn-p">:</span>
-  <span class="syn-p">-</span> <span class="syn-s">auth-session</span>
-  <span class="syn-p">-</span> <span class="syn-s">webhook-outbound</span></pre>
+          <pre><span class="syn-c"># Validate all blueprints in the project</span>
+<span class="syn-s">weblisk validate</span>
+
+<span class="syn-c"># Output</span>
+<span class="syn-s">✓ patterns/api-rest.md        Certified</span>
+<span class="syn-s">✓ patterns/auth-token.md      Certified</span>
+<span class="syn-s">✓ patterns/scope.md           Certified</span>
+<span class="syn-s">⚠ patterns/my-custom.md       Partial (missing: Verification)</span>
+<span class="syn-s">✗ patterns/broken.md          Rejected (missing: Specification, Types)</span>
+
+<span class="syn-s">4 certified, 0 compliant, 1 partial, 0 draft, 1 rejected</span></pre>
         </div>
       </div>
 
-      <div class="tip">Test your blueprints with <code>weblisk-server validate</code> before deploying.</div>
+      <p>The validation pipeline checks:</p>
+      <ol>
+        <li><strong>Structure</strong> — required sections present per schema type</li>
+        <li><strong>Metadata</strong> — type, category, version, status fields valid</li>
+        <li><strong>Extends</strong> — all referenced parent blueprints exist and are resolvable</li>
+        <li><strong>Types</strong> — referenced data structures are defined</li>
+        <li><strong>Verification</strong> — checklist items are testable assertions</li>
+      </ol>
+
+      <h2>Writing a New Pattern</h2>
+      <p>To create a custom pattern blueprint:</p>
+      <ol>
+        <li>Create a Markdown file in your project's <code>patterns/</code> directory</li>
+        <li>Add all required sections per the pattern schema</li>
+        <li>Declare <code>extends</code> for any cross-cutting concerns that apply</li>
+        <li>Include a verification checklist with testable assertions</li>
+        <li>Run <code>weblisk validate</code> to check compliance</li>
+      </ol>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">patterns/my-feature.md</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># My Feature Pattern</span>
+
+<span class="syn-a">## Metadata</span>
+<span class="syn-s">- Type: pattern</span>
+<span class="syn-s">- Category: operations</span>
+<span class="syn-s">- Version: 1.0.0</span>
+<span class="syn-s">- Status: active</span>
+<span class="syn-s">- Extends:</span>
+<span class="syn-s">  - patterns/scope</span>
+<span class="syn-s">  - patterns/logging</span>
+
+<span class="syn-a">## Overview</span>
+<span class="syn-s">Describe what this pattern governs and why.</span>
+
+<span class="syn-a">## Specification</span>
+<span class="syn-s">Define the normative contract:</span>
+<span class="syn-s">- Endpoints, behaviors, constraints</span>
+<span class="syn-s">- Error conditions and responses</span>
+<span class="syn-s">- Required vs optional capabilities</span>
+
+<span class="syn-a">## Types</span>
+<span class="syn-s">```</span>
+<span class="syn-s">MyRequest { field: type, ... }</span>
+<span class="syn-s">MyResponse { field: type, ... }</span>
+<span class="syn-s">```</span>
+
+<span class="syn-a">## Implementation Notes</span>
+<span class="syn-s">- Recommended approaches per platform</span>
+<span class="syn-s">- Performance considerations</span>
+<span class="syn-s">- Common pitfalls</span>
+
+<span class="syn-a">## Verification</span>
+<span class="syn-s">- [ ] Endpoint responds with correct status codes</span>
+<span class="syn-s">- [ ] Invalid input returns 400 with error envelope</span>
+<span class="syn-s">- [ ] Scope constraints enforced at boundary</span>
+<span class="syn-s">- [ ] Structured logs emitted for all operations</span></pre>
+        </div>
+      </div>
+
+      <h2>Blueprint Sources</h2>
+      <p>Custom blueprints are resolved alongside core ones. Place them in your project or configure <code>WL_BLUEPRINT_SOURCES</code> for team-wide distribution:</p>
+      <pre><code># Project-local blueprints (highest priority)
+./patterns/my-feature.md
+
+# Team/org blueprints via environment variable
+export WL_BLUEPRINT_SOURCES="my-org/my-blueprints,my-org/vertical-blueprints"
+
+# Core blueprints (always available, lowest priority)
+avaropoint/weblisk-blueprints</code></pre>
+
+      <div class="tip">All 37 core patterns are open source at <a href="https://github.com/avaropoint/weblisk-blueprints" rel="noopener noreferrer">github.com/avaropoint/weblisk-blueprints</a>. Use them as reference when authoring your own.</div>
 
       <div class="docs-nav-footer">
         <a href="/blueprints/catalog.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Catalog</a>

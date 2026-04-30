@@ -178,7 +178,7 @@
         <tbody>
           <tr><td>9700–9709</td><td>Domain controllers</td><td>seo: 9700</td></tr>
           <tr><td>9710–9749</td><td>Work agents</td><td>seo-analyzer: 9710, a11y-checker: 9711</td></tr>
-          <tr><td>9750–9799</td><td>Infrastructure agents</td><td>sync: 9750, cron: 9751, webhook: 9752, email: 9753</td></tr>
+          <tr><td>9750–9799</td><td>Infrastructure agents</td><td>sync: 9750, cron: 9751, alerting: 9752, email: 9753, health-monitor: 9755, incident-response: 9760, hub: 9770, workflow: 9780, task: 9781, lifecycle: 9782, webhook: 9790</td></tr>
           <tr><td>9800</td><td>Orchestrator</td><td>orchestrator: 9800</td></tr>
           <tr><td>9820+</td><td>Custom agents</td><td>hash(name) % 80 + 9820</td></tr>
         </tbody>
@@ -361,6 +361,99 @@ phases:
       <h4>Template System</h4>
       <p>Simple mustache-style variable substitution: <code>Hello {{name}}, your order #{{order_id}} has shipped.</code> Templates are stored in the database and versioned. No logic — pure substitution.</p>
       <p><strong>Actions:</strong> <code>send</code> (queue email with template + variables), <code>send_raw</code> (send with raw HTML body), <code>status</code> (check delivery), <code>register_template</code>, <code>list_templates</code></p>
+
+      <!-- ─── workflow ──────────────────────────────────────── -->
+      <h3 id="workflow">workflow</h3>
+      <p>Owns the workflow execution engine. Receives <code>workflow.trigger</code> events, resolves DAG definitions from source domains, dispatches phases via <code>task.submit</code> events, tracks execution state, and publishes <code>workflow.completed</code> back to the invoker.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents (dispatches phases)</td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>workflow_runs</code>, <code>workflow_definitions</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Port:</strong> 9780 · <strong>Triggers:</strong> <code>workflow.trigger</code> (start workflow) · <code>task.complete</code> / <code>task.failed</code> (phase result)</p>
+      <p><strong>Actions:</strong> <code>trigger</code> (start a workflow run), <code>status</code> (execution state), <code>cancel</code>, <code>list</code> (active runs), <code>history</code></p>
+
+      <!-- ─── task ──────────────────────────────────────────── -->
+      <h3 id="task">task</h3>
+      <p>Owns task dispatch and tracking. Receives <code>task.submit</code> events, dispatches work to target agents via <code>POST /v1/execute</code>, tracks completion, and publishes <code>task.complete</code> or <code>task.failed</code> back to the requester.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents (dispatches tasks)</td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>task_queue</code>, <code>task_history</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Port:</strong> 9781 · <strong>Triggers:</strong> <code>task.submit</code> (new task) · Schedule: <code>*/1 * * * *</code> (retry stale tasks)</p>
+      <p><strong>Actions:</strong> <code>submit</code> (dispatch task), <code>status</code>, <code>cancel</code>, <code>list</code> (pending tasks), <code>history</code></p>
+
+      <!-- ─── lifecycle ─────────────────────────────────────── -->
+      <h3 id="lifecycle">lifecycle</h3>
+      <p>Owns the continuous optimization loop. Manages strategies, entity context, observations, recommendations, approvals, feedback, and agent metrics. Subscribes globally (<code>scope: "*"</code>) to workflow completion events to capture results across the entire hub.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents (collects metrics)</td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>strategies</code>, <code>observations</code>, <code>recommendations</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Port:</strong> 9782 · <strong>Triggers:</strong> <code>workflow.completed</code> (capture results) · Schedule: <code>0 * * * *</code> (hourly strategy evaluation)</p>
+      <p><strong>Actions:</strong> <code>observe</code> (record observation), <code>recommend</code> (generate recommendations), <code>approve</code> / <code>reject</code>, <code>feedback</code>, <code>strategies</code> (list active strategies)</p>
+
+      <!-- ─── alerting ──────────────────────────────────────── -->
+      <h3 id="alerting">alerting</h3>
+      <p>Receives alert events from the orchestrator, domain controllers, and other agents, then routes notifications to the appropriate channels based on severity, source, and subscriber preferences.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents (receives alerts)</td></tr>
+          <tr><td><code>http:send</code></td><td>Notification channels (Slack, email, webhook)</td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>alert_rules</code>, <code>alert_history</code>, <code>subscribers</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Port:</strong> 9752 · <strong>Depends on:</strong> email-send · <strong>Triggers:</strong> <code>alert.fire</code> (new alert) · <code>alert.resolve</code> (alert cleared)</p>
+      <p><strong>Actions:</strong> <code>fire</code> (create alert), <code>resolve</code>, <code>acknowledge</code>, <code>subscribe</code> (register subscriber), <code>rules</code> (manage routing rules), <code>history</code></p>
+
+      <!-- ─── incident-response ─────────────────────────────── -->
+      <h3 id="incident-response">incident-response</h3>
+      <p>Automated incident detection, runbook execution, remediation steps, and post-incident reporting. Works alongside the alerting agent — alerting handles notification routing, incident-response handles what to do about it.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents (coordinates remediation)</td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>incidents</code>, <code>runbooks</code>, <code>postmortems</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Port:</strong> 9760 · <strong>Depends on:</strong> alerting · <strong>Triggers:</strong> <code>incident.detected</code> (new incident) · <code>alert.fire</code> (escalated alert)</p>
+      <p><strong>Actions:</strong> <code>detect</code> (create incident), <code>execute_runbook</code>, <code>escalate</code>, <code>resolve</code>, <code>postmortem</code> (generate report), <code>list</code> (active incidents)</p>
+
+      <!-- ─── health-monitor ────────────────────────────────── -->
+      <h3 id="health-monitor">health-monitor</h3>
+      <p>Internal infrastructure health monitoring for a Weblisk hub. Tracks agent liveness, orchestrator health, domain controller status, storage latency, federation peer reachability, and gateway responsiveness. Unlike the health domain controller (which monitors external endpoints), this agent monitors the hub itself.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent:message</code></td><td>All agents (health checks)</td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>health_snapshots</code>, <code>health_baselines</code></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Port:</strong> 9755 · <strong>Depends on:</strong> alerting · <strong>Triggers:</strong> Schedule: <code>*/1 * * * *</code> (continuous health checks)</p>
+      <p><strong>Actions:</strong> <code>check</code> (run health check), <code>status</code> (current health snapshot), <code>baselines</code> (view/update baselines), <code>history</code></p>
+
+      <!-- ─── hub ───────────────────────────────────────────── -->
+      <h3 id="hub">hub</h3>
+      <p>Unified hub infrastructure agent for the Weblisk hub network. Handles indexing, search, metrics, verification, and alerting across the federated catalog of published capability listings.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>Resources</th></tr></thead>
+        <tbody>
+          <tr><td><code>http:receive</code></td><td><code>/hub/*</code></td></tr>
+          <tr><td><code>database:read/write</code></td><td><code>hub_listings</code>, <code>hub_metrics</code></td></tr>
+          <tr><td><code>agent:message</code></td><td>Federation peers</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Port:</strong> 9770 · <strong>Triggers:</strong> <code>hub.publish</code> (new listing) · <code>hub.search</code> (query catalog) · Schedule: <code>0 */6 * * *</code> (federation sync)</p>
+      <p><strong>Actions:</strong> <code>publish</code> (register listing), <code>search</code> (query catalog), <code>verify</code> (validate listing), <code>metrics</code> (usage stats), <code>sync</code> (federation peer sync)</p>
 
       <hr>
 

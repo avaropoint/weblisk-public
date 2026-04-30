@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blueprints — Weblisk</title>
   <meta name="description"
-    content="Declarative specifications for APIs, data models, and workflows. Define once, implement in any language.">
+    content="The specification layer of the Weblisk platform — architecture, protocol, patterns, agents, and standards that define how everything operates.">
   <link rel="canonical" href="https://weblisk.dev/blueprints/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Blueprints — Weblisk">
   <meta property="og:description"
-    content="Declarative specifications for APIs, data models, and workflows. Define once, implement in any language.">
+    content="The specification layer of the Weblisk platform — architecture, protocol, patterns, agents, and standards that define how everything operates.">
   <meta property="og:url" content="https://weblisk.dev/blueprints/">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -21,7 +21,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blueprints — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="Declarative specifications for APIs, data models, and workflows. Define once, implement in any language.">
+  <meta name="twitter:description" content="The specification layer of the Weblisk platform — architecture, protocol, patterns, agents, and standards that define how everything operates.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Avaropoint">
@@ -42,10 +42,10 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Blueprints — Weblisk",
-    "description": "Weblisk Blueprints are declarative specifications for APIs, data models, and workflows. Define once, implement in any language.",
+    "description": "The specification layer of the Weblisk platform — architecture, protocol, patterns, agents, platforms, and project standards.",
     "url": "https://weblisk.dev/blueprints/",
     "datePublished": "2026-01-15",
-    "dateModified": "2026-04-20",
+    "dateModified": "2026-04-29",
     "headline": "Blueprints — Weblisk",
     "author": { "@id": "https://avaropoint.com/#org" },
     "publisher": { "@id": "https://avaropoint.com/#org" },
@@ -124,157 +124,168 @@
       <nav aria-label="Blueprint overview links">
         <a href="/blueprints/" aria-current="page" class="active">Introduction</a>
         <a href="/blueprints/catalog.html">Catalog</a>
+        <a href="/blueprints/standards.html">Standards</a>
         <a href="/blueprints/authoring.html">Authoring</a>
       </nav>
       <h3>Related</h3>
       <nav aria-label="Related links">
         <a href="/server/">Server Framework</a>
         <a href="/agents/">Agents</a>
+        <a href="/templates/">Templates</a>
       </nav>
     </aside>
 
     <main class="docs-content" id="main-content">
       <h1>Blueprints</h1>
-      <p class="lead">Declarative specifications for APIs, data models, and workflows. Define once, implement in any
-        language or platform.</p>
+      <p class="lead">The specification layer of the Weblisk platform. Blueprints define <em>what</em> the system does — architecture, protocol, patterns, agents, platforms, and project standards — without prescribing <em>how</em> any particular implementation achieves it.</p>
 
       <h2>What Is a Blueprint?</h2>
-      <p>A Blueprint is a structured definition of <em>what</em> your server should do — not <em>how</em> it does it.
-        Blueprints describe endpoints, data schemas, validation rules, relationships, and workflows in a
-        language-agnostic format.</p>
-      <p>Think of it as an API contract that a <a href="/server/">server implementation</a> can consume to
-        generate boilerplate-free, spec-compliant endpoints automatically.</p>
+      <p>A blueprint is a structured, implementation-agnostic specification. It describes contracts, behaviors, dependencies, and verification criteria in a format that can be consumed by humans, LLMs, and automated tooling alike.</p>
+      <p>Nothing operates in the Weblisk framework without a schema-compliant blueprint. If a schema doesn't define it, the framework doesn't allow it.</p>
 
       <div class="feature-grid" style="margin-top:2rem">
         <div class="feature-card">
           <div class="feature-icon purple">
             <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
           </div>
-          <h3>Declarative</h3>
-          <p>Define your API surface, data models, and relationships in a structured format. No imperative code —
-            just the contract.</p>
+          <h3>Implementation-Agnostic</h3>
+          <p>Blueprints describe what agents and orchestrators must do — not how. The same specs generate Go, Node.js, Cloudflare Workers, or Rust implementations.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon cyan">
-            <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+            <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
           </div>
-          <h3>Platform Independent</h3>
-          <p>The same blueprint can generate a Go server, a Node.js API, a Python backend, or documentation — the
-            implementation is separate from the definition.</p>
+          <h3>Composable via Extends</h3>
+          <p>Agents and domains inherit cross-cutting patterns (scope, policy, safety, approval, privacy) through <code>extends</code> — no copy-paste, no drift.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon green">
-            <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+            <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i>
           </div>
-          <h3>Composable</h3>
-          <p>Blueprints can extend and compose. Start with a base CRUD blueprint, layer on authentication, add
-            real-time sync — each concern is a separate, reusable piece.</p>
+          <h3>Schema-Governed</h3>
+          <p>Every blueprint type has a schema with required sections, field constraints, and compliance levels — from Certified down to Rejected.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon orange">
-            <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i>
+            <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
           </div>
-          <h3>Versioned &amp; Testable</h3>
-          <p>Blueprints are plain files that live in your repo. Version them, diff them, review them. Every
-            blueprint ships with a conformance test suite.</p>
+          <h3>Multi-Source Resolution</h3>
+          <p>The CLI resolves blueprints from local project, custom repos, and core — giving organizations full control over their specifications.</p>
         </div>
       </div>
 
-      <h2>Example Blueprint</h2>
+      <h2>Blueprint Hierarchy</h2>
+      <p>The blueprint system is organized into six categories, each governing a different layer of the platform:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Purpose</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Protocol</strong></td>
+            <td>Wire protocol — endpoints, Ed25519 identity, canonical types, federation</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td><strong>Architecture</strong></td>
+            <td>System components — orchestrator, domains, agents, gateway, admin, client, observability, security</td>
+            <td>16</td>
+          </tr>
+          <tr>
+            <td><strong>Patterns</strong></td>
+            <td>Cross-cutting contracts — API, auth, governance, infrastructure, workflows, operations</td>
+            <td>37</td>
+          </tr>
+          <tr>
+            <td><strong>Agents</strong></td>
+            <td>Infrastructure agents — workflow, task dispatch, lifecycle, alerting, health, sync, cron</td>
+            <td>11</td>
+          </tr>
+          <tr>
+            <td><strong>Platforms</strong></td>
+            <td>Implementation bindings — Go, Cloudflare Workers, Node.js, Rust</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td><strong>Standards</strong></td>
+            <td>Project conventions — structure, global config, code gen, theme, pages, components, islands</td>
+            <td>9</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>How Blueprints Work</h2>
 
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
-          <span class="code-title">blueprints/api-rest.yaml</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="bp-api-rest"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre id="bp-api-rest"><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">api-rest</span>
-<span class="syn-a">version</span><span class="syn-p">:</span> <span class="syn-s">1.0.0</span>
-<span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Standard REST API with CRUD operations</span>
+          <pre><span class="syn-c"># Generate a domain controller from blueprints</span>
+<span class="syn-s">weblisk domain create seo --platform go</span>
 
-<span class="syn-a">models</span><span class="syn-p">:</span>
-  <span class="syn-a">Task</span><span class="syn-p">:</span>
-    <span class="syn-a">fields</span><span class="syn-p">:</span>
-      <span class="syn-a">id</span><span class="syn-p">:</span>        <span class="syn-s">uuid</span>
-      <span class="syn-a">title</span><span class="syn-p">:</span>     <span class="syn-s">string, required, max:255</span>
-      <span class="syn-a">done</span><span class="syn-p">:</span>      <span class="syn-s">boolean, default:false</span>
-      <span class="syn-a">created</span><span class="syn-p">:</span>   <span class="syn-s">timestamp, auto</span>
+<span class="syn-c"># Generate a work agent</span>
+<span class="syn-s">weblisk agent create seo-analyzer --platform go</span>
 
-<span class="syn-a">endpoints</span><span class="syn-p">:</span>
-  <span class="syn-a">/tasks</span><span class="syn-p">:</span>
-    <span class="syn-a">GET</span><span class="syn-p">:</span>    <span class="syn-s">list Task</span>
-    <span class="syn-a">POST</span><span class="syn-p">:</span>   <span class="syn-s">create Task</span>
-  <span class="syn-a">/tasks/:id</span><span class="syn-p">:</span>
-    <span class="syn-a">GET</span><span class="syn-p">:</span>    <span class="syn-s">read Task</span>
-    <span class="syn-a">PUT</span><span class="syn-p">:</span>    <span class="syn-s">update Task</span>
-    <span class="syn-a">DELETE</span><span class="syn-p">:</span> <span class="syn-s">delete Task</span></pre>
+<span class="syn-c"># Generate an application gateway</span>
+<span class="syn-s">weblisk gateway create --platform go</span>
+
+<span class="syn-c"># Validate blueprints against schemas</span>
+<span class="syn-s">weblisk validate</span></pre>
         </div>
       </div>
 
-      <h2>Built-In Blueprints</h2>
-      <p>Weblisk ships with a set of official blueprints covering common patterns:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Blueprint</th>
-            <th>Description</th>
-            <th>Tier</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>api-rest</strong></td>
-            <td>Standard REST API with CRUD, pagination, and filtering</td>
-            <td>Free</td>
-          </tr>
-          <tr>
-            <td><strong>realtime-chat</strong></td>
-            <td>WebSocket-based real-time messaging channels</td>
-            <td>Free</td>
-          </tr>
-          <tr>
-            <td><strong>auth-session</strong></td>
-            <td>Session-based authentication with secure cookies</td>
-            <td>Free</td>
-          </tr>
-          <tr>
-            <td><strong>auth-token</strong></td>
-            <td>JWT and API key authentication</td>
-            <td>Free</td>
-          </tr>
-          <tr>
-            <td><strong>api-ai</strong></td>
-            <td>AI gateway with chat, completions, extraction, and embeddings</td>
-            <td>Free</td>
-          </tr>
-          <tr>
-            <td><strong>webhook-inbound</strong></td>
-            <td>Receive, validate, and route inbound webhooks</td>
-            <td>Free</td>
-          </tr>
-          <tr>
-            <td><strong>webhook-outbound</strong></td>
-            <td>Send webhooks with retries and delivery tracking</td>
-            <td>Free</td>
-          </tr>
-          <tr>
-            <td><strong>file-storage</strong></td>
-            <td>Upload, download, and manage files with S3-compatible backends</td>
-            <td>Pro</td>
-          </tr>
-          <tr>
-            <td><strong>crdt-sync</strong></td>
-            <td>Conflict-free replicated data types with offline sync</td>
-            <td>Pro</td>
-          </tr>
-        </tbody>
-      </table>
+      <p>The CLI reads blueprint specs, combines them with platform bindings, and dispatches to the configured LLM for code generation. The blueprints are the source of truth — generated code is a build artifact.</p>
 
-      <div class="tip">Browse the full list in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>, or
-        learn how to create your own in the <a href="/blueprints/authoring.html">Authoring Guide</a>.</div>
+      <h2>Architecture at a Glance</h2>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">Hub Architecture</span>
+        </div>
+        <div class="code-body">
+          <pre>Hub (self-sovereign deployment)
+├── Application Gateway (end-user edge security)
+│   ├── Session management, ABAC, rate limiting
+│   └── Route protection → agent mediation
+├── Admin Gateway (operator access — separate network)
+│   └── Ed25519 auth, MFA, IP allowlist, 4-eyes approval
+├── Orchestrator (trust anchor)
+│   ├── Registration, namespace control, service directory
+│   └── Domain Controllers (business logic directors)
+│       └── Work Agents (task executors)
+├── Infrastructure Agents (system services)
+│   ├── Workflow, Task, Lifecycle, Alerting
+│   ├── Incident Response, Health Monitor, Hub
+│   └── Sync, Cron, Webhook, Email
+├── Cross-Cutting Patterns (37 — inherited via extends)
+│   ├── Scope, Policy, Safety, Approval, Privacy
+│   ├── Contract, Governance, Security, Observability
+│   └── Workflow, Notification, Storage, Caching...
+└── Federation (hub-to-hub collaboration)</pre>
+        </div>
+      </div>
+
+      <h2>Zero-Dependency Philosophy</h2>
+      <p>Blueprints enforce the Weblisk zero-dependency principle at every layer:</p>
+      <ul>
+        <li><strong>Go</strong> — Standard library only. SQLite compiled into the binary.</li>
+        <li><strong>Rust</strong> — Minimal curated crates (tokio, hyper, serde). Single static binary per agent.</li>
+        <li><strong>Cloudflare</strong> — Platform-native APIs only (Workers KV, Durable Objects, Web Crypto).</li>
+        <li><strong>Node.js</strong> — Recommended libraries are choices, not requirements.</li>
+        <li><strong>AI models</strong> — The only layer with external dependencies. Local models (Ollama) are the default.</li>
+      </ul>
+
+      <div class="tip">Browse the full list of 37+ patterns, architecture specs, and infrastructure agents in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>. Learn how to write your own in the <a href="/blueprints/authoring.html">Authoring Guide</a>, or explore <a href="/blueprints/standards.html">Project Standards</a> for blueprint-driven development.</div>
 
       <div class="docs-nav-footer">
         <span></span>

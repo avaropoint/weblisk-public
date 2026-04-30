@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Standards — Weblisk Blueprints</title>
+  <meta name="description" content="Blueprint-driven development standards — global.yaml, code.yaml, theme.yaml pipelines, page/component/island declarations, and three project modes.">
+  <link rel="canonical" href="https://weblisk.dev/blueprints/standards.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Project Standards — Weblisk Blueprints">
+  <meta property="og:description" content="Blueprint-driven development — YAML declarations generate entire sites via AI. Global config, code conventions, theme tokens, and project modes.">
+  <meta property="og:url" content="https://weblisk.dev/blueprints/standards.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Project Standards — Weblisk Blueprints">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description" content="Blueprint-driven development — YAML declarations generate entire sites via AI. Global config, code conventions, theme tokens, and project modes.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta property="article:published_time" content="2026-04-29T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Project Standards — Weblisk Blueprints",
+    "description": "Blueprint-driven development standards — YAML declarations generate entire sites via AI.",
+    "url": "https://weblisk.dev/blueprints/standards.html",
+    "datePublished": "2026-04-29",
+    "dateModified": "2026-04-29",
+    "headline": "Project Standards — Weblisk Blueprints",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Weblisk",
+        "item": "https://weblisk.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blueprints",
+        "item": "https://weblisk.dev/blueprints/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Project Standards",
+        "item": "https://weblisk.dev/blueprints/standards.html"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/features.html" class="nav-link">Features</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/hub/" class="nav-link">Hub</a>
+        <a href="/server/" class="nav-link">Server</a>
+        <a href="/blueprints/" class="nav-link active" aria-current="page">Blueprints</a>
+        <a href="/agents/" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Blueprints navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Blueprint overview links">
+        <a href="/blueprints/">Introduction</a>
+        <a href="/blueprints/catalog.html">Catalog</a>
+        <a href="/blueprints/standards.html" aria-current="page" class="active">Standards</a>
+        <a href="/blueprints/authoring.html">Authoring</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/">Server Framework</a>
+        <a href="/agents/">Agents</a>
+        <a href="/templates/">Templates</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Project Standards</h1>
+      <p class="lead">Blueprint-driven development — describe your entire application as YAML declarations, then generate code via AI. No hand-written boilerplate. The blueprints <em>are</em> the source of truth; generated code is a build artifact.</p>
+
+      <h2>The Standards Pipeline</h2>
+      <p>Every Weblisk project is governed by three configuration blueprints that form a generation pipeline:</p>
+
+      <table>
+        <thead>
+          <tr><th>File</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>global.yaml</strong></td><td>Project identity, metadata, navigation, SEO defaults, social cards</td></tr>
+          <tr><td><strong>code.yaml</strong></td><td>Code conventions — file naming, formatting, import style, linting rules</td></tr>
+          <tr><td><strong>theme.yaml</strong></td><td>Design tokens — colors, typography, spacing, breakpoints, component variants</td></tr>
+        </tbody>
+      </table>
+
+      <p>The CLI reads these three files and passes them as context to the configured LLM alongside page/component/island declarations. The result is a complete, buildable project — no manual coding required.</p>
+
+      <h2>global.yaml</h2>
+      <p>Defines project-wide settings that apply to every generated page:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">global.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">My Project</span>
+<span class="syn-a">domain</span><span class="syn-p">:</span> <span class="syn-s">example.com</span>
+<span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">A blueprint-driven web application</span>
+
+<span class="syn-a">navigation</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-a">label</span><span class="syn-p">:</span> <span class="syn-s">Home</span>
+    <span class="syn-a">path</span><span class="syn-p">:</span> <span class="syn-s">/</span>
+  <span class="syn-p">-</span> <span class="syn-a">label</span><span class="syn-p">:</span> <span class="syn-s">Features</span>
+    <span class="syn-a">path</span><span class="syn-p">:</span> <span class="syn-s">/features</span>
+  <span class="syn-p">-</span> <span class="syn-a">label</span><span class="syn-p">:</span> <span class="syn-s">Docs</span>
+    <span class="syn-a">path</span><span class="syn-p">:</span> <span class="syn-s">/docs</span>
+
+<span class="syn-a">seo</span><span class="syn-p">:</span>
+  <span class="syn-a">title_suffix</span><span class="syn-p">:</span> <span class="syn-s">" — My Project"</span>
+  <span class="syn-a">og_image</span><span class="syn-p">:</span> <span class="syn-s">/images/og-default.png</span>
+  <span class="syn-a">twitter_site</span><span class="syn-p">:</span> <span class="syn-s">@myproject</span>
+
+<span class="syn-a">footer</span><span class="syn-p">:</span>
+  <span class="syn-a">copyright</span><span class="syn-p">:</span> <span class="syn-s">"© 2026 My Organization"</span>
+  <span class="syn-a">links</span><span class="syn-p">:</span>
+    <span class="syn-p">-</span> <span class="syn-a">label</span><span class="syn-p">:</span> <span class="syn-s">GitHub</span>
+      <span class="syn-a">url</span><span class="syn-p">:</span> <span class="syn-s">https://github.com/my-org</span></pre>
+        </div>
+      </div>
+
+      <h2>code.yaml</h2>
+      <p>Defines code generation conventions — how files are named, formatted, and structured:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">code.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-a">language</span><span class="syn-p">:</span> <span class="syn-s">html</span>
+<span class="syn-a">style</span><span class="syn-p">:</span> <span class="syn-s">vanilla</span>       <span class="syn-c"># No framework — pure HTML/CSS/JS</span>
+
+<span class="syn-a">formatting</span><span class="syn-p">:</span>
+  <span class="syn-a">indent</span><span class="syn-p">:</span> <span class="syn-s">2</span>
+  <span class="syn-a">quotes</span><span class="syn-p">:</span> <span class="syn-s">double</span>
+  <span class="syn-a">semicolons</span><span class="syn-p">:</span> <span class="syn-s">true</span>
+
+<span class="syn-a">naming</span><span class="syn-p">:</span>
+  <span class="syn-a">files</span><span class="syn-p">:</span> <span class="syn-s">kebab-case</span>
+  <span class="syn-a">classes</span><span class="syn-p">:</span> <span class="syn-s">kebab-case</span>
+  <span class="syn-a">variables</span><span class="syn-p">:</span> <span class="syn-s">camelCase</span>
+
+<span class="syn-a">constraints</span><span class="syn-p">:</span>
+  <span class="syn-a">no_frameworks</span><span class="syn-p">:</span> <span class="syn-s">true</span>
+  <span class="syn-a">no_build_step</span><span class="syn-p">:</span> <span class="syn-s">true</span>
+  <span class="syn-a">accessibility</span><span class="syn-p">:</span> <span class="syn-s">wcag-aa</span>
+  <span class="syn-a">performance_budget</span><span class="syn-p">:</span> <span class="syn-s">100kb</span></pre>
+        </div>
+      </div>
+
+      <h2>theme.yaml</h2>
+      <p>Design tokens consumed by the generator — ensures visual consistency across all generated pages:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">theme.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-a">colors</span><span class="syn-p">:</span>
+  <span class="syn-a">primary</span><span class="syn-p">:</span> <span class="syn-s">"#6366f1"</span>
+  <span class="syn-a">secondary</span><span class="syn-p">:</span> <span class="syn-s">"#06b6d4"</span>
+  <span class="syn-a">surface</span><span class="syn-p">:</span> <span class="syn-s">"#1a1f36"</span>
+  <span class="syn-a">text</span><span class="syn-p">:</span> <span class="syn-s">"#e2e8f0"</span>
+
+<span class="syn-a">typography</span><span class="syn-p">:</span>
+  <span class="syn-a">font_family</span><span class="syn-p">:</span> <span class="syn-s">"Inter, system-ui, sans-serif"</span>
+  <span class="syn-a">font_mono</span><span class="syn-p">:</span> <span class="syn-s">"JetBrains Mono, monospace"</span>
+  <span class="syn-a">base_size</span><span class="syn-p">:</span> <span class="syn-s">16px</span>
+  <span class="syn-a">scale</span><span class="syn-p">:</span> <span class="syn-s">1.25</span>
+
+<span class="syn-a">spacing</span><span class="syn-p">:</span>
+  <span class="syn-a">unit</span><span class="syn-p">:</span> <span class="syn-s">8px</span>
+  <span class="syn-a">section</span><span class="syn-p">:</span> <span class="syn-s">80px</span>
+
+<span class="syn-a">breakpoints</span><span class="syn-p">:</span>
+  <span class="syn-a">mobile</span><span class="syn-p">:</span> <span class="syn-s">640px</span>
+  <span class="syn-a">tablet</span><span class="syn-p">:</span> <span class="syn-s">768px</span>
+  <span class="syn-a">desktop</span><span class="syn-p">:</span> <span class="syn-s">1024px</span>
+
+<span class="syn-a">modes</span><span class="syn-p">:</span>
+  <span class="syn-a">dark</span><span class="syn-p">:</span> <span class="syn-s">true</span>
+  <span class="syn-a">light</span><span class="syn-p">:</span> <span class="syn-s">true</span></pre>
+        </div>
+      </div>
+
+      <h2>Page Declarations</h2>
+      <p>Each page is declared as a YAML file in a <code>pages/</code> directory. The declaration describes the page's purpose, sections, and data — not its implementation:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">pages/features.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-a">title</span><span class="syn-p">:</span> <span class="syn-s">Features</span>
+<span class="syn-a">path</span><span class="syn-p">:</span> <span class="syn-s">/features</span>
+<span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Platform capabilities overview</span>
+
+<span class="syn-a">sections</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-a">type</span><span class="syn-p">:</span> <span class="syn-s">hero</span>
+    <span class="syn-a">headline</span><span class="syn-p">:</span> <span class="syn-s">Everything you need</span>
+    <span class="syn-a">subheadline</span><span class="syn-p">:</span> <span class="syn-s">Zero dependencies. Full control.</span>
+  <span class="syn-p">-</span> <span class="syn-a">type</span><span class="syn-p">:</span> <span class="syn-s">feature-grid</span>
+    <span class="syn-a">columns</span><span class="syn-p">:</span> <span class="syn-s">3</span>
+    <span class="syn-a">items</span><span class="syn-p">:</span>
+      <span class="syn-p">-</span> <span class="syn-a">title</span><span class="syn-p">:</span> <span class="syn-s">Signals</span>
+        <span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Fine-grained reactivity</span>
+        <span class="syn-a">icon</span><span class="syn-p">:</span> <span class="syn-s">signal</span>
+      <span class="syn-p">-</span> <span class="syn-a">title</span><span class="syn-p">:</span> <span class="syn-s">Islands</span>
+        <span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Partial hydration</span>
+        <span class="syn-a">icon</span><span class="syn-p">:</span> <span class="syn-s">island</span></pre>
+        </div>
+      </div>
+
+      <h2>Component &amp; Island Declarations</h2>
+      <p>Reusable UI elements are declared as components. Interactive components use the island pattern for selective hydration:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">components/pricing-card.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">pricing-card</span>
+<span class="syn-a">type</span><span class="syn-p">:</span> <span class="syn-s">island</span>          <span class="syn-c"># Hydrated on interaction</span>
+<span class="syn-a">hydrate</span><span class="syn-p">:</span> <span class="syn-s">visible</span>
+
+<span class="syn-a">props</span><span class="syn-p">:</span>
+  <span class="syn-a">plan</span><span class="syn-p">:</span> <span class="syn-s">string</span>
+  <span class="syn-a">price</span><span class="syn-p">:</span> <span class="syn-s">number</span>
+  <span class="syn-a">features</span><span class="syn-p">:</span> <span class="syn-s">string[]</span>
+  <span class="syn-a">cta</span><span class="syn-p">:</span> <span class="syn-s">string</span>
+
+<span class="syn-a">interactions</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-s">toggle annual/monthly pricing</span>
+  <span class="syn-p">-</span> <span class="syn-s">highlight on hover</span>
+  <span class="syn-p">-</span> <span class="syn-s">CTA click → checkout</span></pre>
+        </div>
+      </div>
+
+      <h2>Three Project Modes</h2>
+      <p>Standards blueprints support three project architectures:</p>
+
+      <table>
+        <thead>
+          <tr><th>Mode</th><th>Description</th><th>Template</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Client-Only</strong></td>
+            <td>Static HTML/CSS/JS — no server, no build step. Deployed to any CDN.</td>
+            <td><code>client/basic</code></td>
+          </tr>
+          <tr>
+            <td><strong>Client + Islands</strong></td>
+            <td>Static pages with selectively hydrated interactive components. Partial hydration via <code>data-island</code>.</td>
+            <td><code>client/islands</code></td>
+          </tr>
+          <tr>
+            <td><strong>Full Stack</strong></td>
+            <td>Client + server. Domain controllers, agents, gateway, and application logic — all blueprint-driven.</td>
+            <td><code>server/go</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>The Blueprint Site Template</h2>
+      <p>The <code>client/blueprint-site</code> template is the flagship demonstration of standards-driven development. An entire multi-page website described entirely as YAML — zero hand-written HTML, CSS, or JavaScript:</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># Create a blueprint-driven site</span>
+<span class="syn-s">weblisk new --template client/blueprint-site my-site</span>
+<span class="syn-s">cd my-site</span>
+
+<span class="syn-c"># Project structure:</span>
+<span class="syn-s">├── global.yaml          # Project identity + navigation</span>
+<span class="syn-s">├── code.yaml            # Code conventions</span>
+<span class="syn-s">├── theme.yaml           # Design tokens</span>
+<span class="syn-s">├── pages/               # Page declarations</span>
+<span class="syn-s">│   ├── index.yaml</span>
+<span class="syn-s">│   ├── features.yaml</span>
+<span class="syn-s">│   └── docs.yaml</span>
+<span class="syn-s">├── components/          # Component declarations</span>
+<span class="syn-s">│   ├── hero.yaml</span>
+<span class="syn-s">│   └── pricing-card.yaml</span>
+<span class="syn-s">└── dist/                # Generated output (build artifact)</span>
+
+<span class="syn-c"># Generate the site</span>
+<span class="syn-s">weblisk generate</span></pre>
+        </div>
+      </div>
+
+      <h2>Generation Pipeline</h2>
+      <p>When you run <code>weblisk generate</code>, the CLI:</p>
+      <ol>
+        <li>Reads <code>global.yaml</code>, <code>code.yaml</code>, and <code>theme.yaml</code> as context</li>
+        <li>Resolves all page and component declarations</li>
+        <li>Passes the full context to the configured LLM (local Ollama or remote)</li>
+        <li>Generates HTML, CSS, and JS files into <code>dist/</code></li>
+        <li>Validates the output against code conventions and accessibility requirements</li>
+      </ol>
+      <p>The generated code is deterministic given the same declarations + model. Regeneration is safe — your YAML declarations are the source of truth, not the generated output.</p>
+
+      <div class="tip">Get started with <code>weblisk new --template client/blueprint-site</code>. See <a href="/templates/">Templates</a> for all available project starters, or <a href="/docs/cli.html">CLI Reference</a> for the full command set.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/blueprints/catalog.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Catalog</a>
+        <a href="/blueprints/authoring.html">Authoring <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">The zero-dependency web platform — from browser to federated agent intelligence.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/features.html">Features</a>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/hub/">Hub</a>
+            <a href="/server/">Server</a>
+            <a href="/blueprints/">Blueprints</a>
+            <a href="/agents/">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            2026 
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+</html>

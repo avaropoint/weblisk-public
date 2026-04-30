@@ -27,7 +27,7 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Avaropoint">
   <meta property="article:published_time" content="2026-04-23T00:00:00Z">
-  <meta property="article:modified_time" content="2026-04-23T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <script type="application/ld+json">
@@ -204,6 +204,7 @@
 <span class="syn-f">weblisk</span> new my<span class="syn-a">-blog</span> -<span class="syn-a">-template</span> blog
 <span class="syn-f">weblisk</span> new my<span class="syn-a">-dashboard</span> -<span class="syn-a">-template</span> dashboard
 <span class="syn-f">weblisk</span> new my<span class="syn-a">-docs</span> -<span class="syn-a">-template</span> docs
+<span class="syn-f">weblisk</span> new my<span class="syn-a">-site</span> -<span class="syn-a">-template</span> client/blueprint-site
 </pre>
         </div>
       </div>
@@ -319,6 +320,96 @@
 </pre>
         </div>
       </div>
+      <h3><code>weblisk domain</code></h3>
+      <p>Manage domain controllers — business logic directors that orchestrate agents:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+        </div>
+        <div class="code-body">
+          <pre>
+<span class="syn-f">weblisk</span> domain create seo -<span class="syn-a">-platform</span> go     <span class="syn-c"># Generate a domain controller</span>
+<span class="syn-f">weblisk</span> domain start seo                   <span class="syn-c"># Start a domain controller</span>
+</pre>
+        </div>
+      </div>
+      <h3><code>weblisk gateway</code></h3>
+      <p>Manage application gateways — end-user edge security with session auth, ABAC, and rate limiting:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+        </div>
+        <div class="code-body">
+          <pre>
+<span class="syn-f">weblisk</span> gateway create -<span class="syn-a">-platform</span> go     <span class="syn-c"># Generate an application gateway</span>
+<span class="syn-f">weblisk</span> gateway start                    <span class="syn-c"># Start the gateway</span>
+</pre>
+        </div>
+      </div>
+      <h3><code>weblisk blueprints</code></h3>
+      <p>Manage blueprint specifications:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+        </div>
+        <div class="code-body">
+          <pre>
+<span class="syn-f">weblisk</span> blueprints list     <span class="syn-c"># List all resolved blueprints</span>
+<span class="syn-f">weblisk</span> blueprints update   <span class="syn-c"># Update cached blueprints from all sources</span>
+</pre>
+        </div>
+      </div>
+      <h3><code>weblisk validate</code></h3>
+      <p>Validate all blueprints against their schemas:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+        </div>
+        <div class="code-body">
+          <pre>
+<span class="syn-f">weblisk</span> validate          <span class="syn-c"># Validate all blueprints in the project</span>
+</pre>
+        </div>
+      </div>
+      <p>Reports compliance level per blueprint: Certified, Compliant, Partial, Draft, or Rejected.</p>
+      <h3><code>weblisk status</code></h3>
+      <p>Check hub status — server, agents, gateway, and domain controllers:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+        </div>
+        <div class="code-body">
+          <pre>
+<span class="syn-f">weblisk</span> status               <span class="syn-c"># Current hub status</span>
+<span class="syn-f">weblisk</span> status -<span class="syn-a">-watch</span>       <span class="syn-c"># Continuous monitoring</span>
+<span class="syn-f">weblisk</span> status -<span class="syn-a">-json</span>        <span class="syn-c"># Machine-readable output</span>
+</pre>
+        </div>
+      </div>
+      <h3><code>weblisk generate</code></h3>
+      <p>Generate code from blueprint declarations (used with the <a href="/blueprints/standards.html">blueprint-site</a> template):</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">bash</span>
+        </div>
+        <div class="code-body">
+          <pre>
+<span class="syn-f">weblisk</span> generate             <span class="syn-c"># Generate site from YAML declarations</span>
+</pre>
+        </div>
+      </div>
       <h3><code>weblisk license</code></h3>
       <p>Activate or manage a Pro license:</p>
       <div class="code-window">
@@ -369,6 +460,17 @@ WL_BLUEPRINT_SOURCES=owner/repo    <span class="syn-c"># Custom blueprint reposi
 </pre>
         </div>
       </div>
+
+      <h2>Roadmap</h2>
+      <p>Upcoming CLI capabilities, grouped by development tier:</p>
+      <table>
+        <thead><tr><th>Tier</th><th>Commands</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tier 2</strong></td><td><code>hub init</code>, <code>hub start</code>, <code>hub status</code></td><td>Full hub lifecycle — multi-agent orchestration from a single command</td></tr>
+          <tr><td><strong>Tier 3</strong></td><td><code>migrate</code>, <code>federation</code>, <code>marketplace</code></td><td>Storage migrations, hub-to-hub federation, marketplace publishing</td></tr>
+          <tr><td><strong>Tier 4</strong></td><td><code>benchmark</code>, <code>cloud</code>, <code>monitor</code></td><td>Performance benchmarks, cloud deployment, production monitoring</td></tr>
+        </tbody>
+      </table>
 
       <div class="docs-nav-footer">
         <a href="/docs/a11y.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

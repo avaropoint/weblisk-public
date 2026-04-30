@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blueprint Catalog — Weblisk</title>
-  <meta name="description" content="Weblisk blueprint catalog — REST APIs, authentication, AI gateway, real-time messaging, and webhook specs with YAML config and security details.">
+  <meta name="description" content="Complete Weblisk blueprint catalog — 37 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings. The full specification library for the zero-dependency web platform.">
   <link rel="canonical" href="https://weblisk.dev/blueprints/catalog.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Blueprint Catalog — Weblisk">
-  <meta property="og:description" content="Official Weblisk blueprint catalog with detailed specs for REST APIs, session and token authentication, AI gateway, real-time messaging, and webhooks.">
+  <meta property="og:description" content="Complete Weblisk blueprint catalog — 37 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings.">
   <meta property="og:url" content="https://weblisk.dev/blueprints/catalog.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -19,12 +19,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blueprint Catalog — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="Official Weblisk blueprint catalog with detailed specs for REST APIs, session and token authentication, AI gateway, real-time messaging, and webhooks.">
+  <meta name="twitter:description" content="Complete Weblisk blueprint catalog — 37 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Avaropoint">
   <meta property="article:published_time" content="2026-04-23T00:00:00Z">
-  <meta property="article:modified_time" content="2026-04-23T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <meta name="theme-color" content="#1a1f36">
@@ -40,10 +40,10 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Blueprint Catalog — Weblisk",
-    "description": "Official Weblisk blueprint catalog with detailed specs for REST APIs, session and token authentication, AI gateway, real-time messaging, and webhooks.",
+    "description": "Complete Weblisk blueprint catalog — 37 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings.",
     "url": "https://weblisk.dev/blueprints/catalog.html",
     "datePublished": "2026-01-15",
-    "dateModified": "2026-04-20",
+    "dateModified": "2026-04-29",
     "headline": "Blueprint Catalog — Weblisk",
     "author": { "@id": "https://avaropoint.com/#org" },
     "publisher": { "@id": "https://avaropoint.com/#org" },
@@ -126,40 +126,167 @@
       <nav aria-label="Blueprint overview links">
         <a href="/blueprints/">Introduction</a>
         <a href="/blueprints/catalog.html" aria-current="page" class="active">Catalog</a>
+        <a href="/blueprints/standards.html">Standards</a>
         <a href="/blueprints/authoring.html">Authoring</a>
       </nav>
       <h3>Related</h3>
       <nav aria-label="Related links">
         <a href="/server/">Server Framework</a>
         <a href="/agents/">Agents</a>
+        <a href="/templates/">Templates</a>
       </nav>
     </aside>
 
     <main class="docs-content" id="main-content">
       <h1>Blueprint Catalog</h1>
-      <p class="lead">Official blueprints covering the most common server-side patterns. Every blueprint is a declarative YAML specification — define what you need, and any Weblisk server implementation generates the endpoints automatically. No boilerplate, no vendor lock-in.</p>
+      <p class="lead">The complete specification library — 37 cross-cutting patterns, 16 architecture components, 11 infrastructure agents, 4 platform bindings, and project standards. Every blueprint is open source and ships with every Weblisk hub.</p>
 
-      <h2>How Blueprints Work</h2>
-      <p>Blueprints are implementation-agnostic specifications. They describe <em>what</em> endpoints must do — not how they do it in any particular language. Place a YAML file in your project's <code>blueprints/</code> directory and the server generates spec-compliant endpoints on startup.</p>
-      <p>Blueprints compose naturally. Combine <strong>auth-session</strong> with <strong>api-rest</strong> for a traditional web application. Pair <strong>auth-token</strong> with <strong>api-ai</strong> for a scoped AI gateway. Add <strong>webhook-inbound</strong> to receive events from third-party services and <strong>webhook-outbound</strong> to notify subscribers — the patterns work together without conflicting.</p>
-
-      <h2>Free Blueprints</h2>
-      <p>Included with every Weblisk server implementation. These match the <a href="https://github.com/avaropoint/weblisk-blueprints/tree/main/patterns" rel="noopener noreferrer">patterns directory</a> in the weblisk-blueprints repository.</p>
-
+      <h2>Patterns — API &amp; Communication</h2>
+      <p>Declarative contracts for API surfaces, messaging, and inter-agent communication.</p>
       <table>
-        <thead>
-          <tr><th>Blueprint</th><th>Description</th><th>Endpoints</th></tr>
-        </thead>
+        <thead><tr><th>Pattern</th><th>Purpose</th><th>Tier</th></tr></thead>
         <tbody>
-          <tr><td><a href="#api-rest"><strong>api-rest</strong></a></td><td>Standard REST API with CRUD, pagination, filtering, and sorting</td><td>5 per model</td></tr>
-          <tr><td><a href="#auth-session"><strong>auth-session</strong></a></td><td>Session-based authentication with secure cookies, CSRF protection, and logout</td><td>4</td></tr>
-          <tr><td><a href="#auth-token"><strong>auth-token</strong></a></td><td>JWT and API key authentication with refresh tokens and scoped permissions</td><td>5</td></tr>
-          <tr><td><a href="#api-ai"><strong>api-ai</strong></a></td><td>AI gateway with chat completions, entity extraction, embeddings, and multi-provider routing</td><td>6</td></tr>
-          <tr><td><a href="#realtime-chat"><strong>realtime-chat</strong></a></td><td>WebSocket-based messaging with channels, presence, and history</td><td>4 + WebSocket</td></tr>
-          <tr><td><a href="#webhook-inbound"><strong>webhook-inbound</strong></a></td><td>Receive, validate, and route inbound webhooks from third-party services</td><td>2</td></tr>
-          <tr><td><a href="#webhook-outbound"><strong>webhook-outbound</strong></a></td><td>Send webhooks with retries, signatures, and delivery tracking</td><td>3</td></tr>
+          <tr><td><a href="#api-rest"><strong>api-rest</strong></a></td><td>REST API with CRUD, pagination, filtering, sorting</td><td>Free</td></tr>
+          <tr><td><a href="#api-ai"><strong>api-ai</strong></a></td><td>AI gateway — chat, completions, extraction, embeddings, multi-provider routing</td><td>Free</td></tr>
+          <tr><td><a href="#realtime-chat"><strong>realtime-chat</strong></a></td><td>WebSocket messaging with channels, presence, and history</td><td>Free</td></tr>
+          <tr><td><strong>webhook</strong></td><td>Webhook processing — inbound validation and outbound delivery with retries</td><td>Free</td></tr>
+          <tr><td><strong>command</strong></td><td>Agent command interface — dispatch, routing, execution</td><td>Free</td></tr>
+          <tr><td><strong>messaging</strong></td><td>HTTP-based pub/sub — event envelopes, scoping, namespace ownership</td><td>Free</td></tr>
+          <tr><td><strong>notification</strong></td><td>Multi-channel delivery — email, webhook, Slack, SMS, push</td><td>Free</td></tr>
         </tbody>
       </table>
+
+      <h2>Patterns — Authentication &amp; Security</h2>
+      <table>
+        <thead><tr><th>Pattern</th><th>Purpose</th><th>Tier</th></tr></thead>
+        <tbody>
+          <tr><td><a href="#auth-session"><strong>auth-session</strong></a></td><td>Session-based auth with secure cookies, CSRF protection</td><td>Free</td></tr>
+          <tr><td><a href="#auth-token"><strong>auth-token</strong></a></td><td>JWT and API key auth with refresh tokens, scoped permissions</td><td>Free</td></tr>
+          <tr><td><strong>user-management</strong></td><td>User lifecycle — profiles, roles, password reset, OAuth</td><td>Free</td></tr>
+          <tr><td><strong>security</strong></td><td>Transport security, input validation, zero-trust, threat events</td><td>Free</td></tr>
+          <tr><td><strong>secrets</strong></td><td>Secret lifecycle — storage, rotation, access control</td><td>Free</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Patterns — Governance</h2>
+      <table>
+        <thead><tr><th>Pattern</th><th>Purpose</th><th>Tier</th></tr></thead>
+        <tbody>
+          <tr><td><strong>scope</strong></td><td>Universal classification — 5-level scope, propagation, environment profiles</td><td>Free</td></tr>
+          <tr><td><strong>policy</strong></td><td>Declarative rules engine — evaluation, composition, precedence</td><td>Free</td></tr>
+          <tr><td><strong>safety</strong></td><td>Operation classification — protection gates, kill-switch, quarantine</td><td>Free</td></tr>
+          <tr><td><strong>approval</strong></td><td>Intent-based approval — authority routing, multi-party, emergency override</td><td>Free</td></tr>
+          <tr><td><strong>privacy</strong></td><td>Consent, masking, anonymization, minimization, erasure cascade</td><td>Free</td></tr>
+          <tr><td><strong>contract</strong></td><td>Collaboration agreements — schemas, scope, permissions, versioning</td><td>Free</td></tr>
+          <tr><td><strong>governance</strong></td><td>Compliance profiles, evidence collection, governance directives</td><td>Free</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Patterns — Infrastructure</h2>
+      <table>
+        <thead><tr><th>Pattern</th><th>Purpose</th><th>Tier</th></tr></thead>
+        <tbody>
+          <tr><td><strong>storage</strong></td><td>Agent-level persistence — schema, migration, backup</td><td>Free</td></tr>
+          <tr><td><strong>caching</strong></td><td>In-process caching — LRU, TTL, namespaces, AI response cache</td><td>Free</td></tr>
+          <tr><td><strong>logging</strong></td><td>Structured JSON logging — levels, correlation, rotation</td><td>Free</td></tr>
+          <tr><td><strong>observability</strong></td><td>Health endpoints, metrics envelope, component state tracking</td><td>Free</td></tr>
+          <tr><td><strong>rate-limiting</strong></td><td>Token bucket, sliding window — gateway and agent rate limits</td><td>Free</td></tr>
+          <tr><td><strong>retry</strong></td><td>Retry strategies, circuit breaker, timeout management</td><td>Free</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Patterns — Workflows &amp; Orchestration</h2>
+      <table>
+        <thead><tr><th>Pattern</th><th>Purpose</th><th>Tier</th></tr></thead>
+        <tbody>
+          <tr><td><strong>workflow</strong></td><td>Workflow declaration, event-driven DAG execution, approval gates</td><td>Free</td></tr>
+          <tr><td><strong>state-machine</strong></td><td>Declarative state machines — transitions, guards, side effects</td><td>Free</td></tr>
+          <tr><td><strong>task-dispatch</strong></td><td>Task submission, priority queuing, dispatch protocol, dead-letter</td><td>Free</td></tr>
+          <tr><td><strong>scheduling</strong></td><td>Cron expressions, overlap policy, missed-tick handling, distributed locking</td><td>Free</td></tr>
+          <tr><td><strong>expression</strong></td><td>Expression language — guards, conditions, constraints, policy rules</td><td>Free</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Patterns — Operations</h2>
+      <table>
+        <thead><tr><th>Pattern</th><th>Purpose</th><th>Tier</th></tr></thead>
+        <tbody>
+          <tr><td><strong>deployment</strong></td><td>CI/CD pipelines, containerization, environment management</td><td>Free</td></tr>
+          <tr><td><strong>file-upload</strong></td><td>File upload, processing, CDN delivery, signed URLs</td><td>Free</td></tr>
+          <tr><td><strong>alerting</strong></td><td>Alert rule evaluation, severity routing, dedup, escalation, muting</td><td>Free</td></tr>
+          <tr><td><strong>incident-response</strong></td><td>Incident lifecycle, runbook execution, correlation, post-mortem</td><td>Free</td></tr>
+          <tr><td><strong>offline</strong></td><td>Offline operation — sync, client persistence, encryption, revocation</td><td>Free</td></tr>
+          <tr><td><strong>versioning</strong></td><td>Semantic versioning, compatibility rules, deprecation</td><td>Free</td></tr>
+          <tr><td><strong>domain-controller</strong></td><td>Domain controller base — dispatch, aggregation, lifecycle</td><td>Free</td></tr>
+          <tr><td><strong>interop</strong></td><td>Framework adapters — LangChain, CrewAI, ADK, HTTP service wrappers</td><td>Free</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <h2>Architecture Components</h2>
+      <p>System-level blueprints that define the structure of a Weblisk hub.</p>
+      <table>
+        <thead><tr><th>Component</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>orchestrator</strong></td><td>Trust anchor — registration, namespaces, service directory, channel brokering</td></tr>
+          <tr><td><strong>domain</strong></td><td>Domain controller — workflow declarations, event-driven triggering</td></tr>
+          <tr><td><strong>agent</strong></td><td>Agent base — 6 endpoints, capabilities, pub/sub, retry/circuit breaker</td></tr>
+          <tr><td><strong>gateway</strong></td><td>Application edge security — session auth, ABAC, rate limiting, route protection</td></tr>
+          <tr><td><strong>admin</strong></td><td>Platform admin — operator identity, roles, separate gateway, 4-eyes approval</td></tr>
+          <tr><td><strong>client</strong></td><td>Client architecture — taxonomy, trust levels, session contracts, data boundary</td></tr>
+          <tr><td><strong>hub</strong></td><td>Collaborative hub — discovery, tiers, commerce, federation, registry</td></tr>
+          <tr><td><strong>lifecycle</strong></td><td>Continuous optimization — strategies, observations, approvals, measurement</td></tr>
+          <tr><td><strong>storage</strong></td><td>Abstract persistence interface</td></tr>
+          <tr><td><strong>testing</strong></td><td>Conformance test suite specification</td></tr>
+          <tr><td><strong>observability</strong></td><td>Structured logging, distributed tracing, Prometheus metrics</td></tr>
+          <tr><td><strong>cli</strong></td><td>CLI operations — interrogation, management commands, code generation</td></tr>
+          <tr><td><strong>data-security</strong></td><td>Transport security, scope-aware boundaries, opt-in data primitives</td></tr>
+          <tr><td><strong>enforcement</strong></td><td>Non-bypassable boundary inspection, rogue agent detection</td></tr>
+          <tr><td><strong>threat-model</strong></td><td>5-boundary attack surface analysis, OWASP mapping, residual risk</td></tr>
+          <tr><td><strong>change-management</strong></td><td>Versioning, migration, deprecation lifecycle</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <h2>Infrastructure Agents</h2>
+      <p>System-level services that power every hub — workflow execution, task dispatch, monitoring, and operations.</p>
+      <table>
+        <thead><tr><th>Agent</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>workflow</strong></td><td>Workflow execution engine — DAG resolution, phase coordination</td></tr>
+          <tr><td><strong>task</strong></td><td>Task dispatch and tracking — priority queue, concurrency control</td></tr>
+          <tr><td><strong>lifecycle</strong></td><td>Continuous optimization — strategies, observations, approvals</td></tr>
+          <tr><td><strong>alerting</strong></td><td>Notification routing and delivery</td></tr>
+          <tr><td><strong>incident-response</strong></td><td>Automated incident detection, runbooks, remediation</td></tr>
+          <tr><td><strong>health-monitor</strong></td><td>Internal hub health — agent liveness, storage, gateway</td></tr>
+          <tr><td><strong>hub</strong></td><td>Registry — indexing, search, metrics, verification, alerting</td></tr>
+          <tr><td><strong>sync</strong></td><td>Background data sync (client ↔ server)</td></tr>
+          <tr><td><strong>cron</strong></td><td>Scheduled task execution</td></tr>
+          <tr><td><strong>webhook</strong></td><td>Webhook processing (inbound + outbound)</td></tr>
+          <tr><td><strong>email-send</strong></td><td>Transactional email sending</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <h2>Platform Bindings</h2>
+      <p>Implementation guidance for each supported runtime.</p>
+      <table>
+        <thead><tr><th>Platform</th><th>Approach</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Go</strong></td><td>Standard library only. SQLite compiled into binary. Local processes.</td></tr>
+          <tr><td><strong>Cloudflare</strong></td><td>Workers, Durable Objects, KV, Web Crypto. Zero runtime dependencies.</td></tr>
+          <tr><td><strong>Node.js</strong></td><td>Fastify, Ed25519, SQLite. Recommended libraries, not requirements.</td></tr>
+          <tr><td><strong>Rust</strong></td><td>tokio, hyper, serde, rusqlite. Single static binary per agent.</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <h2 id="pattern-details">Pattern Details</h2>
+      <p>Detailed specifications for the core API patterns. Each includes the YAML format, generated endpoints, security model, and implementation notes.</p>
 
       <!-- ─── api-rest ──────────────────────────────────────── -->
       <h3 id="api-rest">api-rest</h3>
@@ -476,51 +603,34 @@ config:
 
       <hr>
 
-      <h2>Pro Blueprints</h2>
-      <p>Available through <a href="/pro.html">Weblisk Pro</a> or via <a href="https://avaropoint.com" rel="noopener noreferrer">Avaropoint</a> for enterprise engagements.</p>
+      <h2>Blueprint Resolution</h2>
+      <p>The CLI resolves blueprints from multiple sources in priority order:</p>
 
-      <table>
-        <thead>
-          <tr><th>Blueprint</th><th>Description</th><th>Endpoints</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>file-storage</strong></td>
-            <td>Upload, download, and manage files with S3-compatible backends. Presigned URLs, thumbnails, and quotas.</td>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td><strong>crdt-sync</strong></td>
-            <td>Conflict-free replicated data types with offline-first sync, merge strategies, and version vectors</td>
-            <td>4 + WebSocket</td>
-          </tr>
-          <tr>
-            <td><strong>search-index</strong></td>
-            <td>Full-text and semantic search with incremental indexing, facets, and highlighted results</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td><strong>email-transactional</strong></td>
-            <td>Template-based transactional email with queuing, retries, and delivery tracking</td>
-            <td>4</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># Resolution priority:</span>
+<span class="syn-c"># 1. Local project — ./patterns/ in your repo</span>
+<span class="syn-c"># 2. Custom sources — additional repos via WL_BLUEPRINT_SOURCES</span>
+<span class="syn-c"># 3. Core — avaropoint/weblisk-blueprints (always present)</span>
 
-      <hr>
+<span class="syn-c"># Add a custom blueprint source</span>
+<span class="syn-s">export WL_BLUEPRINT_SOURCES="acme-corp/acme-blueprints"</span>
 
-      <h2>Using a Blueprint</h2>
-      <p>Add a blueprint to your project by placing its YAML file in the <code>blueprints/</code> directory. The server implementation automatically loads and generates endpoints on startup.</p>
-      <pre><code># Scaffold a project with the REST and auth blueprints
-weblisk server init --platform go
+<span class="syn-c"># List all resolved blueprints</span>
+<span class="syn-s">weblisk blueprints list</span>
 
-# The CLI resolves blueprints in priority order:
-# 1. Local project — ./patterns/ in your project
-# 2. Custom sources — additional repos via WL_BLUEPRINT_SOURCES
-# 3. Core — avaropoint/weblisk-blueprints (always present)</code></pre>
+<span class="syn-c"># Update cached blueprints from all sources</span>
+<span class="syn-s">weblisk blueprints update</span></pre>
+        </div>
+      </div>
 
-      <h2>Multiple Blueprint Sources</h2>
-      <p>The CLI supports multiple distribution models. Custom sources override core blueprints with the same path — a customer's <code>domains/checkout.md</code> takes precedence over the core version.</p>
+      <h2>Multiple Distribution Models</h2>
+      <p>Custom sources override core blueprints with the same path — a customer's <code>patterns/api-rest.md</code> takes precedence over the core version.</p>
 
       <table>
         <thead><tr><th>Source</th><th>Repository</th><th>Access</th></tr></thead>
@@ -533,7 +643,7 @@ weblisk server init --platform go
       </table>
       <p>Access control is handled entirely by Git — private repos require the user's existing credentials (SSH key or GitHub CLI auth).</p>
 
-      <div class="tip">Want to create your own? See the <a href="/blueprints/authoring.html">Authoring Guide</a>. Every blueprint follows a <a href="https://github.com/avaropoint/weblisk-blueprints/blob/main/SCHEMA.md" rel="noopener noreferrer">standard schema</a> with required sections: metadata, overview, specification, types, implementation notes, and verification checklist.</div>
+      <div class="tip">Want to create your own? See the <a href="/blueprints/authoring.html">Authoring Guide</a>. Every blueprint follows a <a href="https://github.com/avaropoint/weblisk-blueprints/blob/main/schemas/" rel="noopener noreferrer">standard schema</a> with required sections: metadata, overview, specification, types, implementation notes, and verification checklist.</div>
 
       <div class="docs-nav-footer">
         <a href="/blueprints/"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Introduction</a>

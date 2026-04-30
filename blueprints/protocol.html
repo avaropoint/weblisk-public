@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protocol Specifications — Weblisk Blueprints</title>
+  <meta name="description" content="Weblisk protocol blueprints — wire format, Ed25519 identity, canonical types, and federation. The foundational contracts every implementation must fulfil.">
+  <link rel="canonical" href="https://weblisk.dev/blueprints/protocol.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Protocol Specifications — Weblisk Blueprints">
+  <meta property="og:description" content="Weblisk protocol blueprints — wire format, Ed25519 identity, canonical types, and federation. The foundational contracts every implementation must fulfil.">
+  <meta property="og:url" content="https://weblisk.dev/blueprints/protocol.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Protocol Specifications — Weblisk Blueprints">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description" content="Weblisk protocol blueprints — wire format, Ed25519 identity, canonical types, and federation.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta property="article:published_time" content="2026-04-30T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-30T00:00:00Z">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Protocol Specifications — Weblisk Blueprints",
+    "description": "Weblisk protocol blueprints — wire format, Ed25519 identity, canonical types, and federation.",
+    "url": "https://weblisk.dev/blueprints/protocol.html",
+    "datePublished": "2026-04-30",
+    "dateModified": "2026-04-30",
+    "headline": "Protocol Specifications — Weblisk Blueprints",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Blueprints", "item": "https://weblisk.dev/blueprints/" },
+      { "@type": "ListItem", "position": 3, "name": "Protocol", "item": "https://weblisk.dev/blueprints/protocol.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/features.html" class="nav-link">Features</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/hub/" class="nav-link">Hub</a>
+        <a href="/server/" class="nav-link">Server</a>
+        <a href="/blueprints/" class="nav-link active" aria-current="page">Blueprints</a>
+        <a href="/agents/" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Blueprints navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Blueprint overview links">
+        <a href="/blueprints/">Introduction</a>
+        <a href="/blueprints/catalog.html">Catalog</a>
+        <a href="/blueprints/protocol.html" aria-current="page" class="active">Protocol</a>
+        <a href="/blueprints/architecture.html">Architecture</a>
+        <a href="/blueprints/patterns.html">Patterns</a>
+        <a href="/blueprints/standards.html">Standards</a>
+        <a href="/blueprints/authoring.html">Authoring</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/">Server Framework</a>
+        <a href="/server/specification.html">Server Specification</a>
+        <a href="/agents/">Agents</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Protocol Specifications</h1>
+      <p class="lead">The 4 foundational protocol blueprints define <em>how</em> every component communicates — wire format, cryptographic identity, canonical data types, and federation. Everything else in the platform depends on these contracts.</p>
+
+      <p>Protocol blueprints are the lowest layer. They define what goes on the wire between agents, orchestrators, gateways, and federated hubs. A system that implements these 4 specs correctly can participate in any Weblisk network — regardless of implementation language or hosting platform.</p>
+
+      <nav aria-label="Protocol navigation" style="margin:1.5rem 0;padding:1rem;background:var(--wl-bg-soft);border-radius:8px">
+        <strong>On this page:</strong>
+        <a href="#wire-format" style="margin-left:0.75rem">Wire Format</a> ·
+        <a href="#identity">Identity</a> ·
+        <a href="#canonical-types">Canonical Types</a> ·
+        <a href="#federation">Federation</a>
+      </nav>
+
+      <!-- ─── Wire Format ───────────────────────────────────── -->
+      <h2 id="wire-format">Wire Format</h2>
+      <p>The wire format defines the HTTP + JSON communication contract between all Weblisk components. Every request and response in the system follows these rules — no exceptions, no alternative encodings, no negotiation required.</p>
+
+      <h3>Transport Rules</h3>
+      <table>
+        <thead><tr><th>Rule</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Transport</td><td>HTTP/1.1, HTTP/2, or HTTP/3 — all supported equally</td></tr>
+          <tr><td>Content type</td><td><code>application/json</code> — always, for both requests and responses</td></tr>
+          <tr><td>Path prefix</td><td><code>/v1</code> — all endpoints versioned</td></tr>
+          <tr><td>Timestamps</td><td>Unix epoch seconds (<code>int64</code>) — no timezone ambiguity</td></tr>
+          <tr><td>IDs</td><td>32-character hex strings (16 random bytes)</td></tr>
+          <tr><td>Body limit</td><td>1 MB default; 10 MB for task execution</td></tr>
+          <tr><td>Unknown fields</td><td>MUST be ignored — forward compatibility guaranteed</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Request Envelope</h3>
+      <p>Every authenticated request carries identity context:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Request structure</span>
+        </div>
+        <div class="code-body">
+          <pre><code>POST /v1/execute HTTP/1.1
+Authorization: Bearer &lt;WLT token&gt;
+Content-Type: application/json
+X-Trace-Id: &lt;32-char hex&gt;
+X-Request-Id: &lt;32-char hex&gt;
+
+{
+  "id": "&lt;task-id&gt;",
+  "token": "&lt;WLT token&gt;",
+  "context": {
+    "workspace_root": "/path/to/project",
+    "services": { ... },
+    "entity": { ... },
+    "trace_id": "&lt;32-char hex&gt;"
+  },
+  ...
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>Response Envelope</h3>
+      <p>All responses follow one of two shapes — success (2xx) or error (4xx/5xx):</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Error response</span>
+        </div>
+        <div class="code-body">
+          <pre><code>{
+  "error": "forwarding to agent failed — connection refused",
+  "code": "AGENT_UNREACHABLE",
+  "category": "transient",
+  "retryable": true
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>Error Categories</h3>
+      <ul>
+        <li><strong>transient</strong> — temporary failure; retry is safe (network timeout, agent overloaded)</li>
+        <li><strong>permanent</strong> — will not succeed on retry (invalid input, capability not available)</li>
+        <li><strong>partial</strong> — request partially succeeded; detail includes completed and failed sub-results</li>
+      </ul>
+
+      <h3>Standard Error Codes</h3>
+      <table>
+        <thead><tr><th>Code</th><th>HTTP</th><th>Category</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>INVALID_REQUEST</code></td><td>400</td><td>permanent</td><td>Missing or malformed fields</td></tr>
+          <tr><td><code>INVALID_SIGNATURE</code></td><td>401</td><td>permanent</td><td>Ed25519 signature verification failed</td></tr>
+          <tr><td><code>TOKEN_EXPIRED</code></td><td>401</td><td>transient</td><td>Token past expiry — re-register</td></tr>
+          <tr><td><code>FORBIDDEN</code></td><td>403</td><td>permanent</td><td>Missing required capability</td></tr>
+          <tr><td><code>NOT_FOUND</code></td><td>404</td><td>permanent</td><td>Unknown agent or resource</td></tr>
+          <tr><td><code>AGENT_UNREACHABLE</code></td><td>502</td><td>transient</td><td>Agent connection failed</td></tr>
+          <tr><td><code>RATE_LIMITED</code></td><td>429</td><td>transient</td><td>Too many requests — retry after backoff</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <!-- ─── Identity ──────────────────────────────────────── -->
+      <h2 id="identity">Identity — Ed25519 Cryptographic Signing</h2>
+      <p>Every agent, orchestrator, and hub has a unique cryptographic identity. No usernames, no passwords, no shared secrets — identity is proven mathematically via Ed25519 (RFC 8032) digital signatures.</p>
+
+      <h3>Key Generation</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Identity lifecycle</span>
+        </div>
+        <div class="code-body">
+          <pre><code># Keys generated on first startup
+.weblisk/keys/
+├── private.key    # 64 bytes, file permissions 0600
+└── public.key     # 32 bytes, shared freely
+
+# Public key format: 64-character hex string
+# Signature format: 128-character hex string (64 bytes)</code></pre>
+        </div>
+      </div>
+
+      <h3>What Gets Signed</h3>
+      <table>
+        <thead><tr><th>Operation</th><th>Signed Payload</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Registration</td><td><code>JSON.stringify(manifest)</code></td><td>Prove ownership of claimed identity</td></tr>
+          <tr><td>Task results</td><td><code>JSON.stringify({task_id, status, output})</code></td><td>Non-repudiation — agent cannot deny producing a result</td></tr>
+          <tr><td>Messages</td><td><code>JSON.stringify({from, to, action, payload})</code></td><td>Verify sender identity without trusting the transport</td></tr>
+          <tr><td>Channel grants</td><td><code>JSON.stringify({channel_id, agents, expires})</code></td><td>Orchestrator authorizes direct communication</td></tr>
+          <tr><td>Federation handshake</td><td><code>JSON.stringify({hub_id, capabilities, timestamp})</code></td><td>Mutual authentication between hubs</td></tr>
+        </tbody>
+      </table>
+
+      <h3>WLT Token Format</h3>
+      <p>Weblisk tokens (WLT) are structured as <code>base64url(header).base64url(payload).base64url(signature)</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">WLT token claims</span>
+        </div>
+        <div class="code-body">
+          <pre><code>// Header
+{ "alg": "Ed25519", "typ": "WLT" }
+
+// Payload
+{
+  "sub": "seo-analyzer",       // Agent name
+  "iss": "orchestrator",       // Issuer
+  "iat": 1713264000,           // Issued at (epoch seconds)
+  "exp": 1713350400,           // Expiry (epoch seconds)
+  "cap": ["file:read", "llm:chat"],  // Granted capabilities
+  "cid": ""                    // Channel ID (empty = not channel-scoped)
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>Token Lifetimes</h3>
+      <ul>
+        <li><strong>Agent auth tokens:</strong> 24-hour TTL — issued on registration, re-register to renew</li>
+        <li><strong>Channel tokens:</strong> 1-hour TTL — issued per channel grant, auto-expire</li>
+        <li><strong>Federation tokens:</strong> 72-hour TTL — negotiated during hub peering</li>
+      </ul>
+
+      <h3>Replay Protection</h3>
+      <p>Registration requests include a timestamp. The orchestrator rejects any request where <code>|now - timestamp| &gt; 300 seconds</code> (5-minute window). This prevents intercepted registrations from being replayed.</p>
+
+      <h3>Algorithm Agility</h3>
+      <p>The <code>alg</code> field in the WLT header enables future migration to post-quantum algorithms (ML-DSA / FIPS 204) with zero protocol-level changes. Implementations MUST check the <code>alg</code> field and reject unknown algorithms.</p>
+
+      <hr>
+
+      <!-- ─── Canonical Types ───────────────────────────────── -->
+      <h2 id="canonical-types">Canonical Types</h2>
+      <p>Every data structure that crosses a wire boundary is defined as a canonical type. These are the shared vocabulary — when an agent says "TaskResult", every other component knows the exact shape, field types, and constraints.</p>
+
+      <h3>Core Types</h3>
+      <table>
+        <thead><tr><th>Type</th><th>Fields</th><th>Used By</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>AgentManifest</strong></td>
+            <td><code>name</code>, <code>type</code>, <code>version</code>, <code>description</code>, <code>url</code>, <code>public_key</code>, <code>capabilities</code>, <code>inputs</code>, <code>outputs</code>, <code>collaborators</code>, <code>approval</code>, <code>max_concurrent</code></td>
+            <td>Registration, discovery</td>
+          </tr>
+          <tr>
+            <td><strong>TaskRequest</strong></td>
+            <td><code>id</code>, <code>token</code>, <code>context</code>, <code>inputs</code>, <code>priority</code>, <code>deadline</code></td>
+            <td>Task submission</td>
+          </tr>
+          <tr>
+            <td><strong>TaskResult</strong></td>
+            <td><code>task_id</code>, <code>status</code>, <code>output</code>, <code>changes</code>, <code>observations</code>, <code>recommendations</code>, <code>signature</code>, <code>duration_ms</code></td>
+            <td>Task completion</td>
+          </tr>
+          <tr>
+            <td><strong>ServiceDirectory</strong></td>
+            <td><code>agents[]</code> (name, url, type, public_key, capabilities, status)</td>
+            <td>Discovery, routing</td>
+          </tr>
+          <tr>
+            <td><strong>ChannelGrant</strong></td>
+            <td><code>channel_id</code>, <code>agents[]</code>, <code>token</code>, <code>expires</code>, <code>signature</code></td>
+            <td>Agent-to-agent messaging</td>
+          </tr>
+          <tr>
+            <td><strong>ErrorResponse</strong></td>
+            <td><code>error</code>, <code>code</code>, <code>category</code>, <code>retryable</code>, <code>detail</code></td>
+            <td>All error responses</td>
+          </tr>
+          <tr>
+            <td><strong>HealthStatus</strong></td>
+            <td><code>name</code>, <code>version</code>, <code>status</code>, <code>uptime_seconds</code>, <code>metrics</code></td>
+            <td>Health checks</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Type Rules</h3>
+      <ul>
+        <li>All fields use <code>snake_case</code> — no camelCase, no PascalCase on the wire</li>
+        <li>Optional fields are omitted entirely (not <code>null</code>) — reduces payload size and simplifies parsing</li>
+        <li>Arrays are never <code>null</code> — empty arrays are <code>[]</code></li>
+        <li>Enums are lowercase strings — <code>"success"</code>, <code>"failed"</code>, <code>"pending_approval"</code></li>
+        <li>Unknown fields MUST be preserved during passthrough (orchestrator forwarding) and ignored during processing</li>
+      </ul>
+
+      <h3>Capability Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Capability declaration</span>
+        </div>
+        <div class="code-body">
+          <pre><code>// Capability = namespace:action + optional resource scoping
+{
+  "name": "file:read",
+  "resources": ["app/**/*.html", "content/**/*.md"]
+}
+
+// Standard namespaces:
+// file:read, file:write    — filesystem access
+// llm:chat                 — LLM inference
+// agent:message            — inter-agent communication
+// workflow:execute         — multi-agent orchestration
+// http:get, http:send      — outbound HTTP
+// http:receive             — inbound HTTP (webhook handling)
+// database:read, database:write — data store access
+// realtime:publish         — real-time channel publishing</code></pre>
+        </div>
+      </div>
+
+      <h3>Status Enum</h3>
+      <p>Task results carry a <code>status</code> field with exactly 3 values:</p>
+      <ul>
+        <li><code>success</code> — task completed, output is available</li>
+        <li><code>failed</code> — task failed, error is in output</li>
+        <li><code>pending_approval</code> — task produced recommendations that require human approval before execution</li>
+      </ul>
+
+      <hr>
+
+      <!-- ─── Federation ────────────────────────────────────── -->
+      <h2 id="federation">Federation</h2>
+      <p>Federation is the protocol that allows independent hubs to collaborate without trusting each other's internal state. Each hub maintains sovereignty over its agents, data, and policies — federation provides controlled, cryptographically verified interaction between hubs.</p>
+
+      <h3>Federation Model</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Federation topology</span>
+        </div>
+        <div class="code-body">
+          <pre><code>Hub A (acme.weblisk.dev)          Hub B (partner.weblisk.dev)
+├── Orchestrator A                ├── Orchestrator B
+├── Agents [internal]             ├── Agents [internal]
+├── Federation Gateway ◄────────► Federation Gateway
+│   ├── Peer registry             │   ├── Peer registry
+│   ├── Data boundary rules       │   ├── Data boundary rules
+│   └── Trust tier: verified      │   └── Trust tier: verified
+└── Shared capabilities:          └── Shared capabilities:
+    - seo:analyze                     - content:translate
+    - perf:audit                      - legal:review</code></pre>
+        </div>
+      </div>
+
+      <h3>Trust Tiers</h3>
+      <table>
+        <thead><tr><th>Tier</th><th>Access Level</th><th>Verification</th></tr></thead>
+        <tbody>
+          <tr><td><strong>anonymous</strong></td><td>Public endpoints only (health, capability listing)</td><td>None — any hub can query</td></tr>
+          <tr><td><strong>known</strong></td><td>Can request tasks on shared capabilities</td><td>Ed25519 handshake successful</td></tr>
+          <tr><td><strong>verified</strong></td><td>Full collaboration — shared channels, workflow participation</td><td>Mutual authentication + behavioural fingerprint match</td></tr>
+          <tr><td><strong>trusted</strong></td><td>Can act as delegate — execute on behalf of the other hub</td><td>Verified + explicit trust grant by admin</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Peering Handshake</h3>
+      <ol>
+        <li>Hub A sends a signed peering request: <code>{hub_id, url, public_key, capabilities, timestamp}</code></li>
+        <li>Hub B verifies the signature and checks the timestamp (5-minute window)</li>
+        <li>Hub B responds with its own signed capabilities declaration</li>
+        <li>Both hubs store each other in their peer registry at <strong>known</strong> tier</li>
+        <li>Behavioural fingerprinting begins — response patterns, capability stability, error rates</li>
+        <li>After threshold met (configurable), tier elevates to <strong>verified</strong></li>
+      </ol>
+
+      <h3>Data Boundary Contracts</h3>
+      <p>Federation enforces data sovereignty through explicit boundary rules:</p>
+      <div class="code-window">
+        <div name="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Data boundary configuration</span>
+        </div>
+        <div class="code-body">
+          <pre><code>federation:
+  peers:
+    partner.weblisk.dev:
+      trust_tier: verified
+      shared_capabilities:
+        - content:translate
+        - legal:review
+      data_boundary:
+        allow_fields: [title, description, url, language]
+        deny_fields: [email, api_key, internal_id, password]
+        max_payload_size: 64KB
+        retention: none           # Partner must not persist our data
+      rate_limit: 100/hour</code></pre>
+        </div>
+      </div>
+
+      <h3>Federation Security</h3>
+      <ul>
+        <li><strong>Cryptographic isolation:</strong> Each hub's internal agents are invisible to federated peers — only explicitly shared capabilities are exposed</li>
+        <li><strong>Data minimisation:</strong> Boundary rules strip fields before cross-hub transmission</li>
+        <li><strong>Audit trail:</strong> Every federated request is logged with peer identity, capability used, and data fields transmitted</li>
+        <li><strong>Revocation:</strong> Trust can be revoked instantly — removes peer from registry and terminates active channels</li>
+        <li><strong>No transitive trust:</strong> If Hub A trusts Hub B, and Hub B trusts Hub C, Hub A does NOT automatically trust Hub C</li>
+      </ul>
+
+      <div class="tip">The full server implementation of these protocols — including agent endpoints, orchestrator routing, and the registration flow — is detailed in the <a href="/server/specification.html">Server Specification</a>. For protocol-level signing and token details, see <a href="/server/protocols.html">Server Protocols</a>.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/blueprints/catalog.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Catalog</a>
+        <a href="/blueprints/architecture.html">Architecture <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">The zero-dependency web platform — from browser to federated agent intelligence.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/features.html">Features</a>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/hub/">Hub</a>
+            <a href="/server/">Server</a>
+            <a href="/blueprints/">Blueprints</a>
+            <a href="/agents/">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

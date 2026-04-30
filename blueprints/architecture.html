@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Specifications — Weblisk Blueprints</title>
+  <meta name="description" content="Weblisk architecture blueprints — orchestrator, gateway, admin, domain controllers, agents, client model, hub, lifecycle, observability, security, and more. The 16 system-level specifications.">
+  <link rel="canonical" href="https://weblisk.dev/blueprints/architecture.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Architecture Specifications — Weblisk Blueprints">
+  <meta property="og:description" content="The 16 architecture blueprints that define the structural components of every Weblisk deployment — from orchestrator to federation gateway.">
+  <meta property="og:url" content="https://weblisk.dev/blueprints/architecture.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Architecture Specifications — Weblisk Blueprints">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description" content="The 16 architecture blueprints that define the structural components of every Weblisk deployment.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta property="article:published_time" content="2026-04-30T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-30T00:00:00Z">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Architecture Specifications — Weblisk Blueprints",
+    "description": "The 16 architecture blueprints that define the structural components of every Weblisk deployment.",
+    "url": "https://weblisk.dev/blueprints/architecture.html",
+    "datePublished": "2026-04-30",
+    "dateModified": "2026-04-30",
+    "headline": "Architecture Specifications — Weblisk Blueprints",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Blueprints", "item": "https://weblisk.dev/blueprints/" },
+      { "@type": "ListItem", "position": 3, "name": "Architecture", "item": "https://weblisk.dev/blueprints/architecture.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/features.html" class="nav-link">Features</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/hub/" class="nav-link">Hub</a>
+        <a href="/server/" class="nav-link">Server</a>
+        <a href="/blueprints/" class="nav-link active" aria-current="page">Blueprints</a>
+        <a href="/agents/" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Blueprints navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Blueprint overview links">
+        <a href="/blueprints/">Introduction</a>
+        <a href="/blueprints/catalog.html">Catalog</a>
+        <a href="/blueprints/protocol.html">Protocol</a>
+        <a href="/blueprints/architecture.html" aria-current="page" class="active">Architecture</a>
+        <a href="/blueprints/patterns.html">Patterns</a>
+        <a href="/blueprints/standards.html">Standards</a>
+        <a href="/blueprints/authoring.html">Authoring</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/">Server Framework</a>
+        <a href="/server/hub.html">Hub Architecture</a>
+        <a href="/agents/">Agents</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Architecture Specifications</h1>
+      <p class="lead">The 16 architecture blueprints define <em>what</em> each structural component of a Weblisk deployment is, what it's responsible for, and how it interacts with everything else. These are the building blocks — protocol says how things talk, architecture says what the things <em>are</em>.</p>
+
+      <p>Architecture blueprints don't prescribe implementation details — they define responsibilities, interfaces, and constraints. A conforming orchestrator in Go and one in Rust must behave identically from the outside, even though their internals differ completely.</p>
+
+      <nav aria-label="Architecture navigation" style="margin:1.5rem 0;padding:1rem;background:var(--wl-bg-soft);border-radius:8px">
+        <strong>On this page:</strong>
+        <a href="#orchestrator" style="margin-left:0.75rem">Orchestrator</a> ·
+        <a href="#domain">Domain</a> ·
+        <a href="#agent">Agent</a> ·
+        <a href="#gateway">Gateway</a> ·
+        <a href="#admin">Admin</a> ·
+        <a href="#client">Client</a> ·
+        <a href="#hub">Hub</a> ·
+        <a href="#lifecycle">Lifecycle</a> ·
+        <a href="#supporting">Supporting (8)</a>
+      </nav>
+
+      <!-- ─── Orchestrator ──────────────────────────────────── -->
+      <h2 id="orchestrator">Orchestrator</h2>
+      <p>The orchestrator is the <strong>trust anchor</strong> of every deployment. It doesn't execute business logic — it manages identity, registration, routing, discovery, and the audit trail. Every agent registers with the orchestrator. Every task routes through it. Every capability grant originates from it.</p>
+
+      <h3>Responsibilities</h3>
+      <ul>
+        <li><strong>Agent registration:</strong> Verify Ed25519 signatures, issue WLT tokens, assign agent IDs</li>
+        <li><strong>Service directory:</strong> Maintain the live registry of all agents — names, URLs, capabilities, health status</li>
+        <li><strong>Task routing:</strong> Accept task submissions and forward to the target agent (directly or via domain controller)</li>
+        <li><strong>Channel brokering:</strong> Create time-limited channels for direct agent-to-agent communication</li>
+        <li><strong>Namespace management:</strong> Enforce unique naming across agents, prevent collisions</li>
+        <li><strong>Audit logging:</strong> Record every operation in an append-only log — registrations, tasks, messages, approvals</li>
+        <li><strong>Strategy management:</strong> Store business strategies and observations for the lifecycle loop</li>
+      </ul>
+
+      <h3>Endpoints</h3>
+      <table>
+        <thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>POST /v1/register</code></td><td>Agent registration — issues auth token</td></tr>
+          <tr><td><code>DELETE /v1/register</code></td><td>Agent deregistration</td></tr>
+          <tr><td><code>POST /v1/task</code></td><td>Task submission and routing</td></tr>
+          <tr><td><code>POST /v1/channel</code></td><td>Broker agent-to-agent channel</td></tr>
+          <tr><td><code>GET /v1/services</code></td><td>Current service directory</td></tr>
+          <tr><td><code>GET /v1/health</code></td><td>Orchestrator health status</td></tr>
+          <tr><td><code>GET /v1/audit</code></td><td>Append-only audit log</td></tr>
+          <tr><td><code>GET/POST /v1/strategy</code></td><td>Business strategy management</td></tr>
+          <tr><td><code>GET/POST /v1/context</code></td><td>Entity context (company, project)</td></tr>
+          <tr><td><code>GET /v1/observations</code></td><td>Agent observation history</td></tr>
+          <tr><td><code>GET/POST /v1/approve</code></td><td>Approval queue management</td></tr>
+        </tbody>
+      </table>
+
+      <h3>What It Does NOT Do</h3>
+      <ul>
+        <li>Does NOT execute agent logic — it routes, doesn't compute</li>
+        <li>Does NOT store business data — agents own their data</li>
+        <li>Does NOT make decisions — it enforces policies declared elsewhere</li>
+        <li>Does NOT communicate externally — only agents talk to the outside world</li>
+      </ul>
+
+      <hr>
+
+      <!-- ─── Domain Controller ─────────────────────────────── -->
+      <h2 id="domain">Domain Controller</h2>
+      <p>Domain controllers are <strong>business logic directors</strong>. They don't do the work themselves — they decompose complex requests into multi-agent workflows, coordinate execution order, handle failure cases, and aggregate results.</p>
+
+      <h3>Responsibilities</h3>
+      <ul>
+        <li><strong>Workflow declaration:</strong> Define multi-step workflows as directed acyclic graphs (DAGs)</li>
+        <li><strong>Task decomposition:</strong> Break incoming requests into sub-tasks for specialist agents</li>
+        <li><strong>Coordination:</strong> Manage execution order, parallel branches, conditional paths, and join points</li>
+        <li><strong>Failure handling:</strong> Retry transient failures, circuit-break on persistent failures, report partial results</li>
+        <li><strong>Result aggregation:</strong> Combine outputs from multiple agents into a unified response</li>
+        <li><strong>Event-driven triggering:</strong> React to observations, scheduled events, or external triggers</li>
+      </ul>
+
+      <h3>Domain vs. Agent</h3>
+      <table>
+        <thead><tr><th>Aspect</th><th>Domain Controller</th><th>Work Agent</th></tr></thead>
+        <tbody>
+          <tr><td>Role</td><td>Director — orchestrates others</td><td>Executor — does the actual work</td></tr>
+          <tr><td>Logic</td><td>Workflow coordination, routing</td><td>Domain-specific computation</td></tr>
+          <tr><td>Data access</td><td>Reads service directory, forwards context</td><td>Reads/writes domain data</td></tr>
+          <tr><td>Capabilities</td><td><code>workflow:execute</code></td><td>Specific: <code>file:read</code>, <code>llm:chat</code>, etc.</td></tr>
+          <tr><td>Example</td><td>SEO domain controller</td><td>SEO analyzer, meta writer, sitemap generator</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Workflow Definition</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Domain workflow declaration</span>
+        </div>
+        <div class="code-body">
+          <pre><code>workflows:
+  full-audit:
+    trigger: manual
+    steps:
+      - id: analyze
+        agent: seo-analyzer
+        inputs: { html_files: "$input.files" }
+      - id: check-a11y
+        agent: a11y-checker
+        inputs: { html_files: "$input.files" }
+        parallel: true         # Runs alongside 'analyze'
+      - id: generate-fixes
+        agent: seo-writer
+        depends_on: [analyze, check-a11y]
+        inputs:
+          seo_report: "$steps.analyze.output"
+          a11y_report: "$steps.check-a11y.output"
+      - id: approve
+        type: approval_gate
+        depends_on: [generate-fixes]</code></pre>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- ─── Agent Base ────────────────────────────────────── -->
+      <h2 id="agent">Agent Base</h2>
+      <p>The agent base blueprint defines the minimal contract every agent must satisfy — 5 standard endpoints, capability declaration, pub/sub integration, and operational behaviour (retry, circuit breaker, health reporting).</p>
+
+      <h3>Required Endpoints</h3>
+      <table>
+        <thead><tr><th>Endpoint</th><th>Auth</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>POST /v1/describe</code></td><td>No</td><td>Return AgentManifest — identity, capabilities, I/O schema</td></tr>
+          <tr><td><code>POST /v1/execute</code></td><td>Yes</td><td>Execute a task, return signed TaskResult</td></tr>
+          <tr><td><code>GET /v1/health</code></td><td>No</td><td>Health check with metrics</td></tr>
+          <tr><td><code>POST /v1/message</code></td><td>Yes</td><td>Receive agent-to-agent messages</td></tr>
+          <tr><td><code>POST /v1/services</code></td><td>Yes</td><td>Accept service directory updates</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Agent Types</h3>
+      <ul>
+        <li><strong>Work agent</strong> (<code>type: "agent"</code>) — domain-specific executor. Does the actual computation.</li>
+        <li><strong>Domain controller</strong> (<code>type: "domain"</code>) — workflow coordinator. Decomposes and routes.</li>
+        <li><strong>Infrastructure agent</strong> (<code>type: "infrastructure"</code>) — system service. Always running, hub-scoped.</li>
+      </ul>
+
+      <h3>Operational Behaviour</h3>
+      <ul>
+        <li><strong>Registration:</strong> On startup, build manifest, sign it, POST to orchestrator, store the returned token</li>
+        <li><strong>Health reporting:</strong> Respond to <code>GET /v1/health</code> within 1 second; include uptime, version, and queue depth</li>
+        <li><strong>Concurrency:</strong> Respect <code>max_concurrent</code> from manifest — reject excess with 429</li>
+        <li><strong>Graceful shutdown:</strong> Complete in-flight tasks, deregister from orchestrator, then exit</li>
+        <li><strong>Service directory:</strong> Accept pushes from orchestrator; use for agent-to-agent messaging lookups</li>
+      </ul>
+
+      <hr>
+
+      <!-- ─── Gateway ───────────────────────────────────────── -->
+      <h2 id="gateway">Application Gateway</h2>
+      <p>The application gateway is the <strong>end-user edge</strong> — it sits between external clients (browsers, mobile apps, third-party services) and the internal agent network. It handles authentication, authorization, rate limiting, and request mediation.</p>
+
+      <h3>Responsibilities</h3>
+      <ul>
+        <li><strong>Session management:</strong> Create and validate user sessions (implements <a href="/blueprints/patterns.html#auth-session">auth-session</a> or <a href="/blueprints/patterns.html#auth-token">auth-token</a> patterns)</li>
+        <li><strong>ABAC enforcement:</strong> Attribute-Based Access Control — evaluate policies against user attributes, resource attributes, and context</li>
+        <li><strong>Rate limiting:</strong> Per-user, per-IP, per-endpoint rate limits with configurable windows</li>
+        <li><strong>Route protection:</strong> Map external routes to internal agents; block undeclared routes</li>
+        <li><strong>Request mediation:</strong> Transform external request format → internal TaskRequest; transform TaskResult → external response</li>
+        <li><strong>CORS management:</strong> Enforce origin allowlists per route</li>
+      </ul>
+
+      <h3>Request Flow</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Gateway request lifecycle</span>
+        </div>
+        <div class="code-body">
+          <pre><code>Client request
+  → Rate limiter (429 if exceeded)
+  → Authentication (401 if invalid)
+  → ABAC policy evaluation (403 if denied)
+  → Route resolution (404 if unmapped)
+  → Request mediation (transform to TaskRequest)
+  → Orchestrator /v1/task submission
+  → Agent execution
+  → Response mediation (transform from TaskResult)
+  → Client response</code></pre>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- ─── Admin Gateway ─────────────────────────────────── -->
+      <h2 id="admin">Admin Gateway</h2>
+      <p>The admin gateway is a <strong>completely separate entry point</strong> for platform operators. It runs on a different port (or network), uses different authentication, and enforces stricter controls than the application gateway.</p>
+
+      <h3>Security Model</h3>
+      <ul>
+        <li><strong>Separate network:</strong> MUST NOT share an ingress path with the application gateway</li>
+        <li><strong>Ed25519 operator identity:</strong> Operators authenticate with their own Ed25519 keypair — not passwords</li>
+        <li><strong>MFA required:</strong> Second factor verification for all state-changing operations</li>
+        <li><strong>IP allowlist:</strong> Only whitelisted IP ranges can reach the admin gateway</li>
+        <li><strong>4-eyes approval:</strong> Destructive operations (agent removal, policy changes, data deletion) require approval from a second operator</li>
+        <li><strong>Role-based access:</strong> Operators have explicit roles — <code>viewer</code>, <code>operator</code>, <code>admin</code>, <code>superadmin</code></li>
+      </ul>
+
+      <h3>Admin Operations</h3>
+      <table>
+        <thead><tr><th>Category</th><th>Operations</th><th>Approval</th></tr></thead>
+        <tbody>
+          <tr><td>Monitoring</td><td>View health, logs, metrics, audit trail</td><td>None</td></tr>
+          <tr><td>Configuration</td><td>Update policies, rate limits, CORS rules</td><td>None</td></tr>
+          <tr><td>Agent management</td><td>Force-deregister agent, restart, update</td><td>4-eyes</td></tr>
+          <tr><td>Security</td><td>Revoke tokens, rotate keys, block IPs</td><td>4-eyes</td></tr>
+          <tr><td>Data</td><td>Purge audit logs, delete agent storage</td><td>4-eyes + superadmin</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <!-- ─── Client ────────────────────────────────────────── -->
+      <h2 id="client">Client Architecture</h2>
+      <p>The client blueprint defines <strong>how external consumers</strong> (browsers, mobile apps, CLI tools, third-party services) interact with the platform — what they can see, what they can do, and what data boundaries apply.</p>
+
+      <h3>Client Taxonomy</h3>
+      <table>
+        <thead><tr><th>Client Type</th><th>Trust Level</th><th>Session Model</th><th>Data Access</th></tr></thead>
+        <tbody>
+          <tr><td>Browser (SPA)</td><td>Low</td><td>Session cookie or short-lived JWT</td><td>User-scoped only</td></tr>
+          <tr><td>Mobile app</td><td>Low</td><td>Refresh token rotation</td><td>User-scoped only</td></tr>
+          <tr><td>Server-to-server</td><td>Medium</td><td>API key with scoped permissions</td><td>Scope-defined</td></tr>
+          <tr><td>Internal agent</td><td>High</td><td>WLT token from orchestrator</td><td>Capability-scoped</td></tr>
+          <tr><td>Federated hub</td><td>Variable</td><td>Federation token</td><td>Data boundary contract</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Data Boundary Rules</h3>
+      <ul>
+        <li>Clients NEVER interact directly with agents — all traffic routes through the application gateway</li>
+        <li>Response payloads are filtered by the gateway based on client trust level and requested scope</li>
+        <li>Internal fields (agent IDs, trace IDs, raw task results) are stripped before client delivery</li>
+        <li>File access is proxied — clients receive signed URLs with expiry, never direct storage paths</li>
+      </ul>
+
+      <hr>
+
+      <!-- ─── Hub ───────────────────────────────────────────── -->
+      <h2 id="hub">Hub</h2>
+      <p>The hub blueprint defines how a complete Weblisk deployment operates as a <strong>collaborative, discoverable unit</strong> — including marketplace participation, tiered access, commerce, and federation with other hubs.</p>
+
+      <h3>Hub Capabilities</h3>
+      <ul>
+        <li><strong>Discovery:</strong> Hub advertises its capabilities to the Weblisk marketplace for other hubs to find</li>
+        <li><strong>Tiered access:</strong> Free tier (limited agents, rate-limited), Pro tier (full access, priority routing)</li>
+        <li><strong>Commerce:</strong> Hub operators can charge for access to their agents via marketplace billing</li>
+        <li><strong>Federation:</strong> Hub-to-hub collaboration with trust tiers and data boundary contracts (see <a href="/blueprints/protocol.html#federation">Protocol — Federation</a>)</li>
+        <li><strong>Registry:</strong> Central registry of all local agents, domains, and workflows</li>
+        <li><strong>Self-sovereignty:</strong> Hub operator has full control — no external dependency required to operate</li>
+      </ul>
+
+      <h3>Deployment Model</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Hub deployment structure</span>
+        </div>
+        <div class="code-body">
+          <pre><code>hub/
+├── orchestrator         # Central coordination
+├── gateway/             # Application edge (port 443)
+├── admin/               # Operator access (port 8443, separate network)
+├── agents/
+│   ├── infrastructure/  # 11 system agents (always running)
+│   └── domains/         # Business domain controllers + work agents
+├── storage/             # Agent-local SQLite databases
+├── config/
+│   ├── global.yaml      # Hub-level configuration
+│   ├── policies/        # ABAC, rate-limit, safety policies
+│   └── federation/      # Peer definitions, data boundaries
+└── keys/                # Ed25519 keypairs (orchestrator + agents)</code></pre>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- ─── Lifecycle ─────────────────────────────────────── -->
+      <h2 id="lifecycle">Lifecycle</h2>
+      <p>The lifecycle blueprint defines the <strong>continuous optimisation loop</strong> — how the system observes, recommends, and acts on improvements over time. This is what makes a Weblisk deployment adaptive rather than static.</p>
+
+      <h3>The Loop</h3>
+      <ol>
+        <li><strong>Strategise:</strong> Operators define business strategies with measurable targets (via <code>/v1/strategy</code>)</li>
+        <li><strong>Observe:</strong> Agents emit observations during task execution — measurements, anomalies, opportunities</li>
+        <li><strong>Recommend:</strong> Agents propose changes based on observations and strategy alignment</li>
+        <li><strong>Approve:</strong> Recommendations with <code>approval: required</code> wait for human sign-off</li>
+        <li><strong>Execute:</strong> Approved recommendations are executed as new tasks</li>
+        <li><strong>Measure:</strong> Results feed back into observations — the loop continues</li>
+      </ol>
+
+      <h3>Strategy Structure</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Strategy definition</span>
+        </div>
+        <div class="code-body">
+          <pre><code>{
+  "name": "improve-core-web-vitals",
+  "status": "active",
+  "targets": [
+    { "metric": "lcp", "target": "< 2.5s", "current": "3.1s" },
+    { "metric": "cls", "target": "< 0.1", "current": "0.05" }
+  ],
+  "agents": ["perf-analyzer", "image-optimizer", "css-optimizer"],
+  "review_frequency": "weekly"
+}</code></pre>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- ─── Supporting Components ─────────────────────────── -->
+      <h2 id="supporting">Supporting Components</h2>
+      <p>The remaining 8 architecture blueprints define cross-cutting system concerns — persistence, testing, observability, CLI, and security layers.</p>
+
+      <table>
+        <thead><tr><th>Component</th><th>Specification</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>storage</strong></td>
+            <td>Abstract persistence interface. Each agent owns its own SQLite database — no shared state. Schema migrations are versioned and agent-local. Backup and restore follow a standard protocol.</td>
+          </tr>
+          <tr>
+            <td><strong>testing</strong></td>
+            <td>Conformance test suite specification. Every architecture component and pattern has a verification checklist. Implementations must pass the suite to claim compliance.</td>
+          </tr>
+          <tr>
+            <td><strong>observability</strong></td>
+            <td>Structured JSON logging (levels, correlation IDs, rotation), distributed tracing via <code>trace_id</code> propagation, and Prometheus-compatible metrics endpoints. Every agent exposes <code>/metrics</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>cli</strong></td>
+            <td>CLI operations specification — interrogation commands (list agents, show health, query audit), management commands (register, deregister, approve), and code generation commands (domain create, generate).</td>
+          </tr>
+          <tr>
+            <td><strong>data-security</strong></td>
+            <td>Transport security (TLS 1.3 minimum for production), scope-aware data boundaries (agent-local → domain → hub → federation), and opt-in data primitives (encryption at rest, field-level access control).</td>
+          </tr>
+          <tr>
+            <td><strong>enforcement</strong></td>
+            <td>Non-bypassable boundary inspection. The enforcement layer sits between the gateway and agents — validating that every request complies with declared policies before reaching any agent. Includes rogue agent detection (anomalous capability requests, traffic patterns).</td>
+          </tr>
+          <tr>
+            <td><strong>threat-model</strong></td>
+            <td>5-boundary attack surface analysis: client→gateway, gateway→orchestrator, orchestrator→agent, agent→agent, hub→hub. Each boundary maps to OWASP categories with specific mitigations. Includes residual risk documentation.</td>
+          </tr>
+          <tr>
+            <td><strong>change-management</strong></td>
+            <td>Versioning rules (semantic versioning for agents and blueprints), migration procedures (database schema, API versions), and deprecation lifecycle (announce → warn → sunset → remove with minimum 90-day windows).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip">These architecture blueprints define the structural contracts. For the implementation details of the server framework, see <a href="/server/">Server Framework</a>. For the 38 cross-cutting patterns that these components inherit, see <a href="/blueprints/patterns.html">Pattern Specifications</a>. For the runtime agents that implement these architectures, see the <a href="/agents/catalog.html">Agent Catalog</a>.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/blueprints/protocol.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Protocol</a>
+        <a href="/blueprints/patterns.html">Patterns <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">The zero-dependency web platform — from browser to federated agent intelligence.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/features.html">Features</a>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/hub/">Hub</a>
+            <a href="/server/">Server</a>
+            <a href="/blueprints/">Blueprints</a>
+            <a href="/agents/">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

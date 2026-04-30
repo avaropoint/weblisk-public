@@ -126,6 +126,8 @@
       <nav aria-label="Blueprint overview links">
         <a href="/blueprints/">Introduction</a>
         <a href="/blueprints/catalog.html" aria-current="page" class="active">Catalog</a>
+        <a href="/blueprints/protocol.html">Protocol</a>
+        <a href="/blueprints/architecture.html">Architecture</a>
         <a href="/blueprints/patterns.html">Patterns</a>
         <a href="/blueprints/standards.html">Standards</a>
         <a href="/blueprints/authoring.html">Authoring</a>
@@ -225,8 +227,22 @@
 
       <hr>
 
+      <h2>Protocol</h2>
+      <p>The 4 foundational specs that define how every component communicates — the wire contract everything else depends on.</p>
+      <table>
+        <thead><tr><th>Spec</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><a href="/blueprints/protocol.html#wire-format"><strong>wire-format</strong></a></td><td>HTTP + JSON transport rules, request/response envelopes, error categories, versioning</td></tr>
+          <tr><td><a href="/blueprints/protocol.html#identity"><strong>identity</strong></a></td><td>Ed25519 cryptographic identity, WLT token format, signing, replay protection</td></tr>
+          <tr><td><a href="/blueprints/protocol.html#canonical-types"><strong>canonical-types</strong></a></td><td>Shared data structures — AgentManifest, TaskRequest, TaskResult, ServiceDirectory, ChannelGrant</td></tr>
+          <tr><td><a href="/blueprints/protocol.html#federation"><strong>federation</strong></a></td><td>Hub-to-hub collaboration — trust tiers, peering handshake, data boundary contracts</td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
       <h2>Architecture Components</h2>
-      <p>System-level blueprints that define the structure of a Weblisk hub.</p>
+      <p>System-level blueprints that define the structure of a Weblisk hub. <a href="/blueprints/architecture.html">Full architecture specifications →</a></p>
       <table>
         <thead><tr><th>Component</th><th>Purpose</th></tr></thead>
         <tbody>

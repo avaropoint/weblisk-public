@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pattern Specifications — Weblisk Blueprints</title>
+  <meta name="description" content="Detailed blueprint specifications for Weblisk patterns — API REST, authentication, AI gateway, real-time messaging, and webhooks. YAML declarations, generated endpoints, and security models.">
+  <link rel="canonical" href="https://weblisk.dev/blueprints/patterns.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Pattern Specifications — Weblisk Blueprints">
+  <meta property="og:description" content="Detailed blueprint specifications for Weblisk patterns — YAML declarations, generated endpoints, security models, and implementation guidance.">
+  <meta property="og:url" content="https://weblisk.dev/blueprints/patterns.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pattern Specifications — Weblisk Blueprints">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description" content="Detailed blueprint specifications for Weblisk patterns — YAML declarations, generated endpoints, security models, and implementation guidance.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta property="article:published_time" content="2026-04-30T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-30T00:00:00Z">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Pattern Specifications — Weblisk Blueprints",
+    "description": "Detailed blueprint specifications for Weblisk patterns — YAML declarations, generated endpoints, security models, and implementation guidance.",
+    "url": "https://weblisk.dev/blueprints/patterns.html",
+    "datePublished": "2026-04-30",
+    "dateModified": "2026-04-30",
+    "headline": "Pattern Specifications — Weblisk Blueprints",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Weblisk",
+        "item": "https://weblisk.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blueprints",
+        "item": "https://weblisk.dev/blueprints/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Pattern Specifications",
+        "item": "https://weblisk.dev/blueprints/patterns.html"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/features.html" class="nav-link">Features</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/hub/" class="nav-link">Hub</a>
+        <a href="/server/" class="nav-link">Server</a>
+        <a href="/blueprints/" class="nav-link active" aria-current="page">Blueprints</a>
+        <a href="/agents/" class="nav-link">Agents</a>
+        <a href="/pro.html" class="nav-link">Pro <span class="pro-badge">New</span></a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Blueprints navigation">
+      <h3>Overview</h3>
+      <nav aria-label="Blueprint overview links">
+        <a href="/blueprints/">Introduction</a>
+        <a href="/blueprints/catalog.html">Catalog</a>
+        <a href="/blueprints/patterns.html" aria-current="page" class="active">Patterns</a>
+        <a href="/blueprints/standards.html">Standards</a>
+        <a href="/blueprints/authoring.html">Authoring</a>
+      </nav>
+      <h3>Related</h3>
+      <nav aria-label="Related links">
+        <a href="/server/">Server Framework</a>
+        <a href="/agents/">Agents</a>
+        <a href="/templates/">Templates</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Pattern Specifications</h1>
+      <p class="lead">Deep-dive into the core blueprint patterns. Each specification includes the YAML declaration format, generated endpoints, security model, and operational behaviour. These are the contracts that implementations must fulfil.</p>
+
+      <p>Every pattern here is a <strong>complete, working specification</strong> — not a tutorial. Declare the YAML, run <code>weblisk generate</code>, and get a production-ready implementation that follows the spec exactly. The full list of all 38 patterns is in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>.</p>
+
+      <nav aria-label="Pattern navigation" style="margin:1.5rem 0;padding:1rem;background:var(--wl-bg-soft);border-radius:8px">
+        <strong>On this page:</strong>
+        <a href="#api-rest" style="margin-left:0.75rem">api-rest</a> ·
+        <a href="#auth-session">auth-session</a> ·
+        <a href="#auth-token">auth-token</a> ·
+        <a href="#api-ai">api-ai</a> ·
+        <a href="#realtime-chat">realtime-chat</a> ·
+        <a href="#webhook-inbound">webhook-inbound</a> ·
+        <a href="#webhook-outbound">webhook-outbound</a>
+      </nav>
+
+      <!-- ─── api-rest ──────────────────────────────────────── -->
+      <h2 id="api-rest">api-rest</h2>
+      <p>Define your data models once and generate spec-compliant CRUD endpoints automatically. Every generated endpoint follows Weblisk protocol conventions: JSON bodies, consistent error shapes, and deterministic URL patterns. Pagination, filtering, and sorting are built-in — not bolted on.</p>
+
+      <h3>Blueprint Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">patterns/api-rest.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><code>name: api-rest
+version: 1.0.0
+
+models:
+  Task:
+    fields:
+      id:        uuid
+      title:     string, required, max:255
+      done:      boolean, default:false
+      created:   timestamp, auto
+      updated:   timestamp, auto</code></pre>
+        </div>
+      </div>
+
+      <h3>Generated Endpoints (per model)</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>GET</td><td>/tasks</td><td>List with pagination, filtering, sorting</td></tr>
+          <tr><td>POST</td><td>/tasks</td><td>Create a new resource</td></tr>
+          <tr><td>GET</td><td>/tasks/:id</td><td>Read a single resource by ID</td></tr>
+          <tr><td>PUT</td><td>/tasks/:id</td><td>Update (full replace) a resource by ID</td></tr>
+          <tr><td>DELETE</td><td>/tasks/:id</td><td>Delete a resource by ID</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Built-in Query Features</h3>
+      <ul>
+        <li><strong>Pagination:</strong> Cursor-based via <code>limit</code> and <code>cursor</code> query parameters — no offset-based pagination (O(n) → O(1))</li>
+        <li><strong>Filtering:</strong> Field-level via query params (<code>?done=false&amp;owner_id=abc</code>)</li>
+        <li><strong>Sorting:</strong> Via <code>sort</code> param (<code>?sort=created:desc,title:asc</code>)</li>
+      </ul>
+      <p>One YAML declaration generates a type-safe, validated, paginated API with consistent error responses across every model. No ORM configuration, no route registration, no validation boilerplate.</p>
+
+      <hr>
+
+      <!-- ─── auth-session ──────────────────────────────────── -->
+      <h2 id="auth-session">auth-session</h2>
+      <p>Server-side session authentication for traditional web applications. Users authenticate with credentials, receive a secure HTTP-only cookie, and subsequent requests are authenticated via that cookie. CSRF protection is included by default for all state-changing operations.</p>
+
+      <h3>Blueprint Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">patterns/auth-session.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><code>name: auth-session
+version: 1.0.0
+
+config:
+  session_duration: 86400       # 24 hours
+  cookie_name: wl_session
+  csrf_header: X-CSRF-Token
+  max_sessions_per_user: 5
+  password_min_length: 8</code></pre>
+        </div>
+      </div>
+
+      <h3>Endpoints</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/auth/register</td><td>Create a new user account</td></tr>
+          <tr><td>POST</td><td>/auth/login</td><td>Authenticate and create session</td></tr>
+          <tr><td>POST</td><td>/auth/logout</td><td>Destroy current session</td></tr>
+          <tr><td>GET</td><td>/auth/me</td><td>Get current authenticated user</td></tr>
+        </tbody>
+      </table>
+
+      <h3>How It Works</h3>
+      <ol>
+        <li>User sends credentials to <code>POST /auth/login</code></li>
+        <li>Server creates a session record and sets a <code>Set-Cookie</code> header: <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Lax</code></li>
+        <li>Server returns a CSRF token in the response body</li>
+        <li>Client includes the CSRF token in the <code>X-CSRF-Token</code> header on all state-changing requests (POST, PUT, DELETE)</li>
+        <li>On logout, the server destroys the session and clears the cookie</li>
+      </ol>
+
+      <h3>Security</h3>
+      <ul>
+        <li>Passwords hashed with bcrypt (cost ≥ 12) or argon2id — never stored in plaintext</li>
+        <li>Session IDs are 256-bit crypto-random values</li>
+        <li>Failed login returns a generic message — never reveals whether an email exists</li>
+        <li>Constant-time comparison for session IDs and CSRF tokens</li>
+        <li>Login rate-limiting recommended (10 attempts/minute per IP)</li>
+        <li>Oldest sessions evicted when <code>max_sessions_per_user</code> is exceeded</li>
+      </ul>
+
+      <hr>
+
+      <!-- ─── auth-token ────────────────────────────────────── -->
+      <h2 id="auth-token">auth-token</h2>
+      <p>Stateless authentication using JWTs for short-lived access and opaque refresh tokens for session continuity. API keys are also supported for service-to-service communication. Permissions are scoped — each token declares exactly what it can access.</p>
+
+      <h3>Blueprint Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">patterns/auth-token.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><code>name: auth-token
+version: 1.0.0
+
+config:
+  access_token_duration: 900     # 15 minutes
+  refresh_token_duration: 604800 # 7 days
+  issuer: weblisk
+  scopes:
+    - read
+    - write
+    - admin</code></pre>
+        </div>
+      </div>
+
+      <h3>Endpoints</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/auth/register</td><td>Create a new user account</td></tr>
+          <tr><td>POST</td><td>/auth/token</td><td>Exchange credentials for access + refresh token pair</td></tr>
+          <tr><td>POST</td><td>/auth/refresh</td><td>Exchange refresh token for new access token</td></tr>
+          <tr><td>DELETE</td><td>/auth/token</td><td>Revoke a refresh token</td></tr>
+          <tr><td>POST</td><td>/auth/apikey</td><td>Create an API key with scoped permissions</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Authentication Flow</h3>
+      <ol>
+        <li>Client sends credentials to <code>POST /auth/token</code> with requested scopes</li>
+        <li>Server returns a signed JWT (15-min TTL) + opaque refresh token (7-day TTL)</li>
+        <li>Client sends <code>Authorization: Bearer &lt;jwt&gt;</code> on protected requests</li>
+        <li>When the JWT expires, client exchanges the refresh token at <code>POST /auth/refresh</code> for a new pair</li>
+        <li>Refresh token rotation: old token invalidated on every refresh (prevents replay attacks)</li>
+      </ol>
+
+      <h3>JWT Claims</h3>
+      <pre><code>{
+  "sub": "user-id",
+  "iss": "weblisk",
+  "iat": 1713264000,
+  "exp": 1713264900,
+  "scopes": ["read", "write"]
+}</code></pre>
+
+      <h3>Scope Enforcement</h3>
+      <p>Endpoints declare required scopes. The token's scopes must be a superset. Insufficient scopes return 403 Forbidden (not 401).</p>
+      <pre><code>GET  /tasks       → requires: [read]
+POST /tasks       → requires: [write]
+POST /auth/apikey → requires: [admin]</code></pre>
+
+      <h3>API Keys</h3>
+      <p>For service-to-service communication. Created via <code>POST /auth/apikey</code> (requires <code>admin</code> scope). Keys use the same <code>Authorization: Bearer</code> header as JWTs — the server distinguishes them by the <code>wl_key_</code> prefix. Full key returned only on creation.</p>
+
+      <h3>Security</h3>
+      <ul>
+        <li>Refresh tokens stored as SHA-256 hashes — raw token never persisted</li>
+        <li>API keys also stored as hashes with only a prefix shown on lookup</li>
+        <li>JWT signing: HS256 for single-server, ES256 for distributed systems</li>
+        <li>30-second clock skew tolerance on JWT expiration</li>
+        <li>Token endpoint rate-limited (10 requests/minute per IP)</li>
+      </ul>
+
+      <hr>
+
+      <!-- ─── api-ai ────────────────────────────────────────── -->
+      <h2 id="api-ai">api-ai</h2>
+      <p>The intelligence backbone of a Weblisk server. Abstracts provider-specific details (OpenAI, Anthropic, Ollama, Cloudflare Workers AI) behind a universal contract so agents, domains, and application code interact with LLMs through a single interface. Rather than each component implementing its own provider integration, the api-ai pattern provides a centralised gateway with rate limits, usage tracking, and provider routing.</p>
+
+      <h3>Blueprint Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">patterns/api-ai.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><code>name: api-ai
+version: 1.0.0
+
+providers:
+  ollama:
+    type: local
+    base_url: http://localhost:11434
+    models: [llama3, codellama]
+  openai:
+    type: remote
+    auth: bearer
+    env_key: WL_AI_OPENAI_KEY
+    models: [gpt-4o, gpt-4o-mini]
+  anthropic:
+    type: remote
+    auth: x-api-key
+    env_key: WL_AI_ANTHROPIC_KEY
+    models: [claude-sonnet-4-20250514, claude-haiku-4-20250414]
+
+defaults:
+  provider: ollama
+  model: llama3
+  temperature: 0.7
+  max_tokens: 4096</code></pre>
+        </div>
+      </div>
+
+      <h3>Endpoints</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/ai/chat</td><td>Multi-turn conversational inference with optional tool use</td></tr>
+          <tr><td>POST</td><td>/ai/complete</td><td>Single-shot text completion</td></tr>
+          <tr><td>POST</td><td>/ai/extract</td><td>Structured data extraction via JSON schema</td></tr>
+          <tr><td>POST</td><td>/ai/embed</td><td>Generate vector embeddings for text</td></tr>
+          <tr><td>GET</td><td>/ai/models</td><td>List available models and providers</td></tr>
+          <tr><td>GET</td><td>/ai/health</td><td>Provider connectivity and latency</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Key Capabilities</h3>
+      <ul>
+        <li><strong>Provider failover:</strong> If the primary provider returns a 5xx or times out, falls back to a secondary provider transparently</li>
+        <li><strong>Tool calling:</strong> <code>/ai/chat</code> supports tool definitions — the model can request function calls, and provider-specific formats are normalised automatically</li>
+        <li><strong>Streaming:</strong> <code>stream: true</code> returns Server-Sent Events with incremental tokens</li>
+        <li><strong>Schema validation:</strong> <code>/ai/extract</code> validates the returned JSON against the provided schema and retries once on validation failure</li>
+        <li><strong>Token tracking:</strong> Usage data is tracked per-agent via <code>trace_id</code> for cost attribution</li>
+        <li><strong>Multi-provider:</strong> Configure local (Ollama), remote (OpenAI, Anthropic), and platform (Cloudflare Workers AI) providers simultaneously</li>
+      </ul>
+
+      <hr>
+
+      <!-- ─── realtime-chat ─────────────────────────────────── -->
+      <h2 id="realtime-chat">realtime-chat</h2>
+      <p>Real-time messaging built on WebSockets with named channels, presence awareness, and persistent message history. HTTP endpoints handle channel management and history retrieval; the WebSocket connection handles live messaging.</p>
+
+      <h3>Blueprint Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">patterns/realtime-chat.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><code>name: realtime-chat
+version: 1.0.0
+
+channels:
+  general:
+    description: Default public channel
+    max_members: 1000
+    history_limit: 500
+    auth: none
+  team:
+    description: Authenticated team channel
+    max_members: 100
+    history_limit: 1000
+    auth: token</code></pre>
+        </div>
+      </div>
+
+      <h3>Endpoints</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>GET</td><td>/channels</td><td>List available channels</td></tr>
+          <tr><td>GET</td><td>/channels/:name</td><td>Get channel details and presence</td></tr>
+          <tr><td>GET</td><td>/channels/:name/history</td><td>Retrieve paginated message history</td></tr>
+          <tr><td>POST</td><td>/channels/:name/send</td><td>Send a message (HTTP fallback)</td></tr>
+          <tr><td>WS</td><td>/ws?channel=general</td><td>Real-time WebSocket connection</td></tr>
+        </tbody>
+      </table>
+
+      <h3>WebSocket Frame Types</h3>
+      <p><strong>Client → Server:</strong> <code>message</code> (send to channel), <code>typing</code> (typing indicator), <code>ping</code> (keep-alive).</p>
+      <p><strong>Server → Client:</strong> <code>connected</code> (initial payload with members + history), <code>message</code> (new message), <code>typing</code> (another user typing), <code>presence</code> (user joined/left), <code>pong</code>, <code>error</code>.</p>
+      <p>Channel auth modes: <code>none</code> (public) or <code>token</code> (requires valid auth token from auth-session or auth-token blueprint).</p>
+
+      <hr>
+
+      <!-- ─── webhook-inbound ───────────────────────────────── -->
+      <h2 id="webhook-inbound">webhook-inbound</h2>
+      <p>Receive webhook payloads from external services (Stripe, GitHub, Twilio, etc.). Each source is configured with its own validation scheme (HMAC signatures, IP allowlists) and routed to a handler.</p>
+
+      <h3>Blueprint Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">patterns/webhook-inbound.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><code>name: webhook-inbound
+version: 1.0.0
+
+sources:
+  stripe:
+    path: /webhooks/stripe
+    signature:
+      header: Stripe-Signature
+      algorithm: hmac-sha256
+      secret_env: STRIPE_WEBHOOK_SECRET
+    events:
+      - payment_intent.succeeded
+      - invoice.paid
+  github:
+    path: /webhooks/github
+    signature:
+      header: X-Hub-Signature-256
+      algorithm: hmac-sha256
+      secret_env: GITHUB_WEBHOOK_SECRET
+    events:
+      - push
+      - pull_request</code></pre>
+        </div>
+      </div>
+
+      <h3>Endpoints</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/webhooks/:source</td><td>Receive webhook from named source</td></tr>
+          <tr><td>GET</td><td>/webhooks/log</td><td>View recent delivery log (metadata only)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Validation Flow</h3>
+      <ol>
+        <li>Read raw request body (preserve for signature verification)</li>
+        <li>Look up source configuration — 404 for unknown sources</li>
+        <li>Validate HMAC signature with constant-time comparison — 401 if invalid</li>
+        <li>Check event type against allowed list — filtered events return 200 (prevents retry loops)</li>
+        <li>Route to handler asynchronously</li>
+      </ol>
+
+      <hr>
+
+      <!-- ─── webhook-outbound ──────────────────────────────── -->
+      <h2 id="webhook-outbound">webhook-outbound</h2>
+      <p>Send webhook notifications to registered subscriber endpoints. Events are signed with HMAC for integrity, delivered with exponential backoff retries, and tracked for observability.</p>
+
+      <h3>Blueprint Format</h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">patterns/webhook-outbound.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><code>name: webhook-outbound
+version: 1.0.0
+
+config:
+  signing_algorithm: hmac-sha256
+  max_retries: 5
+  retry_backoff: exponential   # 1s, 2s, 4s, 8s, 16s
+  timeout: 10
+  event_types:
+    - user.created
+    - order.placed
+    - order.shipped</code></pre>
+        </div>
+      </div>
+
+      <h3>Endpoints</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/webhooks/subscribers</td><td>Register a new subscriber</td></tr>
+          <tr><td>GET</td><td>/webhooks/subscribers</td><td>List registered subscribers</td></tr>
+          <tr><td>DELETE</td><td>/webhooks/subscribers/:id</td><td>Remove a subscriber</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Delivery Flow</h3>
+      <ol>
+        <li>Event occurs — find all active subscribers for that event type</li>
+        <li>Build payload, compute HMAC-SHA256 with subscriber's secret</li>
+        <li>POST to subscriber URL with <code>X-Webhook-Signature</code>, <code>X-Webhook-ID</code>, <code>X-Webhook-Timestamp</code> headers</li>
+        <li>2xx response → delivered. Non-2xx → retry with exponential backoff (up to 5 retries)</li>
+        <li>All delivery attempts logged with status, response code, and duration</li>
+      </ol>
+
+      <div class="tip">These are the most commonly used patterns. The full list of all 38 patterns is in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>. Want to create your own? See the <a href="/blueprints/authoring.html">Authoring Guide</a>.</div>
+
+      <div class="docs-nav-footer">
+        <a href="/blueprints/catalog.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Catalog</a>
+        <a href="/blueprints/standards.html">Standards <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">The zero-dependency web platform — from browser to federated agent intelligence.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/docs/quick-start.html">Get Started</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/features.html">Features</a>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/hub/">Hub</a>
+            <a href="/server/">Server</a>
+            <a href="/blueprints/">Blueprints</a>
+            <a href="/agents/">Agents</a>
+            <a href="/pro.html">Pro</a>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy;
+            2026 
+            Made with <span class="heart" aria-label="love">&hearts;</span> by <a
+              href="https://avaropoint.com">Avaropoint</a>
+          </span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true"
+                class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor" aria-hidden="true">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

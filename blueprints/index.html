@@ -124,6 +124,7 @@
       <nav aria-label="Blueprint overview links">
         <a href="/blueprints/" aria-current="page" class="active">Introduction</a>
         <a href="/blueprints/catalog.html">Catalog</a>
+        <a href="/blueprints/patterns.html">Patterns</a>
         <a href="/blueprints/standards.html">Standards</a>
         <a href="/blueprints/authoring.html">Authoring</a>
       </nav>
@@ -137,45 +138,71 @@
 
     <main class="docs-content" id="main-content">
       <h1>Blueprints</h1>
-      <p class="lead">The specification layer of the Weblisk platform. Blueprints define <em>what</em> the system does — architecture, protocol, patterns, agents, platforms, and project standards — without prescribing <em>how</em> any particular implementation achieves it.</p>
+      <p class="lead"><strong>Describe once, generate everything.</strong> Blueprints are the specification layer that turns declarative YAML into production-ready APIs, authentication, real-time messaging, AI integration, webhooks, workflows, and full-stack applications — in any language, on any platform, with zero dependencies.</p>
 
-      <h2>What Is a Blueprint?</h2>
-      <p>A blueprint is a structured, implementation-agnostic specification. It describes contracts, behaviors, dependencies, and verification criteria in a format that can be consumed by humans, LLMs, and automated tooling alike.</p>
-      <p>Nothing operates in the Weblisk framework without a schema-compliant blueprint. If a schema doesn't define it, the framework doesn't allow it.</p>
+      <h2>Why Blueprints?</h2>
+      <p>Every tool in the market solves a fragment of the problem. Automation platforms wire together existing APIs. AI code generators produce throwaway prototypes. UI builders generate frontend components without backend contracts. None of them give you a <em>complete, persistent, specification-driven system</em> that you own entirely.</p>
+
+      <p>Blueprints are the missing layer: <strong>the specification that sits between what you want and what gets built.</strong> They encode security models, API contracts, data schemas, and operational behaviour as structured documents — consumed by humans, LLMs, and CI/CD pipelines alike. Nothing operates in the Weblisk framework without a schema-compliant blueprint. If a schema doesn't define it, the framework doesn't allow it.</p>
 
       <div class="feature-grid" style="margin-top:2rem">
         <div class="feature-card">
           <div class="feature-icon purple">
             <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
           </div>
-          <h3>Implementation-Agnostic</h3>
-          <p>Blueprints describe what agents and orchestrators must do — not how. The same specs generate Go, Node.js, Cloudflare Workers, or Rust implementations.</p>
+          <h3>Full-Stack Specification</h3>
+          <p>Not just UI. Not just automation. Blueprints cover APIs, auth, data, real-time, AI, webhooks, governance, monitoring, and deployment — the complete application surface.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon cyan">
             <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
           </div>
-          <h3>Composable via Extends</h3>
-          <p>Agents and domains inherit cross-cutting patterns (scope, policy, safety, approval, privacy) through <code>extends</code> — no copy-paste, no drift.</p>
+          <h3>Generate Any Language</h3>
+          <p>One spec → Go, Node.js, Rust, or Cloudflare Workers. Same blueprint, different platform bindings. Switch languages without rewriting specifications.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon green">
             <i aria-hidden="true" class="wl-icon wl-i-check wl-icon-24"></i>
           </div>
-          <h3>Schema-Governed</h3>
-          <p>Every blueprint type has a schema with required sections, field constraints, and compliance levels — from Certified down to Rejected.</p>
+          <h3>AI-Native Code Generation</h3>
+          <p>Blueprints are designed to be consumed by LLMs. The CLI dispatches specs to your configured AI provider and validates the output — deterministic, reproducible, verifiable.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon orange">
             <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
           </div>
-          <h3>Multi-Source Resolution</h3>
-          <p>The CLI resolves blueprints from local project, custom repos, and core — giving organizations full control over their specifications.</p>
+          <h3>You Own Everything</h3>
+          <p>No vendor lock-in. No SaaS dependency. Generated code is yours — plain files in your repo, deployed on your infrastructure, with zero runtime dependencies on Weblisk.</p>
         </div>
       </div>
 
-      <h2>Blueprint Hierarchy</h2>
-      <p>The blueprint system is organized into six categories, each governing a different layer of the platform:</p>
+      <h2>The Paradigm Shift</h2>
+      <p>Traditional development asks you to write the same patterns over and over: set up auth, wire CRUD endpoints, configure webhooks, add rate limiting, handle retries, implement caching. Every project starts from scratch or bolts together leaky abstractions.</p>
+      <p>Blueprint-driven development inverts this: <strong>declare the contract, generate the implementation.</strong> The specification is the source of truth — code is a build artifact that can be regenerated, upgraded, or ported to a new platform without losing the design intent.</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
+              class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># Generate a complete project from blueprints</span>
+<span class="syn-s">weblisk generate --platform go</span>
+
+<span class="syn-c"># Create a new domain with AI, auth, and real-time</span>
+<span class="syn-s">weblisk domain create chat --patterns api-ai,auth-token,realtime-chat</span>
+
+<span class="syn-c"># Validate all blueprints against schemas</span>
+<span class="syn-s">weblisk validate</span>
+
+<span class="syn-c"># Update to latest specifications from all sources</span>
+<span class="syn-s">weblisk blueprints update</span></pre>
+        </div>
+      </div>
+
+      <h2>What Blueprints Cover</h2>
+      <p>82 specifications organized into six categories — every layer of a production system:</p>
 
       <table>
         <thead>
@@ -219,24 +246,23 @@
         </tbody>
       </table>
 
-      <h2>How Blueprints Work</h2>
-
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">Terminal</span>
-        </div>
-        <div class="code-body">
-          <pre><span class="syn-c"># Generate a domain controller from blueprints</span>
-<span class="syn-s">weblisk domain create seo --platform go</span>
-
-<span class="syn-c"># Validate blueprints against schemas</span>
-<span class="syn-s">weblisk validate</span></pre>
-        </div>
-      </div>
-
-      <p>The CLI reads blueprint specs, combines them with platform bindings, and dispatches to the configured LLM for code generation. The blueprints are the source of truth — generated code is a build artifact. See the <a href="/docs/cli.html">CLI Reference</a> for all blueprint-related commands.</p>
+      <h2>How It Compares</h2>
+      <p>Weblisk blueprints occupy a unique position — they are the <em>specification platform</em> that generates what other tools only partially address:</p>
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>Automation Tools</th><th>AI Code Generators</th><th>UI Builders</th><th>Weblisk Blueprints</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>API design &amp; generation</td><td>—</td><td>Partial</td><td>—</td><td><strong>Full spec → code</strong></td></tr>
+          <tr><td>Authentication &amp; security</td><td>—</td><td>Ad-hoc</td><td>—</td><td><strong>Formal model</strong></td></tr>
+          <tr><td>Real-time &amp; messaging</td><td>Limited</td><td>Ad-hoc</td><td>—</td><td><strong>Full spec → code</strong></td></tr>
+          <tr><td>AI integration</td><td>Plugin</td><td>Itself</td><td>—</td><td><strong>Multi-provider gateway</strong></td></tr>
+          <tr><td>Governance &amp; compliance</td><td>—</td><td>—</td><td>—</td><td><strong>Built-in</strong></td></tr>
+          <tr><td>Multi-language output</td><td>—</td><td>One at a time</td><td>—</td><td><strong>Same spec, any platform</strong></td></tr>
+          <tr><td>Persistent specification</td><td>Workflow JSON</td><td>None (ephemeral)</td><td>None</td><td><strong>Versioned YAML/Markdown</strong></td></tr>
+          <tr><td>Self-hosted / no vendor</td><td>Some</td><td>—</td><td>—</td><td><strong>Always</strong></td></tr>
+        </tbody>
+      </table>
 
       <h2>Architecture at a Glance</h2>
 
@@ -279,7 +305,7 @@
         <li><strong>AI models</strong> — The only layer with external dependencies. Local models (Ollama) are the default.</li>
       </ul>
 
-      <div class="tip">Browse the full list of 38 patterns, architecture specs, and infrastructure agents in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>. Learn how to write your own in the <a href="/blueprints/authoring.html">Authoring Guide</a>, or explore <a href="/blueprints/standards.html">Project Standards</a> for blueprint-driven development.</div>
+      <div class="tip">Browse the full specification library in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>, dive into <a href="/blueprints/patterns.html">Pattern Specifications</a> for detailed YAML formats and generated endpoints, or explore <a href="/blueprints/standards.html">Project Standards</a> for blueprint-driven development.</div>
 
       <div class="docs-nav-footer">
         <span></span>

@@ -138,7 +138,7 @@
 
     <main class="docs-content" id="main-content">
       <h1>Agent Catalog</h1>
-      <p class="lead">Official agents for common server-side patterns. Every agent implements the same 5 protocol endpoints (describe, execute, health, message, services) and communicates via Ed25519-signed messages. The developer implements only the custom logic — the framework handles registration, messaging, and security.</p>
+      <p class="lead">The execution layer — agents bring <a href="/blueprints/catalog.html">blueprint specifications</a> to life as autonomous services. Every agent implements the same 5 protocol endpoints (describe, execute, health, message, services) and communicates via Ed25519-signed messages. The developer implements only the custom logic — the framework handles registration, messaging, and security.</p>
 
       <h2>Agent Architecture</h2>
       <p>Weblisk distinguishes three kinds of agents. Each kind implements the same protocol but serves a different role in the system:</p>
@@ -187,28 +187,18 @@
       <hr>
 
       <h2>Domain Controllers</h2>
-      <p>A domain controller is the business intelligence layer. It sits between the orchestrator and work agents — receiving business-level tasks, decomposing them into multi-agent workflows, dispatching phases, aggregating results, and enforcing quality gates. Nothing enters or leaves a business function without the domain controller's knowledge.</p>
+      <p>A domain controller is the business intelligence layer — it sits between the orchestrator and work agents. It receives business-level tasks, selects the matching workflow, dispatches phases to target agents, aggregates results, and enforces quality gates. Nothing enters or leaves a business function without the domain controller's knowledge.</p>
 
-      <h3>How Domains Work</h3>
+      <h3>Execution Flow</h3>
       <ol>
         <li>Domain registers with the orchestrator, declaring <code>required_agents</code> and <code>workflows</code></li>
-        <li>Orchestrator routes a business task to the domain (e.g. "audit this site for SEO")</li>
-        <li>Domain selects the matching workflow and resolves the phase execution order</li>
-        <li>Phases with no dependencies run in parallel; dependent phases wait for their inputs</li>
-        <li>Domain dispatches each phase to the target agent via <code>POST /v1/message</code></li>
-        <li>Domain aggregates all phase results into a single <code>TaskResult</code></li>
+        <li>Orchestrator routes a business task to the domain</li>
+        <li>Domain resolves the workflow DAG — phases at the same dependency level execute concurrently</li>
+        <li>Domain dispatches each phase to the target agent and aggregates all results into a single <code>TaskResult</code></li>
       </ol>
+      <p>Workflow DAG specifications (phase dependencies, reference expressions, approval gates) are defined in the <a href="/blueprints/catalog.html#pattern-details">workflow blueprint pattern</a>.</p>
 
-      <h4>SEO Domain — Example Workflow</h4>
-      <pre><code>workflow: seo-audit
-phases:
-  - name: scan          → seo-analyzer.scan_html
-  - name: analyze       → seo-analyzer.analyze_metadata   [depends: scan]
-  - name: accessibility → a11y-checker.check_images        [depends: scan]
-  - name: synthesize    → self.aggregate_results           [depends: analyze, accessibility]</code></pre>
-      <p>Phase inputs use <strong>reference expressions</strong> (<code>$task.payload.*</code>, <code>$phases.*.output</code>) to bind data between phases. Phases at the same dependency level execute concurrently. <code>agent: "self"</code> means the domain controller runs that phase internally. See the <a href="/blueprints/catalog.html">workflow pattern</a> for the full DAG specification.</p>
-
-      <h4>Current Domains</h4>
+      <h3>Current Domains</h3>
       <table>
         <thead><tr><th>Domain</th><th>Port</th><th>Required Agents</th><th>Workflows</th></tr></thead>
         <tbody>
@@ -220,7 +210,7 @@ phases:
 
       <hr>
 
-      <h2>Infrastructure Agents <span class="pro-pill">Free</span></h2>
+      <h2 id="infrastructure">Infrastructure Agents <span class="pro-pill">Free</span></h2>
       <p>System-level services available to all domains and authenticated agents. Ship with every Weblisk server.</p>
 
       <!-- ─── sync ──────────────────────────────────────────── -->

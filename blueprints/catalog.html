@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blueprint Catalog — Weblisk</title>
-  <meta name="description" content="Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings. The full specification library for the zero-dependency web platform.">
+  <meta name="description" content="Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, and 4 platform bindings. The full specification library for the zero-dependency web platform.">
   <link rel="canonical" href="https://weblisk.dev/blueprints/catalog.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Blueprint Catalog — Weblisk">
-  <meta property="og:description" content="Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings.">
+  <meta property="og:description" content="Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, and 4 platform bindings.">
   <meta property="og:url" content="https://weblisk.dev/blueprints/catalog.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blueprint Catalog — Weblisk">
   <meta name="twitter:site" content="@weblisk">
-  <meta name="twitter:description" content="Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings.">
+  <meta name="twitter:description" content="Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, and 4 platform bindings.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Avaropoint">
@@ -40,7 +40,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": "Blueprint Catalog — Weblisk",
-    "description": "Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, 11 infrastructure agents, and 4 platform bindings.",
+    "description": "Complete Weblisk blueprint catalog — 38 patterns, 16 architecture components, and 4 platform bindings.",
     "url": "https://weblisk.dev/blueprints/catalog.html",
     "datePublished": "2026-01-15",
     "dateModified": "2026-04-29",
@@ -139,7 +139,7 @@
 
     <main class="docs-content" id="main-content">
       <h1>Blueprint Catalog</h1>
-      <p class="lead">The complete specification library — 38 cross-cutting patterns, 16 architecture components, 11 infrastructure agents, 4 platform bindings, and project standards. Every blueprint is open source and ships with every Weblisk hub.</p>
+      <p class="lead">The complete specification library — 38 cross-cutting patterns, 16 architecture components, 4 platform bindings, and project standards. Every blueprint is open source and ships with every Weblisk hub. Agents that implement these specifications are in the <a href="/agents/catalog.html">Agent Catalog</a>.</p>
 
       <h2>Patterns — API &amp; Communication</h2>
       <p>Declarative contracts for API surfaces, messaging, and inter-agent communication.</p>
@@ -251,23 +251,8 @@
       <hr>
 
       <h2>Infrastructure Agents</h2>
-      <p>System-level services that power every hub — workflow execution, task dispatch, monitoring, and operations.</p>
-      <table>
-        <thead><tr><th>Agent</th><th>Purpose</th></tr></thead>
-        <tbody>
-          <tr><td><strong>workflow</strong></td><td>Workflow execution engine — DAG resolution, phase coordination</td></tr>
-          <tr><td><strong>task</strong></td><td>Task dispatch and tracking — priority queue, concurrency control</td></tr>
-          <tr><td><strong>lifecycle</strong></td><td>Continuous optimization — strategies, observations, approvals</td></tr>
-          <tr><td><strong>alerting</strong></td><td>Notification routing and delivery</td></tr>
-          <tr><td><strong>incident-response</strong></td><td>Automated incident detection, runbooks, remediation</td></tr>
-          <tr><td><strong>health-monitor</strong></td><td>Internal hub health — agent liveness, storage, gateway</td></tr>
-          <tr><td><strong>hub</strong></td><td>Registry — indexing, search, metrics, verification, alerting</td></tr>
-          <tr><td><strong>sync</strong></td><td>Background data sync (client ↔ server)</td></tr>
-          <tr><td><strong>cron</strong></td><td>Scheduled task execution</td></tr>
-          <tr><td><strong>webhook</strong></td><td>Webhook processing (inbound + outbound)</td></tr>
-          <tr><td><strong>email-send</strong></td><td>Transactional email sending</td></tr>
-        </tbody>
-      </table>
+      <p>11 system-level agents power every hub — workflow execution, task dispatch, monitoring, and operations. Each agent implements the blueprints above as runtime services.</p>
+      <p><a href="/agents/catalog.html#infrastructure"><strong>View the full Agent Catalog →</strong></a></p>
 
       <hr>
 

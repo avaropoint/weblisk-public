@@ -26,7 +26,7 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Avaropoint">
   <meta property="article:published_time" content="2026-04-23T00:00:00Z">
-  <meta property="article:modified_time" content="2026-04-23T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <meta name="theme-color" content="#1a1f36">
@@ -199,7 +199,7 @@
           <tr>
             <td><strong>Patterns</strong></td>
             <td>Cross-cutting contracts — API, auth, governance, infrastructure, workflows, operations</td>
-            <td>37</td>
+            <td>38</td>
           </tr>
           <tr>
             <td><strong>Agents</strong></td>
@@ -231,18 +231,12 @@
           <pre><span class="syn-c"># Generate a domain controller from blueprints</span>
 <span class="syn-s">weblisk domain create seo --platform go</span>
 
-<span class="syn-c"># Generate a work agent</span>
-<span class="syn-s">weblisk agent create seo-analyzer --platform go</span>
-
-<span class="syn-c"># Generate an application gateway</span>
-<span class="syn-s">weblisk gateway create --platform go</span>
-
 <span class="syn-c"># Validate blueprints against schemas</span>
 <span class="syn-s">weblisk validate</span></pre>
         </div>
       </div>
 
-      <p>The CLI reads blueprint specs, combines them with platform bindings, and dispatches to the configured LLM for code generation. The blueprints are the source of truth — generated code is a build artifact.</p>
+      <p>The CLI reads blueprint specs, combines them with platform bindings, and dispatches to the configured LLM for code generation. The blueprints are the source of truth — generated code is a build artifact. See the <a href="/docs/cli.html">CLI Reference</a> for all blueprint-related commands.</p>
 
       <h2>Architecture at a Glance</h2>
 
@@ -267,7 +261,7 @@
 │   ├── Workflow, Task, Lifecycle, Alerting
 │   ├── Incident Response, Health Monitor, Hub
 │   └── Sync, Cron, Webhook, Email
-├── Cross-Cutting Patterns (37 — inherited via extends)
+├── Cross-Cutting Patterns (38 — inherited via extends)
 │   ├── Scope, Policy, Safety, Approval, Privacy
 │   ├── Contract, Governance, Security, Observability
 │   └── Workflow, Notification, Storage, Caching...
@@ -285,7 +279,7 @@
         <li><strong>AI models</strong> — The only layer with external dependencies. Local models (Ollama) are the default.</li>
       </ul>
 
-      <div class="tip">Browse the full list of 37+ patterns, architecture specs, and infrastructure agents in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>. Learn how to write your own in the <a href="/blueprints/authoring.html">Authoring Guide</a>, or explore <a href="/blueprints/standards.html">Project Standards</a> for blueprint-driven development.</div>
+      <div class="tip">Browse the full list of 38 patterns, architecture specs, and infrastructure agents in the <a href="/blueprints/catalog.html">Blueprint Catalog</a>. Learn how to write your own in the <a href="/blueprints/authoring.html">Authoring Guide</a>, or explore <a href="/blueprints/standards.html">Project Standards</a> for blueprint-driven development.</div>
 
       <div class="docs-nav-footer">
         <span></span>

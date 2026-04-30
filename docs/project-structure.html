@@ -36,7 +36,7 @@
     "description": "Understand the Weblisk project layout: HTML pages at the project root, islands for interactivity, lib for framework modules, and the Go CLI for builds.",
     "url": "https://weblisk.dev/docs/project-structure.html",
     "datePublished": "2026-01-15",
-    "dateModified": "2026-04-20",
+    "dateModified": "2026-04-29",
     "author": { "@id": "https://avaropoint.com/#org" },
     "publisher": { "@id": "https://avaropoint.com/#org" },
     "isPartOf": { "@id": "https://weblisk.dev/#website" }
@@ -207,8 +207,6 @@ my-app/
 │   └── styles.css         ← App styles
 ├── images/                ← Image assets (SVGs, favicons)
 ├── sw.js                  ← Service Worker
-├── weblisk.json           ← Project config
-├── lib/weblisk/           ← Framework modules (zero deps)
 └── .env                   ← Environment config
 </pre>
         </div>
@@ -303,8 +301,6 @@ my-app/
       </div>
       <p>The <code>data-hydrate</code> attribute controls when the island loads: <code>load</code>, <code>idle</code>,
         <code>visible</code>, <code>media</code>, <code>event</code>, or <code>never</code>.</p>
-      <h2>weblisk.json</h2>
-      <p>Project configuration file created by <code>weblisk new</code>. Identifies the directory as a Weblisk project.</p>
       <h2>.env</h2>
       <p>Environment configuration (loaded automatically by the CLI):</p>
       <div class="code-window">

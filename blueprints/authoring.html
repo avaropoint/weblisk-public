@@ -43,7 +43,7 @@
     "description": "Learn how to create custom Weblisk blueprints — define models, endpoints, hooks, and validation rules.",
     "url": "https://weblisk.dev/blueprints/authoring.html",
     "datePublished": "2026-01-15",
-    "dateModified": "2026-04-20",
+    "dateModified": "2026-04-29",
     "headline": "Authoring Blueprints — Weblisk",
     "author": { "@id": "https://avaropoint.com/#org" },
     "publisher": { "@id": "https://avaropoint.com/#org" },
@@ -330,17 +330,9 @@
       </div>
 
       <h2>Blueprint Sources</h2>
-      <p>Custom blueprints are resolved alongside core ones. Place them in your project or configure <code>WL_BLUEPRINT_SOURCES</code> for team-wide distribution:</p>
-      <pre><code># Project-local blueprints (highest priority)
-./patterns/my-feature.md
+      <p>Custom blueprints are resolved alongside core ones — local project patterns take highest priority, followed by custom repos configured via <code>WL_BLUEPRINT_SOURCES</code>, then core. See <a href="/blueprints/catalog.html#resolution">Blueprint Resolution</a> in the catalog for the full priority chain and distribution models.</p>
 
-# Team/org blueprints via environment variable
-export WL_BLUEPRINT_SOURCES="my-org/my-blueprints,my-org/vertical-blueprints"
-
-# Core blueprints (always available, lowest priority)
-avaropoint/weblisk-blueprints</code></pre>
-
-      <div class="tip">All 37 core patterns are open source at <a href="https://github.com/avaropoint/weblisk-blueprints" rel="noopener noreferrer">github.com/avaropoint/weblisk-blueprints</a>. Use them as reference when authoring your own.</div>
+      <div class="tip">All 38 core patterns are open source at <a href="https://github.com/avaropoint/weblisk-blueprints" rel="noopener noreferrer">github.com/avaropoint/weblisk-blueprints</a>. Use them as reference when authoring your own.</div>
 
       <div class="docs-nav-footer">
         <a href="/blueprints/catalog.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Catalog</a>

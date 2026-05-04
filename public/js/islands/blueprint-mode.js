@@ -128,14 +128,9 @@ document.addEventListener('keydown', (e) => {
 
 async function fetchBlueprint(path) {
   const pageBase = new URL('.', document.baseURI).href;
-  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-
-  const apiRes = isLocal ? null : await fetch(`${pageBase}api/blueprint/${path}`).catch(() => null);
-  if (apiRes && apiRes.ok) return apiRes.text();
-
-  const fileRes = await fetch(`${pageBase}blueprints/${path}`);
-  if (!fileRes.ok) throw new Error(`${fileRes.status} ${fileRes.statusText}`);
-  return fileRes.text();
+  const res = await fetch(`${pageBase}api/blueprint/${path}`);
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return res.text();
 }
 
 /* ── YAML Syntax Highlighter ──────────────────────────── */

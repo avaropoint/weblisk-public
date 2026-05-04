@@ -83,17 +83,9 @@ export default function blueprintViewer(el) {
     try {
       codeEl.textContent = 'Loading…';
       const pageBase = new URL('.', document.baseURI).href;
-      // Always try API first (works with both wrangler dev and production)
-      const apiRes = await fetch(`${pageBase}api/blueprint/${blueprintPath}`).catch(() => null);
-      let text;
-      if (apiRes && apiRes.ok) {
-        text = await apiRes.text();
-      } else {
-        // Fallback: direct file fetch (weblisk dev serves filesystem)
-        const fileRes = await fetch(`${pageBase}blueprints/${blueprintPath}`);
-        if (!fileRes.ok) throw new Error(`${fileRes.status} ${fileRes.statusText}`);
-        text = await fileRes.text();
-      }
+      const res = await fetch(`${pageBase}api/blueprint/${blueprintPath}`);
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+      const text = await res.text();
       codeEl.innerHTML = highlightYaml(text);
       loaded = true;
     } catch (err) {

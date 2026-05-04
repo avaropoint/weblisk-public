@@ -78,7 +78,7 @@ function securityHeaders(headers, isHTML) {
 
 // ─── Blueprint path validation ───
 
-const BLUEPRINT_PREFIXES = ["pages/", "components/", "styles/"];
+const BLUEPRINT_PREFIXES = ["pages/", "components/"];
 
 function isValidBlueprintPath(path) {
   if (!BLUEPRINT_PREFIXES.some((p) => path.startsWith(p))) return false;

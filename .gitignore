@@ -6,3 +6,4 @@ node_modules/
 .weblisk/secrets/
 .weblisk/keys/
 .weblisk/token
+.wrangler/

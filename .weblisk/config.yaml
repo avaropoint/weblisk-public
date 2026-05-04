@@ -1,0 +1,59 @@
+# Weblisk Hub Configuration — weblisk.dev
+# See: https://github.com/avaropoint/weblisk-blueprints/blob/main/schemas/config.md
+#
+# Phase 1: Static site + Blueprint API (current)
+# Phase 2: Marketplace, live examples, agent feedback loops
+#
+# Platform: Cloudflare Workers + R2 + Durable Objects + D1
+
+hub:
+  name: weblisk-public
+  version: 1.0.0
+
+orchestrator:
+  port: 9800
+  storage: durable-objects      # Cloudflare Durable Objects for agent registry
+  audit: true
+
+gateway:
+  port: 8080
+  tls: false                    # Cloudflare edge handles TLS
+  static_dir: public
+  auth: none                    # Phase 1: public site, no auth
+  rate_limit: 100/min
+  cors:
+    origins: [ "https://weblisk.dev", "http://localhost:*" ]
+    methods: [ GET, POST ]
+    headers: [ Content-Type, X-Request-Id ]
+  islands:
+    routing: domain
+  blueprint_api:
+    enabled: true
+    prefix: /api/blueprint
+    sources: [ blueprints/ ]
+
+domains:
+  - name: website
+    port: 9700
+
+# Agents — modular capabilities routed by the gateway.
+# Each agent handles a specific domain; add more as features grow.
+agents:
+  - name: examples
+    type: work
+    route: /api/examples
+    module: workers/agents/examples.js
+    requires_ai: true       # Degrades gracefully when WL_AI_KEY is not set
+    description: Live code generation from blueprints
+
+  # Future agents:
+  # - name: marketplace
+  #   type: work
+  #   route: /api/marketplace
+  #   description: Browse and install templates and blueprints
+  #
+  # - name: generation
+  #   type: work
+  #   route: /api/generate
+  #   requires_ai: true
+  #   description: Blueprint-to-code generation feedback loop

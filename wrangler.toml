@@ -14,3 +14,11 @@ routes = [
 binding = "SITE"
 bucket_name = "weblisk-public"
 preview_bucket_name = "weblisk-public-preview"
+
+[vars]
+WL_VERSION = "1.0.0"
+WL_AI_MODEL = "claude-sonnet-4-20250514"
+WL_AI_BASE_URL = "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37ff60425/weblisk-ai/anthropic"
+
+# WL_AI_KEY is a secret — set via: npx wrangler secret put WL_AI_KEY
+# Until set, the examples agent returns placeholder responses.

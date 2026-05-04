@@ -1,6 +1,8 @@
-// Weblisk static-site Worker — secure HTTP server backed by R2 + Blueprint API.
-// Serves the blueprint-driven website with GET /api/blueprint/:path
-// to expose YAML sources for the X-Ray and Blueprint Viewer islands.
+// Weblisk Gateway Worker — edge security boundary for weblisk.dev.
+// Static site via R2, Blueprint API, and agent routing.
+// See: architecture/gateway.md for the full specification.
+
+import { handle as handleExamples } from "./agents/examples.js";
 
 const DEPLOY_VERSION = Date.now().toString(36);
 
@@ -75,14 +77,35 @@ function isValidBlueprintPath(path) {
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // ─── Path security (non-bypassable, runs before everything) ───
+    if (/\/\.[a-z]/i.test(url.pathname)) return notFound(env);
+    if (url.pathname.includes("..")) {
+      return new Response("Bad Request", {
+        status: 400,
+        headers: { "content-type": "text/plain" },
+      });
+    }
+
+    // ─── Agent routing (accepts GET, HEAD, POST) ───
+    if (url.pathname.startsWith("/api/examples")) {
+      if (!["GET", "HEAD", "POST"].includes(request.method)) {
+        return new Response("Method Not Allowed", {
+          status: 405,
+          headers: { allow: "GET, HEAD, POST", "content-type": "text/plain" },
+        });
+      }
+      return routeToAgent(handleExamples, request, env, "/api/examples");
+    }
+
+    // ─── Static routes: GET and HEAD only ───
     if (request.method !== "GET" && request.method !== "HEAD") {
       return new Response("Method Not Allowed", {
         status: 405,
         headers: { allow: "GET, HEAD", "content-type": "text/plain" },
       });
     }
-
-    const url = new URL(request.url);
 
     // ─── Blueprint API ───
     // GET /api/blueprint/pages/home.yaml → returns YAML source
@@ -181,6 +204,15 @@ const VERSION_RE = /((?:href|src|data-island)\s*=\s*["'])(\/[^"']*\.(?:css|js))(
 
 function injectVersion(html) {
   return html.replace(VERSION_RE, `$1$2?v=${DEPLOY_VERSION}`);
+}
+
+async function routeToAgent(handler, request, env, prefix) {
+  const path = new URL(request.url).pathname.slice(prefix.length) || "/";
+  const response = await handler(request, env, path);
+  // Gateway applies security headers to all agent responses
+  const headers = new Headers(response.headers);
+  securityHeaders(headers, false);
+  return new Response(response.body, { status: response.status, headers });
 }
 
 async function notFound(env) {

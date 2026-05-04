@@ -3,7 +3,7 @@
 # The generated HTML at /public/index.html MUST match this specification.
 #
 # Related blueprints:
-#   Design tokens         → ../../.weblisk/theme.yaml
+#   Design tokens         → ../theme.yaml
 #   Components            → ../components/{nav,footer,blueprint-viewer}.yaml
 
 name: home

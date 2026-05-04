@@ -1,25 +1,29 @@
 # Weblisk Hub Configuration — weblisk.dev
 # See: https://github.com/avaropoint/weblisk-blueprints/blob/main/schemas/config.md
 #
-# Phase 1: Static site + Blueprint API (current)
-# Phase 2: Marketplace, live examples, agent feedback loops
-#
-# Platform: Cloudflare Workers + R2 + Durable Objects + D1
+# Runtime topology for the weblisk.dev hub on Cloudflare Workers.
+# Blueprints (global, code, theme, pages, components) live in blueprints/.
+# This file is operational config only — ports, bindings, storage, env.
+
+extends: platforms/cloudflare
 
 hub:
   name: weblisk-public
-  version: 1.0.0
+  version: 2.0.0
+  entry: workers/site.js
+  compatibility_date: "2026-04-01"
 
 orchestrator:
-  port: 9800
-  storage: durable-objects      # Cloudflare Durable Objects for agent registry
+  storage: durable-objects
+  binding: ORCHESTRATOR
+  class: Orchestrator
+  migration_tag: v1
   audit: true
 
 gateway:
-  port: 8080
   tls: false                    # Cloudflare edge handles TLS
   static_dir: public
-  auth: none                    # Phase 1: public site, no auth
+  auth: none
   rate_limit: 100/min
   cors:
     origins: [ "https://weblisk.dev", "http://localhost:*" ]
@@ -34,30 +38,48 @@ gateway:
 
 domains:
   - name: website
-    port: 9700
 
-# Agents — modular capabilities within domains.
-# The website domain controller handles examples; agents are
-# registered at runtime via the orchestrator Durable Object.
 agents:
   - name: examples
     type: work
     domain: website
     route: /api/examples
     module: workers/domains/website.js
-    requires_ai: true       # Returns simulated responses when WL_AI_KEY is not set
-    description: Live code generation from blueprints
+    requires_ai: true
 
-  # Future agents:
-  # - name: marketplace
-  #   type: work
-  #   domain: website
-  #   route: /api/marketplace
-  #   description: Browse and install templates and blueprints
-  #
-  # - name: generation
-  #   type: work
-  #   domain: website
-  #   route: /api/generate
-  #   requires_ai: true
-  #   description: Blueprint-to-code generation feedback loop
+# ─── Cloudflare Bindings ───
+
+bindings:
+  r2:
+    - name: SITE
+      production: weblisk-public
+      preview: weblisk-public-preview
+  kv:
+    - name: CACHE
+      id: 7606e97b0b2b46369fc120a9667b7ecc
+      preview_id: e0440485b33e41be9e062c12b6ab1639
+  durable_objects:
+    - name: ORCHESTRATOR
+      class: Orchestrator
+  secrets:
+    - WL_AI_KEY
+  vars:
+    WL_VERSION: "1.0.0"
+    WL_AI_MODEL: claude-sonnet-4-20250514
+    WL_AI_BASE_URL: "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37ff60425/weblisk-ai/anthropic"
+
+# ─── Environments ───
+
+environments:
+  production:
+    routes:
+      - pattern: "weblisk.dev/*"
+        zone_name: weblisk.dev
+      - pattern: "weblisk.dev"
+        zone_name: weblisk.dev
+    vars:
+      WL_ENVIRONMENT: production
+  preview:
+    name: weblisk-public-preview
+    vars:
+      WL_ENVIRONMENT: preview

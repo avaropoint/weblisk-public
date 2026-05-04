@@ -1,5 +1,6 @@
-# Weblisk Public Website — Cloudflare Worker + R2
-# Static site with Blueprint API for live specification viewing.
+# Weblisk Public Website — Cloudflare Worker + R2 + KV
+# Gateway serves weblisk.dev from R2, with KV edge caching
+# and agent routing. See: architecture/gateway.md
 
 name = "weblisk-public"
 main = "workers/site.js"
@@ -10,15 +11,34 @@ routes = [
   { pattern = "weblisk.dev", zone_name = "weblisk.dev" }
 ]
 
+# ── R2: file storage (static assets + blueprints) ──
 [[r2_buckets]]
 binding = "SITE"
 bucket_name = "weblisk-public"
 preview_bucket_name = "weblisk-public-preview"
 
+# ── KV: edge cache (service directory, hot responses) ──
+[[kv_namespaces]]
+binding = "CACHE"
+id = "${KV_NAMESPACE_ID}"
+preview_id = "${KV_PREVIEW_NAMESPACE_ID}"
+
 [vars]
 WL_VERSION = "1.0.0"
 WL_AI_MODEL = "claude-sonnet-4-20250514"
 WL_AI_BASE_URL = "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37ff60425/weblisk-ai/anthropic"
+WL_ENVIRONMENT = "production"
 
 # WL_AI_KEY is a secret — set via: npx wrangler secret put WL_AI_KEY
 # Until set, the examples agent returns placeholder responses.
+
+# ── Preview environment (uses preview R2 + KV automatically) ──
+[env.preview]
+name = "weblisk-public-preview"
+routes = []
+
+[env.preview.vars]
+WL_VERSION = "1.0.0"
+WL_AI_MODEL = "claude-sonnet-4-20250514"
+WL_AI_BASE_URL = "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37ff60425/weblisk-ai/anthropic"
+WL_ENVIRONMENT = "preview"

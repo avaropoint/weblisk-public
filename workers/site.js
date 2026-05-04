@@ -6,6 +6,21 @@ import { handle as handleExamples } from "./agents/examples.js";
 
 const DEPLOY_VERSION = Date.now().toString(36);
 
+// ─── Structured logging (per platforms/cloudflare.md) ───
+function log(component, action, detail, traceId) {
+  console.log(JSON.stringify({
+    component,
+    action,
+    ...detail,
+    trace_id: traceId,
+    timestamp: Date.now(),
+  }));
+}
+
+function traceId() {
+  return crypto.randomUUID();
+}
+
 const MIME = {
   html: "text/html;charset=utf-8",
   css:  "text/css;charset=utf-8",
@@ -76,12 +91,17 @@ function isValidBlueprintPath(path) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const tid = request.headers.get("x-trace-id") || traceId();
 
     // ─── Path security (non-bypassable, runs before everything) ───
-    if (/\/\.[a-z]/i.test(url.pathname)) return notFound(env);
+    if (/\/\.[a-z]/i.test(url.pathname)) {
+      log("gateway", "block", { reason: "dotfile", path: url.pathname }, tid);
+      return notFound(env);
+    }
     if (url.pathname.includes("..")) {
+      log("gateway", "block", { reason: "traversal", path: url.pathname }, tid);
       return new Response("Bad Request", {
         status: 400,
         headers: { "content-type": "text/plain" },
@@ -153,15 +173,29 @@ async function handleBlueprintAPI(url, request, env) {
 
   // Blueprints stored in R2 under blueprints/ prefix
   const key = `blueprints/${path}`;
-  const object = await env.SITE.get(key);
 
-  if (!object) {
-    const headers = new Headers({ "content-type": "application/json" });
-    securityHeaders(headers, false);
-    return new Response(JSON.stringify({ error: "Blueprint not found" }), {
-      status: 404,
-      headers,
-    });
+  // ─── KV edge cache (fast reads, avoids R2 round-trip) ───
+  let body;
+  if (env.CACHE) {
+    body = await env.CACHE.get(`bp:${path}`, "text");
+  }
+
+  if (!body) {
+    const object = await env.SITE.get(key);
+    if (!object) {
+      const headers = new Headers({ "content-type": "application/json" });
+      securityHeaders(headers, false);
+      return new Response(JSON.stringify({ error: "Blueprint not found" }), {
+        status: 404,
+        headers,
+      });
+    }
+    body = await object.text();
+    // Write-through to KV (10 min TTL) — non-blocking
+    if (env.CACHE) {
+      const put = env.CACHE.put(`bp:${path}`, body, { expirationTtl: 600 });
+      ctx ? ctx.waitUntil(put) : await put;
+    }
   }
 
   const headers = new Headers();
@@ -172,7 +206,7 @@ async function handleBlueprintAPI(url, request, env) {
   if (request.method === "HEAD") {
     return new Response(null, { headers });
   }
-  return new Response(object.body, { headers });
+  return new Response(body, { headers });
 }
 
 async function respond(object, key, headOnly) {

@@ -1,16 +1,23 @@
 # Navigation Component
 # Renders the top navbar with site links, social, and theme toggle.
-# Extends: standards/components (props, accessibility contract)
 
-name: nav
 type: component
-extends: standards/components
+name: navigation
 hydrate: load
 status: active
-version: 2.0.0
 
 props:
-  active_path: { type: string, required: true }  # Current page path — used to set aria-current
+  active_path: { type: string, required: true }
+
+links:
+  - label: Home
+    path: /
+  - label: Platform
+    path: /platform/
+  - label: Marketplace
+    path: /marketplace/
+  - label: Docs
+    path: /docs/
 
 structure:
   element: nav
@@ -25,7 +32,7 @@ structure:
           text: Weblisk
           version: v1.0
         - type: nav-links
-          source: global.yaml#navigation
+          source: links
         - type: nav-actions
           social:
             - platform: github
@@ -36,11 +43,10 @@ structure:
           mobile_toggle: true
 
 behavior:
-  - mobile menu toggle (hamburger → close, aria-expanded)
-  - theme toggle (light ↔ dark, persists to localStorage via state.js signal)
+  - mobile menu toggle (hamburger to close, aria-expanded)
+  - theme toggle (light/dark, persists to localStorage via state.js signal)
   - active link highlighting from props.active_path
-  - sidebar injection: on pages with .docs-sidebar or .examples-sidebar,
-    injects those links into the mobile nav menu for responsive navigation
+  - sidebar injection for responsive navigation on docs pages
 
 accessibility:
   role: navigation
@@ -53,6 +59,5 @@ accessibility:
 
 dependencies:
   runtime:
-    - "weblisk" # effect() for reactive theme icon updates
-    - "../state.js" # theme signal + setTheme
-  hydration: load # Critical path — must hydrate immediately
+    - weblisk
+    - ../state.js

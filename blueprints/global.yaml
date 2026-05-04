@@ -1,95 +1,42 @@
-# Weblisk Site Identity and Global Configuration
-# This is the source of truth for site-wide settings.
+# Weblisk Global Blueprint
+# Project identity and cross-cutting configuration.
 
 name: Weblisk
 domain: weblisk.dev
-locale: en_US
-description: >
-  The specification-driven platform for building AI-native applications.
-  Describe once, generate everything, own it all.
-version: 2.0.0
-license: MIT
-organization:
-  name: Avaropoint
-  url: https://avaropoint.com
-  github: https://github.com/avaropoint
+locale: en-US
+locales: [en-US]
 
-navigation:
-  - label: Home
-    path: /
-  - label: Platform
-    path: /platform/
-  - label: Marketplace
-    path: /marketplace/
-  - label: Docs
-    path: /docs/
+brand:
+  colors:
+    primary: "#6366f1"
+    accent: "#818cf8"
+    surface: "#ffffff"
+    text: "#1e293b"
+    error: "#ef4444"
+    success: "#10b981"
+  typography:
+    heading: { family: "Inter", weight: 700 }
+    body: { family: "system-ui", weight: 400 }
+    mono: { family: "JetBrains Mono", weight: 400 }
+  spacing: 8px
+  radius: 4px
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
+
+identity:
+  tagline: "Software finally has blueprints"
+  description: >
+    The specification-driven platform for building AI-native applications.
+    Describe once, generate everything, own it all.
+  legal_name: Avaropoint
+  contact: hello@weblisk.dev
+  copyright_year: 2026
 
 social:
-  github: https://github.com/avaropoint/weblisk
-  twitter: https://x.com/weblisk
+  twitter: "@weblisk"
+  github: avaropoint/weblisk
   discord: https://discord.gg/5CetAq9EgZ
-
-seo:
-  title_suffix: " — Weblisk"
-  default_og_image: /images/social/og-image.png
-  twitter_site: "@weblisk"
-  locale: en_US
-
-footer:
-  copyright: "© 2026 Made with ♥ by Avaropoint"
-  tagline: >
-    Software finally has blueprints — describe once, generate forever, own everything.
-  columns:
-    - heading: Platform
-      links:
-        - label: Blueprints
-          path: /platform/blueprints/
-        - label: Agents
-          path: /platform/agents/
-        - label: Server Spec
-          path: /platform/server/
-        - label: Client Framework
-          path: /platform/client/
-    - heading: Ecosystem
-      links:
-        - label: Marketplace
-          path: /marketplace/
-        - label: Documentation
-          path: /docs/
-        - label: Templates
-          path: /marketplace/templates/
-    - heading: Community
-      links:
-        - label: GitHub
-          url: https://github.com/avaropoint/weblisk
-        - label: X (Twitter)
-          url: https://x.com/weblisk
-        - label: Discord
-          url: https://discord.gg/5CetAq9EgZ
-        - label: Sponsor
-          url: https://github.com/sponsors/avaropoint
-
-# Generated artifact policies
-# These drive robots.txt, sitemap.xml, manifest, and sw.js generation.
-
-pwa:
-  name: Weblisk
-  short_name: Weblisk
-  display: standalone
-  background_color: "#0b1121"
-  theme_color: "#1a1f36"
-  start_url: /
-  icons: assets/brand.yaml#pwa_icons
-  service_worker: true
-
-robots:
-  user_agent: "*"
-  allow: /
-  sitemap: https://weblisk.dev/sitemap.xml
-
-sitemap:
-  changefreq: weekly
-  priority: 1.0
+  og_default_image: /images/social/og-image.png
 
 policies:
   accessibility: WCAG-2.2-AA
@@ -100,3 +47,5 @@ policies:
     lcp: 2500
     cls: 0.1
     inp: 200
+
+dependencies: []

@@ -1,16 +1,47 @@
 # Footer Component
 # Renders the site-wide footer with brand, nav columns, social, and copyright.
-# Extends: standards/components (props, accessibility contract)
 
-name: footer
 type: component
-extends: standards/components
-hydrate: none            # No JS — pure HTML component
+name: footer
+hydrate: none
 status: active
-version: 2.0.0
 
 props:
-  columns: { type: array, required: false }    # Override footer columns (default: from global.yaml)
+  columns: { type: array, required: false }
+
+content:
+  copyright: "© 2026 Made with ♥ by Avaropoint"
+  tagline: >
+    Software finally has blueprints — describe once, generate forever, own everything.
+  columns:
+    - heading: Platform
+      links:
+        - label: Blueprints
+          path: /platform/blueprints/
+        - label: Agents
+          path: /platform/agents/
+        - label: Server Spec
+          path: /platform/server/
+        - label: Client Framework
+          path: /platform/client/
+    - heading: Ecosystem
+      links:
+        - label: Marketplace
+          path: /marketplace/
+        - label: Documentation
+          path: /docs/
+        - label: Templates
+          path: /marketplace/templates/
+    - heading: Community
+      links:
+        - label: GitHub
+          url: https://github.com/avaropoint/weblisk
+        - label: X (Twitter)
+          url: https://x.com/weblisk
+        - label: Discord
+          url: https://discord.gg/5CetAq9EgZ
+        - label: Sponsor
+          url: https://github.com/sponsors/avaropoint
 
 structure:
   element: footer
@@ -19,11 +50,11 @@ structure:
     - type: footer-brand
       logo: /images/mark/logo.svg
       text: Weblisk
-      tagline: global.yaml#footer.tagline
+      tagline: content.tagline
     - type: footer-columns
-      source: global.yaml#footer.columns
+      source: content.columns
     - type: footer-bottom
-      copyright: global.yaml#footer.copyright
+      copyright: content.copyright
       social:
         - platform: github
           url: global.yaml#social.github

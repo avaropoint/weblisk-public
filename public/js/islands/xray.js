@@ -13,7 +13,6 @@ export default function xray(el) {
   const props = JSON.parse(el.dataset.props || '{}');
   const blueprintPath = props.blueprint_path || 'pages/home.yaml';
   const pageBase = new URL('.', document.baseURI).href;
-  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
   let yamlCache = null;
 
@@ -37,15 +36,9 @@ export default function xray(el) {
   async function fetchYaml() {
     if (yamlCache) return yamlCache;
     try {
-      const apiRes = isLocal ? null : await fetch(`${pageBase}api/blueprint/${blueprintPath}`).catch(() => null);
-      let text;
-      if (apiRes && apiRes.ok) {
-        text = await apiRes.text();
-      } else {
-        const fileRes = await fetch(`${pageBase}blueprints/${blueprintPath}`);
-        if (!fileRes.ok) throw new Error(`${fileRes.status}`);
-        text = await fileRes.text();
-      }
+      const res = await fetch(`${pageBase}api/blueprint/${blueprintPath}`);
+      if (!res.ok) throw new Error(`${res.status}`);
+      const text = await res.text();
       yamlCache = text;
       return text;
     } catch {
@@ -307,7 +300,7 @@ export default function xray(el) {
     renderTab('blueprint');
   }
 
-  /* ── Syntax highlighting ──────────────────────────────── */
+  /* Syntax highlighting */
 
   function highlightYaml(src) {
     return src.split('\n').map(line => {
@@ -382,7 +375,7 @@ export default function xray(el) {
   }
 }
 
-/* ── Injected Styles ──────────────────────────────────── */
+/* Injected Styles */
 
 function injectStyles() {
   if (document.getElementById('xray-css')) return;

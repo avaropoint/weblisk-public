@@ -1,0 +1,46 @@
+# Shell Island
+# App bootstrap and deferred initialization.
+# Critical path: hydrates all islands immediately via weblisk client.
+# Defers non-critical modules (security, a11y, perf, clipboard) to idle time.
+
+name: shell
+type: island
+extends: standards/islands
+hydrate: load
+status: active
+version: 2.0.0
+
+agent: none
+protocol: none
+auth: none
+
+responsibilities:
+  - Hydrate all islands via weblisk/core/hydrate.js
+  - Register service worker (sw.js)
+  - Initialize deferred sub-modules at idle time
+  - Sync PWA theme color with theme signal
+
+modules:
+  - name: shell-security
+    purpose: CSP violation reporting, trusted types enforcement
+    defer: idle
+  - name: shell-a11y
+    purpose: Skip-link injection, reduced-motion detection, focus-visible
+    defer: idle
+  - name: shell-perf
+    purpose: Web vitals collection (LCP, CLS, INP), telemetry
+    defer: idle
+  - name: shell-clipboard
+    purpose: Copy-to-clipboard for code blocks
+    defer: idle
+  - name: shell-version
+    purpose: Version badge display
+    defer: idle
+
+dependencies:
+  runtime:
+    - weblisk
+    - weblisk/core/hydrate.js
+    - weblisk/pwa/manifest.js
+    - weblisk/nav/scroll.js
+    - ../state.js

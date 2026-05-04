@@ -27,7 +27,7 @@ const DOMAIN_MANIFEST = manifest({
   subscriptions: [],
 });
 
-// ─── Simulated examples data ───
+// Simulated examples data
 // Pre-built responses for common blueprint types until LLM is configured.
 
 const SIMULATED_EXAMPLES = {
@@ -153,7 +153,7 @@ export default {
   },
 };
 
-// ─── Route handler (called by gateway) ───
+// Route handler (called by gateway)
 
 export async function handle(request, env, path) {
   const tid = request.headers.get("x-trace-id") || "";
@@ -166,7 +166,7 @@ export async function handle(request, env, path) {
   return errorResponse("Not found", 404);
 }
 
-// ─── Endpoints ───
+// Endpoints
 
 function info() {
   return jsonResponse({
@@ -216,12 +216,12 @@ async function generate(request, env, tid) {
 
   log("website", "generate", { type: body.type, ai: hasAI(env) }, tid);
 
-  // ─── Live generation (when LLM is configured) ───
+  // Live generation (when LLM is configured)
   if (hasAI(env)) {
     return generateLive(body, env, tid);
   }
 
-  // ─── Simulated generation ───
+  // Simulated generation
   return generateSimulated(body);
 }
 
@@ -296,7 +296,7 @@ async function generateLive(body, env, tid) {
   });
 }
 
-// ─── Helpers ───
+// Helpers
 
 function hasAI(env) {
   return !!(env.WL_AI_KEY && env.WL_AI_KEY !== "sk-ant-PLACEHOLDER");

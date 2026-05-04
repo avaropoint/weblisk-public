@@ -9,7 +9,7 @@ export { Orchestrator } from "./orchestrator.js";
 
 const DEPLOY_VERSION = Date.now().toString(36);
 
-// ─── MIME types ───
+// MIME types
 
 const MIME = {
   html: "text/html;charset=utf-8",
@@ -40,7 +40,7 @@ function mimeFor(key) {
   return MIME[ext] || "application/octet-stream";
 }
 
-// ─── Security headers (per gateway spec) ───
+// Security headers (per gateway spec)
 
 function buildCSP() {
   // script-src uses scheme-source https: rather than explicit CDN domain because
@@ -76,7 +76,7 @@ function securityHeaders(headers, isHTML) {
   }
 }
 
-// ─── Blueprint path validation ───
+// Blueprint path validation
 
 const BLUEPRINT_PREFIXES = ["pages/", "components/"];
 
@@ -87,16 +87,16 @@ function isValidBlueprintPath(path) {
   return true;
 }
 
-// ═══════════════════════════════════════════════════════════════
+//
 //  Gateway — main fetch handler
-// ═══════════════════════════════════════════════════════════════
+//
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const tid = request.headers.get("x-trace-id") || newTraceId();
 
-    // ─── Path security (non-bypassable, runs before everything) ───
+    // Path security (non-bypassable, runs before everything)
     if (/\/\.[a-z]/i.test(url.pathname)) {
       log("gateway", "block", { reason: "dotfile", path: url.pathname }, tid);
       return notFound(env);
@@ -109,7 +109,7 @@ export default {
       });
     }
 
-    // ─── API routes ───
+    // API routes
 
     // Hub health — aggregates orchestrator + gateway + domain health
     if (url.pathname === "/api/health") {
@@ -135,7 +135,7 @@ export default {
       return new Response(null, { status: 204 });
     }
 
-    // ─── Static routes: GET and HEAD only ───
+    // Static routes: GET and HEAD only
     if (request.method !== "GET" && request.method !== "HEAD") {
       return methodNotAllowed("GET, HEAD");
     }
@@ -150,9 +150,9 @@ export default {
   },
 };
 
-// ═══════════════════════════════════════════════════════════════
+//
 //  Route handlers
-// ═══════════════════════════════════════════════════════════════
+//
 
 async function routeToDomain(handler, request, env, prefix, tid) {
   const path = new URL(request.url).pathname.slice(prefix.length) || "/";
@@ -205,9 +205,9 @@ async function hubHealth(env, tid) {
   return jsonResponse(health);
 }
 
-// ═══════════════════════════════════════════════════════════════
+//
 //  Blueprint API (with KV edge caching)
-// ═══════════════════════════════════════════════════════════════
+//
 
 async function handleBlueprintAPI(url, request, env, ctx, tid) {
   const path = url.pathname.replace("/api/blueprint/", "");
@@ -255,9 +255,9 @@ async function handleBlueprintAPI(url, request, env, ctx, tid) {
   return new Response(body, { headers });
 }
 
-// ═══════════════════════════════════════════════════════════════
+//
 //  Static file serving (R2)
-// ═══════════════════════════════════════════════════════════════
+//
 
 async function handleStatic(url, request, env) {
   let key = url.pathname.slice(1);
@@ -307,9 +307,9 @@ async function respond(object, key, headOnly) {
   return new Response(headOnly ? null : object.body, { headers });
 }
 
-// ═══════════════════════════════════════════════════════════════
+//
 //  Helpers
-// ═══════════════════════════════════════════════════════════════
+//
 
 const VERSION_RE = /((?:href|src|data-island)\s*=\s*["'])(\/[^"']*\.(?:css|js))(\?v=[^"']*)?(?=["'])/g;
 

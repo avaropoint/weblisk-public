@@ -53,7 +53,7 @@ export class Orchestrator {
     return errorResponse("Not found", 404);
   }
 
-  // ─── GET /v1/health ───
+  // GET /v1/health
 
   health() {
     const agents = [...this.registry.values()];
@@ -70,7 +70,7 @@ export class Orchestrator {
     });
   }
 
-  // ─── POST /v1/register ───
+  // POST /v1/register
 
   async register(request) {
     let body;
@@ -124,7 +124,7 @@ export class Orchestrator {
     });
   }
 
-  // ─── DELETE /v1/register ───
+  // DELETE /v1/register
 
   async deregister(request) {
     let body;
@@ -150,13 +150,13 @@ export class Orchestrator {
     return jsonResponse({ status: "deregistered" });
   }
 
-  // ─── GET /v1/services ───
+  // GET /v1/services
 
   services() {
     return jsonResponse(this.buildServiceDirectory());
   }
 
-  // ─── Internal ───
+  // Internal
 
   buildServiceDirectory() {
     const agents = [];

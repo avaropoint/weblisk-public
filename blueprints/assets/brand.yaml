@@ -1,0 +1,64 @@
+# Brand Assets
+# Declares all visual identity assets, favicon generation,
+# PWA icons, social images, and logo variants.
+
+name: brand
+type: assets
+extends: standards/assets
+status: active
+version: 2.0.0
+
+logo:
+  source: assets/images/mark/logo.svg
+  variants:
+    - name: mark-light
+      source: assets/images/mark/light/icon-light.svg
+      sizes: [16, 32, 48, 64, 96, 128, 192, 256, 512, 1024]
+      format: png
+      context: light-mode
+    - name: mark-dark
+      source: assets/images/mark/dark/icon-dark.svg
+      sizes: [16, 32, 48, 64, 96, 128, 192, 256, 512, 1024]
+      format: png
+      context: dark-mode
+    - name: wordmark-light
+      source: assets/images/wordmark/light/logo-full-light.svg
+      sizes: [400, 800, 1200]
+      format: png
+      context: light-mode
+    - name: wordmark-dark
+      source: assets/images/wordmark/dark/logo-full-dark.svg
+      sizes: [400, 800, 1200]
+      format: png
+      context: dark-mode
+
+favicon:
+  source: assets/images/favicon.svg
+  generate:
+    - size: 16x16
+      format: ico
+      output: images/favicon.ico
+    - size: 180x180
+      format: png
+      output: images/apple-touch-icon.png
+    - size: any
+      format: svg
+      output: images/favicon.svg
+
+pwa_icons:
+  - size: 192x192
+    format: png
+    output: images/icon-192.png
+  - size: 512x512
+    format: png
+    output: images/icon-512.png
+  - size: 512x512
+    format: png
+    purpose: maskable
+    output: images/icon-maskable-512.png
+
+social:
+  og_image:
+    source: assets/images/social/og-image.svg
+    output: images/social/og-image.png
+    dimensions: 1200x630

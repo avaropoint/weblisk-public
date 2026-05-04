@@ -47,7 +47,7 @@ agents:
     module: workers/domains/website.js
     requires_ai: true
 
-# ─── Cloudflare Bindings ───
+# Cloudflare Bindings
 
 bindings:
   r2:
@@ -68,7 +68,7 @@ bindings:
     WL_AI_MODEL: claude-sonnet-4-20250514
     WL_AI_BASE_URL: "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37ff60425/weblisk-ai/anthropic"
 
-# ─── Environments ───
+# Environments
 
 environments:
   production:

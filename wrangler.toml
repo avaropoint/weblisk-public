@@ -20,8 +20,8 @@ preview_bucket_name = "weblisk-public-preview"
 # ── KV: edge cache (service directory, hot responses) ──
 [[kv_namespaces]]
 binding = "CACHE"
-id = "${KV_NAMESPACE_ID}"
-preview_id = "${KV_PREVIEW_NAMESPACE_ID}"
+id = "7606e97b0b2b46369fc120a9667b7ecc"
+preview_id = "e0440485b33e41be9e062c12b6ab1639"
 
 [vars]
 WL_VERSION = "1.0.0"

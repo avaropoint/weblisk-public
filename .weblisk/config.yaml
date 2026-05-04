@@ -36,24 +36,28 @@ domains:
   - name: website
     port: 9700
 
-# Agents — modular capabilities routed by the gateway.
-# Each agent handles a specific domain; add more as features grow.
+# Agents — modular capabilities within domains.
+# The website domain controller handles examples; agents are
+# registered at runtime via the orchestrator Durable Object.
 agents:
   - name: examples
     type: work
+    domain: website
     route: /api/examples
-    module: workers/agents/examples.js
-    requires_ai: true       # Degrades gracefully when WL_AI_KEY is not set
+    module: workers/domains/website.js
+    requires_ai: true       # Returns simulated responses when WL_AI_KEY is not set
     description: Live code generation from blueprints
 
   # Future agents:
   # - name: marketplace
   #   type: work
+  #   domain: website
   #   route: /api/marketplace
   #   description: Browse and install templates and blueprints
   #
   # - name: generation
   #   type: work
+  #   domain: website
   #   route: /api/generate
   #   requires_ai: true
   #   description: Blueprint-to-code generation feedback loop

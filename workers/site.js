@@ -1,25 +1,15 @@
 // Weblisk Gateway Worker — edge security boundary for weblisk.dev.
-// Static site via R2, Blueprint API, and agent routing.
+// Serves static files from R2, Blueprint API with KV caching,
+// and routes to the website domain controller + orchestrator.
 // See: architecture/gateway.md for the full specification.
 
-import { handle as handleExamples } from "./agents/examples.js";
+import { log, newTraceId, jsonResponse, VERSION } from "./protocol.js";
+import { handle as handleWebsite } from "./domains/website.js";
+export { Orchestrator } from "./orchestrator.js";
 
 const DEPLOY_VERSION = Date.now().toString(36);
 
-// ─── Structured logging (per platforms/cloudflare.md) ───
-function log(component, action, detail, traceId) {
-  console.log(JSON.stringify({
-    component,
-    action,
-    ...detail,
-    trace_id: traceId,
-    timestamp: Date.now(),
-  }));
-}
-
-function traceId() {
-  return crypto.randomUUID();
-}
+// ─── MIME types ───
 
 const MIME = {
   html: "text/html;charset=utf-8",
@@ -50,6 +40,8 @@ function mimeFor(key) {
   return MIME[ext] || "application/octet-stream";
 }
 
+// ─── Security headers (per gateway spec) ───
+
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://cdn.weblisk.dev https://static.cloudflareinsights.com",
@@ -78,22 +70,25 @@ function securityHeaders(headers, isHTML) {
   }
 }
 
-// Allowed blueprint prefixes — prevents path traversal.
+// ─── Blueprint path validation ───
+
 const BLUEPRINT_PREFIXES = ["pages/", "components/", "styles/"];
 
 function isValidBlueprintPath(path) {
-  // Must start with an allowed prefix and end with .yaml or .yml
   if (!BLUEPRINT_PREFIXES.some((p) => path.startsWith(p))) return false;
   if (!path.endsWith(".yaml") && !path.endsWith(".yml")) return false;
-  // No path traversal
   if (path.includes("..") || path.includes("//")) return false;
   return true;
 }
 
+// ═══════════════════════════════════════════════════════════════
+//  Gateway — main fetch handler
+// ═══════════════════════════════════════════════════════════════
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const tid = request.headers.get("x-trace-id") || traceId();
+    const tid = request.headers.get("x-trace-id") || newTraceId();
 
     // ─── Path security (non-bypassable, runs before everything) ───
     if (/\/\.[a-z]/i.test(url.pathname)) {
@@ -108,73 +103,120 @@ export default {
       });
     }
 
-    // ─── Agent routing (accepts GET, HEAD, POST) ───
+    // ─── API routes ───
+
+    // Hub health — aggregates orchestrator + gateway + domain health
+    if (url.pathname === "/api/health") {
+      return hubHealth(env, tid);
+    }
+
+    // Orchestrator (Durable Object) — internal protocol endpoints
+    if (url.pathname.startsWith("/v1/")) {
+      return routeToOrchestrator(request, env, tid);
+    }
+
+    // Website domain controller — examples, generation
     if (url.pathname.startsWith("/api/examples")) {
       if (!["GET", "HEAD", "POST"].includes(request.method)) {
-        return new Response("Method Not Allowed", {
-          status: 405,
-          headers: { allow: "GET, HEAD, POST", "content-type": "text/plain" },
-        });
+        return methodNotAllowed("GET, HEAD, POST");
       }
-      return routeToAgent(handleExamples, request, env, "/api/examples");
+      return routeToDomain(handleWebsite, request, env, "/api/examples", tid);
+    }
+
+    // Performance telemetry (fire-and-forget from shell-perf.js)
+    if (url.pathname === "/api/perf" && request.method === "POST") {
+      log("gateway", "perf", {}, tid);
+      return new Response(null, { status: 204 });
     }
 
     // ─── Static routes: GET and HEAD only ───
     if (request.method !== "GET" && request.method !== "HEAD") {
-      return new Response("Method Not Allowed", {
-        status: 405,
-        headers: { allow: "GET, HEAD", "content-type": "text/plain" },
-      });
+      return methodNotAllowed("GET, HEAD");
     }
 
-    // ─── Blueprint API ───
-    // GET /api/blueprint/pages/home.yaml → returns YAML source
+    // Blueprint API
     if (url.pathname.startsWith("/api/blueprint/")) {
-      return handleBlueprintAPI(url, request, env);
+      return handleBlueprintAPI(url, request, env, ctx, tid);
     }
 
-    // ─── Static file serving ───
-    let key = url.pathname.slice(1);
-
-    if (key === "index.html") {
-      return Response.redirect(url.origin + "/" + (url.search || ""), 301);
-    }
-
-    if (key === "" || key.endsWith("/")) {
-      key += "index.html";
-    }
-
-    let object = await env.SITE.get(key);
-
-    if (!object && !key.includes(".")) {
-      object = await env.SITE.get(key + ".html");
-      if (object) key += ".html";
-    }
-
-    if (!object) {
-      return notFound(env);
-    }
-
-    return respond(object, key, request.method === "HEAD");
+    // Static file serving from R2
+    return handleStatic(url, request, env);
   },
 };
 
-async function handleBlueprintAPI(url, request, env) {
+// ═══════════════════════════════════════════════════════════════
+//  Route handlers
+// ═══════════════════════════════════════════════════════════════
+
+async function routeToDomain(handler, request, env, prefix, tid) {
+  const path = new URL(request.url).pathname.slice(prefix.length) || "/";
+  const proxied = new Request(request, {
+    headers: new Headers([...request.headers.entries(), ["x-trace-id", tid]]),
+  });
+  const response = await handler(proxied, env, path);
+  const headers = new Headers(response.headers);
+  securityHeaders(headers, false);
+  return new Response(response.body, { status: response.status, headers });
+}
+
+async function routeToOrchestrator(request, env, tid) {
+  if (!env.ORCHESTRATOR) {
+    return jsonResponse({ error: "Orchestrator not configured" }, 503);
+  }
+  const id = env.ORCHESTRATOR.idFromName("main");
+  const stub = env.ORCHESTRATOR.get(id);
+  log("gateway", "orchestrator", { path: new URL(request.url).pathname }, tid);
+  const response = await stub.fetch(request);
+  const headers = new Headers(response.headers);
+  securityHeaders(headers, false);
+  return new Response(response.body, { status: response.status, headers });
+}
+
+async function hubHealth(env, tid) {
+  const health = {
+    name: "weblisk-public",
+    status: "healthy",
+    version: VERSION,
+    gateway: { status: "healthy" },
+    orchestrator: { status: "unknown" },
+    domains: { website: { status: "healthy" } },
+  };
+
+  if (env.ORCHESTRATOR) {
+    try {
+      const id = env.ORCHESTRATOR.idFromName("main");
+      const stub = env.ORCHESTRATOR.get(id);
+      const res = await stub.fetch(new Request("https://internal/v1/health"));
+      if (res.ok) {
+        health.orchestrator = await res.json();
+      }
+    } catch {
+      health.orchestrator.status = "unreachable";
+      health.status = "degraded";
+    }
+  }
+
+  return jsonResponse(health);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  Blueprint API (with KV edge caching)
+// ═══════════════════════════════════════════════════════════════
+
+async function handleBlueprintAPI(url, request, env, ctx, tid) {
   const path = url.pathname.replace("/api/blueprint/", "");
 
   if (!isValidBlueprintPath(path)) {
     const headers = new Headers({ "content-type": "application/json" });
     securityHeaders(headers, false);
     return new Response(JSON.stringify({ error: "Invalid blueprint path" }), {
-      status: 400,
-      headers,
+      status: 400, headers,
     });
   }
 
-  // Blueprints stored in R2 under blueprints/ prefix
   const key = `blueprints/${path}`;
 
-  // ─── KV edge cache (fast reads, avoids R2 round-trip) ───
+  // KV edge cache — fast reads
   let body;
   if (env.CACHE) {
     body = await env.CACHE.get(`bp:${path}`, "text");
@@ -186,12 +228,10 @@ async function handleBlueprintAPI(url, request, env) {
       const headers = new Headers({ "content-type": "application/json" });
       securityHeaders(headers, false);
       return new Response(JSON.stringify({ error: "Blueprint not found" }), {
-        status: 404,
-        headers,
+        status: 404, headers,
       });
     }
     body = await object.text();
-    // Write-through to KV (10 min TTL) — non-blocking
     if (env.CACHE) {
       const put = env.CACHE.put(`bp:${path}`, body, { expirationTtl: 600 });
       ctx ? ctx.waitUntil(put) : await put;
@@ -209,6 +249,35 @@ async function handleBlueprintAPI(url, request, env) {
   return new Response(body, { headers });
 }
 
+// ═══════════════════════════════════════════════════════════════
+//  Static file serving (R2)
+// ═══════════════════════════════════════════════════════════════
+
+async function handleStatic(url, request, env) {
+  let key = url.pathname.slice(1);
+
+  if (key === "index.html") {
+    return Response.redirect(url.origin + "/" + (url.search || ""), 301);
+  }
+
+  if (key === "" || key.endsWith("/")) {
+    key += "index.html";
+  }
+
+  let object = await env.SITE.get(key);
+
+  if (!object && !key.includes(".")) {
+    object = await env.SITE.get(key + ".html");
+    if (object) key += ".html";
+  }
+
+  if (!object) {
+    return notFound(env);
+  }
+
+  return respond(object, key, request.method === "HEAD");
+}
+
 async function respond(object, key, headOnly) {
   const isHTML = key.endsWith(".html");
   const headers = new Headers();
@@ -219,7 +288,6 @@ async function respond(object, key, headOnly) {
   }
 
   securityHeaders(headers, isHTML);
-
   headers.set(
     "cache-control",
     isHTML ? "public, max-age=60, s-maxage=300" : "public, max-age=31536000, immutable"
@@ -227,12 +295,15 @@ async function respond(object, key, headOnly) {
 
   if (isHTML && !headOnly) {
     const html = await object.text();
-    const versioned = injectVersion(html);
-    return new Response(versioned, { headers });
+    return new Response(injectVersion(html), { headers });
   }
 
   return new Response(headOnly ? null : object.body, { headers });
 }
+
+// ═══════════════════════════════════════════════════════════════
+//  Helpers
+// ═══════════════════════════════════════════════════════════════
 
 const VERSION_RE = /((?:href|src|data-island)\s*=\s*["'])(\/[^"']*\.(?:css|js))(\?v=[^"']*)?(?=["'])/g;
 
@@ -240,13 +311,11 @@ function injectVersion(html) {
   return html.replace(VERSION_RE, `$1$2?v=${DEPLOY_VERSION}`);
 }
 
-async function routeToAgent(handler, request, env, prefix) {
-  const path = new URL(request.url).pathname.slice(prefix.length) || "/";
-  const response = await handler(request, env, path);
-  // Gateway applies security headers to all agent responses
-  const headers = new Headers(response.headers);
-  securityHeaders(headers, false);
-  return new Response(response.body, { status: response.status, headers });
+function methodNotAllowed(allow) {
+  return new Response("Method Not Allowed", {
+    status: 405,
+    headers: { allow, "content-type": "text/plain" },
+  });
 }
 
 async function notFound(env) {

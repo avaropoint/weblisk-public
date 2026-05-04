@@ -30,7 +30,17 @@ WL_AI_BASE_URL = "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37
 WL_ENVIRONMENT = "production"
 
 # WL_AI_KEY is a secret — set via: npx wrangler secret put WL_AI_KEY
-# Until set, the examples agent returns placeholder responses.
+# Until set, the website domain controller returns simulated responses.
+
+# ── Durable Objects: orchestrator (agent registry, service directory) ──
+[durable_objects]
+bindings = [
+  { name = "ORCHESTRATOR", class_name = "Orchestrator" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["Orchestrator"]
 
 # ── Preview environment (uses preview R2 + KV automatically) ──
 [env.preview]

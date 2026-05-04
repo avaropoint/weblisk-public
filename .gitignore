@@ -3,3 +3,6 @@ dist/
 .env
 .vscode/
 node_modules/
+.weblisk/secrets/
+.weblisk/keys/
+.weblisk/token

@@ -1,11 +1,12 @@
 # ── Deploy: Public Website ────────────────────────────────────
 #
-# Publishes the static site to the weblisk-public R2 bucket
+# Publishes the blueprint-driven site to the weblisk-public R2 bucket
 # and deploys the Worker that serves weblisk.dev.
 #
-# Publishes to:
-#   weblisk-public R2 bucket (static files)
-#   weblisk-public Worker (serves weblisk.dev)
+# Structure:
+#   public/     → R2 root (static files served by Worker)
+#   blueprints/ → R2 blueprints/ prefix (served by Blueprint API)
+#   workers/    → Cloudflare Worker (serves weblisk.dev)
 
 name: Deploy
 
@@ -39,11 +40,13 @@ jobs:
               --no-progress
           }
 
-          # Build list of site files to upload (allowlist approach)
-          SITE_FILES=$(mktemp)
-          find . -type f \( \
+          # ── Upload public/ directory (static site files) ──
+          # Files are uploaded with the public/ prefix stripped.
+          echo "Uploading public/ files..."
+          find ./public -type f \( \
             -name '*.html' -o \
             -name '*.css' -o \
+            -name '*.js' -o \
             -name '*.svg' -o \
             -name '*.png' -o \
             -name '*.jpg' -o \
@@ -56,24 +59,10 @@ jobs:
             -name 'manifest.webmanifest' -o \
             -name 'robots.txt' -o \
             -name 'llms.txt' \
-          \) \
-            -not -path './.git/*' \
-            -not -path './.github/*' \
-            -not -path './.vscode/*' \
-            -not -path './workers/*' \
-          > "$SITE_FILES"
+          \) | while read -r file; do
+            # Strip ./public/ prefix to get R2 key
+            key="${file#./public/}"
 
-          # Also include JS files under js/ only (not workers/, not root)
-          find ./js -type f -name '*.js' >> "$SITE_FILES" 2>/dev/null || true
-
-          # Include sw.js at root
-          [ -f ./sw.js ] && echo "./sw.js" >> "$SITE_FILES"
-
-          cat "$SITE_FILES" | while read -r file; do
-            # Strip leading ./
-            key="${file#./}"
-
-            # Determine MIME type
             case "$file" in
               *.html)  mime="text/html" ;;
               *.css)   mime="text/css" ;;
@@ -94,9 +83,15 @@ jobs:
 
             upload "$file" "$key" "$mime"
           done
+          echo "✓ Public files uploaded"
 
-          rm -f "$SITE_FILES"
-          echo "✓ Site files uploaded to R2"
+          # ── Upload blueprints/ (for Blueprint API) ──
+          echo "Uploading blueprints/..."
+          find ./blueprints -type f -name '*.yaml' -o -name '*.yml' | while read -r file; do
+            key="${file#./}"
+            upload "$file" "$key" "text/yaml"
+          done
+          echo "✓ Blueprints uploaded"
 
       - name: Clean stale files from R2
         env:
@@ -106,11 +101,14 @@ jobs:
         run: |
           BUCKET="s3://weblisk-public"
 
-          # Build set of local keys (same allowlist as upload step)
+          # Build set of expected R2 keys from public/ and blueprints/
           LOCAL_KEYS=$(mktemp)
-          find . -type f \( \
+
+          # Public files (strip public/ prefix)
+          find ./public -type f \( \
             -name '*.html' -o \
             -name '*.css' -o \
+            -name '*.js' -o \
             -name '*.svg' -o \
             -name '*.png' -o \
             -name '*.jpg' -o \
@@ -123,14 +121,12 @@ jobs:
             -name 'manifest.webmanifest' -o \
             -name 'robots.txt' -o \
             -name 'llms.txt' \
-          \) \
-            -not -path './.git/*' \
-            -not -path './.github/*' \
-            -not -path './.vscode/*' \
-            -not -path './workers/*' \
-          | sed 's|^\./||' > "$LOCAL_KEYS"
-          find ./js -type f -name '*.js' 2>/dev/null | sed 's|^\./||' >> "$LOCAL_KEYS" || true
-          [ -f ./sw.js ] && echo "sw.js" >> "$LOCAL_KEYS"
+          \) | sed 's|^\./public/||' >> "$LOCAL_KEYS"
+
+          # Blueprints (keep blueprints/ prefix)
+          find ./blueprints -type f \( -name '*.yaml' -o -name '*.yml' \) \
+            | sed 's|^\./||' >> "$LOCAL_KEYS"
+
           sort -o "$LOCAL_KEYS" "$LOCAL_KEYS"
 
           # List all keys currently in R2

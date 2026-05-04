@@ -1,0 +1,34 @@
+# Weblisk — Code Conventions
+# Enforced by schema validation and code generation.
+
+language: html
+style: vanilla
+
+formatting:
+  indent: 2
+  quotes: double
+  semicolons: true
+  line_width: 100
+
+naming:
+  files: kebab-case
+  css_classes: kebab-case
+  js_variables: camelCase
+  js_functions: camelCase
+  islands: kebab-case
+  blueprints: kebab-case
+
+constraints:
+  no_frameworks: true
+  no_build_step: true
+  no_npm: true
+  no_bundler: true
+  accessibility: wcag-aa
+  performance_budget: 100kb
+  zero_dependencies: true
+
+generation:
+  target: cloudflare-workers
+  client_framework: weblisk
+  client_cdn: https://cdn.weblisk.dev
+  output_dir: public

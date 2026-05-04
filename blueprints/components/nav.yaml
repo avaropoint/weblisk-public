@@ -1,0 +1,39 @@
+# Navigation Component
+# Renders the top navbar with site links, social, and theme toggle.
+
+name: nav
+type: component
+hydrate: load
+status: active
+version: 2.0.0
+
+props:
+  active_path: string    # Current page path — used to set aria-current
+
+structure:
+  element: nav
+  class: navbar
+  aria_label: Main navigation
+  children:
+    - element: div
+      class: navbar-inner
+      children:
+        - type: brand-link
+          logo: /images/mark/logo.svg
+          text: Weblisk
+          version: v1.0
+        - type: nav-links
+          source: global.yaml#navigation
+        - type: nav-actions
+          social:
+            - platform: github
+              url: global.yaml#social.github
+            - platform: twitter
+              url: global.yaml#social.twitter
+          theme_toggle: true
+          mobile_toggle: true
+
+behavior:
+  - mobile menu toggle (hamburger → close)
+  - theme toggle (light ↔ dark, persists to localStorage)
+  - active link highlighting from props.active_path

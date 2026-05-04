@@ -1,0 +1,31 @@
+# Footer Component
+# Renders the site-wide footer with brand, nav columns, social, and copyright.
+
+name: footer
+type: component
+hydrate: none            # No JS — pure HTML component
+status: active
+version: 2.0.0
+
+structure:
+  element: footer
+  class: footer
+  children:
+    - type: footer-brand
+      logo: /images/mark/logo.svg
+      text: Weblisk
+      tagline: global.yaml#footer.tagline
+    - type: footer-columns
+      source: global.yaml#footer.columns
+    - type: footer-bottom
+      copyright: global.yaml#footer.copyright
+      social:
+        - platform: github
+          url: global.yaml#social.github
+        - platform: twitter
+          url: global.yaml#social.twitter
+        - platform: discord
+          url: global.yaml#social.discord
+      powered_by:
+        text: Powered by Weblisk
+        href: /docs/

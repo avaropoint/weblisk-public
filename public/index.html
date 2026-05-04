@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weblisk — Software Finally Has Blueprints</title>
+  <meta name="description"
+    content="Software is the only engineering discipline without a specification layer. Weblisk changes that. Over 80 interlocking blueprints define complete systems — protocol, agents, security, federation — then generate production code in any language. The architecture is permanent. Code is just a build artifact.">
+  <link rel="canonical" href="https://weblisk.dev/">
+  <meta name="keywords"
+    content="specification-driven development, AI agent platform, blueprint-driven, federated agents, zero dependency, code generation, autonomous agents, YAML specification, open platform">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weblisk — Software Finally Has Blueprints">
+  <meta property="og:description"
+    content="Software is the only engineering discipline without a specification layer. Weblisk is over 80 interlocking blueprints that define complete systems and generate production code in any language. Own everything. Rewrite nothing.">
+  <meta property="og:url" content="https://weblisk.dev/">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Weblisk — The specification layer for software. Over 80 blueprints that define complete systems and generate production code.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weblisk — Software Finally Has Blueprints">
+  <meta name="twitter:description"
+    content="The only engineering discipline without a specification layer — until now. Over 80 interlocking blueprints. Any language. Zero lock-in.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+
+  <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="./css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://avaropoint.com/#org",
+    "name": "Avaropoint",
+    "url": "https://avaropoint.com",
+    "logo": "https://weblisk.dev/images/mark/dark/icon-dark-512.png",
+    "sameAs": [
+      "https://github.com/avaropoint",
+      "https://x.com/weblisk",
+      "https://discord.gg/5CetAq9EgZ"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://weblisk.dev/#website",
+    "name": "Weblisk",
+    "url": "https://weblisk.dev",
+    "description": "The specification layer for software. Over 80 interlocking blueprints that define complete systems and generate production code in any language. Own everything. Rewrite nothing.",
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "inLanguage": "en"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://weblisk.dev/#app",
+    "name": "Weblisk",
+    "description": "The specification layer for software. Over 80 interlocking specifications — protocol, architecture, patterns, agents, platforms, and standards — that define complete systems and generate production-ready code in any language, on any platform.",
+    "url": "https://weblisk.dev",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "license": "https://opensource.org/licenses/MIT",
+    "softwareVersion": "1.0.0",
+    "programmingLanguage": ["JavaScript", "Go", "Rust"],
+    "codeRepository": "https://github.com/avaropoint/weblisk",
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Weblisk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weblisk is the specification layer that software has always been missing. It provides over 80 interlocking YAML specifications (blueprints) that define complete software systems — from wire protocol and security models to AI agent orchestration and cryptographic federation. Generate production code in any language, on any platform. The specification is permanent — code is just a build artifact."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Weblisk Blueprints?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Blueprints are declarative YAML specifications that define how an application works — from wire protocol and security models to API contracts and agent behaviour. They are consumed by humans, LLMs, and CI/CD pipelines to generate complete implementations in Go, Node.js, Rust, or Cloudflare Workers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Weblisk different from a framework?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Frameworks give you building blocks you wire together. Weblisk gives you specifications you generate from. The specification is the source of truth — code is a build artifact that can be regenerated, upgraded, or ported to a new platform without losing design intent."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Weblisk free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All specifications, the CLI, and the client framework are free and MIT-licensed. The Weblisk Marketplace enables buying and selling community-created blueprints, agents, and templates."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar (generated from components/nav.yaml) ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="./js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="./images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link active" aria-current="page">Home</a>
+        <a href="/platform/" class="nav-link">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ─── Hero (sections[0]: hero) ─── -->
+    <section id="hero" class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner">
+        <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> v1.0 — The specification layer for software</span>
+        <h1 id="hero-heading">Software finally has blueprints.</h1>
+        <p class="hero-sub">
+          Over 80 interlocking specifications define your entire system — then generate production code in any language, on any platform. Zero dependencies. Zero lock-in. Your specification is the asset — code is just its latest compilation.
+        </p>
+        <div class="hero-actions">
+          <a href="/platform/" class="btn btn-primary">
+            Explore the Platform
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+          <a href="/platform/blueprints/" class="btn btn-outline">View the Blueprints</a>
+        </div>
+        <div class="install-cmd">
+          <span class="prompt" aria-hidden="true">$</span>
+          <code>curl -fsSL https://cdn.weblisk.dev/install.sh | sh</code>
+          <button class="copy-btn" type="button" aria-label="Copy install command"
+            data-copy="curl -fsSL https://cdn.weblisk.dev/install.sh | sh">
+            <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-16"></i>
+          </button>
+        </div>
+        <div class="hero-trust">
+          <span class="hero-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Describe once
+          </span>
+          <span class="hero-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+            Generate forever
+          </span>
+          <span class="hero-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Own everything
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Stats (sections[1]: stats-bar) ─── -->
+    <section id="stats" class="section section-soft" aria-label="Key metrics">
+      <div class="section-inner">
+        <div class="stats-bar">
+          <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Runtime Dependencies</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">80+</div>
+            <div class="stat-label">Specifications</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">16</div>
+            <div class="stat-label">Architecture Components</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">11</div>
+            <div class="stat-label">Infrastructure Agents</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Platform Targets</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Why This Matters (sections[2]: problem-section) ─── -->
+    <section id="why-this-matters" class="section" aria-labelledby="problem-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Why This Matters</span>
+          <h2 id="problem-heading">Your knowledge is the most valuable asset. Protect it.</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3>Centralised Intelligence</h3>
+            <p>Every decision, pattern, and domain rule lives in one specification corpus — not scattered across wikis, tickets, and tribal knowledge. The entire system is readable, queryable, and permanent.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Zero Developer Lock-In</h3>
+            <p>When a developer leaves, the knowledge stays. No months of reverse-engineering. No back-and-forth emails trying to reconstruct intent. The specification is the handover.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Anyone Can Build</h3>
+            <p>AI writes the code. Specifications make it correct. You don't need a senior engineer to maintain architecture — you need blueprints that any team, any AI, any generation of developers can execute from.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Protect What Matters Most</h3>
+            <p>Frameworks change. Teams turn over. AI evolves. The one thing that should never be lost is the knowledge of how your system works and why. That's what a specification layer preserves — permanently.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── The MOAT (sections[3]: content-section) ─── -->
+    <section id="moat" class="section section-soft" aria-labelledby="moat-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">The Platform</span>
+          <h2 id="moat-heading">Over 80 specifications. Years to build. Impossible to shortcut.</h2>
+          <p>An LLM can't produce a coherent specification corpus. SaaS APIs aren't architecture. A federation protocol, security model, and agent orchestrator that cross-reference each other don't emerge in a weekend. Ideas buried in markdown files drift from reality. Structured specifications stay true — and generate. This compounds.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
+            </div>
+            <h3>Complete System Specification</h3>
+            <p>Not fragments. Not templates. Protocol, architecture, patterns, agents, platforms, standards — each spec cross-references and generates alongside every other.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+            </div>
+            <h3>Language &amp; Platform Independence</h3>
+            <p>One blueprint → Go, Rust, Node, or Cloudflare Workers. Switch platforms without losing a single design decision.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
+            </div>
+            <h3>AI That Actually Works</h3>
+            <p>Stop re-prompting. Define once, generate deterministically — every language, zero wasted tokens. Without a spec, AI is hallucination with syntax highlighting. With blueprints, it's verifiable and reproducible.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
+            </div>
+            <h3>Permanent Upgrade Path</h3>
+            <p>Specs evolve. Regenerate. No migration scripts, no breaking changes buried in changelogs. Your architecture survives every technology shift.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── How It Works (sections[4]: content-section) ─── -->
+    <section id="how-it-works" class="section" aria-labelledby="how-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">How It Works</span>
+          <h2 id="how-heading">Specify → Generate → Deploy</h2>
+          <p>Define your domain. Generate the full stack. Deploy. When requirements change, update the spec and regenerate — no migration, no rewrite.</p>
+        </div>
+        <div class="code-window" style="max-width:720px;margin:0 auto">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-title">Terminal</span>
+          </div>
+          <div class="code-body">
+            <pre><span class="syn-c"># Generate a complete project from blueprints</span>
+<span class="syn-s">weblisk generate --platform cloudflare</span>
+
+<span class="syn-c"># Create a new domain with AI, auth, and real-time</span>
+<span class="syn-s">weblisk domain create chat --patterns api-ai,auth-token,realtime-chat</span>
+
+<span class="syn-c"># Validate all blueprints against schemas</span>
+<span class="syn-s">weblisk validate</span>
+
+<span class="syn-c"># Update to latest specifications</span>
+<span class="syn-s">weblisk blueprints update</span></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Architecture (sections[5]: content-section) ─── -->
+    <section id="architecture" class="section section-soft" aria-labelledby="arch-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Architecture</span>
+          <h2 id="arch-heading">Every layer. One specification corpus.</h2>
+          <p>Not a library. Not a framework. A complete system architecture — from wire protocol to cryptographic federation — specified, cross-referenced, and generated.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
+            </div>
+            <h3>Protocol &amp; Identity</h3>
+            <p>HTTP + JSON wire format. Ed25519 identity. Federation protocol for hub-to-hub collaboration.</p>
+            <a href="/platform/blueprints/protocol.html" style="display:inline-block;margin-top:0.5rem;font-weight:500">Protocol specs →</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+            </div>
+            <h3>Orchestrator &amp; Agents</h3>
+            <p>Central orchestrator for identity, routing, and audit. Agents register, execute, and collaborate autonomously.</p>
+            <a href="/platform/blueprints/architecture.html" style="display:inline-block;margin-top:0.5rem;font-weight:500">Architecture specs →</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
+            </div>
+            <h3>38 Cross-Cutting Patterns</h3>
+            <p>API, auth, governance, webhooks, workflows, operations. Each generates real endpoints with real security.</p>
+            <a href="/platform/blueprints/patterns.html" style="display:inline-block;margin-top:0.5rem;font-weight:500">Pattern catalog →</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
+            </div>
+            <h3>Federation &amp; Marketplace</h3>
+            <p>Self-sovereign hubs that federate with cryptographic trust and trade blueprints across organizations.</p>
+            <a href="/marketplace/" style="display:inline-block;margin-top:0.5rem;font-weight:500">Marketplace →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Use Cases (sections[6]: content-section) ─── -->
+    <section id="use-cases" class="section section-soft" aria-labelledby="usecases-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">What You Can Build</span>
+          <h2 id="usecases-heading">Real enterprise domains. Defined as blueprints.</h2>
+          <p>Not toy demos. Production systems generated from composed specifications.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-24"></i>
+            </div>
+            <h3>Marketing Platform</h3>
+            <p>Campaigns, AI content, scheduling, collaboration, analytics — 7 blueprints, entire stack generated.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-24"></i>
+            </div>
+            <h3>Supply Chain</h3>
+            <p>30 federated supplier hubs. Webhook ingestion, orchestration workflows, cryptographic contracts. No EDI. No middleware.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-24"></i>
+            </div>
+            <h3>Customer Support</h3>
+            <p>AI routing, live chat, SLA monitoring, multi-channel ingestion — specified, generated, and continuously optimized.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
+            </div>
+            <h3>Content Management</h3>
+            <p>CRUD, auth, AI writing, CDN triggers, quality agents. The CMS you'd build if starting from scratch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Declarative UI (sections[7]: xray-showcase) ─── -->
+    <section id="client-framework" class="section xray-section" aria-labelledby="client-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Declarative UI</span>
+          <h2 id="client-heading">You describe it. The LLM builds it.</h2>
+          <p>Write a YAML blueprint. The LLM generates production HTML, CSS, and JS — then renders the final UI. Hover any section and click the button to X-Ray any section live.</p>
+        </div>
+      </div>
+      <!-- Full-bleed showcase -->
+      <div class="xray-showcase">
+        <div class="xray-showcase-visual">
+          <div class="xray-showcase-layers">
+            <!-- YOU WRITE — the only layer a human touches -->
+            <div class="xray-layer xray-layer-blueprint">
+              <div class="xray-layer-header">
+                <span class="xray-layer-label">Blueprint</span>
+                <span class="xray-layer-badge xray-badge-human">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  You write
+                </span>
+              </div>
+              <div class="xray-layer-preview">
+                <span class="syn-c"># pages/home.yaml</span><br>
+                <span class="syn-k">- id:</span> <span class="syn-s">hero</span><br>
+                <span class="syn-k">&nbsp;&nbsp;type:</span> <span class="syn-s">hero</span><br>
+                <span class="syn-k">&nbsp;&nbsp;badge:</span><br>
+                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;text:</span> <span class="syn-s">"v1.0 — The specification layer"</span><br>
+                <span class="syn-k">&nbsp;&nbsp;headline:</span> <span class="syn-s">"Software finally has blueprints."</span><br>
+                <span class="syn-k">&nbsp;&nbsp;actions:</span><br>
+                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;- label:</span> <span class="syn-s">Explore the Platform</span><br>
+                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;href:</span> <span class="syn-s">/platform/</span><br>
+                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:</span> <span class="syn-s">primary</span>
+              </div>
+            </div>
+
+            <!-- GENERATION DIVIDER -->
+            <div class="xray-divider">
+              <div class="xray-divider-line"></div>
+              <span class="xray-divider-label">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                LLM generates
+              </span>
+              <div class="xray-divider-line"></div>
+            </div>
+
+            <!-- LLM GENERATES — three layers produced by AI -->
+            <div class="xray-layer xray-layer-html">
+              <div class="xray-layer-header">
+                <span class="xray-layer-label">HTML</span>
+                <span class="xray-layer-badge xray-badge-llm">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  Generated
+                </span>
+              </div>
+              <div class="xray-layer-preview">
+                <span class="syn-t">&lt;section</span> <span class="syn-a">id</span>=<span class="syn-s">"hero"</span> <span class="syn-a">class</span>=<span class="syn-s">"hero"</span><span class="syn-t">&gt;</span><br>
+                <span class="syn-t">&nbsp;&nbsp;&lt;div</span> <span class="syn-a">class</span>=<span class="syn-s">"hero-inner"</span><span class="syn-t">&gt;</span><br>
+                <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;</span>Software finally has blueprints.<span class="syn-t">&lt;/h1&gt;</span><br>
+                <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;&lt;a</span> <span class="syn-a">href</span>=<span class="syn-s">"/platform/"</span> <span class="syn-a">class</span>=<span class="syn-s">"btn btn-primary"</span><span class="syn-t">&gt;</span>Explore<span class="syn-t">&lt;/a&gt;</span><br>
+                <span class="syn-t">&nbsp;&nbsp;&lt;/div&gt;</span><br>
+                <span class="syn-t">&lt;/section&gt;</span>
+              </div>
+            </div>
+            <div class="xray-layer xray-layer-css">
+              <div class="xray-layer-header">
+                <span class="xray-layer-label">CSS</span>
+                <span class="xray-layer-badge xray-badge-llm">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  Generated
+                </span>
+              </div>
+              <div class="xray-layer-preview">
+                <span class="syn-t">.hero</span> <span class="syn-p">{</span> <span class="syn-a">padding</span><span class="syn-p">:</span> <span class="syn-n">6rem</span> <span class="syn-n">2rem</span>; <span class="syn-a">text-align</span><span class="syn-p">:</span> <span class="syn-s">center</span>; <span class="syn-p">}</span><br>
+                <span class="syn-t">.hero-inner</span> <span class="syn-p">{</span> <span class="syn-a">max-width</span><span class="syn-p">:</span> <span class="syn-f">var</span>(<span class="syn-s">--wl-max-width</span>); <span class="syn-p">}</span><br>
+                <span class="syn-t">.hero-badge</span> <span class="syn-p">{</span> <span class="syn-a">border-radius</span><span class="syn-p">:</span> <span class="syn-n">9999px</span>; <span class="syn-a">font-weight</span><span class="syn-p">:</span> <span class="syn-n">600</span>; <span class="syn-p">}</span>
+              </div>
+            </div>
+            <div class="xray-layer xray-layer-js">
+              <div class="xray-layer-header">
+                <span class="xray-layer-label">JS</span>
+                <span class="xray-layer-badge xray-badge-llm">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  Generated
+                </span>
+              </div>
+              <div class="xray-layer-preview">
+                <span class="syn-k">import</span> <span class="syn-p">{</span> hydrateIslands <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span><br>
+                <span class="syn-f">hydrateIslands</span><span class="syn-p">({</span> strategies<span class="syn-p">:</span> <span class="syn-p">{</span> idle<span class="syn-p">,</span> visible<span class="syn-p">,</span> load <span class="syn-p">} });</span>
+              </div>
+            </div>
+
+            <!-- OUTPUT DIVIDER -->
+            <div class="xray-divider">
+              <div class="xray-divider-line"></div>
+              <span class="xray-divider-label">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Renders
+              </span>
+              <div class="xray-divider-line"></div>
+            </div>
+
+            <!-- RENDERED OUTPUT -->
+            <div class="xray-layer xray-layer-rendered">
+              <div class="xray-layer-header">
+                <span class="xray-layer-label">Output</span>
+                <span class="xray-layer-badge xray-badge-output">Live</span>
+              </div>
+              <div class="xray-layer-preview xray-layer-rendered-preview">
+                <div class="xray-mini-hero">
+                  <span class="xray-mini-badge">v1.0 — The specification layer</span>
+                  <strong>Software finally has blueprints.</strong>
+                  <span class="xray-mini-sub">Over 80 interlocking specifications define your entire system</span>
+                  <span class="xray-mini-btn">Explore the Platform</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="xray-showcase-text">
+          <h3>Declarative design, AI-generated code</h3>
+          <p>You write one YAML blueprint — the shape of what you want. The LLM reads your specification and generates every layer of production code: semantic HTML, scoped CSS, and island-hydrated JavaScript.</p>
+          <div class="xray-flow-steps">
+            <div class="xray-flow-step">
+              <span class="xray-flow-icon xray-flow-human">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <div>
+                <strong>You describe</strong>
+                <span>Write a YAML blueprint — the specification layer</span>
+              </div>
+            </div>
+            <div class="xray-flow-step">
+              <span class="xray-flow-icon xray-flow-llm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </span>
+              <div>
+                <strong>LLM generates</strong>
+                <span>HTML, CSS, JS — production-ready, accessible</span>
+              </div>
+            </div>
+            <div class="xray-flow-step">
+              <span class="xray-flow-icon xray-flow-output">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <strong>Output renders</strong>
+                <span>Working UI — every layer traceable, yours to own</span>
+              </div>
+            </div>
+          </div>
+          <p class="xray-showcase-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Try it — hover any section and click the inspect button to X-Ray it live.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Comparison (sections[8]: comparison-table) ─── -->
+    <section id="comparison" class="section section-soft" aria-labelledby="compare-heading">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Comparison</span>
+          <h2 id="compare-heading">This isn't a better tool. It's a missing layer.</h2>
+          <p>Weblisk doesn't compete with frameworks, SaaS platforms, or AI code generators. It sits underneath all of them — the specification layer they've always been missing.</p>
+        </div>
+        <div style="overflow-x: auto">
+          <table class="comparison-table" role="table">
+            <thead>
+              <tr>
+                <th scope="col">Capability</th>
+                <th scope="col" class="highlight col-highlight">Weblisk</th>
+                <th scope="col">Build from scratch</th>
+                <th scope="col">SaaS platform</th>
+                <th scope="col">AI code gen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Persistent specification</td>
+                <td class="yes col-highlight">80+ YAML specs</td>
+                <td class="no">None</td>
+                <td class="no">Vendor-owned</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Generate any language</td>
+                <td class="yes col-highlight">Go, Rust, Node, CF Workers</td>
+                <td class="no">N/A</td>
+                <td class="no">No</td>
+                <td class="partial">Partial</td>
+              </tr>
+              <tr>
+                <td>You own the output</td>
+                <td class="yes col-highlight">100%</td>
+                <td class="yes">Yes</td>
+                <td class="no">Vendor lock-in</td>
+                <td class="partial">Fragile</td>
+              </tr>
+              <tr>
+                <td>Agent orchestration</td>
+                <td class="yes col-highlight">Built-in</td>
+                <td class="no">Build yourself</td>
+                <td class="no">Vendor-controlled</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Federation</td>
+                <td class="yes col-highlight">Cryptographic hub-to-hub</td>
+                <td class="no">Custom integration</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Specification validation</td>
+                <td class="yes col-highlight">Schema-enforced</td>
+                <td class="no">Manual review</td>
+                <td class="no">N/A</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Security model</td>
+                <td class="yes col-highlight">Ed25519, ABAC, 7-layer</td>
+                <td class="no">Build yourself</td>
+                <td class="partial">Shared tenancy</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Upgrade path</td>
+                <td class="yes col-highlight">Regenerate from specs</td>
+                <td class="no">Rewrite</td>
+                <td class="partial">Vendor roadmap</td>
+                <td class="no">Re-prompt</td>
+              </tr>
+              <tr>
+                <td>Runtime dependencies</td>
+                <td class="yes col-highlight">Zero</td>
+                <td class="no">Hundreds</td>
+                <td class="partial">Vendor-managed</td>
+                <td class="no">Hundreds</td>
+              </tr>
+              <tr>
+                <td>AI token efficiency</td>
+                <td class="yes col-highlight">Define once, generate forever</td>
+                <td class="no">N/A</td>
+                <td class="no">N/A</td>
+                <td class="no">Re-prompt every iteration</td>
+              </tr>
+              <tr>
+                <td>Knowledge preservation</td>
+                <td class="yes col-highlight">Structured YAML specs</td>
+                <td class="no">Scattered docs &amp; tribal knowledge</td>
+                <td class="no">Vendor-owned</td>
+                <td class="no">Prompt history</td>
+              </tr>
+              <tr>
+                <td>Reproducibility</td>
+                <td class="yes col-highlight">Identical output, any time</td>
+                <td class="no">"Works on my machine"</td>
+                <td class="partial">Vendor-controlled</td>
+                <td class="no">Non-deterministic</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA (sections[9]: cta-section) ─── -->
+    <section id="cta" class="section" aria-labelledby="cta-heading">
+      <div class="section-inner" style="text-align:center;max-width:640px;margin:0 auto">
+        <h2 id="cta-heading">Stop building from scratch. Start specifying.</h2>
+        <p style="margin-bottom:1.5rem">Install the CLI, define your domain as blueprints, and generate a complete production system — with real security, real agents, and a real upgrade path — in minutes, not months.</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a href="/docs/quick-start.html" class="btn btn-primary">
+            Get Started
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+          <a href="/marketplace/" class="btn btn-outline">Explore the Marketplace</a>
+        </div>
+        <p class="cta-roadmap">Reference implementations today. Deploy-anywhere adapters — AWS, GCP, Azure, Cloudflare — coming soon.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Blueprint Viewer (generated from components/blueprint-viewer.yaml) ─── -->
+  <aside class="blueprint-viewer" aria-label="Page blueprint source"
+    data-island="./js/islands/blueprint-viewer.js" data-hydrate="idle"
+    data-props='{"blueprint_path":"pages/home.yaml"}'>
+    <button class="blueprint-viewer-toggle" type="button" aria-expanded="false" aria-controls="blueprint-drawer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span>View Blueprint</span>
+    </button>
+    <div class="blueprint-drawer" id="blueprint-drawer" hidden>
+      <div class="blueprint-drawer-header">
+        <div>
+          <strong>Blueprint Source</strong>
+          <span class="blueprint-drawer-path">pages/home.yaml</span>
+        </div>
+        <button class="blueprint-drawer-close" type="button" aria-label="Close blueprint viewer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="blueprint-drawer-body">
+        <pre class="blueprint-code"><code>Loading blueprint…</code></pre>
+      </div>
+      <div class="blueprint-drawer-footer">
+        <p>This page was generated from this blueprint.</p>
+        <a href="/platform/blueprints/">Learn about blueprints →</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── X-Ray (section inspector) ─── -->
+  <div data-island="./js/islands/xray.js" data-hydrate="idle"
+    data-props='{"blueprint_path":"pages/home.yaml"}'
+    style="display:contents" aria-hidden="true"></div>
+
+  <!-- ─── Footer (generated from components/footer.yaml) ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="./images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Software finally has blueprints — describe once, generate forever, own everything.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/blueprints/">Blueprints</a>
+            <a href="/platform/agents/">Agents</a>
+            <a href="/platform/server/">Server Spec</a>
+            <a href="/platform/client/">Client Framework</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/marketplace/templates/">Templates</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/islands/shell.js"></script>
+
+  <!-- Island bootstrap — works without CDN hydration -->
+  <script type="module">
+    const base = new URL('.', import.meta.url).href;
+
+    // Blueprint tabs (tabbed code viewer)
+    const tabsEl = document.querySelector('[data-island*="blueprint-tabs"]');
+    if (tabsEl) {
+      import(base + 'js/islands/blueprint-tabs.js')
+        .then(m => m.default(tabsEl))
+        .catch(err => console.warn('[blueprint-tabs] hydration failed:', err));
+    }
+
+    // X-Ray (section inspector)
+    const xrayEl = document.querySelector('[data-island*="xray"]');
+    if (xrayEl) {
+      import(base + 'js/islands/xray.js')
+        .then(m => m.default(xrayEl))
+        .catch(err => console.warn('[xray] hydration failed:', err));
+    }
+
+    // Blueprint viewer (floating drawer + ?blueprint source view)
+    const viewer = document.querySelector('[data-island*="blueprint-viewer"]');
+    if (viewer) {
+      import(base + 'js/islands/blueprint-viewer.js')
+        .then(m => m.default(viewer))
+        .catch(err => {
+          console.warn('[blueprint-viewer] hydration failed:', err);
+          // Fallback: if ?blueprint param present, load source view directly
+          if (new URLSearchParams(location.search).has('blueprint')) {
+            import(base + 'js/islands/blueprint-mode.js')
+              .then(bp => bp.default(viewer, 'pages/home.yaml'));
+          }
+        });
+    }
+  </script>
+</body>
+
+</html>

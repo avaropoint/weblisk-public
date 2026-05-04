@@ -1,0 +1,63 @@
+# Blueprint Viewer Component
+# Drawer/panel that shows the YAML blueprint source for the current page.
+# This is the "View Blueprint" affordance — the proof that every page
+# is specification-driven.
+
+name: blueprint-viewer
+type: island
+hydrate: idle            # Load after initial paint — not critical path
+status: active
+version: 2.0.0
+
+props:
+  blueprint_path: string # Path to the YAML file, e.g. "pages/home.yaml"
+
+structure:
+  element: aside
+  class: blueprint-viewer
+  aria_label: Page blueprint source
+  children:
+    - type: toggle-button
+      label: View Blueprint
+      icon: book
+      aria_expanded: false
+    - type: drawer
+      class: blueprint-drawer
+      children:
+        - type: drawer-header
+          title: "Blueprint Source"
+          subtitle: "{{props.blueprint_path}}"
+          close_button: true
+        - type: code-block
+          language: yaml
+          source: "/api/blueprint/{{props.blueprint_path}}"
+          line_numbers: true
+        - type: drawer-footer
+          text: "This page was generated from this blueprint."
+          link:
+            label: Learn about blueprints →
+            href: /platform/blueprints/
+
+behavior:
+  drawer_mode:
+    - Toggle button opens/closes drawer with slide animation
+    - On open, fetch YAML from /api/blueprint/:path (cached after first load)
+    - Syntax highlighting for YAML (minimal — keywords, strings, comments)
+    - Close on Escape key
+    - Focus trap while open
+    - Respects prefers-reduced-motion
+  source_view:
+    trigger: "?blueprint query parameter"
+    keyboard_shortcut: "Cmd/Ctrl+Shift+B"
+    module: blueprint-mode.js
+    description: >
+      Full-page "View Blueprint Source" — like browser View Source
+      but shows the YAML specification that produced the page.
+    steps:
+      - Hides all page content (fixed overlay covers viewport)
+      - Shows top bar with Blueprint Source label, file path, Copy button, and Close button
+      - Fetches full YAML blueprint and renders with syntax highlighting
+      - Line numbers in left gutter
+      - Copy button copies raw YAML to clipboard
+      - Close button (or Escape) removes query param and returns to rendered page
+      - Keyboard shortcut Cmd/Ctrl+Shift+B toggles from any page

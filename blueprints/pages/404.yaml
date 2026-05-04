@@ -1,0 +1,25 @@
+type: page
+route: /404
+title: "Page Not Found"
+layout: centered
+
+components:
+  header: components/nav
+  footer: components/footer
+
+sections:
+  - type: error
+    code: 404
+    heading: "Page not found"
+    body: "The page you're looking for doesn't exist or has been moved."
+    actions:
+      - label: "Go Home"
+        href: /
+        style: primary
+      - label: "View Docs"
+        href: /docs/
+        style: secondary
+
+seo:
+  title: "Page Not Found — Weblisk"
+  robots: "noindex, nofollow"

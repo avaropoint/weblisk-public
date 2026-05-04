@@ -1,12 +1,10 @@
 # Weblisk Public Website — Cloudflare Worker + R2
-# Minimal Worker serves static files from R2 with index.html fallback.
-# account_id read from CLOUDFLARE_ACCOUNT_ID env var
+# Static site with Blueprint API for live specification viewing.
 
 name = "weblisk-public"
 main = "workers/site.js"
 compatibility_date = "2026-04-01"
 
-# Serve weblisk.dev via this Worker
 routes = [
   { pattern = "weblisk.dev/*", zone_name = "weblisk.dev" },
   { pattern = "weblisk.dev", zone_name = "weblisk.dev" }
@@ -15,3 +13,4 @@ routes = [
 [[r2_buckets]]
 binding = "SITE"
 bucket_name = "weblisk-public"
+preview_bucket_name = "weblisk-public-preview"

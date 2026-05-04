@@ -1,0 +1,69 @@
+# Weblisk — Site Identity & Global Configuration
+# This is the source of truth for site-wide settings.
+
+name: Weblisk
+domain: weblisk.dev
+description: >
+  The specification-driven platform for building AI-native applications.
+  Describe once, generate everything, own it all.
+version: 2.0.0
+license: MIT
+organization:
+  name: Avaropoint
+  url: https://avaropoint.com
+  github: https://github.com/avaropoint
+
+navigation:
+  - label: Home
+    path: /
+  - label: Platform
+    path: /platform/
+  - label: Marketplace
+    path: /marketplace/
+  - label: Docs
+    path: /docs/
+
+social:
+  github: https://github.com/avaropoint/weblisk
+  twitter: https://x.com/weblisk
+  discord: https://discord.gg/5CetAq9EgZ
+
+seo:
+  title_suffix: " — Weblisk"
+  default_og_image: /images/social/og-image.png
+  twitter_site: "@weblisk"
+  locale: en_US
+
+footer:
+  copyright: "© 2026 Made with ♥ by Avaropoint"
+  tagline: >
+    Software finally has blueprints — describe once, generate forever, own everything.
+  columns:
+    - heading: Platform
+      links:
+        - label: Blueprints
+          path: /platform/blueprints/
+        - label: Agents
+          path: /platform/agents/
+        - label: Server Spec
+          path: /platform/server/
+        - label: Client Framework
+          path: /platform/client/
+    - heading: Ecosystem
+      links:
+        - label: Marketplace
+          path: /marketplace/
+        - label: Documentation
+          path: /docs/
+        - label: Templates
+          path: /marketplace/templates/
+    - heading: Community
+      links:
+        - label: GitHub
+          url: https://github.com/avaropoint/weblisk
+        - label: X (Twitter)
+          url: https://x.com/weblisk
+        - label: Discord
+          url: https://discord.gg/5CetAq9EgZ
+        - label: Sponsor
+          url: https://github.com/sponsors/avaropoint

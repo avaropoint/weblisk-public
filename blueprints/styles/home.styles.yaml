@@ -2,11 +2,9 @@
 # CSS additions beyond the base theme that are specific to the homepage.
 # The generated styles in /css/styles.css MUST match this specification.
 # Base design tokens live in /.weblisk/theme.yaml.
-# Extends: standards/styles (page-scoped style declarations)
 
 name: home-styles
 type: styles
-extends: standards/styles
 page: home
 status: active
 version: 2.0.0
@@ -47,8 +45,8 @@ hero_tagline:
   letter_spacing: "-0.01em"
   layout: flex-row-center
   gap: 0.75rem
-  accent_phrases: [1, 3]
-  hover_opacity: [0.85, 1.0]
+  accent_phrases: [ 1, 3 ]
+  hover_opacity: [ 0.85, 1.0 ]
 
 # ─── Feature Card Icons ────────────────────────────────
 # "Why This Matters" section uses inline SVGs instead of wl-icon
@@ -62,7 +60,8 @@ why_this_matters_icons:
       description: Globe with meridians
       paths:
         - circle: { cx: 12, cy: 12, r: 10 }
-        - path: "M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"
+        - path: "M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1
+            4-10z"
         - path: "M2 12h20"
     zero_developer_lock_in:
       description: Users group

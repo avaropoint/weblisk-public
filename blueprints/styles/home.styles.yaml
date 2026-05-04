@@ -2,9 +2,11 @@
 # CSS additions beyond the base theme that are specific to the homepage.
 # The generated styles in /css/styles.css MUST match this specification.
 # Base design tokens live in /.weblisk/theme.yaml.
+# Extends: standards/styles (page-scoped style declarations)
 
 name: home-styles
 type: styles
+extends: standards/styles
 page: home
 status: active
 version: 2.0.0

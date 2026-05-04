@@ -2,15 +2,28 @@
 # Drawer/panel that shows the YAML blueprint source for the current page.
 # This is the "View Blueprint" affordance — the proof that every page
 # is specification-driven.
+# Extends: standards/islands (protocol, data, behavior)
 
 name: blueprint-viewer
 type: island
+extends: standards/islands
 hydrate: idle            # Load after initial paint — not critical path
 status: active
 version: 2.0.0
 
+# Island binding (per standards/islands spec)
+agent: gateway           # Fetches from the gateway's blueprint API
+protocol: request        # One-shot request/response (no persistent connection)
+auth: none               # Blueprint source is public
+
 props:
-  blueprint_path: string # Path to the YAML file, e.g. "pages/home.yaml"
+  blueprint_path: { type: string, required: true }  # Path to YAML, e.g. "pages/home.yaml"
+
+data:
+  format: text
+  content_type: text/yaml
+  schema:
+    type: string         # Raw YAML content (not parsed into object)
 
 structure:
   element: aside

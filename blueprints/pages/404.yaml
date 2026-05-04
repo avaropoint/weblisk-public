@@ -1,4 +1,5 @@
 type: page
+extends: standards/pages
 route: /404
 title: "Page Not Found"
 layout: centered

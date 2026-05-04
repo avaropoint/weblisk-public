@@ -1,14 +1,16 @@
 # Navigation Component
 # Renders the top navbar with site links, social, and theme toggle.
+# Extends: standards/components (props, accessibility contract)
 
 name: nav
 type: component
+extends: standards/components
 hydrate: load
 status: active
 version: 2.0.0
 
 props:
-  active_path: string    # Current page path — used to set aria-current
+  active_path: { type: string, required: true }  # Current page path — used to set aria-current
 
 structure:
   element: nav
@@ -39,6 +41,15 @@ behavior:
   - active link highlighting from props.active_path
   - sidebar injection: on pages with .docs-sidebar or .examples-sidebar,
     injects those links into the mobile nav menu for responsive navigation
+
+accessibility:
+  role: navigation
+  aria_label: "Main navigation"
+  keyboard: tab-through-links
+  focus: true
+  mobile_menu:
+    aria_expanded: true
+    focus_trap: true
 
 dependencies:
   runtime:

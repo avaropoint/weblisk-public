@@ -1,27 +1,107 @@
 # Weblisk Public Website — Server Architecture
 # Defines the server-side implementation for weblisk.dev.
-# This blueprint references canonical specs from weblisk-blueprints
-# and specifies site-specific configuration and routing.
-#
-# Canonical specs (source of truth):
-#   Gateway        → weblisk-blueprints/architecture/gateway.md
-#   Orchestrator   → weblisk-blueprints/architecture/orchestrator.md
-#   Domain         → weblisk-blueprints/architecture/domain.md
-#   Agent          → weblisk-blueprints/architecture/agent.md
-#   Protocol       → weblisk-blueprints/protocol/types.md
-#   Platform (CF)  → weblisk-blueprints/platforms/cloudflare.md
+# Extends the canonical Cloudflare platform specification and references
+# architecture specs from weblisk-blueprints for gateway, orchestrator,
+# domain controller, and protocol contracts.
 
 name: server
 type: architecture
 platform: cloudflare
 status: active
 version: 2.0.0
+extends: platforms/cloudflare
 
 description: >
   Edge-deployed hub architecture for weblisk.dev. Single Cloudflare Worker
   entry point (gateway) with Durable Object orchestrator and website
   domain controller. All modules internal — no external network calls
   between components.
+
+# ─── Dependencies (from canonical specs) ───
+
+requires:
+  - blueprint: platforms/cloudflare
+    version: ">=1.0.0 <2.0.0"
+    bindings:
+      platform:
+        - runtime: cloudflare-workers
+        - state: durable-objects
+        - cache: kv
+        - storage: r2
+    on_change:
+      compatible: validate-and-adopt
+      breaking: version-bump
+      removed: halt-immediately
+  - blueprint: protocol/types
+    version: ">=1.0.0 <2.0.0"
+    bindings:
+      types:
+        - name: HealthStatus
+          fields_used: [status, component, version, uptime_seconds]
+        - name: AgentManifest
+          fields_used: [name, version, capabilities, actions]
+    on_change:
+      compatible: validate-and-adopt
+      breaking: version-bump
+      removed: halt-immediately
+  - blueprint: architecture/gateway
+    version: ">=1.0.0 <2.0.0"
+    bindings:
+      patterns:
+        - behavior: edge-security-boundary
+          parameters: [csp, dotfile-blocking, path-traversal-prevention]
+        - behavior: route-dispatch
+          parameters: [static, api, orchestrator, domain]
+    on_change:
+      compatible: validate-and-adopt
+      breaking: version-bump
+      removed: halt-immediately
+  - blueprint: architecture/orchestrator
+    version: ">=1.0.0 <2.0.0"
+    bindings:
+      types:
+        - name: AgentRegistry
+          fields_used: [register, deregister, lookup]
+    on_change:
+      compatible: validate-and-adopt
+      breaking: version-bump
+      removed: halt-immediately
+  - blueprint: architecture/domain
+    version: ">=1.0.0 <2.0.0"
+    bindings:
+      patterns:
+        - behavior: domain-controller
+          parameters: [describe, health, execute]
+    on_change:
+      compatible: validate-and-adopt
+      breaking: version-bump
+      removed: halt-immediately
+  - blueprint: patterns/caching
+    version: ">=1.0.0 <2.0.0"
+    bindings:
+      patterns:
+        - behavior: cache-interface
+          parameters: [kv_edge_cache, ttl_600s]
+    on_change:
+      compatible: validate-and-adopt
+      breaking: version-bump
+      removed: halt-immediately
+
+# ─── Runtime (per platforms/cloudflare requirement) ───
+
+runtime:
+  language: JavaScript
+  version: "ES2022+ (Cloudflare Workers V8 runtime)"
+  dependencies:
+    required: []    # Zero runtime dependencies — all APIs are platform-native
+    optional: []
+  build_tools:
+    - name: wrangler
+      version: ">=4.0.0"
+      purpose: Cloudflare Workers CLI for development, testing, and deployment
+    - name: node
+      version: ">=18.0.0"
+      purpose: Required to run wrangler CLI tooling
 
 # ─── Hub topology ───
 

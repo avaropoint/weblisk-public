@@ -1,11 +1,16 @@
 # Footer Component
 # Renders the site-wide footer with brand, nav columns, social, and copyright.
+# Extends: standards/components (props, accessibility contract)
 
 name: footer
 type: component
+extends: standards/components
 hydrate: none            # No JS — pure HTML component
 status: active
 version: 2.0.0
+
+props:
+  columns: { type: array, required: false }    # Override footer columns (default: from global.yaml)
 
 structure:
   element: footer
@@ -29,3 +34,10 @@ structure:
       powered_by:
         text: Powered by Weblisk
         href: /docs/
+
+accessibility:
+  role: contentinfo
+  aria_label: "Site footer"
+  nav_columns:
+    role: navigation
+    aria_label: "Footer navigation"

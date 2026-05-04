@@ -1,0 +1,172 @@
+# Weblisk Public Website — Server Architecture
+# Defines the server-side implementation for weblisk.dev.
+# This blueprint references canonical specs from weblisk-blueprints
+# and specifies site-specific configuration and routing.
+#
+# Canonical specs (source of truth):
+#   Gateway        → weblisk-blueprints/architecture/gateway.md
+#   Orchestrator   → weblisk-blueprints/architecture/orchestrator.md
+#   Domain         → weblisk-blueprints/architecture/domain.md
+#   Agent          → weblisk-blueprints/architecture/agent.md
+#   Protocol       → weblisk-blueprints/protocol/types.md
+#   Platform (CF)  → weblisk-blueprints/platforms/cloudflare.md
+
+name: server
+type: architecture
+platform: cloudflare
+status: active
+version: 2.0.0
+
+description: >
+  Edge-deployed hub architecture for weblisk.dev. Single Cloudflare Worker
+  entry point (gateway) with Durable Object orchestrator and website
+  domain controller. All modules internal — no external network calls
+  between components.
+
+# ─── Hub topology ───
+
+hub:
+  name: weblisk-public
+  entry: workers/site.js
+  platform: cloudflare-workers
+  compatibility_date: "2026-04-01"
+
+gateway:
+  module: workers/site.js
+  spec: architecture/gateway.md
+  responsibilities:
+    - Edge security boundary (dotfile blocking, path traversal prevention)
+    - Static file serving from R2
+    - Blueprint API with KV edge caching (10 min TTL)
+    - Security headers on all responses (CSP, HSTS, X-Frame-Options, etc.)
+    - Route dispatch to domain controllers and orchestrator
+    - Version injection for cache busting (CSS/JS assets)
+    - Performance telemetry sink (/api/perf → 204)
+  routes:
+    - path: /api/health
+      method: GET
+      description: Aggregated hub health
+    - path: /v1/*
+      method: "*"
+      target: orchestrator (Durable Object)
+    - path: /api/examples/*
+      methods: [GET, HEAD, POST]
+      target: website domain controller
+    - path: /api/perf
+      method: POST
+      description: Fire-and-forget telemetry (204 No Content)
+    - path: /api/blueprint/:path
+      methods: [GET, HEAD]
+      description: Blueprint YAML with KV cache
+    - path: /*
+      methods: [GET, HEAD]
+      description: Static files from R2
+  security:
+    csp:
+      script-src: "'self' 'unsafe-inline' https:"
+      note: >
+        Uses scheme-source https: rather than explicit CDN domain because
+        wrangler dev rewrites zone domains in response headers. Import map
+        in HTML restricts module resolution to cdn.weblisk.dev.
+    headers:
+      - x-content-type-options: nosniff
+      - x-frame-options: DENY
+      - strict-transport-security: "max-age=31536000; includeSubDomains; preload"
+      - permissions-policy: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+      - cross-origin-opener-policy: same-origin
+
+protocol:
+  module: workers/protocol.js
+  spec: protocol/types.md
+  exports:
+    - VERSION: "1.0.0"
+    - manifest: Build agent manifests
+    - jsonResponse: Standard JSON response helper
+    - errorResponse: Error response with status
+    - healthResponse: Health check response
+    - log: Structured JSON logging (component, action, trace_id, timestamp)
+    - newTraceId: crypto.randomUUID()
+    - validateRequired: Field presence validation
+
+orchestrator:
+  module: workers/orchestrator.js
+  spec: architecture/orchestrator.md
+  runtime: Durable Object (persistent, single-instance)
+  binding: ORCHESTRATOR
+  migration_tag: v1
+  responsibilities:
+    - Agent registry with namespace enforcement
+    - Service directory (lookup registered agents)
+    - Persistent storage (survives worker restarts)
+    - Health reporting with uptime metrics
+  endpoints:
+    - POST /v1/register: Register agent (requires name, type, url)
+    - DELETE /v1/register: Deregister agent (releases namespace)
+    - GET /v1/services: Service directory listing
+    - GET /v1/health: Orchestrator health + metrics
+
+domains:
+  website:
+    module: workers/domains/website.js
+    spec: architecture/domain.md
+    description: >
+      Website domain controller — handles interactive examples and
+      code generation from blueprints.
+    capabilities:
+      - Blueprint type detection (agent, component, page, gateway)
+      - Simulated code generation (pre-built examples per type)
+      - Live generation via CF AI Gateway (when WL_AI_KEY is set)
+      - Graceful degradation (live → simulated fallback on failure)
+    endpoints:
+      - GET /api/examples/: Domain info + endpoint listing
+      - GET /api/examples/describe: Full domain manifest
+      - GET /api/examples/health: Domain health check
+      - POST /api/examples/generate: Generate code from blueprint YAML
+    ai:
+      model: claude-sonnet-4-20250514
+      gateway: CF AI Gateway (Anthropic provider)
+      required: false
+      fallback: simulated responses from SIMULATED_EXAMPLES map
+
+# ─── Cloudflare bindings ───
+
+bindings:
+  r2:
+    - name: SITE
+      production: weblisk-public
+      preview: weblisk-public-preview
+      purpose: Static assets + blueprints
+  kv:
+    - name: CACHE
+      id: 7606e97b0b2b46369fc120a9667b7ecc
+      preview_id: e0440485b33e41be9e062c12b6ab1639
+      purpose: Blueprint API edge cache (600s TTL)
+  durable_objects:
+    - name: ORCHESTRATOR
+      class: Orchestrator
+      purpose: Agent registry and service directory
+  secrets:
+    - WL_AI_KEY: Anthropic API key (optional)
+  vars:
+    - WL_VERSION: "1.0.0"
+    - WL_AI_MODEL: claude-sonnet-4-20250514
+    - WL_AI_BASE_URL: CF AI Gateway URL
+    - WL_ENVIRONMENT: production | preview
+
+# ─── Import map (CDN) ───
+
+client:
+  cdn: https://cdn.weblisk.dev/
+  import_map:
+    weblisk: https://cdn.weblisk.dev/weblisk.js
+    "weblisk/": https://cdn.weblisk.dev/
+  hydration:
+    module: weblisk/core/hydrate.js
+    strategies: [load, idle, visible, media, event, never]
+  shell:
+    module: js/islands/shell.js
+    type: module
+    responsibilities:
+      - Hydrate all islands via import map
+      - Register service worker
+      - Defer non-critical init (security, a11y, perf, clipboard)

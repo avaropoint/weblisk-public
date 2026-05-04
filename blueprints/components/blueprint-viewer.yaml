@@ -41,11 +41,19 @@ structure:
 behavior:
   drawer_mode:
     - Toggle button opens/closes drawer with slide animation
-    - On open, fetch YAML from /api/blueprint/:path (cached after first load)
+    - "On open, fetch YAML from /api/blueprint/:path (cached after first load)"
+    - "Fallback: direct file fetch from /blueprints/:path (weblisk dev / filesystem)"
     - Syntax highlighting for YAML (minimal — keywords, strings, comments)
     - Close on Escape key
     - Focus trap while open
     - Respects prefers-reduced-motion
+  fetch_strategy:
+    primary: "/api/blueprint/{blueprint_path}"
+    fallback: "/blueprints/{blueprint_path}"
+    notes: >
+      Always attempt API route first (works with both wrangler dev and
+      production). Falls back to direct file path for weblisk dev which
+      serves from filesystem without the gateway worker.
   source_view:
     trigger: "?blueprint query parameter"
     keyboard_shortcut: "Cmd/Ctrl+Shift+B"

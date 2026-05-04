@@ -83,13 +83,13 @@ export default function blueprintViewer(el) {
     try {
       codeEl.textContent = 'Loading…';
       const pageBase = new URL('.', document.baseURI).href;
-      const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      // Skip API attempt on localhost to avoid console 404 noise
-      const apiRes = isLocal ? null : await fetch(`${pageBase}api/blueprint/${blueprintPath}`).catch(() => null);
+      // Always try API first (works with both wrangler dev and production)
+      const apiRes = await fetch(`${pageBase}api/blueprint/${blueprintPath}`).catch(() => null);
       let text;
       if (apiRes && apiRes.ok) {
         text = await apiRes.text();
       } else {
+        // Fallback: direct file fetch (weblisk dev serves filesystem)
         const fileRes = await fetch(`${pageBase}blueprints/${blueprintPath}`);
         if (!fileRes.ok) throw new Error(`${fileRes.status} ${fileRes.statusText}`);
         text = await fileRes.text();

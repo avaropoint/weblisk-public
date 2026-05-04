@@ -34,6 +34,14 @@ structure:
           mobile_toggle: true
 
 behavior:
-  - mobile menu toggle (hamburger → close)
-  - theme toggle (light ↔ dark, persists to localStorage)
+  - mobile menu toggle (hamburger → close, aria-expanded)
+  - theme toggle (light ↔ dark, persists to localStorage via state.js signal)
   - active link highlighting from props.active_path
+  - sidebar injection: on pages with .docs-sidebar or .examples-sidebar,
+    injects those links into the mobile nav menu for responsive navigation
+
+dependencies:
+  runtime:
+    - "weblisk" # effect() for reactive theme icon updates
+    - "../state.js" # theme signal + setTheme
+  hydration: load # Critical path — must hydrate immediately

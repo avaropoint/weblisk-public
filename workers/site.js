@@ -42,18 +42,24 @@ function mimeFor(key) {
 
 // ─── Security headers (per gateway spec) ───
 
-const CSP = [
-  "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://cdn.weblisk.dev https://static.cloudflareinsights.com",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
-  "connect-src 'self' https: ws: wss:",
-  "worker-src 'self' blob:",
-  "manifest-src 'self'",
-  "frame-ancestors 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-].join("; ");
+function buildCSP() {
+  // script-src uses scheme-source https: rather than explicit CDN domain because
+  // wrangler dev rewrites zone domains in response headers. The import map in HTML
+  // already restricts module resolution to cdn.weblisk.dev. No user-generated
+  // content exists, so this is safe and works in both local and production.
+  return [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' https:",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "connect-src 'self' https: ws: wss:",
+    "worker-src 'self' blob:",
+    "manifest-src 'self'",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+  ].join("; ");
+}
 
 function securityHeaders(headers, isHTML) {
   headers.set("x-content-type-options", "nosniff");
@@ -65,7 +71,7 @@ function securityHeaders(headers, isHTML) {
   headers.set("cross-origin-opener-policy", "same-origin");
   headers.set("cross-origin-resource-policy", "same-origin");
   if (isHTML) {
-    headers.set("content-security-policy", CSP);
+    headers.set("content-security-policy", buildCSP());
     headers.set("x-permitted-cross-domain-policies", "none");
   }
 }

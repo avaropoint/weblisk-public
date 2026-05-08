@@ -1,0 +1,20 @@
+# Blueprint Tabs Island
+# ARIA-compliant tablist with keyboard navigation.
+# Used by X-Ray and Blueprint Viewer overlays.
+
+name: blueprint-tabs
+type: island
+extends: standards/islands
+hydrate: visible
+status: active
+version: 2.0.0
+
+agent: none
+protocol: none
+auth: none
+
+behavior:
+  - ARIA tablist with role=tab and role=tabpanel
+  - Arrow key navigation between tabs
+  - Home/End key support
+  - Focus management on tab activation

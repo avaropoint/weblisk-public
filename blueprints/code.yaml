@@ -1,0 +1,60 @@
+# Weblisk Code Conventions
+# Constrains all generated code for consistency and determinism.
+
+framework: weblisk
+version: "1.0"
+
+html:
+  doctype: html5
+  charset: utf-8
+  viewport: "width=device-width, initial-scale=1"
+  indent: 2
+  semantic: strict
+  attributes_order: [id, class, data-*, aria-*, role]
+
+css:
+  methodology: utility-first
+  custom_properties: true
+  nesting: native
+  media_queries: mobile-first
+  units: { spacing: rem, font: rem, layout: fr }
+  dark_mode: prefers-color-scheme
+  animations: reduced-motion-safe
+
+javascript:
+  target: es2022
+  modules: esm
+  style: functional
+  naming: camelCase
+  async: async-await
+  error_handling: boundary
+  state: signals
+  no_globals: true
+
+islands:
+  hydration: lazy
+  loading: intersection
+  fallback: skeleton
+  error: graceful
+  communication: events
+
+generation:
+  deterministic: true
+  comments: minimal
+  file_naming: kebab-case
+  component_naming: PascalCase
+  max_file_lines: 300
+  imports: explicit
+
+custom:
+  constraints:
+    no_frameworks: true
+    no_build_step: true
+    no_npm: true
+    no_bundler: true
+    zero_dependencies: true
+    performance_budget: 100kb
+  target:
+    platform: cloudflare-workers
+    client_cdn: https://cdn.weblisk.dev
+    output_dir: public

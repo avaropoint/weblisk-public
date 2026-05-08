@@ -3,7 +3,7 @@
 
 export const VERSION = "1.0.0";
 
-// ─── Agent manifest helpers ───
+// Agent manifest helpers
 
 export function manifest({ name, type, version, description, capabilities, inputs, outputs, publishes, subscriptions, workflows, requiredAgents }) {
   return {
@@ -23,7 +23,7 @@ export function manifest({ name, type, version, description, capabilities, input
   };
 }
 
-// ─── Standard responses ───
+// Standard responses
 
 export function jsonResponse(data, status = 200, headers = {}) {
   return new Response(JSON.stringify(data, null, 2), {
@@ -36,7 +36,7 @@ export function errorResponse(error, status = 400) {
   return jsonResponse({ error }, status);
 }
 
-// ─── Health response ───
+// Health response
 
 export function healthResponse(name, status, version, extra = {}) {
   return jsonResponse({
@@ -48,7 +48,7 @@ export function healthResponse(name, status, version, extra = {}) {
   });
 }
 
-// ─── Structured logging (per platforms/cloudflare.md) ───
+// Structured logging (per platforms/cloudflare.md)
 
 export function log(component, action, detail = {}, traceId) {
   console.log(JSON.stringify({
@@ -60,13 +60,13 @@ export function log(component, action, detail = {}, traceId) {
   }));
 }
 
-// ─── Trace ID ───
+// Trace ID
 
 export function newTraceId() {
   return crypto.randomUUID();
 }
 
-// ─── Validation helpers ───
+// Validation helpers
 
 export function validateRequired(obj, fields) {
   const missing = fields.filter(f => !(f in obj) || obj[f] === undefined || obj[f] === "");

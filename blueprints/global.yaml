@@ -1,0 +1,51 @@
+# Weblisk Global Blueprint
+# Project identity and cross-cutting configuration.
+
+name: Weblisk
+domain: weblisk.dev
+locale: en-US
+locales: [en-US]
+
+brand:
+  colors:
+    primary: "#6366f1"
+    accent: "#818cf8"
+    surface: "#ffffff"
+    text: "#1e293b"
+    error: "#ef4444"
+    success: "#10b981"
+  typography:
+    heading: { family: "Inter", weight: 700 }
+    body: { family: "system-ui", weight: 400 }
+    mono: { family: "JetBrains Mono", weight: 400 }
+  spacing: 8px
+  radius: 4px
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
+
+identity:
+  tagline: "Software finally has blueprints"
+  description: >
+    The specification-driven platform for building AI-native applications.
+    Describe once, generate everything, own it all.
+  legal_name: Avaropoint
+  contact: hello@weblisk.dev
+  copyright_year: 2026
+
+social:
+  twitter: "@weblisk"
+  github: avaropoint/weblisk
+  discord: https://discord.gg/5CetAq9EgZ
+  og_default_image: /images/social/og-image.png
+
+policies:
+  accessibility: WCAG-2.2-AA
+  seo: strict
+  structured_data: required
+  social_meta: required
+  performance:
+    lcp: 2500
+    cls: 0.1
+    inp: 200
+
+dependencies: []

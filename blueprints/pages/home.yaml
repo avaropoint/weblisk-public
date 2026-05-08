@@ -3,7 +3,7 @@
 # The generated HTML at /public/index.html MUST match this specification.
 #
 # Related blueprints:
-#   Design tokens         → ../../.weblisk/theme.yaml
+#   Design tokens         → ../theme.yaml
 #   Components            → ../components/{nav,footer,blueprint-viewer}.yaml
 
 name: home
@@ -20,8 +20,9 @@ seo:
     Software is the only engineering discipline without a specification
     layer. Weblisk changes that. Over 80 interlocking blueprints define complete
     systems — protocol, agents, security, federation — then generate
-    production code in any language. The architecture is permanent.
-    Code is just a build artifact.
+    production code for Cloudflare Workers, Go, Rust, and Node.js.
+    Schema migrations, data integrity, and rollback strategies are built in.
+    The architecture is permanent. Code is just a build artifact.
   canonical: "https://weblisk.dev/"
   keywords:
     - specification-driven development
@@ -33,6 +34,12 @@ seo:
     - autonomous agents
     - YAML specification
     - open platform
+    - schema-aware migrations
+    - data protection
+    - versioned deployments
+    - Cloudflare Workers
+    - domain agents
+    - infrastructure agents
   robots: "index, follow"
   author: Avaropoint
   theme_color: "#1a1f36"
@@ -42,8 +49,8 @@ seo:
     description: >
       Software is the only engineering discipline without a specification
       layer. Weblisk is over 80 interlocking blueprints that define complete
-      systems and generate production code in any language. Own everything.
-      Rewrite nothing.
+      systems and generate production code for any platform. Schema migrations,
+      data integrity, and versioned deployments — built in, not bolted on.
     url: "https://weblisk.dev/"
     site_name: Weblisk
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
@@ -78,8 +85,9 @@ seo:
       url: "https://weblisk.dev"
       description: >
         The specification layer for software. Over 80 interlocking blueprints
-        that define complete systems and generate production code in any
-        language. Own everything. Rewrite nothing.
+        that define complete systems and generate production code for any
+        platform. Schema migrations, data protection, and versioned
+        deployments are built into the specification layer.
       publisher: "https://avaropoint.com/#org"
       inLanguage: en
     - type: SoftwareApplication
@@ -97,7 +105,7 @@ seo:
       currency: USD
       license: "https://opensource.org/licenses/MIT"
       version: "1.0.0"
-      languages: [JavaScript, Go, Rust]
+      languages: [JavaScript, Go, Rust, Cloudflare Workers]
       repository: "https://github.com/avaropoint/weblisk"
       partOf: "https://weblisk.dev/#website"
     - type: FAQPage
@@ -131,6 +139,20 @@ seo:
             are free and MIT-licensed. The Weblisk Marketplace enables
             buying and selling community-created blueprints, agents,
             and templates.
+        - q: How does Weblisk handle data migrations?
+          a: >
+            Schema migrations, data integrity checks, and rollback
+            strategies are specified alongside your code in the blueprint
+            layer. Every deployment is diffed, validated, and reversible.
+            Change management and deprecation lifecycles are built into
+            the specification — not bolted on after the fact.
+        - q: What platforms does Weblisk support?
+          a: >
+            Weblisk starts with Cloudflare Workers as the primary
+            deployment target, with reference implementations in Go,
+            Rust, and Node.js. The goal is to generate production code
+            for any platform — AWS, GCP, Azure, and beyond — from a
+            single specification corpus.
 
 layout: full-width
 components:
@@ -213,23 +235,59 @@ sections:
   - id: stats
     type: stats-bar
     background: soft
+    attributes:
+      data-reveal: true
+    island: stat-counter.js
+    hydrate: visible
     items:
       - value: "0"
         label: Runtime Dependencies
+        icon:
+          description: Shield with checkmark
+          paths:
+            - path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+            - polyline: "9 12 11 14 15 10"
       - value: "80+"
         label: Specifications
+        icon:
+          description: Document with lines
+          paths:
+            - path: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            - polyline: "14 2 14 8 20 8"
+            - line: { x1: 16, y1: 13, x2: 8, y2: 13 }
+            - line: { x1: 16, y1: 17, x2: 8, y2: 17 }
       - value: "16"
         label: Architecture Components
+        icon:
+          description: Stacked layers
+          paths:
+            - path: "M12 2L2 7l10 5 10-5-10-5z"
+            - path: "M2 17l10 5 10-5"
+            - path: "M2 12l10 5 10-5"
       - value: "11"
         label: Infrastructure Agents
+        icon:
+          description: Lightning bolt
+          paths:
+            - polygon: "13 2 3 14 12 14 11 22 21 10 12 10 13 2"
       - value: "4"
         label: Platform Targets
+        icon:
+          description: Monitor
+          paths:
+            - rect: { x: 2, y: 3, width: 20, height: 14, rx: 2, ry: 2 }
+            - line: { x1: 8, y1: 21, x2: 16, y2: 21 }
+            - line: { x1: 12, y1: 17, x2: 12, y2: 21 }
 
   # Why This Matters
   - id: why-this-matters
     type: content-section
     label: Why This Matters
     headline: "Your knowledge is the most valuable asset. Protect it."
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
     cards:
       - icon: globe
         color: purple
@@ -301,6 +359,10 @@ sections:
     background: soft
     label: The Platform
     headline: "Over 80 specifications. Years to build. Impossible to shortcut."
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
     description: >
       An LLM can't produce a coherent specification corpus. SaaS APIs
       aren't architecture. A federation protocol, security model, and
@@ -331,11 +393,13 @@ sections:
           verifiable and reproducible.
       - icon: shield
         color: orange
-        title: "Permanent Upgrade Path"
+        title: "Safe, Versioned Upgrades"
         text: >
-          Specs evolve. Regenerate. No migration scripts, no breaking
-          changes buried in changelogs. Your architecture survives
-          every technology shift.
+          Specs evolve — and so do your data, schemas, and agents.
+          Every deployment is diffed, validated, and reversible.
+          Change management, migration procedures, and deprecation
+          lifecycles are built into the specification layer, not
+          bolted on after the fact.
 
   # How It Works
   - id: how-it-works
@@ -343,24 +407,109 @@ sections:
     label: How It Works
     headline: "Specify → Generate → Deploy"
     description: >
-      Define your domain. Generate the full stack. Deploy. When
-      requirements change, update the spec and regenerate — no
-      migration, no rewrite.
-    code_example:
-      title: Terminal
-      language: shell
-      content: |
-        # Generate a complete project from blueprints
-        weblisk generate --platform cloudflare
+      Define your domain. Generate the full stack. Deploy with
+      confidence. When requirements change, update the spec and
+      regenerate. Schema migrations, data integrity, and rollback
+      strategies are specified alongside your code — nothing is
+      left to chance.
+    attributes:
+      data-reveal: true
+    split_pane_demo:
+      island: split-demo.js
+      hydrate: visible
+      left:
+        title: domains/chat.yaml
+        language: yaml
+        content: |
+          domain: chat
+          version: 1.0.0
 
-        # Create a new domain with AI, auth, and real-time
-        weblisk domain create chat --patterns api-ai,auth-token,realtime-chat
+          patterns:
+            - api-ai
+            - auth-token
+            - realtime-chat
+            - webhooks
 
-        # Validate all blueprints against schemas
-        weblisk validate
+          agents:
+            - content-quality
+            - seo-analyzer
 
-        # Update to latest specifications
-        weblisk blueprints update
+          security:
+            identity: ed25519
+            access: abac
+      divider:
+        icon: bolt
+        label: Generate
+      right:
+        tabs:
+          - id: go
+            label: Go
+            language: go
+            active: true
+            content: |
+              package chat
+
+              type ChatService struct {
+                auth     TokenAuth
+                ws       RealtimeHub
+                webhooks WebhookDispatcher
+              }
+
+              func (s *ChatService) HandleMessage(
+                ctx context.Context,
+                msg *Message,
+              ) error {
+                // Generated from patterns:
+                // api-ai, auth-token, realtime-chat
+                if err := s.auth.Verify(ctx); err != nil {
+                  return err
+                }
+                s.ws.Broadcast(msg)
+                return nil
+              }
+          - id: node
+            label: Node.js
+            language: javascript
+            content: |
+              import { TokenAuth } from './auth.js';
+              import { RealtimeHub } from './realtime.js';
+              import { WebhookDispatcher } from './webhooks.js';
+
+              // Generated from domains/chat.yaml
+              export class ChatService {
+                #auth = new TokenAuth();
+                #ws   = new RealtimeHub();
+                #hooks = new WebhookDispatcher();
+
+                async handleMessage(ctx, msg) {
+                  await this.#auth.verify(ctx);
+                  this.#ws.broadcast(msg);
+                  await this.#hooks.dispatch('message.sent', msg);
+                }
+              }
+          - id: rust
+            label: Rust
+            language: rust
+            content: |
+              use crate::{auth::TokenAuth, realtime::Hub};
+
+              // Generated from domains/chat.yaml
+              pub struct ChatService {
+                  auth: TokenAuth,
+                  hub:  Hub,
+              }
+
+              impl ChatService {
+                  pub async fn handle_message(
+                      &self,
+                      ctx: &Context,
+                      msg: Message,
+                  ) -> Result<()> {
+                      self.auth.verify(ctx).await?;
+                      self.hub.broadcast(&msg).await;
+                      Ok(())
+                  }
+              }
 
   # Architecture
   - id: architecture
@@ -372,43 +521,140 @@ sections:
       Not a library. Not a framework. A complete system architecture —
       from wire protocol to cryptographic federation — specified,
       cross-referenced, and generated.
-    cards:
-      - icon: globe
+    attributes:
+      data-reveal: true
+    interactive_diagram:
+      island: arch-diagram.js
+      hydrate: visible
+      svg_viewbox: "0 0 600 400"
+      layers:
+        - id: protocol
+          label: "Protocol & Federation"
+          sublabel: "HTTP+JSON · Ed25519 · Hub-to-Hub"
+          rect: { x: 130, y: 32, width: 340, height: 60 }
+          detail:
+            title: "Protocol & Federation"
+            text: >
+              HTTP + JSON wire format with Ed25519 identity signing.
+              Federation protocol enables hub-to-hub collaboration
+              with cryptographic trust verification.
+            link:
+              label: Protocol specs →
+              href: /platform/blueprints/protocol.html
+        - id: orchestrator
+          label: "Orchestrator"
+          sublabel: "Identity · Routing · Audit"
+          rect: { x: 110, y: 104, width: 380, height: 60 }
+          detail:
+            title: "Orchestrator"
+            text: >
+              Central orchestrator for identity, routing, and audit.
+              Manages agent registration, task delegation, and
+              cross-domain coordination.
+            link:
+              label: Architecture specs →
+              href: /platform/blueprints/architecture.html
+        - id: agents
+          label: "Agents"
+          sublabel: "Domain · Task · Infrastructure · Quality"
+          rect: { x: 90, y: 176, width: 420, height: 60 }
+          detail:
+            title: "Agents"
+            text: >
+              Domain agents, task agents, infrastructure agents,
+              and quality agents — each sandboxed, portable, and
+              AI-ready. Agents register capabilities, execute
+              tasks, and collaborate autonomously.
+            link:
+              label: Agent catalog →
+              href: /platform/agents/
+        - id: patterns
+          label: "Patterns"
+          sublabel: "API · Auth · Webhooks · Workflows"
+          rect: { x: 70, y: 248, width: 460, height: 60 }
+          detail:
+            title: "Patterns"
+            text: >
+              API, auth, governance, webhooks, workflows, storage,
+              change management, and deployment. Each pattern
+              generates real endpoints with real security and
+              real validation.
+            link:
+              label: Pattern catalog →
+              href: /platform/blueprints/patterns.html
+        - id: platforms
+          label: "Platforms"
+          sublabel: "Cloudflare Workers · Go · Rust · Node"
+          rect: { x: 50, y: 320, width: 500, height: 60 }
+          detail:
+            title: "Platforms"
+            text: >
+              Starting with Cloudflare Workers, with reference
+              implementations in Go, Rust, and Node.js. The goal:
+              generate production code for any platform — AWS,
+              GCP, Azure, and beyond.
+            link:
+              label: Explore platforms →
+              href: /platform/
+      hint: "Hover or tap a layer to explore"
+
+  # Getting Started
+  - id: getting-started
+    type: getting-started
+    label: Getting Started
+    headline: "Up and running in three steps."
+    description: >
+      Install the CLI, define your first domain, and generate
+      production code.
+    attributes:
+      data-reveal: true
+    steps_attributes:
+      data-reveal-stagger: true
+    layout: vertical-timeline
+    steps:
+      - number: 1
         color: purple
-        title: "Protocol & Identity"
-        text: >
-          HTTP + JSON wire format. Ed25519 identity. Federation
-          protocol for hub-to-hub collaboration.
-        link:
-          label: Protocol specs →
-          href: /platform/blueprints/protocol.html
-      - icon: layers
+        title: Install the CLI
+        description: >
+          One command. No dependencies. Works on macOS, Linux, and WSL.
+        code:
+          title: Terminal
+          content: |
+            $ curl -fsSL https://cdn.weblisk.dev/install.sh | sh
+            ✓ Weblisk CLI installed to ~/.weblisk/bin/weblisk
+      - number: 2
         color: cyan
-        title: "Orchestrator & Agents"
-        text: >
-          Central orchestrator for identity, routing, and audit.
-          Agents register, execute, and collaborate autonomously.
-        link:
-          label: Architecture specs →
-          href: /platform/blueprints/architecture.html
-      - icon: bolt
+        title: Define your domain
+        description: >
+          Initialise a project and compose patterns into a domain
+          blueprint.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk init my-project
+            ✓ Created my-project/ with blueprint scaffolding
+
+            $ weblisk domain create chat \
+                --patterns api-ai,auth-token,realtime-chat
+            ✓ Domain "chat" created with 3 patterns
+      - number: 3
         color: green
-        title: "38 Cross-Cutting Patterns"
-        text: >
-          API, auth, governance, webhooks, workflows, operations.
-          Each generates real endpoints with real security.
-        link:
-          label: Pattern catalog →
-          href: /platform/blueprints/patterns.html
-      - icon: shield
-        color: orange
-        title: "Federation & Marketplace"
-        text: >
-          Self-sovereign hubs that federate with cryptographic trust
-          and trade blueprints across organizations.
-        link:
-          label: Marketplace →
-          href: /marketplace/
+        title: Generate and deploy
+        description: >
+          Generate production code for your target platform and deploy.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk generate --platform cloudflare
+            ✓ Generated 24 endpoints, 3 agents, 7 patterns
+            ✓ Output: ./generated/
+
+            $ weblisk deploy
+            ✓ Deployed to production (schema validated, data preserved)
+    cta:
+      label: Read the Quick Start Guide
+      href: /docs/quick-start.html
+      style: primary
 
   # Use Cases
   - id: use-cases
@@ -419,6 +665,12 @@ sections:
     description: >
       Not toy demos. Production systems generated from composed
       specifications.
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
+    island: usecase-expand.js
+    hydrate: visible
     cards:
       - icon: chart
         color: purple
@@ -426,24 +678,84 @@ sections:
         text: >
           Campaigns, AI content, scheduling, collaboration,
           analytics — 7 blueprints, entire stack generated.
+        expandable: true
+        detail:
+          stats:
+            - value: 7
+              label: Blueprints
+            - value: 24
+              label: Endpoints
+            - value: 3
+              label: Agents
+          patterns:
+            - api-ai
+            - auth-token
+            - scheduling
+            - analytics
+            - webhooks
       - icon: refresh
         color: cyan
         title: Supply Chain
         text: >
           30 federated supplier hubs. Webhook ingestion, orchestration
           workflows, cryptographic contracts. No EDI. No middleware.
+        expandable: true
+        detail:
+          stats:
+            - value: 12
+              label: Blueprints
+            - value: 38
+              label: Endpoints
+            - value: 5
+              label: Agents
+          patterns:
+            - federation
+            - webhooks
+            - workflows
+            - contracts
+            - audit
       - icon: bell
         color: green
         title: Customer Support
         text: >
           AI routing, live chat, SLA monitoring, multi-channel
           ingestion — specified, generated, and continuously optimized.
+        expandable: true
+        detail:
+          stats:
+            - value: 9
+              label: Blueprints
+            - value: 31
+              label: Endpoints
+            - value: 4
+              label: Agents
+          patterns:
+            - api-ai
+            - realtime-chat
+            - sla-monitor
+            - routing
+            - multi-channel
       - icon: book
         color: orange
         title: Content Management
         text: >
           CRUD, auth, AI writing, CDN triggers, quality agents.
           The CMS you'd build if starting from scratch.
+        expandable: true
+        detail:
+          stats:
+            - value: 8
+              label: Blueprints
+            - value: 28
+              label: Endpoints
+            - value: 3
+              label: Agents
+          patterns:
+            - auth-token
+            - api-crud
+            - cdn-triggers
+            - ai-writing
+            - quality
 
   # Declarative UI — X-Ray showcase
   - id: client-framework
@@ -455,6 +767,8 @@ sections:
       Write a YAML blueprint. The LLM generates production HTML, CSS,
       and JS — then renders the final UI. Hover any section and click
       the button to X-Ray any section live.
+    attributes:
+      data-reveal: true
     showcase:
       layout: grid  # 1.15fr visual / 0.85fr text, collapses to 1fr at 900px
       max_width: 1600px
@@ -471,9 +785,8 @@ sections:
                 # pages/home.yaml
                 - id: hero
                   type: hero
-                  badge:
-                    text: "v1.0 — The specification layer"
                   headline: "Software finally has blueprints."
+                  install_command: "curl -fsSL …/install.sh | sh"
                   actions:
                     - label: Explore the Platform
                       href: /platform/
@@ -486,9 +799,9 @@ sections:
               language: html
               content: |
                 <section id="hero" class="hero">
-                  <div class="hero-inner">
-                    <h1>Software finally has blueprints.</h1>
-                    <a href="/platform/" class="btn btn-primary">Explore</a>
+                  <h1>Software finally has blueprints.</h1>
+                  <div class="install-cmd">
+                    <code>curl -fsSL …/install.sh | sh</code>
                   </div>
                 </section>
           - id: css
@@ -498,8 +811,8 @@ sections:
               language: css
               content: |
                 .hero { padding: 6rem 2rem; text-align: center; }
-                .hero-inner { max-width: var(--wl-max-width); }
-                .hero-badge { border-radius: 9999px; font-weight: 600; }
+                .install-cmd { display: flex; align-items: center; }
+                .copy-btn { cursor: pointer; margin-left: auto; }
           - id: js
             label: JS
             badge: { text: "Generated", color: llm, icon: bolt }
@@ -550,10 +863,12 @@ sections:
     background: soft
     label: Comparison
     headline: "This isn't a better tool. It's a missing layer."
-    description: >
+    description: >-
       Weblisk doesn't compete with frameworks, SaaS platforms, or AI code
       generators. It sits underneath all of them — the specification layer
       they've always been missing.
+    attributes:
+      data-reveal: true
     highlight_column: Weblisk
     columns:
       - Weblisk
@@ -576,7 +891,9 @@ sections:
       - feature: Security model
         values: ["Ed25519, ABAC, 7-layer", "Build yourself", "Shared tenancy", "None"]
       - feature: Upgrade path
-        values: ["Regenerate from specs", "Rewrite", "Vendor roadmap", "Re-prompt"]
+        values: ["Versioned, validated, reversible", "Rewrite", "Vendor roadmap", "Re-prompt"]
+      - feature: Data protection
+        values: ["Schema-aware migrations", "Manual scripts", "Vendor-managed", "None"]
       - feature: Runtime dependencies
         values: ["Zero", "Hundreds", "Vendor-managed", "Hundreds"]
       - feature: AI token efficiency
@@ -590,10 +907,12 @@ sections:
   - id: cta
     type: cta-section
     headline: "Stop building from scratch. Start specifying."
-    description: >
+    description: >-
       Install the CLI, define your domain as blueprints, and generate
       a complete production system — with real security, real agents,
       and a real upgrade path — in minutes, not months.
+    attributes:
+      data-reveal: true
     actions:
       - label: Get Started
         href: /docs/quick-start.html

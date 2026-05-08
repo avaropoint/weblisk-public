@@ -107,7 +107,7 @@ export default async function blueprintSource(el, blueprintPath) {
   exitBtn.focus();
 }
 
-/* ── Keyboard shortcut (Cmd/Ctrl+Shift+B) ─────────── */
+/* Keyboard shortcut (Cmd/Ctrl+Shift+B) */
 
 document.addEventListener('keydown', (e) => {
   if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === 'B' || e.key === 'b')) {
@@ -124,21 +124,16 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* ── Fetch Blueprint ──────────────────────────────────── */
+/* Fetch Blueprint */
 
 async function fetchBlueprint(path) {
   const pageBase = new URL('.', document.baseURI).href;
-  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-
-  const apiRes = isLocal ? null : await fetch(`${pageBase}api/blueprint/${path}`).catch(() => null);
-  if (apiRes && apiRes.ok) return apiRes.text();
-
-  const fileRes = await fetch(`${pageBase}blueprints/${path}`);
-  if (!fileRes.ok) throw new Error(`${fileRes.status} ${fileRes.statusText}`);
-  return fileRes.text();
+  const res = await fetch(`${pageBase}api/blueprint/${path}`);
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return res.text();
 }
 
-/* ── YAML Syntax Highlighter ──────────────────────────── */
+/* YAML Syntax Highlighter */
 
 function highlightYaml(src) {
   return src
@@ -181,7 +176,7 @@ function highlightValue(val) {
   return `<span class="syn-s">${esc(value)}</span>${comment}`;
 }
 
-/* ── Helpers ──────────────────────────────────────────── */
+/* Helpers */
 
 function esc(s) {
   return s
@@ -191,14 +186,14 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
-/* ── Styles ───────────────────────────────────────────── */
+/* Styles */
 
 function injectStyles() {
   if (document.getElementById('bp-source-css')) return;
   const style = document.createElement('style');
   style.id = 'bp-source-css';
   style.textContent = `
-/* ── Blueprint Source View ───────────────────────────── */
+/* Blueprint Source View */
 .bp-source-active > :not(.bp-source):not(script):not(style):not(link) {
   display: none !important;
 }
@@ -213,7 +208,7 @@ function injectStyles() {
   font-family: var(--wl-mono, var(--wl-font-mono, 'SF Mono', 'Fira Code', 'Cascadia Code', monospace));
 }
 
-/* ── Top Bar ──────────────────────────────────────── */
+/* Top Bar */
 .bp-source-bar {
   flex-shrink: 0;
   background: linear-gradient(135deg, var(--wl-primary, #6366f1), var(--wl-primary-dark, #4f46e5));
@@ -278,7 +273,7 @@ function injectStyles() {
 }
 .bp-source-exit:hover { background: rgba(255,255,255,0.25); }
 
-/* ── Code Body ────────────────────────────────────── */
+/* Code Body */
 .bp-source-body {
   flex: 1;
   overflow: auto;
@@ -318,7 +313,7 @@ function injectStyles() {
   color: inherit;
 }
 
-/* ── Footer ───────────────────────────────────────── */
+/* Footer */
 .bp-source-footer {
   flex-shrink: 0;
   display: flex;
@@ -339,7 +334,7 @@ function injectStyles() {
   text-decoration: underline;
 }
 
-/* ── Mobile ───────────────────────────────────────── */
+/* Mobile */
 @media (max-width: 600px) {
   .bp-source-bar-inner { padding: 0 0.75rem; }
   .bp-source-path { display: none; }

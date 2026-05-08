@@ -1,0 +1,29 @@
+# X-Ray Island
+# Reveals the blueprint source behind any page section.
+# Adds a trigger button to each section; clicking opens a tabbed overlay
+# showing Blueprint YAML, HTML, CSS, JS, and the live rendered output.
+
+name: xray
+type: island
+extends: standards/islands
+hydrate: idle
+status: active
+version: 2.0.0
+
+agent: gateway
+protocol: request
+auth: none
+
+props:
+  blueprint_path: { type: string, required: true }
+
+behavior:
+  - Inject X-Ray trigger button into each main section with an id
+  - On click, open tabbed overlay with blueprint source and live view
+  - Fetch blueprint YAML via /api/blueprint/ API only
+  - Extract HTML, CSS from the live DOM for display
+  - ARIA-compliant overlay with focus trap and Escape to close
+
+dependencies:
+  runtime:
+    - islands/blueprint-tabs.js

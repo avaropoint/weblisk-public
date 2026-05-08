@@ -17,7 +17,7 @@ const VERSION = 'weblisk-sw-v1';
 const SYNC_DB = 'wl-sync-queue';
 const SYNC_STORE = 'mutations';
 
-// ─── Lifecycle ───────────────────────────────────────────────
+// Lifecycle
 
 self.addEventListener('install', () => self.skipWaiting());
 
@@ -25,7 +25,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-// ─── Fetch: Minimal — only intercept to provide offline fallback ─────
+// Fetch: Minimal — only intercept to provide offline fallback
 
 self.addEventListener('fetch', (event) => {
   // Only intercept navigation requests (HTML pages)
@@ -70,7 +70,7 @@ const OFFLINE_HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// ─── Background Sync ─────────────────────────────────────────
+// Background Sync
 // Fires when connectivity returns after a mutation was queued.
 // Reads the mutation queue from IDB and replays each request.
 
@@ -140,7 +140,7 @@ async function replayMutations(tag) {
   }
 }
 
-// ─── Push Notifications ──────────────────────────────────────
+// Push Notifications
 // Receives push events from server even when app is closed.
 
 self.addEventListener('push', (event) => {
@@ -194,7 +194,7 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 
-// ─── Message Relay (Tab Coordination) ────────────────────────
+// Message Relay (Tab Coordination)
 // SW acts as a central hub for cross-tab messaging.
 // Unlike BroadcastChannel, this works even when tabs are in
 // different execution contexts (e.g., after a navigation).
@@ -212,7 +212,7 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// ─── Helpers ─────────────────────────────────────────────────
+// Helpers
 
 async function notifyClients(data, excludeId) {
   const clients = await self.clients.matchAll({ type: 'window' });

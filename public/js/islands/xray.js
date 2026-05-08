@@ -13,7 +13,6 @@ export default function xray(el) {
   const props = JSON.parse(el.dataset.props || '{}');
   const blueprintPath = props.blueprint_path || 'pages/home.yaml';
   const pageBase = new URL('.', document.baseURI).href;
-  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
   let yamlCache = null;
 
@@ -37,15 +36,9 @@ export default function xray(el) {
   async function fetchYaml() {
     if (yamlCache) return yamlCache;
     try {
-      const apiRes = isLocal ? null : await fetch(`${pageBase}api/blueprint/${blueprintPath}`).catch(() => null);
-      let text;
-      if (apiRes && apiRes.ok) {
-        text = await apiRes.text();
-      } else {
-        const fileRes = await fetch(`${pageBase}blueprints/${blueprintPath}`);
-        if (!fileRes.ok) throw new Error(`${fileRes.status}`);
-        text = await fileRes.text();
-      }
+      const res = await fetch(`${pageBase}api/blueprint/${blueprintPath}`);
+      if (!res.ok) throw new Error(`${res.status}`);
+      const text = await res.text();
       yamlCache = text;
       return text;
     } catch {
@@ -56,18 +49,24 @@ export default function xray(el) {
   function extractSectionYaml(yaml, sectionId) {
     const lines = yaml.split('\n');
     let start = -1;
+    let startIndent = 0;
     for (let i = 0; i < lines.length; i++) {
-      const m = lines[i].match(/^\s*-\s+id:\s*(.+)/);
-      if (m && m[1].trim() === sectionId) { start = i; continue; }
-      if (start >= 0 && m) {
-        // Trim trailing blank lines and standalone comments before next section
+      const m = lines[i].match(/^(\s*)-\s+id:\s*(.+)/);
+      if (!m) continue;
+      const indent = m[1].length;
+      const id = m[2].trim();
+      if (start < 0) {
+        if (id === sectionId) { start = i; startIndent = indent; }
+        continue;
+      }
+      // Only treat as a new section boundary if at the SAME or lesser indent
+      if (indent <= startIndent) {
         let end = i;
         while (end > start && /^\s*(#.*)?$/.test(lines[end - 1])) end--;
         return lines.slice(start, end).join('\n');
       }
     }
     if (start >= 0) {
-      // Last section — trim trailing blank/comment lines
       let end = lines.length;
       while (end > start && /^\s*(#.*)?$/.test(lines[end - 1])) end--;
       return lines.slice(start, end).join('\n');
@@ -307,7 +306,7 @@ export default function xray(el) {
     renderTab('blueprint');
   }
 
-  /* ── Syntax highlighting ──────────────────────────────── */
+  /* Syntax highlighting */
 
   function highlightYaml(src) {
     return src.split('\n').map(line => {
@@ -382,7 +381,7 @@ export default function xray(el) {
   }
 }
 
-/* ── Injected Styles ──────────────────────────────────── */
+/* Injected Styles */
 
 function injectStyles() {
   if (document.getElementById('xray-css')) return;

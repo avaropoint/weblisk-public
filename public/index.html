@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weblisk — Software Finally Has Blueprints</title>
   <meta name="description"
-    content="Software is the only engineering discipline without a specification layer. Weblisk changes that. Over 80 interlocking blueprints define complete systems — protocol, agents, security, federation — then generate production code in any language. The architecture is permanent. Code is just a build artifact.">
+    content="Software is the only engineering discipline without a specification layer. Weblisk changes that. Over 80 interlocking blueprints define complete systems — protocol, agents, security, federation — then generate production code for Cloudflare Workers, Go, Rust, and Node.js. Schema migrations, data integrity, and rollback strategies are built in. The architecture is permanent. Code is just a build artifact.">
   <link rel="canonical" href="https://weblisk.dev/">
   <meta name="keywords"
-    content="specification-driven development, AI agent platform, blueprint-driven, federated agents, zero dependency, code generation, autonomous agents, YAML specification, open platform">
+    content="specification-driven development, AI agent platform, blueprint-driven, federated agents, zero dependency, code generation, autonomous agents, YAML specification, open platform, schema-aware migrations, data protection, versioned deployments, Cloudflare Workers, domain agents, infrastructure agents">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Weblisk — Software Finally Has Blueprints">
   <meta property="og:description"
-    content="Software is the only engineering discipline without a specification layer. Weblisk is over 80 interlocking blueprints that define complete systems and generate production code in any language. Own everything. Rewrite nothing.">
+    content="Software is the only engineering discipline without a specification layer. Weblisk is over 80 interlocking blueprints that define complete systems and generate production code for any platform. Schema migrations, data integrity, and versioned deployments — built in, not bolted on.">
   <meta property="og:url" content="https://weblisk.dev/">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -63,7 +63,7 @@
     "@id": "https://weblisk.dev/#website",
     "name": "Weblisk",
     "url": "https://weblisk.dev",
-    "description": "The specification layer for software. Over 80 interlocking blueprints that define complete systems and generate production code in any language. Own everything. Rewrite nothing.",
+    "description": "The specification layer for software. Over 80 interlocking blueprints that define complete systems and generate production code for any platform. Schema migrations, data protection, and versioned deployments are built into the specification layer.",
     "publisher": { "@id": "https://avaropoint.com/#org" },
     "inLanguage": "en"
   }
@@ -82,7 +82,7 @@
     "author": { "@id": "https://avaropoint.com/#org" },
     "license": "https://opensource.org/licenses/MIT",
     "softwareVersion": "1.0.0",
-    "programmingLanguage": ["JavaScript", "Go", "Rust"],
+    "programmingLanguage": ["JavaScript", "Go", "Rust", "Cloudflare Workers"],
     "codeRepository": "https://github.com/avaropoint/weblisk",
     "isPartOf": { "@id": "https://weblisk.dev/#website" }
   }
@@ -122,6 +122,22 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. All specifications, the CLI, and the client framework are free and MIT-licensed. The Weblisk Marketplace enables buying and selling community-created blueprints, agents, and templates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Weblisk handle data migrations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Schema migrations, data integrity checks, and rollback strategies are specified alongside your code in the blueprint layer. Every deployment is diffed, validated, and reversible. Change management and deprecation lifecycles are built into the specification — not bolted on after the fact."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What platforms does Weblisk support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weblisk starts with Cloudflare Workers as the primary deployment target, with reference implementations in Go, Rust, and Node.js. The goal is to generate production code for any platform — AWS, GCP, Azure, and beyond — from a single specification corpus."
         }
       }
     ]
@@ -210,27 +226,42 @@
     </section>
 
     <!-- ─── Stats (sections[1]: stats-bar) ─── -->
-    <section id="stats" class="section section-soft" aria-label="Key metrics">
+    <section id="stats" class="section section-soft" aria-label="Key metrics" data-reveal>
       <div class="section-inner">
-        <div class="stats-bar">
+        <div class="stats-bar" data-island="./js/islands/stat-counter.js" data-hydrate="visible">
           <div class="stat-item">
-            <div class="stat-number">0</div>
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="stat-number" data-count="0">0</div>
             <div class="stat-label">Runtime Dependencies</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">80+</div>
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="stat-number" data-count="80" data-suffix="+">80+</div>
             <div class="stat-label">Specifications</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">16</div>
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="stat-number" data-count="16">16</div>
             <div class="stat-label">Architecture Components</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">11</div>
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="stat-number" data-count="11">11</div>
             <div class="stat-label">Infrastructure Agents</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">4</div>
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="stat-number" data-count="4">4</div>
             <div class="stat-label">Platform Targets</div>
           </div>
         </div>
@@ -238,13 +269,13 @@
     </section>
 
     <!-- ─── Why This Matters (sections[2]: problem-section) ─── -->
-    <section id="why-this-matters" class="section" aria-labelledby="problem-heading">
+    <section id="why-this-matters" class="section" aria-labelledby="problem-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Why This Matters</span>
           <h2 id="problem-heading">Your knowledge is the most valuable asset. Protect it.</h2>
         </div>
-        <div class="feature-grid">
+        <div class="feature-grid" data-reveal-stagger>
           <div class="feature-card">
             <div class="feature-icon purple">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
@@ -278,14 +309,14 @@
     </section>
 
     <!-- ─── The MOAT (sections[3]: content-section) ─── -->
-    <section id="moat" class="section section-soft" aria-labelledby="moat-heading">
+    <section id="moat" class="section section-soft" aria-labelledby="moat-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">The Platform</span>
           <h2 id="moat-heading">Over 80 specifications. Years to build. Impossible to shortcut.</h2>
           <p>An LLM can't produce a coherent specification corpus. SaaS APIs aren't architecture. A federation protocol, security model, and agent orchestrator that cross-reference each other don't emerge in a weekend. Ideas buried in markdown files drift from reality. Structured specifications stay true — and generate. This compounds.</p>
         </div>
-        <div class="feature-grid">
+        <div class="feature-grid" data-reveal-stagger>
           <div class="feature-card">
             <div class="feature-icon purple">
               <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
@@ -311,131 +342,399 @@
             <div class="feature-icon orange">
               <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
             </div>
-            <h3>Permanent Upgrade Path</h3>
-            <p>Specs evolve. Regenerate. No migration scripts, no breaking changes buried in changelogs. Your architecture survives every technology shift.</p>
+            <h3>Safe, Versioned Upgrades</h3>
+            <p>Specs evolve — and so do your data, schemas, and agents. Every deployment is diffed, validated, and reversible. Change management, migration procedures, and deprecation lifecycles are built into the specification layer, not bolted on after the fact.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ─── How It Works (sections[4]: content-section) ─── -->
-    <section id="how-it-works" class="section" aria-labelledby="how-heading">
+    <section id="how-it-works" class="section" aria-labelledby="how-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">How It Works</span>
           <h2 id="how-heading">Specify → Generate → Deploy</h2>
-          <p>Define your domain. Generate the full stack. Deploy. When requirements change, update the spec and regenerate — no migration, no rewrite.</p>
+          <p>Define your domain. Generate the full stack. Deploy with confidence. When requirements change, update the spec and regenerate. Schema migrations, data integrity, and rollback strategies are specified alongside your code — nothing is left to chance.</p>
         </div>
-        <div class="code-window" style="max-width:720px;margin:0 auto">
-          <div class="code-header">
-            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
-            <span class="code-title">Terminal</span>
+        <div class="split-pane" data-island="./js/islands/split-demo.js" data-hydrate="visible">
+          <!-- Left: Blueprint input -->
+          <div class="split-pane-left">
+            <div class="code-window">
+              <div class="code-header">
+                <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                <span class="code-title">domains/chat.yaml</span>
+              </div>
+              <div class="code-body">
+                <pre><span class="syn-k">domain:</span> <span class="syn-s">chat</span>
+<span class="syn-k">version:</span> <span class="syn-s">1.0.0</span>
+
+<span class="syn-k">patterns:</span>
+  <span class="syn-k">- </span><span class="syn-s">api-ai</span>
+  <span class="syn-k">- </span><span class="syn-s">auth-token</span>
+  <span class="syn-k">- </span><span class="syn-s">realtime-chat</span>
+  <span class="syn-k">- </span><span class="syn-s">webhooks</span>
+
+<span class="syn-k">agents:</span>
+  <span class="syn-k">- </span><span class="syn-s">content-quality</span>
+  <span class="syn-k">- </span><span class="syn-s">seo-analyzer</span>
+
+<span class="syn-k">security:</span>
+  <span class="syn-k">  identity:</span> <span class="syn-s">ed25519</span>
+  <span class="syn-k">  access:</span> <span class="syn-s">abac</span></pre>
+              </div>
+            </div>
           </div>
-          <div class="code-body">
-            <pre><span class="syn-c"># Generate a complete project from blueprints</span>
-<span class="syn-s">weblisk generate --platform cloudflare</span>
 
-<span class="syn-c"># Create a new domain with AI, auth, and real-time</span>
-<span class="syn-s">weblisk domain create chat --patterns api-ai,auth-token,realtime-chat</span>
+          <!-- Center: Generate arrow -->
+          <div class="split-pane-divider" aria-hidden="true">
+            <div class="split-pane-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <span class="split-pane-label">Generate</span>
+          </div>
 
-<span class="syn-c"># Validate all blueprints against schemas</span>
-<span class="syn-s">weblisk validate</span>
+          <!-- Right: Generated output with tabs -->
+          <div class="split-pane-right">
+            <div class="code-window">
+              <div class="code-header">
+                <div class="split-tabs">
+                  <button class="split-tab active" data-tab="go" type="button">Go</button>
+                  <button class="split-tab" data-tab="node" type="button">Node.js</button>
+                  <button class="split-tab" data-tab="rust" type="button">Rust</button>
+                </div>
+              </div>
+              <div class="code-body">
+                <pre class="split-output" data-tab-content="go"><span class="syn-k">package</span> <span class="syn-s">chat</span>
 
-<span class="syn-c"># Update to latest specifications</span>
-<span class="syn-s">weblisk blueprints update</span></pre>
+<span class="syn-k">type</span> <span class="syn-f">ChatService</span> <span class="syn-k">struct</span> <span class="syn-p">{</span>
+  auth     <span class="syn-f">TokenAuth</span>
+  ws       <span class="syn-f">RealtimeHub</span>
+  webhooks <span class="syn-f">WebhookDispatcher</span>
+<span class="syn-p">}</span>
+
+<span class="syn-k">func</span> <span class="syn-p">(</span>s <span class="syn-f">*ChatService</span><span class="syn-p">)</span> <span class="syn-f">HandleMessage</span><span class="syn-p">(</span>
+  ctx <span class="syn-f">context.Context</span>,
+  msg <span class="syn-f">*Message</span>,
+<span class="syn-p">)</span> <span class="syn-k">error</span> <span class="syn-p">{</span>
+  <span class="syn-c">// Generated from patterns:</span>
+  <span class="syn-c">// api-ai, auth-token, realtime-chat</span>
+  <span class="syn-k">if</span> err := s.auth.<span class="syn-f">Verify</span>(ctx); err != <span class="syn-k">nil</span> <span class="syn-p">{</span>
+    <span class="syn-k">return</span> err
+  <span class="syn-p">}</span>
+  s.ws.<span class="syn-f">Broadcast</span>(msg)
+  <span class="syn-k">return</span> <span class="syn-k">nil</span>
+<span class="syn-p">}</span></pre>
+                <pre class="split-output" data-tab-content="node" hidden><span class="syn-k">import</span> <span class="syn-p">{</span> TokenAuth <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'./auth.js'</span>;
+<span class="syn-k">import</span> <span class="syn-p">{</span> RealtimeHub <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'./realtime.js'</span>;
+<span class="syn-k">import</span> <span class="syn-p">{</span> WebhookDispatcher <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'./webhooks.js'</span>;
+
+<span class="syn-c">// Generated from domains/chat.yaml</span>
+<span class="syn-k">export class</span> <span class="syn-f">ChatService</span> <span class="syn-p">{</span>
+  #auth = <span class="syn-k">new</span> <span class="syn-f">TokenAuth</span>();
+  #ws   = <span class="syn-k">new</span> <span class="syn-f">RealtimeHub</span>();
+  #hooks = <span class="syn-k">new</span> <span class="syn-f">WebhookDispatcher</span>();
+
+  <span class="syn-k">async</span> <span class="syn-f">handleMessage</span>(ctx, msg) <span class="syn-p">{</span>
+    <span class="syn-k">await</span> <span class="syn-k">this</span>.#auth.<span class="syn-f">verify</span>(ctx);
+    <span class="syn-k">this</span>.#ws.<span class="syn-f">broadcast</span>(msg);
+    <span class="syn-k">await</span> <span class="syn-k">this</span>.#hooks.<span class="syn-f">dispatch</span>(<span class="syn-s">'message.sent'</span>, msg);
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span></pre>
+                <pre class="split-output" data-tab-content="rust" hidden><span class="syn-k">use</span> crate::<span class="syn-p">{</span>auth::<span class="syn-f">TokenAuth</span>, realtime::<span class="syn-f">Hub</span><span class="syn-p">}</span>;
+
+<span class="syn-c">// Generated from domains/chat.yaml</span>
+<span class="syn-k">pub struct</span> <span class="syn-f">ChatService</span> <span class="syn-p">{</span>
+    auth: <span class="syn-f">TokenAuth</span>,
+    hub:  <span class="syn-f">Hub</span>,
+<span class="syn-p">}</span>
+
+<span class="syn-k">impl</span> <span class="syn-f">ChatService</span> <span class="syn-p">{</span>
+    <span class="syn-k">pub async fn</span> <span class="syn-f">handle_message</span>(
+        &amp;<span class="syn-k">self</span>,
+        ctx: &amp;<span class="syn-f">Context</span>,
+        msg: <span class="syn-f">Message</span>,
+    ) -&gt; <span class="syn-f">Result</span>&lt;()&gt; <span class="syn-p">{</span>
+        <span class="syn-k">self</span>.auth.<span class="syn-f">verify</span>(ctx).<span class="syn-f">await</span>?;
+        <span class="syn-k">self</span>.hub.<span class="syn-f">broadcast</span>(&amp;msg).<span class="syn-f">await</span>;
+        <span class="syn-f">Ok</span>(())
+    <span class="syn-p">}</span>
+<span class="syn-p">}</span></pre>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ─── Architecture (sections[5]: content-section) ─── -->
-    <section id="architecture" class="section section-soft" aria-labelledby="arch-heading">
+    <section id="architecture" class="section section-soft" aria-labelledby="arch-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Architecture</span>
           <h2 id="arch-heading">Every layer. One specification corpus.</h2>
           <p>Not a library. Not a framework. A complete system architecture — from wire protocol to cryptographic federation — specified, cross-referenced, and generated.</p>
         </div>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon purple">
-              <i aria-hidden="true" class="wl-icon wl-i-globe wl-icon-24"></i>
-            </div>
-            <h3>Protocol &amp; Identity</h3>
-            <p>HTTP + JSON wire format. Ed25519 identity. Federation protocol for hub-to-hub collaboration.</p>
-            <a href="/platform/blueprints/protocol.html" style="display:inline-block;margin-top:0.5rem;font-weight:500">Protocol specs →</a>
+        <div class="arch-diagram" data-island="./js/islands/arch-diagram.js" data-hydrate="visible">
+          <div class="arch-visual">
+            <svg viewBox="0 0 600 400" class="arch-svg" aria-label="Weblisk architecture layers">
+              <!-- Layer 5 (bottom): Platforms -->
+              <g class="arch-layer" data-layer="platforms">
+                <rect x="50" y="320" width="500" height="60" rx="8" class="arch-rect arch-platforms"/>
+                <text x="300" y="355" text-anchor="middle" class="arch-layer-text">Platforms</text>
+                <text x="300" y="372" text-anchor="middle" class="arch-layer-sub">Cloudflare Workers · Go · Rust · Node</text>
+              </g>
+              <!-- Layer 4: Patterns -->
+              <g class="arch-layer" data-layer="patterns">
+                <rect x="70" y="248" width="460" height="60" rx="8" class="arch-rect arch-patterns"/>
+                <text x="300" y="283" text-anchor="middle" class="arch-layer-text">Patterns</text>
+                <text x="300" y="300" text-anchor="middle" class="arch-layer-sub">API · Auth · Webhooks · Workflows</text>
+              </g>
+              <!-- Layer 3: Agents -->
+              <g class="arch-layer" data-layer="agents">
+                <rect x="90" y="176" width="420" height="60" rx="8" class="arch-rect arch-agents"/>
+                <text x="300" y="211" text-anchor="middle" class="arch-layer-text">Agents</text>
+                <text x="300" y="228" text-anchor="middle" class="arch-layer-sub">Domain · Task · Infrastructure · Quality</text>
+              </g>
+              <!-- Layer 2: Orchestrator -->
+              <g class="arch-layer" data-layer="orchestrator">
+                <rect x="110" y="104" width="380" height="60" rx="8" class="arch-rect arch-orchestrator"/>
+                <text x="300" y="139" text-anchor="middle" class="arch-layer-text">Orchestrator</text>
+                <text x="300" y="156" text-anchor="middle" class="arch-layer-sub">Identity · Routing · Audit</text>
+              </g>
+              <!-- Layer 1 (top): Protocol & Federation -->
+              <g class="arch-layer" data-layer="protocol">
+                <rect x="130" y="32" width="340" height="60" rx="8" class="arch-rect arch-protocol"/>
+                <text x="300" y="67" text-anchor="middle" class="arch-layer-text">Protocol &amp; Federation</text>
+                <text x="300" y="84" text-anchor="middle" class="arch-layer-sub">HTTP+JSON · Ed25519 · Hub-to-Hub</text>
+              </g>
+              <!-- Connection lines -->
+              <line x1="300" y1="92" x2="300" y2="104" class="arch-connector"/>
+              <line x1="300" y1="164" x2="300" y2="176" class="arch-connector"/>
+              <line x1="300" y1="236" x2="300" y2="248" class="arch-connector"/>
+              <line x1="300" y1="308" x2="300" y2="320" class="arch-connector"/>
+            </svg>
           </div>
-          <div class="feature-card">
-            <div class="feature-icon cyan">
-              <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
+          <div class="arch-detail">
+            <div class="arch-detail-content" data-detail="protocol">
+              <h3>Protocol &amp; Federation</h3>
+              <p>HTTP + JSON wire format with Ed25519 identity signing. Federation protocol enables hub-to-hub collaboration with cryptographic trust verification.</p>
+              <a href="/platform/blueprints/protocol.html">Protocol specs →</a>
             </div>
-            <h3>Orchestrator &amp; Agents</h3>
-            <p>Central orchestrator for identity, routing, and audit. Agents register, execute, and collaborate autonomously.</p>
-            <a href="/platform/blueprints/architecture.html" style="display:inline-block;margin-top:0.5rem;font-weight:500">Architecture specs →</a>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon green">
-              <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
+            <div class="arch-detail-content" data-detail="orchestrator" hidden>
+              <h3>Orchestrator</h3>
+              <p>Central orchestrator for identity, routing, and audit. Manages agent registration, task delegation, and cross-domain coordination.</p>
+              <a href="/platform/blueprints/architecture.html">Architecture specs →</a>
             </div>
-            <h3>38 Cross-Cutting Patterns</h3>
-            <p>API, auth, governance, webhooks, workflows, operations. Each generates real endpoints with real security.</p>
-            <a href="/platform/blueprints/patterns.html" style="display:inline-block;margin-top:0.5rem;font-weight:500">Pattern catalog →</a>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon orange">
-              <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
+            <div class="arch-detail-content" data-detail="agents" hidden>
+              <h3>Agents</h3>
+              <p>Domain agents, task agents, infrastructure agents, and quality agents — each sandboxed, portable, and AI-ready. Agents register capabilities, execute tasks, and collaborate autonomously.</p>
+              <a href="/platform/agents/">Agent catalog →</a>
             </div>
-            <h3>Federation &amp; Marketplace</h3>
-            <p>Self-sovereign hubs that federate with cryptographic trust and trade blueprints across organizations.</p>
-            <a href="/marketplace/" style="display:inline-block;margin-top:0.5rem;font-weight:500">Marketplace →</a>
+            <div class="arch-detail-content" data-detail="patterns" hidden>
+              <h3>Patterns</h3>
+              <p>API, auth, governance, webhooks, workflows, storage, change management, and deployment. Each pattern generates real endpoints with real security and real validation.</p>
+              <a href="/platform/blueprints/patterns.html">Pattern catalog →</a>
+            </div>
+            <div class="arch-detail-content" data-detail="platforms" hidden>
+              <h3>Platforms</h3>
+              <p>Starting with Cloudflare Workers, with reference implementations in Go, Rust, and Node.js. The goal: generate production code for any platform — AWS, GCP, Azure, and beyond.</p>
+              <a href="/platform/">Explore platforms →</a>
+            </div>
+            <p class="arch-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Hover or tap a layer to explore
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── Use Cases (sections[6]: content-section) ─── -->
-    <section id="use-cases" class="section section-soft" aria-labelledby="usecases-heading">
+    <!-- ─── Getting Started (sections[6]: getting-started) ─── -->
+    <section id="getting-started" class="section" aria-labelledby="gs-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Getting Started</span>
+          <h2 id="gs-heading">Up and running in three steps.</h2>
+          <p>Install the CLI, define your first domain, and generate production code.</p>
+        </div>
+        <div class="gs-steps" data-reveal-stagger>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number purple" aria-hidden="true">1</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Install the CLI</h3>
+              <p>One command. No dependencies. Works on macOS, Linux, and WSL.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
+<span class="syn-s">✓ Weblisk CLI installed to ~/.weblisk/bin/weblisk</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number cyan" aria-hidden="true">2</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Define your domain</h3>
+              <p>Initialise a project and compose patterns into a domain blueprint.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk init my-project
+<span class="syn-s">✓ Created my-project/ with blueprint scaffolding</span>
+
+<span class="syn-p">$</span> weblisk domain create chat \
+    --patterns api-ai,auth-token,realtime-chat
+<span class="syn-s">✓ Domain "chat" created with 3 patterns</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number green" aria-hidden="true">3</div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Generate and deploy</h3>
+              <p>Generate production code for your target platform and deploy.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk generate --platform cloudflare
+<span class="syn-s">✓ Generated 24 endpoints, 3 agents, 7 patterns</span>
+<span class="syn-s">✓ Output: ./generated/</span>
+
+<span class="syn-p">$</span> weblisk deploy
+<span class="syn-s">✓ Deployed to production (schema validated, data preserved)</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:2.5rem">
+          <a href="/docs/quick-start.html" class="btn btn-primary">
+            Read the Quick Start Guide
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Use Cases (sections[7]: content-section) ─── -->
+    <section id="use-cases" class="section section-soft" aria-labelledby="usecases-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">What You Can Build</span>
           <h2 id="usecases-heading">Real enterprise domains. Defined as blueprints.</h2>
           <p>Not toy demos. Production systems generated from composed specifications.</p>
         </div>
-        <div class="feature-grid">
-          <div class="feature-card">
+        <div class="feature-grid usecase-grid" data-reveal-stagger data-island="./js/islands/usecase-expand.js" data-hydrate="visible">
+          <div class="feature-card usecase-card" data-expandable>
             <div class="feature-icon purple">
               <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-24"></i>
             </div>
             <h3>Marketing Platform</h3>
             <p>Campaigns, AI content, scheduling, collaboration, analytics — 7 blueprints, entire stack generated.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>7</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>24</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>3</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">api-ai</span>
+                <span class="usecase-tag">auth-token</span>
+                <span class="usecase-tag">scheduling</span>
+                <span class="usecase-tag">analytics</span>
+                <span class="usecase-tag">webhooks</span>
+              </div>
+            </div>
           </div>
-          <div class="feature-card">
+          <div class="feature-card usecase-card" data-expandable>
             <div class="feature-icon cyan">
               <i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-24"></i>
             </div>
             <h3>Supply Chain</h3>
             <p>30 federated supplier hubs. Webhook ingestion, orchestration workflows, cryptographic contracts. No EDI. No middleware.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>12</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>38</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>5</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">federation</span>
+                <span class="usecase-tag">webhooks</span>
+                <span class="usecase-tag">workflows</span>
+                <span class="usecase-tag">contracts</span>
+                <span class="usecase-tag">audit</span>
+              </div>
+            </div>
           </div>
-          <div class="feature-card">
+          <div class="feature-card usecase-card" data-expandable>
             <div class="feature-icon green">
               <i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-24"></i>
             </div>
             <h3>Customer Support</h3>
             <p>AI routing, live chat, SLA monitoring, multi-channel ingestion — specified, generated, and continuously optimized.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>9</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>31</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>4</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">api-ai</span>
+                <span class="usecase-tag">realtime-chat</span>
+                <span class="usecase-tag">sla-monitor</span>
+                <span class="usecase-tag">routing</span>
+                <span class="usecase-tag">multi-channel</span>
+              </div>
+            </div>
           </div>
-          <div class="feature-card">
+          <div class="feature-card usecase-card" data-expandable>
             <div class="feature-icon orange">
               <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
             </div>
             <h3>Content Management</h3>
             <p>CRUD, auth, AI writing, CDN triggers, quality agents. The CMS you'd build if starting from scratch.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>8</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>28</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>3</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">auth-token</span>
+                <span class="usecase-tag">api-crud</span>
+                <span class="usecase-tag">cdn-triggers</span>
+                <span class="usecase-tag">ai-writing</span>
+                <span class="usecase-tag">quality</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── Declarative UI (sections[7]: xray-showcase) ─── -->
-    <section id="client-framework" class="section xray-section" aria-labelledby="client-heading">
+    <!-- ─── Declarative UI (sections[8]: xray-showcase) ─── -->
+    <section id="client-framework" class="section xray-section" aria-labelledby="client-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Declarative UI</span>
@@ -460,9 +759,8 @@
                 <span class="syn-c"># pages/home.yaml</span><br>
                 <span class="syn-k">- id:</span> <span class="syn-s">hero</span><br>
                 <span class="syn-k">&nbsp;&nbsp;type:</span> <span class="syn-s">hero</span><br>
-                <span class="syn-k">&nbsp;&nbsp;badge:</span><br>
-                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;text:</span> <span class="syn-s">"v1.0 — The specification layer"</span><br>
                 <span class="syn-k">&nbsp;&nbsp;headline:</span> <span class="syn-s">"Software finally has blueprints."</span><br>
+                <span class="syn-k">&nbsp;&nbsp;install_command:</span> <span class="syn-s">"curl -fsSL …/install.sh | sh"</span><br>
                 <span class="syn-k">&nbsp;&nbsp;actions:</span><br>
                 <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;- label:</span> <span class="syn-s">Explore the Platform</span><br>
                 <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;href:</span> <span class="syn-s">/platform/</span><br>
@@ -491,9 +789,9 @@
               </div>
               <div class="xray-layer-preview">
                 <span class="syn-t">&lt;section</span> <span class="syn-a">id</span>=<span class="syn-s">"hero"</span> <span class="syn-a">class</span>=<span class="syn-s">"hero"</span><span class="syn-t">&gt;</span><br>
-                <span class="syn-t">&nbsp;&nbsp;&lt;div</span> <span class="syn-a">class</span>=<span class="syn-s">"hero-inner"</span><span class="syn-t">&gt;</span><br>
-                <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;</span>Software finally has blueprints.<span class="syn-t">&lt;/h1&gt;</span><br>
-                <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;&lt;a</span> <span class="syn-a">href</span>=<span class="syn-s">"/platform/"</span> <span class="syn-a">class</span>=<span class="syn-s">"btn btn-primary"</span><span class="syn-t">&gt;</span>Explore<span class="syn-t">&lt;/a&gt;</span><br>
+                <span class="syn-t">&nbsp;&nbsp;&lt;h1&gt;</span>Software finally has blueprints.<span class="syn-t">&lt;/h1&gt;</span><br>
+                <span class="syn-t">&nbsp;&nbsp;&lt;div</span> <span class="syn-a">class</span>=<span class="syn-s">"install-cmd"</span><span class="syn-t">&gt;</span><br>
+                <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;</span>curl -fsSL …/install.sh | sh<span class="syn-t">&lt;/code&gt;</span><br>
                 <span class="syn-t">&nbsp;&nbsp;&lt;/div&gt;</span><br>
                 <span class="syn-t">&lt;/section&gt;</span>
               </div>
@@ -508,8 +806,8 @@
               </div>
               <div class="xray-layer-preview">
                 <span class="syn-t">.hero</span> <span class="syn-p">{</span> <span class="syn-a">padding</span><span class="syn-p">:</span> <span class="syn-n">6rem</span> <span class="syn-n">2rem</span>; <span class="syn-a">text-align</span><span class="syn-p">:</span> <span class="syn-s">center</span>; <span class="syn-p">}</span><br>
-                <span class="syn-t">.hero-inner</span> <span class="syn-p">{</span> <span class="syn-a">max-width</span><span class="syn-p">:</span> <span class="syn-f">var</span>(<span class="syn-s">--wl-max-width</span>); <span class="syn-p">}</span><br>
-                <span class="syn-t">.hero-badge</span> <span class="syn-p">{</span> <span class="syn-a">border-radius</span><span class="syn-p">:</span> <span class="syn-n">9999px</span>; <span class="syn-a">font-weight</span><span class="syn-p">:</span> <span class="syn-n">600</span>; <span class="syn-p">}</span>
+                <span class="syn-t">.install-cmd</span> <span class="syn-p">{</span> <span class="syn-a">display</span><span class="syn-p">:</span> <span class="syn-s">flex</span>; <span class="syn-a">align-items</span><span class="syn-p">:</span> <span class="syn-s">center</span>; <span class="syn-p">}</span><br>
+                <span class="syn-t">.copy-btn</span> <span class="syn-p">{</span> <span class="syn-a">cursor</span><span class="syn-p">:</span> <span class="syn-s">pointer</span>; <span class="syn-a">margin-left</span><span class="syn-p">:</span> <span class="syn-s">auto</span>; <span class="syn-p">}</span>
               </div>
             </div>
             <div class="xray-layer xray-layer-js">
@@ -593,8 +891,8 @@
       </div>
     </section>
 
-    <!-- ─── Comparison (sections[8]: comparison-table) ─── -->
-    <section id="comparison" class="section section-soft" aria-labelledby="compare-heading">
+    <!-- ─── Comparison (sections[9]: comparison-table) ─── -->
+    <section id="comparison" class="section section-soft" aria-labelledby="compare-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Comparison</span>
@@ -664,10 +962,17 @@
               </tr>
               <tr>
                 <td>Upgrade path</td>
-                <td class="yes col-highlight">Regenerate from specs</td>
+                <td class="yes col-highlight">Versioned, validated, reversible</td>
                 <td class="no">Rewrite</td>
                 <td class="partial">Vendor roadmap</td>
                 <td class="no">Re-prompt</td>
+              </tr>
+              <tr>
+                <td>Data protection</td>
+                <td class="yes col-highlight">Schema-aware migrations</td>
+                <td class="no">Manual scripts</td>
+                <td class="partial">Vendor-managed</td>
+                <td class="no">None</td>
               </tr>
               <tr>
                 <td>Runtime dependencies</td>
@@ -703,8 +1008,8 @@
       </div>
     </section>
 
-    <!-- ─── CTA (sections[9]: cta-section) ─── -->
-    <section id="cta" class="section" aria-labelledby="cta-heading">
+    <!-- ─── CTA (sections[10]: cta-section) ─── -->
+    <section id="cta" class="section" aria-labelledby="cta-heading" data-reveal>
       <div class="section-inner" style="text-align:center;max-width:640px;margin:0 auto">
         <h2 id="cta-heading">Stop building from scratch. Start specifying.</h2>
         <p style="margin-bottom:1.5rem">Install the CLI, define your domain as blueprints, and generate a complete production system — with real security, real agents, and a real upgrade path — in minutes, not months.</p>
@@ -810,6 +1115,49 @@
   <!-- Island bootstrap — works without CDN hydration -->
   <script type="module">
     const base = new URL('.', import.meta.url).href;
+
+    // Scroll reveal animations
+    import(base + 'js/islands/scroll-reveal.js')
+      .then(m => m.default())
+      .catch(err => console.warn('[scroll-reveal] init failed:', err));
+
+    // Split-pane demo (tab switching)
+    const splitEl = document.querySelector('[data-island*="split-demo"]');
+    if (splitEl) {
+      import(base + 'js/islands/split-demo.js')
+        .then(m => m.default(splitEl))
+        .catch(err => console.warn('[split-demo] hydration failed:', err));
+    }
+
+    // Architecture diagram (layer hover)
+    const archEl = document.querySelector('[data-island*="arch-diagram"]');
+    if (archEl) {
+      import(base + 'js/islands/arch-diagram.js')
+        .then(m => m.default(archEl))
+        .catch(err => console.warn('[arch-diagram] hydration failed:', err));
+    }
+
+    // Use case expandable cards
+    const usecaseEl = document.querySelector('[data-island*="usecase-expand"]');
+    if (usecaseEl) {
+      import(base + 'js/islands/usecase-expand.js')
+        .then(m => m.default(usecaseEl))
+        .catch(err => console.warn('[usecase-expand] hydration failed:', err));
+    }
+
+    // Stat counter animation
+    const statsEl = document.querySelector('[data-island*="stat-counter"]');
+    if (statsEl) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          import(base + 'js/islands/stat-counter.js')
+            .then(m => m.default(statsEl))
+            .catch(err => console.warn('[stat-counter] hydration failed:', err));
+        }
+      }, { threshold: 0.3 });
+      observer.observe(statsEl);
+    }
 
     // Blueprint tabs (tabbed code viewer)
     const tabsEl = document.querySelector('[data-island*="blueprint-tabs"]');

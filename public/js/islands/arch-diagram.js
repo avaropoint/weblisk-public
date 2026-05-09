@@ -27,5 +27,5 @@ export default function archDiagram(container) {
   });
 
   // Default: show first layer
-  showLayer('orchestrator');
+  showLayer('protocol');
 }

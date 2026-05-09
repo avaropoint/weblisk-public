@@ -219,28 +219,28 @@ sections:
   - id: hero
     type: hero
     badge:
-      text: "v1.0 — The specification layer for software"
+      text: "v1.0 — Your vision, fully generated"
       icon: dot
     headline: "Software finally has blueprints."
     subheadline: >
-      Over 80 interlocking specifications define your entire system — then
-      generate production code in any language, on any platform. Zero
-      dependencies. Zero lock-in. Your specification is the asset —
-      code is just its latest compilation.
+      Describe what you want in a YAML blueprint. Agents generate every
+      layer — HTML, CSS, JavaScript, APIs, security, deployments —
+      automatically. Change the blueprint, everything regenerates. Your
+      vision stays permanent. Code is just its latest expression.
     actions:
-      - label: Explore the Platform
+      - label: See It In Action
         href: /platform/
         style: primary
-      - label: View the Blueprints
-        href: /platform/blueprints/
+      - label: Start Building
+        href: /docs/quick-start.html
         style: outline
     trust_signals:
       - icon: file-text
-        text: Describe once
-      - icon: shuffle
-        text: Generate forever
+        text: Your blueprint, your rules
+      - icon: bolt
+        text: Every layer generated
       - icon: shield
-        text: Own everything
+        text: Continuously improved
     install_command: "curl -fsSL https://cdn.weblisk.dev/install.sh | sh"
     styles:
       install_cmd:
@@ -331,6 +331,151 @@ sections:
             - rect: { x: 2, y: 3, width: 20, height: 14, rx: 2, ry: 2 }
             - line: { x1: 8, y1: 21, x2: 16, y2: 21 }
             - line: { x1: 12, y1: 17, x2: 12, y2: 21 }
+
+  # Blueprint Pipeline
+  - id: blueprint-pipeline
+    type: pipeline-showcase
+    label: The Generative Pipeline
+    headline: "From blueprint to living UI — every layer, generated."
+    description: >
+      You write one YAML file describing what you want. Agents read it
+      and generate every layer of production code — HTML structure,
+      scoped CSS, interactive JavaScript — then render the final UI. No
+      templates. No boilerplate. No hand-wiring.
+    attributes:
+      data-reveal: true
+    island: pipeline.js
+    hydrate: visible
+    stages:
+      - id: blueprint
+        number: 1
+        badge: { text: "You write", color: human, icon: user }
+        label: Blueprint
+        preview:
+          language: yaml
+          title: pages/home.yaml
+          content: |
+            - id: hero
+              type: hero
+              headline: "Software finally has blueprints."
+              actions:
+                - label: See It In Action
+                  style: primary
+              install_command: "curl -fsSL …/install.sh | sh"
+      - id: generated
+        number: 2
+        badge: { text: "Generated", color: agent, icon: bolt }
+        label: Code Layers
+        layers:
+          - id: html
+            label: HTML
+            border_color: pink
+            content: |
+              <section class="hero">
+                <h1>Software finally…</h1>
+                <a class="btn">See It…</a>
+              </section>
+          - id: css
+            label: CSS
+            border_color: blue
+            content: |
+              .hero { padding: 6rem 2rem; }
+              .btn-primary { background: var(…); }
+              .install-cmd { display: flex; }
+          - id: js
+            label: JS
+            border_color: yellow
+            content: |
+              import { hydrateIslands } from 'weblisk';
+              hydrateIslands({ idle, visible, load });
+      - id: rendered
+        number: 3
+        badge: { text: "Live", color: output, animated: pulse }
+        label: Final Output
+        preview:
+          type: mini-hero
+          badge: "v1.0 — Your vision, fully generated"
+          headline: "Software finally has blueprints."
+          subheadline: "Describe what you want. Agents generate every layer."
+          cta: "See It In Action →"
+    caption: >-
+      This is how this very page was built — every section you see was
+      generated from a blueprint.
+
+  # Autonomous Loop
+  - id: autonomous-loop
+    type: content-section
+    background: soft
+    label: The Autonomous Loop
+    headline: "Change the blueprint. Everything follows — automatically."
+    description: >
+      No rebuilds. No re-prompting. No waiting on developers. Edit a
+      blueprint and agents detect the change, regenerate the affected
+      code, preview the result, and publish — all without writing a
+      single line of code. Your website lives in a state of continuous,
+      autonomous improvement.
+    attributes:
+      data-reveal: true
+    island: loop-cycle.js
+    hydrate: visible
+    steps:
+      - id: describe
+        icon: edit
+        title: "Describe"
+        text: "Edit the blueprint — add a section, change copy, add a pattern. Plain YAML, no code."
+      - id: process
+        icon: bolt
+        title: "Agents Process"
+        text: "Agents parse the diff, resolve dependencies, and regenerate every affected layer."
+      - id: preview
+        icon: eye
+        title: "Preview"
+        text: "Live preview renders instantly — see exactly what your users will see before it ships."
+      - id: publish
+        icon: cloud-upload
+        title: "Publish"
+        text: "Validated, versioned, deployed — schema-checked with automatic rollback if anything breaks."
+    loop_label: "Continuous improvement — the loop never stops"
+
+  # Total Control
+  - id: total-control
+    type: content-section
+    label: Total Control
+    headline: "Your blueprint is the master plan. Everything answers to it."
+    description: >
+      This isn't just about generating code. Your blueprint controls
+      every aspect of your online presence — from pixel-level design to
+      production infrastructure. Every integration, every touchpoint,
+      every decision — specified, versioned, and yours.
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
+    cards:
+      - icon: layout
+        title: "Design & Layout"
+        text: "Every section, component, and visual hierarchy — described in your blueprint, generated pixel-perfect."
+        spec: "pages/*.yaml → HTML + CSS"
+      - icon: settings
+        title: "Integrations & APIs"
+        text: "Webhooks, third-party connectors, API contracts — every integration specified and auto-generated."
+        spec: "patterns/*.yaml → endpoints"
+      - icon: shield
+        title: "Security & Identity"
+        text: "Ed25519 signing, ABAC access control, 7-layer security — all enforced by the blueprint, not bolted on."
+        spec: "security.yaml → middleware"
+      - icon: database
+        title: "Data & Migrations"
+        text: "Schema-aware migrations, integrity checks, rollback strategies — your data lifecycle, specified."
+        spec: "schemas/*.yaml → migrations"
+      - icon: cloud-upload
+        title: "Deployments"
+        text: "Versioned, validated, reversible — deploy to Cloudflare Workers, Go, Rust, or Node.js from one spec."
+        spec: "platforms/*.yaml → deploy"
+      - icon: bolt
+        title: "Agents & Automation"
+        text: "Domain agents, quality agents, infrastructure agents — autonomous workers that execute your blueprint's intent."
+        spec: "agents/*.yaml → orchestration"
 
   # Why This Matters
   - id: why-this-matters
@@ -959,15 +1104,16 @@ sections:
   # CTA
   - id: cta
     type: cta-section
-    headline: "Stop building from scratch. Start specifying."
+    headline: "Your vision deserves more than a blank editor."
     description: >-
-      Install the CLI, define your domain as blueprints, and generate
-      a complete production system — with real security, real agents,
-      and a real upgrade path — in minutes, not months.
+      Describe what you want. Generate a complete production system —
+      design, security, agents, deployments — in minutes. Own every
+      layer. Change anything by editing the blueprint. The loop never
+      stops.
     attributes:
       data-reveal: true
     actions:
-      - label: Get Started
+      - label: Start Building
         href: /docs/quick-start.html
         style: primary
       - label: Explore the Marketplace

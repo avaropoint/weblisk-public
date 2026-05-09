@@ -188,17 +188,17 @@
     <!-- ─── Hero (sections[0]: hero) ─── -->
     <section id="hero" class="hero" aria-labelledby="hero-heading">
       <div class="hero-inner">
-        <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> v1.0 — The specification layer for software</span>
+        <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> v1.0 — Your vision, fully generated</span>
         <h1 id="hero-heading">Software finally has blueprints.</h1>
         <p class="hero-sub">
-          Over 80 interlocking specifications define your entire system — then generate production code in any language, on any platform. Zero dependencies. Zero lock-in. Your specification is the asset — code is just its latest compilation.
+          Describe what you want in a YAML blueprint. Agents generate every layer — HTML, CSS, JavaScript, APIs, security, deployments — automatically. Change the blueprint, everything regenerates. Your vision stays permanent. Code is just its latest expression.
         </p>
         <div class="hero-actions">
           <a href="/platform/" class="btn btn-primary">
-            Explore the Platform
+            See It In Action
             <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
           </a>
-          <a href="/platform/blueprints/" class="btn btn-outline">View the Blueprints</a>
+          <a href="/docs/quick-start.html" class="btn btn-outline">Start Building</a>
         </div>
         <div class="install-cmd">
           <span class="prompt" aria-hidden="true">$</span>
@@ -211,15 +211,15 @@
         <div class="hero-trust">
           <span class="hero-trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            Describe once
+            Your blueprint, your rules
           </span>
           <span class="hero-trust-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
-            Generate forever
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Every layer generated
           </span>
           <span class="hero-trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Own everything
+            Continuously improved
           </span>
         </div>
       </div>
@@ -268,7 +268,240 @@
       </div>
     </section>
 
-    <!-- ─── Why This Matters (sections[2]: problem-section) ─── -->
+    <!-- ─── Blueprint Pipeline (sections[2]: blueprint-pipeline) ─── -->
+    <section id="blueprint-pipeline" class="section" aria-labelledby="pipeline-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">The Generative Pipeline</span>
+          <h2 id="pipeline-heading">From blueprint to living UI — every layer, generated.</h2>
+          <p>You write one YAML file describing what you want. Agents read it and generate every layer of production code — HTML structure, scoped CSS, interactive JavaScript — then render the final UI. No templates. No boilerplate. No hand-wiring.</p>
+        </div>
+        <div class="pipeline" data-island="./js/islands/pipeline.js" data-hydrate="visible">
+          <div class="pipeline-stage pipeline-stage-active" data-stage="blueprint">
+            <div class="pipeline-stage-header">
+              <span class="pipeline-stage-number">1</span>
+              <span class="pipeline-stage-badge pipeline-badge-human">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                You write
+              </span>
+            </div>
+            <div class="pipeline-stage-label">Blueprint</div>
+            <div class="pipeline-stage-preview code-window">
+              <div class="code-header">
+                <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                <span class="code-title">pages/home.yaml</span>
+              </div>
+              <div class="code-body">
+                <pre><span class="syn-k">- id:</span> <span class="syn-s">hero</span>
+  <span class="syn-k">type:</span> <span class="syn-s">hero</span>
+  <span class="syn-k">headline:</span> <span class="syn-s">"Software finally has blueprints."</span>
+  <span class="syn-k">actions:</span>
+    <span class="syn-k">- label:</span> <span class="syn-s">See It In Action</span>
+      <span class="syn-k">style:</span> <span class="syn-s">primary</span>
+  <span class="syn-k">install_command:</span> <span class="syn-s">"curl -fsSL …/install.sh | sh"</span></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-arrow" aria-hidden="true">
+            <div class="pipeline-arrow-line"></div>
+            <div class="pipeline-arrow-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Agents process
+            </div>
+            <div class="pipeline-arrow-line"></div>
+          </div>
+
+          <div class="pipeline-stage" data-stage="generated">
+            <div class="pipeline-stage-header">
+              <span class="pipeline-stage-number">2</span>
+              <span class="pipeline-stage-badge pipeline-badge-agent">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Generated
+              </span>
+            </div>
+            <div class="pipeline-stage-label">Code Layers</div>
+            <div class="pipeline-layers">
+              <div class="pipeline-layer pipeline-layer-html" data-layer="html">
+                <span class="pipeline-layer-tag">HTML</span>
+                <div class="pipeline-layer-code">
+                  <span class="syn-t">&lt;section</span> <span class="syn-a">class</span>=<span class="syn-s">"hero"</span><span class="syn-t">&gt;</span><br>
+                  <span class="syn-t">&nbsp;&nbsp;&lt;h1&gt;</span>Software finally…<span class="syn-t">&lt;/h1&gt;</span><br>
+                  <span class="syn-t">&nbsp;&nbsp;&lt;a</span> <span class="syn-a">class</span>=<span class="syn-s">"btn"</span><span class="syn-t">&gt;</span>See It…<span class="syn-t">&lt;/a&gt;</span><br>
+                  <span class="syn-t">&lt;/section&gt;</span>
+                </div>
+              </div>
+              <div class="pipeline-layer pipeline-layer-css" data-layer="css">
+                <span class="pipeline-layer-tag">CSS</span>
+                <div class="pipeline-layer-code">
+                  <span class="syn-t">.hero</span> <span class="syn-p">{</span> <span class="syn-a">padding</span>: <span class="syn-n">6rem 2rem</span>; <span class="syn-p">}</span><br>
+                  <span class="syn-t">.btn-primary</span> <span class="syn-p">{</span> <span class="syn-a">background</span>: <span class="syn-s">var(…)</span>; <span class="syn-p">}</span><br>
+                  <span class="syn-t">.install-cmd</span> <span class="syn-p">{</span> <span class="syn-a">display</span>: <span class="syn-s">flex</span>; <span class="syn-p">}</span>
+                </div>
+              </div>
+              <div class="pipeline-layer pipeline-layer-js" data-layer="js">
+                <span class="pipeline-layer-tag">JS</span>
+                <div class="pipeline-layer-code">
+                  <span class="syn-k">import</span> { hydrateIslands } <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span>;<br>
+                  <span class="syn-f">hydrateIslands</span>({ idle, visible, load });
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-arrow" aria-hidden="true">
+            <div class="pipeline-arrow-line"></div>
+            <div class="pipeline-arrow-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Renders
+            </div>
+            <div class="pipeline-arrow-line"></div>
+          </div>
+
+          <div class="pipeline-stage" data-stage="rendered">
+            <div class="pipeline-stage-header">
+              <span class="pipeline-stage-number">3</span>
+              <span class="pipeline-stage-badge pipeline-badge-live">
+                Live
+              </span>
+            </div>
+            <div class="pipeline-stage-label">Final Output</div>
+            <div class="pipeline-stage-preview pipeline-rendered">
+              <div class="pipeline-mini-hero">
+                <span class="pipeline-mini-badge">v1.0 — Your vision, fully generated</span>
+                <strong>Software finally has blueprints.</strong>
+                <span class="pipeline-mini-sub">Describe what you want. Agents generate every layer.</span>
+                <span class="pipeline-mini-btn">See It In Action →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="pipeline-caption">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          This is how this very page was built — every section you see was generated from a blueprint.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── Autonomous Loop (sections[3]: autonomous-loop) ─── -->
+    <section id="autonomous-loop" class="section section-soft" aria-labelledby="loop-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">The Autonomous Loop</span>
+          <h2 id="loop-heading">Change the blueprint. Everything follows — automatically.</h2>
+          <p>No rebuilds. No re-prompting. No waiting on developers. Edit a blueprint and agents detect the change, regenerate the affected code, preview the result, and publish — all without writing a single line of code. Your website lives in a state of continuous, autonomous improvement.</p>
+        </div>
+        <div class="loop-cycle" data-island="./js/islands/loop-cycle.js" data-hydrate="visible">
+          <div class="loop-step loop-step-active" data-step="describe">
+            <div class="loop-step-icon loop-icon-describe">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Describe</h3>
+            <p>Edit the blueprint — add a section, change copy, add a pattern. Plain YAML, no code.</p>
+          </div>
+          <div class="loop-connector" aria-hidden="true">
+            <svg width="32" height="16" viewBox="0 0 32 16"><path d="M2 8h28M24 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="loop-step" data-step="process">
+            <div class="loop-step-icon loop-icon-process">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Agents Process</h3>
+            <p>Agents parse the diff, resolve dependencies, and regenerate every affected layer.</p>
+          </div>
+          <div class="loop-connector" aria-hidden="true">
+            <svg width="32" height="16" viewBox="0 0 32 16"><path d="M2 8h28M24 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="loop-step" data-step="preview">
+            <div class="loop-step-icon loop-icon-preview">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Preview</h3>
+            <p>Live preview renders instantly — see exactly what your users will see before it ships.</p>
+          </div>
+          <div class="loop-connector" aria-hidden="true">
+            <svg width="32" height="16" viewBox="0 0 32 16"><path d="M2 8h28M24 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="loop-step" data-step="publish">
+            <div class="loop-step-icon loop-icon-publish">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            </div>
+            <h3>Publish</h3>
+            <p>Validated, versioned, deployed — schema-checked with automatic rollback if anything breaks.</p>
+          </div>
+          <div class="loop-return" aria-hidden="true">
+            <svg width="100%" height="40" viewBox="0 0 800 40" preserveAspectRatio="none">
+              <path d="M780 5 Q795 20 780 35 L20 35 Q5 20 20 5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round"/>
+              <polygon points="24,2 14,8 20,8 20,2" fill="currentColor"/>
+            </svg>
+            <span class="loop-return-label">Continuous improvement — the loop never stops</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Total Control (sections[4]: total-control) ─── -->
+    <section id="total-control" class="section" aria-labelledby="control-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Total Control</span>
+          <h2 id="control-heading">Your blueprint is the master plan. Everything answers to it.</h2>
+          <p>This isn't just about generating code. Your blueprint controls every aspect of your online presence — from pixel-level design to production infrastructure. Every integration, every touchpoint, every decision — specified, versioned, and yours.</p>
+        </div>
+        <div class="control-grid" data-reveal-stagger>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+            <h3>Design &amp; Layout</h3>
+            <p>Every section, component, and visual hierarchy — described in your blueprint, generated pixel-perfect.</p>
+            <span class="control-spec">pages/*.yaml → HTML + CSS</span>
+          </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <h3>Integrations &amp; APIs</h3>
+            <p>Webhooks, third-party connectors, API contracts — every integration specified and auto-generated.</p>
+            <span class="control-spec">patterns/*.yaml → endpoints</span>
+          </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Security &amp; Identity</h3>
+            <p>Ed25519 signing, ABAC access control, 7-layer security — all enforced by the blueprint, not bolted on.</p>
+            <span class="control-spec">security.yaml → middleware</span>
+          </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h3>Data &amp; Migrations</h3>
+            <p>Schema-aware migrations, integrity checks, rollback strategies — your data lifecycle, specified.</p>
+            <span class="control-spec">schemas/*.yaml → migrations</span>
+          </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            </div>
+            <h3>Deployments</h3>
+            <p>Versioned, validated, reversible — deploy to Cloudflare Workers, Go, Rust, or Node.js from one spec.</p>
+            <span class="control-spec">platforms/*.yaml → deploy</span>
+          </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Agents &amp; Automation</h3>
+            <p>Domain agents, quality agents, infrastructure agents — autonomous workers that execute your blueprint's intent.</p>
+            <span class="control-spec">agents/*.yaml → orchestration</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Why This Matters (sections[5]: problem-section) ─── -->
     <section id="why-this-matters" class="section" aria-labelledby="problem-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -308,7 +541,7 @@
       </div>
     </section>
 
-    <!-- ─── The MOAT (sections[3]: content-section) ─── -->
+    <!-- ─── The MOAT (sections[6]: content-section) ─── -->
     <section id="moat" class="section section-soft" aria-labelledby="moat-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -349,7 +582,7 @@
       </div>
     </section>
 
-    <!-- ─── How It Works (sections[4]: content-section) ─── -->
+    <!-- ─── How It Works (sections[7]: content-section) ─── -->
     <section id="how-it-works" class="section" aria-labelledby="how-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -467,7 +700,7 @@
       </div>
     </section>
 
-    <!-- ─── Architecture (sections[5]: content-section) ─── -->
+    <!-- ─── Architecture (sections[8]: content-section) ─── -->
     <section id="architecture" class="section section-soft" aria-labelledby="arch-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -550,7 +783,7 @@
       </div>
     </section>
 
-    <!-- ─── Getting Started (sections[6]: getting-started) ─── -->
+    <!-- ─── Getting Started (sections[9]: getting-started) ─── -->
     <section id="getting-started" class="section" aria-labelledby="gs-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -636,7 +869,7 @@
       </div>
     </section>
 
-    <!-- ─── Use Cases (sections[7]: content-section) ─── -->
+    <!-- ─── Use Cases (sections[10]: content-section) ─── -->
     <section id="use-cases" class="section section-soft" aria-labelledby="usecases-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -733,7 +966,7 @@
       </div>
     </section>
 
-    <!-- ─── Declarative UI (sections[8]: xray-showcase) ─── -->
+    <!-- ─── Declarative UI (sections[11]: xray-showcase) ─── -->
     <section id="client-framework" class="section xray-section" aria-labelledby="client-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -891,7 +1124,7 @@
       </div>
     </section>
 
-    <!-- ─── Comparison (sections[9]: comparison-table) ─── -->
+    <!-- ─── Comparison (sections[12]: comparison-table) ─── -->
     <section id="comparison" class="section section-soft" aria-labelledby="compare-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -1008,14 +1241,14 @@
       </div>
     </section>
 
-    <!-- ─── CTA (sections[10]: cta-section) ─── -->
+    <!-- ─── CTA (sections[13]: cta-section) ─── -->
     <section id="cta" class="section" aria-labelledby="cta-heading" data-reveal>
       <div class="section-inner" style="text-align:center;max-width:640px;margin:0 auto">
-        <h2 id="cta-heading">Stop building from scratch. Start specifying.</h2>
-        <p style="margin-bottom:1.5rem">Install the CLI, define your domain as blueprints, and generate a complete production system — with real security, real agents, and a real upgrade path — in minutes, not months.</p>
+        <h2 id="cta-heading">Your vision deserves more than a blank editor.</h2>
+        <p style="margin-bottom:1.5rem">Describe what you want. Generate a complete production system — design, security, agents, deployments — in minutes. Own every layer. Change anything by editing the blueprint. The loop never stops.</p>
         <div class="hero-actions" style="justify-content:center">
           <a href="/docs/quick-start.html" class="btn btn-primary">
-            Get Started
+            Start Building
             <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
           </a>
           <a href="/marketplace/" class="btn btn-outline">Explore the Marketplace</a>
@@ -1127,6 +1360,22 @@
       import(base + 'js/islands/split-demo.js')
         .then(m => m.default(splitEl))
         .catch(err => console.warn('[split-demo] hydration failed:', err));
+    }
+
+    // Pipeline animation
+    const pipelineEl = document.querySelector('[data-island*="pipeline"]');
+    if (pipelineEl) {
+      import(base + 'js/islands/pipeline.js')
+        .then(m => m.default(pipelineEl))
+        .catch(err => console.warn('[pipeline] hydration failed:', err));
+    }
+
+    // Autonomous loop cycle
+    const loopEl = document.querySelector('[data-island*="loop-cycle"]');
+    if (loopEl) {
+      import(base + 'js/islands/loop-cycle.js')
+        .then(m => m.default(loopEl))
+        .catch(err => console.warn('[loop-cycle] hydration failed:', err));
     }
 
     // Architecture diagram (layer hover)

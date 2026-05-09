@@ -160,6 +160,59 @@ components:
   - footer
   - blueprint-viewer
 
+# ── Responsive Design Rules ──────────────────────────────────────────────────
+# These constraints MUST be satisfied by the generated CSS.
+responsive:
+  global:
+    - body and html MUST have overflow-x: hidden to prevent horizontal scroll
+    - All sections use padding (not fixed widths) for horizontal spacing
+    - Code blocks (pre) MUST have overflow-x: auto and max-width: 100%
+    - Grid children MUST have min-width: 0 to prevent grid blowout
+    - The install_command element MUST wrap or scroll on narrow viewports
+
+  breakpoints:
+    desktop: ">= 1024px"
+    tablet: "768px – 1023px"
+    phone: "481px – 767px"
+    small_phone: "<= 480px"
+
+  rules:
+    - selector: ".section-inner"
+      constraints:
+        - overflow: hidden (contain child overflow)
+        - max-width: var(--wl-max-width) with auto margins
+
+    - selector: ".install-cmd"
+      constraints:
+        - max-width: 100% on all viewports
+        - overflow-x: auto with hidden scrollbar on small screens
+        - word-break or horizontal scroll when content exceeds container
+
+    - selector: ".gs-step-content .code-window"
+      constraints:
+        - min-width: 0 (prevent grid blowout)
+        - code-body pre: overflow-x auto, max-width 100%
+
+    - selector: ".split-pane"
+      constraints:
+        - Children get min-width: 0 to prevent grid overflow
+        - Stacks vertically below 768px
+
+    - selector: ".code-window, .code-body pre"
+      constraints:
+        - max-width: 100% at all breakpoints
+        - overflow-x: auto on pre elements
+
+    - selector: ".xray-showcase"
+      constraints:
+        - Stacks at 900px
+        - Code layers truncate with overflow: hidden
+
+    - selector: ".comparison-table"
+      constraints:
+        - Wrapped in overflow-x: auto container
+        - min-width on table for horizontal scroll on small screens
+
 sections:
 
   # Hero

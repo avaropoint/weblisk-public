@@ -191,7 +191,7 @@
         <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> v1.0 — Your vision, fully generated</span>
         <h1 id="hero-heading">Software finally has blueprints.</h1>
         <p class="hero-sub">
-          Describe what you want in a YAML blueprint. Agents generate every layer — HTML, CSS, JavaScript, APIs, security, deployments — automatically. Change the blueprint, everything regenerates. Your vision stays permanent. Code is just its latest expression.
+          Describe what you want in a YAML blueprint. Domain-expert agents generate every layer — from UI/UX to APIs, security to deployments — in a continuous, intelligent feedback loop. From ideation to production, your vision stays permanent. Code is just its latest expression.
         </p>
         <div class="hero-actions">
           <a href="/platform/" class="btn btn-primary">
@@ -268,13 +268,54 @@
       </div>
     </section>
 
-    <!-- ─── Blueprint Pipeline (sections[2]: blueprint-pipeline) ─── -->
+    <!-- ─── What Is a Blueprint? (sections[2]: concept-section) ─── -->
+    <section id="what-is-a-blueprint" class="section" aria-labelledby="blueprint-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">The Foundation</span>
+          <h2 id="blueprint-heading">A blueprint is your project's single source of truth.</h2>
+          <p>Not a template. Not a config file. A structured YAML specification that captures your entire domain — what your project does, how it's secured, where it deploys, and which agents maintain it. You describe what you want. Domain-expert agents generate every layer of production code. The blueprint is permanent. Code is just its latest expression.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Readable by Anyone</h3>
+            <p>No programming knowledge required. Product managers, designers, founders — anyone can read and write a blueprint. It's structured YAML, not source code.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Controls Everything</h3>
+            <p>Design, security, integrations, data models, deployments, agent behavior — every aspect of your project, specified in one versioned corpus.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Generates Deterministically</h3>
+            <p>Same blueprint, same output. Every time. No drift, no surprises, no "works on my machine." Reproduce any build from any point in history.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Eliminates AI Waste</h3>
+            <p>Define once, generate forever. No re-prompting, no token churn, no hallucinated architecture. Blueprints give AI the structured context it needs to produce correct, reproducible output on every pass.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Generative UI/UX (sections[3]: blueprint-pipeline) ─── -->
     <section id="blueprint-pipeline" class="section" aria-labelledby="pipeline-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
-          <span class="section-label">The Generative Pipeline</span>
-          <h2 id="pipeline-heading">From blueprint to living UI — every layer, generated.</h2>
-          <p>You write one YAML file describing what you want. Agents read it and generate every layer of production code — HTML structure, scoped CSS, interactive JavaScript — then render the final UI. No templates. No boilerplate. No hand-wiring.</p>
+          <span class="section-label">Generative UI/UX</span>
+          <h2 id="pipeline-heading">From blueprint to functional UI/UX — every layer, meticulously generated.</h2>
+          <p>Real-time generative UI/UX, powered by domain expertise. You write one YAML blueprint. Agents with deep architectural knowledge read it and generate every layer of production code — semantic HTML, scoped CSS, interactive JavaScript — in a continuous, intelligent feedback loop from ideation to production. No templates. No boilerplate. No re-prompting.</p>
         </div>
         <div class="pipeline" data-island="./js/islands/pipeline.js" data-hydrate="visible">
           <div class="pipeline-stage pipeline-stage-active" data-stage="blueprint">
@@ -383,206 +424,130 @@
       </div>
     </section>
 
-    <!-- ─── Autonomous Loop (sections[3]: autonomous-loop) ─── -->
-    <section id="autonomous-loop" class="section section-soft" aria-labelledby="loop-heading" data-reveal>
+    <!-- ─── The Workflow (sections[4]: workflow-section) ─── -->
+    <section id="the-workflow" class="section section-soft" aria-labelledby="workflow-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
-          <span class="section-label">The Autonomous Loop</span>
-          <h2 id="loop-heading">Change the blueprint. Everything follows — automatically.</h2>
-          <p>No rebuilds. No re-prompting. No waiting on developers. Edit a blueprint and agents detect the change, regenerate the affected code, preview the result, and publish — all without writing a single line of code. Your website lives in a state of continuous, autonomous improvement.</p>
-        </div>
-        <div class="loop-cycle" data-island="./js/islands/loop-cycle.js" data-hydrate="visible">
-          <div class="loop-step loop-step-active" data-step="describe">
-            <div class="loop-step-icon loop-icon-describe">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            </div>
-            <h3>Describe</h3>
-            <p>Edit the blueprint — add a section, change copy, add a pattern. Plain YAML, no code.</p>
-          </div>
-          <div class="loop-connector" aria-hidden="true">
-            <svg width="32" height="16" viewBox="0 0 32 16"><path d="M2 8h28M24 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="loop-step" data-step="process">
-            <div class="loop-step-icon loop-icon-process">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </div>
-            <h3>Agents Process</h3>
-            <p>Agents parse the diff, resolve dependencies, and regenerate every affected layer.</p>
-          </div>
-          <div class="loop-connector" aria-hidden="true">
-            <svg width="32" height="16" viewBox="0 0 32 16"><path d="M2 8h28M24 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="loop-step" data-step="preview">
-            <div class="loop-step-icon loop-icon-preview">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
-            <h3>Preview</h3>
-            <p>Live preview renders instantly — see exactly what your users will see before it ships.</p>
-          </div>
-          <div class="loop-connector" aria-hidden="true">
-            <svg width="32" height="16" viewBox="0 0 32 16"><path d="M2 8h28M24 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="loop-step" data-step="publish">
-            <div class="loop-step-icon loop-icon-publish">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-            </div>
-            <h3>Publish</h3>
-            <p>Validated, versioned, deployed — schema-checked with automatic rollback if anything breaks.</p>
-          </div>
-          <div class="loop-return" aria-hidden="true">
-            <svg width="100%" height="40" viewBox="0 0 800 40" preserveAspectRatio="none">
-              <path d="M780 5 Q795 20 780 35 L20 35 Q5 20 20 5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round"/>
-              <polygon points="24,2 14,8 20,8 20,2" fill="currentColor"/>
-            </svg>
-            <span class="loop-return-label">Continuous improvement — the loop never stops</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── Total Control (sections[4]: total-control) ─── -->
-    <section id="total-control" class="section" aria-labelledby="control-heading" data-reveal>
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-label">Total Control</span>
-          <h2 id="control-heading">Your blueprint is the master plan. Everything answers to it.</h2>
-          <p>This isn't just about generating code. Your blueprint controls every aspect of your online presence — from pixel-level design to production infrastructure. Every integration, every touchpoint, every decision — specified, versioned, and yours.</p>
+          <span class="section-label">The Workflow</span>
+          <h2 id="workflow-heading">From ideation to production — and every step in between.</h2>
+          <p>This isn't a simplified demo. This is the real workflow. Initialize your project, source or create blueprints, generate production code for any platform, handle migrations between versions, preview changes, and deploy — all orchestrated by domain-expert agents that understand every layer of your stack.</p>
         </div>
         <div class="control-grid" data-reveal-stagger>
           <div class="control-card">
             <div class="control-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
             </div>
-            <h3>Design &amp; Layout</h3>
-            <p>Every section, component, and visual hierarchy — described in your blueprint, generated pixel-perfect.</p>
-            <span class="control-spec">pages/*.yaml → HTML + CSS</span>
+            <h3>Initialize</h3>
+            <p>One command scaffolds your project with blueprint structure, agent configs, and platform targets. No boilerplate decisions — start with a working structure immediately.</p>
+            <span class="control-spec">weblisk init my-project</span>
           </div>
           <div class="control-card">
             <div class="control-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             </div>
-            <h3>Integrations &amp; APIs</h3>
-            <p>Webhooks, third-party connectors, API contracts — every integration specified and auto-generated.</p>
-            <span class="control-spec">patterns/*.yaml → endpoints</span>
-          </div>
-          <div class="control-card">
-            <div class="control-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3>Security &amp; Identity</h3>
-            <p>Ed25519 signing, ABAC access control, 7-layer security — all enforced by the blueprint, not bolted on.</p>
-            <span class="control-spec">security.yaml → middleware</span>
-          </div>
-          <div class="control-card">
-            <div class="control-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-            </div>
-            <h3>Data &amp; Migrations</h3>
-            <p>Schema-aware migrations, integrity checks, rollback strategies — your data lifecycle, specified.</p>
-            <span class="control-spec">schemas/*.yaml → migrations</span>
-          </div>
-          <div class="control-card">
-            <div class="control-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-            </div>
-            <h3>Deployments</h3>
-            <p>Versioned, validated, reversible — deploy to Cloudflare Workers, Go, Rust, or Node.js from one spec.</p>
-            <span class="control-spec">platforms/*.yaml → deploy</span>
+            <h3>Source Blueprints</h3>
+            <p>Pull from the open marketplace, fork community blueprints, or write your own from scratch. Compose patterns, mix templates, extend anything — your specs, your rules.</p>
+            <span class="control-spec">weblisk add patterns/auth-token</span>
           </div>
           <div class="control-card">
             <div class="control-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
-            <h3>Agents &amp; Automation</h3>
-            <p>Domain agents, quality agents, infrastructure agents — autonomous workers that execute your blueprint's intent.</p>
-            <span class="control-spec">agents/*.yaml → orchestration</span>
+            <h3>Build &amp; Generate</h3>
+            <p>Generate production code for any language or platform — Go, Rust, Node, Cloudflare Workers. Leverage open templates or build your own unique specs. One blueprint, infinite targets.</p>
+            <span class="control-spec">weblisk generate --platform cloudflare</span>
           </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </div>
+            <h3>Transform &amp; Migrate</h3>
+            <p>Handle schema migrations, data transformations, and infrastructure transitions between versions. Every change is diffed, validated, and reversible — nothing is left to chance.</p>
+            <span class="control-spec">schemas/*.yaml → migrations</span>
+          </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Preview &amp; Validate</h3>
+            <p>See exactly what ships before it goes live. Auto-approve when all criteria pass — schema validation, security checks, quality gates. Full confidence before production.</p>
+            <span class="control-spec">weblisk preview --validate</span>
+          </div>
+          <div class="control-card">
+            <div class="control-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            </div>
+            <h3>Deploy &amp; Monitor</h3>
+            <p>Validated, versioned, deployed — with schema checks and automatic rollback. Domain-expert agents continuously monitor every layer, ensuring enterprise standards, best practices, and protocol compliance.</p>
+            <span class="control-spec">weblisk deploy --auto-rollback</span>
+          </div>
+        </div>
+        <div class="loop-return" aria-hidden="true">
+          <svg width="100%" height="40" viewBox="0 0 800 40" preserveAspectRatio="none">
+            <path d="M780 5 Q795 20 780 35 L20 35 Q5 20 20 5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round"/>
+            <polygon points="24,2 14,8 20,8 20,2" fill="currentColor"/>
+          </svg>
+          <span class="loop-return-label">Continuous improvement — domain-expert agents monitor every layer, the loop never stops</span>
         </div>
       </div>
     </section>
 
-    <!-- ─── Why This Matters (sections[5]: problem-section) ─── -->
-    <section id="why-this-matters" class="section" aria-labelledby="problem-heading" data-reveal>
+    <!-- ─── Why Blueprints (sections[5]: merged-section) ─── -->
+    <section id="why-blueprints" class="section" aria-labelledby="why-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
-          <span class="section-label">Why This Matters</span>
-          <h2 id="problem-heading">Your knowledge is the most valuable asset. Protect it.</h2>
+          <span class="section-label">Why Blueprints</span>
+          <h2 id="why-heading">Your knowledge is your most valuable asset. Protect it.</h2>
+          <p>Frameworks change. Teams turn over. AI evolves. The one thing that should never be lost is the knowledge of how your system works and why. Blueprints capture that knowledge in structured, versioned specifications — not scattered docs, tribal knowledge, or prompt history. This is the layer that's been missing.</p>
         </div>
         <div class="feature-grid" data-reveal-stagger>
           <div class="feature-card">
             <div class="feature-icon purple">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
             </div>
-            <h3>Centralised Intelligence</h3>
+            <h3>Centralised Domain Knowledge</h3>
             <p>Every decision, pattern, and domain rule lives in one specification corpus — not scattered across wikis, tickets, and tribal knowledge. The entire system is readable, queryable, and permanent.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon cyan">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
-            <h3>Zero Developer Lock-In</h3>
-            <p>When a developer leaves, the knowledge stays. No months of reverse-engineering. No back-and-forth emails trying to reconstruct intent. The specification is the handover.</p>
+            <h3>AI That Actually Works</h3>
+            <p>Stop re-prompting. Define once, generate deterministically — every language, zero wasted tokens. Without a spec, AI is hallucination with syntax highlighting. With blueprints, it's verifiable, reproducible, and cost-efficient.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon green">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <h3>Anyone Can Build</h3>
-            <p>AI writes the code. Specifications make it correct. You don't need a senior engineer to maintain architecture — you need blueprints that any team, any AI, any generation of developers can execute from.</p>
+            <h3>Zero Lock-In</h3>
+            <p>When a developer leaves, the knowledge stays. No months of reverse-engineering. No back-and-forth emails reconstructing intent. The specification is the handover — any team, any AI, any generation of developers can execute from it.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon orange">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             </div>
-            <h3>Protect What Matters Most</h3>
-            <p>Frameworks change. Teams turn over. AI evolves. The one thing that should never be lost is the knowledge of how your system works and why. That's what a specification layer preserves — permanently.</p>
+            <h3>Platform Independence</h3>
+            <p>One blueprint → Go, Rust, Node, or Cloudflare Workers. Switch platforms without losing a single design decision. Your domain knowledge transcends any particular language or runtime.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── The MOAT (sections[6]: content-section) ─── -->
-    <section id="moat" class="section section-soft" aria-labelledby="moat-heading" data-reveal>
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-label">The Platform</span>
-          <h2 id="moat-heading">Over 80 specifications. Years to build. Impossible to shortcut.</h2>
-          <p>An LLM can't produce a coherent specification corpus. SaaS APIs aren't architecture. A federation protocol, security model, and agent orchestrator that cross-reference each other don't emerge in a weekend. Ideas buried in markdown files drift from reality. Structured specifications stay true — and generate. This compounds.</p>
-        </div>
-        <div class="feature-grid" data-reveal-stagger>
           <div class="feature-card">
             <div class="feature-icon purple">
               <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
             </div>
             <h3>Complete System Specification</h3>
-            <p>Not fragments. Not templates. Protocol, architecture, patterns, agents, platforms, standards — each spec cross-references and generates alongside every other.</p>
+            <p>Not fragments. Not templates. Protocol, architecture, patterns, agents, platforms — 80+ specs that cross-reference and generate alongside every other. Years to build. Impossible to shortcut.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon cyan">
-              <i aria-hidden="true" class="wl-icon wl-i-layers wl-icon-24"></i>
-            </div>
-            <h3>Language &amp; Platform Independence</h3>
-            <p>One blueprint → Go, Rust, Node, or Cloudflare Workers. Switch platforms without losing a single design decision.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon green">
-              <i aria-hidden="true" class="wl-icon wl-i-bolt wl-icon-24"></i>
-            </div>
-            <h3>AI That Actually Works</h3>
-            <p>Stop re-prompting. Define once, generate deterministically — every language, zero wasted tokens. Without a spec, AI is hallucination with syntax highlighting. With blueprints, it's verifiable and reproducible.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon orange">
               <i aria-hidden="true" class="wl-icon wl-i-shield wl-icon-24"></i>
             </div>
             <h3>Safe, Versioned Upgrades</h3>
-            <p>Specs evolve — and so do your data, schemas, and agents. Every deployment is diffed, validated, and reversible. Change management, migration procedures, and deprecation lifecycles are built into the specification layer, not bolted on after the fact.</p>
+            <p>Specs evolve — and so do your data, schemas, and agents. Every deployment is diffed, validated, and reversible. Change management and migration procedures are built into the specification layer, not bolted on.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── How It Works (sections[7]: content-section) ─── -->
+    <!-- ─── How It Works (sections[6]: content-section) ─── -->
     <section id="how-it-works" class="section" aria-labelledby="how-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -700,7 +665,7 @@
       </div>
     </section>
 
-    <!-- ─── Architecture (sections[8]: content-section) ─── -->
+    <!-- ─── Architecture (sections[7]: content-section) ─── -->
     <section id="architecture" class="section section-soft" aria-labelledby="arch-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -783,7 +748,7 @@
       </div>
     </section>
 
-    <!-- ─── Getting Started (sections[9]: getting-started) ─── -->
+    <!-- ─── Getting Started (sections[8]: getting-started) ─── -->
     <section id="getting-started" class="section" aria-labelledby="gs-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -869,7 +834,7 @@
       </div>
     </section>
 
-    <!-- ─── Use Cases (sections[10]: content-section) ─── -->
+    <!-- ─── Use Cases (sections[9]: content-section) ─── -->
     <section id="use-cases" class="section section-soft" aria-labelledby="usecases-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -966,165 +931,7 @@
       </div>
     </section>
 
-    <!-- ─── Declarative UI (sections[11]: xray-showcase) ─── -->
-    <section id="client-framework" class="section xray-section" aria-labelledby="client-heading" data-reveal>
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-label">Declarative UI</span>
-          <h2 id="client-heading">You describe it. The LLM builds it.</h2>
-          <p>Write a YAML blueprint. The LLM generates production HTML, CSS, and JS — then renders the final UI. Hover any section and click the button to X-Ray any section live.</p>
-        </div>
-      </div>
-      <!-- Full-bleed showcase -->
-      <div class="xray-showcase">
-        <div class="xray-showcase-visual">
-          <div class="xray-showcase-layers">
-            <!-- YOU WRITE — the only layer a human touches -->
-            <div class="xray-layer xray-layer-blueprint">
-              <div class="xray-layer-header">
-                <span class="xray-layer-label">Blueprint</span>
-                <span class="xray-layer-badge xray-badge-human">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  You write
-                </span>
-              </div>
-              <div class="xray-layer-preview">
-                <span class="syn-c"># pages/home.yaml</span><br>
-                <span class="syn-k">- id:</span> <span class="syn-s">hero</span><br>
-                <span class="syn-k">&nbsp;&nbsp;type:</span> <span class="syn-s">hero</span><br>
-                <span class="syn-k">&nbsp;&nbsp;headline:</span> <span class="syn-s">"Software finally has blueprints."</span><br>
-                <span class="syn-k">&nbsp;&nbsp;install_command:</span> <span class="syn-s">"curl -fsSL …/install.sh | sh"</span><br>
-                <span class="syn-k">&nbsp;&nbsp;actions:</span><br>
-                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;- label:</span> <span class="syn-s">Explore the Platform</span><br>
-                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;href:</span> <span class="syn-s">/platform/</span><br>
-                <span class="syn-k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:</span> <span class="syn-s">primary</span>
-              </div>
-            </div>
-
-            <!-- GENERATION DIVIDER -->
-            <div class="xray-divider">
-              <div class="xray-divider-line"></div>
-              <span class="xray-divider-label">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                LLM generates
-              </span>
-              <div class="xray-divider-line"></div>
-            </div>
-
-            <!-- LLM GENERATES — three layers produced by AI -->
-            <div class="xray-layer xray-layer-html">
-              <div class="xray-layer-header">
-                <span class="xray-layer-label">HTML</span>
-                <span class="xray-layer-badge xray-badge-llm">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  Generated
-                </span>
-              </div>
-              <div class="xray-layer-preview">
-                <span class="syn-t">&lt;section</span> <span class="syn-a">id</span>=<span class="syn-s">"hero"</span> <span class="syn-a">class</span>=<span class="syn-s">"hero"</span><span class="syn-t">&gt;</span><br>
-                <span class="syn-t">&nbsp;&nbsp;&lt;h1&gt;</span>Software finally has blueprints.<span class="syn-t">&lt;/h1&gt;</span><br>
-                <span class="syn-t">&nbsp;&nbsp;&lt;div</span> <span class="syn-a">class</span>=<span class="syn-s">"install-cmd"</span><span class="syn-t">&gt;</span><br>
-                <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;</span>curl -fsSL …/install.sh | sh<span class="syn-t">&lt;/code&gt;</span><br>
-                <span class="syn-t">&nbsp;&nbsp;&lt;/div&gt;</span><br>
-                <span class="syn-t">&lt;/section&gt;</span>
-              </div>
-            </div>
-            <div class="xray-layer xray-layer-css">
-              <div class="xray-layer-header">
-                <span class="xray-layer-label">CSS</span>
-                <span class="xray-layer-badge xray-badge-llm">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  Generated
-                </span>
-              </div>
-              <div class="xray-layer-preview">
-                <span class="syn-t">.hero</span> <span class="syn-p">{</span> <span class="syn-a">padding</span><span class="syn-p">:</span> <span class="syn-n">6rem</span> <span class="syn-n">2rem</span>; <span class="syn-a">text-align</span><span class="syn-p">:</span> <span class="syn-s">center</span>; <span class="syn-p">}</span><br>
-                <span class="syn-t">.install-cmd</span> <span class="syn-p">{</span> <span class="syn-a">display</span><span class="syn-p">:</span> <span class="syn-s">flex</span>; <span class="syn-a">align-items</span><span class="syn-p">:</span> <span class="syn-s">center</span>; <span class="syn-p">}</span><br>
-                <span class="syn-t">.copy-btn</span> <span class="syn-p">{</span> <span class="syn-a">cursor</span><span class="syn-p">:</span> <span class="syn-s">pointer</span>; <span class="syn-a">margin-left</span><span class="syn-p">:</span> <span class="syn-s">auto</span>; <span class="syn-p">}</span>
-              </div>
-            </div>
-            <div class="xray-layer xray-layer-js">
-              <div class="xray-layer-header">
-                <span class="xray-layer-label">JS</span>
-                <span class="xray-layer-badge xray-badge-llm">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  Generated
-                </span>
-              </div>
-              <div class="xray-layer-preview">
-                <span class="syn-k">import</span> <span class="syn-p">{</span> hydrateIslands <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span><br>
-                <span class="syn-f">hydrateIslands</span><span class="syn-p">({</span> strategies<span class="syn-p">:</span> <span class="syn-p">{</span> idle<span class="syn-p">,</span> visible<span class="syn-p">,</span> load <span class="syn-p">} });</span>
-              </div>
-            </div>
-
-            <!-- OUTPUT DIVIDER -->
-            <div class="xray-divider">
-              <div class="xray-divider-line"></div>
-              <span class="xray-divider-label">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Renders
-              </span>
-              <div class="xray-divider-line"></div>
-            </div>
-
-            <!-- RENDERED OUTPUT -->
-            <div class="xray-layer xray-layer-rendered">
-              <div class="xray-layer-header">
-                <span class="xray-layer-label">Output</span>
-                <span class="xray-layer-badge xray-badge-output">Live</span>
-              </div>
-              <div class="xray-layer-preview xray-layer-rendered-preview">
-                <div class="xray-mini-hero">
-                  <span class="xray-mini-badge">v1.0 — The specification layer</span>
-                  <strong>Software finally has blueprints.</strong>
-                  <span class="xray-mini-sub">Over 80 interlocking specifications define your entire system</span>
-                  <span class="xray-mini-btn">Explore the Platform</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="xray-showcase-text">
-          <h3>Declarative design, AI-generated code</h3>
-          <p>You write one YAML blueprint — the shape of what you want. The LLM reads your specification and generates every layer of production code: semantic HTML, scoped CSS, and island-hydrated JavaScript.</p>
-          <div class="xray-flow-steps">
-            <div class="xray-flow-step">
-              <span class="xray-flow-icon xray-flow-human">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </span>
-              <div>
-                <strong>You describe</strong>
-                <span>Write a YAML blueprint — the specification layer</span>
-              </div>
-            </div>
-            <div class="xray-flow-step">
-              <span class="xray-flow-icon xray-flow-llm">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              </span>
-              <div>
-                <strong>LLM generates</strong>
-                <span>HTML, CSS, JS — production-ready, accessible</span>
-              </div>
-            </div>
-            <div class="xray-flow-step">
-              <span class="xray-flow-icon xray-flow-output">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </span>
-              <div>
-                <strong>Output renders</strong>
-                <span>Working UI — every layer traceable, yours to own</span>
-              </div>
-            </div>
-          </div>
-          <p class="xray-showcase-hint">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            Try it — hover any section and click the inspect button to X-Ray it live.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── Comparison (sections[12]: comparison-table) ─── -->
+    <!-- ─── Comparison (sections[10]: comparison-table) ─── -->
     <section id="comparison" class="section section-soft" aria-labelledby="compare-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
@@ -1241,7 +1048,7 @@
       </div>
     </section>
 
-    <!-- ─── CTA (sections[13]: cta-section) ─── -->
+    <!-- ─── CTA (sections[11]: cta-section) ─── -->
     <section id="cta" class="section" aria-labelledby="cta-heading" data-reveal>
       <div class="section-inner" style="text-align:center;max-width:640px;margin:0 auto">
         <h2 id="cta-heading">Your vision deserves more than a blank editor.</h2>

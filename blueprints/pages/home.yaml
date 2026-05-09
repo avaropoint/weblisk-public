@@ -223,10 +223,11 @@ sections:
       icon: dot
     headline: "Software finally has blueprints."
     subheadline: >
-      Describe what you want in a YAML blueprint. Agents generate every
-      layer — HTML, CSS, JavaScript, APIs, security, deployments —
-      automatically. Change the blueprint, everything regenerates. Your
-      vision stays permanent. Code is just its latest expression.
+      Describe what you want in a YAML blueprint. Domain-expert agents
+      generate every layer — from UI/UX to APIs, security to
+      deployments — in a continuous, intelligent feedback loop. From
+      ideation to production, your vision stays permanent. Code is just
+      its latest expression.
     actions:
       - label: See It In Action
         href: /platform/
@@ -332,16 +333,65 @@ sections:
             - line: { x1: 8, y1: 21, x2: 16, y2: 21 }
             - line: { x1: 12, y1: 17, x2: 12, y2: 21 }
 
-  # Blueprint Pipeline
+  # What Is a Blueprint?
+  - id: what-is-a-blueprint
+    type: content-section
+    label: The Foundation
+    headline: "A blueprint is your project's single source of truth."
+    description: >
+      Not a template. Not a config file. A structured YAML specification
+      that captures your entire domain — what your project does, how
+      it's secured, where it deploys, and which agents maintain it. You
+      describe what you want. Domain-expert agents generate every layer
+      of production code. The blueprint is permanent. Code is just its
+      latest expression.
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
+    cards:
+      - icon: edit
+        color: purple
+        title: "Readable by Anyone"
+        text: >
+          No programming knowledge required. Product managers, designers,
+          founders — anyone can read and write a blueprint. It's
+          structured YAML, not source code.
+      - icon: layers
+        color: cyan
+        title: "Controls Everything"
+        text: >
+          Design, security, integrations, data models, deployments,
+          agent behavior — every aspect of your project, specified in
+          one versioned corpus.
+      - icon: check
+        color: green
+        title: "Generates Deterministically"
+        text: >
+          Same blueprint, same output. Every time. No drift, no
+          surprises, no "works on my machine." Reproduce any build
+          from any point in history.
+      - icon: bolt
+        color: orange
+        title: "Eliminates AI Waste"
+        text: >
+          Define once, generate forever. No re-prompting, no token
+          churn, no hallucinated architecture. Blueprints give AI the
+          structured context it needs to produce correct, reproducible
+          output on every pass.
+
+  # Generative UI/UX
   - id: blueprint-pipeline
     type: pipeline-showcase
-    label: The Generative Pipeline
-    headline: "From blueprint to living UI — every layer, generated."
+    label: Generative UI/UX
+    headline: "From blueprint to functional UI/UX — every layer, meticulously generated."
     description: >
-      You write one YAML file describing what you want. Agents read it
-      and generate every layer of production code — HTML structure,
-      scoped CSS, interactive JavaScript — then render the final UI. No
-      templates. No boilerplate. No hand-wiring.
+      Real-time generative UI/UX, powered by domain expertise. You
+      write one YAML blueprint. Agents with deep architectural
+      knowledge read it and generate every layer of production code —
+      semantic HTML, scoped CSS, interactive JavaScript — in a
+      continuous, intelligent feedback loop from ideation to production.
+      No templates. No boilerplate. No re-prompting.
     attributes:
       data-reveal: true
     island: pipeline.js
@@ -402,86 +452,79 @@ sections:
       This is how this very page was built — every section you see was
       generated from a blueprint.
 
-  # Autonomous Loop
-  - id: autonomous-loop
+  # The Workflow
+  - id: the-workflow
     type: content-section
     background: soft
-    label: The Autonomous Loop
-    headline: "Change the blueprint. Everything follows — automatically."
+    label: The Workflow
+    headline: "From ideation to production — and every step in between."
     description: >
-      No rebuilds. No re-prompting. No waiting on developers. Edit a
-      blueprint and agents detect the change, regenerate the affected
-      code, preview the result, and publish — all without writing a
-      single line of code. Your website lives in a state of continuous,
-      autonomous improvement.
-    attributes:
-      data-reveal: true
-    island: loop-cycle.js
-    hydrate: visible
-    steps:
-      - id: describe
-        icon: edit
-        title: "Describe"
-        text: "Edit the blueprint — add a section, change copy, add a pattern. Plain YAML, no code."
-      - id: process
-        icon: bolt
-        title: "Agents Process"
-        text: "Agents parse the diff, resolve dependencies, and regenerate every affected layer."
-      - id: preview
-        icon: eye
-        title: "Preview"
-        text: "Live preview renders instantly — see exactly what your users will see before it ships."
-      - id: publish
-        icon: cloud-upload
-        title: "Publish"
-        text: "Validated, versioned, deployed — schema-checked with automatic rollback if anything breaks."
-    loop_label: "Continuous improvement — the loop never stops"
-
-  # Total Control
-  - id: total-control
-    type: content-section
-    label: Total Control
-    headline: "Your blueprint is the master plan. Everything answers to it."
-    description: >
-      This isn't just about generating code. Your blueprint controls
-      every aspect of your online presence — from pixel-level design to
-      production infrastructure. Every integration, every touchpoint,
-      every decision — specified, versioned, and yours.
+      This isn't a simplified demo. This is the real workflow. Initialize
+      your project, source or create blueprints, generate production code
+      for any platform, handle migrations between versions, preview
+      changes, and deploy — all orchestrated by domain-expert agents that
+      understand every layer of your stack.
     attributes:
       data-reveal: true
     cards_attributes:
       data-reveal-stagger: true
     cards:
-      - icon: layout
-        title: "Design & Layout"
-        text: "Every section, component, and visual hierarchy — described in your blueprint, generated pixel-perfect."
-        spec: "pages/*.yaml → HTML + CSS"
-      - icon: settings
-        title: "Integrations & APIs"
-        text: "Webhooks, third-party connectors, API contracts — every integration specified and auto-generated."
-        spec: "patterns/*.yaml → endpoints"
-      - icon: shield
-        title: "Security & Identity"
-        text: "Ed25519 signing, ABAC access control, 7-layer security — all enforced by the blueprint, not bolted on."
-        spec: "security.yaml → middleware"
-      - icon: database
-        title: "Data & Migrations"
-        text: "Schema-aware migrations, integrity checks, rollback strategies — your data lifecycle, specified."
-        spec: "schemas/*.yaml → migrations"
-      - icon: cloud-upload
-        title: "Deployments"
-        text: "Versioned, validated, reversible — deploy to Cloudflare Workers, Go, Rust, or Node.js from one spec."
-        spec: "platforms/*.yaml → deploy"
+      - icon: terminal
+        title: "Initialize"
+        text: >
+          One command scaffolds your project with blueprint structure,
+          agent configs, and platform targets. No boilerplate decisions —
+          start with a working structure immediately.
+        spec: "weblisk init my-project"
+      - icon: download
+        title: "Source Blueprints"
+        text: >
+          Pull from the open marketplace, fork community blueprints, or
+          write your own from scratch. Compose patterns, mix templates,
+          extend anything — your specs, your rules.
+        spec: "weblisk add patterns/auth-token"
       - icon: bolt
-        title: "Agents & Automation"
-        text: "Domain agents, quality agents, infrastructure agents — autonomous workers that execute your blueprint's intent."
-        spec: "agents/*.yaml → orchestration"
+        title: "Build & Generate"
+        text: >
+          Generate production code for any language or platform — Go,
+          Rust, Node, Cloudflare Workers. Leverage open templates or
+          build your own unique specs. One blueprint, infinite targets.
+        spec: "weblisk generate --platform cloudflare"
+      - icon: refresh
+        title: "Transform & Migrate"
+        text: >
+          Handle schema migrations, data transformations, and
+          infrastructure transitions between versions. Every change is
+          diffed, validated, and reversible — nothing is left to chance.
+        spec: "schemas/*.yaml → migrations"
+      - icon: eye
+        title: "Preview & Validate"
+        text: >
+          See exactly what ships before it goes live. Auto-approve when
+          all criteria pass — schema validation, security checks, quality
+          gates. Full confidence before production.
+        spec: "weblisk preview --validate"
+      - icon: cloud-upload
+        title: "Deploy & Monitor"
+        text: >
+          Validated, versioned, deployed — with schema checks and
+          automatic rollback. Domain-expert agents continuously monitor
+          every layer, ensuring enterprise standards, best practices,
+          and protocol compliance.
+        spec: "weblisk deploy --auto-rollback"
+    loop_label: "Continuous improvement — domain-expert agents monitor every layer, the loop never stops"
 
-  # Why This Matters
-  - id: why-this-matters
+  # Why Blueprints
+  - id: why-blueprints
     type: content-section
-    label: Why This Matters
-    headline: "Your knowledge is the most valuable asset. Protect it."
+    label: Why Blueprints
+    headline: "Your knowledge is your most valuable asset. Protect it."
+    description: >
+      Frameworks change. Teams turn over. AI evolves. The one thing that
+      should never be lost is the knowledge of how your system works and
+      why. Blueprints capture that knowledge in structured, versioned
+      specifications — not scattered docs, tribal knowledge, or prompt
+      history. This is the layer that's been missing.
     attributes:
       data-reveal: true
     cards_attributes:
@@ -489,115 +532,50 @@ sections:
     cards:
       - icon: globe
         color: purple
-        title: "Centralised Intelligence"
+        title: "Centralised Domain Knowledge"
         text: >
           Every decision, pattern, and domain rule lives in one
           specification corpus — not scattered across wikis, tickets,
           and tribal knowledge. The entire system is readable,
           queryable, and permanent.
-      - icon: users
-        color: cyan
-        title: "Zero Developer Lock-In"
-        text: >
-          When a developer leaves, the knowledge stays. No months of
-          reverse-engineering. No back-and-forth emails trying to
-          reconstruct intent. The specification is the handover.
-      - icon: layers
-        color: green
-        title: "Anyone Can Build"
-        text: >
-          AI writes the code. Specifications make it correct. You don't
-          need a senior engineer to maintain architecture — you need
-          blueprints that any team, any AI, any generation of developers
-          can execute from.
-      - icon: shield
-        color: orange
-        title: "Protect What Matters Most"
-        text: >
-          Frameworks change. Teams turn over. AI evolves. The one thing
-          that should never be lost is the knowledge of how your system
-          works and why. That's what a specification layer preserves —
-          permanently.
-    styles:
-      icons:
-        type: inline-svg
-        stroke_width: 2
-        size: 24
-        note: >
-          This section uses inline SVGs instead of wl-icon font classes.
-          All other sections use wl-icon-* classes.
-        icons:
-          centralised_intelligence:
-            description: Globe with meridians
-            paths:
-              - circle: { cx: 12, cy: 12, r: 10 }
-              - path: "M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"
-              - path: "M2 12h20"
-          zero_developer_lock_in:
-            description: Users group
-            paths:
-              - path: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-              - circle: { cx: 9, cy: 7, r: 4 }
-              - path: "M23 21v-2a4 4 0 0 0-3-3.87"
-              - path: "M16 3.13a4 4 0 0 1 0 7.75"
-          anyone_can_build:
-            description: Stacked layers
-            paths:
-              - path: "M12 2L2 7l10 5 10-5-10-5z"
-              - path: "M2 17l10 5 10-5"
-              - path: "M2 12l10 5 10-5"
-          protect_what_matters:
-            description: Shield
-            paths:
-              - path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-
-  # The MOAT
-  - id: moat
-    type: content-section
-    background: soft
-    label: The Platform
-    headline: "Over 80 specifications. Years to build. Impossible to shortcut."
-    attributes:
-      data-reveal: true
-    cards_attributes:
-      data-reveal-stagger: true
-    description: >
-      An LLM can't produce a coherent specification corpus. SaaS APIs
-      aren't architecture. A federation protocol, security model, and
-      agent orchestrator that cross-reference each other don't emerge
-      in a weekend. Ideas buried in markdown files drift from reality.
-      Structured specifications stay true — and generate. This compounds.
-    cards:
-      - icon: book
-        color: purple
-        title: "Complete System Specification"
-        text: >
-          Not fragments. Not templates. Protocol, architecture, patterns,
-          agents, platforms, standards — each spec cross-references and
-          generates alongside every other.
-      - icon: layers
-        color: cyan
-        title: "Language & Platform Independence"
-        text: >
-          One blueprint → Go, Rust, Node, or Cloudflare Workers.
-          Switch platforms without losing a single design decision.
       - icon: bolt
-        color: green
+        color: cyan
         title: "AI That Actually Works"
         text: >
           Stop re-prompting. Define once, generate deterministically —
           every language, zero wasted tokens. Without a spec, AI is
           hallucination with syntax highlighting. With blueprints, it's
-          verifiable and reproducible.
-      - icon: shield
+          verifiable, reproducible, and cost-efficient.
+      - icon: users
+        color: green
+        title: "Zero Lock-In"
+        text: >
+          When a developer leaves, the knowledge stays. No months of
+          reverse-engineering. No back-and-forth emails reconstructing
+          intent. The specification is the handover — any team, any AI,
+          any generation of developers can execute from it.
+      - icon: layers
         color: orange
+        title: "Platform Independence"
+        text: >
+          One blueprint → Go, Rust, Node, or Cloudflare Workers. Switch
+          platforms without losing a single design decision. Your domain
+          knowledge transcends any particular language or runtime.
+      - icon: book
+        color: purple
+        title: "Complete System Specification"
+        text: >
+          Not fragments. Not templates. Protocol, architecture, patterns,
+          agents, platforms — 80+ specs that cross-reference and generate
+          alongside every other. Years to build. Impossible to shortcut.
+      - icon: shield
+        color: cyan
         title: "Safe, Versioned Upgrades"
         text: >
-          Specs evolve — and so do your data, schemas, and agents.
-          Every deployment is diffed, validated, and reversible.
-          Change management, migration procedures, and deprecation
-          lifecycles are built into the specification layer, not
-          bolted on after the fact.
+          Specs evolve — and so do your data, schemas, and agents. Every
+          deployment is diffed, validated, and reversible. Change
+          management and migration procedures are built into the
+          specification layer, not bolted on.
 
   # How It Works
   - id: how-it-works
@@ -954,106 +932,6 @@ sections:
             - cdn-triggers
             - ai-writing
             - quality
-
-  # Declarative UI — X-Ray showcase
-  - id: client-framework
-    type: xray-showcase
-    classes: [xray-section]
-    label: Declarative UI
-    headline: "You describe it. The LLM builds it."
-    description: >-
-      Write a YAML blueprint. The LLM generates production HTML, CSS,
-      and JS — then renders the final UI. Hover any section and click
-      the button to X-Ray any section live.
-    attributes:
-      data-reveal: true
-    showcase:
-      layout: grid  # 1.15fr visual / 0.85fr text, collapses to 1fr at 900px
-      max_width: 1600px
-      visual:
-        # Stacked layer cards showing the generation pipeline
-        layers:
-          - id: blueprint
-            label: Blueprint
-            badge: { text: "You write", color: human, icon: user }
-            border: thick  # 2px purple border
-            preview:
-              language: yaml
-              content: |
-                # pages/home.yaml
-                - id: hero
-                  type: hero
-                  headline: "Software finally has blueprints."
-                  install_command: "curl -fsSL …/install.sh | sh"
-                  actions:
-                    - label: Explore the Platform
-                      href: /platform/
-                      style: primary
-          - divider: { label: "LLM generates", icon: bolt }
-          - id: html
-            label: HTML
-            badge: { text: "Generated", color: llm, icon: bolt }
-            preview:
-              language: html
-              content: |
-                <section id="hero" class="hero">
-                  <h1>Software finally has blueprints.</h1>
-                  <div class="install-cmd">
-                    <code>curl -fsSL …/install.sh | sh</code>
-                  </div>
-                </section>
-          - id: css
-            label: CSS
-            badge: { text: "Generated", color: llm, icon: bolt }
-            preview:
-              language: css
-              content: |
-                .hero { padding: 6rem 2rem; text-align: center; }
-                .install-cmd { display: flex; align-items: center; }
-                .copy-btn { cursor: pointer; margin-left: auto; }
-          - id: js
-            label: JS
-            badge: { text: "Generated", color: llm, icon: bolt }
-            preview:
-              language: javascript
-              content: |
-                import { hydrateIslands } from 'weblisk';
-                hydrateIslands({ strategies: { idle, visible, load } });
-          - divider: { label: "Renders", icon: check }
-          - id: rendered
-            label: Output
-            badge: { text: "Live", color: output, animated: pulse }
-            preview:
-              type: mini-hero
-              badge: "v1.0 — The specification layer"
-              headline: "Software finally has blueprints."
-              subheadline: "Over 80 interlocking specifications define your entire system"
-              cta: "Explore the Platform"
-      text:
-        heading: "Declarative design, AI-generated code"
-        body: >-
-          You write one YAML blueprint — the shape of what you want.
-          The LLM reads your specification and generates every layer of
-          production code: semantic HTML, scoped CSS, and island-hydrated
-          JavaScript.
-        flow_steps:
-          - icon: user
-            color: human
-            title: "You describe"
-            text: "Write a YAML blueprint — the specification layer"
-          - icon: bolt
-            color: llm
-            title: "LLM generates"
-            text: "HTML, CSS, JS — production-ready, accessible"
-          - icon: check
-            color: output
-            title: "Output renders"
-            text: "Working UI — every layer traceable, yours to own"
-        hint: "Try it — hover any section and click the inspect button to X-Ray it live."
-    island: xray.js
-    hydrate: idle
-    props:
-      blueprint_path: pages/home.yaml
 
   # Comparison
   - id: comparison

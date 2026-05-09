@@ -1020,9 +1020,15 @@ button.nav-toggle {
 .arch-layer:hover[data-layer="platforms"] .arch-rect,
 .arch-layer.active[data-layer="platforms"] .arch-rect { stroke: var(--wl-primary); fill: var(--wl-primary-light); }
 
+.arch-layer:hover[data-layer="schemas"] .arch-rect,
+.arch-layer.active[data-layer="schemas"] .arch-rect { stroke: #8b5cf6; fill: rgba(139, 92, 246, 0.1); }
+
+.arch-layer:hover[data-layer="ecosystem"] .arch-rect,
+.arch-layer.active[data-layer="ecosystem"] .arch-rect { stroke: var(--wl-success); fill: rgba(16, 185, 129, 0.08); }
+
 .arch-layer-text {
   font-family: var(--wl-font);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   fill: var(--wl-text);
   pointer-events: none;
@@ -1030,7 +1036,7 @@ button.nav-toggle {
 
 .arch-layer-sub {
   font-family: var(--wl-font);
-  font-size: 11px;
+  font-size: 12px;
   fill: var(--wl-text-muted);
   pointer-events: none;
 }
@@ -4848,6 +4854,138 @@ select.input {
 @media (max-width: 480px) {
   .control-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+
+/* ─── Workflow SVG Flow ──────────────────────────────────── */
+
+.workflow-flow {
+  margin-top: 2.5rem;
+  position: relative;
+}
+
+.workflow-svg {
+  width: 100%;
+  height: auto;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: block;
+}
+
+.workflow-rect {
+  transition: filter 0.3s ease, stroke-width 0.3s ease;
+}
+
+.workflow-node:hover .workflow-rect {
+  filter: drop-shadow(0 4px 16px rgba(59, 79, 124, 0.15));
+  stroke-width: 2;
+}
+
+.workflow-title {
+  font-family: var(--wl-font);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.workflow-step-num {
+  font-family: var(--wl-font);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.workflow-desc {
+  font-family: var(--wl-font);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.workflow-cmd {
+  font-family: var(--wl-mono);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.workflow-return-label {
+  font-family: var(--wl-font);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+}
+
+/* Mobile fallback for workflow */
+.workflow-mobile {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .workflow-svg {
+    display: none;
+  }
+  .workflow-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .workflow-mobile-step {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--wl-surface);
+    border: 1px solid var(--wl-border);
+    border-radius: var(--wl-radius-lg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .workflow-mobile-step:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--wl-shadow-lg);
+  }
+  .workflow-mobile-step-deploy {
+    border-color: var(--wl-primary);
+    background: var(--wl-primary-light);
+  }
+  .workflow-mobile-marker {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--wl-primary-light);
+    color: var(--wl-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+  .workflow-mobile-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    color: var(--wl-text);
+  }
+  .workflow-mobile-content p {
+    font-size: 0.85rem;
+    color: var(--wl-text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+  .workflow-mobile-content code {
+    font-family: var(--wl-mono);
+    font-size: 0.7rem;
+    color: var(--wl-primary);
+    background: var(--wl-primary-light);
+    padding: 2px 8px;
+    border-radius: var(--wl-radius);
+    display: inline-block;
+  }
+  .workflow-mobile-connector {
+    width: 2px;
+    height: 16px;
+    background: var(--wl-border);
+    margin-left: 2.25rem;
   }
 }
 

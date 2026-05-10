@@ -241,7 +241,7 @@ sections:
       icon: dot
     headline: "Software finally has blueprints."
     subheadline: >
-      What if the software your business runs on was truly yours —
+      What if you can truly own software again —
       designed to your exact requirements, transparent at every layer,
       and never locked behind a subscription? Weblisk is an open-source
       framework that takes the guesswork out of building complex
@@ -742,8 +742,8 @@ sections:
     label: Getting Started
     headline: "Up and running in minutes."
     description: >
-      Install the CLI, scaffold from a starter template, run a local
-      dev server, and generate production code.
+      Install the CLI, initialise a project, generate production
+      code, and run it locally.
     attributes:
       data-reveal: true
     steps_attributes:
@@ -762,11 +762,10 @@ sections:
             ✓ Weblisk CLI installed to ~/.weblisk/bin/weblisk
       - number: 2
         color: cyan
-        title: Create your project
+        title: Initialise your project
         description: >
-          Scaffold from a starter template — client, server, or
-          full-stack. Blueprints, agent configs, and platform targets
-          included.
+          Start from scratch or source a starter template — client,
+          server, or full-stack. Use either, or combine both.
         code:
           title: Terminal
           content: |
@@ -776,9 +775,11 @@ sections:
       - number: 3
         color: green
         title: Define and compose
+        optional: true
         description: >
-          Create domains, compose patterns from the marketplace, and
-          shape your blueprints to your exact requirements.
+          Create domains, compose patterns, and shape blueprints to
+          your exact requirements. Skip this if a starter already
+          covers what you need.
         code:
           title: Terminal
           content: |
@@ -787,28 +788,28 @@ sections:
             ✓ Domain "chat" created with 3 patterns
       - number: 4
         color: orange
-        title: Run locally
+        title: Generate
         description: >
-          Start a local dev server with hot reload. See changes
-          instantly as you refine your blueprints.
-        code:
-          title: Terminal
-          content: |
-            $ weblisk dev
-            ✓ Dev server running at http://localhost:3000
-            ✓ Watching blueprints for changes...
-      - number: 5
-        color: purple
-        title: Generate and deploy
-        description: >
-          Generate production code for your target language and
-          platform. Deploy when you're ready — or keep iterating.
+          Generate production code — client and server components
+          built from your blueprints in your target language.
         code:
           title: Terminal
           content: |
             $ weblisk generate --lang go
             ✓ Generated 24 endpoints, 3 agents, 7 patterns
             ✓ Output: ./generated/
+      - number: 5
+        color: purple
+        title: Run and deploy
+        description: >
+          Start a local dev server to watch your results, then deploy
+          to your target platform when you're ready.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk dev
+            ✓ Dev server running at http://localhost:3000
+            ✓ Watching for changes...
 
             $ weblisk deploy --target cloudflare
             ✓ Deployed to production (validated, versioned)

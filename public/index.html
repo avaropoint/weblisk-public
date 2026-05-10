@@ -199,7 +199,7 @@
         <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> v1.0 — Your vision, fully generated</span>
         <h1 id="hero-heading">Software finally has blueprints.</h1>
         <p class="hero-sub">
-          What if the software your business runs on was truly yours — designed to your exact requirements, transparent at every layer, and never locked behind a subscription? Weblisk is an open-source framework that takes the guesswork out of building complex applications. Blueprints capture what you need once, and agents generate production systems that belong entirely to you. Your code. Your data. Your terms.
+          What if you can truly own software again — designed to your exact requirements, transparent at every layer, and never locked behind a subscription? Weblisk is an open-source framework that takes the guesswork out of building complex applications. Blueprints capture what you need once, and agents generate production systems that belong entirely to you. Your code. Your data. Your terms.
         </p>
         <div class="hero-actions">
           <a href="/platform/" class="btn btn-primary">
@@ -904,7 +904,7 @@
         <div class="section-header">
           <span class="section-label">Getting Started</span>
           <h2 id="gs-heading">Up and running in minutes.</h2>
-          <p>Install the CLI, scaffold from a starter template, run a local dev server, and generate production code.</p>
+          <p>Install the CLI, initialise a project, generate production code, and run it locally.</p>
         </div>
         <div class="gs-steps" data-reveal-stagger>
           <div class="gs-step">
@@ -933,8 +933,8 @@
               <div class="gs-step-line" aria-hidden="true"></div>
             </div>
             <div class="gs-step-content">
-              <h3>Create your project</h3>
-              <p>Scaffold from a starter template — client, server, or full-stack. Blueprints, agent configs, and platform targets included.</p>
+              <h3>Initialise your project</h3>
+              <p>Start from scratch or source a starter template — client, server, or full-stack. Use either, or combine both.</p>
               <div class="code-window gs-code">
                 <div class="code-header">
                   <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
@@ -954,8 +954,8 @@
               <div class="gs-step-line" aria-hidden="true"></div>
             </div>
             <div class="gs-step-content">
-              <h3>Define and compose</h3>
-              <p>Create domains, compose patterns from the marketplace, and shape your blueprints to your exact requirements.</p>
+              <h3>Define and compose <span class="gs-step-badge">Optional</span></h3>
+              <p>Create domains, compose patterns, and shape blueprints to your exact requirements. Skip this if a starter already covers what you need.</p>
               <div class="code-window gs-code">
                 <div class="code-header">
                   <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
@@ -975,17 +975,17 @@
               <div class="gs-step-line" aria-hidden="true"></div>
             </div>
             <div class="gs-step-content">
-              <h3>Run locally</h3>
-              <p>Start a local dev server with hot reload. See changes instantly as you refine your blueprints.</p>
+              <h3>Generate</h3>
+              <p>Generate production code — client and server components built from your blueprints in your target language.</p>
               <div class="code-window gs-code">
                 <div class="code-header">
                   <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
                   <span class="code-title">Terminal</span>
                 </div>
                 <div class="code-body">
-                  <pre><span class="syn-p">$</span> weblisk dev
-<span class="syn-s">✓ Dev server running at http://localhost:3000</span>
-<span class="syn-s">✓ Watching blueprints for changes...</span></pre>
+                  <pre><span class="syn-p">$</span> weblisk generate --lang go
+<span class="syn-s">✓ Generated 24 endpoints, 3 agents, 7 patterns</span>
+<span class="syn-s">✓ Output: ./generated/</span></pre>
                 </div>
               </div>
             </div>
@@ -995,17 +995,17 @@
               <div class="gs-step-number purple" aria-hidden="true">5</div>
             </div>
             <div class="gs-step-content">
-              <h3>Generate and deploy</h3>
-              <p>Generate production code for your target language and platform. Deploy when you're ready — or keep iterating.</p>
+              <h3>Run and deploy</h3>
+              <p>Start a local dev server to watch your results, then deploy to your target platform when you're ready.</p>
               <div class="code-window gs-code">
                 <div class="code-header">
                   <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
                   <span class="code-title">Terminal</span>
                 </div>
                 <div class="code-body">
-                  <pre><span class="syn-p">$</span> weblisk generate --lang go
-<span class="syn-s">✓ Generated 24 endpoints, 3 agents, 7 patterns</span>
-<span class="syn-s">✓ Output: ./generated/</span>
+                  <pre><span class="syn-p">$</span> weblisk dev
+<span class="syn-s">✓ Dev server running at http://localhost:3000</span>
+<span class="syn-s">✓ Watching for changes...</span>
 
 <span class="syn-p">$</span> weblisk deploy --target cloudflare
 <span class="syn-s">✓ Deployed to production (validated, versioned)</span></pre>

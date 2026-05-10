@@ -12,7 +12,7 @@ props:
 content:
   copyright: "© 2026 Made with ♥ by Avaropoint"
   tagline: >
-    Software finally has blueprints — describe once, generate forever, own everything.
+    Open-source tools. Code you own. Describe once, generate forever.
   columns:
     - heading: Platform
       links:

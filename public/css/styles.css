@@ -1050,6 +1050,41 @@ button.nav-toggle {
   stroke-dasharray: 4 3;
 }
 
+.arch-connector-spine {
+  stroke: var(--wl-border);
+  stroke-width: 1;
+  stroke-opacity: 0.3;
+}
+
+.arch-connector-side {
+  stroke: var(--wl-border);
+  stroke-width: 1;
+  stroke-opacity: 0.15;
+  stroke-dasharray: 3 4;
+}
+
+.arch-connector-bridge {
+  stroke: var(--wl-border);
+  stroke-width: 1;
+  stroke-opacity: 0.12;
+  stroke-dasharray: 2 4;
+}
+
+.arch-node {
+  fill: var(--wl-border);
+  opacity: 0.3;
+  transition: opacity 0.25s, fill 0.25s;
+}
+
+.arch-layer.active ~ .arch-node,
+.arch-layer:hover ~ .arch-node {
+  opacity: 0.15;
+}
+
+.arch-node[data-layer] {
+  pointer-events: none;
+}
+
 .arch-detail {
   position: relative;
 }

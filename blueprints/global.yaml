@@ -26,8 +26,9 @@ brand:
 identity:
   tagline: "Software finally has blueprints"
   description: >
-    The specification-driven platform for building AI-native applications.
-    Describe once, generate everything, own it all.
+    An open-source framework that takes the guesswork out of building
+    complex applications. Describe your requirements as blueprints,
+    generate production code you fully own.
   legal_name: Avaropoint
   contact: hello@weblisk.dev
   copyright_year: 2026

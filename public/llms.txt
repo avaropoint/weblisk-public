@@ -1,47 +1,48 @@
 # Weblisk
 
-> The specification layer for software. Over 80 interlocking blueprints define complete systems — then generate production code for any platform. Schema migrations, data integrity, and versioned deployments are built in.
+> An open-source framework that takes the guesswork out of building complex applications. Blueprints capture your exact requirements — security, data, integrations, deployments — and agents generate production code you fully own. 80+ specifications. Zero vendor lock-in. Your code, your data, your terms.
 
 ## About
 
-Weblisk is the specification layer that software has always been missing. It provides over 80 interlocking YAML specifications (blueprints) that define complete software systems — from wire protocol and security models to AI agent orchestration and cryptographic federation.
-
-Generate production code for Cloudflare Workers, Go, Rust, or Node.js. The specification is permanent — code is just a build artifact.
+Weblisk is an open-source, MIT-licensed framework for building complete software systems from declarative blueprints. Define your requirements once as structured specifications, and domain-expert agents generate production code in Go, Rust, Node.js, or Cloudflare Workers. The framework is open source. The code you generate is yours.
 
 Weblisk is created and maintained by Avaropoint.
 
 ## Core Concepts
 
-- **Specification-Driven Development**: Define your entire system as YAML blueprints. Protocol, architecture, patterns, agents, platforms, and standards — each spec cross-references and generates alongside every other.
-- **Schema-Aware Migrations**: Every deployment is diffed, validated, and reversible. Change management, migration procedures, and deprecation lifecycles are built into the specification layer.
-- **Agent Orchestration**: Domain agents, task agents, infrastructure agents, and quality agents — each sandboxed, portable, and AI-ready.
-- **Cryptographic Federation**: Ed25519 identity signing with hub-to-hub collaboration and cryptographic trust verification.
-- **Zero Dependencies**: Every module is first-party code. No supply chain risk, no npm audit vulnerabilities.
+- **Blueprint-Driven Development**: Define your entire system as structured blueprints. Protocol, architecture, patterns, agents, platforms, and standards — each specification cross-references and generates alongside every other. Blueprints are readable by humans, LLMs, and CI/CD pipelines.
+- **Blueprint-Versioned Migrations**: Agent-orchestrated migrations across your entire stack — data, infrastructure, agents, and configuration. Every deployment is diffed, validated, and reversible.
+- **Agent Orchestration**: Domain agents, task agents, infrastructure agents, and quality agents — each sandboxed, portable, and AI-ready. AI where it helps, control where it matters.
+- **Cryptographic Federation**: Ed25519 identity signing with hub-to-hub collaboration. Trusted hub networks with real data guardrails — collaborate on your terms.
+- **Zero Runtime Dependencies**: Every module is first-party code. No supply chain risk, no npm audit vulnerabilities.
 - **Platform Independence**: One specification corpus generates production code for Cloudflare Workers (primary), Go, Rust, and Node.js. AWS, GCP, and Azure support coming soon.
+- **True Ownership**: You own every line of generated code. No vendor lock-in, no subscription dependency for the software you run your business on. Open-source framework, MIT-licensed.
 
 ## Architecture Layers
 
-1. **Protocol & Federation** — HTTP+JSON wire format, Ed25519 identity signing, hub-to-hub federation.
-2. **Orchestrator** — Identity, routing, audit. Manages agent registration, task delegation, and cross-domain coordination.
-3. **Agents** — Domain, task, infrastructure, and quality agents. Sandboxed, portable, AI-ready.
-4. **Patterns** — API, auth, governance, webhooks, workflows, storage, change management, and deployment.
-5. **Platforms** — Starting with Cloudflare Workers, with reference implementations in Go, Rust, and Node.js.
+Weblisk exposes seven interconnected layers — all open, all yours. You decide which layers to use, extend, or replace.
 
-## Data Protection Philosophy
+1. **Protocol** — HTTP+JSON wire format, versioned contracts.
+2. **Federation** — Ed25519 identity signing, hub-to-hub collaboration, cryptographic trust.
+3. **Orchestration** — Identity, routing, audit. Agent registration, task delegation, cross-domain coordination.
+4. **Agents** — Domain, task, infrastructure, and quality agents. Sandboxed, portable, AI-ready.
+5. **Patterns** — API, auth, governance, webhooks, workflows, storage, change management, deployment.
+6. **Platforms** — Cloudflare Workers primary, with Go, Rust, and Node.js reference implementations.
+7. **Marketplace** — Community blueprints, agents, and templates. Buy, sell, compose.
 
-Schema migrations, data integrity checks, and rollback strategies are specified alongside your code in the blueprint layer. Nothing is left to chance:
+## Data Sovereignty
+
+Blueprint-versioned, agent-orchestrated migrations protect your data across every upgrade:
 - Every deployment is diffed against the current state
-- Schema changes are validated before execution
+- Changes are validated before execution
 - Rollback procedures are generated from the specification
 - Data preservation is guaranteed across upgrades
+- You control every layer of data moving in and out of your organisation
 
 ## Key Pages
 
 - Homepage: https://weblisk.dev/
-- Platform: https://weblisk.dev/platform/
-- Blueprints: https://weblisk.dev/platform/blueprints/
-- Agents: https://weblisk.dev/platform/agents/
-- Marketplace: https://weblisk.dev/marketplace/
+- Features: https://weblisk.dev/features.html
 - Documentation: https://weblisk.dev/docs/
 - Quick Start: https://weblisk.dev/docs/quick-start.html
 
@@ -64,22 +65,25 @@ Schema migrations, data integrity checks, and rollback strategies are specified 
 ## FAQ
 
 ### What is Weblisk?
-Weblisk is the specification layer that software has always been missing. It provides over 80 interlocking YAML specifications (blueprints) that define complete software systems — from wire protocol and security models to AI agent orchestration and cryptographic federation. Generate production code in any language, on any platform. The specification is permanent — code is just a build artifact.
+Weblisk is an open-source framework that takes the guesswork out of building complex applications. Over 80 interlocking blueprints capture your exact requirements — security models, data schemas, integrations, deployments — and domain-expert agents generate production code you fully own. The framework is MIT-licensed. The code you generate belongs entirely to you.
 
 ### What are Weblisk Blueprints?
-Blueprints are declarative YAML specifications that define how an application works — from wire protocol and security models to API contracts and agent behaviour. They are consumed by humans, LLMs, and CI/CD pipelines to generate complete implementations in Go, Node.js, Rust, or Cloudflare Workers.
+Blueprints are structured specifications that define how your application works — from security models and API contracts to agent behaviour and deployment targets. Anyone can read them. They are consumed by humans, LLMs, and CI/CD pipelines to generate complete implementations in Go, Node.js, Rust, or Cloudflare Workers.
 
-### How is Weblisk different from a framework?
-Frameworks give you building blocks you wire together. Weblisk gives you specifications you generate from. The specification is the source of truth — code is a build artifact that can be regenerated, upgraded, or ported to a new platform without losing design intent.
+### How is Weblisk different from a SaaS platform or AI code generator?
+SaaS platforms rent you features through subscriptions — you depend on their roadmap and their infrastructure. AI code generators require re-prompting every iteration and produce non-deterministic output. Weblisk blueprints capture your requirements once and generate deterministic, production-grade code you fully own. Define once, generate forever.
 
 ### How does Weblisk handle data migrations?
-Schema migrations, data integrity checks, and rollback strategies are specified alongside your code in the blueprint layer. Every deployment is diffed, validated, and reversible. Change management and deprecation lifecycles are built into the specification — not bolted on after the fact.
+Blueprint-versioned, agent-orchestrated migrations across your entire stack — data, infrastructure, agents, and configuration. Every deployment is diffed, validated, and reversible. Change management and deprecation lifecycles are built into the specification — not bolted on after the fact.
 
 ### What platforms does Weblisk support?
-Weblisk starts with Cloudflare Workers as the primary deployment target, with reference implementations in Go, Rust, and Node.js. The goal is to generate production code for any platform — AWS, GCP, Azure, and beyond — from a single specification corpus.
+Weblisk starts with Cloudflare Workers as the primary deployment target, with reference implementations in Go, Rust, and Node.js. One specification corpus generates production code for any platform — AWS, GCP, Azure, and beyond.
 
 ### Is Weblisk free?
-Yes. All specifications, the CLI, and the client framework are free and MIT-licensed. The Weblisk Marketplace enables buying and selling community-created blueprints, agents, and templates.
+Yes. The framework, specifications, and CLI are free and MIT-licensed. The Weblisk Marketplace enables composing, buying, and selling community-created blueprints, agents, and templates.
+
+### How does data sovereignty work?
+You control every layer of data moving in and out of your organisation. Blueprints define data schemas, access policies, and migration strategies. Cryptographic federation enables collaboration through trusted hub networks with real data guardrails — no shared tenancy, no vendor access to your data.
 
 ## Optional
 

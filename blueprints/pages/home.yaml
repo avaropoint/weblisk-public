@@ -17,12 +17,11 @@ version: 2.0.0
 seo:
   title: "Weblisk — Software Finally Has Blueprints"
   description: >
-    Software is the only engineering discipline without a specification
-    layer. Weblisk changes that. Over 80 interlocking blueprints define complete
-    systems — protocol, agents, security, federation — then generate
-    production code for Cloudflare Workers, Go, Rust, and Node.js.
-    Schema migrations, data integrity, and rollback strategies are built in.
-    The architecture is permanent. Code is just a build artifact.
+    Weblisk is an open-source framework that takes the guesswork out of
+    building complex applications. Blueprints capture your exact
+    requirements — security, data, integrations, deployments — and agents
+    generate production code you fully own. 80+ specifications. Zero
+    vendor lock-in. Your code, your data, your terms.
   canonical: "https://weblisk.dev/"
   keywords:
     - specification-driven development
@@ -32,9 +31,9 @@ seo:
     - zero dependency
     - code generation
     - autonomous agents
-    - YAML specification
+    - blueprint specification
     - open platform
-    - schema-aware migrations
+    - blueprint-versioned migrations
     - data protection
     - versioned deployments
     - Cloudflare Workers
@@ -47,10 +46,10 @@ seo:
     type: website
     title: "Weblisk — Software Finally Has Blueprints"
     description: >
-      Software is the only engineering discipline without a specification
-      layer. Weblisk is over 80 interlocking blueprints that define complete
-      systems and generate production code for any platform. Schema migrations,
-      data integrity, and versioned deployments — built in, not bolted on.
+      Weblisk is an open-source framework that takes the guesswork out
+      of building complex applications. 80+ blueprints capture your
+      requirements and agents generate production code you fully own.
+      Zero vendor lock-in.
     url: "https://weblisk.dev/"
     site_name: Weblisk
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
@@ -65,8 +64,9 @@ seo:
     card: summary_large_image
     title: "Weblisk — Software Finally Has Blueprints"
     description: >
-      The only engineering discipline without a specification layer —
-      until now. Over 80 interlocking blueprints. Any language. Zero lock-in.
+      Open-source framework that takes the guesswork out of building
+      complex apps. 80+ blueprints. Agents generate code you fully own.
+      Zero lock-in.
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
     site: "@weblisk"
   structured_data:
@@ -84,20 +84,21 @@ seo:
       name: Weblisk
       url: "https://weblisk.dev"
       description: >
-        The specification layer for software. Over 80 interlocking blueprints
-        that define complete systems and generate production code for any
-        platform. Schema migrations, data protection, and versioned
-        deployments are built into the specification layer.
+        Weblisk is an open-source framework that takes the guesswork
+        out of building complex applications. Blueprints capture your
+        requirements and agents generate production code you fully own.
+        80+ specifications, zero vendor lock-in.
       publisher: "https://avaropoint.com/#org"
       inLanguage: en
     - type: SoftwareApplication
       id: "https://weblisk.dev/#app"
       name: Weblisk
       description: >
-        The specification layer for software. Over 80 interlocking
-        specifications — protocol, architecture, patterns, agents,
-        platforms, and standards — that define complete systems and
-        generate production-ready code in any language, on any platform.
+        Weblisk is an open-source framework that takes the guesswork
+        out of building complex applications. Blueprints capture your
+        exact requirements — security, data, integrations, deployments
+        — and agents generate production code you fully own. 80+
+        specifications. Zero vendor lock-in.
       url: "https://weblisk.dev"
       category: DeveloperApplication
       os: Any
@@ -105,47 +106,64 @@ seo:
       currency: USD
       license: "https://opensource.org/licenses/MIT"
       version: "1.0.0"
-      languages: [JavaScript, Go, Rust, Cloudflare Workers]
+      languages: [Go, Rust, "Node.js"]
       repository: "https://github.com/avaropoint/weblisk"
       partOf: "https://weblisk.dev/#website"
     - type: FAQPage
       questions:
         - q: What is Weblisk?
           a: >
-            Weblisk is the specification layer that software has always
-            been missing. It provides over 80 interlocking YAML specifications
-            (blueprints) that define complete software systems — from wire
-            protocol and security models to AI agent orchestration and
-            cryptographic federation. Generate production code in any
-            language, on any platform. The specification is permanent —
-            code is just a build artifact.
+            Weblisk is an open-source framework that takes the guesswork
+            out of building complex applications. Over 80 interlocking
+            blueprints capture your exact requirements — security, data,
+            integrations, deployments — and agents generate production
+            code in Go, Rust, or Node.js that you fully own. No vendor
+            lock-in. Full control of your data. Collaborate on your
+            terms through trusted hub networks.
         - q: What are Weblisk Blueprints?
           a: >
-            Blueprints are declarative YAML specifications that define
-            how an application works — from wire protocol and security
-            models to API contracts and agent behaviour. They are consumed
-            by humans, LLMs, and CI/CD pipelines to generate complete
-            implementations in Go, Node.js, Rust, or Cloudflare Workers.
-        - q: How is Weblisk different from a framework?
+            Blueprints are structured specifications that define exactly
+            how your application works — business logic, security models,
+            API contracts, agent behaviour, and deployment targets.
+            Anyone can read them — founders, product managers, developers.
+            Agents consume blueprints to generate complete production
+            systems. The framework is open source. The code it generates
+            belongs to you.
+        - q: Why use Weblisk instead of AI code generators like Claude or ChatGPT?
           a: >
-            Frameworks give you building blocks you wire together. Weblisk
-            gives you specifications you generate from. The specification
-            is the source of truth — code is a build artifact that can be
-            regenerated, upgraded, or ported to a new platform without
-            losing design intent.
+            AI code generators lose context between sessions — every
+            prompt starts from scratch, outputs are non-deterministic,
+            and architecture decisions drift over time. Weblisk
+            blueprints give AI a permanent, structured specification to
+            generate from. Define once, generate forever. No
+            re-prompting, no hallucinated architecture, no wasted
+            tokens. AI is used selectively where it helps, with
+            governance where it matters.
+        - q: How does Weblisk compare to SaaS platforms?
+          a: >
+            SaaS platforms offer convenience, but the trade-off is often
+            limited control over your data, your roadmap, and your
+            costs. With Weblisk, you define your exact requirements as
+            blueprints and generate systems you fully own. Your data
+            stays where you put it, and you set the guardrails for how
+            it moves in and out of your organization.
         - q: Is Weblisk free?
           a: >
-            Yes. All specifications, the CLI, and the client framework
-            are free and MIT-licensed. The Weblisk Marketplace enables
-            buying and selling community-created blueprints, agents,
-            and templates.
-        - q: How does Weblisk handle data migrations?
+            Yes. The Weblisk framework — all specifications, the CLI,
+            and the client framework — is free and MIT-licensed. Any
+            code you generate with it is yours to use however you
+            choose. The Weblisk Marketplace enables buying and selling
+            community-created blueprints, agents, and templates so you
+            can start from proven patterns instead of building from
+            scratch.
+        - q: How does Weblisk protect my data and handle upgrades?
           a: >
-            Schema migrations, data integrity checks, and rollback
-            strategies are specified alongside your code in the blueprint
-            layer. Every deployment is diffed, validated, and reversible.
-            Change management and deprecation lifecycles are built into
-            the specification — not bolted on after the fact.
+            Migrations in Weblisk are blueprint-versioned and
+            agent-orchestrated across your entire stack — data,
+            infrastructure, agents, and configuration. Every change is
+            diffed, validated, and reversible. Your data stays where
+            you put it — no vendor-managed migrations, no surprise
+            breaking changes.
         - q: What platforms does Weblisk support?
           a: >
             Weblisk starts with Cloudflare Workers as the primary
@@ -223,11 +241,13 @@ sections:
       icon: dot
     headline: "Software finally has blueprints."
     subheadline: >
-      Describe what you want in a YAML blueprint. Domain-expert agents
-      generate every layer — from UI/UX to APIs, security to
-      deployments — in a continuous, intelligent feedback loop. From
-      ideation to production, your vision stays permanent. Code is just
-      its latest expression.
+      What if the software your business runs on was truly yours —
+      designed to your exact requirements, transparent at every layer,
+      and never locked behind a subscription? Weblisk is an open-source
+      framework that takes the guesswork out of building complex
+      applications. Blueprints capture what you need once, and agents
+      generate production systems that belong entirely to you. Your
+      code. Your data. Your terms.
     actions:
       - label: See It In Action
         href: /platform/
@@ -237,11 +257,11 @@ sections:
         style: outline
     trust_signals:
       - icon: file-text
-        text: Your blueprint, your rules
+        text: You own every line
       - icon: bolt
-        text: Every layer generated
+        text: Open-source framework, MIT-licensed
       - icon: shield
-        text: Continuously improved
+        text: AI where it helps, control where it matters
     install_command: "curl -fsSL https://cdn.weblisk.dev/install.sh | sh"
     styles:
       install_cmd:
@@ -336,15 +356,16 @@ sections:
   # What Is a Blueprint?
   - id: what-is-a-blueprint
     type: content-section
-    label: The Foundation
-    headline: "A blueprint is your project's single source of truth."
+    label: Blueprints
+    headline: "A blueprint is the specification that brings ideation to realization."
     description: >
-      Not a template. Not a config file. A structured YAML specification
-      that captures your entire domain — what your project does, how
-      it's secured, where it deploys, and which agents maintain it. You
-      describe what you want. Domain-expert agents generate every layer
-      of production code. The blueprint is permanent. Code is just its
-      latest expression.
+      Most organizations rely on software they can't fully see into —
+      subscriptions with opaque data practices, stitched-together tools,
+      AI outputs no one can verify. Weblisk blueprints are structured
+      specifications that capture your exact business logic, security
+      requirements, and operational rules. Define it once. Agents
+      generate production systems from it — verifiable, repeatable,
+      and entirely owned by you.
     attributes:
       data-reveal: true
     cards_attributes:
@@ -352,46 +373,66 @@ sections:
     cards:
       - icon: edit
         color: purple
-        title: "Readable by Anyone"
+        title: "Anyone Can Read It"
         text: >
-          No programming knowledge required. Product managers, designers,
-          founders — anyone can read and write a blueprint. It's
-          structured YAML, not source code.
+          No programming required. Founders, product managers, developers,
+          and stakeholders can all read, understand, and shape a blueprint.
+          Your business logic is documented in structured specification —
+          not buried in source code.
       - icon: layers
         color: cyan
-        title: "Controls Everything"
+        title: "One Source of Truth"
         text: >
-          Design, security, integrations, data models, deployments,
-          agent behavior — every aspect of your project, specified in
-          one versioned corpus.
+          Design, security, integrations, data models, deployments —
+          every aspect of your project in one versioned corpus. No
+          scattered requirements documents. No architecture diagrams
+          that drift from reality. 80+ specs that stay synchronized.
       - icon: check
         color: green
-        title: "Generates Deterministically"
+        title: "Built-In Governance"
         text: >
-          Same blueprint, same output. Every time. No drift, no
-          surprises, no "works on my machine." Reproduce any build
-          from any point in history.
+          Five compliance tiers enforce standards automatically — from
+          internal tools to regulated enterprise systems. Nothing ships
+          that doesn't meet the spec. Audit trails, validation rules,
+          and security policies are part of the blueprint, not afterthoughts.
       - icon: bolt
         color: orange
-        title: "Eliminates AI Waste"
+        title: "AI That Doesn't Forget"
         text: >
-          Define once, generate forever. No re-prompting, no token
-          churn, no hallucinated architecture. Blueprints give AI the
-          structured context it needs to produce correct, reproducible
-          output on every pass.
+          AI code generators lose context between sessions. Every prompt
+          starts from scratch. Blueprints give AI the complete picture —
+          permanently. Define once, generate forever. No re-prompting,
+          no hallucinated architecture, no wasted tokens.
+      - icon: globe
+        color: cyan
+        title: "Your Team Can Leave — The Knowledge Stays"
+        text: >
+          When a developer leaves, companies lose months reverse-engineering
+          what was built. The blueprint is the handover — any team, any
+          AI, any future developer can execute from it. Zero tribal
+          knowledge risk.
+      - icon: shield
+        color: green
+        title: "Upgrades Without Rewrites"
+        text: >
+          Software evolves — your upgrade path shouldn't be a rewrite.
+          With blueprints, every migration is versioned, agent-orchestrated,
+          and reversible. Data, infrastructure, agents, and configuration
+          evolve together — change management built into the specification
+          layer.
 
   # Generative UI/UX
   - id: blueprint-pipeline
     type: pipeline-showcase
     label: Generative UI/UX
-    headline: "From blueprint to functional UI/UX — every layer, meticulously generated."
+    headline: "See what you specified — not what a vendor decided for you."
     description: >
-      Real-time generative UI/UX, powered by domain expertise. You
-      write one YAML blueprint. Agents with deep architectural
-      knowledge read it and generate every layer of production code —
-      semantic HTML, scoped CSS, interactive JavaScript — in a
-      continuous, intelligent feedback loop from ideation to production.
-      No templates. No boilerplate. No re-prompting.
+      Your blueprint is the input. Production-ready code is the output.
+      If it specifies a web page, agents generate semantic HTML, scoped
+      CSS, and interactive JavaScript. If it specifies an API, they
+      generate server code in Go, Rust, or Node.js. You decide what
+      gets built — agents handle how. This example shows how this very
+      page was built from its blueprint.
     attributes:
       data-reveal: true
     island: pipeline.js
@@ -449,21 +490,21 @@ sections:
           subheadline: "Describe what you want. Agents generate every layer."
           cta: "See It In Action →"
     caption: >-
-      This is how this very page was built — every section you see was
-      generated from a blueprint.
+      This page was generated from a blueprint. APIs, agents, and
+      platform code are generated the same way — the blueprint defines
+      the target.
 
   # The Workflow
   - id: the-workflow
     type: content-section
     background: soft
     label: The Workflow
-    headline: "From ideation to production — and every step in between."
+    headline: "One workflow. Full visibility at every step."
     description: >
-      This isn't a simplified demo. This is the real workflow. Initialize
-      your project, source or create blueprints, generate production code
-      for any platform, handle migrations between versions, preview
-      changes, and deploy — all orchestrated by domain-expert agents that
-      understand every layer of your stack.
+      Initialize, source, generate, migrate, validate, deploy — every
+      step tracked, validated, and reversible. You see exactly what's
+      happening at every stage. Agents handle the heavy lifting while
+      you stay in control of the process.
     attributes:
       data-reveal: true
     cards_attributes:
@@ -493,10 +534,10 @@ sections:
       - icon: refresh
         title: "Transform & Migrate"
         text: >
-          Handle schema migrations, data transformations, and
-          infrastructure transitions between versions. Every change is
-          diffed, validated, and reversible — nothing is left to chance.
-        spec: "schemas/*.yaml → migrations"
+          Blueprint-versioned, agent-orchestrated migrations across
+          your entire stack — data, infrastructure, agents, and
+          configuration. Every change diffed, validated, and reversible.
+        spec: "weblisk migrate --validate"
       - icon: eye
         title: "Preview & Validate"
         text: >
@@ -514,264 +555,120 @@ sections:
         spec: "weblisk deploy --auto-rollback"
     loop_label: "Continuous improvement — domain-expert agents monitor every layer, the loop never stops"
 
-  # Why Blueprints
-  - id: why-blueprints
-    type: content-section
-    label: Why Blueprints
-    headline: "Your knowledge is your most valuable asset. Protect it."
-    description: >
-      Frameworks change. Teams turn over. AI evolves. The one thing that
-      should never be lost is the knowledge of how your system works and
-      why. Blueprints capture that knowledge in structured, versioned
-      specifications — not scattered docs, tribal knowledge, or prompt
-      history. This is the layer that's been missing.
-    attributes:
-      data-reveal: true
-    cards_attributes:
-      data-reveal-stagger: true
-    cards:
-      - icon: globe
-        color: purple
-        title: "Centralised Domain Knowledge"
-        text: >
-          Every decision, pattern, and domain rule lives in one
-          specification corpus — not scattered across wikis, tickets,
-          and tribal knowledge. The entire system is readable,
-          queryable, and permanent.
-      - icon: bolt
-        color: cyan
-        title: "AI That Actually Works"
-        text: >
-          Stop re-prompting. Define once, generate deterministically —
-          every language, zero wasted tokens. Without a spec, AI is
-          hallucination with syntax highlighting. With blueprints, it's
-          verifiable, reproducible, and cost-efficient.
-      - icon: users
-        color: green
-        title: "Zero Lock-In"
-        text: >
-          When a developer leaves, the knowledge stays. No months of
-          reverse-engineering. No back-and-forth emails reconstructing
-          intent. The specification is the handover — any team, any AI,
-          any generation of developers can execute from it.
-      - icon: layers
-        color: orange
-        title: "Platform Independence"
-        text: >
-          One blueprint → Go, Rust, Node, or Cloudflare Workers. Switch
-          platforms without losing a single design decision. Your domain
-          knowledge transcends any particular language or runtime.
-      - icon: book
-        color: purple
-        title: "Complete System Specification"
-        text: >
-          Not fragments. Not templates. Protocol, architecture, patterns,
-          agents, platforms — 80+ specs that cross-reference and generate
-          alongside every other. Years to build. Impossible to shortcut.
-      - icon: shield
-        color: cyan
-        title: "Safe, Versioned Upgrades"
-        text: >
-          Specs evolve — and so do your data, schemas, and agents. Every
-          deployment is diffed, validated, and reversible. Change
-          management and migration procedures are built into the
-          specification layer, not bolted on.
-
-  # How It Works
-  - id: how-it-works
-    type: content-section
-    label: How It Works
-    headline: "Specify → Generate → Deploy"
-    description: >
-      Define your domain. Generate the full stack. Deploy with
-      confidence. When requirements change, update the spec and
-      regenerate. Schema migrations, data integrity, and rollback
-      strategies are specified alongside your code — nothing is
-      left to chance.
-    attributes:
-      data-reveal: true
-    split_pane_demo:
-      island: split-demo.js
-      hydrate: visible
-      left:
-        title: domains/chat.yaml
-        language: yaml
-        content: |
-          domain: chat
-          version: 1.0.0
-
-          patterns:
-            - api-ai
-            - auth-token
-            - realtime-chat
-            - webhooks
-
-          agents:
-            - content-quality
-            - seo-analyzer
-
-          security:
-            identity: ed25519
-            access: abac
-      divider:
-        icon: bolt
-        label: Generate
-      right:
-        tabs:
-          - id: go
-            label: Go
-            language: go
-            active: true
-            content: |
-              package chat
-
-              type ChatService struct {
-                auth     TokenAuth
-                ws       RealtimeHub
-                webhooks WebhookDispatcher
-              }
-
-              func (s *ChatService) HandleMessage(
-                ctx context.Context,
-                msg *Message,
-              ) error {
-                // Generated from patterns:
-                // api-ai, auth-token, realtime-chat
-                if err := s.auth.Verify(ctx); err != nil {
-                  return err
-                }
-                s.ws.Broadcast(msg)
-                return nil
-              }
-          - id: node
-            label: Node.js
-            language: javascript
-            content: |
-              import { TokenAuth } from './auth.js';
-              import { RealtimeHub } from './realtime.js';
-              import { WebhookDispatcher } from './webhooks.js';
-
-              // Generated from domains/chat.yaml
-              export class ChatService {
-                #auth = new TokenAuth();
-                #ws   = new RealtimeHub();
-                #hooks = new WebhookDispatcher();
-
-                async handleMessage(ctx, msg) {
-                  await this.#auth.verify(ctx);
-                  this.#ws.broadcast(msg);
-                  await this.#hooks.dispatch('message.sent', msg);
-                }
-              }
-          - id: rust
-            label: Rust
-            language: rust
-            content: |
-              use crate::{auth::TokenAuth, realtime::Hub};
-
-              // Generated from domains/chat.yaml
-              pub struct ChatService {
-                  auth: TokenAuth,
-                  hub:  Hub,
-              }
-
-              impl ChatService {
-                  pub async fn handle_message(
-                      &self,
-                      ctx: &Context,
-                      msg: Message,
-                  ) -> Result<()> {
-                      self.auth.verify(ctx).await?;
-                      self.hub.broadcast(&msg).await;
-                      Ok(())
-                  }
-              }
-
   # Architecture
   - id: architecture
     type: content-section
     background: soft
     label: Architecture
-    headline: "Every layer. One specification corpus."
+    headline: "Seven layers. All open. All yours."
     description: >
-      Not a library. Not a framework. A complete system architecture —
-      from wire protocol to cryptographic federation — specified,
-      cross-referenced, and generated.
+      Weblisk exposes every layer — from wire protocol to marketplace —
+      as open, specified, and interconnected. You decide which layers to
+      use, extend, or replace. The architecture is transparent by design
+      because we believe you should understand the systems you depend on.
     attributes:
       data-reveal: true
     interactive_diagram:
       island: arch-diagram.js
       hydrate: visible
-      svg_viewbox: "0 0 600 400"
+      svg_viewbox: "0 0 560 540"
       layers:
         - id: protocol
-          label: "Protocol & Federation"
-          sublabel: "HTTP+JSON · Ed25519 · Hub-to-Hub"
-          rect: { x: 130, y: 32, width: 340, height: 60 }
+          label: "Protocol"
+          sublabel: "HTTP+JSON · Wire Format · Standard API Contracts"
+          rect: { x: 30, y: 0, width: 500, height: 60 }
           detail:
-            title: "Protocol & Federation"
+            title: "Protocol"
             text: >
-              HTTP + JSON wire format with Ed25519 identity signing.
-              Federation protocol enables hub-to-hub collaboration
-              with cryptographic trust verification.
+              HTTP + JSON wire format that standardizes communication
+              across every Weblisk project. Standard API contracts,
+              consistent request/response shapes, and versioned endpoints.
             link:
               label: Protocol specs →
               href: /platform/blueprints/protocol.html
-        - id: orchestrator
-          label: "Orchestrator"
-          sublabel: "Identity · Routing · Audit"
-          rect: { x: 110, y: 104, width: 380, height: 60 }
+        - id: federation
+          label: "Federation"
+          sublabel: "Ed25519 · Hub-to-Hub Trust · Cryptographic Verification"
+          rect: { x: 30, y: 70, width: 500, height: 60 }
           detail:
-            title: "Orchestrator"
+            title: "Federation"
             text: >
-              Central orchestrator for identity, routing, and audit.
-              Manages agent registration, task delegation, and
-              cross-domain coordination.
+              Ed25519 identity signing with hub-to-hub cryptographic trust
+              verification. Federation protocol enables collaboration across
+              independent hubs — every message signed, every agent verified,
+              every data contract enforced.
             link:
-              label: Architecture specs →
-              href: /platform/blueprints/architecture.html
+              label: Federation specs →
+              href: /platform/blueprints/federation.html
+        - id: schemas
+          label: "Schemas & Validation"
+          sublabel: "5 Compliance Tiers · Enforced Standards · Versioning"
+          rect: { x: 30, y: 140, width: 500, height: 60 }
+          detail:
+            title: "Schemas & Validation"
+            text: >
+              Five compliance tiers — from sandbox to certified. Every
+              blueprint validated against Weblisk schemas before it can
+              register, publish, or interact with other agents. Enterprise
+              standards, enforced automatically.
+            link:
+              label: Schema specs →
+              href: /platform/blueprints/schemas.html
         - id: agents
           label: "Agents"
-          sublabel: "Domain · Task · Infrastructure · Quality"
-          rect: { x: 90, y: 176, width: 420, height: 60 }
+          sublabel: "Domain · Infrastructure · Task · Quality · Lifecycle"
+          rect: { x: 30, y: 210, width: 500, height: 60 }
           detail:
             title: "Agents"
             text: >
-              Domain agents, task agents, infrastructure agents,
-              and quality agents — each sandboxed, portable, and
-              AI-ready. Agents register capabilities, execute
-              tasks, and collaborate autonomously.
+              11 infrastructure agents plus unlimited domain agents.
+              Each sandboxed, portable, and AI-ready. Agents register
+              capabilities, execute tasks, and collaborate autonomously
+              across your entire system.
             link:
               label: Agent catalog →
               href: /platform/agents/
         - id: patterns
           label: "Patterns"
-          sublabel: "API · Auth · Webhooks · Workflows"
-          rect: { x: 70, y: 248, width: 460, height: 60 }
+          sublabel: "API · Auth · Governance · Webhooks · Workflows · Storage"
+          rect: { x: 30, y: 280, width: 500, height: 60 }
           detail:
             title: "Patterns"
             text: >
-              API, auth, governance, webhooks, workflows, storage,
-              change management, and deployment. Each pattern
-              generates real endpoints with real security and
-              real validation.
+              48+ cross-cutting contracts — API, auth, governance,
+              webhooks, workflows, storage, deployment, and more.
+              Each pattern generates real endpoints with real security
+              and real validation.
             link:
               label: Pattern catalog →
               href: /platform/blueprints/patterns.html
         - id: platforms
           label: "Platforms"
-          sublabel: "Cloudflare Workers · Go · Rust · Node"
-          rect: { x: 50, y: 320, width: 500, height: 60 }
+          sublabel: "Cloudflare Workers · Go · Rust · Node.js"
+          rect: { x: 30, y: 350, width: 500, height: 60 }
           detail:
             title: "Platforms"
             text: >
-              Starting with Cloudflare Workers, with reference
-              implementations in Go, Rust, and Node.js. The goal:
-              generate production code for any platform — AWS,
-              GCP, Azure, and beyond.
+              Languages: Go, Rust, Node.js. Platforms: Cloudflare
+              Workers today, with AWS, GCP, Azure adapters on the
+              roadmap. One blueprint, any target.
             link:
               label: Explore platforms →
               href: /platform/
+        - id: ecosystem
+          label: "Marketplace & Hub Network"
+          sublabel: "Open Blueprints · Templates · Community Hub · Collaboration"
+          rect: { x: 30, y: 420, width: 500, height: 60 }
+          detail:
+            title: "Marketplace & Hub Network"
+            text: >
+              Share blueprints on the open marketplace. Fork community
+              templates. Collaborate across hubs with cryptographic
+              data contracts. Build your own blueprints and publish
+              them for others to compose into their projects.
+            link:
+              label: Explore the marketplace →
+              href: /marketplace/
       hint: "Hover or tap a layer to explore"
 
   # Getting Started
@@ -837,10 +734,11 @@ sections:
     type: content-section
     background: soft
     label: What You Can Build
-    headline: "Real enterprise domains. Defined as blueprints."
+    headline: "Real problems. Your solutions."
     description: >
-      Not toy demos. Production systems generated from composed
-      specifications.
+      Define your exact requirements as blueprints and generate
+      production systems tailored to how your business actually works —
+      not shaped around someone else's feature set.
     attributes:
       data-reveal: true
     cards_attributes:
@@ -852,8 +750,9 @@ sections:
         color: purple
         title: Marketing Platform
         text: >
+          Consolidate scattered tools into one system you own.
           Campaigns, AI content, scheduling, collaboration,
-          analytics — 7 blueprints, entire stack generated.
+          analytics — 7 blueprints, fully generated, completely yours.
         expandable: true
         detail:
           stats:
@@ -873,8 +772,9 @@ sections:
         color: cyan
         title: Supply Chain
         text: >
-          30 federated supplier hubs. Webhook ingestion, orchestration
-          workflows, cryptographic contracts. No EDI. No middleware.
+          Connect 30 suppliers without expensive middleware. Webhook
+          ingestion, orchestration workflows, cryptographic contracts —
+          federated, auditable, and no EDI headaches.
         expandable: true
         detail:
           stats:
@@ -894,8 +794,9 @@ sections:
         color: green
         title: Customer Support
         text: >
-          AI routing, live chat, SLA monitoring, multi-channel
-          ingestion — specified, generated, and continuously optimized.
+          Build a support platform shaped around your team. AI routing,
+          live chat, SLA monitoring, multi-channel ingestion —
+          specified, generated, and continuously optimized.
         expandable: true
         detail:
           stats:
@@ -915,8 +816,9 @@ sections:
         color: orange
         title: Content Management
         text: >
-          CRUD, auth, AI writing, CDN triggers, quality agents.
-          The CMS you'd build if starting from scratch.
+          The CMS built for your workflow — not someone else's. CRUD,
+          auth, AI writing, CDN triggers, quality agents. No plugin
+          bloat. No theme limitations.
         expandable: true
         detail:
           stats:
@@ -938,11 +840,13 @@ sections:
     type: comparison-table
     background: soft
     label: Comparison
-    headline: "This isn't a better tool. It's a missing layer."
+    headline: "A different way to think about software."
     description: >-
-      Weblisk doesn't compete with frameworks, SaaS platforms, or AI code
-      generators. It sits underneath all of them — the specification layer
-      they've always been missing.
+      Renting features through subscriptions works — until it doesn't.
+      Re-prompting AI works — until context is lost. Custom builds work —
+      until the team changes. Weblisk is the specification layer that
+      makes true ownership practical, so you can control every layer of
+      data moving in and out of your organization.
     attributes:
       data-reveal: true
     highlight_column: Weblisk
@@ -953,15 +857,19 @@ sections:
       - AI code gen
     rows:
       - feature: Persistent specification
-        values: ["80+ YAML specs", "None", "Vendor-owned", "None"]
-      - feature: Generate any language
-        values: ["Go, Rust, Node, CF Workers", "N/A", "No", "Partial"]
+        values: ["80+ blueprints", "None", "Vendor-owned", "None"]
+      - feature: Multi-language generation
+        values: ["Go · Rust · Node.js", "N/A", "No", "Partial"]
+      - feature: Platform targets
+        values: ["Cloudflare Workers + more", "Manual", "Vendor-locked", "No"]
       - feature: You own the output
         values: ["100%", "Yes", "Vendor lock-in", "Fragile"]
       - feature: Agent orchestration
         values: ["Built-in", "Build yourself", "Vendor-controlled", "No"]
       - feature: Federation
         values: ["Cryptographic hub-to-hub", "Custom integration", "No", "No"]
+      - feature: Governance
+        values: ["Schema-enforced, 5 tiers", "Manual policies", "Vendor-defined", "None"]
       - feature: Specification validation
         values: ["Schema-enforced", "Manual review", "N/A", "No"]
       - feature: Security model
@@ -969,25 +877,27 @@ sections:
       - feature: Upgrade path
         values: ["Versioned, validated, reversible", "Rewrite", "Vendor roadmap", "Re-prompt"]
       - feature: Data protection
-        values: ["Schema-aware migrations", "Manual scripts", "Vendor-managed", "None"]
+        values: ["Blueprint-versioned, agent-orchestrated", "Manual scripts", "Vendor-managed", "None"]
       - feature: Runtime dependencies
         values: ["Zero", "Hundreds", "Vendor-managed", "Hundreds"]
       - feature: AI token efficiency
         values: ["Define once, generate forever", "N/A", "N/A", "Re-prompt every iteration"]
       - feature: Knowledge preservation
-        values: ["Structured YAML specs", "Scattered docs & tribal knowledge", "Vendor-owned", "Prompt history"]
+        values: ["Structured specifications", "Scattered docs & tribal knowledge", "Vendor-owned", "Prompt history"]
       - feature: Reproducibility
         values: ["Identical output, any time", "\"Works on my machine\"", "Vendor-controlled", "Non-deterministic"]
 
   # CTA
   - id: cta
     type: cta-section
-    headline: "Your vision deserves more than a blank editor."
+    headline: "Own the software your business depends on."
     description: >-
-      Describe what you want. Generate a complete production system —
-      design, security, agents, deployments — in minutes. Own every
-      layer. Change anything by editing the blueprint. The loop never
-      stops.
+      Compose blueprints from the marketplace, generate a complete
+      production system, and own every layer — the design, the security,
+      the data, the deployments. Collaborate on your terms through
+      trusted hub networks with real data guardrails. Change anything
+      by editing the spec. The framework is open source. The code you
+      generate is yours.
     attributes:
       data-reveal: true
     actions:

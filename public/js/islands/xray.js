@@ -33,6 +33,23 @@ export default function xray(el) {
     section.appendChild(btn);
   });
 
+  // Show x-ray trigger when section scrolls into view
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const trigger = entry.target.querySelector('.xray-trigger');
+        if (!trigger) continue;
+        if (entry.isIntersecting) {
+          trigger.classList.add('xray-trigger-visible');
+        } else {
+          trigger.classList.remove('xray-trigger-visible');
+        }
+      }
+    },
+    { threshold: 0.15 }
+  );
+  sections.forEach(section => revealObserver.observe(section));
+
   async function fetchYaml() {
     if (yamlCache) return yamlCache;
     try {
@@ -413,6 +430,7 @@ function injectStyles() {
   border-color: var(--wl-border-dark, #334155);
 }
 section:hover > .xray-trigger,
+.xray-trigger-visible,
 .xray-trigger:focus-visible {
   opacity: 1;
 }

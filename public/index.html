@@ -366,13 +366,9 @@
             </div>
           </div>
 
-          <div class="pipeline-arrow" aria-hidden="true">
-            <div class="pipeline-arrow-line"></div>
-            <div class="pipeline-arrow-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              Agents process
-            </div>
-            <div class="pipeline-arrow-line"></div>
+          <div class="pipeline-connector" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Agents process</span>
           </div>
 
           <div class="pipeline-stage" data-stage="generated">
@@ -412,13 +408,9 @@
             </div>
           </div>
 
-          <div class="pipeline-arrow" aria-hidden="true">
-            <div class="pipeline-arrow-line"></div>
-            <div class="pipeline-arrow-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Renders
-            </div>
-            <div class="pipeline-arrow-line"></div>
+          <div class="pipeline-connector" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Renders</span>
           </div>
 
           <div class="pipeline-stage" data-stage="rendered">
@@ -443,6 +435,15 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
           This page was generated from a blueprint. APIs, agents, and platform code are generated the same way — the blueprint defines the target.
         </p>
+        <div class="pipeline-client-callout">
+          <div class="pipeline-client-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="pipeline-client-text">
+            <strong>Built on the Weblisk Client Framework</strong> — reactive islands that hydrate on demand, accept any blueprint-driven input, and connect directly to the agents that handle their logic. Every section on this page is a live island — specification in, reactive UI out.
+            <a href="/platform/client/">Learn about the client framework →</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -902,8 +903,8 @@
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Getting Started</span>
-          <h2 id="gs-heading">Up and running in three steps.</h2>
-          <p>Install the CLI, define your first domain, and generate production code.</p>
+          <h2 id="gs-heading">Up and running in minutes.</h2>
+          <p>Install the CLI, scaffold from a starter template, run a local dev server, and generate production code.</p>
         </div>
         <div class="gs-steps" data-reveal-stagger>
           <div class="gs-step">
@@ -932,18 +933,36 @@
               <div class="gs-step-line" aria-hidden="true"></div>
             </div>
             <div class="gs-step-content">
-              <h3>Define your domain</h3>
-              <p>Initialise a project and compose patterns into a domain blueprint.</p>
+              <h3>Create your project</h3>
+              <p>Scaffold from a starter template — client, server, or full-stack. Blueprints, agent configs, and platform targets included.</p>
               <div class="code-window gs-code">
                 <div class="code-header">
                   <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
                   <span class="code-title">Terminal</span>
                 </div>
                 <div class="code-body">
-                  <pre><span class="syn-p">$</span> weblisk init my-project
-<span class="syn-s">✓ Created my-project/ with blueprint scaffolding</span>
-
-<span class="syn-p">$</span> weblisk domain create chat \
+                  <pre><span class="syn-p">$</span> weblisk init my-app --template server
+<span class="syn-s">✓ Created my-app/ from weblisk-templates/server</span>
+<span class="syn-s">✓ Blueprint scaffolding ready</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number green" aria-hidden="true">3</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Define and compose</h3>
+              <p>Create domains, compose patterns from the marketplace, and shape your blueprints to your exact requirements.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk domain create chat \
     --patterns api-ai,auth-token,realtime-chat
 <span class="syn-s">✓ Domain "chat" created with 3 patterns</span></pre>
                 </div>
@@ -952,11 +971,32 @@
           </div>
           <div class="gs-step">
             <div class="gs-step-marker">
-              <div class="gs-step-number green" aria-hidden="true">3</div>
+              <div class="gs-step-number orange" aria-hidden="true">4</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Run locally</h3>
+              <p>Start a local dev server with hot reload. See changes instantly as you refine your blueprints.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk dev
+<span class="syn-s">✓ Dev server running at http://localhost:3000</span>
+<span class="syn-s">✓ Watching blueprints for changes...</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number purple" aria-hidden="true">5</div>
             </div>
             <div class="gs-step-content">
               <h3>Generate and deploy</h3>
-              <p>Generate production code for your target language and platform.</p>
+              <p>Generate production code for your target language and platform. Deploy when you're ready — or keep iterating.</p>
               <div class="code-window gs-code">
                 <div class="code-header">
                   <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
@@ -967,8 +1007,8 @@
 <span class="syn-s">✓ Generated 24 endpoints, 3 agents, 7 patterns</span>
 <span class="syn-s">✓ Output: ./generated/</span>
 
-<span class="syn-p">$</span> weblisk deploy
-<span class="syn-s">✓ Deployed to production (schema validated, data preserved)</span></pre>
+<span class="syn-p">$</span> weblisk deploy --target cloudflare
+<span class="syn-s">✓ Deployed to production (validated, versioned)</span></pre>
                 </div>
               </div>
             </div>

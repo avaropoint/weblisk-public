@@ -354,7 +354,7 @@ sections:
             - line: { x1: 12, y1: 17, x2: 12, y2: 21 }
 
   # What Is a Blueprint?
-  - id: what-is-a-blueprint
+  - id: blueprints
     type: content-section
     label: Blueprints
     headline: "A blueprint is the specification that brings ideation to realization."
@@ -493,6 +493,19 @@ sections:
       This page was generated from a blueprint. APIs, agents, and
       platform code are generated the same way — the blueprint defines
       the target.
+    connectors:
+      - label: Agents process
+        style: compact
+      - label: Renders
+        style: compact
+    client_framework_callout:
+      headline: "Built on the Weblisk Client Framework"
+      description: >-
+        Reactive islands that hydrate on demand, accept any blueprint-driven
+        input, and connect directly to the agents that handle their logic.
+        Every section on this page is a live island — specification in,
+        reactive UI out.
+      link: /platform/client/
 
   # The Workflow
   - id: the-workflow
@@ -671,14 +684,66 @@ sections:
               href: /marketplace/
       hint: "Hover or tap a layer to explore"
 
+  # Comparison
+  - id: comparison
+    type: comparison-table
+    label: Comparison
+    headline: "A different way to think about software."
+    description: >-
+      Renting features through subscriptions works — until it doesn't.
+      Re-prompting AI works — until context is lost. Custom builds work —
+      until the team changes. Weblisk is the specification layer that
+      makes true ownership practical, so you can control every layer of
+      data moving in and out of your organization.
+    attributes:
+      data-reveal: true
+    highlight_column: Weblisk
+    columns:
+      - Weblisk
+      - Build from scratch
+      - SaaS platform
+      - AI code gen
+    rows:
+      - feature: Persistent specification
+        values: ["80+ blueprints", "None", "Vendor-owned", "None"]
+      - feature: Multi-language generation
+        values: ["Go · Rust · Node.js", "N/A", "No", "Partial"]
+      - feature: Platform targets
+        values: ["Cloudflare Workers + more", "Manual", "Vendor-locked", "No"]
+      - feature: You own the output
+        values: ["100%", "Yes", "Vendor lock-in", "Fragile"]
+      - feature: Agent orchestration
+        values: ["Built-in", "Build yourself", "Vendor-controlled", "No"]
+      - feature: Federation
+        values: ["Cryptographic hub-to-hub", "Custom integration", "No", "No"]
+      - feature: Governance
+        values: ["Schema-enforced, 5 tiers", "Manual policies", "Vendor-defined", "None"]
+      - feature: Specification validation
+        values: ["Schema-enforced", "Manual review", "N/A", "No"]
+      - feature: Security model
+        values: ["Ed25519, ABAC, 7-layer", "Build yourself", "Shared tenancy", "None"]
+      - feature: Upgrade path
+        values: ["Versioned, validated, reversible", "Rewrite", "Vendor roadmap", "Re-prompt"]
+      - feature: Data protection
+        values: ["Blueprint-versioned, agent-orchestrated", "Manual scripts", "Vendor-managed", "None"]
+      - feature: Runtime dependencies
+        values: ["Zero", "Hundreds", "Vendor-managed", "Hundreds"]
+      - feature: AI token efficiency
+        values: ["Define once, generate forever", "N/A", "N/A", "Re-prompt every iteration"]
+      - feature: Knowledge preservation
+        values: ["Structured specifications", "Scattered docs & tribal knowledge", "Vendor-owned", "Prompt history"]
+      - feature: Reproducibility
+        values: ["Identical output, any time", "\"Works on my machine\"", "Vendor-controlled", "Non-deterministic"]
+
   # Getting Started
   - id: getting-started
     type: getting-started
+    background: soft
     label: Getting Started
-    headline: "Up and running in three steps."
+    headline: "Up and running in minutes."
     description: >
-      Install the CLI, define your first domain, and generate
-      production code.
+      Install the CLI, scaffold from a starter template, run a local
+      dev server, and generate production code.
     attributes:
       data-reveal: true
     steps_attributes:
@@ -697,33 +762,56 @@ sections:
             ✓ Weblisk CLI installed to ~/.weblisk/bin/weblisk
       - number: 2
         color: cyan
-        title: Define your domain
+        title: Create your project
         description: >
-          Initialise a project and compose patterns into a domain
-          blueprint.
+          Scaffold from a starter template — client, server, or
+          full-stack. Blueprints, agent configs, and platform targets
+          included.
         code:
           title: Terminal
           content: |
-            $ weblisk init my-project
-            ✓ Created my-project/ with blueprint scaffolding
-
+            $ weblisk init my-app --template server
+            ✓ Created my-app/ from weblisk-templates/server
+            ✓ Blueprint scaffolding ready
+      - number: 3
+        color: green
+        title: Define and compose
+        description: >
+          Create domains, compose patterns from the marketplace, and
+          shape your blueprints to your exact requirements.
+        code:
+          title: Terminal
+          content: |
             $ weblisk domain create chat \
                 --patterns api-ai,auth-token,realtime-chat
             ✓ Domain "chat" created with 3 patterns
-      - number: 3
-        color: green
-        title: Generate and deploy
+      - number: 4
+        color: orange
+        title: Run locally
         description: >
-          Generate production code for your target platform and deploy.
+          Start a local dev server with hot reload. See changes
+          instantly as you refine your blueprints.
         code:
           title: Terminal
           content: |
-            $ weblisk generate --platform cloudflare
+            $ weblisk dev
+            ✓ Dev server running at http://localhost:3000
+            ✓ Watching blueprints for changes...
+      - number: 5
+        color: purple
+        title: Generate and deploy
+        description: >
+          Generate production code for your target language and
+          platform. Deploy when you're ready — or keep iterating.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk generate --lang go
             ✓ Generated 24 endpoints, 3 agents, 7 patterns
             ✓ Output: ./generated/
 
-            $ weblisk deploy
-            ✓ Deployed to production (schema validated, data preserved)
+            $ weblisk deploy --target cloudflare
+            ✓ Deployed to production (validated, versioned)
     cta:
       label: Read the Quick Start Guide
       href: /docs/quick-start.html
@@ -732,7 +820,6 @@ sections:
   # Use Cases
   - id: use-cases
     type: content-section
-    background: soft
     label: What You Can Build
     headline: "Real problems. Your solutions."
     description: >
@@ -834,58 +921,6 @@ sections:
             - cdn-triggers
             - ai-writing
             - quality
-
-  # Comparison
-  - id: comparison
-    type: comparison-table
-    background: soft
-    label: Comparison
-    headline: "A different way to think about software."
-    description: >-
-      Renting features through subscriptions works — until it doesn't.
-      Re-prompting AI works — until context is lost. Custom builds work —
-      until the team changes. Weblisk is the specification layer that
-      makes true ownership practical, so you can control every layer of
-      data moving in and out of your organization.
-    attributes:
-      data-reveal: true
-    highlight_column: Weblisk
-    columns:
-      - Weblisk
-      - Build from scratch
-      - SaaS platform
-      - AI code gen
-    rows:
-      - feature: Persistent specification
-        values: ["80+ blueprints", "None", "Vendor-owned", "None"]
-      - feature: Multi-language generation
-        values: ["Go · Rust · Node.js", "N/A", "No", "Partial"]
-      - feature: Platform targets
-        values: ["Cloudflare Workers + more", "Manual", "Vendor-locked", "No"]
-      - feature: You own the output
-        values: ["100%", "Yes", "Vendor lock-in", "Fragile"]
-      - feature: Agent orchestration
-        values: ["Built-in", "Build yourself", "Vendor-controlled", "No"]
-      - feature: Federation
-        values: ["Cryptographic hub-to-hub", "Custom integration", "No", "No"]
-      - feature: Governance
-        values: ["Schema-enforced, 5 tiers", "Manual policies", "Vendor-defined", "None"]
-      - feature: Specification validation
-        values: ["Schema-enforced", "Manual review", "N/A", "No"]
-      - feature: Security model
-        values: ["Ed25519, ABAC, 7-layer", "Build yourself", "Shared tenancy", "None"]
-      - feature: Upgrade path
-        values: ["Versioned, validated, reversible", "Rewrite", "Vendor roadmap", "Re-prompt"]
-      - feature: Data protection
-        values: ["Blueprint-versioned, agent-orchestrated", "Manual scripts", "Vendor-managed", "None"]
-      - feature: Runtime dependencies
-        values: ["Zero", "Hundreds", "Vendor-managed", "Hundreds"]
-      - feature: AI token efficiency
-        values: ["Define once, generate forever", "N/A", "N/A", "Re-prompt every iteration"]
-      - feature: Knowledge preservation
-        values: ["Structured specifications", "Scattered docs & tribal knowledge", "Vendor-owned", "Prompt history"]
-      - feature: Reproducibility
-        values: ["Identical output, any time", "\"Works on my machine\"", "Vendor-controlled", "Non-deterministic"]
 
   # CTA
   - id: cta

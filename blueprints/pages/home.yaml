@@ -364,7 +364,7 @@ sections:
       AI outputs no one can verify. Weblisk blueprints are structured
       specifications that capture your exact business logic, security
       requirements, and operational rules. Define it once. Agents
-      generate production systems from it — verifiable, repeatable,
+      generate production code and systems from it — verifiable, repeatable,
       and entirely owned by you.
     attributes:
       data-reveal: true

@@ -17,7 +17,7 @@ version: 2.0.0
 seo:
   title: "Weblisk — Software Finally Has Blueprints"
   description: >
-    Weblisk is an open-source framework that takes the guesswork out of
+    Weblisk is a full stack zero dependency open-source framework that takes the guesswork out of
     building complex applications. Blueprints capture your exact
     requirements — security, data, integrations, deployments — and agents
     generate production code you fully own. 80+ specifications. Zero
@@ -46,7 +46,7 @@ seo:
     type: website
     title: "Weblisk — Software Finally Has Blueprints"
     description: >
-      Weblisk is an open-source framework that takes the guesswork out
+      Weblisk is a full stack zero dependency open-source framework that takes the guesswork out
       of building complex applications. 80+ blueprints capture your
       requirements and agents generate production code you fully own.
       Zero vendor lock-in.
@@ -84,7 +84,7 @@ seo:
       name: Weblisk
       url: "https://weblisk.dev"
       description: >
-        Weblisk is an open-source framework that takes the guesswork
+        Weblisk is a full stack zero dependency open-source framework that takes the guesswork
         out of building complex applications. Blueprints capture your
         requirements and agents generate production code you fully own.
         80+ specifications, zero vendor lock-in.
@@ -94,7 +94,7 @@ seo:
       id: "https://weblisk.dev/#app"
       name: Weblisk
       description: >
-        Weblisk is an open-source framework that takes the guesswork
+        Weblisk is a full stack zero dependency open-source framework that takes the guesswork
         out of building complex applications. Blueprints capture your
         exact requirements — security, data, integrations, deployments
         — and agents generate production code you fully own. 80+
@@ -113,7 +113,7 @@ seo:
       questions:
         - q: What is Weblisk?
           a: >
-            Weblisk is an open-source framework that takes the guesswork
+            Weblisk is a full stack zero dependency open-source framework that takes the guesswork
             out of building complex applications. Over 80 interlocking
             blueprints capture your exact requirements — security, data,
             integrations, deployments — and agents generate production
@@ -243,7 +243,7 @@ sections:
     subheadline: >
       What if you can truly own software again —
       designed to your exact requirements, transparent at every layer,
-      and never locked behind a subscription? Weblisk is an open-source
+      and never locked behind a subscription? Weblisk is a full stack zero dependency open-source
       framework that takes the guesswork out of building complex
       applications. Blueprints capture what you need once, and agents
       generate production systems that belong entirely to you. Your
@@ -330,7 +330,7 @@ sections:
             - polyline: "14 2 14 8 20 8"
             - line: { x1: 16, y1: 13, x2: 8, y2: 13 }
             - line: { x1: 16, y1: 17, x2: 8, y2: 17 }
-      - value: "16"
+      - value: "16+"
         label: Architecture Components
         icon:
           description: Stacked layers
@@ -338,13 +338,13 @@ sections:
             - path: "M12 2L2 7l10 5 10-5-10-5z"
             - path: "M2 17l10 5 10-5"
             - path: "M2 12l10 5 10-5"
-      - value: "11"
+      - value: "11+"
         label: Infrastructure Agents
         icon:
           description: Lightning bolt
           paths:
             - polygon: "13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-      - value: "4"
+      - value: "4+"
         label: Platform Targets
         icon:
           description: Monitor
@@ -926,7 +926,7 @@ sections:
   # CTA
   - id: cta
     type: cta-section
-    headline: "Own the software your business depends on."
+    headline: "It's time to own your software again."
     description: >-
       Compose blueprints from the marketplace, generate a complete
       production system, and own every layer — the design, the security,

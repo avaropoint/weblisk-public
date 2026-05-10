@@ -8,16 +8,17 @@ locales: [en-US]
 
 brand:
   colors:
-    primary: "#6366f1"
-    accent: "#818cf8"
+    primary: "#3B4F7C"
+    primary_hover: "#2D3E64"
+    accent: "#0b7d97"
     surface: "#ffffff"
-    text: "#1e293b"
-    error: "#ef4444"
-    success: "#10b981"
+    text: "#0f172a"
+    error: "#dc2626"
+    success: "#047857"
   typography:
     heading: { family: "Inter", weight: 700 }
     body: { family: "system-ui", weight: 400 }
-    mono: { family: "JetBrains Mono", weight: 400 }
+    mono: { family: "'JetBrains Mono'", weight: 400 }
   spacing: 8px
   radius: 4px
   logo: assets/logo.svg
@@ -26,9 +27,9 @@ brand:
 identity:
   tagline: "Software finally has blueprints"
   description: >
-    An open-source framework that takes the guesswork out of building
-    complex applications. Describe your requirements as blueprints,
-    generate production code you fully own.
+    A full stack zero dependency open-source framework that takes the
+    guesswork out of building complex applications. Describe your
+    requirements as blueprints, generate production code you fully own.
   legal_name: Avaropoint
   contact: hello@weblisk.dev
   copyright_year: 2026

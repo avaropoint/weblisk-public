@@ -177,6 +177,7 @@ components:
   - nav
   - footer
   - blueprint-viewer
+  - xray
 
 # ── Responsive Design Rules ──────────────────────────────────────────────────
 # These constraints MUST be satisfied by the generated CSS.
@@ -944,5 +945,5 @@ sections:
         href: /marketplace/
         style: outline
     roadmap_note: >-
-      Reference implementations today. Deploy-anywhere adapters —
-      AWS, GCP, Azure, Cloudflare — coming soon.
+      Languages: Go, Rust, Node.js. Platforms: Cloudflare Workers
+      today — AWS, GCP, Azure adapters coming soon.

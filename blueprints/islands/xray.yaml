@@ -19,6 +19,8 @@ props:
 
 behavior:
   - Inject X-Ray trigger button into each main section with an id
+  - IntersectionObserver (threshold 0.15) adds .xray-trigger-visible class when section enters viewport
+  - Trigger button appears on scroll (via .xray-trigger-visible) and on hover
   - On click, open tabbed overlay with blueprint source and live view
   - Fetch blueprint YAML via /api/blueprint/ API only
   - Extract HTML, CSS from the live DOM for display

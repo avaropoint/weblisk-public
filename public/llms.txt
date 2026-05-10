@@ -1,10 +1,10 @@
 # Weblisk
 
-> An open-source framework that takes the guesswork out of building complex applications. Blueprints capture your exact requirements — security, data, integrations, deployments — and agents generate production code you fully own. 80+ specifications. Zero vendor lock-in. Your code, your data, your terms.
+> A full stack zero dependency open-source framework that takes the guesswork out of building complex applications. Blueprints capture your exact requirements — security, data, integrations, deployments — and agents generate production code you fully own. 80+ specifications. Zero vendor lock-in. Your code, your data, your terms.
 
 ## About
 
-Weblisk is an open-source, MIT-licensed framework for building complete software systems from declarative blueprints. Define your requirements once as structured specifications, and domain-expert agents generate production code in Go, Rust, Node.js, or Cloudflare Workers. The framework is open source. The code you generate is yours.
+Weblisk is a full stack zero dependency open-source, MIT-licensed framework for building complete software systems from declarative blueprints. Define your requirements once as structured specifications, and domain-expert agents generate production code in Go, Rust, Node.js, or Cloudflare Workers. The framework is open source. The code you generate is yours.
 
 Weblisk is created and maintained by Avaropoint.
 

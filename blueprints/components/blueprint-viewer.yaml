@@ -1,7 +1,8 @@
 # Blueprint Viewer Component
-# Drawer/panel that shows the YAML blueprint source for the current page.
-# This is the "View Blueprint" affordance — the proof that every page
-# is specification-driven.
+# Activated by ?blueprint query parameter to show the YAML blueprint
+# source for the current page — like browser View Source but for specs.
+# The drawer/toggle button has been removed; blueprint viewing is now
+# accessed via ?blueprint=true or the x-ray section inspector.
 # Extends: standards/islands (protocol, data, behavior)
 
 name: blueprint-viewer
@@ -9,7 +10,7 @@ type: island
 extends: standards/islands
 hydrate: idle            # Load after initial paint — not critical path
 status: active
-version: 2.0.0
+version: 3.0.0
 
 # Island binding (per standards/islands spec)
 agent: gateway           # Fetches from the gateway's blueprint API
@@ -26,47 +27,14 @@ data:
     type: string         # Raw YAML content (not parsed into object)
 
 structure:
-  element: aside
-  class: blueprint-viewer
-  aria_label: Page blueprint source
-  children:
-    - type: toggle-button
-      label: View Blueprint
-      icon: book
-      aria_expanded: false
-    - type: drawer
-      class: blueprint-drawer
-      children:
-        - type: drawer-header
-          title: "Blueprint Source"
-          subtitle: "{{props.blueprint_path}}"
-          close_button: true
-        - type: code-block
-          language: yaml
-          source: "/api/blueprint/{{props.blueprint_path}}"
-          line_numbers: true
-        - type: drawer-footer
-          text: "This page was generated from this blueprint."
-          link:
-            label: Learn about blueprints →
-            href: /platform/blueprints/
+  element: div
+  style: "display: contents"
+  aria_hidden: true
+  notes: >
+    No visible UI. The island only activates when ?blueprint is present
+    in the URL, delegating to blueprint-mode.js for the full-page view.
 
 behavior:
-  drawer_mode:
-    - Toggle button opens/closes drawer with slide animation
-    - "On open, fetch YAML from /api/blueprint/:path (cached after first load)"
-    - "Fallback: direct file fetch from /blueprints/:path (weblisk dev / filesystem)"
-    - Syntax highlighting for YAML (minimal — keywords, strings, comments)
-    - Close on Escape key
-    - Focus trap while open
-    - Respects prefers-reduced-motion
-  fetch_strategy:
-    primary: "/api/blueprint/{blueprint_path}"
-    fallback: "/blueprints/{blueprint_path}"
-    notes: >
-      Always attempt API route first (works with both wrangler dev and
-      production). Falls back to direct file path for weblisk dev which
-      serves from filesystem without the gateway worker.
   source_view:
     trigger: "?blueprint query parameter"
     keyboard_shortcut: "Cmd/Ctrl+Shift+B"
@@ -82,3 +50,10 @@ behavior:
       - Copy button copies raw YAML to clipboard
       - Close button (or Escape) removes query param and returns to rendered page
       - Keyboard shortcut Cmd/Ctrl+Shift+B toggles from any page
+  fetch_strategy:
+    primary: "/api/blueprint/{blueprint_path}"
+    fallback: "/blueprints/{blueprint_path}"
+    notes: >
+      Always attempt API route first (works with both wrangler dev and
+      production). Falls back to direct file path for weblisk dev which
+      serves from filesystem without the gateway worker.

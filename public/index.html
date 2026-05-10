@@ -1138,33 +1138,10 @@
 
   </main>
 
-  <!-- ─── Blueprint Viewer (generated from components/blueprint-viewer.yaml) ─── -->
-  <aside class="blueprint-viewer" aria-label="Page blueprint source"
-    data-island="./js/islands/blueprint-viewer.js" data-hydrate="idle"
-    data-props='{"blueprint_path":"pages/home.yaml"}'>
-    <button class="blueprint-viewer-toggle" type="button" aria-expanded="false" aria-controls="blueprint-drawer">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      <span>View Blueprint</span>
-    </button>
-    <div class="blueprint-drawer" id="blueprint-drawer" hidden>
-      <div class="blueprint-drawer-header">
-        <div>
-          <strong>Blueprint Source</strong>
-          <span class="blueprint-drawer-path">pages/home.yaml</span>
-        </div>
-        <button class="blueprint-drawer-close" type="button" aria-label="Close blueprint viewer">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="blueprint-drawer-body">
-        <pre class="blueprint-code"><code>Loading blueprint…</code></pre>
-      </div>
-      <div class="blueprint-drawer-footer">
-        <p>This page was generated from this blueprint.</p>
-        <a href="/platform/blueprints/">Learn about blueprints →</a>
-      </div>
-    </div>
-  </aside>
+  <!-- ─── Blueprint Source (?blueprint=true activates full-page view) ─── -->
+  <div data-island="./js/islands/blueprint-viewer.js" data-hydrate="idle"
+    data-props='{"blueprint_path":"pages/home.yaml"}'
+    style="display:contents" aria-hidden="true"></div>
 
   <!-- ─── X-Ray (section inspector) ─── -->
   <div data-island="./js/islands/xray.js" data-hydrate="idle"

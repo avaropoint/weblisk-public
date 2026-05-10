@@ -245,7 +245,7 @@ sections:
       designed to your exact requirements, transparent at every layer,
       and never locked behind a subscription? Weblisk is a full stack zero dependency open-source
       framework that takes the guesswork out of building complex
-      applications. Blueprints capture what you need once, and agents
+      applications. Blueprints capture everything you want, and agents
       generate production systems that belong entirely to you. Your
       code. Your data. Your terms.
     actions:

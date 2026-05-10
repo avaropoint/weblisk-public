@@ -499,9 +499,9 @@ sections:
       - label: Renders
         style: compact
     client_framework_callout:
-      headline: "Built on the Weblisk Client Framework"
+      headline: "Built using the Weblisk Client Framework"
       description: >-
-        Reactive islands that hydrate on demand, accept any blueprint-driven
+        Reactive islands that hydrate on demand with zero build dependencies, accept any blueprint-driven
         input, and connect directly to the agents that handle their logic.
         Every section on this page is a live island — specification in,
         reactive UI out.

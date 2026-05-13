@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agents — Weblisk</title>
+  <meta name="description" content="Learn about Weblisk agents — autonomous, governance-aware workers for AI inference, data transformation, webhooks, scheduled tasks, and event processing.">
+  <link rel="canonical" href="https://weblisk.dev/docs/agents.html">
+  <link rel="icon" href="/images/mark/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://weblisk.dev/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://weblisk.dev/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "Agents", "item": "https://weblisk.dev/docs/agents.html" }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "Agents — Weblisk",
+        "description": "Learn about Weblisk agents — autonomous, governance-aware workers for AI inference, data transformation, webhooks, scheduled tasks, and event processing.",
+        "datePublished": "2026-01-15",
+        "dateModified": "2026-06-01",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Avaropoint",
+          "url": "https://avaropoint.com"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link active" aria-current="page">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Framework</h3>
+      <nav aria-label="Framework documentation links">
+        <a href="/docs/blueprints.html">Blueprints</a>
+        <a href="/docs/agents.html" aria-current="page" class="active">Agents</a>
+        <a href="/docs/governance.html">Governance</a>
+        <a href="/docs/federation.html">Federation</a>
+        <a href="/docs/migrations.html">Migrations</a>
+      </nav>
+      <h3>Client Framework</h3>
+      <nav aria-label="Client framework documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics</a>
+      </nav>
+      <h3>Security &amp; Performance</h3>
+      <nav aria-label="Security and performance documentation links">
+        <a href="/docs/security.html">Security</a>
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Agents</h1>
+
+      <p>Agents are autonomous, specification-driven workers that execute tasks within a Weblisk application. They operate under governance policies, respect security boundaries, and can be composed into multi-agent workflows.</p>
+
+      <h2 id="what-is-an-agent">What Is an Agent?</h2>
+
+      <p>An agent is a stateless or stateful worker defined in a blueprint that performs a specific task: data transformation, external API calls, scheduled jobs, event processing, or AI inference. Each agent has a declared capability set, resource budget, and governance tier.</p>
+
+      <p>Agents are first-class citizens in the Weblisk runtime. They are registered, monitored, and governed like any other resource — but they execute autonomously once activated.</p>
+
+      <h2 id="defining-an-agent">Defining an Agent</h2>
+
+      <p>Agents are declared in your blueprint YAML under the <code>agents</code> key. Each agent specifies its type, capabilities, governance tier, and resource constraints.</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">yaml</span>
+        </div>
+        <pre><code>agents:
+  summarizer:
+    type: ai
+    model: gpt-4o
+    capabilities: [text.summarize, text.translate]
+    governance: tier-3
+    budget:
+      tokens_per_request: 4096
+      requests_per_minute: 60
+    retry: { max: 3, backoff: exponential }</code></pre>
+      </div>
+
+      <p>The <code>budget</code> block enforces resource limits at runtime. If an agent exceeds its budget, the request is rejected and an alert is emitted to the governance layer.</p>
+
+      <h2 id="agent-types">Agent Types</h2>
+
+      <p>Weblisk supports five built-in agent types, each optimized for a different class of workload:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ai</code></td>
+              <td>LLM-powered inference — text generation, summarization, classification, embeddings</td>
+            </tr>
+            <tr>
+              <td><code>transform</code></td>
+              <td>Data mapping and ETL — reshape, validate, and enrich data between systems</td>
+            </tr>
+            <tr>
+              <td><code>webhook</code></td>
+              <td>External HTTP callbacks — receive and process inbound webhooks from third-party services</td>
+            </tr>
+            <tr>
+              <td><code>cron</code></td>
+              <td>Scheduled tasks — time-based execution with cron syntax for recurring jobs</td>
+            </tr>
+            <tr>
+              <td><code>event</code></td>
+              <td>Event-driven reactive — subscribe to internal or external event streams and react in real time</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="capabilities">Capabilities</h2>
+
+      <p>Agents declare their capabilities explicitly. The runtime enforces these — an agent cannot access resources outside its declared scope. This principle of least privilege ensures agents remain predictable and auditable.</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">yaml</span>
+        </div>
+        <pre><code>agents:
+  data-sync:
+    type: transform
+    capabilities:
+      - db.read:users
+      - db.write:analytics
+      - http.fetch:api.example.com
+    governance: tier-2</code></pre>
+      </div>
+
+      <p>Capabilities follow a <code>namespace.action:resource</code> pattern. Common namespaces include <code>db</code>, <code>http</code>, <code>text</code>, <code>file</code>, and <code>queue</code>. Undeclared access attempts are blocked and logged.</p>
+
+      <h2 id="multi-agent-workflows">Multi-Agent Workflows</h2>
+
+      <p>Agents can be composed into pipelines and directed acyclic graphs (DAGs). Each step declares its inputs, outputs, and optional parallelization strategy.</p>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">yaml</span>
+        </div>
+        <pre><code>workflows:
+  content-pipeline:
+    steps:
+      - agent: scraper
+        output: raw_content
+      - agent: summarizer
+        input: raw_content
+        output: summary
+      - agent: translator
+        input: summary
+        output: translated
+        parallel: [en, es, fr, de]</code></pre>
+      </div>
+
+      <p>The <code>parallel</code> key fans out execution across multiple instances. Each variant receives the same input and produces an independent output. The runtime collects results and merges them before passing to the next step.</p>
+
+      <h2 id="governance-integration">Governance Integration</h2>
+
+      <p>Agents are subject to governance tiers (1–5). Higher tiers require additional checkpoints:</p>
+
+      <ul>
+        <li><strong>Tier 1</strong> — No restrictions; fire-and-forget execution</li>
+        <li><strong>Tier 2</strong> — Audit logging of all inputs and outputs</li>
+        <li><strong>Tier 3</strong> — Rate limiting and behavioral monitoring</li>
+        <li><strong>Tier 4</strong> — Approval gates before execution</li>
+        <li><strong>Tier 5</strong> — Full human-in-the-loop review with signed audit trail</li>
+      </ul>
+
+      <p>Governance policies are defined separately and applied to agents by tier. See the <a href="/docs/governance.html">Governance</a> documentation for full details on policy configuration.</p>
+
+      <h2 id="lifecycle">Lifecycle</h2>
+
+      <p>Every agent follows a defined lifecycle managed by the Weblisk runtime:</p>
+
+      <ol>
+        <li><strong>Registered</strong> — Agent definition is parsed and validated from the blueprint</li>
+        <li><strong>Activated</strong> — Agent is initialized with its configuration and connected to required resources</li>
+        <li><strong>Executing</strong> — Agent is processing a task within its capability and budget constraints</li>
+        <li><strong>Completed / Failed</strong> — Task finishes successfully or encounters an unrecoverable error</li>
+        <li><strong>Deactivated</strong> — Agent is shut down and resources are released</li>
+      </ol>
+
+      <p>Health checks run on a configurable interval. If an agent becomes unresponsive, the runtime applies its restart policy — either <code>always</code>, <code>on-failure</code>, or <code>never</code>. Failed agents emit structured error events that can trigger alerting or fallback workflows.</p>
+
+      <!-- Docs nav footer -->
+      <nav class="docs-nav-footer" aria-label="Documentation pagination">
+        <a href="/docs/blueprints.html" class="docs-nav-prev">
+          <span class="docs-nav-dir">Previous</span>
+          <span class="docs-nav-label">Blueprints</span>
+        </a>
+        <a href="/docs/governance.html" class="docs-nav-next">
+          <span class="docs-nav-dir">Next</span>
+          <span class="docs-nav-label">Governance</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/blueprints/">Blueprints</a>
+            <a href="/platform/agents/">Agents</a>
+            <a href="/platform/server/">Server Spec</a>
+            <a href="/platform/client/">Client Framework</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/marketplace/templates/">Templates</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+</html>

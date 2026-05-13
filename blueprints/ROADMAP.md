@@ -54,10 +54,10 @@
 - **Source material**: v1/docs/index.html for structure, content needs rewriting.
 - **Priority**: HIGH.
 
-### /docs/quick-start.html (rebuild from v1)
+### /docs/quickstart.html (rebuild from v1)
 - **Purpose**: 5-minute quick start guide.
 - **Sections**: Install, init, generate, run, deploy.
-- **Source material**: v1/docs/quick-start.html, getting-started section from homepage.
+- **Source material**: v1/docs/quickstart.html, getting-started section from homepage.
 - **Priority**: HIGH — primary docs CTA target.
 
 ### /docs/installation.html (rebuild from v1)
@@ -86,7 +86,7 @@ These 19 pages should be migrated from v1/docs/ with updated styling:
 
 ## Implementation Order
 1. /platform/ (HIGH) — needed for homepage "See It In Action" CTA
-2. /docs/ + /docs/quick-start.html (HIGH) — needed for "Start Building" CTA
+2. /docs/ + /docs/quickstart.html (HIGH) — needed for "Start Building" CTA
 3. /docs/installation.html (HIGH) — dependency for quick-start
 4. /platform/blueprints/ (HIGH) — architecture layer links
 5. Client framework docs migration (MEDIUM) — 19 pages from v1

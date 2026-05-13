@@ -272,7 +272,7 @@ sections:
         href: /platform/
         style: primary
       - label: Start Building
-        href: /docs/quick-start.html
+        href: /docs/quickstart.html
         style: outline
     trust_signals:
       - icon: file-text
@@ -913,7 +913,7 @@ sections:
             ✓ Deployed to production (validated, versioned)
     cta:
       label: Read the Quick Start Guide
-      href: /docs/quick-start.html
+      href: /docs/quickstart.html
       style: primary
 
   # Use Cases
@@ -1042,7 +1042,7 @@ sections:
       data-reveal: true
     actions:
       - label: Start Building
-        href: /docs/quick-start.html
+        href: /docs/quickstart.html
         style: primary
       - label: Explore the Marketplace
         href: /marketplace/

@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform — Weblisk</title>
+  <meta name="description"
+    content="Explore the Weblisk platform: 97+ specifications across 7 architecture layers, domain-expert agents, cryptographic federation, and production code generation in Go, Rust, and Node.js.">
+  <link rel="canonical" href="https://weblisk.dev/platform/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Platform — Weblisk">
+  <meta property="og:description"
+    content="97+ specifications. 7 architecture layers. Zero dependencies. Explore the complete Weblisk platform.">
+  <meta property="og:url" content="https://weblisk.dev/platform/">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Platform — Weblisk">
+  <meta name="twitter:description"
+    content="97+ specifications. 7 architecture layers. Zero dependencies. Explore the complete Weblisk platform.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Platform — Weblisk",
+    "description": "Explore the Weblisk platform: 97+ specifications across 7 architecture layers, domain-expert agents, cryptographic federation, and production code generation.",
+    "url": "https://weblisk.dev/platform/",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Platform", "item": "https://weblisk.dev/platform/" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link active" aria-current="page">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ─── Hero ─── -->
+    <section class="hero hero-compact" aria-labelledby="platform-heading">
+      <div class="hero-inner">
+        <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> The Weblisk Platform</span>
+        <h1 id="platform-heading">97+ specifications. Seven layers. All open.</h1>
+        <p class="hero-sub">
+          A complete specification corpus that defines how enterprise software should be built — from wire protocol to marketplace. Every layer is open, documented, and interconnected. Agents generate production code from these specifications. You own the output.
+        </p>
+        <div class="hero-actions">
+          <a href="/docs/quickstart.html" class="btn btn-primary">
+            Start Building
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+          <a href="/docs/" class="btn btn-outline">Read the Docs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Stats ─── -->
+    <section class="section section-soft" aria-label="Platform metrics" data-reveal>
+      <div class="section-inner">
+        <div class="stats-bar" data-island="/js/islands/stat-counter.js" data-hydrate="visible">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="stat-number" data-count="97" data-suffix="+">97+</div>
+            <div class="stat-label">Specifications</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="stat-number" data-count="7">7</div>
+            <div class="stat-label">Architecture Layers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="stat-number" data-count="7">7</div>
+            <div class="stat-label">Specification Categories</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="stat-number" data-count="11" data-suffix="+">11+</div>
+            <div class="stat-label">Autonomous Agents</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="stat-number" data-count="0">0</div>
+            <div class="stat-label">Runtime Dependencies</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Specification Categories ─── -->
+    <section class="section" aria-labelledby="categories-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Specifications</span>
+          <h2 id="categories-heading">Seven categories. Every aspect of your system covered.</h2>
+          <p>Each specification category defines a different aspect of the framework. Together they form a complete, interlocking system — from the wire protocol that standardizes communication to the standards that enforce quality.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h3>Protocol <span class="feature-count">4 specs</span></h3>
+            <p>HTTP+JSON wire format, standard API contracts, versioned endpoints, consistent request/response shapes. The communication layer every Weblisk project builds on.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Architecture <span class="feature-count">16 specs</span></h3>
+            <p>The structural foundation — component models, dependency contracts, lifecycle hooks, configuration schemas, and the enforcement boundary that makes governance possible.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Agents <span class="feature-count">11 specs</span></h3>
+            <p>Domain, infrastructure, task, quality, and lifecycle agents. Each sandboxed, portable, and AI-ready. Agents register capabilities and collaborate autonomously across your system.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3>Patterns <span class="feature-count">40 specs</span></h3>
+            <p>Cross-cutting contracts — API, auth, governance, webhooks, workflows, storage, deployment. Each pattern generates real endpoints with real security. Compose together with explicit dependency contracts.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>Platforms <span class="feature-count">4 specs</span></h3>
+            <p>Generation targets for Cloudflare Workers (primary), Go, Rust, and Node.js. One specification corpus, any platform. AWS, GCP, and Azure adapters on the roadmap.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h3>Schemas <span class="feature-count">10 specs</span></h3>
+            <p>Five compliance tiers from sandbox to certified. 4-phase validation pipeline with 50+ checks. Content hashing detects post-generation tampering. Enterprise standards enforced by architecture.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Standards <span class="feature-count">9 specs</span></h3>
+            <p>Quality, naming, versioning, deprecation, and compliance standards. The rules that ensure every specification, agent, and generated artifact meets a consistent bar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Architecture Diagram ─── -->
+    <section class="section section-soft" aria-labelledby="arch-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Architecture</span>
+          <h2 id="arch-heading">Seven layers. All open. All yours.</h2>
+          <p>Weblisk exposes every layer — from wire protocol to marketplace — as open, specified, and interconnected. A non-bypassable enforcement boundary inspects every operation at four checkpoints. You decide which layers to use, extend, or replace.</p>
+        </div>
+        <div class="arch-explorer" data-island="/js/islands/arch-diagram.js" data-hydrate="visible">
+          <div class="arch-diagram" role="img" aria-label="Weblisk architecture diagram showing 7 interconnected layers">
+            <svg viewBox="0 0 560 540" aria-hidden="true">
+              <g class="arch-layer arch-layer-active" data-layer="protocol">
+                <rect x="30" y="0" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="26" text-anchor="middle" class="arch-layer-text">Protocol</text>
+                <text x="280" y="46" text-anchor="middle" class="arch-layer-sub">HTTP+JSON · Wire Format · Standard API Contracts</text>
+              </g>
+              <g class="arch-layer" data-layer="federation">
+                <rect x="30" y="70" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="96" text-anchor="middle" class="arch-layer-text">Federation</text>
+                <text x="280" y="116" text-anchor="middle" class="arch-layer-sub">ML-DSA-65 · Hub-to-Hub Trust · Post-Quantum Verification</text>
+              </g>
+              <g class="arch-layer" data-layer="schemas">
+                <rect x="30" y="140" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="166" text-anchor="middle" class="arch-layer-text">Schemas &amp; Validation</text>
+                <text x="280" y="186" text-anchor="middle" class="arch-layer-sub">5 Compliance Tiers · Enforced Standards · Versioning</text>
+              </g>
+              <g class="arch-layer" data-layer="agents">
+                <rect x="30" y="210" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="236" text-anchor="middle" class="arch-layer-text">Agents</text>
+                <text x="280" y="256" text-anchor="middle" class="arch-layer-sub">Domain · Infrastructure · Task · Quality · Lifecycle</text>
+              </g>
+              <g class="arch-layer" data-layer="patterns">
+                <rect x="30" y="280" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="306" text-anchor="middle" class="arch-layer-text">Patterns</text>
+                <text x="280" y="326" text-anchor="middle" class="arch-layer-sub">API · Auth · Governance · Webhooks · Workflows · Storage</text>
+              </g>
+              <g class="arch-layer" data-layer="platforms">
+                <rect x="30" y="350" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="376" text-anchor="middle" class="arch-layer-text">Platforms</text>
+                <text x="280" y="396" text-anchor="middle" class="arch-layer-sub">Cloudflare Workers · Go · Rust · Node.js</text>
+              </g>
+              <g class="arch-layer" data-layer="ecosystem">
+                <rect x="30" y="420" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="446" text-anchor="middle" class="arch-layer-text">Marketplace &amp; Hub Network</text>
+                <text x="280" y="466" text-anchor="middle" class="arch-layer-sub">Open Blueprints · Templates · Community Hub · Collaboration</text>
+              </g>
+              <circle cx="30" cy="30" r="4" class="arch-node" data-layer="protocol"/>
+              <circle cx="530" cy="30" r="4" class="arch-node" data-layer="protocol"/>
+              <circle cx="30" cy="100" r="4" class="arch-node" data-layer="federation"/>
+              <circle cx="530" cy="100" r="4" class="arch-node" data-layer="federation"/>
+              <circle cx="30" cy="170" r="4" class="arch-node" data-layer="schemas"/>
+              <circle cx="530" cy="170" r="4" class="arch-node" data-layer="schemas"/>
+              <circle cx="30" cy="240" r="4" class="arch-node" data-layer="agents"/>
+              <circle cx="530" cy="240" r="4" class="arch-node" data-layer="agents"/>
+              <circle cx="30" cy="310" r="4" class="arch-node" data-layer="patterns"/>
+              <circle cx="530" cy="310" r="4" class="arch-node" data-layer="patterns"/>
+              <circle cx="30" cy="380" r="4" class="arch-node" data-layer="platforms"/>
+              <circle cx="530" cy="380" r="4" class="arch-node" data-layer="platforms"/>
+              <circle cx="30" cy="450" r="4" class="arch-node" data-layer="ecosystem"/>
+              <circle cx="530" cy="450" r="4" class="arch-node" data-layer="ecosystem"/>
+            </svg>
+          </div>
+          <div class="arch-detail">
+            <div class="arch-detail-content" data-detail="protocol">
+              <h3>Protocol</h3>
+              <p>HTTP + JSON wire format that standardizes communication across every Weblisk project. Standard API contracts, consistent request/response shapes, and versioned endpoints — ensuring every agent, service, and hub speaks the same language.</p>
+            </div>
+            <div class="arch-detail-content" data-detail="federation" hidden>
+              <h3>Federation</h3>
+              <p>Post-quantum identity signing (ML-DSA-65, FIPS 204) with hub-to-hub cryptographic trust verification. Federation protocol enables collaboration across independent hubs — every message signed, every agent verified, every data contract enforced. Quantum-resistant by default.</p>
+            </div>
+            <div class="arch-detail-content" data-detail="schemas" hidden>
+              <h3>Schemas &amp; Validation</h3>
+              <p>Five compliance tiers — from sandbox to certified. Every blueprint runs through a 4-phase validation pipeline with 50+ checks before it can register, publish, or interact with other agents. Content hashing detects post-generation tampering.</p>
+            </div>
+            <div class="arch-detail-content" data-detail="agents" hidden>
+              <h3>Agents</h3>
+              <p>11 infrastructure agents plus unlimited domain agents. Each sandboxed, portable, and AI-ready. Agents register capabilities, execute tasks, and collaborate autonomously across your entire system.</p>
+            </div>
+            <div class="arch-detail-content" data-detail="patterns" hidden>
+              <h3>Patterns</h3>
+              <p>40 cross-cutting contracts — API, auth, governance, webhooks, workflows, storage, deployment, and more. Each pattern generates real endpoints with real security and real validation. Policies can only add restrictions, never loosen them.</p>
+            </div>
+            <div class="arch-detail-content" data-detail="platforms" hidden>
+              <h3>Platforms</h3>
+              <p>Languages: Go, Rust, Node.js. Platforms: Cloudflare Workers today, with AWS, GCP, Azure adapters on the roadmap. One blueprint, any target.</p>
+            </div>
+            <div class="arch-detail-content" data-detail="ecosystem" hidden>
+              <h3>Marketplace &amp; Hub Network</h3>
+              <p>Share blueprints on the open marketplace. Fork community templates. Collaborate across hubs with cryptographic data contracts. Build your own blueprints and publish them for others to compose into their projects.</p>
+            </div>
+            <p class="arch-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Hover or tap a layer to explore
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Generation Targets ─── -->
+    <section class="section" aria-labelledby="targets-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Code Generation</span>
+          <h2 id="targets-heading">One specification. Any language. Any platform.</h2>
+          <p>Write your blueprint once. Generate production code for your target language and deployment platform. The same specification produces the same output every time — deterministic, verifiable, and yours.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Go</h3>
+            <p>High-performance server code with strong typing, concurrency, and minimal footprint. Ideal for APIs, microservices, and infrastructure agents.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Rust</h3>
+            <p>Memory-safe, zero-cost abstractions for performance-critical workloads. Generated code compiles to native binaries with no runtime overhead.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Node.js</h3>
+            <p>JavaScript/TypeScript server code for rapid development cycles. Full access to the npm ecosystem while maintaining zero Weblisk runtime dependencies.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h3>Cloudflare Workers</h3>
+            <p>Edge-first deployment with global distribution, zero cold starts, and V8 isolate security. The primary generation target for Weblisk projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Governance ─── -->
+    <section class="section section-soft" aria-labelledby="gov-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Governance</span>
+          <h2 id="gov-heading">AI without boundaries is a liability. We built the boundaries.</h2>
+          <p>Every AI framework lets agents act. None of them enforce what agents can't do. Weblisk is the first framework where governance is architecture — non-bypassable enforcement boundaries inspect every operation at every layer.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Non-Bypassable Enforcement</h3>
+            <p>Four checkpoints — message, storage, external, response — inspect every operation regardless of agent cooperation. Agents cannot circumvent these boundaries.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Explicit Consent Boundaries</h3>
+            <p>Data doesn't move without permission. Agent actions don't execute without authorization. Every boundary crossing requires explicit consent defined in your blueprints.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <h3>Monotonic Security</h3>
+            <p>Policies can only add restrictions — never loosen them. No configuration change, no prompt, no agent can reduce your security posture. Once a boundary is set, it holds.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Behavioral Fingerprinting</h3>
+            <p>Identifies when agents deviate from expected patterns. Anomalous behavior triggers quarantine escalation — isolating compromised agents before impact.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Federation ─── -->
+    <section class="section" aria-labelledby="fed-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Federation</span>
+          <h2 id="fed-heading">Post-quantum cryptography. Hub-to-hub collaboration.</h2>
+          <p>ML-DSA-65 (FIPS 204) post-quantum identity signing ensures your federation network is resistant to both classical and quantum attacks. Collaborate across independent hubs with cryptographic trust — every message signed, every agent verified, every data contract enforced.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>ML-DSA-65 Signing</h3>
+            <p>FIPS 204 post-quantum digital signatures. Quantum-resistant by default — every identity, every message, every agent action is cryptographically verified.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3>Hub-to-Hub Trust</h3>
+            <p>Independent hubs collaborate through cryptographic trust verification. No central authority needed — each hub maintains sovereignty while participating in federated networks.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h3>Data Contracts</h3>
+            <p>Real data contracts — not handshake agreements. Blueprint-defined policies control exactly what enters and exits your organization across every federated connection.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Client Framework ─── -->
+    <section class="section section-soft" aria-labelledby="client-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Client Framework</span>
+          <h2 id="client-heading">Zero-dependency reactive islands. Built on browser standards.</h2>
+          <p>The Weblisk client framework generates reactive UI from blueprints. Islands hydrate on demand — idle, visible, or immediate — with zero build dependencies. Every section on this site is a live island. Specification in, reactive UI out.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Island Architecture</h3>
+            <p>Independent, self-contained components that hydrate on demand. No monolithic bundle. Each island loads only when needed — reducing initial payload to near-zero.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Signals &amp; Reactivity</h3>
+            <p>Fine-grained reactivity with signals. No virtual DOM. No diffing. Direct DOM updates through a dependency graph — faster and more predictable than framework abstractions.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Progressive Hydration</h3>
+            <p>Three strategies — load, visible, idle — give you precise control over when JavaScript activates. Serve static HTML instantly, hydrate interactive behavior when it matters.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Security Built In</h3>
+            <p>CSP-compliant by default. Strict output encoding, sandboxed execution, and no eval. Security isn't an add-on — it's how the framework generates code.</p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:2rem">
+          <a href="/docs/islands.html" class="btn btn-outline">Explore the Client Framework →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA ─── -->
+    <section class="section" aria-labelledby="cta-heading" data-reveal>
+      <div class="section-inner" style="text-align:center;max-width:760px;margin:0 auto">
+        <h2 id="cta-heading">Your data. Your IP. Your rules.</h2>
+        <p style="margin-bottom:1.5rem">The Weblisk platform gives you everything you need to build, generate, and govern enterprise software from structured specifications. The framework is open source. The generated code is yours.</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a href="/docs/quickstart.html" class="btn btn-primary">
+            Start Building
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+          <a href="/marketplace/" class="btn btn-outline">Explore the Marketplace</a>
+        </div>
+        <p class="cta-roadmap">Languages: Go, Rust, Node.js. Platforms: Cloudflare Workers today — AWS, GCP, Azure adapters coming soon.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/blueprints/">Blueprints</a>
+            <a href="/platform/agents/">Agents</a>
+            <a href="/platform/server/">Server Spec</a>
+            <a href="/platform/client/">Client Framework</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/marketplace/templates/">Templates</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+  <script type="module">
+    const base = '/';
+    import('/js/islands/scroll-reveal.js')
+      .then(m => m.default())
+      .catch(err => console.warn('[scroll-reveal] init failed:', err));
+    const archEl = document.querySelector('[data-island*="arch-diagram"]');
+    if (archEl) {
+      import('/js/islands/arch-diagram.js')
+        .then(m => m.default(archEl))
+        .catch(err => console.warn('[arch-diagram] hydration failed:', err));
+    }
+    const statsEl = document.querySelector('[data-island*="stat-counter"]');
+    if (statsEl) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          import('/js/islands/stat-counter.js')
+            .then(m => m.default(statsEl))
+            .catch(err => console.warn('[stat-counter] hydration failed:', err));
+        }
+      }, { threshold: 0.3 });
+      observer.observe(statsEl);
+    }
+  </script>
+</body>
+
+</html>

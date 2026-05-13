@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation — Weblisk</title>
+  <meta name="description"
+    content="Complete documentation for the Weblisk framework. Guides for blueprints, agents, governance, islands, signals, state, security, PWA, accessibility, and more.">
+  <link rel="canonical" href="https://weblisk.dev/docs/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Documentation — Weblisk">
+  <meta property="og:description"
+    content="Complete documentation for the Weblisk framework. Blueprints, agents, governance, client framework, and more.">
+  <meta property="og:url" content="https://weblisk.dev/docs/">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Documentation — Weblisk">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description"
+    content="Complete documentation for the Weblisk framework. Blueprints, agents, governance, client framework, and more.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Documentation — Weblisk",
+    "description": "Complete documentation for the Weblisk framework.",
+    "url": "https://weblisk.dev/docs/",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://weblisk.dev/docs/" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link active" aria-current="page">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/" aria-current="page" class="active">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Framework</h3>
+      <nav aria-label="Framework documentation links">
+        <a href="/docs/blueprints.html">Blueprints</a>
+        <a href="/docs/agents.html">Agents</a>
+        <a href="/docs/governance.html">Governance</a>
+        <a href="/docs/federation.html">Federation</a>
+        <a href="/docs/migrations.html">Migrations</a>
+      </nav>
+      <h3>Client Framework</h3>
+      <nav aria-label="Client framework documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics</a>
+      </nav>
+      <h3>Security &amp; Performance</h3>
+      <nav aria-label="Security and performance documentation links">
+        <a href="/docs/security.html">Security</a>
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Documentation</h1>
+      <p class="lead">A full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints.</p>
+
+      <h2>What is Weblisk?</h2>
+
+      <p>Weblisk is a specification-driven framework. You define your requirements as <strong>blueprints</strong> — structured specifications that capture business logic, security models, data contracts, and deployment targets. Domain-expert <strong>agents</strong> consume those blueprints and generate production code in Go, Rust, or Node.js that you fully own.</p>
+
+      <p>The framework includes a <strong>governance layer</strong> with non-bypassable enforcement boundaries — four checkpoints (message, storage, external, response) inspect every operation regardless of agent cooperation. Nothing enters or exits your system without explicit consent.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Weblisk</th>
+            <th>Others</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dependencies</td>
+            <td><strong>Zero</strong></td>
+            <td>50–500+ packages</td>
+          </tr>
+          <tr>
+            <td>Specification corpus</td>
+            <td><strong>97+ blueprints</strong></td>
+            <td>Scattered docs</td>
+          </tr>
+          <tr>
+            <td>AI governance</td>
+            <td><strong>Enforcement boundaries</strong></td>
+            <td>Trust-based</td>
+          </tr>
+          <tr>
+            <td>Code ownership</td>
+            <td><strong>100% yours</strong></td>
+            <td>Vendor lock-in</td>
+          </tr>
+          <tr>
+            <td>Security</td>
+            <td><strong>ML-DSA-65, post-quantum</strong></td>
+            <td>Classical crypto</td>
+          </tr>
+          <tr>
+            <td>Generation targets</td>
+            <td><strong>Go, Rust, Node.js, CF Workers</strong></td>
+            <td>Single language</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Framework Overview</h2>
+
+      <p>Weblisk has two main components:</p>
+
+      <h3>1. The Specification Framework</h3>
+      <p>97+ specifications across 7 categories define every aspect of how software is built:</p>
+      <ul>
+        <li><strong><a href="/docs/blueprints.html">Blueprints</a></strong> — Structured specifications that define your system. Anyone can read them — founders, product managers, developers.</li>
+        <li><strong><a href="/docs/agents.html">Agents</a></strong> — 11+ infrastructure agents plus unlimited domain agents. Sandboxed, portable, AI-ready.</li>
+        <li><strong><a href="/docs/governance.html">Governance</a></strong> — Non-bypassable enforcement boundaries, monotonic security, behavioral fingerprinting.</li>
+        <li><strong><a href="/docs/federation.html">Federation</a></strong> — ML-DSA-65 post-quantum signing, hub-to-hub cryptographic trust, data contracts.</li>
+        <li><strong><a href="/docs/migrations.html">Migrations</a></strong> — Blueprint-versioned, agent-orchestrated upgrades. Every change diffed, validated, reversible.</li>
+      </ul>
+
+      <h3>2. The Client Framework</h3>
+      <p>A zero-dependency JavaScript framework built on native browser standards:</p>
+      <ul>
+        <li><strong>Core</strong> — <a href="/docs/signals.html">Signals</a>, <a href="/docs/islands.html">Islands</a>, <a href="/docs/hydration.html">Hydration</a>, <a href="/docs/scheduler.html">Scheduler</a>, <a href="/docs/workers.html">Workers</a>, <a href="/docs/devtools.html">DevTools</a></li>
+        <li><strong>UI</strong> — <a href="/docs/ui.html">13 component utilities</a> (dialog, toast, tabs, accordion, tooltip, dropdown, carousel, progress, skeleton, virtualList, clipboard, theme, component)</li>
+        <li><strong>Data</strong> — <a href="/docs/store.html">Local-first IDB store</a> with background sync</li>
+        <li><strong>State</strong> — <a href="/docs/state.html">Forms, undo/redo, cross-tab sync, IDB-backed signals</a></li>
+        <li><strong>Navigation</strong> — <a href="/docs/routing.html">Route guards</a>, <a href="/docs/transitions.html">scroll restoration, view transitions</a></li>
+        <li><strong>Networking</strong> — <a href="/docs/fetch.html">Enhanced fetch</a>, <a href="/docs/realtime.html">SSE, WebSocket, WebTransport</a></li>
+        <li><strong>Security</strong> — <a href="/docs/security.html">CSP, CSRF, sanitization, Trusted Types, permissions</a></li>
+        <li><strong>Performance</strong> — <a href="/docs/performance.html">Web Vitals, timing marks, beacon reporting</a></li>
+        <li><strong>PWA</strong> — <a href="/docs/pwa.html">Offline state, push notifications, manifest</a></li>
+        <li><strong>Accessibility</strong> — <a href="/docs/a11y.html">ARIA, focus management, reduced motion</a></li>
+        <li><strong>Testing</strong> — <a href="/docs/testing.html">DOM assertions, signal spies, island test harness</a></li>
+      </ul>
+
+      <h2>Quick Example</h2>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
+<span class="syn-s">✓ Weblisk CLI installed</span>
+
+<span class="syn-p">$</span> weblisk init my-app --template server
+<span class="syn-s">✓ Created my-app/ from weblisk-templates/server</span>
+
+<span class="syn-p">$</span> weblisk generate --lang go
+<span class="syn-s">✓ Generated 24 endpoints, 3 agents, 7 patterns</span>
+
+<span class="syn-p">$</span> weblisk dev
+<span class="syn-s">✓ Dev server running at http://localhost:3000</span></pre>
+        </div>
+      </div>
+
+      <div class="tip">Start with the <a href="/docs/quickstart.html">Quick Start guide</a> to scaffold your first project in minutes.</div>
+
+      <div class="docs-nav-footer">
+        <span></span>
+        <a href="/docs/installation.html">Installation <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/blueprints/">Blueprints</a>
+            <a href="/platform/agents/">Agents</a>
+            <a href="/platform/server/">Server Spec</a>
+            <a href="/platform/client/">Client Framework</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/marketplace/templates/">Templates</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

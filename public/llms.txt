@@ -30,6 +30,16 @@ Weblisk exposes seven interconnected layers — all open, all yours. You decide 
 6. **Platforms** — Cloudflare Workers primary, with Go, Rust, and Node.js reference implementations.
 7. **Marketplace** — Community blueprints, agents, and templates. Buy, sell, compose.
 
+## AI Governance
+
+Weblisk is the first framework where governance is architecture, not policy. Every operation passes through non-bypassable enforcement boundaries at four checkpoints — message, storage, external, and response — regardless of agent cooperation.
+
+- **Explicit Consent Boundaries**: Nothing enters or exits the system without permission defined in blueprints — not data, not agent actions, not external service calls.
+- **Works With Any AI**: Wraps LangChain, CrewAI, Google ADK, or any other AI framework unmodified while enforcing governance at every boundary.
+- **Monotonic Security**: Policies can only add restrictions, never loosen. No configuration change or prompt can reduce the security posture.
+- **Rogue Agent Detection**: Behavioral fingerprinting identifies anomalous agent patterns. Quarantine escalation isolates compromised agents before they impact the system.
+- **Data Sovereignty**: Blueprint-defined policies control what enters and exits the organization. Cryptographic federation enables collaboration with real data contracts.
+
 ## Data Sovereignty
 
 Blueprint-versioned, agent-orchestrated migrations protect your data across every upgrade:

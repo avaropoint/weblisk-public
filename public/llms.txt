@@ -1,6 +1,6 @@
 # Weblisk
 
-> A full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints. Structured specifications define your exact requirements across security, data, integrations, and deployments — and agents generate production code you fully own. 97 specifications. Zero vendor lock-in.
+> A full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints. Structured specifications define your exact requirements across security, data, integrations, and deployments — and agents generate production code you fully own. 97+ specifications. Zero vendor lock-in.
 
 ## About
 
@@ -75,7 +75,7 @@ Blueprint-versioned, agent-orchestrated migrations protect your data across ever
 ## FAQ
 
 ### What is Weblisk?
-Weblisk is a full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints — structured specifications that give AI the context it needs to generate real systems. 97 interlocking blueprints capture your exact requirements — security models, data schemas, integrations, deployments — and domain-expert agents generate production code you fully own. The framework is MIT-licensed. The code you generate belongs entirely to you.
+Weblisk is a full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints — structured specifications that give AI the context it needs to generate real systems. 97+ interlocking blueprints capture your exact requirements — security models, data schemas, integrations, deployments — and domain-expert agents generate production code you fully own. The framework is MIT-licensed. The code you generate belongs entirely to you.
 
 ### What are Weblisk Blueprints?
 Blueprints are structured specifications that define how your application works — from security models and API contracts to agent behaviour and deployment targets. Anyone can read them. They are consumed by humans, LLMs, and CI/CD pipelines to generate complete implementations in Go, Node.js, Rust, or Cloudflare Workers.

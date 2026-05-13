@@ -21,7 +21,7 @@ seo:
     around the idea that enterprise software needs blueprints. Structured
     specifications define your exact requirements across security, data,
     integrations, and deployments — and agents generate production code
-    you fully own. 80+ specifications. Zero vendor lock-in.
+    you fully own. 97 specifications. Zero vendor lock-in.
   canonical: "https://weblisk.dev/"
   keywords:
     - specification-driven development
@@ -47,7 +47,7 @@ seo:
     title: "Weblisk — Software Finally Has Blueprints"
     description: >
       Weblisk is a full stack zero dependency open-source framework built
-      around the idea that enterprise software needs blueprints. 80+
+      around the idea that enterprise software needs blueprints. 97
       specifications define your requirements and agents generate
       production code you fully own. Zero vendor lock-in.
     url: "https://weblisk.dev/"
@@ -65,7 +65,7 @@ seo:
     title: "Weblisk — Software Finally Has Blueprints"
     description: >
       Open-source framework built on the idea that enterprise software
-      needs blueprints. 80+ specifications. Agents generate code you
+      needs blueprints. 97 specifications. Agents generate code you
       fully own. Zero lock-in.
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
     site: "@weblisk"
@@ -87,7 +87,7 @@ seo:
         Weblisk is a full stack zero dependency open-source framework built
         around the idea that enterprise software needs blueprints.
         Structured specifications define your requirements and agents
-        generate production code you fully own. 80+ specifications,
+        generate production code you fully own. 97 specifications,
         zero vendor lock-in.
       publisher: "https://avaropoint.com/#org"
       inLanguage: en
@@ -99,7 +99,7 @@ seo:
         around the idea that enterprise software needs blueprints.
         Structured specifications define your exact requirements across
         security, data, integrations, and deployments — and agents
-        generate production code you fully own. 80+ specifications.
+        generate production code you fully own. 97 specifications.
         Zero vendor lock-in.
       url: "https://weblisk.dev"
       category: DeveloperApplication
@@ -118,7 +118,7 @@ seo:
             Weblisk is a full stack zero dependency open-source framework built
             around the idea that enterprise software needs blueprints —
             structured specifications that give AI the context it needs
-            to generate real systems. Over 80 interlocking blueprints
+            to generate real systems. 97 interlocking blueprints
             capture your exact requirements — security, data,
             integrations, deployments — and agents generate production
             code in Go, Rust, or Node.js that you fully own. No vendor
@@ -327,7 +327,7 @@ sections:
           paths:
             - path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
             - polyline: "9 12 11 14 15 10"
-      - value: "80+"
+      - value: "97"
         label: Specifications
         icon:
           description: Document with lines
@@ -393,7 +393,7 @@ sections:
           Design, security, integrations, data models, deployments —
           every aspect of your project in one versioned corpus. No
           scattered requirements documents. No architecture diagrams
-          that drift from reality. 80+ specs that stay synchronized.
+          that drift from reality. 97 specs that stay synchronized.
       - icon: check
         color: green
         title: "Built-In Governance"
@@ -406,10 +406,12 @@ sections:
         color: orange
         title: "AI That Doesn't Forget"
         text: >
-          AI code generators lose context between sessions. Every prompt
-          starts from scratch. Blueprints give AI the complete picture —
-          permanently. Define once, generate forever. No re-prompting,
-          no hallucinated architecture, no wasted tokens.
+          AI memory remembers conversations. Blueprints define enforceable
+          contracts. Memory can't validate generated code against 50+
+          compliance checks, can't enforce behavioral boundaries on running
+          agents, and can't orchestrate 7-stage migration pipelines.
+          Blueprints give AI the structure it needs to generate verifiable
+          systems — not just code snippets.
       - icon: globe
         color: cyan
         title: "Your Team Can Leave — The Knowledge Stays"
@@ -583,9 +585,12 @@ sections:
     headline: "Seven layers. All open. All yours."
     description: >
       Weblisk exposes every layer — from wire protocol to marketplace —
-      as open, specified, and interconnected. You decide which layers to
-      use, extend, or replace. The architecture is transparent by design
-      because we believe you should understand the systems you depend on.
+      as open, specified, and interconnected. A non-bypassable enforcement
+      boundary inspects every operation at four checkpoints (message,
+      storage, external, response) regardless of whether agents cooperate.
+      You decide which layers to use, extend, or replace. The architecture
+      is transparent by design because we believe you should understand
+      the systems you depend on.
     attributes:
       data-reveal: true
     interactive_diagram:
@@ -608,15 +613,16 @@ sections:
               href: /platform/blueprints/protocol.html
         - id: federation
           label: "Federation"
-          sublabel: "Ed25519 · Hub-to-Hub Trust · Cryptographic Verification"
+          sublabel: "ML-DSA-65 · Hub-to-Hub Trust · Post-Quantum Verification"
           rect: { x: 30, y: 70, width: 500, height: 60 }
           detail:
             title: "Federation"
             text: >
-              Ed25519 identity signing with hub-to-hub cryptographic trust
-              verification. Federation protocol enables collaboration across
-              independent hubs — every message signed, every agent verified,
-              every data contract enforced.
+              Post-quantum identity signing (ML-DSA-65, FIPS 204) with
+              hub-to-hub cryptographic trust verification. Federation
+              protocol enables collaboration across independent hubs —
+              every message signed, every agent verified, every data
+              contract enforced. Quantum-resistant by default.
             link:
               label: Federation specs →
               href: /platform/blueprints/federation.html
@@ -628,9 +634,11 @@ sections:
             title: "Schemas & Validation"
             text: >
               Five compliance tiers — from sandbox to certified. Every
-              blueprint validated against Weblisk schemas before it can
-              register, publish, or interact with other agents. Enterprise
-              standards, enforced automatically.
+              blueprint runs through a 4-phase validation pipeline with
+              50+ checks before it can register, publish, or interact
+              with other agents. Content hashing detects post-generation
+              tampering. Enterprise standards, enforced automatically —
+              not by trust, but by architecture.
             link:
               label: Schema specs →
               href: /platform/blueprints/schemas.html
@@ -655,10 +663,12 @@ sections:
           detail:
             title: "Patterns"
             text: >
-              48+ cross-cutting contracts — API, auth, governance,
+              40 cross-cutting contracts — API, auth, governance,
               webhooks, workflows, storage, deployment, and more.
               Each pattern generates real endpoints with real security
-              and real validation.
+              and real validation. Patterns compose together with explicit
+              dependency contracts — policies can only add restrictions,
+              never loosen them.
             link:
               label: Pattern catalog →
               href: /platform/blueprints/patterns.html
@@ -712,7 +722,7 @@ sections:
       - AI code gen
     rows:
       - feature: Persistent specification
-        values: ["80+ blueprints", "None", "Vendor-owned", "None"]
+        values: ["97 blueprints", "None", "Vendor-owned", "None"]
       - feature: Multi-language generation
         values: ["Go · Rust · Node.js", "N/A", "No", "Partial"]
       - feature: Platform targets
@@ -728,7 +738,7 @@ sections:
       - feature: Specification validation
         values: ["Schema-enforced", "Manual review", "N/A", "No"]
       - feature: Security model
-        values: ["Ed25519, ABAC, 7-layer", "Build yourself", "Shared tenancy", "None"]
+        values: ["ML-DSA-65, ABAC, 7-layer", "Build yourself", "Shared tenancy", "None"]
       - feature: Upgrade path
         values: ["Versioned, validated, reversible", "Rewrite", "Vendor roadmap", "Re-prompt"]
       - feature: Data protection
@@ -741,6 +751,14 @@ sections:
         values: ["Structured specifications", "Scattered docs & tribal knowledge", "Vendor-owned", "Prompt history"]
       - feature: Reproducibility
         values: ["Identical output, any time", "\"Works on my machine\"", "Vendor-controlled", "Non-deterministic"]
+      - feature: Specification enforcement
+        values: ["4-phase pipeline, 50+ checks", "Manual code review", "N/A", "None"]
+      - feature: AI governance
+        values: ["Behavioral boundaries, quarantine", "None", "Vendor-controlled", "None"]
+      - feature: AI framework interop
+        values: ["LangChain, CrewAI, ADK", "Custom integration", "No", "Framework-specific"]
+      - feature: Post-quantum crypto
+        values: ["ML-DSA-65 (FIPS 204)", "Manual implementation", "Vendor-dependent", "No"]
 
   # Getting Started
   - id: getting-started
@@ -846,9 +864,10 @@ sections:
         color: purple
         title: Marketing Platform
         text: >
-          Consolidate scattered tools into one system you own.
-          Campaigns, AI content, scheduling, collaboration,
-          analytics — 7 blueprints, fully generated, completely yours.
+          Replace HubSpot, Mailchimp, and five other subscriptions with
+          one system you own. Campaigns, AI content, scheduling,
+          collaboration, analytics — 7 blueprints, fully generated.
+          Zero monthly fees. Full control of your customer data.
         expandable: true
         detail:
           stats:
@@ -868,9 +887,10 @@ sections:
         color: cyan
         title: Supply Chain
         text: >
-          Connect 30 suppliers without expensive middleware. Webhook
-          ingestion, orchestration workflows, cryptographic contracts —
-          federated, auditable, and no EDI headaches.
+          Connect 30 suppliers without expensive EDI middleware or
+          enterprise iPaaS subscriptions. Webhook ingestion,
+          orchestration workflows, cryptographic contracts — federated,
+          auditable, and running on your infrastructure.
         expandable: true
         detail:
           stats:
@@ -890,9 +910,10 @@ sections:
         color: green
         title: Customer Support
         text: >
-          Build a support platform shaped around your team. AI routing,
-          live chat, SLA monitoring, multi-channel ingestion —
-          specified, generated, and continuously optimized.
+          Replace Zendesk or Intercom with a support platform shaped
+          around your team. AI routing, live chat, SLA monitoring,
+          multi-channel ingestion — 9 blueprints, your data stays on
+          your infrastructure, and the system evolves with your business.
         expandable: true
         detail:
           stats:
@@ -912,9 +933,10 @@ sections:
         color: orange
         title: Content Management
         text: >
-          The CMS built for your workflow — not someone else's. CRUD,
-          auth, AI writing, CDN triggers, quality agents. No plugin
-          bloat. No theme limitations.
+          Replace WordPress or Contentful with a CMS built for your
+          workflow. CRUD, auth, AI writing, CDN triggers, quality agents.
+          No plugin bloat, no theme limitations, no per-seat pricing —
+          just your content system, owned outright.
         expandable: true
         detail:
           stats:

@@ -1,6 +1,6 @@
 # Weblisk
 
-> A full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints. Structured specifications define your exact requirements across security, data, integrations, and deployments — and agents generate production code you fully own. 80+ specifications. Zero vendor lock-in.
+> A full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints. Structured specifications define your exact requirements across security, data, integrations, and deployments — and agents generate production code you fully own. 97 specifications. Zero vendor lock-in.
 
 ## About
 
@@ -13,7 +13,7 @@ Weblisk is created and maintained by Avaropoint.
 - **Blueprint-Driven Development**: Define your entire system as structured blueprints. Protocol, architecture, patterns, agents, platforms, and standards — each specification cross-references and generates alongside every other. Blueprints are readable by humans, LLMs, and CI/CD pipelines.
 - **Blueprint-Versioned Migrations**: Agent-orchestrated migrations across your entire stack — data, infrastructure, agents, and configuration. Every deployment is diffed, validated, and reversible.
 - **Agent Orchestration**: Domain agents, task agents, infrastructure agents, and quality agents — each sandboxed, portable, and AI-ready. AI where it helps, control where it matters.
-- **Cryptographic Federation**: Ed25519 identity signing with hub-to-hub collaboration. Trusted hub networks with real data guardrails — collaborate on your terms.
+- **Cryptographic Federation**: ML-DSA-65 post-quantum identity signing with hub-to-hub collaboration. Trusted hub networks with real data guardrails — collaborate on your terms.
 - **Zero Runtime Dependencies**: Every module is first-party code. No supply chain risk, no npm audit vulnerabilities.
 - **Platform Independence**: One specification corpus generates production code for Cloudflare Workers (primary), Go, Rust, and Node.js. AWS, GCP, and Azure support coming soon.
 - **True Ownership**: You own every line of generated code. No vendor lock-in, no subscription dependency for the software you run your business on. Open-source framework, MIT-licensed.
@@ -23,7 +23,7 @@ Weblisk is created and maintained by Avaropoint.
 Weblisk exposes seven interconnected layers — all open, all yours. You decide which layers to use, extend, or replace.
 
 1. **Protocol** — HTTP+JSON wire format, versioned contracts.
-2. **Federation** — Ed25519 identity signing, hub-to-hub collaboration, cryptographic trust.
+2. **Federation** — ML-DSA-65 post-quantum identity signing, hub-to-hub collaboration, cryptographic trust.
 3. **Orchestration** — Identity, routing, audit. Agent registration, task delegation, cross-domain coordination.
 4. **Agents** — Domain, task, infrastructure, and quality agents. Sandboxed, portable, AI-ready.
 5. **Patterns** — API, auth, governance, webhooks, workflows, storage, change management, deployment.
@@ -65,7 +65,7 @@ Blueprint-versioned, agent-orchestrated migrations protect your data across ever
 ## FAQ
 
 ### What is Weblisk?
-Weblisk is a full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints — structured specifications that give AI the context it needs to generate real systems. Over 80 interlocking blueprints capture your exact requirements — security models, data schemas, integrations, deployments — and domain-expert agents generate production code you fully own. The framework is MIT-licensed. The code you generate belongs entirely to you.
+Weblisk is a full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints — structured specifications that give AI the context it needs to generate real systems. 97 interlocking blueprints capture your exact requirements — security models, data schemas, integrations, deployments — and domain-expert agents generate production code you fully own. The framework is MIT-licensed. The code you generate belongs entirely to you.
 
 ### What are Weblisk Blueprints?
 Blueprints are structured specifications that define how your application works — from security models and API contracts to agent behaviour and deployment targets. Anyone can read them. They are consumed by humans, LLMs, and CI/CD pipelines to generate complete implementations in Go, Node.js, Rust, or Cloudflare Workers.

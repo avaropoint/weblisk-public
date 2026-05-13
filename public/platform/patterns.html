@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patterns — Weblisk Platform</title>
+  <meta name="description"
+    content="37 cross-cutting patterns across 6 categories: API &amp; Communication, Auth &amp; Security, Governance, Infrastructure, Workflows &amp; Orchestration, and Operations.">
+  <link rel="canonical" href="https://weblisk.dev/platform/patterns.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Patterns — Weblisk Platform">
+  <meta property="og:description"
+    content="37 cross-cutting contracts that agents extend and opt into. Reusable behaviors that generate real endpoints, validation, and security.">
+  <meta property="og:url" content="https://weblisk.dev/platform/patterns.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Patterns — Weblisk Platform">
+  <meta name="twitter:description"
+    content="37 cross-cutting contracts that agents extend and opt into. Reusable behaviors that generate real endpoints, validation, and security.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Patterns — Weblisk Platform",
+    "description": "37 cross-cutting patterns across 6 categories that agents extend and opt into.",
+    "url": "https://weblisk.dev/platform/patterns.html",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Platform", "item": "https://weblisk.dev/platform/" },
+      { "@type": "ListItem", "position": 3, "name": "Patterns", "item": "https://weblisk.dev/platform/patterns.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link active" aria-current="page">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Platform navigation">
+      <h3>Platform</h3>
+      <nav aria-label="Platform overview links">
+        <a href="/platform/">Overview</a>
+        <a href="/platform/protocol.html">Protocol</a>
+        <a href="/platform/architecture.html">Architecture</a>
+        <a href="/platform/agents.html">Agents</a>
+        <a href="/platform/patterns.html" aria-current="page" class="active">Patterns</a>
+        <a href="/platform/schemas.html">Schemas</a>
+        <a href="/platform/standards.html">Standards</a>
+        <a href="/platform/client.html">Client Framework</a>
+        <a href="/platform/security.html">Security &amp; Governance</a>
+      </nav>
+      <h3>Resources</h3>
+      <nav aria-label="Platform resource links">
+        <a href="/docs/">Documentation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/marketplace/">Marketplace</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Patterns</h1>
+      <p class="lead">37 cross-cutting contracts that agents extend and opt into. Unlike the enforcement layer (which is always active), patterns define reusable behaviors that generate real endpoints, real validation, and real security.</p>
+
+      <h2>How Patterns Work</h2>
+      <p>Patterns are YAML blueprints that agents reference via <code>extends</code> in their frontmatter. A pattern is a dependency that provides a known contract — its interface, behavior, configuration, and verification criteria — without prescribing a specific implementation language.</p>
+      <ul>
+        <li>Agents declare which patterns they extend</li>
+        <li>Patterns generate real code: endpoints, middleware, validation</li>
+        <li>Patterns compose together with explicit dependency contracts</li>
+        <li>The enforcement layer ensures declared patterns are actually applied</li>
+      </ul>
+      <p>Patterns define rules. The enforcement layer ensures they are applied. Agents that declare honest intents benefit from fast-path evaluation. Agents that lie, misbehave, or drift are detected and quarantined.</p>
+
+      <h2>API &amp; Communication <span class="badge">7 patterns</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>api-rest</strong></td>
+            <td>REST API with CRUD, pagination, filtering, sorting</td>
+          </tr>
+          <tr>
+            <td><strong>api-ai</strong></td>
+            <td>AI gateway — chat, completions, extraction, embeddings</td>
+          </tr>
+          <tr>
+            <td><strong>realtime-chat</strong></td>
+            <td>WebSocket messaging with channels, presence, history</td>
+          </tr>
+          <tr>
+            <td><strong>webhook</strong></td>
+            <td>Webhook processing — inbound validation, outbound delivery</td>
+          </tr>
+          <tr>
+            <td><strong>command</strong></td>
+            <td>Agent command interface — dispatch, routing, execution</td>
+          </tr>
+          <tr>
+            <td><strong>messaging</strong></td>
+            <td>HTTP-based pub/sub — event envelopes, scoping, namespace ownership</td>
+          </tr>
+          <tr>
+            <td><strong>notification</strong></td>
+            <td>Multi-channel notification — email, webhook, Slack, SMS, push</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Authentication &amp; Security <span class="badge">5 patterns</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>auth-session</strong></td>
+            <td>Session-based auth with secure cookies, CSRF</td>
+          </tr>
+          <tr>
+            <td><strong>auth-token</strong></td>
+            <td>JWT and API key auth with refresh tokens, scopes</td>
+          </tr>
+          <tr>
+            <td><strong>user-management</strong></td>
+            <td>User lifecycle — profiles, roles, password reset, OAuth</td>
+          </tr>
+          <tr>
+            <td><strong>security</strong></td>
+            <td>Transport security, input validation, zero-trust, threat events</td>
+          </tr>
+          <tr>
+            <td><strong>secrets</strong></td>
+            <td>Secret lifecycle — storage, rotation, access control</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Governance <span class="badge">8 patterns</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>contract</strong></td>
+            <td>Collaboration agreements — schemas, scope, permissions, versioning</td>
+          </tr>
+          <tr>
+            <td><strong>scope</strong></td>
+            <td>Universal classification — 5-level scope, propagation, environment profiles</td>
+          </tr>
+          <tr>
+            <td><strong>policy</strong></td>
+            <td>Declarative rules engine — evaluation, composition, precedence</td>
+          </tr>
+          <tr>
+            <td><strong>safety</strong></td>
+            <td>Operation classification — protection gates, kill-switch, quarantine</td>
+          </tr>
+          <tr>
+            <td><strong>approval</strong></td>
+            <td>Intent-based approval — authority routing, multi-party, emergency override</td>
+          </tr>
+          <tr>
+            <td><strong>privacy</strong></td>
+            <td>Consent, masking, anonymization, minimization, erasure cascade</td>
+          </tr>
+          <tr>
+            <td><strong>governance</strong></td>
+            <td>Compliance profiles, evidence collection, governance directives</td>
+          </tr>
+          <tr>
+            <td><strong>migration</strong></td>
+            <td>Migration governance — plans, dry runs, blast radius, integrity verification</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Infrastructure <span class="badge">6 patterns</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>storage</strong></td>
+            <td>Agent-level persistence — schema, migration, backup</td>
+          </tr>
+          <tr>
+            <td><strong>caching</strong></td>
+            <td>In-process caching — LRU, TTL, namespaces, AI response cache</td>
+          </tr>
+          <tr>
+            <td><strong>logging</strong></td>
+            <td>Structured JSON logging — levels, correlation, rotation</td>
+          </tr>
+          <tr>
+            <td><strong>observability</strong></td>
+            <td>Health endpoints, metrics envelope, component state tracking</td>
+          </tr>
+          <tr>
+            <td><strong>rate-limiting</strong></td>
+            <td>Token bucket, sliding window — gateway and agent rate limits</td>
+          </tr>
+          <tr>
+            <td><strong>retry</strong></td>
+            <td>Retry strategies, circuit breaker, timeout management</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Workflows &amp; Orchestration <span class="badge">5 patterns</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>workflow</strong></td>
+            <td>Workflow declaration, event-driven DAG execution, approval gates</td>
+          </tr>
+          <tr>
+            <td><strong>state-machine</strong></td>
+            <td>Declarative state machines — transitions, guards, side effects</td>
+          </tr>
+          <tr>
+            <td><strong>task-dispatch</strong></td>
+            <td>Task submission, priority queuing, dispatch protocol, dead-letter</td>
+          </tr>
+          <tr>
+            <td><strong>scheduling</strong></td>
+            <td>Cron expressions, overlap policy, missed-tick handling, distributed locking</td>
+          </tr>
+          <tr>
+            <td><strong>expression</strong></td>
+            <td>Expression language — guards, conditions, constraints, policy rules</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Operations <span class="badge">9 patterns</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>development</strong></td>
+            <td>Development server — routing, security headers, live reload, blueprint API</td>
+          </tr>
+          <tr>
+            <td><strong>deployment</strong></td>
+            <td>CI/CD pipelines, containerization, environment management</td>
+          </tr>
+          <tr>
+            <td><strong>file-upload</strong></td>
+            <td>File upload, processing, CDN delivery, signed URLs</td>
+          </tr>
+          <tr>
+            <td><strong>alerting</strong></td>
+            <td>Alert rule evaluation, severity routing, dedup, escalation, muting</td>
+          </tr>
+          <tr>
+            <td><strong>incident-response</strong></td>
+            <td>Incident lifecycle, runbook execution, correlation, post-mortem</td>
+          </tr>
+          <tr>
+            <td><strong>offline</strong></td>
+            <td>Offline operation — sync, client persistence, encryption, revocation</td>
+          </tr>
+          <tr>
+            <td><strong>versioning</strong></td>
+            <td>Semantic versioning, compatibility rules, deprecation</td>
+          </tr>
+          <tr>
+            <td><strong>domain-controller</strong></td>
+            <td>Domain controller base — dispatch, aggregation, lifecycle</td>
+          </tr>
+          <tr>
+            <td><strong>interop</strong></td>
+            <td>Framework adapters — LangChain, CrewAI, ADK, HTTP service wrappers</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-nav-footer">
+        <a href="/platform/agents.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Agents</a>
+        <a href="/platform/schemas.html">Schemas <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

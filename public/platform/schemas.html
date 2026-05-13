@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schemas — Weblisk Platform</title>
+  <meta name="description"
+    content="Blueprint validation and compliance enforcement. Five compliance levels from Certified to Rejected, with content hashing, version constraints, and automated validation.">
+  <link rel="canonical" href="https://weblisk.dev/platform/schemas.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Schemas — Weblisk Platform">
+  <meta property="og:description"
+    content="Every blueprint receives a compliance level after validation. The governance layer that ensures nothing operates outside the framework's security and operational boundaries.">
+  <meta property="og:url" content="https://weblisk.dev/platform/schemas.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Schemas — Weblisk Platform">
+  <meta name="twitter:description"
+    content="Every blueprint receives a compliance level after validation. The governance layer that ensures nothing operates outside the framework's security and operational boundaries.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Schemas — Weblisk Platform",
+    "description": "Blueprint validation and compliance enforcement. Five compliance levels with automated validation.",
+    "url": "https://weblisk.dev/platform/schemas.html",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Platform", "item": "https://weblisk.dev/platform/" },
+      { "@type": "ListItem", "position": 3, "name": "Schemas", "item": "https://weblisk.dev/platform/schemas.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link active" aria-current="page">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Platform navigation">
+      <h3>Platform</h3>
+      <nav aria-label="Platform overview links">
+        <a href="/platform/">Overview</a>
+        <a href="/platform/protocol.html">Protocol</a>
+        <a href="/platform/architecture.html">Architecture</a>
+        <a href="/platform/agents.html">Agents</a>
+        <a href="/platform/patterns.html">Patterns</a>
+        <a href="/platform/schemas.html" aria-current="page" class="active">Schemas</a>
+        <a href="/platform/standards.html">Standards</a>
+        <a href="/platform/client.html">Client Framework</a>
+        <a href="/platform/security.html">Security &amp; Governance</a>
+      </nav>
+      <h3>Resources</h3>
+      <nav aria-label="Platform resource links">
+        <a href="/docs/">Documentation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/marketplace/">Marketplace</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Schemas</h1>
+      <p class="lead">Every blueprint receives a compliance level after automated validation. The level determines what the blueprint is allowed to do in the framework. Non-compliant blueprints are flagged, restricted, or rejected depending on severity.</p>
+
+      <h2>Foundational Rule</h2>
+      <blockquote>
+        <p>Nothing operates in the Weblisk framework without a schema-compliant blueprint. If a schema doesn't define it, the framework doesn't allow it.</p>
+      </blockquote>
+      <p>This applies to agent capabilities, event namespaces, storage tables, API endpoints, workflow definitions, configuration parameters, and inter-agent communication patterns.</p>
+
+      <h2>Compliance Levels</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Badge</th>
+            <th>Description</th>
+            <th>Key Permissions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Certified</strong></td>
+            <td>✅</td>
+            <td>Fully compliant. All sections, fields, security declarations, dependency contracts.</td>
+            <td>Register, publish to marketplace, consumed by others, full messaging, events, storage, scheduling</td>
+          </tr>
+          <tr>
+            <td><strong>Compliant</strong></td>
+            <td>⚠️</td>
+            <td>Structurally valid. Minor issues (missing optional sections, incomplete tests).</td>
+            <td>Register, full messaging, events, storage, scheduling. Cannot publish to marketplace.</td>
+          </tr>
+          <tr>
+            <td><strong>Restricted</strong></td>
+            <td>🟡</td>
+            <td>Partially valid. Validation errors, missing fields, incomplete security.</td>
+            <td>Register, own storage only. Limited messaging (declared collaborators only), limited events (own namespace, system.* only).</td>
+          </tr>
+          <tr>
+            <td><strong>Non-Compliant</strong></td>
+            <td>🔴</td>
+            <td>Failed critical validation. Missing required sections, undeclared capabilities.</td>
+            <td>Sandbox mode only. Own storage (sandboxed). Fully isolated from other agents.</td>
+          </tr>
+          <tr>
+            <td><strong>Rejected</strong></td>
+            <td>❌</td>
+            <td>Cannot operate. Structural integrity failure, signature mismatch, security violations.</td>
+            <td>Cannot register. Cannot operate.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Schema Files</h2>
+      <p>10 schemas govern every blueprint type in the framework:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Schema</th>
+            <th>Governs</th>
+            <th>Applies To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>common</strong></td>
+            <td>Shared rules inherited by all blueprint types</td>
+            <td>Every blueprint</td>
+          </tr>
+          <tr>
+            <td><strong>compliance</strong></td>
+            <td>Compliance levels, validation, enforcement, security boundaries</td>
+            <td>Every blueprint</td>
+          </tr>
+          <tr>
+            <td><strong>config</strong></td>
+            <td>Hub configuration file (<code>.weblisk/config.yaml</code>)</td>
+            <td>Every project</td>
+          </tr>
+          <tr>
+            <td><strong>agent</strong></td>
+            <td>Infrastructure agent blueprints</td>
+            <td><code>agents/</code> directory</td>
+          </tr>
+          <tr>
+            <td><strong>domain</strong></td>
+            <td>Domain controller blueprints</td>
+            <td>Domain YAML specs</td>
+          </tr>
+          <tr>
+            <td><strong>protocol</strong></td>
+            <td>Wire protocol specifications</td>
+            <td><code>protocol/</code> directory</td>
+          </tr>
+          <tr>
+            <td><strong>pattern</strong></td>
+            <td>Cross-cutting patterns</td>
+            <td><code>patterns/</code> directory</td>
+          </tr>
+          <tr>
+            <td><strong>architecture</strong></td>
+            <td>System architecture components</td>
+            <td><code>architecture/</code> directory</td>
+          </tr>
+          <tr>
+            <td><strong>platform</strong></td>
+            <td>Platform implementation bindings</td>
+            <td><code>platforms/</code> directory</td>
+          </tr>
+          <tr>
+            <td><strong>standard</strong></td>
+            <td>Project-level blueprint standards</td>
+            <td><code>standards/</code> directory</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Blueprint Types</h2>
+      <p>Six blueprint types are governed by the schema system:</p>
+      <ul>
+        <li><strong>agent</strong> — Infrastructure agent specifications (22 required sections)</li>
+        <li><strong>domain</strong> — Domain controller specifications</li>
+        <li><strong>protocol</strong> — Wire protocol specifications</li>
+        <li><strong>pattern</strong> — Cross-cutting implementation contracts</li>
+        <li><strong>architecture</strong> — System architecture components</li>
+        <li><strong>platform</strong> — Platform implementation bindings (Go, Cloudflare, Node.js, Rust)</li>
+      </ul>
+
+      <h2>Blueprint Resolution Order</h2>
+      <p>When the framework resolves a blueprint reference, it searches in priority order:</p>
+      <ol>
+        <li><strong>Local project</strong> — <code>blueprints/</code> in the current project</li>
+        <li><strong>Custom sources</strong> — registered external blueprint sources</li>
+        <li><strong>Core</strong> — the weblisk-blueprints repository (framework defaults)</li>
+      </ol>
+      <p>Local always wins. This allows projects to override any framework blueprint while maintaining compatibility.</p>
+
+      <h2>Validation Pipeline</h2>
+      <p>Every blueprint goes through multi-phase validation before receiving a compliance level:</p>
+      <ol>
+        <li><strong>Structural validation</strong> — all required sections present, frontmatter valid</li>
+        <li><strong>Field validation</strong> — all fields match expected types and constraints</li>
+        <li><strong>Security validation</strong> — access control, capabilities, scope declarations complete</li>
+        <li><strong>Dependency resolution</strong> — all referenced patterns, schemas, and collaborators exist</li>
+        <li><strong>Content hashing</strong> — generates integrity hash for the validated blueprint</li>
+        <li><strong>Compliance assignment</strong> — assigns one of 5 compliance levels based on results</li>
+      </ol>
+
+      <div class="docs-nav-footer">
+        <a href="/platform/patterns.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Patterns</a>
+        <a href="/platform/standards.html">Standards <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

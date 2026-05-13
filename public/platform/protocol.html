@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protocol — Weblisk Platform</title>
+  <meta name="description"
+    content="The Weblisk Agent Protocol: HTTP+JSON wire format, 6 agent endpoints, 6 orchestrator endpoints, ML-DSA-65 post-quantum identity, stateless tokens, and federation wire protocol.">
+  <link rel="canonical" href="https://weblisk.dev/platform/protocol.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Protocol — Weblisk Platform">
+  <meta property="og:description"
+    content="The universal wire protocol for all Weblisk agents and orchestrators. HTTP+JSON, post-quantum identity, stateless tokens, and federation.">
+  <meta property="og:url" content="https://weblisk.dev/platform/protocol.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Protocol — Weblisk Platform">
+  <meta name="twitter:description"
+    content="The universal wire protocol for all Weblisk agents and orchestrators. HTTP+JSON, post-quantum identity, stateless tokens, and federation.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Protocol — Weblisk Platform",
+    "description": "The Weblisk Agent Protocol: HTTP+JSON wire format, post-quantum identity, stateless tokens, and federation wire protocol.",
+    "url": "https://weblisk.dev/platform/protocol.html",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Platform", "item": "https://weblisk.dev/platform/" },
+      { "@type": "ListItem", "position": 3, "name": "Protocol", "item": "https://weblisk.dev/platform/protocol.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link active" aria-current="page">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Platform navigation">
+      <h3>Platform</h3>
+      <nav aria-label="Platform overview links">
+        <a href="/platform/">Overview</a>
+        <a href="/platform/protocol.html" aria-current="page" class="active">Protocol</a>
+        <a href="/platform/architecture.html">Architecture</a>
+        <a href="/platform/agents.html">Agents</a>
+        <a href="/platform/patterns.html">Patterns</a>
+        <a href="/platform/schemas.html">Schemas</a>
+        <a href="/platform/standards.html">Standards</a>
+        <a href="/platform/client.html">Client Framework</a>
+        <a href="/platform/security.html">Security &amp; Governance</a>
+      </nav>
+      <h3>Resources</h3>
+      <nav aria-label="Platform resource links">
+        <a href="/docs/">Documentation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/marketplace/">Marketplace</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Protocol</h1>
+      <p class="lead">The universal wire protocol for all Weblisk agents and orchestrators. Every implementation — regardless of language or platform — conforms to this specification exactly. All communication is HTTP + JSON.</p>
+
+      <h2>Design Principles</h2>
+      <ol>
+        <li><strong>One protocol</strong> — HTTP is the only communication layer. No separate message broker, queue, or bus infrastructure.</li>
+        <li><strong>Event-driven</strong> — Agents coordinate through namespaced, scoped events delivered via HTTP POST. Workflows, tasks, and lifecycle loops are all event-driven.</li>
+        <li><strong>Namespace ownership</strong> — Every event namespace is exclusively owned by one agent. The orchestrator enforces this at registration, preventing collisions.</li>
+        <li><strong>Scoped delivery</strong> — Events carry a <code>scope</code> field that limits delivery to the intended recipient. Agents only receive events addressed to them unless they have explicit permission to observe globally.</li>
+        <li><strong>Separation of concerns</strong> — The orchestrator manages agent lifecycle, discovery, trust, and namespace control. It does NOT execute tasks, manage workflows, or store business state.</li>
+      </ol>
+
+      <h2>Protocol Specifications</h2>
+      <p>The protocol layer consists of four specifications:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Specification</th>
+            <th>Defines</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>spec</strong></td>
+            <td>The agent protocol — registration, execution, messaging, events, health, channels</td>
+          </tr>
+          <tr>
+            <td><strong>identity</strong></td>
+            <td>Cryptographic identity — ML-DSA-65 key pairs, signing, verification, Weblisk Tokens (WLT)</td>
+          </tr>
+          <tr>
+            <td><strong>types</strong></td>
+            <td>Shared type definitions — AgentManifest, TaskRequest, TaskResult, EventEnvelope, ErrorResponse</td>
+          </tr>
+          <tr>
+            <td><strong>federation</strong></td>
+            <td>Multi-orchestrator collaboration — cross-tenant agent invocation, data contracts, trust tiers</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Agent Endpoints</h2>
+      <p>Every agent serves exactly 6 endpoints on a single HTTP port. All endpoints use POST for uniformity — simplifying agent implementation to a single HTTP handler dispatch.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Auth</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>POST /v1/describe</code></td>
+            <td>No</td>
+            <td>Returns agent identity, capabilities, event subscriptions, namespace ownership</td>
+          </tr>
+          <tr>
+            <td><code>POST /v1/execute</code></td>
+            <td>Yes</td>
+            <td>Executes a task synchronously — the core work endpoint</td>
+          </tr>
+          <tr>
+            <td><code>POST /v1/message</code></td>
+            <td>Yes</td>
+            <td>Receives direct agent-to-agent messages</td>
+          </tr>
+          <tr>
+            <td><code>POST /v1/event</code></td>
+            <td>Yes</td>
+            <td>Receives scoped events from subscribed namespaces</td>
+          </tr>
+          <tr>
+            <td><code>POST /v1/health</code></td>
+            <td>No</td>
+            <td>Returns agent health status and metrics</td>
+          </tr>
+          <tr>
+            <td><code>POST /v1/shutdown</code></td>
+            <td>Yes</td>
+            <td>Graceful shutdown signal from orchestrator</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Orchestrator Endpoints</h2>
+      <p>The orchestrator exposes exactly 6 endpoints:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Auth</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>POST /v1/register</code></td>
+            <td>Identity*</td>
+            <td>Agent registration with ML-DSA-65 identity verification</td>
+          </tr>
+          <tr>
+            <td><code>DELETE /v1/register</code></td>
+            <td>Yes</td>
+            <td>Agent deregistration</td>
+          </tr>
+          <tr>
+            <td><code>GET /v1/services</code></td>
+            <td>Yes</td>
+            <td>Service directory — routing table and namespace map</td>
+          </tr>
+          <tr>
+            <td><code>POST /v1/channel</code></td>
+            <td>Yes</td>
+            <td>Request direct agent-to-agent channel</td>
+          </tr>
+          <tr>
+            <td><code>GET /v1/health</code></td>
+            <td>No</td>
+            <td>Orchestrator and hub health</td>
+          </tr>
+          <tr>
+            <td><code>GET /v1/audit</code></td>
+            <td>Yes</td>
+            <td>Query append-only audit log</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>* Registration uses ML-DSA-65 identity verification instead of tokens.</p>
+
+      <h2>Conventions</h2>
+      <ul>
+        <li>All paths are prefixed with <code>/v1</code></li>
+        <li>All request/response bodies are <code>application/json</code></li>
+        <li>All timestamps are Unix epoch seconds (<code>int64</code>)</li>
+        <li>All signatures are base64url-encoded ML-DSA-65 signatures (3309 bytes decoded)</li>
+        <li>All public keys are base64url-encoded ML-DSA-65 public keys (1952 bytes decoded)</li>
+        <li>IDs are 32-character hex strings (16 random bytes); event IDs use UUID v7</li>
+        <li>Unknown JSON fields MUST be ignored (forward compatibility)</li>
+        <li>Request bodies limited: 1 MB default, 10 MB for task execution</li>
+      </ul>
+
+      <h2>Identity &amp; Cryptography</h2>
+      <p>Every entity — agent or orchestrator — generates an ML-DSA-65 key pair on first run. This key pair is the foundation of all identity, signing, and token operations.</p>
+
+      <h3>Post-Quantum Algorithms</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Purpose</th>
+            <th>Algorithm</th>
+            <th>Standard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Digital signatures</td>
+            <td><strong>ML-DSA-65</strong> (CRYSTALS-Dilithium)</td>
+            <td>FIPS 204</td>
+          </tr>
+          <tr>
+            <td>Key encapsulation</td>
+            <td><strong>ML-KEM-768</strong> (CRYSTALS-Kyber)</td>
+            <td>FIPS 203</td>
+          </tr>
+          <tr>
+            <td>Backup signatures</td>
+            <td><strong>SLH-DSA-SHA2-128s</strong> (SPHINCS+)</td>
+            <td>FIPS 205</td>
+          </tr>
+          <tr>
+            <td>Symmetric encryption</td>
+            <td><strong>AES-256-GCM</strong></td>
+            <td>FIPS 197</td>
+          </tr>
+          <tr>
+            <td>Key derivation</td>
+            <td><strong>Argon2id</strong></td>
+            <td>RFC 9106</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Weblisk does not use any quantum-vulnerable algorithms. No RSA, no ECDSA, no Ed25519, no classical Diffie-Hellman. Per NIST IR 8547, all elliptic curve and RSA algorithms will be deprecated by 2030 and removed by 2035.</p>
+
+      <h3>Weblisk Tokens (WLT)</h3>
+      <p>Token format: <code>base64url(header).base64url(payload).base64url(signature)</code></p>
+      <ul>
+        <li>All three parts use base64url encoding WITHOUT padding (RFC 4648 &sect;5)</li>
+        <li>Algorithm header: <code>alg</code> field MUST be <code>ML-DSA-65</code>; any other value is rejected</li>
+        <li>Claims: <code>sub</code> (agent name), <code>iss</code> ("orchestrator"), <code>cap</code> (capabilities)</li>
+        <li>Expiry: 24 hours (configurable)</li>
+        <li>JSON signing uses RFC 8785 JSON Canonicalization Scheme (JCS)</li>
+      </ul>
+
+      <h3>Key Management</h3>
+      <ul>
+        <li>Generate fresh ML-DSA-65 key pair on first run using cryptographically secure random source</li>
+        <li>Key sizes: 1952-byte public key, 4032-byte private key, 3309-byte signature</li>
+        <li>Private keys stored encrypted at rest using AES-256-GCM with Argon2id-derived key</li>
+        <li>On startup: load existing keys if present, generate new ones if absent</li>
+      </ul>
+
+      <h2>Federation Protocol</h2>
+      <p>Federation enables businesses to expose specific agent capabilities to partners, customers, and the wider hub network — without exposing internal systems, data, or infrastructure.</p>
+
+      <h3>Design Principles</h3>
+      <ol>
+        <li><strong>Zero trust by default</strong> — No orchestrator trusts another until an explicit trust relationship is established and cryptographically verified. Trust is never implied by network proximity.</li>
+        <li><strong>Data minimization by construction</strong> — Data contracts declare the minimum viable data set for each collaboration. Fields not in the contract are stripped before crossing the boundary. Enforced at the protocol level.</li>
+        <li><strong>Behavioral integrity</strong> — Agents are fingerprinted at registration. Changes to manifest, capabilities, or behavioral patterns are detected and flagged before they can affect cross-boundary interactions.</li>
+        <li><strong>Sovereignty-aware routing</strong> — Data residency requirements are first-class. Tasks involving regulated data are only routed to agents within the permitted jurisdiction.</li>
+        <li><strong>Non-repudiation</strong> — Every cross-boundary message is signed by both sending and receiving orchestrator. Full chain of custody is auditable.</li>
+      </ol>
+
+      <h3>Federation Conventions</h3>
+      <ul>
+        <li>All federation endpoints prefixed with <code>/v1/federation</code></li>
+        <li>Trust relationships are explicit, non-transitive, and time-limited</li>
+        <li>Data contracts are fail-closed — unknown fields are rejected, not ignored</li>
+        <li>Cross-boundary messages signed by both orchestrators</li>
+        <li>Federation topic qualification uses <code>::</code> separator (e.g., <code>acme-corp::workflow.completed</code>)</li>
+      </ul>
+
+      <div class="docs-nav-footer">
+        <a href="/platform/"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Overview</a>
+        <a href="/platform/architecture.html">Architecture <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

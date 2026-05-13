@@ -311,8 +311,8 @@
             <div class="feature-icon green">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
-            <h3>Built-In Governance</h3>
-            <p>Five compliance tiers enforce standards automatically — from internal tools to regulated enterprise systems. Nothing ships that doesn't meet the spec. Audit trails, validation rules, and security policies are part of the blueprint, not afterthoughts.</p>
+            <h3>Define Once, Generate Forever</h3>
+            <p>No re-prompting. No lost context. No starting from scratch every session. The blueprint holds your requirements permanently — generate from it whenever you need, in any language, for any platform. Same input, same output, every time.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon orange">
@@ -858,25 +858,46 @@
                 <td class="no">None</td>
               </tr>
               <tr>
-                <td>Multi-language generation</td>
-                <td class="yes col-highlight">Go · Rust · Node.js</td>
-                <td class="no">N/A</td>
-                <td class="no">No</td>
-                <td class="partial">Partial</td>
-              </tr>
-              <tr>
-                <td>Platform targets</td>
-                <td class="yes col-highlight">Cloudflare Workers + more</td>
-                <td class="no">Manual</td>
-                <td class="no">Vendor-locked</td>
-                <td class="no">No</td>
-              </tr>
-              <tr>
                 <td>You own the output</td>
                 <td class="yes col-highlight">100%</td>
                 <td class="yes">Yes</td>
                 <td class="no">Vendor lock-in</td>
                 <td class="partial">Fragile</td>
+              </tr>
+              <tr>
+                <td>AI governance</td>
+                <td class="yes col-highlight">Enforcement boundaries, quarantine</td>
+                <td class="no">None</td>
+                <td class="no">Vendor-controlled</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Specification enforcement</td>
+                <td class="yes col-highlight">4-phase pipeline, 50+ checks</td>
+                <td class="no">Manual code review</td>
+                <td class="no">N/A</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Security model</td>
+                <td class="yes col-highlight">ML-DSA-65, ABAC, post-quantum</td>
+                <td class="no">Build yourself</td>
+                <td class="partial">Shared tenancy</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Data sovereignty</td>
+                <td class="yes col-highlight">Blueprint-versioned, agent-orchestrated</td>
+                <td class="no">Manual scripts</td>
+                <td class="partial">Vendor-managed</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Runtime dependencies</td>
+                <td class="yes col-highlight">Zero</td>
+                <td class="no">Hundreds</td>
+                <td class="partial">Vendor-managed</td>
+                <td class="no">Hundreds</td>
               </tr>
               <tr>
                 <td>Agent orchestration</td>
@@ -900,88 +921,11 @@
                 <td class="no">None</td>
               </tr>
               <tr>
-                <td>Specification validation</td>
-                <td class="yes col-highlight">Schema-enforced</td>
-                <td class="no">Manual review</td>
-                <td class="no">N/A</td>
-                <td class="no">No</td>
-              </tr>
-              <tr>
-                <td>Security model</td>
-                <td class="yes col-highlight">ML-DSA-65, ABAC, 7-layer</td>
-                <td class="no">Build yourself</td>
-                <td class="partial">Shared tenancy</td>
-                <td class="no">None</td>
-              </tr>
-              <tr>
                 <td>Upgrade path</td>
                 <td class="yes col-highlight">Versioned, validated, reversible</td>
                 <td class="no">Rewrite</td>
                 <td class="partial">Vendor roadmap</td>
                 <td class="no">Re-prompt</td>
-              </tr>
-              <tr>
-                <td>Data protection</td>
-                <td class="yes col-highlight">Blueprint-versioned, agent-orchestrated</td>
-                <td class="no">Manual scripts</td>
-                <td class="partial">Vendor-managed</td>
-                <td class="no">None</td>
-              </tr>
-              <tr>
-                <td>Runtime dependencies</td>
-                <td class="yes col-highlight">Zero</td>
-                <td class="no">Hundreds</td>
-                <td class="partial">Vendor-managed</td>
-                <td class="no">Hundreds</td>
-              </tr>
-              <tr>
-                <td>AI token efficiency</td>
-                <td class="yes col-highlight">Define once, generate forever</td>
-                <td class="no">N/A</td>
-                <td class="no">N/A</td>
-                <td class="no">Re-prompt every iteration</td>
-              </tr>
-              <tr>
-                <td>Knowledge preservation</td>
-                <td class="yes col-highlight">Structured specifications</td>
-                <td class="no">Scattered docs &amp; tribal knowledge</td>
-                <td class="no">Vendor-owned</td>
-                <td class="no">Prompt history</td>
-              </tr>
-              <tr>
-                <td>Reproducibility</td>
-                <td class="yes col-highlight">Identical output, any time</td>
-                <td class="no">"Works on my machine"</td>
-                <td class="partial">Vendor-controlled</td>
-                <td class="no">Non-deterministic</td>
-              </tr>
-              <tr>
-                <td>Specification enforcement</td>
-                <td class="yes col-highlight">4-phase pipeline, 50+ checks</td>
-                <td class="no">Manual code review</td>
-                <td class="no">N/A</td>
-                <td class="no">None</td>
-              </tr>
-              <tr>
-                <td>AI governance</td>
-                <td class="yes col-highlight">Behavioral boundaries, quarantine</td>
-                <td class="no">None</td>
-                <td class="no">Vendor-controlled</td>
-                <td class="no">None</td>
-              </tr>
-              <tr>
-                <td>AI framework interop</td>
-                <td class="yes col-highlight">Any AI, governed at every layer</td>
-                <td class="no">Custom integration</td>
-                <td class="no">No</td>
-                <td class="partial">Framework-specific</td>
-              </tr>
-              <tr>
-                <td>Post-quantum crypto</td>
-                <td class="yes col-highlight">ML-DSA-65 (FIPS 204)</td>
-                <td class="no">Manual implementation</td>
-                <td class="no">Vendor-dependent</td>
-                <td class="no">No</td>
               </tr>
             </tbody>
           </table>
@@ -1128,7 +1072,7 @@
               <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-24"></i>
             </div>
             <h3>Marketing Platform</h3>
-            <p>Replace HubSpot, Mailchimp, and five other subscriptions with one system you own. Campaigns, AI content, scheduling, collaboration, analytics — 7 blueprints, fully generated. Zero monthly fees. Full control of your customer data.</p>
+            <p>Stop paying monthly subscriptions for marketing tools you don't fully control. Campaigns, AI content, scheduling, collaboration, analytics — 7 blueprints, fully generated. Zero monthly fees. Full control of your customer data.</p>
             <div class="usecase-detail" hidden>
               <div class="usecase-stats">
                 <span class="usecase-stat"><strong>7</strong> Blueprints</span>
@@ -1149,7 +1093,7 @@
               <i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-24"></i>
             </div>
             <h3>Supply Chain</h3>
-            <p>Connect 30 suppliers without expensive EDI middleware or enterprise iPaaS subscriptions. Webhook ingestion, orchestration workflows, cryptographic contracts — federated, auditable, and running on your infrastructure.</p>
+            <p>Connect 30 suppliers without expensive middleware or enterprise integration subscriptions. Webhook ingestion, orchestration workflows, cryptographic contracts — federated, auditable, and running on your infrastructure.</p>
             <div class="usecase-detail" hidden>
               <div class="usecase-stats">
                 <span class="usecase-stat"><strong>12</strong> Blueprints</span>
@@ -1170,7 +1114,7 @@
               <i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-24"></i>
             </div>
             <h3>Customer Support</h3>
-            <p>Replace Zendesk or Intercom with a support platform shaped around your team. AI routing, live chat, SLA monitoring, multi-channel ingestion — 9 blueprints, your data stays on your infrastructure, and the system evolves with your business.</p>
+            <p>Own your support platform instead of renting one. AI routing, live chat, SLA monitoring, multi-channel ingestion — 9 blueprints, your data stays on your infrastructure, and the system evolves with your business.</p>
             <div class="usecase-detail" hidden>
               <div class="usecase-stats">
                 <span class="usecase-stat"><strong>9</strong> Blueprints</span>
@@ -1191,7 +1135,7 @@
               <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
             </div>
             <h3>Content Management</h3>
-            <p>Replace WordPress or Contentful with a CMS built for your workflow. CRUD, auth, AI writing, CDN triggers, quality agents. No plugin bloat, no theme limitations, no per-seat pricing — just your content system, owned outright.</p>
+            <p>Build a CMS shaped around your workflow — not the other way around. CRUD, auth, AI writing, CDN triggers, quality agents. No plugin bloat, no theme limitations, no per-seat pricing — just your content system, owned outright.</p>
             <div class="usecase-detail" hidden>
               <div class="usecase-stats">
                 <span class="usecase-stat"><strong>8</strong> Blueprints</span>

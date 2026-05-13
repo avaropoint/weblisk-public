@@ -17,11 +17,11 @@ version: 2.0.0
 seo:
   title: "Weblisk — Software Finally Has Blueprints"
   description: >
-    Weblisk is a full stack zero dependency open-source framework that takes the guesswork out of
-    building complex applications. Blueprints capture your exact
-    requirements — security, data, integrations, deployments — and agents
-    generate production code you fully own. 80+ specifications. Zero
-    vendor lock-in. Your code, your data, your terms.
+    Weblisk is a full stack zero dependency open-source framework built
+    around the idea that enterprise software needs blueprints. Structured
+    specifications define your exact requirements across security, data,
+    integrations, and deployments — and agents generate production code
+    you fully own. 80+ specifications. Zero vendor lock-in.
   canonical: "https://weblisk.dev/"
   keywords:
     - specification-driven development
@@ -46,10 +46,10 @@ seo:
     type: website
     title: "Weblisk — Software Finally Has Blueprints"
     description: >
-      Weblisk is a full stack zero dependency open-source framework that takes the guesswork out
-      of building complex applications. 80+ blueprints capture your
-      requirements and agents generate production code you fully own.
-      Zero vendor lock-in.
+      Weblisk is a full stack zero dependency open-source framework built
+      around the idea that enterprise software needs blueprints. 80+
+      specifications define your requirements and agents generate
+      production code you fully own. Zero vendor lock-in.
     url: "https://weblisk.dev/"
     site_name: Weblisk
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
@@ -64,9 +64,9 @@ seo:
     card: summary_large_image
     title: "Weblisk — Software Finally Has Blueprints"
     description: >
-      Open-source framework that takes the guesswork out of building
-      complex apps. 80+ blueprints. Agents generate code you fully own.
-      Zero lock-in.
+      Open-source framework built on the idea that enterprise software
+      needs blueprints. 80+ specifications. Agents generate code you
+      fully own. Zero lock-in.
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
     site: "@weblisk"
   structured_data:
@@ -84,21 +84,23 @@ seo:
       name: Weblisk
       url: "https://weblisk.dev"
       description: >
-        Weblisk is a full stack zero dependency open-source framework that takes the guesswork
-        out of building complex applications. Blueprints capture your
-        requirements and agents generate production code you fully own.
-        80+ specifications, zero vendor lock-in.
+        Weblisk is a full stack zero dependency open-source framework built
+        around the idea that enterprise software needs blueprints.
+        Structured specifications define your requirements and agents
+        generate production code you fully own. 80+ specifications,
+        zero vendor lock-in.
       publisher: "https://avaropoint.com/#org"
       inLanguage: en
     - type: SoftwareApplication
       id: "https://weblisk.dev/#app"
       name: Weblisk
       description: >
-        Weblisk is a full stack zero dependency open-source framework that takes the guesswork
-        out of building complex applications. Blueprints capture your
-        exact requirements — security, data, integrations, deployments
-        — and agents generate production code you fully own. 80+
-        specifications. Zero vendor lock-in.
+        Weblisk is a full stack zero dependency open-source framework built
+        around the idea that enterprise software needs blueprints.
+        Structured specifications define your exact requirements across
+        security, data, integrations, and deployments — and agents
+        generate production code you fully own. 80+ specifications.
+        Zero vendor lock-in.
       url: "https://weblisk.dev"
       category: DeveloperApplication
       os: Any
@@ -113,13 +115,14 @@ seo:
       questions:
         - q: What is Weblisk?
           a: >
-            Weblisk is a full stack zero dependency open-source framework that takes the guesswork
-            out of building complex applications. Over 80 interlocking
-            blueprints capture your exact requirements — security, data,
+            Weblisk is a full stack zero dependency open-source framework built
+            around the idea that enterprise software needs blueprints —
+            structured specifications that give AI the context it needs
+            to generate real systems. Over 80 interlocking blueprints
+            capture your exact requirements — security, data,
             integrations, deployments — and agents generate production
             code in Go, Rust, or Node.js that you fully own. No vendor
-            lock-in. Full control of your data. Collaborate on your
-            terms through trusted hub networks.
+            lock-in. Full control of your data.
         - q: What are Weblisk Blueprints?
           a: >
             Blueprints are structured specifications that define exactly
@@ -242,13 +245,15 @@ sections:
       icon: dot
     headline: "Software finally has blueprints."
     subheadline: >
-      What if you can truly own software again —
-      designed to your exact requirements, transparent at every layer,
-      and never locked behind a subscription? Weblisk is a full stack zero dependency open-source
-      framework that takes the guesswork out of building complex
-      applications. Blueprints capture everything you want, and agents
-      generate production code and systems that belong entirely to you. Your
-      code. Your data. Your terms.
+      AI is the most powerful development tool ever created — but
+      without structure, it produces code that drifts, hallucinates,
+      and can't be verified. Weblisk is a full stack zero dependency
+      open-source framework built around the idea that enterprise
+      software needs blueprints — structured specifications that define
+      your exact requirements across security, data, integrations, and
+      deployments. Agents consume those blueprints and generate
+      production code you fully own, in any language, for any platform.
+      The framework is open source. The generated code is yours.
     actions:
       - label: See It In Action
         href: /platform/
@@ -358,15 +363,16 @@ sections:
   - id: blueprints
     type: content-section
     label: Blueprints
-    headline: "A blueprint is the specification that brings ideation to realization."
+    headline: "The missing layer between what you need and what AI generates."
     description: >
-      Most organizations rely on software they can't fully see into —
-      subscriptions with opaque data practices, stitched-together tools,
-      AI slop and outputs no one can verify. Weblisk blueprints are structured
+      AI can generate code. What it can't do is hold the full context
+      of your system — security models, data contracts, compliance
+      rules, integration boundaries — across sessions, teams, and
+      time. Blueprints are that context. They're structured
       specifications that capture your exact business logic, security
-      requirements, and operational rules. Define it once. Agents
-      generate production code and systems from it — verifiable, repeatable,
-      and entirely owned by you.
+      requirements, and operational rules in a format that humans can
+      read and agents can execute. Define it once. Generate from it
+      repeatedly — verifiable, repeatable, and entirely yours.
     attributes:
       data-reveal: true
     cards_attributes:
@@ -426,14 +432,14 @@ sections:
   - id: blueprint-pipeline
     type: pipeline-showcase
     label: Generative UI/UX
-    headline: "See what you specified — not what a vendor decided for you."
+    headline: "From specification to production — nothing hidden."
     description: >
       Your blueprint is the input. Production-ready code is the output.
       If it specifies a web page, agents generate semantic HTML, scoped
       CSS, and interactive JavaScript. If it specifies an API, they
-      generate server code in Go, Rust, or Node.js. You decide what
-      gets built — agents handle how. This example shows how this very
-      page was built from its blueprint.
+      generate server code in Go, Rust, or Node.js. Every layer is
+      visible, every decision traceable back to the spec. This example
+      shows how this very page was built from its blueprint.
     attributes:
       data-reveal: true
     island: pipeline.js
@@ -823,11 +829,12 @@ sections:
   - id: use-cases
     type: content-section
     label: What You Can Build
-    headline: "Real problems. Your solutions."
+    headline: "Enterprise systems, generated from specification."
     description: >
-      Define your exact requirements as blueprints and generate
-      production systems tailored to how your business actually works —
-      not shaped around someone else's feature set.
+      These aren't templates — they're fully specified systems generated
+      from blueprints. Each one defines its own security model, data
+      contracts, agent logic, and deployment targets. Change the spec,
+      regenerate the system.
     attributes:
       data-reveal: true
     cards_attributes:
@@ -927,14 +934,14 @@ sections:
   # CTA
   - id: cta
     type: cta-section
-    headline: "It's time to own your software again."
+    headline: "Software built the way it should be."
     description: >-
-      Compose blueprints from the marketplace, generate a complete
-      production system, and own every layer — the design, the security,
-      the data, the deployments. Collaborate on your terms through
-      trusted hub networks with real data guardrails. Change anything
-      by editing the spec. The framework is open source. The code you
-      generate is yours.
+      We built Weblisk because enterprise software deserves better than
+      scattered tools, lost context, and code no one can verify.
+      Blueprints give AI the structure it needs to generate real
+      systems — and give you the transparency to understand exactly
+      what was built and why. The framework is open source. The code
+      you generate is yours.
     attributes:
       data-reveal: true
     actions:

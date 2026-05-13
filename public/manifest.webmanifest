@@ -1,7 +1,7 @@
 {
   "name": "Weblisk",
   "short_name": "Weblisk",
-  "description": "A full stack zero dependency open-source framework. Blueprints capture your exact requirements and agents generate production code you fully own.",
+  "description": "A full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints. Specifications define your requirements and agents generate production code you fully own.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b1121",

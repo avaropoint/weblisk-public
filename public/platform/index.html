@@ -202,7 +202,7 @@
           <tr>
             <td><strong>Platforms</strong></td>
             <td>4</td>
-            <td>Generation targets: Go (stdlib), Cloudflare Workers (V8), Node.js (Fastify), Rust (tokio/hyper)</td>
+            <td>Generation targets: Go, Cloudflare Workers, Node.js, Rust — standard library first, explicit dependencies only when blueprint requires</td>
           </tr>
         </tbody>
       </table>
@@ -266,7 +266,7 @@
       <h2>Key Design Principles</h2>
 
       <h3>Zero Dependencies</h3>
-      <p>Every platform target achieves true zero external runtime dependencies. Go compiles from the standard library alone. Cloudflare Workers use only platform-native APIs. Node.js uses Fastify as the sole dependency. Rust uses tokio/hyper. No package manager sprawl, no native bindings, no external database servers.</p>
+      <p>Every platform target prioritises native and standard library APIs first. External frameworks or libraries are only introduced when a blueprint explicitly requires functionality that cannot be achieved with the standard library alone — and every such dependency must be declared in the blueprint. No implicit package manager sprawl, no undeclared bindings, no external database servers.</p>
 
       <h3>Post-Quantum Cryptography</h3>
       <p>Weblisk adopts NIST's post-quantum cryptography standards (released August 2024). All classical algorithms (RSA, ECDSA, Ed25519) are excluded entirely.</p>
@@ -317,7 +317,7 @@
       <!-- ─── Explore Each Layer ─── -->
       <h2>Explore Each Layer</h2>
 
-      <div class="feature-grid" data-reveal-stagger>
+      <div class="feature-grid">
         <div class="feature-card">
           <h3><a href="/platform/protocol.html">Protocol →</a></h3>
           <p>The universal wire protocol for all agents and orchestrators. HTTP+JSON, 6 agent endpoints, 6 orchestrator endpoints, ML-DSA-65 identity, stateless tokens, federation wire format.</p>

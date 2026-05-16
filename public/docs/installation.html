@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Installation — Weblisk</title>
   <meta name="description"
-    content="Install the Weblisk CLI on macOS, Linux, or Windows. Options include the install script, Homebrew, Scoop, and manual binary downloads.">
+    content="Install the Weblisk CLI on macOS, Linux, or Windows. Options include the install script, PowerShell, CDN, and manual binary downloads.">
   <link rel="canonical" href="https://weblisk.dev/docs/installation.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Installation — Weblisk">
   <meta property="og:description"
-    content="Install the Weblisk CLI on macOS, Linux, or Windows. Multiple installation methods available.">
+    content="Install the Weblisk CLI on macOS, Linux, or Windows. Install script, PowerShell, CDN, and manual download.">
   <meta property="og:url" content="https://weblisk.dev/docs/installation.html">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -175,33 +175,28 @@
       </ul>
       <p>The CLI itself is a standalone binary — no runtime dependencies.</p>
 
-      <h2>Install Script (Recommended)</h2>
-      <p>The install script detects your OS and architecture, downloads the correct binary, and adds it to your PATH:</p>
+      <h2>Install the CLI</h2>
+      <p>A single command downloads the binary for your platform:</p>
+
+      <h3>macOS / Linux</h3>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
           <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
-<span class="syn-s">✓ Detected: macOS arm64</span>
-<span class="syn-s">✓ Downloaded weblisk-1.0.0-darwin-arm64</span>
-<span class="syn-s">✓ Installed to /usr/local/bin/weblisk</span>
-
-<span class="syn-p">$</span> weblisk --version
-<span class="syn-s">weblisk 1.0.0</span></pre>
+          <pre><span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh</pre>
         </div>
       </div>
 
-      <h2>Homebrew (macOS)</h2>
+      <h3>Windows (PowerShell)</h3>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
-          <span class="code-title">Terminal</span>
+          <span class="code-title">PowerShell</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-p">$</span> brew tap avaropoint/weblisk
-<span class="syn-p">$</span> brew install weblisk</pre>
+          <pre><span class="syn-p">$</span> irm https://cdn.weblisk.dev/install.ps1 | iex</pre>
         </div>
       </div>
 
@@ -255,8 +250,8 @@
         </div>
       </div>
 
-      <h2>Client Framework Only</h2>
-      <p>If you only need the client framework (islands, signals, reactive UI) without the CLI or code generation, load it directly from the CDN — no installation required:</p>
+      <h2>Use via CDN</h2>
+      <p>The fastest way to start — no CLI, no download, no build step. Add an import map pointing to the Weblisk CDN and start writing modules immediately:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
@@ -313,14 +308,11 @@
           <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-c"># Install script</span>
+          <pre><span class="syn-c"># macOS / Linux</span>
 <span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
 
-<span class="syn-c"># Homebrew</span>
-<span class="syn-p">$</span> brew upgrade weblisk
-
-<span class="syn-c"># Scoop</span>
-<span class="syn-p">$</span> scoop update weblisk</pre>
+<span class="syn-c"># Windows (PowerShell)</span>
+<span class="syn-p">$</span> irm https://cdn.weblisk.dev/install.ps1 | iex</pre>
         </div>
       </div>
 

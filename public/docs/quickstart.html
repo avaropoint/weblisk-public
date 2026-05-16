@@ -191,18 +191,15 @@
           <pre><span class="syn-c"># macOS / Linux</span>
 <span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
 
-<span class="syn-c"># macOS (Homebrew)</span>
-<span class="syn-p">$</span> brew install weblisk/tap/weblisk
-
-<span class="syn-c"># Windows (Scoop)</span>
-<span class="syn-p">$</span> scoop bucket add weblisk https://github.com/nicholasgasior/scoop-bucket.git && scoop install weblisk
+<span class="syn-c"># Windows (PowerShell)</span>
+<span class="syn-p">$</span> irm https://cdn.weblisk.dev/install.ps1 | iex
 
 <span class="syn-c"># verify</span>
-<span class="syn-p">$</span> weblisk version
-<span class="syn-s">weblisk v1.1.0</span></pre>
+<span class="syn-p">$</span> weblisk --version
+<span class="syn-s">weblisk 1.0.0</span></pre>
         </div>
       </div>
-      <p>For detailed installation options (Windows, Homebrew, manual), see the <a href="/docs/installation.html">Installation guide</a>.</p>
+      <p>For detailed installation options (manual download, CDN-only), see the <a href="/docs/installation.html">Installation guide</a>.</p>
 
       <!-- ─── Step 2: New ─── -->
       <h2>2. Create a Project</h2>
@@ -241,16 +238,12 @@
         </thead>
         <tbody>
           <tr>
+            <td><code>client/starter</code></td>
+            <td>Client-only site with islands, signals, PWA, and service worker</td>
+          </tr>
+          <tr>
             <td><code>server/starter</code></td>
-            <td>Hub with orchestrator, gateway, one domain, two agents</td>
-          </tr>
-          <tr>
-            <td><code>client/default</code></td>
-            <td>Static site with islands, signals, PWA, and service worker</td>
-          </tr>
-          <tr>
-            <td><code>client/blog</code></td>
-            <td>Blog with Markdown rendering, RSS feed, and SEO metadata</td>
+            <td>Extends client/starter with a hub, orchestrator, gateway, domains, and agents</td>
           </tr>
         </tbody>
       </table>

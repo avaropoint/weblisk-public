@@ -53,14 +53,14 @@
         "mainEntity": {
           "@type": "HowTo",
           "name": "Get Started with Weblisk",
-          "description": "Install the CLI, scaffold a project, define a blueprint, generate production code, and deploy.",
-          "totalTime": "PT5M",
+          "description": "Install the CLI, scaffold a project, define domains and agents, generate your server, and run it.",
+          "totalTime": "PT10M",
           "step": [
             { "@type": "HowToStep", "position": 1, "name": "Install the CLI", "text": "Install the Weblisk CLI with curl or npm." },
-            { "@type": "HowToStep", "position": 2, "name": "Initialize a Project", "text": "Scaffold a project from a template with weblisk init." },
-            { "@type": "HowToStep", "position": 3, "name": "Define & Compose", "text": "Define your system as blueprints — structured YAML specifications." },
-            { "@type": "HowToStep", "position": 4, "name": "Generate", "text": "Generate production code from your blueprints with weblisk generate." },
-            { "@type": "HowToStep", "position": 5, "name": "Run & Deploy", "text": "Start the dev server and deploy to your target platform." }
+            { "@type": "HowToStep", "position": 2, "name": "Create a Project", "text": "Scaffold a project from a template with weblisk new." },
+            { "@type": "HowToStep", "position": 3, "name": "Define Domains & Agents", "text": "Define your system as YAML specs — domains, agents, and capabilities." },
+            { "@type": "HowToStep", "position": 4, "name": "Generate & Validate", "text": "Generate server implementation from specs with weblisk server init." },
+            { "@type": "HowToStep", "position": 5, "name": "Run", "text": "Start the hub with weblisk server start." }
           ]
         }
       },
@@ -178,7 +178,7 @@
 
     <main class="docs-content" id="main-content">
       <h1>Quick Start</h1>
-      <p class="lead">From zero to production-ready in five steps. This guide walks you through installing the CLI, scaffolding a project, defining blueprints, generating code, and deploying.</p>
+      <p class="lead">From zero to running hub in five steps. This guide walks you through installing the CLI, scaffolding a project, writing domain specs, generating your server, and running it locally.</p>
 
       <!-- ─── Step 1: Install ─── -->
       <h2>1. Install the CLI</h2>
@@ -195,25 +195,37 @@
 <span class="syn-p">$</span> npm install -g @weblisk/cli
 
 <span class="syn-c"># verify</span>
-<span class="syn-p">$</span> weblisk --version
-<span class="syn-s">weblisk 1.0.0</span></pre>
+<span class="syn-p">$</span> weblisk version
+<span class="syn-s">weblisk v1.1.0</span></pre>
         </div>
       </div>
       <p>For detailed installation options (Windows, Homebrew, manual), see the <a href="/docs/installation.html">Installation guide</a>.</p>
 
-      <!-- ─── Step 2: Init ─── -->
-      <h2>2. Initialize a Project</h2>
+      <!-- ─── Step 2: New ─── -->
+      <h2>2. Create a Project</h2>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
           <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-p">$</span> weblisk init my-app --template server
-<span class="syn-s">✓ Created my-app/ from weblisk-templates/server</span>
-<span class="syn-s">✓ 4 blueprints, 2 agents, 1 platform target</span>
+          <pre><span class="syn-p">$</span> weblisk new my-hub --template server/starter
+<span class="syn-s">✓ Created my-hub/ from weblisk-templates/server/starter</span>
+<span class="syn-s">✓ .gitignore generated (secrets, keys, tokens excluded)</span>
+<span class="syn-s">✓ Run: cd my-hub &amp;&amp; weblisk doctor</span>
 
-<span class="syn-p">$</span> cd my-app</pre>
+<span class="syn-p">$</span> cd my-hub</pre>
+        </div>
+      </div>
+      <p>Templates are resolved from <a href="https://github.com/avaropoint/weblisk-templates" rel="noopener noreferrer">weblisk-templates</a>. You can combine multiple:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># Combine a client + server template (files are merged)</span>
+<span class="syn-p">$</span> weblisk new my-app --template client/blog --template server/starter</pre>
         </div>
       </div>
       <p>Available templates:</p>
@@ -226,20 +238,16 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>server</code></td>
-            <td>API server with auth, CRUD, and governance patterns</td>
+            <td><code>server/starter</code></td>
+            <td>Hub with orchestrator, gateway, one domain, two agents</td>
           </tr>
           <tr>
-            <td><code>client</code></td>
-            <td>Static site with islands, signals, and PWA</td>
+            <td><code>client/default</code></td>
+            <td>Static site with islands, signals, PWA, and service worker</td>
           </tr>
           <tr>
-            <td><code>full</code></td>
-            <td>Server + client with end-to-end blueprints</td>
-          </tr>
-          <tr>
-            <td><code>minimal</code></td>
-            <td>Empty project with one blueprint file</td>
+            <td><code>client/blog</code></td>
+            <td>Blog with Markdown rendering, RSS feed, and SEO metadata</td>
           </tr>
         </tbody>
       </table>
@@ -250,67 +258,104 @@
           <span class="code-title">Project structure</span>
         </div>
         <div class="code-body">
-          <pre>my-app/
-├── blueprints/
-│   ├── api.yaml           ← API endpoints &amp; contracts
-│   ├── auth.yaml          ← Auth patterns &amp; policies
-│   ├── governance.yaml    ← Enforcement boundaries
-│   └── platform.yaml      ← Target: Cloudflare Workers
+          <pre>my-hub/
+├── .weblisk/
+│   ├── config.yaml          ← Hub configuration
+│   └── secrets/             ← Local secrets (0600 permissions)
+├── domains/
+│   └── seo/
+│       └── domain.yaml      ← Domain controller spec
 ├── agents/
-│   ├── domain.yaml        ← Domain agent definitions
-│   └── quality.yaml       ← Quality agent definitions
-├── generated/             ← Code output (after step 4)
-├── weblisk.yaml           ← Project configuration
-└── .env                   ← Environment variables</pre>
+│   ├── seo-analyzer/
+│   │   └── agent.yaml       ← Work agent spec
+│   └── cron/
+│       └── agent.yaml       ← Infrastructure agent spec
+├── public/                  ← Static client files (optional)
+├── .gitignore               ← Auto-excludes secrets, keys, tokens
+└── README.md</pre>
         </div>
       </div>
 
       <!-- ─── Step 3: Define ─── -->
-      <h2>3. Define &amp; Compose</h2>
-      <p>Blueprints are structured YAML specifications that define your system. Anyone can read them — founders, product managers, developers, compliance officers.</p>
+      <h2>3. Define Domains &amp; Agents</h2>
+      <p>Blueprints are YAML specs that describe your system. The CLI reads these and dispatches to the configured LLM for code generation — no boilerplate, no copy-paste.</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
-          <span class="code-title">blueprints/api.yaml</span>
+          <span class="code-title">domains/seo/domain.yaml</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-a">kind</span><span class="syn-p">:</span> <span class="syn-s">Pattern/API</span>
+          <pre><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">seo</span>
 <span class="syn-a">version</span><span class="syn-p">:</span> <span class="syn-s">1.0.0</span>
-<span class="syn-a">metadata</span><span class="syn-p">:</span>
-  <span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">task-api</span>
-  <span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">Task management API</span>
+<span class="syn-a">description</span><span class="syn-p">:</span> <span class="syn-s">SEO analysis and optimization domain</span>
 
-<span class="syn-a">endpoints</span><span class="syn-p">:</span>
-  <span class="syn-p">-</span> <span class="syn-a">path</span><span class="syn-p">:</span> <span class="syn-s">/api/v1/tasks</span>
-    <span class="syn-a">methods</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">GET</span><span class="syn-p">,</span> <span class="syn-s">POST</span><span class="syn-p">]</span>
-    <span class="syn-a">auth</span><span class="syn-p">:</span> <span class="syn-s">required</span>
-    <span class="syn-a">governance</span><span class="syn-p">:</span>
-      <span class="syn-a">consent</span><span class="syn-p">:</span> <span class="syn-s">explicit</span>
-      <span class="syn-a">audit</span><span class="syn-p">:</span> <span class="syn-s">true</span>
+<span class="syn-a">required_agents</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-s">seo-analyzer</span>
+  <span class="syn-p">-</span> <span class="syn-s">a11y-checker</span>
 
-  <span class="syn-p">-</span> <span class="syn-a">path</span><span class="syn-p">:</span> <span class="syn-s">/api/v1/tasks/{id}</span>
-    <span class="syn-a">methods</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">GET</span><span class="syn-p">,</span> <span class="syn-s">PUT</span><span class="syn-p">,</span> <span class="syn-s">DELETE</span><span class="syn-p">]</span>
-    <span class="syn-a">auth</span><span class="syn-p">:</span> <span class="syn-s">required</span></pre>
+<span class="syn-a">workflows</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">seo-audit</span>
+    <span class="syn-a">trigger</span><span class="syn-p">:</span> <span class="syn-s">action=audit</span>
+    <span class="syn-a">phases</span><span class="syn-p">:</span>
+      <span class="syn-p">-</span> <span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">scan</span>
+        <span class="syn-a">agent</span><span class="syn-p">:</span> <span class="syn-s">seo-analyzer</span>
+      <span class="syn-p">-</span> <span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">accessibility</span>
+        <span class="syn-a">agent</span><span class="syn-p">:</span> <span class="syn-s">a11y-checker</span>
+      <span class="syn-p">-</span> <span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">report</span>
+        <span class="syn-a">agent</span><span class="syn-p">:</span> <span class="syn-s">seo-analyzer</span></pre>
         </div>
       </div>
-      <p>Compose blueprints together — each one defines a separate concern (API, auth, governance, storage, webhooks). Dependencies are explicit. The framework validates composition at every stage.</p>
-      <div class="tip">Browse the <a href="/marketplace/">Marketplace</a> for community blueprints and templates you can fork and compose into your project.</div>
+      <p>Each agent has its own spec declaring capabilities, secrets, and task handling:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">agents/seo-analyzer/agent.yaml</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-a">name</span><span class="syn-p">:</span> <span class="syn-s">seo-analyzer</span>
+<span class="syn-a">type</span><span class="syn-p">:</span> <span class="syn-s">work</span>
+<span class="syn-a">domain</span><span class="syn-p">:</span> <span class="syn-s">seo</span>
+<span class="syn-a">version</span><span class="syn-p">:</span> <span class="syn-s">1.0.0</span>
+
+<span class="syn-a">capabilities</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-s">file:read **/*.html</span>
+  <span class="syn-p">-</span> <span class="syn-s">llm:chat *</span>
+
+<span class="syn-a">secrets</span><span class="syn-p">:</span>
+  <span class="syn-p">-</span> <span class="syn-s">LLM_API_KEY</span></pre>
+        </div>
+      </div>
+      <div class="tip">Browse the <a href="/marketplace/">Marketplace</a> for pre-built blueprints and capabilities you can purchase or fork.</div>
 
       <!-- ─── Step 4: Generate ─── -->
-      <h2>4. Generate</h2>
+      <h2>4. Generate &amp; Validate</h2>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
           <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-p">$</span> weblisk generate --lang go
-<span class="syn-s">✓ Validated 4 blueprints (50+ checks passed)</span>
-<span class="syn-s">✓ Generated 24 endpoints, 3 agents, 7 patterns</span>
-<span class="syn-s">✓ Output: generated/</span></pre>
+          <pre><span class="syn-c"># Validate project health</span>
+<span class="syn-p">$</span> weblisk doctor
+<span class="syn-s">✓ .gitignore excludes secrets</span>
+<span class="syn-s">✓ .weblisk/config.yaml valid</span>
+<span class="syn-s">✓ Blueprint YAML valid (2 domains, 3 agents)</span>
+<span class="syn-s">⚠ Secret 'LLM_API_KEY' declared but not set</span>
+
+<span class="syn-c"># Set required secrets</span>
+<span class="syn-p">$</span> weblisk secret set seo-analyzer LLM_API_KEY
+<span class="syn-s">Enter value: ********</span>
+<span class="syn-s">✓ Secret stored: .weblisk/secrets/seo-analyzer/LLM_API_KEY</span>
+
+<span class="syn-c"># Generate server implementation from specs</span>
+<span class="syn-p">$</span> weblisk server init --platform go
+<span class="syn-s">Reading .weblisk/config.yaml, domains/*, agents/*...</span>
+<span class="syn-s">Dispatching to LLM for code generation...</span>
+<span class="syn-s">✓ Generated orchestrator, gateway, 1 domain, 2 agents</span>
+<span class="syn-s">✓ Platform: Go</span></pre>
         </div>
       </div>
-      <p>Generation targets:</p>
+      <p>Platform targets:</p>
       <table>
         <thead>
           <tr>
@@ -320,56 +365,100 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>--lang go</code></td>
-            <td>Go server code with strong typing and concurrency</td>
+            <td><code>--platform go</code></td>
+            <td>Go server — strong typing, concurrency, small binaries</td>
           </tr>
           <tr>
-            <td><code>--lang rust</code></td>
-            <td>Rust with zero-cost abstractions and memory safety</td>
+            <td><code>--platform node</code></td>
+            <td>Node.js — TypeScript, fast iteration</td>
           </tr>
           <tr>
-            <td><code>--lang node</code></td>
-            <td>TypeScript/Node.js server code</td>
+            <td><code>--platform rust</code></td>
+            <td>Rust — zero-cost abstractions, memory safety</td>
           </tr>
           <tr>
-            <td><code>--platform cf-workers</code></td>
-            <td>Cloudflare Workers (edge deployment)</td>
+            <td><code>--platform cloudflare</code></td>
+            <td>Cloudflare Workers — edge deployment, global distribution</td>
           </tr>
         </tbody>
       </table>
-      <p>The generated code is deterministic — the same blueprint produces the same output every time. Content hashing detects post-generation tampering. You own every line.</p>
-
-      <!-- ─── Step 5: Run & Deploy ─── -->
-      <h2>5. Run &amp; Deploy</h2>
+      <p>You can also generate individual agents or domains:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
           <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-c"># Start the dev server</span>
-<span class="syn-p">$</span> weblisk dev
-<span class="syn-s">✓ Dev server running at http://localhost:3000</span>
-<span class="syn-s">✓ 4 checkpoints active (message, storage, external, response)</span>
-
-<span class="syn-c"># Deploy to Cloudflare Workers</span>
-<span class="syn-p">$</span> weblisk deploy --platform cf-workers
-<span class="syn-s">✓ Deployed to https://my-app.weblisk.workers.dev</span></pre>
+          <pre><span class="syn-p">$</span> weblisk agent create seo-analyzer --platform go
+<span class="syn-p">$</span> weblisk domain create seo --platform go
+<span class="syn-p">$</span> weblisk gateway create --platform go</pre>
         </div>
       </div>
-      <p>The dev server enforces the same governance boundaries as production — four checkpoints inspect every operation during development. No surprises at deploy time.</p>
+
+      <!-- ─── Step 5: Run ─── -->
+      <h2>5. Run</h2>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># Start the full hub (builds + runs all components)</span>
+<span class="syn-p">$</span> weblisk server start
+<span class="syn-s">✓ Orchestrator running on :9800</span>
+<span class="syn-s">✓ Gateway running on :9900</span>
+<span class="syn-s">✓ Domain 'seo' running on :9700</span>
+<span class="syn-s">✓ Agent 'seo-analyzer' registered</span>
+<span class="syn-s">✓ Agent 'cron' registered</span>
+
+<span class="syn-c"># Or start the dev server (file watching + live reload)</span>
+<span class="syn-p">$</span> weblisk dev --port 3000
+
+<span class="syn-c"># Verify everything is healthy</span>
+<span class="syn-p">$</span> weblisk server verify
+<span class="syn-s">✓ Orchestrator healthy (http://localhost:9800)</span>
+<span class="syn-s">✓ 2 agents registered, 2 online</span></pre>
+        </div>
+      </div>
+
+      <!-- ─── Operator Identity ─── -->
+      <h2>6. Set Up Operator Identity (Optional)</h2>
+      <p>To manage a running hub via CLI operations commands, generate your ML-DSA-65 operator identity:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-c"># Generate operator key pair (encrypted with passphrase)</span>
+<span class="syn-p">$</span> weblisk operator init
+<span class="syn-s">Enter passphrase (min 12 characters): ********</span>
+<span class="syn-s">✓ Generated key pair in ~/.weblisk/keys/</span>
+
+<span class="syn-c"># Register with your hub</span>
+<span class="syn-p">$</span> weblisk operator register --orch http://localhost:9800
+<span class="syn-s">✓ Registered as admin (first operator — auto-approved)</span>
+<span class="syn-s">  Token stored: ~/.weblisk/token</span>
+
+<span class="syn-c"># Now you can use operations commands</span>
+<span class="syn-p">$</span> weblisk status
+<span class="syn-p">$</span> weblisk agents list
+<span class="syn-p">$</span> weblisk approvals list</pre>
+        </div>
+      </div>
 
       <!-- ─── Client-Only Quick Start ─── -->
       <h2>Client Framework Only</h2>
-      <p>If you only need the client framework (islands, signals, reactive UI) without the server-side specification engine, you can use it standalone:</p>
+      <p>If you only need the client framework (islands, signals, reactive UI) without the hub server, scaffold a client-only project:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
           <span class="code-title">Terminal</span>
         </div>
         <div class="code-body">
-          <pre><span class="syn-p">$</span> weblisk init my-site --template client
-<span class="syn-p">$</span> cd my-site</pre>
+          <pre><span class="syn-p">$</span> weblisk new my-site --template client/default
+<span class="syn-p">$</span> cd my-site
+<span class="syn-p">$</span> weblisk dev</pre>
         </div>
       </div>
       <p>This scaffolds a static site with islands, styles, and a service worker. Every page is a full standalone HTML document — what you write is what ships. The framework loads via CDN import maps — no build step required.</p>
@@ -408,12 +497,13 @@
       <h2>What's Next</h2>
       <ul>
         <li><a href="/docs/project-structure.html">Project Structure</a> — understand the layout and conventions</li>
+        <li><a href="/docs/cli.html">CLI Reference</a> — full command reference for all 13 command groups</li>
         <li><a href="/docs/blueprints.html">Blueprints</a> — learn the specification format in detail</li>
-        <li><a href="/docs/agents.html">Agents</a> — understand domain, infrastructure, and task agents</li>
-        <li><a href="/docs/governance.html">Governance</a> — enforcement boundaries, monotonic security, consent</li>
-        <li><a href="/docs/islands.html">Islands</a> — deep dive into the island architecture</li>
-        <li><a href="/docs/signals.html">Signals</a> — fine-grained reactivity without a virtual DOM</li>
-        <li><a href="/marketplace/">Marketplace</a> — browse community blueprints and templates</li>
+        <li><a href="/docs/agents.html">Agents</a> — understand work, infrastructure, and domain agents</li>
+        <li><a href="/docs/governance.html">Governance</a> — enforcement boundaries, data contracts, consent</li>
+        <li><a href="/docs/federation.html">Federation</a> — connect hubs, share capabilities, data contracts</li>
+        <li><a href="/docs/islands.html">Islands</a> — deep dive into the client island architecture</li>
+        <li><a href="/marketplace/">Marketplace</a> — browse and purchase capabilities, blueprints, agents</li>
       </ul>
 
       <div class="docs-nav-footer">

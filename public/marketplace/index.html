@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marketplace — Weblisk</title>
   <meta name="description"
-    content="Browse open-source blueprints, templates, and agent packages on the Weblisk Marketplace. Fork, compose, and publish specifications for the community.">
+    content="Buy, sell, and share capabilities, blueprints, agents, templates, and data contracts on the Weblisk Marketplace. Every hub can be a seller, buyer, or both.">
   <link rel="canonical" href="https://weblisk.dev/marketplace/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Marketplace — Weblisk">
   <meta property="og:description"
-    content="Browse open-source blueprints, templates, and agent packages. Fork, compose, and publish specifications for the community.">
+    content="The decentralized marketplace for the hub network. Buy live capabilities, download blueprint assets, publish your own agents, and build ecosystem partnerships.">
   <meta property="og:url" content="https://weblisk.dev/marketplace/">
   <meta property="og:site_name" content="Weblisk">
   <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
@@ -22,7 +22,7 @@
   <meta name="twitter:title" content="Marketplace — Weblisk">
   <meta name="twitter:site" content="@weblisk">
   <meta name="twitter:description"
-    content="Browse open-source blueprints, templates, and agent packages. Fork, compose, and publish for the community.">
+    content="The decentralized marketplace for the hub network. Buy live capabilities, download blueprint assets, publish your own agents, and build ecosystem partnerships.">
   <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Avaropoint">
@@ -41,7 +41,7 @@
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Marketplace — Weblisk",
-    "description": "Browse open-source blueprints, templates, and agent packages on the Weblisk Marketplace.",
+    "description": "Buy, sell, and share capabilities, blueprints, agents, templates, and data contracts on the Weblisk Marketplace.",
     "url": "https://weblisk.dev/marketplace/",
     "author": { "@id": "https://avaropoint.com/#org" },
     "isPartOf": { "@id": "https://weblisk.dev/#website" }
@@ -103,134 +103,410 @@
     <section class="hero hero-compact" aria-labelledby="mp-heading">
       <div class="hero-inner">
         <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> Marketplace</span>
-        <h1 id="mp-heading">Blueprints built by the community. Verified by governance.</h1>
+        <h1 id="mp-heading">The decentralized marketplace for the hub network.</h1>
         <p class="hero-sub">
-          Browse open-source blueprints, starter templates, and agent packages. Fork and compose them into your projects — every artifact passes the same validation pipeline as your own specifications.
+          Every hub can be a seller, buyer, or both. Buy live capabilities over federation, download installable blueprints, publish agents, sell domain expertise — all governed by cryptographic identity and verified data contracts.
         </p>
         <div class="hero-actions">
           <a href="/docs/quickstart.html" class="btn btn-primary">
             Start Building
             <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
           </a>
-          <a href="/marketplace/publish/" class="btn btn-outline">Publish a Blueprint</a>
+          <a href="#publish" class="btn btn-outline">Publish a Listing</a>
         </div>
       </div>
     </section>
 
-    <!-- ─── Categories ─── -->
-    <section class="section" aria-labelledby="categories-heading" data-reveal>
+    <!-- ─── What Can Be Listed ─── -->
+    <section class="section" aria-labelledby="listings-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
-          <span class="section-label">Browse</span>
-          <h2 id="categories-heading">Find blueprints for every layer of your system.</h2>
-          <p>Every marketplace artifact is a validated blueprint — structured YAML specifications that compose into your project with explicit dependency contracts.</p>
+          <span class="section-label">Listing Types</span>
+          <h2 id="listings-heading">Five asset types. Two delivery models.</h2>
+          <p>Live capabilities run on the seller's hub, invoked over federation. Installable assets download into your hub and run under your full control.</p>
         </div>
         <div class="feature-grid" data-reveal-stagger>
           <div class="feature-card">
             <div class="feature-icon purple">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
-            <h3>API Patterns</h3>
-            <p>REST, GraphQL, and RPC endpoint patterns with built-in auth, rate limiting, and validation. Generate production-ready API servers from a single blueprint.</p>
+            <h3>Capabilities</h3>
+            <p>Live, invocable agent capabilities hosted on a provider hub. Your hub calls them over federation — no code to install, governed by data contracts.</p>
+            <span class="badge">Live service</span>
           </div>
           <div class="feature-card">
             <div class="feature-icon cyan">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             </div>
-            <h3>Auth &amp; Security</h3>
-            <p>Authentication flows (OAuth 2.0, SAML, passkeys), RBAC/ABAC authorization, session management, and audit logging. Governance-enforced by default.</p>
+            <h3>Blueprints</h3>
+            <p>Domain controller or agent blueprints that generate into your own hub. Buy once, generate for any platform — Go, Node.js, Rust, or Cloudflare Workers.</p>
+            <span class="badge">Installable</span>
           </div>
           <div class="feature-card">
             <div class="feature-icon green">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             </div>
-            <h3>Agent Packages</h3>
-            <p>Pre-built domain agents for common verticals — e-commerce, SaaS, healthcare, fintech. Sandboxed, portable, and ready to compose into your agent network.</p>
+            <h3>Templates</h3>
+            <p>Pre-configured hub templates with domains, agents, and workflows ready to deploy. SaaS starter, e-commerce, analytics — scaffold entire systems in minutes.</p>
+            <span class="badge">Installable</span>
           </div>
           <div class="feature-card">
             <div class="feature-icon orange">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
             </div>
-            <h3>Storage &amp; Data</h3>
-            <p>Database patterns, caching strategies, file storage, and data pipeline blueprints. Compose with your API patterns for end-to-end data flows.</p>
+            <h3>Agents</h3>
+            <p>Standalone work or infrastructure agent blueprints. PDF extractors, translation agents, sentiment analyzers — plug into your domain workflows.</p>
+            <span class="badge">Installable</span>
           </div>
           <div class="feature-card">
-            <div class="feature-icon purple">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <div class="feature-icon pink">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </div>
-            <h3>Starter Templates</h3>
-            <p>Full project templates — SaaS, API server, full-stack app, static site. Each template composes multiple blueprints into a working project scaffold.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon cyan">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
-            </div>
-            <h3>Federation</h3>
-            <p>Hub-to-hub trust configurations, data contract templates, and cross-organization collaboration patterns. Federate with cryptographic verification.</p>
+            <h3>Data Contracts</h3>
+            <p>Reusable, audited data contracts for specific business functions. GDPR-compliant customer data exchange, HIPAA-ready health records, financial reporting.</p>
+            <span class="badge">Installable</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── How It Works ─── -->
-    <section class="section section-soft" aria-labelledby="how-heading" data-reveal>
+    <!-- ─── Delivery Models ─── -->
+    <section class="section section-soft" aria-labelledby="delivery-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Architecture</span>
+          <h2 id="delivery-heading">Two delivery models. One protocol.</h2>
+          <p>The distinction matters: installable assets run inside your hub, under your full control. The seller has no ongoing access. Live capabilities run on the seller's infrastructure, governed by federation rules.</p>
+        </div>
+        <div class="code-window" style="max-width:680px;margin:0 auto">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-title">Delivery Models</span>
+          </div>
+          <div class="code-body">
+            <pre><span class="syn-c">Live service (capability):</span>
+  Buyer hub ──federation──► Provider hub (runs the agent)
+  <span class="syn-s">• Governed by data contract</span>
+  <span class="syn-s">• Pay per invocation or subscription</span>
+  <span class="syn-s">• Zero code on buyer's infrastructure</span>
+
+<span class="syn-c">Installable asset (blueprint, template, agent, data contract):</span>
+  Buyer hub ──download──► Blueprint files ──CLI generate──► Buyer's own code
+  <span class="syn-s">• Full ownership of generated code</span>
+  <span class="syn-s">• One-time or subscription payment</span>
+  <span class="syn-s">• Seller has no ongoing access</span></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Pricing Models ─── -->
+    <section class="section" aria-labelledby="pricing-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Commerce</span>
+          <h2 id="pricing-heading">Seven pricing models. From free to enterprise.</h2>
+          <p>Sellers choose the model that fits their offering. Buyers review pricing and data contracts before purchase — all enforced by the protocol.</p>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Description</th>
+                <th>Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Free</strong></td>
+                <td>No charge — open source or community contribution</td>
+                <td>Core blueprints, community agents</td>
+              </tr>
+              <tr>
+                <td><strong>One-time</strong></td>
+                <td>Single payment for permanent access</td>
+                <td>Blueprints, templates, standalone agents</td>
+              </tr>
+              <tr>
+                <td><strong>Per-invocation</strong></td>
+                <td>Charge per federated task execution</td>
+                <td>Live capabilities (high-volume, low-cost)</td>
+              </tr>
+              <tr>
+                <td><strong>Monthly subscription</strong></td>
+                <td>Recurring fee for access</td>
+                <td>Live capabilities (predictable workloads)</td>
+              </tr>
+              <tr>
+                <td><strong>Tiered</strong></td>
+                <td>Price brackets based on volume</td>
+                <td>Variable workloads</td>
+              </tr>
+              <tr>
+                <td><strong>Revenue share</strong></td>
+                <td>Percentage of buyer's revenue from the capability</td>
+                <td>Co-investment models</td>
+              </tr>
+              <tr>
+                <td><strong>Custom</strong></td>
+                <td>Negotiated enterprise pricing</td>
+                <td>Large partnerships</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Purchase Flow ─── -->
+    <section class="section section-soft" aria-labelledby="flow-heading" data-reveal>
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Workflow</span>
-          <h2 id="how-heading">Browse. Fork. Compose. Ship.</h2>
-          <p>Every marketplace artifact is a standard Weblisk blueprint. No special formats, no lock-in, no hidden dependencies.</p>
+          <h2 id="flow-heading">Discover. Evaluate. Purchase. Deploy.</h2>
+          <p>The entire purchase flow is protocol-native — signed by both parties, recorded on both hubs, and governed by the same enforcement layer as every other operation.</p>
         </div>
         <div class="feature-grid" data-reveal-stagger>
           <div class="feature-card">
             <div class="feature-icon green">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </div>
-            <h3>1. Browse</h3>
-            <p>Search by category, language target, compliance tier, or keyword. Every listing shows specification counts, dependency maps, and validation status.</p>
+            <h3>1. Discover</h3>
+            <p>Search via the marketplace UI, CLI, or hub-to-hub federation. Filter by category, platform support, compliance tier, pricing model, or rating.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon purple">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </div>
-            <h3>2. Fork</h3>
-            <p>Fork any blueprint into your project. Customize it to match your domain, security requirements, and deployment targets. Your fork, your rules.</p>
+            <h3>2. Evaluate</h3>
+            <p>Review verified metrics (uptime, latency, rating), data contracts, pricing, platform support, and trial availability — all cryptographically attested.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon cyan">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
             </div>
-            <h3>3. Compose</h3>
-            <p>Compose marketplace blueprints with your own. Dependency contracts are explicit — the framework validates compatibility at every stage.</p>
+            <h3>3. Purchase</h3>
+            <p>Buyer's hub signs the purchase request with its ML-DSA-65 key. For live capabilities, federation peering initiates automatically. For assets, download begins.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon orange">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
             </div>
-            <h3>4. Generate &amp; Ship</h3>
-            <p>Generate production code from the composed blueprints. Same deterministic output, same governance enforcement, same validation pipeline.</p>
+            <h3>4. Deploy</h3>
+            <p>Installable assets generate into your hub via CLI. Live capabilities become available in your workflows immediately. Dual-signed receipt recorded on both hubs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CLI Integration ─── -->
+    <section class="section" aria-labelledby="cli-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">CLI</span>
+          <h2 id="cli-heading">Full marketplace access from the terminal.</h2>
+          <p>Every marketplace operation is available via the CLI. Search, evaluate, purchase, install, publish, and manage listings without leaving your terminal.</p>
+        </div>
+        <div class="code-window" style="max-width:740px;margin:0 auto">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-title">Terminal</span>
+          </div>
+          <div class="code-body">
+            <pre><span class="syn-c"># Search for capabilities</span>
+<span class="syn-p">$</span> weblisk marketplace search "demand forecasting"
+<span class="syn-s">ID        NAME                        TYPE          SELLER        PRICE      RATING</span>
+<span class="syn-s">mkt-001   Demand Forecasting Agent    capability    acme-ai       $0.02/req  4.8★</span>
+<span class="syn-s">mkt-002   Supply Chain Optimizer      capability    logicorp      $0.05/req  4.5★</span>
+<span class="syn-s">mkt-003   Inventory Predictor         installable   predict-co    $99/mo     4.2★</span>
+
+<span class="syn-c"># Purchase a live capability</span>
+<span class="syn-p">$</span> weblisk marketplace buy mkt-001 --accept-contract --accept-pricing
+<span class="syn-s">✓ Purchase confirmed.</span>
+<span class="syn-s">  Type:   live capability</span>
+<span class="syn-s">  Access: federation peering initiated with acme-ai</span>
+<span class="syn-s">  Status: Active — capability available in workflows</span>
+
+<span class="syn-c"># Install a purchased blueprint</span>
+<span class="syn-p">$</span> weblisk marketplace install mkt-003
+<span class="syn-s">✓ Blueprint downloaded to agents/inventory-predictor/</span>
+<span class="syn-s">  Run: weblisk agent create inventory-predictor --platform go</span></pre>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ─── Publish ─── -->
-    <section class="section" aria-labelledby="publish-heading" data-reveal>
+    <section class="section section-soft" aria-labelledby="publish-heading" id="publish" data-reveal>
       <div class="section-inner">
         <div class="section-header">
-          <span class="section-label">Contribute</span>
-          <h2 id="publish-heading">Publish your blueprints.</h2>
-          <p>Share your work with the community. Published blueprints go through the same 4-phase validation pipeline — 50+ checks that verify structure, dependencies, security, and compliance tier compatibility.</p>
+          <span class="section-label">Sell</span>
+          <h2 id="publish-heading">Publish your expertise. Earn revenue.</h2>
+          <p>Turn your domain agents, blueprints, and capabilities into marketplace listings. Every listing is signed with your hub's ML-DSA-65 key and verified by the network.</p>
         </div>
-        <div class="code-window" style="max-width:680px;margin:0 auto">
+        <div class="code-window" style="max-width:740px;margin:0 auto;margin-bottom:2rem">
           <div class="code-header">
             <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
             <span class="code-title">Terminal</span>
           </div>
           <div class="code-body">
-            <pre><span class="syn-p">$</span> weblisk publish ./blueprints/my-auth-pattern.yaml
-<span class="syn-s">✓ Validated: 50+ checks passed</span>
-<span class="syn-s">✓ Compliance tier: production</span>
-<span class="syn-s">✓ Published to marketplace as @myorg/auth-oauth2</span></pre>
+            <pre><span class="syn-c"># Publish a capability</span>
+<span class="syn-p">$</span> weblisk marketplace publish --type capability --config listing.yaml
+<span class="syn-s">✓ Listing validated</span>
+<span class="syn-s">✓ Data contract parsed</span>
+<span class="syn-s">✓ Pricing terms set</span>
+<span class="syn-s">✓ Published as mkt-xxx: Demand Forecasting Agent</span>
+
+<span class="syn-c"># View your seller dashboard</span>
+<span class="syn-p">$</span> weblisk marketplace dashboard
+<span class="syn-s">LISTING     REVENUE(30d)  REQUESTS(30d)  ACTIVE BUYERS  RATING</span>
+<span class="syn-s">mkt-xxx     $1,240.00     62,000         8              4.8★</span>
+<span class="syn-s">mkt-yyy     $340.00       3,400          2              4.5★</span>
+<span class="syn-s"></span>
+<span class="syn-s">Total revenue (30d): $1,580.00</span></pre>
+          </div>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <h3>Verified Reviews</h3>
+            <p>Only hubs that have purchased or invoked your listing can leave reviews. Every review is signed by the reviewer's ML-DSA-65 key — no fake reviews possible.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Seller Analytics</h3>
+            <p>Revenue by listing and time period. Download counts, active installations, usage metrics for live capabilities, review trends, and payout history.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Update &amp; Delist</h3>
+            <p>Update pricing, metadata, or version at any time. Delist with a reason — active buyers are notified and existing contracts honored until expiry.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Hub Registry ─── -->
+    <section class="section" aria-labelledby="registry-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Registry</span>
+          <h2 id="registry-heading">weblisk.dev is the public directory for the hub network.</h2>
+          <p>This site aggregates listings from registries that opt into public visibility. Every hub can also run its own private or partner marketplace.</p>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Visibility</th>
+                <th>Discovery</th>
+                <th>Listed on weblisk.dev</th>
+                <th>Access</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Public</strong></td>
+                <td>Anyone can find via search</td>
+                <td>Yes</td>
+                <td>Open or gated (free/paid)</td>
+              </tr>
+              <tr>
+                <td><strong>Partner</strong></td>
+                <td>Visible to peered hubs only</td>
+                <td>No</td>
+                <td>Requires peering relationship</td>
+              </tr>
+              <tr>
+                <td><strong>Private</strong></td>
+                <td>Visible within organization only</td>
+                <td>No</td>
+                <td>Internal hub network only</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Ecosystem Strategies ─── -->
+    <section class="section section-soft" aria-labelledby="ecosystem-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Ecosystem</span>
+          <h2 id="ecosystem-heading">Build your own ecosystem.</h2>
+          <p>The marketplace isn't just for individual listings. Hub operators build entire ecosystems — partner networks, vertical marketplaces, developer communities, and enterprise catalogs.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Partner Network</h3>
+            <p>Publish curated capabilities and invite partners to list complementary services under your marketplace umbrella.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3>Vertical Marketplace</h3>
+            <p>Industry-specific registries — healthcare, logistics, finance, e-commerce — with domain-appropriate listings and compliance requirements.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Developer Community</h3>
+            <p>Open listing submission with review and approval processes. Quality control via the same governance engine that validates blueprints.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Enterprise Catalog</h3>
+            <p>Private marketplace within your organization. Internal teams publish and consume capabilities without exposure to the public network.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Marketplace Listing Detail ─── -->
+    <section class="section" aria-labelledby="listing-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Listing Detail</span>
+          <h2 id="listing-heading">Every listing is a signed, verifiable artifact.</h2>
+          <p>Marketplace listings are protocol-native data structures — signed by the seller's ML-DSA-65 key, with explicit data contracts, verified metrics, and platform support declarations.</p>
+        </div>
+        <div class="code-window" style="max-width:740px;margin:0 auto">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-title">Marketplace Listing (JSON)</span>
+          </div>
+          <div class="code-body">
+            <pre><span class="syn-p">{</span>
+  <span class="syn-a">"marketplace_id"</span><span class="syn-p">:</span> <span class="syn-s">"mkt-avaropoint-seo-blueprint"</span><span class="syn-p">,</span>
+  <span class="syn-a">"listing_type"</span><span class="syn-p">:</span> <span class="syn-s">"blueprint"</span><span class="syn-p">,</span>
+  <span class="syn-a">"seller"</span><span class="syn-p">:</span> <span class="syn-p">{</span>
+    <span class="syn-a">"hub_name"</span><span class="syn-p">:</span> <span class="syn-s">"avaropoint-prod"</span><span class="syn-p">,</span>
+    <span class="syn-a">"verified_seller"</span><span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+    <span class="syn-a">"seller_since"</span><span class="syn-p">:</span> <span class="syn-n">1704067200</span>
+  <span class="syn-p">},</span>
+  <span class="syn-a">"product"</span><span class="syn-p">:</span> <span class="syn-p">{</span>
+    <span class="syn-a">"name"</span><span class="syn-p">:</span> <span class="syn-s">"SEO Domain Controller"</span><span class="syn-p">,</span>
+    <span class="syn-a">"category"</span><span class="syn-p">:</span> <span class="syn-s">"website-optimization"</span><span class="syn-p">,</span>
+    <span class="syn-a">"platforms"</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">"go"</span><span class="syn-p">,</span> <span class="syn-s">"node"</span><span class="syn-p">,</span> <span class="syn-s">"cloudflare"</span><span class="syn-p">]</span>
+  <span class="syn-p">},</span>
+  <span class="syn-a">"pricing"</span><span class="syn-p">:</span> <span class="syn-p">{</span>
+    <span class="syn-a">"model"</span><span class="syn-p">:</span> <span class="syn-s">"one_time"</span><span class="syn-p">,</span>
+    <span class="syn-a">"price"</span><span class="syn-p">:</span> <span class="syn-n">49.00</span><span class="syn-p">,</span>
+    <span class="syn-a">"trial_days"</span><span class="syn-p">:</span> <span class="syn-n">14</span>
+  <span class="syn-p">},</span>
+  <span class="syn-a">"stats"</span><span class="syn-p">:</span> <span class="syn-p">{</span>
+    <span class="syn-a">"downloads"</span><span class="syn-p">:</span> <span class="syn-n">1240</span><span class="syn-p">,</span>
+    <span class="syn-a">"avg_rating"</span><span class="syn-p">:</span> <span class="syn-n">4.7</span><span class="syn-p">,</span>
+    <span class="syn-a">"review_count"</span><span class="syn-p">:</span> <span class="syn-n">156</span>
+  <span class="syn-p">},</span>
+  <span class="syn-a">"signature"</span><span class="syn-p">:</span> <span class="syn-s">"&lt;ML-DSA-65 signature&gt;"</span>
+<span class="syn-p">}</span></pre>
           </div>
         </div>
       </div>
@@ -239,14 +515,14 @@
     <!-- ─── CTA ─── -->
     <section class="section section-soft" aria-labelledby="cta-heading" data-reveal>
       <div class="section-inner" style="text-align:center;max-width:760px;margin:0 auto">
-        <h2 id="cta-heading">Build on what others have built. Share what you create.</h2>
-        <p style="margin-bottom:1.5rem">The marketplace is open. Every blueprint is a standard Weblisk specification — no vendor lock-in, no hidden dependencies, no special formats. Fork, compose, generate, ship.</p>
+        <h2 id="cta-heading">The marketplace is the hub network.</h2>
+        <p style="margin-bottom:1.5rem">Every hub can sell what it knows, buy what it needs, and share what it builds. No gatekeepers. No platform fees on open-source. Cryptographic identity and verified data contracts — from purchase through production.</p>
         <div class="hero-actions" style="justify-content:center">
           <a href="/docs/quickstart.html" class="btn btn-primary">
             Start Building
             <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
           </a>
-          <a href="/docs/" class="btn btn-outline">Read the Docs</a>
+          <a href="/platform/" class="btn btn-outline">Explore the Platform</a>
         </div>
       </div>
     </section>
@@ -267,16 +543,17 @@
         <div class="footer-nav">
           <div class="footer-col">
             <h3>Platform</h3>
-            <a href="/platform/blueprints/">Blueprints</a>
-            <a href="/platform/agents/">Agents</a>
-            <a href="/platform/server/">Server Spec</a>
-            <a href="/platform/client/">Client Framework</a>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
           </div>
           <div class="footer-col">
             <h3>Ecosystem</h3>
             <a href="/marketplace/">Marketplace</a>
             <a href="/docs/">Documentation</a>
-            <a href="/marketplace/templates/">Templates</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
           </div>
           <div class="footer-col">
             <h3>Community</h3>

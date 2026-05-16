@@ -181,77 +181,148 @@
 
     <main class="docs-content" id="main-content">
       <h1>State Management</h1>
+      <p class="lead">Persistent, reactive state primitives for forms, undo/redo, cross-tab sync, and IndexedDB-backed signals. Zero dependencies — just import and use.</p>
 
-      <p>Beyond basic signals, Weblisk provides specialized state modules for common patterns.</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-state.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- FORM STATE -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Form State</h2>
-      <p>Declarative form handling with validation and submission tracking:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <p>Declarative form handling with validation, submission tracking, and reactive state — no third-party form libraries needed.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Form State Machine</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-1">
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-form" style="width:100%">
+              <p class="feature-demo-desc">Declarative form with built-in validation, submit state, and error tracking.</p>
+              <form id="demo-form-el" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.5rem">
+                <input type="text" name="email" class="input" placeholder="Email (required)" aria-label="Email" />
+                <input type="text" name="age" class="input" placeholder="Age (1-120)" aria-label="Age" />
+                <button type="submit" class="btn btn-sm">Submit</button>
+              </form>
+              <pre class="demo-output" id="output-form">Fill out the form above</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect<span class="syn-p">,</span> enhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> formState <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/form.js'</span><span class="syn-p">;</span>
 
-<span class="syn-k">const</span> form <span class="syn-p">=</span> <span class="syn-f">formState</span><span class="syn-p">(</span><span class="syn-p">{</span>
+<span class="syn-k">const</span> fs <span class="syn-p">=</span> <span class="syn-f">formState</span><span class="syn-p">(</span><span class="syn-p">{</span>
   fields<span class="syn-p">:</span> <span class="syn-p">{</span>
-    email<span class="syn-p">:</span>    <span class="syn-p">{</span> required<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> pattern<span class="syn-p">:</span> <span class="syn-p">/</span>^<span class="syn-p">[</span>^@<span class="syn-p">]</span><span class="syn-p">+</span>@<span class="syn-p">[</span>^@<span class="syn-p">]</span><span class="syn-p">+</span>$<span class="syn-p">/</span> <span class="syn-p">}</span><span class="syn-p">,</span>
-    password<span class="syn-p">:</span> <span class="syn-p">{</span> required<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> minLength<span class="syn-p">:</span> <span class="syn-n">8</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+    email<span class="syn-p">:</span> <span class="syn-p">{</span> required<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> pattern<span class="syn-p">:</span> <span class="syn-p">/</span>^[^\s@]+@[^\s@]+$<span class="syn-p">/</span><span class="syn-p">,</span> message<span class="syn-p">:</span> <span class="syn-s">'Invalid email'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+    age<span class="syn-p">:</span>   <span class="syn-p">{</span> required<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> validate<span class="syn-p">:</span> v <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-k">const</span> n <span class="syn-p">=</span> <span class="syn-f">parseInt</span><span class="syn-p">(</span>v<span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">isNaN</span><span class="syn-p">(</span>n<span class="syn-p">)</span> <span class="syn-p">||</span> n <span class="syn-p">&lt;</span> <span class="syn-n">1</span> <span class="syn-p">||</span> n <span class="syn-p">&gt;</span> <span class="syn-n">120</span><span class="syn-p">)</span> <span class="syn-k">return</span> <span class="syn-s">'Must be 1-120'</span><span class="syn-p">;</span>
+      <span class="syn-k">return</span> <span class="syn-k">null</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span> <span class="syn-p">}</span>
   <span class="syn-p">}</span><span class="syn-p">,</span>
-  <span class="syn-k">async</span> <span class="syn-f">onSubmit</span><span class="syn-p">(</span>values<span class="syn-p">)</span> <span class="syn-p">{</span>
-    <span class="syn-k">await</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/api/login'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-      method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
-      body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span>values<span class="syn-p">)</span><span class="syn-p">,</span>
-    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span><span class="syn-p">,</span>
-  <span class="syn-f">onError</span><span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">{</span>
-    console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span><span class="syn-s">'Submit failed:'</span><span class="syn-p">,</span> err<span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span><span class="syn-p">,</span>
+  onSubmit<span class="syn-p">:</span> <span class="syn-k">async</span> <span class="syn-p">(</span>values<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+    <span class="syn-k">await</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/api/login'</span><span class="syn-p">,</span> <span class="syn-p">{</span> method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span> body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span>values<span class="syn-p">)</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Bind to a DOM form</span>
-form<span class="syn-p">.</span><span class="syn-f">bind</span><span class="syn-p">(</span><span class="syn-s">'form#login'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+fs<span class="syn-p">.</span><span class="syn-f">bind</span><span class="syn-p">(</span><span class="syn-s">'form#login'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Or read state reactively</span>
+<span class="syn-c">// Reactive state reads</span>
 <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Valid:'</span><span class="syn-p">,</span> form<span class="syn-p">.</span><span class="syn-f">valid</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Submitting:'</span><span class="syn-p">,</span> form<span class="syn-p">.</span><span class="syn-f">submitting</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Errors:'</span><span class="syn-p">,</span> form<span class="syn-p">.</span><span class="syn-f">errors</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Valid:'</span><span class="syn-p">,</span> fs<span class="syn-p">.</span><span class="syn-f">valid</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'Errors:'</span><span class="syn-p">,</span> fs<span class="syn-p">.</span><span class="syn-f">errors</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
       <h3>FormState API</h3>
-      <p>| Property/Method | Type | Description |</p>
-      <p>|----------------|------|-------------|</p>
-      <p>| <code>values</code> | signal | Current field values |</p>
-      <p>| <code>errors</code> | signal | Validation errors |</p>
-      <p>| <code>submitting</code> | signal | <code>true</code> during submit |</p>
-      <p>| <code>submitted</code> | signal | <code>true</code> after successful submit |</p>
-      <p>| <code>submitError</code> | signal | Last submit error |</p>
-      <p>| <code>valid</code> | computed | <code>true</code> when all fields pass validation |</p>
-      <p>| <code>dirty</code> | computed | <code>true</code> when any field has changed |</p>
-      <p>| <code>setValue(name, value)</code> | method | Set a field value |</p>
-      <p>| <code>submit()</code> | method | Trigger form submission |</p>
-      <p>| <code>reset()</code> | method | Reset all fields to initial values |</p>
-      <p>| <code>bind(form)</code> | method | Bind to a form element |</p>
+      <table class="api-table">
+        <thead><tr><th>Property / Method</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>values</code></td><td>signal</td><td>Current field values</td></tr>
+          <tr><td><code>errors</code></td><td>signal</td><td>Validation errors by field name</td></tr>
+          <tr><td><code>submitting</code></td><td>signal</td><td><code>true</code> during submit</td></tr>
+          <tr><td><code>submitted</code></td><td>signal</td><td><code>true</code> after successful submit</td></tr>
+          <tr><td><code>submitError</code></td><td>signal</td><td>Last submit error</td></tr>
+          <tr><td><code>valid</code></td><td>computed</td><td><code>true</code> when all fields pass validation</td></tr>
+          <tr><td><code>dirty</code></td><td>computed</td><td><code>true</code> when any field has changed</td></tr>
+          <tr><td><code>setValue(name, value)</code></td><td>method</td><td>Set a field value programmatically</td></tr>
+          <tr><td><code>submit()</code></td><td>method</td><td>Trigger form submission</td></tr>
+          <tr><td><code>reset()</code></td><td>method</td><td>Reset all fields to initial values</td></tr>
+          <tr><td><code>bind(form)</code></td><td>method</td><td>Bind to a <code>&lt;form&gt;</code> element</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- UNDO / REDO -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Undo / Redo</h2>
-      <p>Wrap any signal with an undo/redo stack:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <p>Wrap any signal with an undo/redo history stack. Supports configurable depth and keyboard shortcuts.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Undo / Redo</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">import</span> <span class="syn-p">{</span> undoable<span class="syn-p">,</span> undoKeyboard <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/history.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-undo" style="width:100%">
+              <p class="feature-demo-desc">Edit the text, then undo/redo with the buttons or keyboard shortcuts.</p>
+              <input type="text" class="input" id="undo-input" placeholder="Type something..." aria-label="Text with undo support" style="margin-bottom:0.5rem" />
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                <button class="btn btn-sm" id="btn-undo">&#8617; Undo</button>
+                <button class="btn btn-sm" id="btn-redo">&#8618; Redo</button>
+              </div>
+              <pre class="demo-output" id="output-undo">History: 1 entry</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> undoable<span class="syn-p">,</span> undoKeyboard <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/history.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> <span class="syn-p">[</span>text<span class="syn-p">,</span> setText<span class="syn-p">,</span> <span class="syn-p">{</span> undo<span class="syn-p">,</span> redo<span class="syn-p">,</span> canUndo<span class="syn-p">,</span> canRedo <span class="syn-p">}</span><span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">undoable</span><span class="syn-p">(</span><span class="syn-s">''</span><span class="syn-p">,</span> <span class="syn-p">{</span>
   maxHistory<span class="syn-p">:</span> <span class="syn-n">100</span><span class="syn-p">,</span>
@@ -266,45 +337,128 @@ form<span class="syn-p">.</span><span class="syn-f">bind</span><span class="syn-
 <span class="syn-f">canRedo</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// false</span>
 
 <span class="syn-c">// Install Cmd/Ctrl+Z shortcuts</span>
-<span class="syn-k">const</span> cleanup <span class="syn-p">=</span> <span class="syn-f">undoKeyboard</span><span class="syn-p">(</span><span class="syn-p">{</span> undo<span class="syn-p">,</span> redo <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-k">const</span> cleanup <span class="syn-p">=</span> <span class="syn-f">undoKeyboard</span><span class="syn-p">(</span><span class="syn-p">{</span> undo<span class="syn-p">,</span> redo <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>Undoable API</h3>
+      <table class="api-table">
+        <thead><tr><th>Return</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>value</code></td><td>signal</td><td>Current value (read with <code>value()</code>)</td></tr>
+          <tr><td><code>setValue</code></td><td>setter</td><td>Push a new value onto the history stack</td></tr>
+          <tr><td><code>undo()</code></td><td>method</td><td>Revert to the previous value</td></tr>
+          <tr><td><code>redo()</code></td><td>method</td><td>Re-apply the next undone value</td></tr>
+          <tr><td><code>canUndo</code></td><td>computed</td><td><code>true</code> when undo is possible</td></tr>
+          <tr><td><code>canRedo</code></td><td>computed</td><td><code>true</code> when redo is possible</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- CROSS-TAB SYNC -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Cross-Tab Sync</h2>
-      <p>Signals that synchronize across all open tabs:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <p>Signals that synchronize across all open tabs via <code>BroadcastChannel</code> with <code>localStorage</code> fallback.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Cross-Tab Sync</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> synced <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/sync.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-sync" style="width:100%">
+              <p class="feature-demo-desc">Open this page in another tab — changes sync instantly via BroadcastChannel.</p>
+              <button class="btn btn-sm" id="btn-sync">Update Shared Counter</button>
+              <pre class="demo-output" id="output-sync">Counter: 0</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> synced <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/sync.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> <span class="syn-p">[</span>theme<span class="syn-p">,</span> setTheme<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">synced</span><span class="syn-p">(</span><span class="syn-s">'theme'</span><span class="syn-p">,</span> <span class="syn-s">'light'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-f">setTheme</span><span class="syn-p">(</span><span class="syn-s">'dark'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-c">// → All other tabs with synced('theme') update to 'dark'</span>
-</pre>
+
+<span class="syn-c">// With effect for reactive UI updates:</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> <span class="syn-p">[</span>count<span class="syn-p">,</span> setCount<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">synced</span><span class="syn-p">(</span><span class="syn-s">'counter'</span><span class="syn-p">,</span> <span class="syn-n">0</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> el<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`Count: ${count()}`</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
-      <p>Uses <code>BroadcastChannel</code> with <code>localStorage</code> fallback.</p>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- INDEXEDDB SIGNALS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>IndexedDB Signals</h2>
-      <p>For large data that exceeds localStorage's 5MB limit:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <p>For large data that exceeds localStorage's 5 MB limit. Reads are asynchronous on first load, then reactive like any signal.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">IndexedDB Signals</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-k">import</span> <span class="syn-p">{</span> idbSignal <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/idb.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-idb" style="width:100%">
+              <p class="feature-demo-desc">Signal backed by IndexedDB — survives page refresh, handles large data.</p>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                <button class="btn btn-sm" id="btn-idb-set">Store Value</button>
+                <button class="btn btn-sm" id="btn-idb-get">Read Value</button>
+              </div>
+              <pre class="demo-output" id="output-idb">No data stored</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> idbSignal <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/state/idb.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> <span class="syn-p">[</span>draft<span class="syn-p">,</span> setDraft<span class="syn-p">,</span> <span class="syn-p">{</span> ready<span class="syn-p">,</span> remove <span class="syn-p">}</span><span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-f">idbSignal</span><span class="syn-p">(</span><span class="syn-s">'editor-draft'</span><span class="syn-p">,</span> <span class="syn-s">''</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
@@ -313,11 +467,26 @@ form<span class="syn-p">.</span><span class="syn-f">bind</span><span class="syn-
 
 <span class="syn-f">setDraft</span><span class="syn-p">(</span>largeContent<span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Debounced write to IDB (300ms default)</span>
 
-<span class="syn-c">// Clean up</span>
-<span class="syn-k">await</span> <span class="syn-f">remove</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-c">// Clean up when done</span>
+<span class="syn-k">await</span> <span class="syn-f">remove</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>idbSignal Options</h3>
+      <table class="api-table">
+        <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>debounce</code></td><td><code>300</code></td><td>Write debounce in ms</td></tr>
+          <tr><td><code>dbName</code></td><td><code>'weblisk'</code></td><td>IndexedDB database name</td></tr>
+          <tr><td><code>storeName</code></td><td><code>'signals'</code></td><td>Object store name</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
 
       <div class="docs-nav-footer">
         <a href="/docs/devtools.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

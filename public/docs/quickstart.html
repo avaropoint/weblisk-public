@@ -56,7 +56,7 @@
           "description": "Install the CLI, scaffold a project, define domains and agents, generate your server, and run it.",
           "totalTime": "PT10M",
           "step": [
-            { "@type": "HowToStep", "position": 1, "name": "Install the CLI", "text": "Install the Weblisk CLI with curl or npm." },
+            { "@type": "HowToStep", "position": 1, "name": "Install the CLI", "text": "Install the Weblisk CLI via curl, Homebrew, or Scoop." },
             { "@type": "HowToStep", "position": 2, "name": "Create a Project", "text": "Scaffold a project from a template with weblisk new." },
             { "@type": "HowToStep", "position": 3, "name": "Define Domains & Agents", "text": "Define your system as YAML specs — domains, agents, and capabilities." },
             { "@type": "HowToStep", "position": 4, "name": "Generate & Validate", "text": "Generate server implementation from specs with weblisk server init." },
@@ -191,8 +191,11 @@
           <pre><span class="syn-c"># macOS / Linux</span>
 <span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
 
-<span class="syn-c"># or via npm</span>
-<span class="syn-p">$</span> npm install -g @weblisk/cli
+<span class="syn-c"># macOS (Homebrew)</span>
+<span class="syn-p">$</span> brew install weblisk/tap/weblisk
+
+<span class="syn-c"># Windows (Scoop)</span>
+<span class="syn-p">$</span> scoop bucket add weblisk https://github.com/nicholasgasior/scoop-bucket.git && scoop install weblisk
 
 <span class="syn-c"># verify</span>
 <span class="syn-p">$</span> weblisk version

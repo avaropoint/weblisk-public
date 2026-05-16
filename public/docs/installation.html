@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Installation — Weblisk</title>
   <meta name="description"
-    content="Install the Weblisk CLI on macOS, Linux, or Windows. Options include the install script, npm, Homebrew, and manual binary downloads.">
+    content="Install the Weblisk CLI on macOS, Linux, or Windows. Options include the install script, Homebrew, Scoop, and manual binary downloads.">
   <link rel="canonical" href="https://weblisk.dev/docs/installation.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Installation — Weblisk">
@@ -169,7 +169,7 @@
       <h2>Requirements</h2>
       <ul>
         <li><strong>OS:</strong> macOS 12+, Linux (glibc 2.31+), Windows 10+ (WSL2 recommended)</li>
-        <li><strong>Node.js:</strong> 20+ (only required for the npm install method and Node.js generation target)</li>
+        <li><strong>Node.js:</strong> 20+ (only required for the Node.js generation target)</li>
         <li><strong>Go:</strong> 1.22+ (only required for the Go generation target)</li>
         <li><strong>Rust:</strong> 1.77+ (only required for the Rust generation target)</li>
       </ul>
@@ -192,18 +192,6 @@
 <span class="syn-s">weblisk 1.0.0</span></pre>
         </div>
       </div>
-
-      <h2>npm</h2>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
-          <span class="code-title">Terminal</span>
-        </div>
-        <div class="code-body">
-          <pre><span class="syn-p">$</span> npm install -g @weblisk/cli</pre>
-        </div>
-      </div>
-      <p>This installs a thin npm wrapper that downloads the platform-specific binary on first run.</p>
 
       <h2>Homebrew (macOS)</h2>
       <div class="code-window">
@@ -328,11 +316,11 @@
           <pre><span class="syn-c"># Install script</span>
 <span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
 
-<span class="syn-c"># npm</span>
-<span class="syn-p">$</span> npm update -g @weblisk/cli
-
 <span class="syn-c"># Homebrew</span>
-<span class="syn-p">$</span> brew upgrade weblisk</pre>
+<span class="syn-p">$</span> brew upgrade weblisk
+
+<span class="syn-c"># Scoop</span>
+<span class="syn-p">$</span> scoop update weblisk</pre>
         </div>
       </div>
 

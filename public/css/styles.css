@@ -31,6 +31,7 @@
 
 :root,
 [data-theme="light"] {
+  color-scheme: light;
   --wl-primary: #3B4F7C;
   --wl-primary-hover: #2D3E64;
   --wl-primary-light: rgba(59, 79, 124, 0.08);
@@ -86,6 +87,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --wl-primary: #93AEDB;
   --wl-primary-hover: #A8BFE5;
   --wl-primary-light: rgba(147, 174, 219, 0.1);
@@ -123,6 +125,71 @@
   --wl-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
   --wl-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
   --wl-shadow-glow: 0 0 20px var(--wl-primary-glow);
+}
+
+/* ─── prefers-color-scheme fallback ──────────────────────────
+   If JS fails to load (or is blocked), OS-level dark mode users
+   still get a usable dark theme. The inline <script> in <head>
+   sets data-theme, so this only fires when that script is absent. */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --wl-primary: #93AEDB;
+    --wl-primary-hover: #A8BFE5;
+    --wl-primary-light: rgba(147, 174, 219, 0.1);
+    --wl-primary-glow: rgba(147, 174, 219, 0.15);
+    --wl-accent: #22d3ee;
+    --wl-accent-light: rgba(34, 211, 238, 0.1);
+    --wl-bg: #0b1121;
+    --wl-bg-soft: #111827;
+    --wl-surface: #1a2332;
+    --wl-text: #e8ecf4;
+    --wl-text-muted: #9ca8bc;
+    --wl-text-dim: #8294a8;
+    --wl-border: #243044;
+    --wl-success: #34d399;
+    --wl-warning: #fbbf24;
+    --wl-danger: #f87171;
+    --wl-purple: #a78bfa;
+    --wl-cyan: #22d3ee;
+    --wl-green: #34d399;
+    --wl-orange: #fbbf24;
+    --wl-code-bg: #0d1525;
+    --wl-code-surface: #141e30;
+    --syn-keyword: #c4a0fc;
+    --syn-string: #5eead4;
+    --syn-number: #fdba74;
+    --syn-comment: #7e8fa3;
+    --syn-function: #7ab8ff;
+    --syn-tag: #f9a8d4;
+    --syn-attr: #fde68a;
+    --syn-punctuation: #7e8fa3;
+    --wl-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --wl-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --wl-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --wl-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    --wl-shadow-glow: 0 0 20px var(--wl-primary-glow);
+    color-scheme: dark;
+  }
+}
+
+/* ─── Semantic tint variables ────────────────────────────────
+   Reusable alpha tints for colored backgrounds/badges.
+   Avoids scattering raw rgba() values throughout the file. */
+:root {
+  --wl-green-light: rgba(5, 150, 105, 0.1);
+  --wl-purple-light: rgba(124, 58, 237, 0.1);
+  --wl-blue-light: rgba(59, 130, 246, 0.1);
+  --wl-orange-light: rgba(217, 119, 6, 0.1);
+  --wl-cyan-light: rgba(8, 145, 178, 0.1);
+  --wl-pink-light: rgba(236, 72, 153, 0.1);
+}
+[data-theme="dark"] {
+  --wl-green-light: rgba(52, 211, 153, 0.12);
+  --wl-purple-light: rgba(167, 139, 250, 0.12);
+  --wl-blue-light: rgba(96, 165, 250, 0.12);
+  --wl-orange-light: rgba(251, 191, 36, 0.12);
+  --wl-cyan-light: rgba(34, 211, 238, 0.12);
+  --wl-pink-light: rgba(244, 114, 182, 0.12);
 }
 
 [data-theme="dark"] .comparison-table .col-highlight {

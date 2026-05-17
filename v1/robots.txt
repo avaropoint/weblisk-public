@@ -1,9 +1,0 @@
-# Weblisk — https://weblisk.dev
-User-agent: *
-Allow: /
-Disallow: /cdn-cgi/
-
-Sitemap: https://weblisk.dev/sitemap.xml
-
-# AI crawler guidance
-# See https://weblisk.dev/llms.txt for structured content

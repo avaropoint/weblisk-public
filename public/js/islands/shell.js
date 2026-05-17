@@ -38,7 +38,7 @@ whenIdle(async () => {
 
   // Theme color sync
   effect(() => {
-    setThemeColor(theme() === "dark" ? "#1a1a2e" : "#ffffff");
+    setThemeColor(theme() === "dark" ? "#0b1121" : "#ffffff");
   });
 
   mark("shell:ready");

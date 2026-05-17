@@ -3,5 +3,5 @@
 
 import { synced } from "weblisk/state/sync.js";
 
-export const [theme, setTheme] = synced("theme", "light");
+export const [theme, setTheme] = synced("wl-theme", "light");
 export const [username, setUsername] = synced("username", "Guest");

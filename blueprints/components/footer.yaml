@@ -16,22 +16,24 @@ content:
   columns:
     - heading: Platform
       links:
-        - label: Blueprints
-          path: /platform/blueprints/
+        - label: Overview
+          path: /platform/
+        - label: Protocol
+          path: /platform/protocol.html
+        - label: Architecture
+          path: /platform/architecture.html
         - label: Agents
-          path: /platform/agents/
-        - label: Server Spec
-          path: /platform/server/
-        - label: Client Framework
-          path: /platform/client/
+          path: /platform/agents.html
+        - label: Security
+          path: /platform/security.html
     - heading: Ecosystem
       links:
         - label: Marketplace
           path: /marketplace/
         - label: Documentation
           path: /docs/
-        - label: Templates
-          path: /marketplace/templates/
+        - label: Quick Start
+          path: /docs/quickstart.html
     - heading: Community
       links:
         - label: GitHub

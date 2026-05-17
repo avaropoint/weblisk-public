@@ -52,9 +52,10 @@ Blueprint-versioned, agent-orchestrated migrations protect your data across ever
 ## Key Pages
 
 - Homepage: https://weblisk.dev/
-- Features: https://weblisk.dev/features.html
+- Platform: https://weblisk.dev/platform/
+- Marketplace: https://weblisk.dev/marketplace/
 - Documentation: https://weblisk.dev/docs/
-- Quick Start: https://weblisk.dev/docs/quick-start.html
+- Quick Start: https://weblisk.dev/docs/quickstart.html
 
 ## Documentation
 
@@ -65,12 +66,37 @@ Blueprint-versioned, agent-orchestrated migrations protect your data across ever
 - Hydration: https://weblisk.dev/docs/hydration.html
 - Components: https://weblisk.dev/docs/components.html
 - State Management: https://weblisk.dev/docs/state.html
+- Store: https://weblisk.dev/docs/store.html
 - Routing: https://weblisk.dev/docs/routing.html
+- Transitions: https://weblisk.dev/docs/transitions.html
+- Fetch: https://weblisk.dev/docs/fetch.html
+- Realtime: https://weblisk.dev/docs/realtime.html
 - Security: https://weblisk.dev/docs/security.html
 - Performance: https://weblisk.dev/docs/performance.html
+- Workers: https://weblisk.dev/docs/workers.html
+- Scheduler: https://weblisk.dev/docs/scheduler.html
+- Accessibility: https://weblisk.dev/docs/a11y.html
 - PWA: https://weblisk.dev/docs/pwa.html
+- Blueprints: https://weblisk.dev/docs/blueprints.html
+- Agents: https://weblisk.dev/docs/agents.html
+- Governance: https://weblisk.dev/docs/governance.html
+- Federation: https://weblisk.dev/docs/federation.html
+- Migrations: https://weblisk.dev/docs/migrations.html
 - Testing: https://weblisk.dev/docs/testing.html
 - CLI: https://weblisk.dev/docs/cli.html
+- DevTools: https://weblisk.dev/docs/devtools.html
+- Analytics: https://weblisk.dev/docs/analytics.html
+
+## Platform
+
+- Protocol: https://weblisk.dev/platform/protocol.html
+- Architecture: https://weblisk.dev/platform/architecture.html
+- Agents: https://weblisk.dev/platform/agents.html
+- Patterns: https://weblisk.dev/platform/patterns.html
+- Schemas: https://weblisk.dev/platform/schemas.html
+- Standards: https://weblisk.dev/platform/standards.html
+- Security: https://weblisk.dev/platform/security.html
+- Client: https://weblisk.dev/platform/client.html
 
 ## FAQ
 

@@ -162,7 +162,7 @@
     <main class="docs-content" id="main-content">
       <h1>Blueprints</h1>
 
-      <p>Blueprints are declarative YAML specifications that describe your entire application — APIs, schemas, auth, integrations — in a single source of truth. Write once, generate server code in Go, Rust, Node.js, or Cloudflare Workers.</p>
+      <p>Blueprints are declarative YAML specifications that describe your entire application — APIs, schemas, auth, integrations — in a single source of truth. Write once, generate server code for any supported language or platform.</p>
 
       <h2 id="what-is-a-blueprint">What Is a Blueprint?</h2>
 
@@ -274,7 +274,7 @@ auth:
         <pre><code>weblisk generate --lang go --platform cloudflare</code></pre>
       </div>
 
-      <p>Generation targets:</p>
+      <p>Built-in generation targets (extensible via custom generators):</p>
 
       <ul>
         <li><strong>Go</strong> — high-performance compiled binary</li>
@@ -283,7 +283,7 @@ auth:
         <li><strong>Cloudflare Workers</strong> — edge-deployed serverless</li>
       </ul>
 
-      <p>Use the <code>--dry-run</code> flag to preview generated output without writing files to disk.</p>
+      <p>Anyone can author additional generators for other languages or platforms — the generation interface is open and documented. Use the <code>--dry-run</code> flag to preview generated output without writing files to disk.</p>
 
       <!-- Docs nav footer -->
       <nav class="docs-nav-footer" aria-label="Documentation pagination">

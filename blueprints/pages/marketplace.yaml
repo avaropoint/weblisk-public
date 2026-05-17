@@ -87,7 +87,7 @@ coming_soon:
     items:
       - title: "Blueprints & Templates"
         icon_color: purple
-        description: "Domain controller blueprints and pre-configured hub templates. Buy once, generate for any platform."
+        description: "Domain controller blueprints and pre-configured hub templates. Buy once, generate for any language or platform."
       - title: "Agents"
         icon_color: green
         description: "Standalone agent blueprints — PDF extractors, translation agents, sentiment analyzers."

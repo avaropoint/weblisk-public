@@ -97,7 +97,7 @@
         "name": "What is Weblisk?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Weblisk is a full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints — structured specifications that give AI the context it needs to generate real systems. 97+ interlocking blueprints capture your exact requirements — security, data, integrations, deployments — and agents generate production code in Go, Rust, or Node.js that you fully own. No vendor lock-in. Full control of your data."
+          "text": "Weblisk is a full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints — structured specifications that give AI the context it needs to generate real systems. 97+ interlocking blueprints capture your exact requirements — security, data, integrations, deployments — and agents generate production code in any supported language or platform that you fully own. No vendor lock-in. Full control of your data."
         }
       },
       {
@@ -153,7 +153,7 @@
         "name": "What platforms does Weblisk support?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Weblisk generates production code in Go, Rust, and Node.js. Deploy to Cloudflare Workers today, with AWS, GCP, and Azure adapters on the roadmap. One blueprint, any target — switch platforms without rewriting your application."
+          "text": "Weblisk blueprints generate production code for any language or platform — Go, Rust, Node.js, and Cloudflare Workers ship today, with community and marketplace generators extending support further. One blueprint, any target — switch platforms without rewriting your application."
         }
       }
     ]
@@ -345,7 +345,7 @@
         <div class="section-header">
           <span class="section-label">Generative UI/UX</span>
           <h2 id="pipeline-heading">From specification to production — nothing hidden.</h2>
-          <p>Your blueprint is the input. Production-ready code is the output. If it specifies a web page, agents generate semantic HTML, scoped CSS, and interactive JavaScript. If it specifies an API, they generate server code in Go, Rust, or Node.js. Every layer is visible, every decision traceable back to the spec. This example shows how this very page was built from its blueprint.</p>
+          <p>Your blueprint is the input. Production-ready code is the output. If it specifies a web page, agents generate semantic HTML, scoped CSS, and interactive JavaScript. If it specifies an API, they generate server code for your chosen language and platform. Every layer is visible, every decision traceable back to the spec. This example shows how this very page was built from its blueprint.</p>
         </div>
         <div class="pipeline" data-island="/js/islands/pipeline.js" data-hydrate="visible">
           <div class="pipeline-stage pipeline-stage-active" data-stage="blueprint">
@@ -530,9 +530,9 @@
               <circle cx="776" cy="76" r="16" fill="var(--wl-success)" opacity="0.12"/>
               <text x="776" y="81" text-anchor="middle" class="workflow-step-num" fill="var(--wl-success)">3</text>
               <text x="800" y="81" class="workflow-title" fill="var(--wl-text)">Build &amp; Generate</text>
-              <text x="760" y="110" class="workflow-desc" fill="var(--wl-text-muted)">Generate production code in Go, Rust, or</text>
-              <text x="760" y="126" class="workflow-desc" fill="var(--wl-text-muted)">Node.js. Deploy to platforms like Cloudflare</text>
-              <text x="760" y="142" class="workflow-desc" fill="var(--wl-text-muted)">Workers. One blueprint, infinite targets.</text>
+              <text x="760" y="110" class="workflow-desc" fill="var(--wl-text-muted)">Generate production code for any language</text>
+              <text x="760" y="126" class="workflow-desc" fill="var(--wl-text-muted)">or platform. Built-in targets ship today,</text>
+              <text x="760" y="142" class="workflow-desc" fill="var(--wl-text-muted)">custom generators extend the rest.</text>
               <rect x="760" y="158" width="250" height="24" rx="4" fill="var(--wl-success)" opacity="0.08"/>
               <text x="770" y="174" class="workflow-cmd" fill="var(--wl-success)">weblisk generate --lang go</text>
             </g>
@@ -611,7 +611,7 @@
               <div class="workflow-mobile-marker"><span>3</span></div>
               <div class="workflow-mobile-content">
                 <h3>Build &amp; Generate</h3>
-                <p>Generate production code in Go, Rust, or Node.js. Deploy to platforms like Cloudflare Workers. One blueprint, infinite targets.</p>
+                <p>Generate production code for any supported language or platform. Built-in targets ship today — custom generators extend the rest. One blueprint, infinite targets.</p>
                 <code>weblisk generate --lang go</code>
               </div>
             </div>
@@ -704,7 +704,7 @@
               <g class="arch-layer" data-layer="platforms">
                 <rect x="30" y="350" width="500" height="60" rx="10" class="arch-rect"/>
                 <text x="280" y="376" text-anchor="middle" class="arch-layer-text">Platforms</text>
-                <text x="280" y="396" text-anchor="middle" class="arch-layer-sub">Cloudflare Workers · Go · Rust · Node.js</text>
+                <text x="280" y="396" text-anchor="middle" class="arch-layer-sub">Any language · Any platform · Extensible</text>
               </g>
               <!-- Layer 7: Marketplace & Hub Network -->
               <g class="arch-layer" data-layer="ecosystem">
@@ -758,7 +758,7 @@
             </div>
             <div class="arch-detail-content" data-detail="platforms" hidden>
               <h3>Platforms</h3>
-              <p>Languages: Go, Rust, Node.js. Platforms: Cloudflare Workers today, with AWS, GCP, Azure adapters on the roadmap. One blueprint, any target.</p>
+              <p>Blueprints target any language or platform. Go, Rust, Node.js, and Cloudflare Workers ship as built-in generators — community and marketplace authors can build generators for anything else. One blueprint, any target.</p>
               <a href="/platform/">Explore platforms →</a>
             </div>
             <div class="arch-detail-content" data-detail="ecosystem" hidden>
@@ -1167,7 +1167,7 @@
           </a>
           <a href="/marketplace/" class="btn btn-outline">Explore the Marketplace</a>
         </div>
-        <p class="cta-roadmap">Languages: Go, Rust, Node.js. Platforms: Cloudflare Workers today — AWS, GCP, Azure adapters coming soon.</p>
+        <p class="cta-roadmap">Built-in targets: Go, Rust, Node.js, Cloudflare Workers. Extensible to any language or platform via custom generators.</p>
       </div>
     </section>
 

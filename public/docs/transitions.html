@@ -181,121 +181,228 @@
 
     <main class="docs-content" id="main-content">
       <h1>View Transitions</h1>
+      <p class="lead">Weblisk wraps the browser's View Transitions API with automatic fallbacks, making smooth page and element transitions trivial.</p>
 
-      <p>Weblisk wraps the browser's View Transitions API with automatic fallbacks, making smooth page transitions
-        trivial.</p>
-      <h2>Basic Navigation</h2>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-transitions.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- NAVIGATE WITH TRANSITION -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Navigate with Transition</h2>
+      <p>Swap content with a smooth crossfade — uses <code>document.startViewTransition()</code> if supported.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Navigate with Transition</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-navigate" style="width:100%">
+              <p class="feature-demo-desc">Swap content with a smooth crossfade transition.</p>
+              <div id="navigate-panel"
+                style="min-height:80px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:1rem;margin-bottom:0.75rem;background:var(--wl-primary);transition:none">
+                <h4 style="margin:0;font-size:1rem">Home</h4>
+                <p style="margin:0.25rem 0 0;font-size:0.85rem;opacity:0.85">Welcome to the homepage</p>
+              </div>
+              <button class="btn btn-sm" id="btn-navigate">Navigate →</button>
+              <pre class="demo-output" id="output-navigate">Click to navigate between pages</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> navigate <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/transition.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-s">'/about'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- SHARED ELEMENT TRANSITIONS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Shared Element Transitions</h2>
+      <p>Click a card — it expands into a detail view with a shared element animation. Match elements across pages by assigning <code>view-transition-name</code> values.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Shared Element Transitions</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-shared" style="width:100%">
+              <p class="feature-demo-desc">Click a card to expand with a shared element animation.</p>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;flex-wrap:wrap">
+                <div class="transition-card"
+                  style="flex:1;min-width:80px;padding:0.75rem;border-radius:8px;background:var(--wl-primary);color:#fff;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600">
+                  Signals</div>
+                <div class="transition-card"
+                  style="flex:1;min-width:80px;padding:0.75rem;border-radius:8px;background:var(--wl-accent,#6b7bf7);color:#fff;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600">
+                  Islands</div>
+                <div class="transition-card"
+                  style="flex:1;min-width:80px;padding:0.75rem;border-radius:8px;background:var(--success,#22c55e);color:#fff;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600">
+                  Security</div>
+              </div>
+              <div id="shared-detail" hidden
+                style="padding:1rem;border-radius:8px;background:var(--wl-surface);border:1px solid var(--wl-border)">
+                <h4 style="margin:0 0 0.5rem"></h4>
+                <p style="margin:0;font-size:0.85rem;color:var(--wl-text-muted)"></p>
+                <button class="btn btn-sm" id="btn-back" style="margin-top:0.75rem">← Back</button>
+              </div>
+              <pre class="demo-output" id="output-shared">Click a card to expand</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> transitionNames <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/transition.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">transitionNames</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  <span class="syn-s">'.product-image'</span><span class="syn-p">:</span> <span class="syn-s">'product-hero'</span><span class="syn-p">,</span>
+  <span class="syn-s">'.product-title'</span><span class="syn-p">:</span> <span class="syn-s">'product-title'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- TRANSITION TYPES -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Transition Types</h2>
+      <p>Tag transitions with types for targeted CSS animations — fade, slide, scale, and more.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Transition Types</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-types" style="width:100%">
+              <p class="feature-demo-desc">Apply named transition types to control the animation style.</p>
+              <div id="types-stage"
+                style="min-height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;margin-bottom:0.75rem;background:var(--wl-primary);font-size:0.85rem">
+                fade</div>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+                <button class="btn btn-sm" data-transition="fade">Fade</button>
+                <button class="btn btn-sm" data-transition="slide-left">Slide Left</button>
+                <button class="btn btn-sm" data-transition="slide-right">Slide Right</button>
+                <button class="btn btn-sm" data-transition="scale">Scale</button>
+              </div>
+              <pre class="demo-output" id="output-types">Choose a transition type</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <button class="feature-demo-code-tab" data-lang="css" type="button">CSS</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-s">'/gallery'</span><span class="syn-p">,</span> <span class="syn-p">{</span> types<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'slide-left'</span><span class="syn-p">]</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <div class="feature-demo-code-panel" data-lang="css">
+              <pre>::view-transition-old(root).slide-left {
+  <span class="syn-a">animation</span>: slide-out-left <span class="syn-n">0.3s</span> ease;
+}
+::view-transition-new(root).slide-left {
+  <span class="syn-a">animation</span>: slide-in-right <span class="syn-n">0.3s</span> ease;
+}</pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Transitions API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>navigate(url, opts?)</code></td><td>function</td><td>Navigate with a view transition. Pass <code>types</code> for targeted CSS</td></tr>
+          <tr><td><code>navigate(callback)</code></td><td>function</td><td>SPA-style swap — callback runs inside <code>startViewTransition()</code></td></tr>
+          <tr><td><code>transitionNames(map)</code></td><td>function</td><td>Assign <code>view-transition-name</code> values for cross-page element matching</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- MPA TRANSITIONS (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>MPA Transitions</h2>
+      <p>For multi-page apps (the default Weblisk pattern), add this CSS to enable smooth crossfade transitions between pages:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
-          <span class="code-title">js</span>
+          <span class="code-title">css</span>
           <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
           <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> navigate <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/transition.js'</span><span class="syn-p">;</span>
-
-document<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'a.fancy'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'click'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span>e<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  e<span class="syn-p">.</span><span class="syn-f">preventDefault</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span>e<span class="syn-p">.</span>target<span class="syn-p">.</span>href<span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Transition Types</h2>
-      <p>Tag transitions with types for targeted CSS:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-s">'/gallery'</span><span class="syn-p">,</span> <span class="syn-p">{</span> types<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'slide-left'</span><span class="syn-p">]</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">css</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-::view-transition-old(root).slide-left {
-  <span class="syn-a">animation</span>: slide-out-left <span class="syn-n">0.3s</span> ease;
-}
-::view-transition-new(root).slide-left {
-  <span class="syn-a">animation</span>: slide-in-right <span class="syn-n">0.3s</span> ease;
-}
-</pre>
-        </div>
-      </div>
-      <h2>Named Elements</h2>
-      <p>Match elements across pages for shared element transitions:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-k">import</span> <span class="syn-p">{</span> transitionNames <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/transition.js'</span><span class="syn-p">;</span>
-
-<span class="syn-f">transitionNames</span><span class="syn-p">(</span><span class="syn-p">{</span>
-  <span class="syn-s">'.product-image'</span><span class="syn-p">:</span> <span class="syn-s">'product-hero'</span><span class="syn-p">,</span>
-  <span class="syn-s">'.product-title'</span><span class="syn-p">:</span> <span class="syn-s">'product-title'</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>The browser automatically animates matching elements between the old and new page.</p>
-      <h2>SPA-Style Swap</h2>
-      <p>Use a callback to swap content manually:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
-<span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> html <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/about'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">then</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> r<span class="syn-p">.</span><span class="syn-f">text</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  document<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'main'</span><span class="syn-p">)</span><span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> html<span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>MPA Transitions</h2>
-      <p>For multi-page apps (the default Weblisk pattern), add this CSS to your stylesheet to enable
-        smooth crossfade transitions between pages. Both pages must include this rule:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">css</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-6">
 <span class="syn-k">@view-transition</span> { <span class="syn-a">navigation</span>: auto; }
 
-<span class="syn-c">/* Customize the animation */</span>
 <span class="syn-k">::view-transition-old</span>(root) {
   <span class="syn-a">animation</span>: 200ms ease both fade-out;
 }
@@ -306,6 +413,7 @@ document<span class="syn-p">.</span><span class="syn-f">querySelector</span><spa
         </div>
       </div>
       <p>This is already included in the scaffold's <code>styles.css</code>. No JavaScript needed for MPA transitions.</p>
+
       <h2>SPA Transitions</h2>
       <p>For single-page apps that swap content dynamically, use <code>navigate()</code> with a callback:</p>
       <div class="code-window">
@@ -313,14 +421,13 @@ document<span class="syn-p">.</span><span class="syn-f">querySelector</span><spa
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
           <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
-          <pre id="doc-code-7">
+          <pre id="doc-code-2">
 <span class="syn-k">import</span> <span class="syn-p">{</span> navigate <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/transition.js'</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Swap content with a view transition</span>
 <span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-k">=></span> <span class="syn-p">{</span>
   document.<span class="syn-f">getElementById</span><span class="syn-p">(</span><span class="syn-s">'content'</span><span class="syn-p">)</span>.innerHTML <span class="syn-p">=</span> newHTML<span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>

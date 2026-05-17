@@ -181,9 +181,163 @@
 
     <main class="docs-content" id="main-content">
       <h1>Islands</h1>
+      <p class="lead">Islands are the core pattern in Weblisk. HTML renders first as static content — then small JavaScript modules "enhance" specific regions with interactivity. Only the interactive parts ship JavaScript.</p>
 
-      <p>Islands are the core pattern in Weblisk. HTML renders first as static content — then small JavaScript modules
-        "enhance" specific regions with interactivity. Only the interactive parts ship JavaScript.</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-islands.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- LAZY ISLANDS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Lazy Islands</h2>
+      <p>For islands below the fold, load them only when they enter the viewport using <code>IntersectionObserver</code>. Zero JavaScript until visible.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Lazy Islands</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-lazy" style="width:100%">
+              <p class="feature-demo-desc">Scroll down — the widget below loads its script only when visible (check console).</p>
+              <div id="lazy-target"
+                style="min-height:60px;border:2px dashed var(--wl-border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--wl-text-muted);font-size:0.85rem">
+                Waiting to enter viewport...
+              </div>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="html" type="button">HTML</button>
+              <button class="feature-demo-code-tab" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="html">
+              <pre><span class="syn-t">&lt;div</span> <span class="syn-a">id=</span><span class="syn-s">"lazy-target"</span>
+  <span class="syn-a">style=</span><span class="syn-s">"min-height:60px;border:2px dashed var(--wl-border);
+         border-radius:8px;display:flex;align-items:center;
+         justify-content:center;font-size:0.85rem"</span><span class="syn-t">&gt;</span>
+  Waiting to enter viewport...
+<span class="syn-t">&lt;/div</span><span class="syn-t">&gt;</span></pre>
+            </div>
+            <div class="feature-demo-code-panel" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> lazyEnhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/lazy-island.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">lazyEnhance</span><span class="syn-p">(</span><span class="syn-s">'#lazy-target'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> el <span class="syn-p">=</span> document<span class="syn-p">.</span><span class="syn-f">getElementById</span><span class="syn-p">(</span><span class="syn-s">'lazy-target'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  el<span class="syn-p">.</span>style<span class="syn-p">.</span>borderColor <span class="syn-p">=</span> <span class="syn-s">'var(--success, green)'</span><span class="syn-p">;</span>
+  el<span class="syn-p">.</span>style<span class="syn-p">.</span>borderStyle <span class="syn-p">=</span> <span class="syn-s">'solid'</span><span class="syn-p">;</span>
+  el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> <span class="syn-s">'&lt;strong&gt;Lazy island loaded!&lt;/strong&gt;'</span><span class="syn-p">;</span>
+  <span class="syn-k">return</span> Promise<span class="syn-p">.</span><span class="syn-f">resolve</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span> rootMargin<span class="syn-p">:</span> <span class="syn-s">'50px'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Lazy Islands API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>lazyEnhance(selector, setup, opts?)</code></td><td>function</td><td>Enhance a single element when it enters the viewport</td></tr>
+          <tr><td><code>lazyEnhanceAll(selector, setup)</code></td><td>function</td><td>Enhance all matching elements as each enters viewport</td></tr>
+          <tr><td><code>opts.rootMargin</code></td><td>string</td><td>IntersectionObserver margin (default: <code>'0px'</code>)</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- ERROR BOUNDARIES -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Error Boundaries</h2>
+      <p>Wrap islands in error boundaries to gracefully handle failures. Shows a fallback UI, optionally retries, and reports errors via a callback.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Error Boundaries</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-error" style="width:100%">
+              <p class="feature-demo-desc">Click to trigger an error inside a boundary — it catches it gracefully.</p>
+              <button class="btn btn-sm" id="btn-error">Trigger Error</button>
+              <div id="error-target" style="min-height:40px;padding:0.75rem 0;margin-top:0.5rem;font-size:0.85rem;color:var(--wl-text-muted)">No errors yet.</div>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="html" type="button">HTML</button>
+              <button class="feature-demo-code-tab" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="html">
+              <pre><span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"btn btn-sm"</span> <span class="syn-a">id=</span><span class="syn-s">"btn-error"</span><span class="syn-t">&gt;</span>Trigger Error<span class="syn-t">&lt;/button</span><span class="syn-t">&gt;</span>
+<span class="syn-t">&lt;div</span> <span class="syn-a">id=</span><span class="syn-s">"error-target"</span><span class="syn-t">&gt;</span>No errors yet.<span class="syn-t">&lt;/div</span><span class="syn-t">&gt;</span></pre>
+            </div>
+            <div class="feature-demo-code-panel" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> boundary <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/error.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">boundary</span><span class="syn-p">(</span><span class="syn-s">'#target'</span><span class="syn-p">,</span> setupFn<span class="syn-p">,</span> <span class="syn-p">{</span>
+  fallback<span class="syn-p">:</span> <span class="syn-s">'&lt;p&gt;Something went wrong. &lt;button data-retry&gt;Retry&lt;/button&gt;&lt;/p&gt;'</span><span class="syn-p">,</span>
+  onError<span class="syn-p">:</span> <span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span>err<span class="syn-p">)</span><span class="syn-p">,</span>
+  retry<span class="syn-p">:</span> <span class="syn-k">true</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Boundary API</h3>
+      <table class="api-table">
+        <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>boundary(selector, setup, opts)</code></td><td>function</td><td>Wrap an island setup in an error boundary</td></tr>
+          <tr><td><code>opts.fallback</code></td><td>string</td><td>HTML string shown when setup throws</td></tr>
+          <tr><td><code>opts.onError</code></td><td>function</td><td>Callback receiving the caught error</td></tr>
+          <tr><td><code>opts.retry</code></td><td>boolean</td><td>If <code>true</code>, clicking <code>[data-retry]</code> re-runs setup</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- BASIC ISLAND PATTERN (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Basic Island</h2>
       <p>HTML:</p>
       <div class="code-window">
@@ -226,7 +380,28 @@
 </pre>
         </div>
       </div>
+
       <h2>The <code>enhance()</code> Function</h2>
+      <table class="api-table">
+        <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>target</code></td><td><code>string | Element</code></td><td>CSS selector or DOM element to enhance</td></tr>
+          <tr><td><code>setup</code></td><td><code>(el, ctx) =&gt; cleanup | void</code></td><td>Setup function with element and context</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Context Object</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>$</code></td><td><code>querySelector</code> scoped to the island element</td></tr>
+          <tr><td><code>$$</code></td><td><code>querySelectorAll</code> scoped to the island element</td></tr>
+          <tr><td><code>effect</code></td><td>Scoped <code>effect()</code> — auto-cleaned when island is destroyed</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Cleanup</h3>
+      <p>Return a function from <code>setup</code> to clean up when the island is removed:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -237,24 +412,17 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-3">
-<span class="syn-f">enhance</span><span class="syn-p">(</span>target<span class="syn-p">,</span> setup<span class="syn-p">)</span>
+<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;timer&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> id <span class="syn-p">=</span> <span class="syn-f">setInterval</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span> <span class="syn-p">/</span><span class="syn-p">*</span> <span class="syn-p">.</span><span class="syn-p">.</span><span class="syn-p">.</span> <span class="syn-p">*</span><span class="syn-p">/</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+  <span class="syn-k">return</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">clearInterval</span><span class="syn-p">(</span>id<span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Called on cleanup</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>
       </div>
-      <p>| Parameter | Type | Description |</p>
-      <p>|-----------|------|-------------|</p>
-      <p>| <code>target</code> | <code>string \| Element</code> | CSS selector or DOM element to enhance |</p>
-      <p>| <code>setup</code> | <code>(el, ctx) => cleanup \| void</code> | Setup function with element and context |
-      </p>
-      <h3>Context Object</h3>
-      <p>The second argument to your setup function provides helpers:</p>
-      <p>| Property | Description |</p>
-      <p>|----------|-------------|</p>
-      <p>| <code>$</code> | <code>querySelector</code> scoped to the island element |</p>
-      <p>| <code>$$</code> | <code>querySelectorAll</code> scoped to the island element |</p>
-      <p>| <code>effect</code> | Scoped <code>effect()</code> — auto-cleaned when island is destroyed |</p>
-      <h3>Cleanup</h3>
-      <p>Return a function from <code>setup</code> to clean up when the island is removed:</p>
+
+      <h2>Multiple Islands on a Page</h2>
+      <p>Each island is independent — connect them via a shared store:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -265,16 +433,15 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-4">
-<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;timer&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> id <span class="syn-p">=</span> <span class="syn-f">setInterval</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span> <span class="syn-p">/</span><span class="syn-p">*</span> <span class="syn-p">.</span><span class="syn-p">.</span><span class="syn-p">.</span> <span class="syn-p">*</span><span class="syn-p">/</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-  <span class="syn-k">return</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">clearInterval</span><span class="syn-p">(</span>id<span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Called on cleanup</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-c">// shared.js</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> store <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">export</span> <span class="syn-k">const</span> appState <span class="syn-p">=</span> <span class="syn-f">store</span><span class="syn-p">(</span><span class="syn-p">{</span> query<span class="syn-p">:</span> <span class="syn-s">''</span><span class="syn-p">,</span> results<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-p">]</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>
       </div>
-      <h2>Lazy Islands</h2>
-      <p>For islands below the fold, load them only when they become visible:</p>
+
+      <h2>Creating Islands</h2>
+      <p>Create a new file in <code>js/islands/</code> with an <code>export default function</code>:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -285,148 +452,6 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-5">
-<span class="syn-k">import</span> <span class="syn-p">{</span> lazyEnhance <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/lazy-island.js'</span><span class="syn-p">;</span>
-
-<span class="syn-f">lazyEnhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;chart&quot;]'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> <span class="syn-p">{</span> setupChart <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-k">import</span><span class="syn-p">(</span><span class="syn-s">'./chart-setup.js'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-k">return</span> setupChart<span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h3>Lazy Enhance All</h3>
-      <p>Enhance multiple islands matching the same selector:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-6">
-<span class="syn-k">import</span> <span class="syn-p">{</span> lazyEnhanceAll <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/lazy-island.js'</span><span class="syn-p">;</span>
-
-<span class="syn-f">lazyEnhanceAll</span><span class="syn-p">(</span><span class="syn-s">'.card[data-island]'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> type <span class="syn-p">=</span> el<span class="syn-p">.</span>dataset<span class="syn-p">.</span>island<span class="syn-p">;</span>
-  <span class="syn-k">const</span> mod <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-k">import</span><span class="syn-p">(</span><span class="syn-s">`./cards/${type}.js`</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  mod<span class="syn-p">.</span><span class="syn-f">setup</span><span class="syn-p">(</span>el<span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Error Boundaries</h2>
-      <p>Wrap islands in error boundaries to gracefully handle failures:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-7">
-<span class="syn-k">import</span> <span class="syn-p">{</span> boundary <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/error.js'</span><span class="syn-p">;</span>
-
-<span class="syn-f">boundary</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;chart&quot;]'</span><span class="syn-p">,</span> setupChart<span class="syn-p">,</span> <span class="syn-p">{</span>
-  fallback<span class="syn-p">:</span> <span class="syn-s">'&lt;p&gt;Chart failed to load. &lt;button data-retry&gt;Retry&lt;/button&gt;&lt;/p&gt;'</span><span class="syn-p">,</span>
-  onError<span class="syn-p">:</span> <span class="syn-p">(</span>err<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span><span class="syn-s">'Chart error:'</span><span class="syn-p">,</span> err<span class="syn-p">)</span><span class="syn-p">,</span>
-  retry<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>If the setup function throws, the fallback HTML is shown. With <code>retry: true</code>, clicking
-        <code>[data-retry]</code> re-runs setup.</p>
-      <h2>Multiple Islands on a Page</h2>
-      <p>Each island is independent — they don't share state unless you explicitly connect them:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">html</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-8">
-<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;header&quot;</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
-<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;search&quot;</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
-<span class="syn-t">&lt;</span><span class="syn-t">div</span> <span class="syn-a">data-island</span><span class="syn-p">=</span><span class="syn-s">&quot;results&quot;</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/</span><span class="syn-t">div</span><span class="syn-t">&gt;</span>
-</pre>
-        </div>
-      </div>
-      <p>To share state between islands, use a shared store:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-9">
-<span class="syn-c">// shared.js</span>
-<span class="syn-k">import</span> <span class="syn-p">{</span> store <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
-<span class="syn-k">export</span> <span class="syn-k">const</span> appState <span class="syn-p">=</span> <span class="syn-f">store</span><span class="syn-p">(</span><span class="syn-p">{</span> query<span class="syn-p">:</span> <span class="syn-s">''</span><span class="syn-p">,</span> results<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-p">]</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-10">
-<span class="syn-c">// search.js</span>
-<span class="syn-k">import</span> <span class="syn-p">{</span> appState <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'./shared.js'</span><span class="syn-p">;</span>
-<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;search&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> $ <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'input'</span><span class="syn-p">,</span> <span class="syn-p">(</span>e<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-    appState<span class="syn-p">.</span>query <span class="syn-p">=</span> e<span class="syn-p">.</span>target<span class="syn-p">.</span>value<span class="syn-p">;</span>
-  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-11">
-<span class="syn-c">// results.js</span>
-<span class="syn-k">import</span> <span class="syn-p">{</span> appState <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'./shared.js'</span><span class="syn-p">;</span>
-<span class="syn-f">enhance</span><span class="syn-p">(</span><span class="syn-s">'[data-island=&quot;results&quot;]'</span><span class="syn-p">,</span> <span class="syn-p">(</span>el<span class="syn-p">,</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-    el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> appState<span class="syn-p">.</span>results<span class="syn-p">.</span><span class="syn-f">map</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> <span class="syn-s">`&lt;li&gt;${r}&lt;/li&gt;`</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">join</span><span class="syn-p">(</span><span class="syn-s">''</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Creating Islands</h2>
-      <p>Create a new file in <code>js/islands/</code> with an <code>export default function</code>:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-12">
 <span class="syn-c">// js/islands/my-widget.js</span>
 <span class="syn-k">export</span> <span class="syn-k">default</span> <span class="syn-k">function</span> <span class="syn-f">myWidget</span><span class="syn-p">(</span>el<span class="syn-p">)</span> <span class="syn-p">{</span>
   <span class="syn-c">// el is the element with [data-island]</span>

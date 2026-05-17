@@ -179,84 +179,161 @@
 
     <main class="docs-content" id="main-content">
       <h1>Performance</h1>
+      <p class="lead">High-resolution timing, Core Web Vitals as reactive signals, beacon reporting, and speculative prefetch. Measure everything, ship the data, and preload what's next.</p>
 
-      <h2>Core Web Vitals</h2>
-      <p>Track LCP, CLS, FID, INP, FCP, and TTFB as reactive signals:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> vitals <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/perf/vitals.js'</span><span class="syn-p">;</span>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-perf.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
 
-<span class="syn-k">const</span> v <span class="syn-p">=</span> <span class="syn-f">vitals</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- USER TIMING -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>User Timing</h2>
+      <p>High-resolution marks and measures using the Performance API. The <code>time()</code> helper wraps any async function, returning both its result and duration in milliseconds.</p>
 
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'LCP:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">lcp</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'CLS:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">cls</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'INP:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">inp</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'FCP:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">fcp</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'TTFB:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">ttfb</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">User Timing</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <h2>Performance Timing</h2>
-      <p>High-resolution timing wrappers:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">import</span> <span class="syn-p">{</span> mark<span class="syn-p">,</span> measure<span class="syn-p">,</span> time <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/perf/marks.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-marks" style="width:100%">
+              <p class="feature-demo-desc">Marks + measures using the Performance API with wl: prefix.</p>
+              <button class="btn btn-sm" id="btn-marks">Run Timed Task</button>
+              <pre class="demo-output" id="output-marks">Ready...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> mark<span class="syn-p">,</span> measure<span class="syn-p">,</span> time<span class="syn-p">,</span> getEntries <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/perf/marks.js'</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Place marks</span>
 <span class="syn-f">mark</span><span class="syn-p">(</span><span class="syn-s">'data-loaded'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Measure between marks</span>
 <span class="syn-k">const</span> m <span class="syn-p">=</span> <span class="syn-f">measure</span><span class="syn-p">(</span><span class="syn-s">'load-time'</span><span class="syn-p">,</span> <span class="syn-s">'init'</span><span class="syn-p">,</span> <span class="syn-s">'data-loaded'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`Loaded in ${m.duration}ms`</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Time a function</span>
+<span class="syn-c">// Time any async function</span>
 <span class="syn-k">const</span> <span class="syn-p">[</span>result<span class="syn-p">,</span> duration<span class="syn-p">]</span> <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">time</span><span class="syn-p">(</span><span class="syn-s">'api-call'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
   <span class="syn-k">return</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/api/data'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">then</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> r<span class="syn-p">.</span><span class="syn-f">json</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`API call took ${duration}ms`</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+
+<span class="syn-c">// Retrieve all wl: entries</span>
+<span class="syn-k">const</span> <span class="syn-p">{</span> marks<span class="syn-p">,</span> measures <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">getEntries</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
-      <h3>Retrieving Entries</h3>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+
+      <h3>Timing API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>mark(name)</code></td><td>function</td><td>Place a <code>wl:</code>-prefixed performance mark</td></tr>
+          <tr><td><code>measure(name, start, end)</code></td><td>function</td><td>Measure duration between two marks</td></tr>
+          <tr><td><code>time(name, fn)</code></td><td>async</td><td>Time an async function — returns <code>[result, durationMs]</code></td></tr>
+          <tr><td><code>getEntries()</code></td><td>function</td><td>Get all <code>wl:</code> marks and measures</td></tr>
+          <tr><td><code>clearEntries()</code></td><td>function</td><td>Clear all <code>wl:</code> performance entries</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- CORE WEB VITALS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Core Web Vitals</h2>
+      <p>Track LCP, CLS, FID, INP, FCP, and TTFB as reactive signals via <code>PerformanceObserver</code>. Values update automatically as the browser reports them.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Core Web Vitals</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> getEntries<span class="syn-p">,</span> clearEntries <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/perf/marks.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-vitals" style="width:100%">
+              <p class="feature-demo-desc">Live LCP, CLS, FCP, TTFB signals from PerformanceObserver.</p>
+              <pre class="demo-output" id="output-vitals">Collecting metrics...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> vitals <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/perf/vitals.js'</span><span class="syn-p">;</span>
 
-<span class="syn-k">const</span> <span class="syn-p">{</span> marks<span class="syn-p">,</span> measures <span class="syn-p">}</span> <span class="syn-p">=</span> <span class="syn-f">getEntries</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-console<span class="syn-p">.</span><span class="syn-f">table</span><span class="syn-p">(</span>measures<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> v <span class="syn-p">=</span> <span class="syn-f">vitals</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-f">clearEntries</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Reset</span>
-</pre>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'LCP:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">lcp</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'CLS:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">cls</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'INP:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">inp</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'FCP:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">fcp</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'TTFB:'</span><span class="syn-p">,</span> v<span class="syn-p">.</span><span class="syn-f">ttfb</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>Vitals API</h3>
+      <table class="api-table">
+        <thead><tr><th>Signal</th><th>Metric</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>v.lcp()</code></td><td>LCP</td><td>Largest Contentful Paint (ms)</td></tr>
+          <tr><td><code>v.cls()</code></td><td>CLS</td><td>Cumulative Layout Shift (unitless)</td></tr>
+          <tr><td><code>v.fid()</code></td><td>FID</td><td>First Input Delay (ms)</td></tr>
+          <tr><td><code>v.inp()</code></td><td>INP</td><td>Interaction to Next Paint (ms)</td></tr>
+          <tr><td><code>v.fcp()</code></td><td>FCP</td><td>First Contentful Paint (ms)</td></tr>
+          <tr><td><code>v.ttfb()</code></td><td>TTFB</td><td>Time to First Byte (ms)</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- BEACON REPORTER (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Beacon Reporter</h2>
-      <p>Ship performance data to your analytics endpoint:</p>
+      <p>Ship performance data to your analytics endpoint. Uses <code>navigator.sendBeacon</code> to ensure data is sent even during page unload.</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -284,10 +361,12 @@ console<span class="syn-p">.</span><span class="syn-f">table</span><span class="
 </pre>
         </div>
       </div>
-      <p>Uses <code>navigator.sendBeacon</code> to ensure data is sent even during page unload.</p>
 
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- SPECULATION RULES (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Speculation Rules (Prefetch &amp; Prerender)</h2>
-      <p>Preload pages the user is likely to visit next for instant perceived navigation:</p>
+      <p>Preload pages the user is likely to visit next for instant perceived navigation. Uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API" rel="noopener noreferrer">Speculation Rules API</a> where supported, falling back to <code>&lt;link rel="prefetch"&gt;</code>.</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -315,13 +394,15 @@ handle<span class="syn-p">.</span><span class="syn-f">destroy</span><span class=
         </div>
       </div>
       <h3>Eagerness Levels</h3>
-      <p>| Level | Behavior |</p>
-      <p>|-------|----------|</p>
-      <p>| <code>immediate</code> | Prefetch all matching links now |</p>
-      <p>| <code>eager</code> | Prefetch on hover or pointer down |</p>
-      <p>| <code>moderate</code> | Prefetch on hover with short delay (default) |</p>
-      <p>| <code>conservative</code> | Prefetch on pointer down only |</p>
-      <p>Uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API" rel="noopener noreferrer">Speculation Rules API</a> where supported, falling back to <code>&lt;link rel="prefetch"&gt;</code> for broader coverage.</p>
+      <table class="api-table">
+        <thead><tr><th>Level</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td><code>immediate</code></td><td>Prefetch all matching links now</td></tr>
+          <tr><td><code>eager</code></td><td>Prefetch on hover or pointer down</td></tr>
+          <tr><td><code>moderate</code></td><td>Prefetch on hover with short delay (default)</td></tr>
+          <tr><td><code>conservative</code></td><td>Prefetch on pointer down only</td></tr>
+        </tbody>
+      </table>
 
       <div class="docs-nav-footer">
         <a href="/docs/security.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

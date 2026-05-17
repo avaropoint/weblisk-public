@@ -180,10 +180,236 @@
 
     <main class="docs-content" id="main-content">
       <h1>Realtime</h1>
+      <p class="lead">Signal-driven wrappers for WebSocket, Server-Sent Events, and WebTransport with auto-reconnect, heartbeat, and reactive state.</p>
 
-      <p>Weblisk provides signal-driven wrappers for real-time communication protocols.</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-realtime.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- WEBSOCKET -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>WebSocket</h2>
-      <p>Reactive WebSocket with auto-reconnect and heartbeat:</p>
+      <p>Reactive WebSocket with auto-reconnect, heartbeat pings, and a signal-based message buffer. Connection state is a signal — UI updates automatically.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">WebSocket</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-ws" style="width:100%">
+              <p class="feature-demo-desc">Reactive WebSocket with auto-reconnect, heartbeat, and message buffering.</p>
+              <button class="btn btn-sm" id="btn-ws">Simulate Socket</button>
+              <pre class="demo-output" id="output-ws">Disconnected</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> socket <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/ws.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> ws <span class="syn-p">=</span> <span class="syn-f">socket</span><span class="syn-p">(</span><span class="syn-s">'wss://api.example.com/ws'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  reconnect<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  maxRetries<span class="syn-p">:</span> <span class="syn-n">10</span><span class="syn-p">,</span>
+  heartbeat<span class="syn-p">:</span> <span class="syn-n">30000</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'State:'</span><span class="syn-p">,</span> ws<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Messages:'</span><span class="syn-p">,</span> ws<span class="syn-p">.</span><span class="syn-f">messages</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+ws<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'subscribe'</span><span class="syn-p">,</span> channel<span class="syn-p">:</span> <span class="syn-s">'updates'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>WebSocket API</h3>
+      <table class="api-table">
+        <thead><tr><th>Member</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>socket(url, opts?)</code></td><td>function</td><td>Open a WebSocket. Options: <code>reconnect</code>, <code>maxRetries</code>, <code>heartbeat</code></td></tr>
+          <tr><td><code>.state()</code></td><td>signal</td><td><code>'connecting'</code>, <code>'open'</code>, or <code>'closed'</code></td></tr>
+          <tr><td><code>.messages()</code></td><td>signal</td><td>Array of received messages</td></tr>
+          <tr><td><code>.send(data)</code></td><td>method</td><td>Send JSON data (buffered if not yet open)</td></tr>
+          <tr><td><code>.close()</code></td><td>method</td><td>Close the connection</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- SSE -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Server-Sent Events</h2>
+      <p>Reactive SSE with named event channels, auto-reconnect, and a <code>latest()</code> helper for showing only the most recent event.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Server-Sent Events</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-sse" style="width:100%">
+              <p class="feature-demo-desc">Reactive SSE with named event channels and auto-reconnect.</p>
+              <button class="btn btn-sm" id="btn-sse">Simulate Events</button>
+              <pre class="demo-output" id="output-sse">No events</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> stream<span class="syn-p">,</span> latest <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/sse.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> sse <span class="syn-p">=</span> <span class="syn-f">stream</span><span class="syn-p">(</span><span class="syn-s">'/api/events'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  channels<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'notifications'</span><span class="syn-p">,</span> <span class="syn-s">'updates'</span><span class="syn-p">]</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> last <span class="syn-p">=</span> <span class="syn-f">latest</span><span class="syn-p">(</span>sse<span class="syn-p">.</span>events<span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Status:'</span><span class="syn-p">,</span> sse<span class="syn-p">.</span><span class="syn-f">status</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Latest:'</span><span class="syn-p">,</span> <span class="syn-f">last</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>SSE API</h3>
+      <table class="api-table">
+        <thead><tr><th>Member</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>stream(url, opts?)</code></td><td>function</td><td>Open an SSE connection. Options: <code>channels</code></td></tr>
+          <tr><td><code>.status()</code></td><td>signal</td><td><code>'connecting'</code>, <code>'open'</code>, or <code>'closed'</code></td></tr>
+          <tr><td><code>.events()</code></td><td>signal</td><td>Array of all received events</td></tr>
+          <tr><td><code>latest(signal)</code></td><td>function</td><td>Derived signal returning only the most recent event</td></tr>
+          <tr><td><code>.close()</code></td><td>method</td><td>Close the connection</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- TRANSPORT -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>WebTransport</h2>
+      <p>Unified HTTP/3 WebTransport with automatic WebSocket fallback. Multiplexed named channels, auto-reconnect, and heartbeat.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Real-Time Transport</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-transport" style="width:100%">
+              <p class="feature-demo-desc">Unified WebTransport (HTTP/3) → WebSocket fallback. Multiplexed channels, auto-reconnect.</p>
+              <button class="btn btn-sm" id="btn-transport">Check Transport</button>
+              <pre class="demo-output" id="output-transport">Ready...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> transport <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/transport.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> conn <span class="syn-p">=</span> <span class="syn-f">transport</span><span class="syn-p">(</span><span class="syn-s">'https://api.example.com/transport'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  wsUrl<span class="syn-p">:</span> <span class="syn-s">'wss://api.example.com/ws'</span><span class="syn-p">,</span>
+  reconnect<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
+  heartbeat<span class="syn-p">:</span> <span class="syn-n">15000</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+conn<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'message'</span><span class="syn-p">,</span> text<span class="syn-p">:</span> <span class="syn-s">'hello'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> chat <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">channel</span><span class="syn-p">(</span><span class="syn-s">'chat'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+chat<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Hi!'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+chat<span class="syn-p">.</span><span class="syn-f">on</span><span class="syn-p">(</span><span class="syn-s">'message'</span><span class="syn-p">,</span> <span class="syn-p">(</span>msg<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>msg<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Transport API</h3>
+      <table class="api-table">
+        <thead><tr><th>Member</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>transport(url, opts?)</code></td><td>function</td><td>Open connection. Options: <code>wsUrl</code>, <code>reconnect</code>, <code>heartbeat</code></td></tr>
+          <tr><td><code>.state()</code></td><td>signal</td><td><code>'connecting'</code>, <code>'open'</code>, or <code>'closed'</code></td></tr>
+          <tr><td><code>.send(data)</code></td><td>method</td><td>Send JSON on the default channel</td></tr>
+          <tr><td><code>.on(event, fn)</code></td><td>method</td><td>Listen for messages on the default channel</td></tr>
+          <tr><td><code>.channel(name)</code></td><td>method</td><td>Create a named multiplexed channel</td></tr>
+          <tr><td><code>.close()</code></td><td>method</td><td>Close the connection</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- CRDT PRIMITIVES (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>CRDT Primitives</h2>
+      <p>Conflict-free replicated data types for offline-first collaboration. Resolve concurrent writes automatically without a central server — sync state between peers, tabs, or devices.</p>
+      <h3>LWW Register</h3>
+      <p>Last-Writer-Wins Register — resolves concurrent writes by timestamp. Ties broken by node ID.</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -194,142 +420,11 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> socket <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/ws.js'</span><span class="syn-p">;</span>
-
-<span class="syn-k">const</span> ws <span class="syn-p">=</span> <span class="syn-f">socket</span><span class="syn-p">(</span><span class="syn-s">'wss://api.example.com/ws'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  reconnect<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>   <span class="syn-c">// Auto-reconnect on disconnect</span>
-  maxRetries<span class="syn-p">:</span> <span class="syn-n">10</span><span class="syn-p">,</span>    <span class="syn-c">// Max reconnection attempts</span>
-  heartbeat<span class="syn-p">:</span> <span class="syn-n">30000</span><span class="syn-p">,</span>  <span class="syn-c">// Heartbeat ping every 30s</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Reactive message signal</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> msgs <span class="syn-p">=</span> ws<span class="syn-p">.</span><span class="syn-f">messages</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-k">if</span> <span class="syn-p">(</span>msgs<span class="syn-p">.</span>length<span class="syn-p">)</span> <span class="syn-p">{</span>
-    console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Latest:'</span><span class="syn-p">,</span> msgs<span class="syn-p">[</span>msgs<span class="syn-p">.</span>length <span class="syn-p">-</span> <span class="syn-n">1</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Connection state</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'WS state:'</span><span class="syn-p">,</span> ws<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'connecting', 'open', 'closed'</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Send data</span>
-ws<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'subscribe'</span><span class="syn-p">,</span> channel<span class="syn-p">:</span> <span class="syn-s">'updates'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Close</span>
-ws<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Server-Sent Events (SSE)</h2>
-      <p>Signal-driven SSE connection:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">import</span> <span class="syn-p">{</span> stream<span class="syn-p">,</span> latest <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/sse.js'</span><span class="syn-p">;</span>
-
-<span class="syn-k">const</span> sse <span class="syn-p">=</span> <span class="syn-f">stream</span><span class="syn-p">(</span><span class="syn-s">'/api/events'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  channels<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'notifications'</span><span class="syn-p">,</span> <span class="syn-s">'updates'</span><span class="syn-p">]</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// All events</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Events:'</span><span class="syn-p">,</span> sse<span class="syn-p">.</span><span class="syn-f">events</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Just the latest event</span>
-<span class="syn-k">const</span> lastEvent <span class="syn-p">=</span> <span class="syn-f">latest</span><span class="syn-p">(</span>sse<span class="syn-p">.</span>events<span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> event <span class="syn-p">=</span> <span class="syn-f">lastEvent</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-k">if</span> <span class="syn-p">(</span>event<span class="syn-p">)</span> <span class="syn-f">showNotification</span><span class="syn-p">(</span>event<span class="syn-p">.</span>data<span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Connection state</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'SSE:'</span><span class="syn-p">,</span> sse<span class="syn-p">.</span><span class="syn-f">status</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'connecting', 'open', 'closed'</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-sse<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>WebTransport</h2>
-      <p>HTTP/3 bidirectional transport with WebSocket fallback:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> transport <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/transport.js'</span><span class="syn-p">;</span>
-
-<span class="syn-k">const</span> conn <span class="syn-p">=</span> <span class="syn-f">transport</span><span class="syn-p">(</span><span class="syn-s">'https://api.example.com/transport'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  wsUrl<span class="syn-p">:</span> <span class="syn-s">'wss://api.example.com/ws'</span><span class="syn-p">,</span> <span class="syn-c">// Fallback URL</span>
-  reconnect<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
-  heartbeat<span class="syn-p">:</span> <span class="syn-n">15000</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Connection state</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'State:'</span><span class="syn-p">,</span> conn<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Send data</span>
-conn<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> type<span class="syn-p">:</span> <span class="syn-s">'message'</span><span class="syn-p">,</span> text<span class="syn-p">:</span> <span class="syn-s">'hello'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Listen for messages</span>
-conn<span class="syn-p">.</span><span class="syn-f">on</span><span class="syn-p">(</span><span class="syn-s">'message'</span><span class="syn-p">,</span> <span class="syn-p">(</span>data<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Received:'</span><span class="syn-p">,</span> data<span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Named channels</span>
-<span class="syn-k">const</span> chat <span class="syn-p">=</span> conn<span class="syn-p">.</span><span class="syn-f">channel</span><span class="syn-p">(</span><span class="syn-s">'chat'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-chat<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Hi!'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-chat<span class="syn-p">.</span><span class="syn-f">on</span><span class="syn-p">(</span><span class="syn-s">'message'</span><span class="syn-p">,</span> <span class="syn-p">(</span>msg<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>msg<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-conn<span class="syn-p">.</span><span class="syn-f">close</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>The transport module automatically selects WebTransport when available, falling back to WebSocket in all
-        browsers.</p>
-
-      <h2>CRDT Primitives</h2>
-      <p>Conflict-free replicated data types for offline-first collaboration. Resolve concurrent writes automatically without a central server — sync state between peers, tabs, or devices.</p>
-      <h3>LWW Register</h3>
-      <p>Last-Writer-Wins Register — resolves concurrent writes by timestamp. Ties broken by node ID.</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
 <span class="syn-k">import</span> <span class="syn-p">{</span> lwwRegister <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> title <span class="syn-p">=</span> <span class="syn-f">lwwRegister</span><span class="syn-p">(</span><span class="syn-s">'Untitled'</span><span class="syn-p">,</span> <span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Local write</span>
 title<span class="syn-p">.</span><span class="syn-f">set</span><span class="syn-p">(</span><span class="syn-s">'Meeting Notes'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Merge a remote state received over WebSocket</span>
 title<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>remoteState<span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Export state for syncing to other nodes</span>
 ws<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p">(</span>title<span class="syn-p">.</span><span class="syn-f">state</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>
@@ -341,20 +436,17 @@ ws<span class="syn-p">.</span><span class="syn-f">send</span><span class="syn-p"
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
           <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
-          <pre id="doc-code-5">
+          <pre id="doc-code-2">
 <span class="syn-k">import</span> <span class="syn-p">{</span> gCounter<span class="syn-p">,</span> pnCounter <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Grow-only counter (likes, page views)</span>
 <span class="syn-k">const</span> likes <span class="syn-p">=</span> <span class="syn-f">gCounter</span><span class="syn-p">(</span><span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 likes<span class="syn-p">.</span><span class="syn-f">increment</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 likes<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>remoteLikes<span class="syn-p">)</span><span class="syn-p">;</span>
-console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>likes<span class="syn-p">.</span><span class="syn-f">value</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Total across all nodes</span>
 
-<span class="syn-c">// PN counter (inventory, votes — supports decrement)</span>
 <span class="syn-k">const</span> stock <span class="syn-p">=</span> <span class="syn-f">pnCounter</span><span class="syn-p">(</span><span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 stock<span class="syn-p">.</span><span class="syn-f">increment</span><span class="syn-p">(</span><span class="syn-n">10</span><span class="syn-p">)</span><span class="syn-p">;</span>
 stock<span class="syn-p">.</span><span class="syn-f">decrement</span><span class="syn-p">(</span><span class="syn-n">3</span><span class="syn-p">)</span><span class="syn-p">;</span>
@@ -368,26 +460,22 @@ stock<span class="syn-p">.</span><span class="syn-f">decrement</span><span class
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
           <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
-          <pre id="doc-code-6">
+          <pre id="doc-code-3">
 <span class="syn-k">import</span> <span class="syn-p">{</span> lwwMap <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pro/crdt.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> doc <span class="syn-p">=</span> <span class="syn-f">lwwMap</span><span class="syn-p">(</span><span class="syn-s">'node-a'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 doc<span class="syn-p">.</span><span class="syn-f">set</span><span class="syn-p">(</span><span class="syn-s">'title'</span><span class="syn-p">,</span> <span class="syn-s">'Sprint Retro'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-doc<span class="syn-p">.</span><span class="syn-f">set</span><span class="syn-p">(</span><span class="syn-s">'status'</span><span class="syn-p">,</span> <span class="syn-s">'in-progress'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Merge remote changes</span>
 doc<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>remoteState<span class="syn-p">)</span><span class="syn-p">;</span>
-console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>doc<span class="syn-p">.</span><span class="syn-f">get</span><span class="syn-p">(</span><span class="syn-s">'title'</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>   <span class="syn-c">// Latest value</span>
-console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>doc<span class="syn-p">.</span><span class="syn-f">entries</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>   <span class="syn-c">// All key-value pairs</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span>doc<span class="syn-p">.</span><span class="syn-f">entries</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>
       </div>
       <h3>CRDT Types</h3>
-      <table class="doc-table">
+      <table class="api-table">
         <thead>
           <tr><th>Type</th><th>Use Case</th><th>Operations</th></tr>
         </thead>

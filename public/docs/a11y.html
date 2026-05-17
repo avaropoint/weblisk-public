@@ -179,22 +179,55 @@
 
     <main class="docs-content" id="main-content">
       <h1>Accessibility</h1>
+      <p class="lead">ARIA announcements, focus traps, roving tabindex, reduced motion detection, and locale-aware formatting. Build inclusive UIs with reactive signals.</p>
 
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-a11y.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- ARIA LIVE REGIONS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>ARIA Live Regions</h2>
-      <p>Announce messages to screen readers:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> announce<span class="syn-p">,</span> aria<span class="syn-p">,</span> role <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/aria.js'</span><span class="syn-p">;</span>
+      <p>Announce messages to screen readers via a managed ARIA live region. Polite announcements wait for the user to finish reading; assertive ones interrupt immediately.</p>
 
-<span class="syn-c">// Polite announcement (waits for user to finish reading)</span>
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">ARIA Announcements</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-announce" style="width:100%">
+              <p class="feature-demo-desc">Screen reader announcements via ARIA live region.</p>
+              <button class="btn btn-sm" id="btn-announce">Announce Message</button>
+              <pre class="demo-output" id="output-announce">No announcements yet</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> announce<span class="syn-p">,</span> aria<span class="syn-p">,</span> role <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/aria.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Polite announcement (waits for user)</span>
 <span class="syn-f">announce</span><span class="syn-p">(</span><span class="syn-s">'3 new items loaded'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Assertive announcement (interrupts)</span>
@@ -204,146 +237,177 @@
 <span class="syn-f">aria</span><span class="syn-p">(</span><span class="syn-s">'#dialog'</span><span class="syn-p">,</span> <span class="syn-p">{</span> modal<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> labelledby<span class="syn-p">:</span> <span class="syn-s">'dialog-title'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Set a role with required attributes</span>
-<span class="syn-f">role</span><span class="syn-p">(</span><span class="syn-s">'#tab-panel'</span><span class="syn-p">,</span> <span class="syn-s">'tabpanel'</span><span class="syn-p">,</span> <span class="syn-p">{</span> labelledby<span class="syn-p">:</span> <span class="syn-s">'tab-1'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-f">role</span><span class="syn-p">(</span><span class="syn-s">'#tab-panel'</span><span class="syn-p">,</span> <span class="syn-s">'tabpanel'</span><span class="syn-p">,</span> <span class="syn-p">{</span> labelledby<span class="syn-p">:</span> <span class="syn-s">'tab-1'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>ARIA API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>announce(msg, priority?)</code></td><td>function</td><td>Announce to screen readers — <code>'polite'</code> (default) or <code>'assertive'</code></td></tr>
+          <tr><td><code>aria(sel, attrs)</code></td><td>function</td><td>Set ARIA attributes declaratively on an element</td></tr>
+          <tr><td><code>role(sel, role, attrs?)</code></td><td>function</td><td>Set role and required ARIA attributes</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- FOCUS MANAGEMENT -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Focus Management</h2>
-      <h3>Focus Trap</h3>
-      <p>Trap focus within a container (modals, dialogs):</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">import</span> <span class="syn-p">{</span> focusTrap <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
+      <p>Focus traps for modals/dialogs, roving tabindex for toolbars/menus, and skip-to-content links for keyboard navigation.</p>
 
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Focus Management</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-focus" style="width:100%">
+              <p class="feature-demo-desc">Focus trap + roving tabindex. Click "Open Trap" then Tab to cycle.</p>
+              <button class="btn btn-sm" id="btn-focus-trap">Open Focus Trap</button>
+              <div id="focus-trap-target" hidden
+                style="border:2px solid var(--wl-primary);border-radius:8px;padding:1rem;margin-top:0.75rem;gap:0.5rem;flex-wrap:wrap;">
+                <button class="btn btn-sm">Button A</button>
+                <button class="btn btn-sm">Button B</button>
+                <button class="btn btn-sm">Button C</button>
+                <button class="btn btn-sm" id="btn-focus-release">&#10005; Close Trap</button>
+              </div>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> focusTrap<span class="syn-p">,</span> rovingIndex<span class="syn-p">,</span> skipLink <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Trap focus within a container</span>
 <span class="syn-k">const</span> trap <span class="syn-p">=</span> <span class="syn-f">focusTrap</span><span class="syn-p">(</span><span class="syn-s">'#modal'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-trap<span class="syn-p">.</span><span class="syn-f">activate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>   <span class="syn-c">// Tab now cycles within #modal</span>
+trap<span class="syn-p">.</span><span class="syn-f">activate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>   <span class="syn-c">// Tab cycles within #modal</span>
 trap<span class="syn-p">.</span><span class="syn-f">deactivate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// Release focus</span>
-</pre>
-        </div>
-      </div>
-      <h3>Roving Tabindex</h3>
-      <p>Arrow key navigation within a group (tabs, toolbars, menus):</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> rovingIndex <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
 
-<span class="syn-k">const</span> cleanup <span class="syn-p">=</span> <span class="syn-f">rovingIndex</span><span class="syn-p">(</span><span class="syn-s">'#toolbar'</span><span class="syn-p">,</span> <span class="syn-s">'button'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  horizontal<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>
-  wrap<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>    <span class="syn-c">// Arrow keys wrap around</span>
+<span class="syn-c">// Arrow-key navigation for toolbars</span>
+<span class="syn-f">rovingIndex</span><span class="syn-p">(</span><span class="syn-s">'#toolbar'</span><span class="syn-p">,</span> <span class="syn-s">'button'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  horizontal<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> wrap<span class="syn-p">:</span> <span class="syn-k">true</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h3>Skip Link</h3>
-      <p>Add a "Skip to main content" link for keyboard navigation:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-k">import</span> <span class="syn-p">{</span> skipLink <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/focus.js'</span><span class="syn-p">;</span>
 
-<span class="syn-f">skipLink</span><span class="syn-p">(</span><span class="syn-s">'main-content'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-c">// Creates: &lt;a class=&quot;wl-skip&quot; href=&quot;#main-content&quot;&gt;Skip to main content&lt;/a&gt;</span>
-</pre>
+<span class="syn-c">// Skip-to-content link</span>
+<span class="syn-f">skipLink</span><span class="syn-p">(</span><span class="syn-s">'main-content'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>Focus API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>focusTrap(el)</code></td><td>function</td><td>Create a focus trap — returns <code>{ activate, deactivate }</code></td></tr>
+          <tr><td><code>rovingIndex(container, sel, opts?)</code></td><td>function</td><td>Arrow-key navigation within a group</td></tr>
+          <tr><td><code>skipLink(targetId)</code></td><td>function</td><td>Inject a "Skip to main content" link</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- REDUCED MOTION -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Reduced Motion</h2>
-      <p>Respect the user's motion preference:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <p>Respect the user's motion preference with a reactive signal. Conditionally disable animations and transitions.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Reduced Motion</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
-<span class="syn-k">import</span> <span class="syn-p">{</span> motionReduced<span class="syn-p">,</span> motion<span class="syn-p">,</span> safeTransition<span class="syn-p">,</span> ifMotion <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/motion.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-motion" style="width:100%">
+              <p class="feature-demo-desc">Detects prefers-reduced-motion. Toggle in OS settings to see it change live.</p>
+              <pre class="demo-output" id="output-motion">Checking...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> motionReduced<span class="syn-p">,</span> motion<span class="syn-p">,</span> safeTransition<span class="syn-p">,</span> ifMotion <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/motion.js'</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Reactive signal</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">motionReduced</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'User prefers reduced motion'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Reduced:'</span><span class="syn-p">,</span> <span class="syn-f">motionReduced</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Choose value based on preference</span>
-<span class="syn-k">const</span> duration <span class="syn-p">=</span> <span class="syn-f">motion</span><span class="syn-p">(</span><span class="syn-s">'0.3s'</span><span class="syn-p">,</span> <span class="syn-s">'0s'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> dur <span class="syn-p">=</span> <span class="syn-f">motion</span><span class="syn-p">(</span><span class="syn-s">'0.3s'</span><span class="syn-p">,</span> <span class="syn-s">'0s'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Only set transition if motion is allowed</span>
 <span class="syn-f">safeTransition</span><span class="syn-p">(</span><span class="syn-s">'#panel'</span><span class="syn-p">,</span> <span class="syn-s">'transform 0.3s ease'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Run function only if motion is allowed</span>
-<span class="syn-f">ifMotion</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  el<span class="syn-p">.</span><span class="syn-f">animate</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">0</span> <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-p">{</span> opacity<span class="syn-p">:</span> <span class="syn-n">1</span> <span class="syn-p">}</span><span class="syn-p">]</span><span class="syn-p">,</span> <span class="syn-p">{</span> duration<span class="syn-p">:</span> <span class="syn-n">300</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h3>Global CSS Override</h3>
-      <p>Inject CSS that disables all animations when reduced motion is preferred:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-6">
-<span class="syn-k">import</span> <span class="syn-p">{</span> injectReducedMotionCSS <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/motion.js'</span><span class="syn-p">;</span>
-
-<span class="syn-f">injectReducedMotionCSS</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>This adds:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">css</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-7">
-<span class="syn-k">@media</span> (<span class="syn-a">prefers-reduced-motion</span>: reduce) {
-  *, *::before, *::after {
-    <span class="syn-a">animation-duration</span>: <span class="syn-n">0.01ms</span> !important;
-    <span class="syn-a">transition-duration</span>: <span class="syn-n">0.01ms</span> !important;
-  }
-}
-</pre>
+<span class="syn-c">// Run code only if motion is allowed</span>
+<span class="syn-f">ifMotion</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> el<span class="syn-p">.</span><span class="syn-f">animate</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-p">{</span>opacity<span class="syn-p">:</span><span class="syn-n">0</span><span class="syn-p">}</span><span class="syn-p">,</span><span class="syn-p">{</span>opacity<span class="syn-p">:</span><span class="syn-n">1</span><span class="syn-p">}</span><span class="syn-p">]</span><span class="syn-p">,</span> <span class="syn-n">300</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
 
+      <h3>Motion API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>motionReduced()</code></td><td>signal</td><td>Reactive boolean — <code>true</code> when user prefers reduced motion</td></tr>
+          <tr><td><code>motion(full, reduced)</code></td><td>function</td><td>Return <code>full</code> or <code>reduced</code> based on preference</td></tr>
+          <tr><td><code>safeTransition(sel, transition)</code></td><td>function</td><td>Set CSS transition only when motion is allowed</td></tr>
+          <tr><td><code>ifMotion(fn)</code></td><td>function</td><td>Run a function only when motion is allowed</td></tr>
+          <tr><td><code>injectReducedMotionCSS()</code></td><td>function</td><td>Inject global CSS that disables all animations when reduced</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- LOCALE & INTERNATIONALIZATION (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Locale &amp; Internationalization</h2>
-      <p>Signal-driven locale detection and Intl API formatting wrappers:</p>
+      <p>Signal-driven locale detection and <code>Intl</code> API formatting wrappers — no translation dictionaries needed.</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -356,26 +420,19 @@ trap<span class="syn-p">.</span><span class="syn-f">deactivate</span><span class
           <pre id="doc-code-8">
 <span class="syn-k">import</span> <span class="syn-p">{</span> locale<span class="syn-p">,</span> setLocale<span class="syn-p">,</span> textDirection<span class="syn-p">,</span> formatter <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/a11y/locale.js'</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Reactive locale signal (reads html[lang] or navigator.language)</span>
-console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">locale</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'en-US'</span>
+console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-f">locale</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>         <span class="syn-c">// 'en-US'</span>
+<span class="syn-f">setLocale</span><span class="syn-p">(</span><span class="syn-s">'fr'</span><span class="syn-p">)</span><span class="syn-p">;</span>               <span class="syn-c">// Switch — formatters update reactively</span>
+<span class="syn-f">textDirection</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>             <span class="syn-c">// 'ltr' or 'rtl'</span>
 
-<span class="syn-c">// Switch locale — all formatters update reactively</span>
-<span class="syn-f">setLocale</span><span class="syn-p">(</span><span class="syn-s">'fr'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Text direction signal for RTL support</span>
-<span class="syn-k">const</span> dir <span class="syn-p">=</span> <span class="syn-f">textDirection</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'ltr' or 'rtl'</span>
-
-<span class="syn-c">// Intl formatters tied to the locale signal</span>
 <span class="syn-k">const</span> fmt <span class="syn-p">=</span> <span class="syn-f">formatter</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-fmt<span class="syn-p">.</span><span class="syn-f">number</span><span class="syn-p">(</span><span class="syn-n">1234.5</span><span class="syn-p">)</span><span class="syn-p">;</span>              <span class="syn-c">// '1,234.5' or '1 234,5'</span>
-fmt<span class="syn-p">.</span><span class="syn-f">date</span><span class="syn-p">(</span><span class="syn-k">new</span> <span class="syn-f">Date</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>             <span class="syn-c">// locale-formatted date</span>
-fmt<span class="syn-p">.</span><span class="syn-f">currency</span><span class="syn-p">(</span><span class="syn-n">99.99</span><span class="syn-p">,</span> <span class="syn-s">'USD'</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// '$99.99' or '99,99 $US'</span>
-fmt<span class="syn-p">.</span><span class="syn-f">relative</span><span class="syn-p">(</span><span class="syn-n">-2</span><span class="syn-p">,</span> <span class="syn-s">'day'</span><span class="syn-p">)</span><span class="syn-p">;</span>         <span class="syn-c">// '2 days ago' or 'il y a 2 jours'</span>
-fmt<span class="syn-p">.</span><span class="syn-f">list</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-s">'A'</span><span class="syn-p">,</span> <span class="syn-s">'B'</span><span class="syn-p">,</span> <span class="syn-s">'C'</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>        <span class="syn-c">// 'A, B, and C' or 'A, B et C'</span>
+fmt<span class="syn-p">.</span><span class="syn-f">number</span><span class="syn-p">(</span><span class="syn-n">1234.5</span><span class="syn-p">)</span><span class="syn-p">;</span>            <span class="syn-c">// '1,234.5' or '1 234,5'</span>
+fmt<span class="syn-p">.</span><span class="syn-f">date</span><span class="syn-p">(</span><span class="syn-k">new</span> <span class="syn-f">Date</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>           <span class="syn-c">// locale-formatted date</span>
+fmt<span class="syn-p">.</span><span class="syn-f">currency</span><span class="syn-p">(</span><span class="syn-n">99.99</span><span class="syn-p">,</span> <span class="syn-s">'USD'</span><span class="syn-p">)</span><span class="syn-p">;</span>     <span class="syn-c">// '$99.99' or '99,99 $US'</span>
+fmt<span class="syn-p">.</span><span class="syn-f">relative</span><span class="syn-p">(</span><span class="syn-n">-2</span><span class="syn-p">,</span> <span class="syn-s">'day'</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// '2 days ago'</span>
+fmt<span class="syn-p">.</span><span class="syn-f">list</span><span class="syn-p">(</span><span class="syn-p">[</span><span class="syn-s">'A'</span><span class="syn-p">,</span> <span class="syn-s">'B'</span><span class="syn-p">,</span> <span class="syn-s">'C'</span><span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span>      <span class="syn-c">// 'A, B, and C'</span>
 </pre>
         </div>
       </div>
-      <p>No translation dictionaries — uses the browser's native <code>Intl</code> API for locale-aware formatting.</p>
 
       <div class="docs-nav-footer">
         <a href="/docs/ui.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

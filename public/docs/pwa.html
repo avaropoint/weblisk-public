@@ -181,122 +181,53 @@
 
     <main class="docs-content" id="main-content">
       <h1>PWA</h1>
+      <p class="lead">Offline support, push notifications, background sync, and installability. Progressive web app primitives that work with any service worker.</p>
 
-      <p>Weblisk provides progressive web app primitives for offline support, push notifications, and installability.
-      </p>
-      <h2>Offline State</h2>
-      <p>Track connectivity as a reactive signal:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> online<span class="syn-p">,</span> syncStatus<span class="syn-p">,</span> pendingCount <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-pwa.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
 
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-p">!</span><span class="syn-f">online</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    <span class="syn-f">showBanner</span><span class="syn-p">(</span><span class="syn-s">'You are offline. Changes are saved locally.'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> status <span class="syn-p">=</span> <span class="syn-f">syncStatus</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 'idle', 'syncing', 'error'</span>
-  <span class="syn-k">const</span> count <span class="syn-p">=</span> <span class="syn-f">pendingCount</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-k">if</span> <span class="syn-p">(</span>count <span class="syn-p">&gt;</span> <span class="syn-n">0</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    statusEl<span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`${count} changes pending sync`</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h3>Manual Sync</h3>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">import</span> <span class="syn-p">{</span> triggerSync <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
-
-<span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>       <span class="syn-c">// Sync a specific collection</span>
-<span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>              <span class="syn-c">// Sync all collections</span>
-</pre>
-        </div>
-      </div>
-      <h3>Periodic Sync</h3>
-      <p>Register background sync that runs on an interval (Chromium only):</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> registerPeriodicSync <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
-
-<span class="syn-k">const</span> success <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">registerPeriodicSync</span><span class="syn-p">(</span><span class="syn-s">'content-refresh'</span><span class="syn-p">,</span> <span class="syn-n">12</span> <span class="syn-p">*</span> <span class="syn-n">60</span> <span class="syn-p">*</span> <span class="syn-n">60</span> <span class="syn-p">*</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Push Notifications</h2>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-k">import</span> <span class="syn-p">{</span> requestPermission<span class="syn-p">,</span> subscribe<span class="syn-p">,</span> notify<span class="syn-p">,</span> permission <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/push.js'</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Check current permission</span>
-<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Permission:'</span><span class="syn-p">,</span> <span class="syn-f">permission</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Request permission</span>
-<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">requestPermission</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Subscribe to push (server needs to store the subscription)</span>
-<span class="syn-k">const</span> sub <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">subscribe</span><span class="syn-p">(</span><span class="syn-s">'YOUR_VAPID_PUBLIC_KEY'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-k">await</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/api/push/subscribe'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
-  body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span>sub<span class="syn-p">)</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Show a local notification</span>
-<span class="syn-k">await</span> <span class="syn-f">notify</span><span class="syn-p">(</span><span class="syn-s">'New message'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  body<span class="syn-p">:</span> <span class="syn-s">'You have a new message from Alice'</span><span class="syn-p">,</span>
-  icon<span class="syn-p">:</span> <span class="syn-s">'/icon-192.png'</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- RUNTIME MANIFEST -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Web App Manifest</h2>
-      <p>Generate and inject a manifest at runtime:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <p>Generate and inject a manifest at runtime — no static JSON file needed. Supports dynamic theme color updates.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Runtime Manifest</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
-<span class="syn-k">import</span> <span class="syn-p">{</span> manifest<span class="syn-p">,</span> injectManifest<span class="syn-p">,</span> setThemeColor <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/manifest.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-pwa-manifest" style="width:100%">
+              <p class="feature-demo-desc">Web App Manifest generated and injected at runtime — no static JSON file needed.</p>
+              <button class="btn btn-sm" id="btn-manifest">Check Manifest</button>
+              <pre class="demo-output" id="output-manifest">Manifest injected at boot (see &lt;head&gt;)</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> manifest<span class="syn-p">,</span> injectManifest<span class="syn-p">,</span> setThemeColor <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/manifest.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> m <span class="syn-p">=</span> <span class="syn-f">manifest</span><span class="syn-p">(</span><span class="syn-p">{</span>
   name<span class="syn-p">:</span> <span class="syn-s">'My App'</span><span class="syn-p">,</span>
@@ -304,20 +235,164 @@
   start_url<span class="syn-p">:</span> <span class="syn-s">'/'</span><span class="syn-p">,</span>
   display<span class="syn-p">:</span> <span class="syn-s">'standalone'</span><span class="syn-p">,</span>
   theme_color<span class="syn-p">:</span> <span class="syn-s">'#2563eb'</span><span class="syn-p">,</span>
-  background_color<span class="syn-p">:</span> <span class="syn-s">'#ffffff'</span><span class="syn-p">,</span>
-  icons<span class="syn-p">:</span> <span class="syn-p">[</span>
-    <span class="syn-p">{</span> src<span class="syn-p">:</span> <span class="syn-s">'/icon-192.png'</span><span class="syn-p">,</span> sizes<span class="syn-p">:</span> <span class="syn-s">'192x192'</span><span class="syn-p">,</span> type<span class="syn-p">:</span> <span class="syn-s">'image/png'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
-    <span class="syn-p">{</span> src<span class="syn-p">:</span> <span class="syn-s">'/icon-512.png'</span><span class="syn-p">,</span> sizes<span class="syn-p">:</span> <span class="syn-s">'512x512'</span><span class="syn-p">,</span> type<span class="syn-p">:</span> <span class="syn-s">'image/png'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
-  <span class="syn-p">]</span><span class="syn-p">,</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-f">injectManifest</span><span class="syn-p">(</span>m<span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Update theme color dynamically (e.g., dark mode)</span>
-<span class="syn-f">setThemeColor</span><span class="syn-p">(</span><span class="syn-s">'#1e293b'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-f">setThemeColor</span><span class="syn-p">(</span><span class="syn-s">'#1e293b'</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// e.g., dark mode</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>Manifest API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>manifest(opts)</code></td><td>function</td><td>Create a manifest object from options</td></tr>
+          <tr><td><code>injectManifest(m)</code></td><td>function</td><td>Inject a <code>&lt;link rel="manifest"&gt;</code> with a blob URL</td></tr>
+          <tr><td><code>setThemeColor(color)</code></td><td>function</td><td>Update the <code>&lt;meta name="theme-color"&gt;</code> dynamically</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- CONNECTIVITY & SYNC -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Connectivity &amp; Sync</h2>
+      <p>Reactive online/offline signal plus background sync engine. Mutations are queued locally and the service worker replays them when connectivity returns.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Connectivity &amp; Sync</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-pwa-offline" style="width:100%">
+              <p class="feature-demo-desc">Reactive online/offline signal plus sync engine status. Toggle network in DevTools.</p>
+              <pre class="demo-output" id="output-offline">Checking...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> online<span class="syn-p">,</span> syncStatus<span class="syn-p">,</span> pendingCount<span class="syn-p">,</span> triggerSync <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-p">!</span><span class="syn-f">online</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-f">showBanner</span><span class="syn-p">(</span><span class="syn-s">'You are offline.'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Manual sync</span>
+<span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>  <span class="syn-c">// Sync a specific collection</span>
+<span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>         <span class="syn-c">// Sync all collections</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Offline API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>online()</code></td><td>signal</td><td>Reactive boolean — <code>true</code> when connected</td></tr>
+          <tr><td><code>syncStatus()</code></td><td>signal</td><td><code>'idle'</code>, <code>'syncing'</code>, or <code>'error'</code></td></tr>
+          <tr><td><code>pendingCount()</code></td><td>signal</td><td>Number of mutations queued for sync</td></tr>
+          <tr><td><code>triggerSync(tag?)</code></td><td>async</td><td>Manually trigger background sync</td></tr>
+          <tr><td><code>registerPeriodicSync(tag, interval)</code></td><td>async</td><td>Register periodic background sync (Chromium)</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- PUSH NOTIFICATIONS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Push Notifications</h2>
+      <p>Request permission and show local or push notifications. The <code>permission</code> export is a reactive signal that updates when the user responds to the prompt.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Push Notifications</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-pwa-push" style="width:100%">
+              <p class="feature-demo-desc">Request permission and show local notifications.</p>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                <button class="btn btn-sm" id="btn-push">Request Permission</button>
+                <button class="btn btn-sm" id="btn-notify">Send Notification</button>
+              </div>
+              <pre class="demo-output" id="output-push">Permission: checking...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> requestPermission<span class="syn-p">,</span> subscribe<span class="syn-p">,</span> notify<span class="syn-p">,</span> permission <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/push.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Reactive permission signal</span>
+<span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Permission:'</span><span class="syn-p">,</span> <span class="syn-f">permission</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">await</span> <span class="syn-f">requestPermission</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">await</span> <span class="syn-f">notify</span><span class="syn-p">(</span><span class="syn-s">'New message'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  body<span class="syn-p">:</span> <span class="syn-s">'You have a new message from Alice'</span><span class="syn-p">,</span>
+  icon<span class="syn-p">:</span> <span class="syn-s">'/icon-192.png'</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Push API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>permission()</code></td><td>signal</td><td>Reactive notification permission state</td></tr>
+          <tr><td><code>requestPermission()</code></td><td>async</td><td>Prompt the user for notification permission</td></tr>
+          <tr><td><code>subscribe(vapidKey)</code></td><td>async</td><td>Subscribe to push via the service worker</td></tr>
+          <tr><td><code>notify(title, opts?)</code></td><td>async</td><td>Show a local notification</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
 
       <div class="docs-nav-footer">
         <a href="/docs/performance.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

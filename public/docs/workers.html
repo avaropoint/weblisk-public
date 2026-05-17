@@ -181,11 +181,85 @@
 
     <main class="docs-content" id="main-content">
       <h1>Workers</h1>
+      <p class="lead">Run CPU-intensive work off the main thread using inline Web Workers. No separate worker files needed — the function is serialized and executed in a worker automatically.</p>
 
-      <p>Run CPU-intensive work off the main thread using inline Web Workers. No separate worker files needed — the
-        function is serialized and executed in a worker automatically.</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-workers.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- WEB WORKER OFFLOAD -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>offload</h2>
-      <p>Create a function that runs in a disposable worker:</p>
+      <p>Create a function that runs in a disposable Web Worker. Each call spins up a one-shot worker that terminates after returning.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Web Workers</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-worker" style="width:100%">
+              <p class="feature-demo-desc">Offload heavy computation to a Web Worker — main thread stays smooth.</p>
+              <button class="btn btn-sm" id="btn-worker">Compute Fibonacci(40)</button>
+              <pre class="demo-output" id="output-worker">Ready...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> offload <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/worker.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> fib <span class="syn-p">=</span> <span class="syn-f">offload</span><span class="syn-p">(</span><span class="syn-k">function</span> <span class="syn-p">(</span>n<span class="syn-p">)</span> <span class="syn-p">{</span>
+  <span class="syn-k">function</span> <span class="syn-f">f</span><span class="syn-p">(</span>n<span class="syn-p">)</span> <span class="syn-p">{</span> <span class="syn-k">return</span> n <span class="syn-p">&lt;</span><span class="syn-p">=</span> <span class="syn-n">1</span> ? n <span class="syn-p">:</span> <span class="syn-f">f</span><span class="syn-p">(</span>n <span class="syn-p">-</span> <span class="syn-n">1</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-f">f</span><span class="syn-p">(</span>n <span class="syn-p">-</span> <span class="syn-n">2</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-p">}</span>
+  <span class="syn-k">return</span> <span class="syn-f">f</span><span class="syn-p">(</span>n<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fib</span><span class="syn-p">(</span><span class="syn-n">40</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Worker API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>offload(fn)</code></td><td>function</td><td>Create a one-shot worker from a self-contained function. Returns an async callable</td></tr>
+          <tr><td><code>workerPool(fn, size?)</code></td><td>function</td><td>Create a persistent pool of workers. Size defaults to <code>navigator.hardwareConcurrency</code></td></tr>
+          <tr><td><code>pool.run(data)</code></td><td>method</td><td>Execute work on the next available pool worker</td></tr>
+          <tr><td><code>pool.terminate()</code></td><td>method</td><td>Shut down all pool workers</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- WORKER POOL (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>workerPool</h2>
+      <p>For repeated tasks, use a persistent pool of workers:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -196,38 +270,9 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> offload <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/worker.js'</span><span class="syn-p">;</span>
-
-<span class="syn-k">const</span> heavyCalc <span class="syn-p">=</span> <span class="syn-f">offload</span><span class="syn-p">(</span><span class="syn-p">(</span>data<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-c">// This runs in a Web Worker — no access to DOM</span>
-  <span class="syn-k">let</span> result <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span>
-  <span class="syn-k">for</span> <span class="syn-p">(</span><span class="syn-k">let</span> i <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span> i <span class="syn-p">&lt;</span> data<span class="syn-p">.</span>iterations<span class="syn-p">;</span> i<span class="syn-p">+</span><span class="syn-p">+</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    result <span class="syn-p">+</span><span class="syn-p">=</span> Math<span class="syn-p">.</span><span class="syn-f">sqrt</span><span class="syn-p">(</span>i<span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-  <span class="syn-k">return</span> result<span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">heavyCalc</span><span class="syn-p">(</span><span class="syn-p">{</span> iterations<span class="syn-p">:</span> <span class="syn-n">10_000_000</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>Each call spins up a one-shot worker that terminates after returning.</p>
-      <h2>workerPool</h2>
-      <p>For repeated tasks, use a persistent pool of workers:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
 <span class="syn-k">import</span> <span class="syn-p">{</span> workerPool <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/worker.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> pool <span class="syn-p">=</span> <span class="syn-f">workerPool</span><span class="syn-p">(</span><span class="syn-p">(</span>imageData<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-c">// Process image data in parallel</span>
   <span class="syn-k">const</span> pixels <span class="syn-p">=</span> <span class="syn-k">new</span> <span class="syn-f">Uint8ClampedArray</span><span class="syn-p">(</span>imageData<span class="syn-p">)</span><span class="syn-p">;</span>
   <span class="syn-k">for</span> <span class="syn-p">(</span><span class="syn-k">let</span> i <span class="syn-p">=</span> <span class="syn-n">0</span><span class="syn-p">;</span> i <span class="syn-p">&lt;</span> pixels<span class="syn-p">.</span>length<span class="syn-p">;</span> i <span class="syn-p">+</span><span class="syn-p">=</span> <span class="syn-n">4</span><span class="syn-p">)</span> <span class="syn-p">{</span>
     <span class="syn-k">const</span> avg <span class="syn-p">=</span> <span class="syn-p">(</span>pixels<span class="syn-p">[</span>i<span class="syn-p">]</span> <span class="syn-p">+</span> pixels<span class="syn-p">[</span>i<span class="syn-p">+</span><span class="syn-n">1</span><span class="syn-p">]</span> <span class="syn-p">+</span> pixels<span class="syn-p">[</span>i<span class="syn-p">+</span><span class="syn-n">2</span><span class="syn-p">]</span><span class="syn-p">)</span> <span class="syn-p">/</span> <span class="syn-n">3</span><span class="syn-p">;</span>
@@ -236,20 +281,17 @@
   <span class="syn-k">return</span> pixels<span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">4</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 4 workers</span>
 
-<span class="syn-c">// Process multiple images in parallel</span>
 <span class="syn-k">const</span> results <span class="syn-p">=</span> <span class="syn-k">await</span> Promise<span class="syn-p">.</span><span class="syn-f">all</span><span class="syn-p">(</span>
   images<span class="syn-p">.</span><span class="syn-f">map</span><span class="syn-p">(</span>img <span class="syn-p">=&gt;</span> pool<span class="syn-p">.</span><span class="syn-f">run</span><span class="syn-p">(</span>img<span class="syn-p">.</span>data<span class="syn-p">)</span><span class="syn-p">)</span>
 <span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Clean up when done</span>
 pool<span class="syn-p">.</span><span class="syn-f">terminate</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>
       </div>
-      <p>The pool size defaults to <code>navigator.hardwareConcurrency</code> (typically 4-16).</p>
+
       <h2>Limitations</h2>
-      <p>Functions passed to <code>offload</code> and <code>workerPool</code> must be <strong>self-contained</strong>:
-      </p>
+      <p>Functions passed to <code>offload</code> and <code>workerPool</code> must be <strong>self-contained</strong>:</p>
       <ul>
         <li>No access to DOM (<code>document</code>, <code>window</code>)</li>
         <li>No access to outer scope variables (closures)</li>

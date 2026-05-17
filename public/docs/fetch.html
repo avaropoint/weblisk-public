@@ -179,10 +179,97 @@
 
     <main class="docs-content" id="main-content">
       <h1>Fetch</h1>
+      <p class="lead">Enhanced Fetch API with typed JSON, timeout, retry, deduplication, NDJSON streaming, and an offline queue that replays when connectivity returns.</p>
 
-      <p>The <code>net/fetch.js</code> module enhances the native Fetch API with common patterns.</p>
-      <h2>fetchJSON</h2>
-      <p>Typed JSON fetch with timeout, retry, and deduplication:</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-fetch.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- ENHANCED FETCH -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Enhanced Fetch</h2>
+      <p><code>fetchJSON</code> wraps the native Fetch API with automatic JSON parsing, configurable timeout, retries with exponential backoff, and request deduplication. <code>fetchOffline</code> queues mutations when offline and flushes them when connectivity returns.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Enhanced Fetch</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-fetch" style="width:100%">
+              <p class="feature-demo-desc">fetchJSON with retry, dedup, timeout. fetchOffline queues when offline.</p>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                <button class="btn btn-sm" id="btn-fetch">Fetch demo API</button>
+                <button class="btn btn-sm" id="btn-fetch-offline">Queue Offline</button>
+              </div>
+              <pre class="demo-output" id="output-fetch">Ready...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> fetchJSON<span class="syn-p">,</span> fetchOffline <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Typed JSON with timeout, retry, dedup</span>
+<span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchJSON</span><span class="syn-p">(</span><span class="syn-s">'/api/search'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
+  body<span class="syn-p">:</span> <span class="syn-p">{</span> query<span class="syn-p">:</span> <span class="syn-s">'weblisk'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  timeout<span class="syn-p">:</span> <span class="syn-n">5000</span><span class="syn-p">,</span>
+  retries<span class="syn-p">:</span> <span class="syn-n">3</span><span class="syn-p">,</span>
+  dedupe<span class="syn-p">:</span> <span class="syn-k">true</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Queue mutations when offline</span>
+<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchOffline</span><span class="syn-p">(</span><span class="syn-s">'/api/todos'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
+  body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span> <span class="syn-p">}</span><span class="syn-p">)</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">if</span> <span class="syn-p">(</span>result<span class="syn-p">.</span>queued<span class="syn-p">)</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Will sync when online'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Fetch API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>fetchJSON(url, opts?)</code></td><td>async</td><td>Fetch &amp; parse JSON. Options: <code>timeout</code>, <code>retries</code>, <code>dedupe</code>, <code>headers</code></td></tr>
+          <tr><td><code>fetchStream(url)</code></td><td>async generator</td><td>Stream NDJSON as an async iterator</td></tr>
+          <tr><td><code>fetchOffline(url, opts)</code></td><td>async</td><td>Queue request when offline; returns <code>{ queued: true }</code></td></tr>
+          <tr><td><code>flushOfflineQueue()</code></td><td>async</td><td>Manually replay all queued offline requests</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- NDJSON STREAMING (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>NDJSON Streaming</h2>
+      <p>Stream newline-delimited JSON as an async generator:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -193,13 +280,21 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> fetchJSON <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> fetchStream <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
 
-<span class="syn-k">const</span> user <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchJSON</span><span class="syn-p">(</span><span class="syn-s">'/api/user/123'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">for</span> <span class="syn-k">await</span> <span class="syn-p">(</span><span class="syn-k">const</span> event <span class="syn-k">of</span> <span class="syn-f">fetchStream</span><span class="syn-p">(</span><span class="syn-s">'/api/events'</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Event:'</span><span class="syn-p">,</span> event<span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span>
 </pre>
         </div>
       </div>
-      <h3>Options</h3>
+      <p>Works with any API that returns newline-separated JSON objects.</p>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- RETRY BEHAVIOUR (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Retry Behaviour</h2>
+      <p>Retries use exponential backoff (1 s, 2 s, 4 s, …) and only retry on network errors or 5xx status codes. Configure with the <code>retries</code> option:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -210,67 +305,11 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-2">
-<span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchJSON</span><span class="syn-p">(</span><span class="syn-s">'/api/search'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
-  body<span class="syn-p">:</span> <span class="syn-p">{</span> query<span class="syn-p">:</span> <span class="syn-s">'weblisk'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
-  timeout<span class="syn-p">:</span> <span class="syn-n">5000</span><span class="syn-p">,</span>     <span class="syn-c">// 5s timeout (default: 10000)</span>
-  retries<span class="syn-p">:</span> <span class="syn-n">3</span><span class="syn-p">,</span>        <span class="syn-c">// Retry on failure (default: 0)</span>
+<span class="syn-k">const</span> data <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchJSON</span><span class="syn-p">(</span><span class="syn-s">'/api/data'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  retries<span class="syn-p">:</span> <span class="syn-n">3</span><span class="syn-p">,</span>        <span class="syn-c">// Up to 3 retries on failure</span>
+  timeout<span class="syn-p">:</span> <span class="syn-n">5000</span><span class="syn-p">,</span>     <span class="syn-c">// 5s per attempt (default: 10000)</span>
   dedupe<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>       <span class="syn-c">// Deduplicate concurrent identical requests</span>
-  headers<span class="syn-p">:</span> <span class="syn-p">{</span> Authorization<span class="syn-p">:</span> <span class="syn-s">'Bearer token'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>Retries use exponential backoff (1s, 2s, 4s, ...) and only retry on network errors or 5xx status codes.</p>
-      <h2>fetchStream</h2>
-      <p>Stream NDJSON (newline-delimited JSON) as an async generator:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> fetchStream <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
-
-<span class="syn-k">for</span> <span class="syn-k">await</span> <span class="syn-p">(</span><span class="syn-k">const</span> event <span class="syn-k">of</span> <span class="syn-f">fetchStream</span><span class="syn-p">(</span><span class="syn-s">'/api/events'</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Event:'</span><span class="syn-p">,</span> event<span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span>
-</pre>
-        </div>
-      </div>
-      <p>Works with any API that returns newline-separated JSON objects.</p>
-      <h2>Offline Queue</h2>
-      <p>Queue mutations when offline, flush when connectivity returns:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-k">import</span> <span class="syn-p">{</span> fetchOffline<span class="syn-p">,</span> flushOfflineQueue <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/net/fetch.js'</span><span class="syn-p">;</span>
-
-<span class="syn-c">// This works even when offline</span>
-<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetchOffline</span><span class="syn-p">(</span><span class="syn-s">'/api/todos'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
-  body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-k">if</span> <span class="syn-p">(</span>result<span class="syn-p">.</span>queued<span class="syn-p">)</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Saved offline, will sync when online'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span>
-
-<span class="syn-c">// Manually flush the queue</span>
-window<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'online'</span><span class="syn-p">,</span> <span class="syn-k">async</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> count <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">flushOfflineQueue</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`Flushed ${count} queued requests`</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  headers<span class="syn-p">:</span> <span class="syn-p">{</span> Authorization<span class="syn-p">:</span> <span class="syn-s">'Bearer token'</span> <span class="syn-p">}</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>

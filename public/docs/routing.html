@@ -181,11 +181,245 @@
 
     <main class="docs-content" id="main-content">
       <h1>Routing &amp; Guards</h1>
+      <p class="lead">Weblisk uses the browser's native navigation (MPA links) rather than client-side routing. Add guards and hooks to control navigation behavior, protect routes, and handle unsaved changes.</p>
 
-      <p>Weblisk uses the browser's native navigation (MPA links) rather than client-side routing. But you can add
-        guards and hooks to control navigation behavior.</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-routing.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- ROUTE GUARD -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Route Guards</h2>
-      <p>Protect routes with before/after navigation hooks:</p>
+      <p>Protect routes with before/after navigation hooks. Guards can allow, block, or redirect navigation.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Route Guard</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-guard" style="width:100%">
+              <p class="feature-demo-desc">Enable "unsaved changes" then try to navigate — the guard blocks you.</p>
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
+                <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.85rem">
+                  <input type="checkbox" id="toggle-dirty">
+                  Simulate unsaved changes
+                </label>
+                <span id="dirty-indicator" style="font-size:0.8rem;font-weight:600;color:var(--wl-success, #047857)">No changes</span>
+              </div>
+              <button class="btn btn-sm" id="btn-navigate-guard">Navigate to /dashboard</button>
+              <pre class="demo-output" id="output-guard">Toggle the checkbox, then click navigate</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> beforeNavigate<span class="syn-p">,</span> installGuards <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/guard.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">installGuards</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-f">beforeNavigate</span><span class="syn-p">(</span><span class="syn-p">(</span>to<span class="syn-p">,</span> <span class="syn-k">from</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">hasUnsavedChanges</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-k">return</span> <span class="syn-f">confirm</span><span class="syn-p">(</span><span class="syn-s">'You have unsaved changes. Leave?'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+  <span class="syn-k">return</span> <span class="syn-k">true</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Guard API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>installGuards()</code></td><td>function</td><td>Install the navigation interceptor</td></tr>
+          <tr><td><code>beforeNavigate(fn)</code></td><td>function</td><td>Register a guard. Return <code>true</code> to allow, <code>false</code> to block, or a string to redirect</td></tr>
+          <tr><td><code>afterNavigate(fn)</code></td><td>function</td><td>Register a callback that fires after navigation completes</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- HASH ROUTING -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Hash Routing</h2>
+      <p>Simple tab-style routing using URL hash fragments. Click a tab to update the hash and show the matching section.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Hash Routing</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-hash" style="width:100%">
+              <p class="feature-demo-desc">Click a tab — the URL hash updates and the matching section is shown.</p>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;flex-wrap:wrap">
+                <button class="btn btn-sm active" data-nav="overview">Overview</button>
+                <button class="btn btn-sm" data-nav="features">Features</button>
+                <button class="btn btn-sm" data-nav="pricing">Pricing</button>
+              </div>
+              <div>
+                <div data-section="overview" style="padding:0.75rem;border-radius:8px;background:var(--wl-surface);border:1px solid var(--wl-border);font-size:0.85rem">
+                  <strong>Overview</strong> — A lightweight framework for building fast, accessible web applications.
+                </div>
+                <div data-section="features" hidden style="padding:0.75rem;border-radius:8px;background:var(--wl-surface);border:1px solid var(--wl-border);font-size:0.85rem">
+                  <strong>Features</strong> — Islands architecture, reactive signals, zero build step, under 4 KB.
+                </div>
+                <div data-section="pricing" hidden style="padding:0.75rem;border-radius:8px;background:var(--wl-surface);border:1px solid var(--wl-border);font-size:0.85rem">
+                  <strong>Pricing</strong> — Free and open source. Pro tier available for teams.
+                </div>
+              </div>
+              <pre class="demo-output" id="output-hash">Click a tab to update the hash</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="html" type="button">HTML</button>
+              <button class="feature-demo-code-tab" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="html">
+              <pre><span class="syn-t">&lt;button</span> <span class="syn-a">data-nav=</span><span class="syn-s">"overview"</span><span class="syn-t">&gt;</span>Overview<span class="syn-t">&lt;/button&gt;</span>
+<span class="syn-t">&lt;button</span> <span class="syn-a">data-nav=</span><span class="syn-s">"features"</span><span class="syn-t">&gt;</span>Features<span class="syn-t">&lt;/button&gt;</span>
+<span class="syn-t">&lt;button</span> <span class="syn-a">data-nav=</span><span class="syn-s">"pricing"</span><span class="syn-t">&gt;</span>Pricing<span class="syn-t">&lt;/button&gt;</span>
+
+<span class="syn-t">&lt;div</span> <span class="syn-a">data-section=</span><span class="syn-s">"overview"</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/div&gt;</span>
+<span class="syn-t">&lt;div</span> <span class="syn-a">data-section=</span><span class="syn-s">"features"</span> <span class="syn-a">hidden</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/div&gt;</span>
+<span class="syn-t">&lt;div</span> <span class="syn-a">data-section=</span><span class="syn-s">"pricing"</span> <span class="syn-a">hidden</span><span class="syn-t">&gt;</span>...<span class="syn-t">&lt;/div&gt;</span></pre>
+            </div>
+            <div class="feature-demo-code-panel" data-lang="js">
+              <pre><span class="syn-c">// Listen for hash changes and show matching section</span>
+window<span class="syn-p">.</span><span class="syn-f">addEventListener</span><span class="syn-p">(</span><span class="syn-s">'hashchange'</span><span class="syn-p">,</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+  <span class="syn-k">const</span> hash <span class="syn-p">=</span> location<span class="syn-p">.</span>hash<span class="syn-p">.</span><span class="syn-f">slice</span><span class="syn-p">(</span><span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  sections<span class="syn-p">.</span><span class="syn-f">forEach</span><span class="syn-p">(</span>s <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+    s<span class="syn-p">.</span>hidden <span class="syn-p">=</span> s<span class="syn-p">.</span>dataset<span class="syn-p">.</span>section <span class="syn-p">!</span><span class="syn-p">=</span><span class="syn-p">=</span> hash<span class="syn-p">;</span>
+  <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- NAVIGATION API -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Navigation API</h2>
+      <p>Navigate between routes with back/forward history traversal using the modern Navigation API.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Navigation API</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-navapi" style="width:100%">
+              <p class="feature-demo-desc">Navigate between routes with back/forward history traversal.</p>
+              <div id="path-display"
+                style="min-height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;margin-bottom:0.75rem;background:var(--wl-primary);font-size:1rem">
+                /home</div>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem;flex-wrap:wrap">
+                <button class="btn btn-sm" data-route="/home">Home</button>
+                <button class="btn btn-sm" data-route="/about">About</button>
+                <button class="btn btn-sm" data-route="/blog">Blog</button>
+              </div>
+              <div style="display:flex;gap:0.5rem">
+                <button class="btn btn-sm" id="btn-back-nav" disabled>← Back</button>
+                <button class="btn btn-sm" id="btn-fwd-nav" disabled>Forward →</button>
+              </div>
+              <pre class="demo-output" id="output-navapi">Click a route, then use Back / Forward</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> navigate<span class="syn-p">,</span> transitionNames <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/transition.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Navigate with a view transition</span>
+<span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-s">'/about'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// With custom transition type</span>
+<span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-s">'/products'</span><span class="syn-p">,</span> <span class="syn-p">{</span> types<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'slide-left'</span><span class="syn-p">]</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Navigation API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>navigate(url, opts?)</code></td><td>function</td><td>Navigate with an optional view transition</td></tr>
+          <tr><td><code>transitionNames(map)</code></td><td>function</td><td>Assign view-transition-name values for cross-page element matching</td></tr>
+          <tr><td><code>intercept(opts)</code></td><td>function</td><td>Upgrade MPA links into SPA-style content swaps</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- SCROLL RESTORATION (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Scroll Restoration</h2>
+      <p>Save and restore scroll positions across navigations:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -196,42 +430,18 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> beforeNavigate<span class="syn-p">,</span> afterNavigate<span class="syn-p">,</span> installGuards <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/guard.js'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> installScroll <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/scroll.js'</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Install the navigation interceptor</span>
-<span class="syn-f">installGuards</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Block unauthenticated access</span>
-<span class="syn-f">beforeNavigate</span><span class="syn-p">(</span><span class="syn-p">(</span>to<span class="syn-p">,</span> <span class="syn-k">from</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">if</span> <span class="syn-p">(</span>to<span class="syn-p">.</span><span class="syn-f">startsWith</span><span class="syn-p">(</span><span class="syn-s">'/dashboard'</span><span class="syn-p">)</span> <span class="syn-p">&amp;&amp;</span> <span class="syn-p">!</span><span class="syn-f">isLoggedIn</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    <span class="syn-k">return</span> <span class="syn-s">'/login'</span><span class="syn-p">;</span> <span class="syn-c">// Redirect</span>
-  <span class="syn-p">}</span>
-  <span class="syn-k">return</span> <span class="syn-k">true</span><span class="syn-p">;</span> <span class="syn-c">// Allow</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Warn about unsaved changes</span>
-<span class="syn-f">beforeNavigate</span><span class="syn-p">(</span><span class="syn-p">(</span>to<span class="syn-p">,</span> <span class="syn-k">from</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">if</span> <span class="syn-p">(</span><span class="syn-f">hasUnsavedChanges</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    <span class="syn-k">return</span> <span class="syn-f">confirm</span><span class="syn-p">(</span><span class="syn-s">'You have unsaved changes. Leave?'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Track page views</span>
-<span class="syn-f">afterNavigate</span><span class="syn-p">(</span><span class="syn-p">(</span>to<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  analytics<span class="syn-p">.</span><span class="syn-f">track</span><span class="syn-p">(</span><span class="syn-s">'pageview'</span><span class="syn-p">,</span> <span class="syn-p">{</span> path<span class="syn-p">:</span> to <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-f">installScroll</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  offset<span class="syn-p">:</span> <span class="syn-n">80</span><span class="syn-p">,</span>         <span class="syn-c">// Account for sticky header</span>
+  savePositions<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> <span class="syn-c">// Remember scroll position per page</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>
       </div>
-      <h3>Guard Return Values</h3>
-      <p>| Return | Effect |</p>
-      <p>|--------|--------|</p>
-      <p>| <code>true</code> | Allow navigation |</p>
-      <p>| <code>false</code> | Block navigation |</p>
-      <p>| <code>string</code> | Redirect to that URL |</p>
-      <p>| <code>Promise</code> | Awaited, then same rules apply |</p>
-      <h2>Scroll Restoration</h2>
-      <p>Save and restore scroll positions across navigations:</p>
+
+      <h2>Navigation Interceptor</h2>
+      <p>Upgrade standard MPA link clicks into SPA-style content swaps without changing your HTML:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -242,76 +452,6 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-2">
-<span class="syn-k">import</span> <span class="syn-p">{</span> installScroll <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/scroll.js'</span><span class="syn-p">;</span>
-
-<span class="syn-f">installScroll</span><span class="syn-p">(</span><span class="syn-p">{</span>
-  offset<span class="syn-p">:</span> <span class="syn-n">80</span><span class="syn-p">,</span>         <span class="syn-c">// Account for sticky header</span>
-  savePositions<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span> <span class="syn-c">// Remember scroll position per page</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h3>Manual Control</h3>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> saveScroll<span class="syn-p">,</span> restoreScroll<span class="syn-p">,</span> scrollToAnchor <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/scroll.js'</span><span class="syn-p">;</span>
-
-<span class="syn-f">saveScroll</span><span class="syn-p">(</span><span class="syn-s">'/products'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-f">restoreScroll</span><span class="syn-p">(</span><span class="syn-s">'/products'</span><span class="syn-p">,</span> <span class="syn-s">'smooth'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-f">scrollToAnchor</span><span class="syn-p">(</span><span class="syn-s">'#pricing'</span><span class="syn-p">,</span> <span class="syn-n">80</span><span class="syn-p">)</span><span class="syn-p">;</span> <span class="syn-c">// 80px header offset</span>
-</pre>
-        </div>
-      </div>
-      <h2>View Transitions</h2>
-      <p>Smooth page transitions using the View Transitions API:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-k">import</span> <span class="syn-p">{</span> navigate<span class="syn-p">,</span> transitionNames <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/transition.js'</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Navigate with a transition</span>
-<span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-s">'/about'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Navigate with a custom transition type</span>
-<span class="syn-k">await</span> <span class="syn-f">navigate</span><span class="syn-p">(</span><span class="syn-s">'/products'</span><span class="syn-p">,</span> <span class="syn-p">{</span> types<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'slide-left'</span><span class="syn-p">]</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Assign transition names for cross-page element matching</span>
-<span class="syn-f">transitionNames</span><span class="syn-p">(</span><span class="syn-p">{</span>
-  <span class="syn-s">'.hero-image'</span><span class="syn-p">:</span> <span class="syn-s">'hero'</span><span class="syn-p">,</span>
-  <span class="syn-s">'.page-title'</span><span class="syn-p">:</span> <span class="syn-s">'title'</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>Falls back to a CSS crossfade on browsers without View Transitions support.</p>
-
-      <h2>Navigation Interceptor</h2>
-      <p>Upgrade standard MPA link clicks into SPA-style content swaps without changing your HTML:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
 <span class="syn-k">import</span> <span class="syn-p">{</span> intercept <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/nav/router.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> router <span class="syn-p">=</span> <span class="syn-f">intercept</span><span class="syn-p">(</span><span class="syn-p">{</span>
@@ -319,15 +459,11 @@
   transition<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>        <span class="syn-c">// Use view transitions</span>
   scroll<span class="syn-p">:</span> <span class="syn-k">true</span><span class="syn-p">,</span>            <span class="syn-c">// Scroll to top after swap</span>
   exclude<span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">'/api/'</span><span class="syn-p">]</span><span class="syn-p">,</span>     <span class="syn-c">// Skip these URL patterns</span>
-  onNavigate<span class="syn-p">:</span> <span class="syn-p">(</span>url<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Navigated to'</span><span class="syn-p">,</span> url<span class="syn-p">)</span><span class="syn-p">,</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Cleanup</span>
-router<span class="syn-p">.</span><span class="syn-f">destroy</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 </pre>
         </div>
       </div>
-      <p>Uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API" rel="noopener noreferrer">Navigation API</a> where available, with click interception + popstate as a fallback. Links with <code>target</code>, <code>download</code>, <code>data-no-intercept</code>, or modifier keys are always left alone.</p>
+      <p>Uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API" rel="noopener noreferrer">Navigation API</a> where available, with click interception + popstate as a fallback.</p>
 
       <div class="docs-nav-footer">
         <a href="/docs/store.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

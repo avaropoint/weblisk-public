@@ -181,10 +181,252 @@
 
     <main class="docs-content" id="main-content">
       <h1>Components</h1>
+      <p class="lead">Weblisk components are standard <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom Elements</a> with a thin signal bridge. No Shadow DOM. No template compiler. No build step.</p>
 
-      <p>Weblisk components are standard <a
-          href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom
-          Elements</a> with a thin signal bridge. No Shadow DOM. No template compiler. No build step.</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-components.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- COUNTER -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Counter Component</h2>
+      <p>A reactive counter component with increment, decrement, and reset props — built on signal-backed attributes.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Counter</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-counter" style="width:100%">
+              <p class="feature-demo-desc">Click +, −, or Reset to see reactive state updates.</p>
+              <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:0.75rem">
+                <button class="btn btn-sm" id="btn-dec">−</button>
+                <span id="counter-value" style="font-size:2rem;font-weight:700;min-width:3rem;text-align:center">0</span>
+                <button class="btn btn-sm" id="btn-inc">+</button>
+              </div>
+              <button class="btn btn-sm" id="btn-reset">Reset</button>
+              <pre class="demo-output" id="output-counter">Click +, −, or Reset</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+              <button class="feature-demo-code-tab" data-lang="html" type="button">HTML</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> component <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
+
+<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-counter'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  props<span class="syn-p">:</span> <span class="syn-p">{</span> start<span class="syn-p">:</span> <span class="syn-n">0</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props<span class="syn-p">,</span> $<span class="syn-p">,</span> effect <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.count'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.inc'</span><span class="syn-p">)</span><span class="syn-p">.</span>onclick <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> props<span class="syn-p">.</span>start<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.dec'</span><span class="syn-p">)</span><span class="syn-p">.</span>onclick <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> props<span class="syn-p">.</span>start<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">-</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <div class="feature-demo-code-panel" data-lang="html">
+              <pre><span class="syn-t">&lt;wl-counter</span> <span class="syn-a">start=</span><span class="syn-s">"5"</span><span class="syn-t">&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"dec"</span><span class="syn-t">&gt;</span>-<span class="syn-t">&lt;/button&gt;</span>
+  <span class="syn-t">&lt;span</span> <span class="syn-a">class=</span><span class="syn-s">"count"</span><span class="syn-t">&gt;</span>5<span class="syn-t">&lt;/span&gt;</span>
+  <span class="syn-t">&lt;button</span> <span class="syn-a">class=</span><span class="syn-s">"inc"</span><span class="syn-t">&gt;</span>+<span class="syn-t">&lt;/button&gt;</span>
+<span class="syn-t">&lt;/wl-counter&gt;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- LIVE CLOCK -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Live Clock</h2>
+      <p>A clock component with <code>setup()</code> and <code>cleanup()</code> lifecycle hooks — interval is cleared on disconnect.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Live Clock</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-clock" style="width:100%">
+              <p class="feature-demo-desc">Start the clock to see lifecycle in action.</p>
+              <div id="clock-display"
+                style="min-height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;margin-bottom:0.75rem;background:var(--wl-surface);border:1px solid var(--wl-border)">
+                --:--:--</div>
+              <div style="display:flex;gap:0.5rem">
+                <button class="btn btn-sm" id="btn-start-clock">Start</button>
+                <button class="btn btn-sm" id="btn-stop-clock" disabled>Stop</button>
+              </div>
+              <pre class="demo-output" id="output-clock">Start the clock to see lifecycle in action</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-clock'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> $<span class="syn-p">,</span> cleanup <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-k">const</span> tick <span class="syn-p">=</span> <span class="syn-f">setInterval</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.time'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span>
+        <span class="syn-k">new</span> <span class="syn-f">Date</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">toLocaleTimeString</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-f">cleanup</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-f">clearInterval</span><span class="syn-p">(</span>tick<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- TOGGLE SWITCHES -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Toggle Switches</h2>
+      <p>Custom toggle components with <code>props.onChange</code> callbacks and ARIA switch role.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Toggle Switches</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-toggle" style="width:100%">
+              <p class="feature-demo-desc">Flip a toggle to see state changes.</p>
+              <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:0.5rem">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-size:0.85rem;font-weight:600">Wi-Fi</span>
+                  <button class="toggle-switch" data-toggle="wifi" role="switch" aria-checked="false" aria-label="Toggle Wi-Fi">
+                    <span class="toggle-dot"></span>
+                  </button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-size:0.85rem;font-weight:600">Bluetooth</span>
+                  <button class="toggle-switch" data-toggle="bluetooth" role="switch" aria-checked="false" aria-label="Toggle Bluetooth">
+                    <span class="toggle-dot"></span>
+                  </button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-size:0.85rem;font-weight:600">Dark Mode</span>
+                  <button class="toggle-switch" data-toggle="darkMode" role="switch" aria-checked="false" aria-label="Toggle Dark Mode">
+                    <span class="toggle-dot"></span>
+                  </button>
+                </div>
+              </div>
+              <div id="toggle-status" style="font-size:0.8rem;color:var(--wl-text-dim)"></div>
+              <pre class="demo-output" id="output-toggle">Flip a toggle to see state changes</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-toggle'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
+  props<span class="syn-p">:</span> <span class="syn-p">{</span> active<span class="syn-p">:</span> <span class="syn-k">false</span> <span class="syn-p">}</span><span class="syn-p">,</span>
+  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props<span class="syn-p">,</span> $<span class="syn-p">,</span> effect<span class="syn-p">,</span> emit <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
+    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'button'</span><span class="syn-p">)</span><span class="syn-p">.</span>onclick <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">{</span>
+      props<span class="syn-p">.</span>active<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>v <span class="syn-p">=</span><span class="syn-p">&gt;</span> <span class="syn-p">!</span>v<span class="syn-p">)</span><span class="syn-p">;</span>
+      <span class="syn-f">emit</span><span class="syn-p">(</span><span class="syn-s">'change'</span><span class="syn-p">,</span> <span class="syn-p">{</span> active<span class="syn-p">:</span> props<span class="syn-p">.</span><span class="syn-f">active</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
+    <span class="syn-p">}</span><span class="syn-p">;</span>
+  <span class="syn-p">}</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Component API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>component(tag, opts)</code></td><td>function</td><td>Register a Custom Element with signal-backed props</td></tr>
+          <tr><td><code>opts.props</code></td><td>Object</td><td>Default values — type determines attribute parsing (string, number, boolean)</td></tr>
+          <tr><td><code>opts.setup(ctx)</code></td><td>function</td><td>Called on <code>connectedCallback</code> — receives context object</td></tr>
+          <tr><td><code>opts.template()</code></td><td>function</td><td>Optional fallback DOM if the element is empty</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Setup Context</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>props</code></td><td>Object</td><td>Signal getters for each declared prop</td></tr>
+          <tr><td><code>el</code></td><td>HTMLElement</td><td>The custom element instance</td></tr>
+          <tr><td><code>$(sel)</code></td><td>function</td><td><code>querySelector</code> scoped to this element</td></tr>
+          <tr><td><code>$$(sel)</code></td><td>function</td><td><code>querySelectorAll</code> scoped to this element</td></tr>
+          <tr><td><code>effect(fn)</code></td><td>function</td><td>Auto-tracked effect, disposed on disconnect</td></tr>
+          <tr><td><code>emit(name, detail?)</code></td><td>function</td><td>Dispatch a bubbling CustomEvent</td></tr>
+          <tr><td><code>cleanup(fn)</code></td><td>function</td><td>Register a function to call on disconnect</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- EVENTS (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Events</h2>
+      <p>Use <code>emit</code> to dispatch standard CustomEvents that bubble:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -195,151 +437,6 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> component <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>Also available as a deep import: <code>import { component } from 'weblisk/ui/component.js';</code></p>
-      <h2>Defining a Component</h2>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-counter'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  props<span class="syn-p">:</span> <span class="syn-p">{</span> start<span class="syn-p">:</span> <span class="syn-n">0</span> <span class="syn-p">}</span><span class="syn-p">,</span>
-
-  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props<span class="syn-p">,</span> $<span class="syn-p">,</span> effect <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-      <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.count'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-    <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.inc'</span><span class="syn-p">)</span><span class="syn-p">.</span>onclick <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> props<span class="syn-p">.</span>start<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
-    <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.dec'</span><span class="syn-p">)</span><span class="syn-p">.</span>onclick <span class="syn-p">=</span> <span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> props<span class="syn-p">.</span>start<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>props<span class="syn-p">.</span><span class="syn-f">start</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">-</span> <span class="syn-n">1</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>Usage — plain HTML:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">html</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-t">&lt;</span><span class="syn-t">wl-counter</span> <span class="syn-a">start</span><span class="syn-p">=</span><span class="syn-s">&quot;5&quot;</span><span class="syn-t">&gt;</span>
-  <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;dec&quot;</span><span class="syn-t">&gt;</span>-<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
-  <span class="syn-t">&lt;</span><span class="syn-t">span</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;count&quot;</span><span class="syn-t">&gt;</span>5<span class="syn-t">&lt;/</span><span class="syn-t">span</span><span class="syn-t">&gt;</span>
-  <span class="syn-t">&lt;</span><span class="syn-t">button</span> <span class="syn-a">class</span><span class="syn-p">=</span><span class="syn-s">&quot;inc&quot;</span><span class="syn-t">&gt;</span>+<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
-<span class="syn-t">&lt;/</span><span class="syn-t">wl-counter</span><span class="syn-t">&gt;</span>
-</pre>
-        </div>
-      </div>
-      <p>The HTML works before JavaScript loads — the count shows "5", buttons are visible. When the component upgrades,
-        it adds interactivity. This is <strong>progressive enhancement</strong>.</p>
-      <h2>Props</h2>
-      <p>Props are declared with default values. The type of the default determines how attributes are parsed:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-widget'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  props<span class="syn-p">:</span> <span class="syn-p">{</span>
-    label<span class="syn-p">:</span> <span class="syn-s">''</span><span class="syn-p">,</span>        <span class="syn-c">// String — attribute value as-is</span>
-    count<span class="syn-p">:</span> <span class="syn-n">0</span><span class="syn-p">,</span>         <span class="syn-c">// Number — parsed with Number()</span>
-    active<span class="syn-p">:</span> <span class="syn-k">false</span><span class="syn-p">,</span>    <span class="syn-c">// Boolean — &quot;false&quot; and &quot;0&quot; are false, everything else is true</span>
-  <span class="syn-p">}</span><span class="syn-p">,</span>
-  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    <span class="syn-k">typeof</span> props<span class="syn-p">.</span><span class="syn-f">label</span><span class="syn-p">(</span><span class="syn-p">)</span>  <span class="syn-c">// 'string'</span>
-    <span class="syn-k">typeof</span> props<span class="syn-p">.</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span>  <span class="syn-c">// 'number'</span>
-    <span class="syn-k">typeof</span> props<span class="syn-p">.</span><span class="syn-f">active</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-c">// 'boolean'</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>Each prop is a <strong>signal</strong> — call it to read, call <code>.set()</code> to write:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
-props<span class="syn-p">.</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span>          <span class="syn-c">// read: 0</span>
-props<span class="syn-p">.</span>count<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span><span class="syn-n">5</span><span class="syn-p">)</span>     <span class="syn-c">// write: 5</span>
-props<span class="syn-p">.</span>count<span class="syn-p">.</span><span class="syn-k">set</span><span class="syn-p">(</span>n <span class="syn-p">=&gt;</span> n <span class="syn-p">+</span> <span class="syn-n">1</span><span class="syn-p">)</span>  <span class="syn-c">// functional update: 6</span>
-</pre>
-        </div>
-      </div>
-      <p>When an HTML attribute changes (e.g. via <code>setAttribute</code>), the prop signal updates automatically.</p>
-      <h2>Setup Context</h2>
-      <p>The <code>setup</code> function receives a context object:</p>
-      <p>| Property | Type | Description |</p>
-      <p>|----------|------|-------------|</p>
-      <p>| <code>props</code> | <code>Object</code> | Signal getters for each declared prop |</p>
-      <p>| <code>el</code> | <code>HTMLElement</code> | The custom element instance |</p>
-      <p>| <code>$</code> | <code>(selector) => Element</code> | <code>querySelector</code> scoped to this element |</p>
-      <p>| <code>$$</code> | <code>(selector) => Element[]</code> | <code>querySelectorAll</code> scoped to this element
-        |</p>
-      <p>| <code>effect</code> | <code>(fn) => dispose</code> | Auto-tracked effect, disposed on disconnect |</p>
-      <p>| <code>emit</code> | <code>(name, detail?) => void</code> | Dispatch a bubbling CustomEvent |</p>
-      <p>| <code>cleanup</code> | <code>(fn) => void</code> | Register a function to call on disconnect |</p>
-      <h2>Effects</h2>
-      <p>Effects created via the context are automatically disposed when the element disconnects from the DOM:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-6">
-<span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-clock'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> $<span class="syn-p">,</span> effect<span class="syn-p">,</span> cleanup <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
-    <span class="syn-k">const</span> tick <span class="syn-p">=</span> <span class="syn-f">setInterval</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-      <span class="syn-f">$</span><span class="syn-p">(</span><span class="syn-s">'.time'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-k">new</span> <span class="syn-f">Date</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">toLocaleTimeString</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-    <span class="syn-p">}</span><span class="syn-p">,</span> <span class="syn-n">1000</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-    <span class="syn-f">cleanup</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">clearInterval</span><span class="syn-p">(</span>tick<span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-p">}</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Events</h2>
-      <p>Use <code>emit</code> to dispatch standard CustomEvents that bubble:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-7">
 <span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-color-picker'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
   props<span class="syn-p">:</span> <span class="syn-p">{</span> value<span class="syn-p">:</span> <span class="syn-s">'#000000'</span> <span class="syn-p">}</span><span class="syn-p">,</span>
   <span class="syn-f">setup</span><span class="syn-p">(</span><span class="syn-p">{</span> props<span class="syn-p">,</span> $<span class="syn-p">,</span> emit <span class="syn-p">}</span><span class="syn-p">)</span> <span class="syn-p">{</span>
@@ -352,29 +449,7 @@ props<span class="syn-p">.</span>count<span class="syn-p">.</span><span class="s
 </pre>
         </div>
       </div>
-      <p>Listen from any parent:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">html</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-8">
-<span class="syn-t">&lt;</span><span class="syn-t">wl-color-picker</span> <span class="syn-a">value</span><span class="syn-p">=</span><span class="syn-s">&quot;#6366f1&quot;</span><span class="syn-t">&gt;</span>
-  <span class="syn-t">&lt;</span><span class="syn-t">input</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;color&quot;</span> <span class="syn-t">/&gt;</span>
-<span class="syn-t">&lt;/</span><span class="syn-t">wl-color-picker</span><span class="syn-t">&gt;</span>
 
-<span class="syn-t">&lt;</span><span class="syn-t">script</span> <span class="syn-a">type</span><span class="syn-p">=</span><span class="syn-s">&quot;module&quot;</span><span class="syn-t">&gt;</span>
-document.querySelector('wl-color-picker').addEventListener('color-change', (e) =&gt; {
-  document.body.style.setProperty('--accent', e.detail.color);
-});
-<span class="syn-t">&lt;/</span><span class="syn-t">script</span><span class="syn-t">&gt;</span>
-</pre>
-        </div>
-      </div>
       <h2>Template Fallback</h2>
       <p>If the element is empty, an optional <code>template</code> function provides initial DOM:</p>
       <div class="code-window">
@@ -382,11 +457,11 @@ document.querySelector('wl-color-picker').addEventListener('color-change', (e) =
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
           <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
-          <pre id="doc-code-9">
+          <pre id="doc-code-2">
 <span class="syn-f">component</span><span class="syn-p">(</span><span class="syn-s">'wl-spinner'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
   <span class="syn-f">template</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">{</span>
     <span class="syn-k">return</span> <span class="syn-s">'&lt;div class=&quot;spinner&quot; role=&quot;status&quot; aria-label=&quot;Loading&quot;&gt;&lt;/div&gt;'</span><span class="syn-p">;</span>
@@ -398,89 +473,20 @@ document.querySelector('wl-color-picker').addEventListener('color-change', (e) =
 </pre>
         </div>
       </div>
-      <p>If the element already has children (server-rendered), the template is skipped. This ensures components work
-        with any server template engine.</p>
-      <h2>Working With Any Framework</h2>
-      <p>Components are standard Custom Elements — they work anywhere HTML works:</p>
-      <p><strong>Rails (ERB)</strong></p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">erb</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-10">
-<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;&lt;%= @feature.enabled? %&gt;</span>&quot;&gt;
-  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span><span class="syn-t">&lt;</span>%= <span class="syn-a">@feature.name</span> %<span class="syn-t">&gt;</span><span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
-<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
-</pre>
-        </div>
-      </div>
-      <p><strong>Django (Jinja2)</strong></p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">html</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-11">
-<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;{{ feature.enabled|lower }}&quot;</span><span class="syn-t">&gt;</span>
-  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>{{ feature.name }}<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
-<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
-</pre>
-        </div>
-      </div>
-      <p><strong>Go (html/template)</strong></p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">html</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-12">
-<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;{{.Enabled}}&quot;</span><span class="syn-t">&gt;</span>
-  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>{{.Name}}<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
-<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
-</pre>
-        </div>
-      </div>
-      <p><strong>Static HTML</strong></p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">html</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-13"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-13">
-<span class="syn-t">&lt;</span><span class="syn-t">wl-toggle</span> <span class="syn-a">active</span><span class="syn-p">=</span><span class="syn-s">&quot;true&quot;</span><span class="syn-t">&gt;</span>
-  <span class="syn-t">&lt;</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>Dark Mode<span class="syn-t">&lt;/</span><span class="syn-t">button</span><span class="syn-t">&gt;</span>
-<span class="syn-t">&lt;/</span><span class="syn-t">wl-toggle</span><span class="syn-t">&gt;</span>
-</pre>
-        </div>
-      </div>
-      <p>All identical. The server renders the HTML. The component enhances it.</p>
+      <p>If the element already has children (server-rendered), the template is skipped.</p>
+
       <h2>Component vs. Island</h2>
       <p>Both enhance existing HTML. The difference:</p>
-      <p>| | <code>component()</code> | <code>enhance()</code> |</p>
-      <p>|---|---|---|</p>
-      <p>| Registers a Custom Element | Yes | No |</p>
-      <p>| Reusable with attributes | Yes | No (selector-based) |</p>
-      <p>| Works in any template engine | Yes | Yes |</p>
-      <p>| Auto-cleanup on disconnect | Yes | Manual |</p>
-      <p>| When to use | Reusable interactive widgets | One-off page-specific behavior |</p>
-      <p>Use <code>component()</code> for reusable widgets. Use <code>enhance()</code> for page-specific behavior.</p>
+      <table class="api-table">
+        <thead><tr><th></th><th><code>component()</code></th><th><code>enhance()</code></th></tr></thead>
+        <tbody>
+          <tr><td>Registers a Custom Element</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Reusable with attributes</td><td>Yes</td><td>No (selector-based)</td></tr>
+          <tr><td>Works in any template engine</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Auto-cleanup on disconnect</td><td>Yes</td><td>Manual</td></tr>
+          <tr><td>When to use</td><td>Reusable interactive widgets</td><td>One-off page-specific behavior</td></tr>
+        </tbody>
+      </table>
 
       <div class="docs-nav-footer">
         <a href="/docs/hydration.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

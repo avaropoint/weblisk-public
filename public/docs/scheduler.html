@@ -181,11 +181,94 @@
 
     <main class="docs-content" id="main-content">
       <h1>Scheduler</h1>
+      <p class="lead">The scheduler module helps you prioritize work and avoid blocking the main thread. It wraps the Scheduler API with automatic fallbacks to <code>requestIdleCallback</code>, <code>requestAnimationFrame</code>, and <code>queueMicrotask</code>.</p>
 
-      <p>The scheduler module helps you prioritize work and avoid blocking the main thread. It wraps the Scheduler API
-        with automatic fallbacks.</p>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-scheduler.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- TASK SCHEDULER -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>scheduleTask</h2>
-      <p>Run a function with a specified priority:</p>
+      <p>Run a function with a specified priority. Tasks are executed according to the Scheduler API, with automatic fallbacks for browsers without native support.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Task Scheduler</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-scheduler" style="width:100%">
+              <p class="feature-demo-desc">Priority-based scheduling using scheduler.postTask → rIC → rAF fallback.</p>
+              <button class="btn btn-sm" id="btn-scheduler">Schedule Tasks</button>
+              <pre class="demo-output" id="output-scheduler">Ready...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> scheduleTask <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/scheduler.js'</span><span class="syn-p">;</span>
+
+<span class="syn-k">await</span> Promise<span class="syn-p">.</span><span class="syn-f">all</span><span class="syn-p">(</span><span class="syn-p">[</span>
+  <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> doWork<span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'background'</span><span class="syn-p">)</span><span class="syn-p">,</span>
+  <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> render<span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'user-visible'</span><span class="syn-p">)</span><span class="syn-p">,</span>
+  <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=</span><span class="syn-p">&gt;</span> handle<span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'user-blocking'</span><span class="syn-p">)</span><span class="syn-p">,</span>
+<span class="syn-p">]</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Scheduler API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>scheduleTask(fn, priority)</code></td><td>function</td><td>Schedule a task with the given priority. Returns a Promise</td></tr>
+          <tr><td><code>batchUpdates(fn)</code></td><td>function</td><td>Batch multiple signal updates into a single animation frame</td></tr>
+          <tr><td><code>rafThrottle(fn)</code></td><td>function</td><td>Throttle a function to run at most once per animation frame</td></tr>
+          <tr><td><code>idleDebounce(fn, timeout?)</code></td><td>function</td><td>Debounce a function to run when the browser is idle</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Priority Levels</h3>
+      <table class="api-table">
+        <thead><tr><th>Priority</th><th>Use Case</th><th>Fallback</th></tr></thead>
+        <tbody>
+          <tr><td><code>user-blocking</code></td><td>Input handling, critical UI</td><td><code>queueMicrotask</code></td></tr>
+          <tr><td><code>user-visible</code></td><td>Rendering visible content</td><td><code>requestAnimationFrame</code></td></tr>
+          <tr><td><code>background</code></td><td>Prefetching, analytics</td><td><code>requestIdleCallback</code></td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- BATCH UPDATES (docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>batchUpdates</h2>
+      <p>Batch multiple signal updates into a single animation frame:</p>
       <div class="code-window">
         <div class="code-header">
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
@@ -196,37 +279,6 @@
         </div>
         <div class="code-body">
           <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> scheduleTask <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/scheduler.js'</span><span class="syn-p">;</span>
-
-<span class="syn-c">// High priority — user is waiting</span>
-<span class="syn-k">const</span> result <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">processInput</span><span class="syn-p">(</span>data<span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'user-blocking'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Normal priority — visible but not blocking</span>
-<span class="syn-k">await</span> <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">renderChart</span><span class="syn-p">(</span>data<span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'user-visible'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Low priority — background work</span>
-<span class="syn-k">await</span> <span class="syn-f">scheduleTask</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-f">preloadImages</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'background'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p><strong>Priority levels:</strong></p>
-      <p>| Priority | Use Case | Fallback |</p>
-      <p>|----------|----------|----------|</p>
-      <p>| <code>user-blocking</code> | Input handling, critical UI | <code>queueMicrotask</code> |</p>
-      <p>| <code>user-visible</code> | Rendering visible content | <code>requestAnimationFrame</code> |</p>
-      <p>| <code>background</code> | Prefetching, analytics | <code>requestIdleCallback</code> |</p>
-      <h2>batchUpdates</h2>
-      <p>Batch multiple signal updates into a single animation frame:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
 <span class="syn-k">import</span> <span class="syn-p">{</span> batchUpdates <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/scheduler.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">await</span> <span class="syn-f">batchUpdates</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
@@ -238,6 +290,7 @@
 </pre>
         </div>
       </div>
+
       <h2>rafThrottle</h2>
       <p>Throttle a function to run at most once per animation frame:</p>
       <div class="code-window">
@@ -245,11 +298,11 @@
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
           <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
-          <pre id="doc-code-3">
+          <pre id="doc-code-2">
 <span class="syn-k">import</span> <span class="syn-p">{</span> rafThrottle <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/scheduler.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> onScroll <span class="syn-p">=</span> <span class="syn-f">rafThrottle</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
@@ -260,6 +313,7 @@ window<span class="syn-p">.</span><span class="syn-f">addEventListener</span><sp
 </pre>
         </div>
       </div>
+
       <h2>idleDebounce</h2>
       <p>Debounce a function to run when the browser is idle:</p>
       <div class="code-window">
@@ -267,11 +321,11 @@ window<span class="syn-p">.</span><span class="syn-f">addEventListener</span><sp
           <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
               class="dot-green"></span></div>
           <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
+          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
               aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
         </div>
         <div class="code-body">
-          <pre id="doc-code-4">
+          <pre id="doc-code-3">
 <span class="syn-k">import</span> <span class="syn-p">{</span> idleDebounce <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/core/scheduler.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> saveProgress <span class="syn-p">=</span> <span class="syn-f">idleDebounce</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>

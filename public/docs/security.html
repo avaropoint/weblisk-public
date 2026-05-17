@@ -180,61 +180,181 @@
 
     <main class="docs-content" id="main-content">
       <h1>Security</h1>
+      <p class="lead">HTML sanitization, Trusted Types, CSRF tokens, nonce-based CSP, and Permissions Policy. OWASP essentials with zero dependencies — just import and use.</p>
 
-      <p>Weblisk's security modules cover the OWASP essentials with zero dependencies.</p>
-      <h2>Content Security Policy</h2>
-      <p>Generate and inject a strict CSP:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-security.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- INPUT SANITIZATION -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Input Sanitization</h2>
+      <p>Clean untrusted HTML before inserting into the DOM. Uses the native Sanitizer API where available, DOMParser fallback elsewhere.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Input Sanitization</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> applyCSP<span class="syn-p">,</span> scriptHash <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csp.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-sanitize" style="width:100%">
+              <p class="feature-demo-desc">Type HTML/script tags below — they'll be sanitized in real-time.</p>
+              <input type="text" class="input" id="sanitize-input" placeholder='Try: &lt;script&gt;alert("xss")&lt;/script&gt;' aria-label="HTML to sanitize" style="margin-bottom:0.5rem" />
+              <pre class="demo-output" id="output-sanitize">Sanitized output appears here</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> sanitize<span class="syn-p">,</span> escapeHTML<span class="syn-p">,</span> html <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/sanitize.js'</span><span class="syn-p">;</span>
 
-<span class="syn-f">applyCSP</span><span class="syn-p">(</span><span class="syn-p">{</span>
-  <span class="syn-s">'script-src'</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">&quot;'self'&quot;</span><span class="syn-p">]</span><span class="syn-p">,</span>
-  <span class="syn-s">'style-src'</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">&quot;'self'&quot;</span><span class="syn-p">,</span> <span class="syn-s">&quot;'unsafe-inline'&quot;</span><span class="syn-p">]</span><span class="syn-p">,</span>
-  <span class="syn-s">'img-src'</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">&quot;'self'&quot;</span><span class="syn-p">,</span> <span class="syn-s">'data:'</span><span class="syn-p">]</span><span class="syn-p">,</span>
-  <span class="syn-s">'connect-src'</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">&quot;'self'&quot;</span><span class="syn-p">,</span> <span class="syn-s">'https://api.example.com'</span><span class="syn-p">]</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-c">// Remove dangerous elements/attributes</span>
+<span class="syn-k">const</span> safe <span class="syn-p">=</span> <span class="syn-f">sanitize</span><span class="syn-p">(</span>userProvidedHTML<span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Escape for text content</span>
+<span class="syn-k">const</span> escaped <span class="syn-p">=</span> <span class="syn-f">escapeHTML</span><span class="syn-p">(</span><span class="syn-s">'&lt;script&gt;alert("xss")&lt;/script&gt;'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Tagged template — values are auto-escaped</span>
+el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> html<span class="syn-s">`&lt;p&gt;Hello, ${userName}!&lt;/p&gt;`</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
-      <h3>Inline Script Hashes</h3>
-      <p>For inline scripts, compute the hash:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+
+      <h3>Sanitize API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>sanitize(html)</code></td><td>function</td><td>Remove dangerous elements/attributes from an HTML string</td></tr>
+          <tr><td><code>escapeHTML(str)</code></td><td>function</td><td>Escape <code>&lt; &gt; &amp; " '</code> for safe text insertion</td></tr>
+          <tr><td><code>html``</code></td><td>tag</td><td>Tagged template — interpolated values are auto-escaped</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- TRUSTED TYPES -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Trusted Types</h2>
+      <p>Prevent DOM XSS by routing all dynamic HTML through a Trusted Types policy. Falls back to sanitization when the browser doesn't support the Trusted Types API.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Trusted Types</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">const</span> hash <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">scriptHash</span><span class="syn-p">(</span><span class="syn-s">'console.log(&quot;hello&quot;)'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-c">// → 'sha256-abc...'</span>
-</pre>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-trusted" style="width:100%">
+              <p class="feature-demo-desc">Trusted Types policy strips dangerous content from HTML strings.</p>
+              <button class="btn btn-sm" id="btn-trusted">Test Trusted HTML</button>
+              <pre class="demo-output" id="output-trusted">Ready...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> trustedHTML<span class="syn-p">,</span> trustedScriptURL <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/trusted.js'</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Create trusted HTML (sanitized)</span>
+el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> <span class="syn-f">trustedHTML</span><span class="syn-p">(</span><span class="syn-s">'&lt;p&gt;Safe content&lt;/p&gt;'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+
+<span class="syn-c">// Create trusted script URL (must be same-origin)</span>
+<span class="syn-k">const</span> url <span class="syn-p">=</span> <span class="syn-f">trustedScriptURL</span><span class="syn-p">(</span><span class="syn-s">'./lib/weblisk/core/signal.js'</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>Trusted Types API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>trustedHTML(str)</code></td><td>function</td><td>Sanitize and return a <code>TrustedHTML</code> object (or string fallback)</td></tr>
+          <tr><td><code>trustedScriptURL(url)</code></td><td>function</td><td>Validate same-origin and return a <code>TrustedScriptURL</code></td></tr>
+        </tbody>
+      </table>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- CSRF PROTECTION -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>CSRF Protection</h2>
-      <p>Generate and inject CSRF tokens:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <p>Generate cryptographic tokens using <code>crypto.getRandomValues()</code> and inject them into forms automatically. Tokens are stored in <code>sessionStorage</code>.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">CSRF Tokens</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-k">import</span> <span class="syn-p">{</span> protectForm<span class="syn-p">,</span> csrfToken <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csrf.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-csrf" style="width:100%">
+              <p class="feature-demo-desc">Generate cryptographic tokens and protect forms automatically.</p>
+              <button class="btn btn-sm" id="btn-csrf">Generate Token</button>
+              <pre class="demo-output" id="output-csrf">No token</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> protectForm<span class="syn-p">,</span> csrfToken<span class="syn-p">,</span> generateToken <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csrf.js'</span><span class="syn-p">;</span>
 
 <span class="syn-c">// Auto-inject a hidden _csrf field into a form</span>
 <span class="syn-f">protectForm</span><span class="syn-p">(</span><span class="syn-s">'#payment-form'</span><span class="syn-p">)</span><span class="syn-p">;</span>
@@ -245,85 +365,99 @@
   method<span class="syn-p">:</span> <span class="syn-s">'POST'</span><span class="syn-p">,</span>
   headers<span class="syn-p">:</span> <span class="syn-p">{</span> <span class="syn-s">'X-CSRF-Token'</span><span class="syn-p">:</span> token <span class="syn-p">}</span><span class="syn-p">,</span>
   body<span class="syn-p">:</span> JSON<span class="syn-p">.</span><span class="syn-f">stringify</span><span class="syn-p">(</span>data<span class="syn-p">)</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
-      <p>Tokens are generated using <code>crypto.getRandomValues()</code> and stored in <code>sessionStorage</code>.</p>
-      <h2>Input Sanitization</h2>
-      <p>Clean untrusted HTML before inserting into the DOM:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-k">import</span> <span class="syn-p">{</span> sanitize<span class="syn-p">,</span> escapeHTML<span class="syn-p">,</span> html <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/sanitize.js'</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Remove dangerous elements/attributes</span>
-<span class="syn-k">const</span> safe <span class="syn-p">=</span> <span class="syn-f">sanitize</span><span class="syn-p">(</span>userProvidedHTML<span class="syn-p">)</span><span class="syn-p">;</span>
+      <h3>CSRF API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>generateToken()</code></td><td>function</td><td>Generate a 64-char hex token (32 bytes, cryptographically random)</td></tr>
+          <tr><td><code>csrfToken()</code></td><td>signal</td><td>Reactive signal — current CSRF token (auto-generated on first read)</td></tr>
+          <tr><td><code>protectForm(sel)</code></td><td>function</td><td>Auto-inject a hidden <code>_csrf</code> field into the matched form</td></tr>
+        </tbody>
+      </table>
 
-<span class="syn-c">// Escape for text content</span>
-<span class="syn-k">const</span> escaped <span class="syn-p">=</span> <span class="syn-f">escapeHTML</span><span class="syn-p">(</span><span class="syn-s">'&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-c">// → '&amp;lt;script&amp;gt;alert(&amp;quot;xss&amp;quot;)&amp;lt;/script&amp;gt;'</span>
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- CSP + PERMISSIONS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>CSP &amp; Permissions Policy</h2>
+      <p>Generate and inject a strict Content Security Policy and lock down browser features with Permissions Policy. Default policy denies all features unless explicitly allowed.</p>
 
-<span class="syn-c">// Tagged template — values are auto-escaped</span>
-el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> html<span class="syn-s">`&lt;p&gt;Hello, ${userName}!&lt;/p&gt;`</span><span class="syn-p">;</span>
-</pre>
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">CSP + Permissions</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <p>Uses the native Sanitizer API where available, DOMParser fallback elsewhere.</p>
-      <h2>Trusted Types</h2>
-      <p>Prevent DOM XSS by routing all dynamic HTML through a Trusted Types policy:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
-<span class="syn-k">import</span> <span class="syn-p">{</span> trustedHTML<span class="syn-p">,</span> trustedScriptURL <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/trusted.js'</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Create trusted HTML (sanitized)</span>
-el<span class="syn-p">.</span>innerHTML <span class="syn-p">=</span> <span class="syn-f">trustedHTML</span><span class="syn-p">(</span><span class="syn-s">'&lt;p&gt;Safe content&lt;/p&gt;'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Create trusted script URL (must be same-origin)</span>
-<span class="syn-k">const</span> url <span class="syn-p">=</span> <span class="syn-f">trustedScriptURL</span><span class="syn-p">(</span><span class="syn-s">'./lib/weblisk/core/signal.js'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Permissions Policy</h2>
-      <p>Restrict browser features to reduce attack surface:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-6">
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-csp-perms" style="width:100%">
+              <p class="feature-demo-desc">Content Security Policy and Permissions Policy are active (applied at boot).</p>
+              <button class="btn btn-sm" id="btn-check-csp">Check Policies</button>
+              <pre class="demo-output" id="output-csp">Click to inspect active policies</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> applyCSP<span class="syn-p">,</span> scriptHash <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/csp.js'</span><span class="syn-p">;</span>
 <span class="syn-k">import</span> <span class="syn-p">{</span> applyPermissionsPolicy <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/security/permissions.js'</span><span class="syn-p">;</span>
+
+<span class="syn-f">applyCSP</span><span class="syn-p">(</span><span class="syn-p">{</span>
+  <span class="syn-s">'script-src'</span><span class="syn-p">:</span> <span class="syn-p">[</span><span class="syn-s">"'self'"</span><span class="syn-p">]</span><span class="syn-p">,</span>
+  <span class="syn-s">'style-src'</span><span class="syn-p">:</span>  <span class="syn-p">[</span><span class="syn-s">"'self'"</span><span class="syn-p">,</span> <span class="syn-s">"'unsafe-inline'"</span><span class="syn-p">]</span><span class="syn-p">,</span>
+  <span class="syn-s">'img-src'</span><span class="syn-p">:</span>    <span class="syn-p">[</span><span class="syn-s">"'self'"</span><span class="syn-p">,</span> <span class="syn-s">'data:'</span><span class="syn-p">]</span><span class="syn-p">,</span>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-f">applyPermissionsPolicy</span><span class="syn-p">(</span><span class="syn-p">{</span>
   camera<span class="syn-p">:</span> <span class="syn-s">'none'</span><span class="syn-p">,</span>
   microphone<span class="syn-p">:</span> <span class="syn-s">'none'</span><span class="syn-p">,</span>
   geolocation<span class="syn-p">:</span> <span class="syn-s">'self'</span><span class="syn-p">,</span>
-  payment<span class="syn-p">:</span> <span class="syn-s">'self'</span><span class="syn-p">,</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
-      <p>Default policy denies all features unless explicitly allowed.</p>
 
+      <h3>CSP &amp; Permissions API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Module</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>applyCSP(directives)</code></td><td>csp.js</td><td>Inject a <code>&lt;meta&gt;</code> CSP header with the given directives</td></tr>
+          <tr><td><code>scriptHash(code)</code></td><td>csp.js</td><td>Compute a <code>sha256-…</code> hash for an inline script</td></tr>
+          <tr><td><code>applyPermissionsPolicy(policy)</code></td><td>permissions.js</td><td>Set a Permissions-Policy header restricting browser features</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- CLIENT-SIDE AUTH (no interactive demo — docs-only) -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
       <h2>Client-Side Auth</h2>
       <p>JWT-based authentication with reactive session signals, auto-refresh, and route guards. Works with any JWT-issuing backend — zero server coupling.</p>
       <h3>Setup</h3>

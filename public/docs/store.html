@@ -179,243 +179,168 @@
 
     <main class="docs-content" id="main-content">
       <h1>Local-First Store</h1>
+      <p class="lead">IDB-backed collection store with CRUD, reactive queries, change events, and optional background sync to a server. Data is available offline instantly.</p>
 
-      <p>The <code>data/store.js</code> module provides a local-first collection store backed by IndexedDB. Data is
-        available offline instantly, with optional background sync to a server.</p>
-      <h2>Creating a Collection</h2>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-1"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+      <!-- ─── Interactive Demos ─── -->
+      <section data-island="/js/islands/features-data.js" data-hydrate="idle">
+        <div data-island="/js/islands/feature.js" data-hydrate="idle">
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- LOCAL-FIRST STORE -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Collection CRUD</h2>
+      <p>Create a collection backed by IndexedDB. Records get auto-generated IDs and <code>_updated</code> timestamps. All writes are instant and local.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Local-First Store</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="code-body">
-          <pre id="doc-code-1">
-<span class="syn-k">import</span> <span class="syn-p">{</span> collection <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-store" style="width:100%">
+              <p class="feature-demo-desc">IDB-backed collection with CRUD, reactive queries, and automatic Background Sync queuing.</p>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                <button class="btn btn-sm" id="btn-store-add">Add Item</button>
+                <button class="btn btn-sm" id="btn-store-list">List All</button>
+                <button class="btn btn-sm" id="btn-store-clear">Clear</button>
+              </div>
+              <pre class="demo-output" id="output-store">No items</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> collection <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
 
 <span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>With server sync:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-2"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-2">
-<span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  syncUrl<span class="syn-p">:</span> <span class="syn-s">'https://api.example.com/todos'</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>CRUD Operations</h2>
-      <h3>Create / Update</h3>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-3"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-3">
-<span class="syn-c">// Auto-generates an ID</span>
+
+<span class="syn-c">// Create / update</span>
 <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span><span class="syn-p">,</span> done<span class="syn-p">:</span> <span class="syn-k">false</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Provide your own ID</span>
-<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> id<span class="syn-p">:</span> <span class="syn-s">'abc123'</span><span class="syn-p">,</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span><span class="syn-p">,</span> done<span class="syn-p">:</span> <span class="syn-k">false</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Update existing</span>
-<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> id<span class="syn-p">:</span> <span class="syn-s">'abc123'</span><span class="syn-p">,</span> done<span class="syn-p">:</span> <span class="syn-k">true</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>Records automatically get an <code>_updated</code> timestamp.</p>
-      <h3>Read</h3>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-4"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-4">
-<span class="syn-c">// Single record</span>
-<span class="syn-k">const</span> todo <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-k">get</span><span class="syn-p">(</span><span class="syn-s">'abc123'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// All records</span>
+<span class="syn-c">// Read</span>
 <span class="syn-k">const</span> all <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">getAll</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">const</span> done <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">getAll</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> r<span class="syn-p">.</span>done<span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Filtered</span>
-<span class="syn-k">const</span> done <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">getAll</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> r<span class="syn-p">.</span>done <span class="syn-p">=</span><span class="syn-p">=</span><span class="syn-p">=</span> <span class="syn-k">true</span><span class="syn-p">)</span><span class="syn-p">;</span>
-
-<span class="syn-c">// Count</span>
-<span class="syn-k">const</span> total <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">count</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-c">// Delete (soft-delete for sync)</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">delete</span><span class="syn-p">(</span><span class="syn-s">'abc123'</span><span class="syn-p">)</span><span class="syn-p">;</span>
+<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">purgeDeleted</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
-      <h3>Delete</h3>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-5"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-5">
-<span class="syn-c">// Soft-delete (marks _deleted, keeps for sync)</span>
-<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-k">delete</span><span class="syn-p">(</span><span class="syn-s">'abc123'</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-c">// Hard-delete all soft-deleted records</span>
-<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">purgeDeleted</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Reactive Queries</h2>
-      <p>Create a signal that live-updates when the collection changes:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-6"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-6">
-<span class="syn-k">import</span> <span class="syn-p">{</span> effect <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span><span class="syn-p">;</span>
-<span class="syn-k">import</span> <span class="syn-p">{</span> collection <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
+      <h3>Collection API</h3>
+      <table class="api-table">
+        <thead><tr><th>Method</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>collection(name, opts?)</code></td><td>function</td><td>Create/open a named IDB collection. Pass <code>{ syncUrl }</code> for server sync</td></tr>
+          <tr><td><code>.put(record)</code></td><td>async</td><td>Insert or upsert a record (auto-generates ID if missing)</td></tr>
+          <tr><td><code>.get(id)</code></td><td>async</td><td>Get a single record by ID</td></tr>
+          <tr><td><code>.getAll(filter?)</code></td><td>async</td><td>Get all records, optionally filtered</td></tr>
+          <tr><td><code>.count()</code></td><td>async</td><td>Count records in the collection</td></tr>
+          <tr><td><code>.delete(id)</code></td><td>async</td><td>Soft-delete a record (marks <code>_deleted</code>)</td></tr>
+          <tr><td><code>.purgeDeleted()</code></td><td>async</td><td>Hard-delete all soft-deleted records</td></tr>
+          <tr><td><code>.live(filter?)</code></td><td>signal</td><td>Reactive query — returns a signal that updates on changes</td></tr>
+          <tr><td><code>.onChange(fn)</code></td><td>function</td><td>Subscribe to collection changes</td></tr>
+          <tr><td><code>.merge(data)</code></td><td>async</td><td>Merge server data (newer timestamps win)</td></tr>
+          <tr><td><code>.changesSince(ts)</code></td><td>async</td><td>Get records changed since a timestamp</td></tr>
+        </tbody>
+      </table>
 
-<span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-k">const</span> allTodos <span class="syn-p">=</span> todos<span class="syn-p">.</span><span class="syn-f">live</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- SYNC STATUS -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <h2>Sync Status</h2>
+      <p>Monitor background sync status and pending mutation count as reactive signals. Trigger sync manually or let the service worker handle it automatically.</p>
+
+      <div class="feature-demo">
+        <div class="feature-demo-header">
+          <span class="feature-demo-title">Sync Status</span>
+          <div class="feature-demo-actions">
+            <div class="feature-demo-tabs">
+              <button class="feature-demo-tab active" data-tab="preview" type="button">Preview</button>
+              <button class="feature-demo-tab" data-tab="code" type="button">Code</button>
+            </div>
+            <div class="feature-demo-viewport-btns">
+              <button class="feature-demo-viewport-btn active" data-viewport="desktop" type="button" aria-label="Desktop view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="tablet" type="button" aria-label="Tablet view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+              <button class="feature-demo-viewport-btn" data-viewport="mobile" type="button" aria-label="Mobile view">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="feature-demo-body">
+          <div class="feature-demo-preview">
+            <div id="demo-sync-status" style="width:100%">
+              <p class="feature-demo-desc">Reactive sync status, pending mutation count, and manual sync trigger.</p>
+              <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+                <button class="btn btn-sm" id="btn-sync-trigger">Trigger Sync</button>
+                <button class="btn btn-sm" id="btn-sync-count">Count Pending</button>
+              </div>
+              <pre class="demo-output" id="output-sync-status">Checking...</pre>
+            </div>
+          </div>
+          <div class="feature-demo-code">
+            <div class="feature-demo-code-tabs">
+              <button class="feature-demo-code-tab active" data-lang="js" type="button">JavaScript</button>
+            </div>
+            <div class="feature-demo-code-panel active" data-lang="js">
+              <pre><span class="syn-k">import</span> <span class="syn-p">{</span> syncStatus<span class="syn-p">,</span> pendingCount<span class="syn-p">,</span> triggerSync <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/pwa/offline.js'</span><span class="syn-p">;</span>
+<span class="syn-k">import</span> <span class="syn-p">{</span> onSyncResult <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
 
 <span class="syn-f">effect</span><span class="syn-p">(</span><span class="syn-p">(</span><span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  <span class="syn-k">const</span> items <span class="syn-p">=</span> <span class="syn-f">allTodos</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  document<span class="syn-p">.</span><span class="syn-f">querySelector</span><span class="syn-p">(</span><span class="syn-s">'.count'</span><span class="syn-p">)</span><span class="syn-p">.</span>textContent <span class="syn-p">=</span> <span class="syn-s">`${items.length} items`</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <p>With a filter:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-7"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-7">
-<span class="syn-k">const</span> activeTodos <span class="syn-p">=</span> todos<span class="syn-p">.</span><span class="syn-f">live</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> <span class="syn-p">!</span>r<span class="syn-p">.</span>done<span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Change Events</h2>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-8"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-8">
-<span class="syn-k">const</span> unsub <span class="syn-p">=</span> todos<span class="syn-p">.</span><span class="syn-f">onChange</span><span class="syn-p">(</span><span class="syn-p">(</span>records<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
-  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Collection changed:'</span><span class="syn-p">,</span> records<span class="syn-p">.</span>length<span class="syn-p">,</span> <span class="syn-s">'items'</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h2>Server Sync</h2>
-      <p>When <code>syncUrl</code> is configured, mutations are queued for Background Sync:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-9"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-9">
-<span class="syn-k">const</span> todos <span class="syn-p">=</span> <span class="syn-f">collection</span><span class="syn-p">(</span><span class="syn-s">'todos'</span><span class="syn-p">,</span> <span class="syn-p">{</span>
-  syncUrl<span class="syn-p">:</span> <span class="syn-s">'https://api.example.com/todos'</span>
+  console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">'Status:'</span><span class="syn-p">,</span> <span class="syn-f">syncStatus</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">,</span> <span class="syn-s">'Pending:'</span><span class="syn-p">,</span> <span class="syn-f">pendingCount</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
 <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
-<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">put</span><span class="syn-p">(</span><span class="syn-p">{</span> text<span class="syn-p">:</span> <span class="syn-s">'Buy milk'</span> <span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-c">// → Saved to IDB immediately</span>
-<span class="syn-c">// → Queued for background sync to server</span>
-</pre>
-        </div>
-      </div>
-      <h3>Merging Server Data</h3>
-      <p>Pull changes from the server and merge (newer timestamps win):</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-10"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-10">
-<span class="syn-k">const</span> serverData <span class="syn-p">=</span> <span class="syn-k">await</span> <span class="syn-f">fetch</span><span class="syn-p">(</span><span class="syn-s">'/api/todos'</span><span class="syn-p">)</span><span class="syn-p">.</span><span class="syn-f">then</span><span class="syn-p">(</span>r <span class="syn-p">=&gt;</span> r<span class="syn-p">.</span><span class="syn-f">json</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">merge</span><span class="syn-p">(</span>serverData<span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h3>Incremental Sync</h3>
-      <p>Get only records changed since a timestamp:</p>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-11"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-11">
-<span class="syn-k">const</span> changes <span class="syn-p">=</span> <span class="syn-k">await</span> todos<span class="syn-p">.</span><span class="syn-f">changesSince</span><span class="syn-p">(</span>lastSyncTimestamp<span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
-        </div>
-      </div>
-      <h3>Listening for Sync Results</h3>
-      <div class="code-window">
-        <div class="code-header">
-          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span
-              class="dot-green"></span></div>
-          <span class="code-title">js</span>
-          <button class="code-copy" type="button" aria-label="Copy code" data-copy-target="doc-code-12"><i
-              aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
-        </div>
-        <div class="code-body">
-          <pre id="doc-code-12">
-<span class="syn-k">import</span> <span class="syn-p">{</span> onSyncResult <span class="syn-p">}</span> <span class="syn-k">from</span> <span class="syn-s">'weblisk/data/store.js'</span><span class="syn-p">;</span>
+<span class="syn-k">await</span> <span class="syn-f">triggerSync</span><span class="syn-p">(</span><span class="syn-p">)</span><span class="syn-p">;</span>
 
 <span class="syn-f">onSyncResult</span><span class="syn-p">(</span><span class="syn-p">(</span>msg<span class="syn-p">)</span> <span class="syn-p">=&gt;</span> <span class="syn-p">{</span>
   <span class="syn-k">if</span> <span class="syn-p">(</span>msg<span class="syn-p">.</span>ok<span class="syn-p">)</span> console<span class="syn-p">.</span><span class="syn-f">log</span><span class="syn-p">(</span><span class="syn-s">`Synced ${msg.collection}`</span><span class="syn-p">)</span><span class="syn-p">;</span>
-  <span class="syn-k">else</span> console<span class="syn-p">.</span><span class="syn-f">error</span><span class="syn-p">(</span><span class="syn-s">`Sync failed:`</span><span class="syn-p">,</span> msg<span class="syn-p">.</span>error<span class="syn-p">)</span><span class="syn-p">;</span>
-<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span>
-</pre>
+<span class="syn-p">}</span><span class="syn-p">)</span><span class="syn-p">;</span></pre>
+            </div>
+            <button class="feature-demo-copy-btn" type="button" aria-label="Copy code"><i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-14"></i></button>
+          </div>
         </div>
       </div>
+
+      <h3>Sync API</h3>
+      <table class="api-table">
+        <thead><tr><th>Export</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>syncStatus()</code></td><td>signal</td><td><code>'idle'</code>, <code>'syncing'</code>, or <code>'error'</code></td></tr>
+          <tr><td><code>pendingCount()</code></td><td>signal</td><td>Number of mutations queued for sync</td></tr>
+          <tr><td><code>triggerSync(tag?)</code></td><td>async</td><td>Manually trigger background sync</td></tr>
+          <tr><td><code>onSyncResult(fn)</code></td><td>function</td><td>Listen for sync completion/failure messages</td></tr>
+        </tbody>
+      </table>
+
+        </div>
+      </section>
 
       <div class="docs-nav-footer">
         <a href="/docs/state.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"

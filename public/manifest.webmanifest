@@ -1,7 +1,7 @@
 {
   "name": "Weblisk",
   "short_name": "Weblisk",
-  "description": "The open ecosystem for agentic services. Describe a domain as a blueprint. Agents generate production services in any language, on any platform.",
+  "description": "The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Blueprints in, production code out — in any language or platform.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b1121",

@@ -27,10 +27,10 @@ brand:
 identity:
   tagline: "The open ecosystem for agentic services"
   description: >
-    A zero-dependency open-source framework for defining and
-    orchestrating agentic services — autonomous, interconnected
-    domains that power your business. Build it, consume it, or
-    publish it.
+    The first open-source platform to unify a secure, collaborative
+    hub and marketplace of autonomous agents. Define what you need
+    as blueprints — AI translates them to production code in any
+    language or platform of your choice.
   legal_name: Avaropoint
   contact: hello@weblisk.dev
   copyright_year: 2026

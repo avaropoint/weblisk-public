@@ -1,10 +1,10 @@
 # Weblisk
 
-> The open ecosystem for agentic services. Describe a domain as a blueprint. Agents generate production services in any language, on any platform. Build them, consume them, or publish them to the marketplace.
+> The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Define what you need as blueprints — AI translates them to production code in any language or platform of your choice.
 
 ## About
 
-Weblisk is a zero-dependency open-source, MIT-licensed framework and ecosystem for agentic services. Describe a domain as a blueprint — your data models, security rules, integrations, and business logic. Agents read those blueprints and generate production services in any language, on any platform. Build them, consume them, or publish them to the marketplace. The framework is open source. The code you generate is yours.
+Weblisk is the first open-source, MIT-licensed platform to unify a secure, collaborative hub and marketplace of autonomous agents. Define what you need as blueprints — AI translates them to production code in any language or platform of your choice. Build them, consume them, or publish them to the marketplace. The framework is open source. The code you generate is yours.
 
 Weblisk is created and maintained by Avaropoint.
 
@@ -101,7 +101,7 @@ Blueprint-versioned, agent-orchestrated migrations protect your data across ever
 ## FAQ
 
 ### What is Weblisk?
-Weblisk is the open ecosystem for agentic services. Describe a domain as a blueprint — your data models, security, integrations, and business logic. Agents generate production services in any language, on any platform. Build them, consume them, or publish them to the marketplace. The framework is MIT-licensed. The code you generate belongs entirely to you.
+Weblisk is the first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Define what you need as blueprints — AI translates them to production code in any language or platform of your choice. Build them, consume them, or publish them to the marketplace. The framework is MIT-licensed. The code you generate belongs entirely to you.
 
 ### What are Weblisk Blueprints?
 Blueprints are structured specifications that define how your application works — from security models and API contracts to agent behaviour and deployment targets. Anyone can read them. They are consumed by humans, LLMs, and CI/CD pipelines to generate complete implementations in Go, Node.js, Rust, or Cloudflare Workers.

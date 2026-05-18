@@ -17,9 +17,10 @@ version: 2.1.0
 seo:
   title: "Weblisk — The Open Ecosystem for Agentic Services"
   description: >
-    Describe a domain as a blueprint. Agents generate production
-    services in any language, on any platform. Build them, consume
-    them, or publish them to the marketplace.
+    The first open-source platform to unify a secure, collaborative
+    hub and marketplace of autonomous agents. Define what you need
+    as blueprints — AI translates them to production code in any
+    language or platform of your choice.
   canonical: "https://weblisk.dev/"
   keywords:
     - agentic services
@@ -40,11 +41,11 @@ seo:
   theme_color: "#1a1f36"
   open_graph:
     type: website
-    title: "Weblisk — Agentic Services You Actually Own"
+    title: "Weblisk — The Open Ecosystem for Agentic Services"
     description: >
-      A zero-dependency open-source framework for defining and
-      orchestrating agentic services. Build it, consume it, or
-      publish it to the marketplace.
+      The first open-source platform to unify a secure, collaborative
+      hub and marketplace of autonomous agents. Blueprints in,
+      production code out — in any language or platform.
     url: "https://weblisk.dev/"
     site_name: Weblisk
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
@@ -52,16 +53,16 @@ seo:
     image_height: 630
     image_type: image/png
     image_alt: >-
-      Weblisk — The open ecosystem for agentic services. Describe
-      a domain. Generate the services. Own every layer.
+      Weblisk — The open ecosystem for agentic services. Define
+      what you need as blueprints. AI translates them to code.
     locale: en_US
   twitter:
     card: summary_large_image
     title: "Weblisk — The Open Ecosystem for Agentic Services"
     description: >
-      Describe a domain as a blueprint. Agents generate production
-      services in any language, on any platform. Build them, consume
-      them, or publish them to the marketplace.
+      The first open-source platform to unify a secure, collaborative
+      hub and marketplace of autonomous agents. Blueprints in,
+      production code out — in any language or platform.
     image: "https://weblisk.dev/images/social/og-image.png?v=2"
     site: "@weblisk"
   structured_data:
@@ -244,10 +245,10 @@ sections:
       icon: dot
     headline: "The open ecosystem for agentic services."
     subheadline: >
-      Describe a domain as a blueprint. Agents generate production
-      services — in any language, on any platform. Build them, consume
-      them, or publish them to the marketplace. Zero dependencies.
-      Your code. Your data. Your rules.
+      The first open-source platform to unify a secure, collaborative
+      hub and marketplace of autonomous agents. Define what you need
+      as blueprints — AI translates them to production code in any
+      language or platform of your choice.
     actions:
       - label: Get Started
         href: /docs/quickstart.html

@@ -344,8 +344,8 @@
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">How It Works</span>
-          <h2 id="pipeline-heading">Say you need contact management. Here's what happens.</h2>
-          <p>You describe what you need in a blueprint — fields, relationships, security rules, integrations. Agents read that blueprint and generate production code: semantic HTML for the UI, API endpoints for the server, data models for the database. Every layer is visible, every decision traceable back to your spec. This example shows how this very page was built from its blueprint.</p>
+          <h2 id="pipeline-heading">Details your blueprints need to make it work your way.</h2>
+          <p>A blueprint describes what you need — entities, fields, access rules, integrations. Agents read that blueprint and generate production code: API endpoints, data models, validation, and UI. Every layer is visible, every decision traceable back to your spec.</p>
         </div>
         <div class="pipeline" data-island="/js/islands/pipeline.js" data-hydrate="visible">
           <div class="pipeline-stage pipeline-stage-active" data-stage="blueprint">
@@ -360,16 +360,21 @@
             <div class="pipeline-stage-preview code-window">
               <div class="code-header">
                 <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
-                <span class="code-title">pages/home.yaml</span>
+                <span class="code-title">domains/contacts.yaml</span>
               </div>
               <div class="code-body">
-                <pre><span class="syn-k">- id:</span> <span class="syn-s">hero</span>
-  <span class="syn-k">type:</span> <span class="syn-s">hero</span>
-  <span class="syn-k">headline:</span> <span class="syn-s">"The open ecosystem for agentic services."</span>
-  <span class="syn-k">actions:</span>
-    <span class="syn-k">- label:</span> <span class="syn-s">Get Started</span>
-      <span class="syn-k">style:</span> <span class="syn-s">primary</span>
-  <span class="syn-k">install_command:</span> <span class="syn-s">"curl -fsSL …/install.sh | sh"</span></pre>
+                <pre><span class="syn-k">domain:</span> <span class="syn-s">contacts</span>
+<span class="syn-k">entities:</span>
+  <span class="syn-k">- name:</span> <span class="syn-s">Contact</span>
+    <span class="syn-k">fields:</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">email</span>
+        <span class="syn-k">type:</span> <span class="syn-s">string</span>
+        <span class="syn-k">unique:</span> <span class="syn-s">true</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">company</span>
+        <span class="syn-k">ref:</span> <span class="syn-s">Company</span>
+    <span class="syn-k">access:</span>
+      <span class="syn-k">read:</span> <span class="syn-s">[owner, team]</span>
+      <span class="syn-k">write:</span> <span class="syn-s">[owner]</span></pre>
               </div>
             </div>
           </div>
@@ -389,28 +394,31 @@
             </div>
             <div class="pipeline-stage-label">Code Layers</div>
             <div class="pipeline-layers">
-              <div class="pipeline-layer pipeline-layer-html" data-layer="html">
-                <span class="pipeline-layer-tag">HTML</span>
+              <div class="pipeline-layer pipeline-layer-html" data-layer="api">
+                <span class="pipeline-layer-tag">API</span>
                 <div class="pipeline-layer-code">
-                  <span class="syn-t">&lt;section</span> <span class="syn-a">class</span>=<span class="syn-s">"hero"</span><span class="syn-t">&gt;</span><br>
-                  <span class="syn-t">&nbsp;&nbsp;&lt;h1&gt;</span>The open ecosystem…<span class="syn-t">&lt;/h1&gt;</span><br>
-                  <span class="syn-t">&nbsp;&nbsp;&lt;a</span> <span class="syn-a">class</span>=<span class="syn-s">"btn"</span><span class="syn-t">&gt;</span>Get Started…<span class="syn-t">&lt;/a&gt;</span><br>
-                  <span class="syn-t">&lt;/section&gt;</span>
+                  <span class="syn-k">export async function</span> <span class="syn-f">createContact</span>(req) {<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">const</span> data = <span class="syn-k">await</span> <span class="syn-f">validate</span>(req, ContactSchema);<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">await</span> <span class="syn-f">enforce</span>(req.user, <span class="syn-s">'write'</span>, <span class="syn-s">'Contact'</span>);<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">return</span> db.contacts.<span class="syn-f">insert</span>(data);<br>
+                  }
                 </div>
               </div>
-              <div class="pipeline-layer pipeline-layer-css" data-layer="css">
-                <span class="pipeline-layer-tag">CSS</span>
+              <div class="pipeline-layer pipeline-layer-css" data-layer="schema">
+                <span class="pipeline-layer-tag">Schema</span>
                 <div class="pipeline-layer-code">
-                  <span class="syn-t">.hero</span> <span class="syn-p">{</span> <span class="syn-a">padding</span>: <span class="syn-n">6rem 2rem</span>; <span class="syn-p">}</span><br>
-                  <span class="syn-t">.btn-primary</span> <span class="syn-p">{</span> <span class="syn-a">background</span>: <span class="syn-s">var(…)</span>; <span class="syn-p">}</span><br>
-                  <span class="syn-t">.install-cmd</span> <span class="syn-p">{</span> <span class="syn-a">display</span>: <span class="syn-s">flex</span>; <span class="syn-p">}</span>
+                  <span class="syn-k">CREATE TABLE</span> <span class="syn-t">contacts</span> (<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">id</span> <span class="syn-s">UUID PRIMARY KEY</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">email</span> <span class="syn-s">TEXT UNIQUE NOT NULL</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">company_id</span> <span class="syn-s">UUID REFERENCES companies(id)</span><br>
+                  );
                 </div>
               </div>
-              <div class="pipeline-layer pipeline-layer-js" data-layer="js">
-                <span class="pipeline-layer-tag">JS</span>
+              <div class="pipeline-layer pipeline-layer-js" data-layer="client">
+                <span class="pipeline-layer-tag">Client</span>
                 <div class="pipeline-layer-code">
-                  <span class="syn-k">import</span> { hydrateIslands } <span class="syn-k">from</span> <span class="syn-s">'weblisk'</span>;<br>
-                  <span class="syn-f">hydrateIslands</span>({ idle, visible, load });
+                  <span class="syn-k">import</span> { createForm } <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui'</span>;<br>
+                  <span class="syn-k">export default</span> <span class="syn-f">createForm</span>(<span class="syn-s">'Contact'</span>, ContactSchema);
                 </div>
               </div>
             </div>
@@ -418,7 +426,7 @@
 
           <div class="pipeline-connector" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Renders</span>
+            <span>Deploys</span>
           </div>
 
           <div class="pipeline-stage" data-stage="rendered">
@@ -428,20 +436,20 @@
                 Live
               </span>
             </div>
-            <div class="pipeline-stage-label">Final Output</div>
+            <div class="pipeline-stage-label">Running Service</div>
             <div class="pipeline-stage-preview pipeline-rendered">
               <div class="pipeline-mini-hero">
-                <span class="pipeline-mini-badge">v1.0 — Zero dependencies, open source</span>
-                <strong>The open ecosystem for agentic services.</strong>
-                <span class="pipeline-mini-sub">Describe a domain. Generate the services. Own every layer.</span>
-                <span class="pipeline-mini-btn">Get Started →</span>
+                <span class="pipeline-mini-badge">contacts domain — live</span>
+                <strong>POST /api/contacts</strong>
+                <span class="pipeline-mini-sub">Validated · Access-controlled · Schema-enforced</span>
+                <span class="pipeline-mini-btn">201 Created →</span>
               </div>
             </div>
           </div>
         </div>
         <p class="pipeline-caption">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          This page was generated from a blueprint. Click the <code>&lt;/&gt;</code> on any section to X-Ray the blueprint and generated code behind it.
+          This page was generated from a blueprint. Click the <code>&lt;/&gt;</code> on any section to X-Ray the blueprint source behind it.
         </p>
         <div class="pipeline-client-callout">
           <div class="pipeline-client-icon">

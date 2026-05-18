@@ -425,14 +425,12 @@ sections:
   - id: blueprint-pipeline
     type: pipeline-showcase
     label: How It Works
-    headline: "Say you need contact management. Here's what happens."
+    headline: "Details your blueprints need to make it work your way."
     description: >
-      You describe what you need in a blueprint — fields, relationships,
-      security rules, integrations. Agents read that blueprint and
-      generate production code: semantic HTML for the UI, API endpoints
-      for the server, data models for the database. Every layer is
-      visible, every decision traceable back to your spec. This example
-      shows how this very page was built from its blueprint.
+      A blueprint describes what you need — entities, fields, access
+      rules, integrations. Agents read that blueprint and generate
+      production code: API endpoints, data models, validation, and UI.
+      Every layer is visible, every decision traceable back to your spec.
     attributes:
       data-reveal: true
     island: pipeline.js
@@ -444,51 +442,59 @@ sections:
         label: Blueprint
         preview:
           language: yaml
-          title: pages/home.yaml
+          title: domains/contacts.yaml
           content: |
-            - id: hero
-              type: hero
-              headline: "The open ecosystem for agentic services."
-              actions:
-                - label: Get Started
-                  style: primary
-              install_command: "curl -fsSL …/install.sh | sh"
+            domain: contacts
+            entities:
+              - name: Contact
+                fields:
+                  - name: email
+                    type: string
+                    unique: true
+                  - name: company
+                    ref: Company
+                access:
+                  read: [owner, team]
+                  write: [owner]
       - id: generated
         number: 2
         badge: { text: "Generated", color: agent, icon: bolt }
         label: Code Layers
         layers:
-          - id: html
-            label: HTML
+          - id: api
+            label: API
             border_color: pink
             content: |
-              <section class="hero">
-                <h1>The open ecosystem…</h1>
-                <a class="btn">Get Started…</a>
-              </section>
-          - id: css
-            label: CSS
+              export async function createContact(req) {
+                const data = await validate(req, ContactSchema);
+                await enforce(req.user, 'write', 'Contact');
+                return db.contacts.insert(data);
+              }
+          - id: schema
+            label: Schema
             border_color: blue
             content: |
-              .hero { padding: 6rem 2rem; }
-              .btn-primary { background: var(…); }
-              .install-cmd { display: flex; }
-          - id: js
-            label: JS
+              CREATE TABLE contacts (
+                id UUID PRIMARY KEY,
+                email TEXT UNIQUE NOT NULL,
+                company_id UUID REFERENCES companies(id)
+              );
+          - id: client
+            label: Client
             border_color: yellow
             content: |
-              import { hydrateIslands } from 'weblisk';
-              hydrateIslands({ idle, visible, load });
+              import { createForm } from 'weblisk/ui';
+              export default createForm('Contact', ContactSchema);
       - id: rendered
         number: 3
         badge: { text: "Live", color: output, animated: pulse }
-        label: Final Output
+        label: Running Service
         preview:
-          type: mini-hero
-          badge: "v1.0 — Zero dependencies, open source"
-          headline: "The open ecosystem for agentic services."
-          subheadline: "Describe a domain. Generate the services. Own every layer."
-          cta: "Get Started →"
+          type: mini-service
+          badge: "contacts domain — live"
+          headline: "POST /api/contacts"
+          subheadline: "Validated · Access-controlled · Schema-enforced"
+          cta: "201 Created →"
     caption: >-
       This page was generated from a blueprint. Click the </> on any
       section to X-Ray the blueprint source and generated code side by side.

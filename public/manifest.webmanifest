@@ -1,7 +1,7 @@
 {
   "name": "Weblisk",
   "short_name": "Weblisk",
-  "description": "A zero-dependency open-source framework for defining and orchestrating agentic services. Describe a service as a blueprint. Build it, consume it, or publish it.",
+  "description": "The open ecosystem for agentic services. Describe a domain as a blueprint. Agents generate production services in any language, on any platform.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b1121",

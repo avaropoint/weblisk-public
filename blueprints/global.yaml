@@ -25,7 +25,7 @@ brand:
   favicon: assets/favicon.svg
 
 identity:
-  tagline: "Agentic services you actually own"
+  tagline: "The open ecosystem for agentic services"
   description: >
     A zero-dependency open-source framework for defining and
     orchestrating agentic services — autonomous, interconnected

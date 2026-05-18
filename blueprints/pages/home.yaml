@@ -546,12 +546,13 @@ sections:
     type: content-section
     background: soft
     label: The Workflow
-    headline: "Pick a domain. Describe it. Ship it."
+    headline: "Every blueprint is a domain expert. Build yours or use ours."
     description: >
-      Whether you're starting fresh or wrapping an existing system,
-      the workflow is the same: describe what you need, let agents
-      generate it, validate before it ships, and deploy alongside
-      your existing tools — or replace them one at a time.
+      A blueprint encodes the knowledge of the best architect, the best
+      security engineer, the best data modeler — for any domain. Write one
+      from scratch, fork one from the marketplace, or compose patterns
+      together. Either way, you get production-grade systems that reflect
+      deep expertise without needing to be the expert yourself.
     attributes:
       data-reveal: true
     cards_attributes:

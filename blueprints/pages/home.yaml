@@ -359,7 +359,7 @@ sections:
   - id: blueprints
     type: content-section
     label: Blueprints
-    headline: "You already know what your business needs. A blueprint is how you write it down."
+    headline: "Blueprints are the structure of any idea."
     description: >
       A blueprint is a structured description of what you want to build
       — your data models, security rules, integrations, and business

@@ -4315,11 +4315,19 @@ select.input {
 /* ─── Blueprint Pipeline ─────────────────────────────────── */
 
 .pipeline {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   gap: 0;
   margin-top: 2.5rem;
+}
+
+@media (min-width: 1100px) {
+  .pipeline {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: start;
+  }
 }
 
 .pipeline-stage {
@@ -4462,9 +4470,9 @@ select.input {
   font-size: 0.68rem;
   line-height: 1.5;
   color: var(--wl-code-text);
-  white-space: nowrap;
+  white-space: pre-wrap;
+  word-break: break-word;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* Pipeline connectors */
@@ -4494,7 +4502,8 @@ select.input {
   background: var(--wl-bg-soft);
   border: 1px solid var(--wl-border);
   border-radius: var(--wl-radius-lg);
-  padding: 1.5rem 1rem;
+  padding: 0.75rem;
+  overflow: hidden;
 }
 
 .pipeline-mini-hero {
@@ -4542,6 +4551,7 @@ select.input {
   gap: 0;
   font-size: 0.7rem;
   width: 100%;
+  overflow-x: auto;
 }
 
 .pipeline-mini-toolbar {
@@ -4581,6 +4591,7 @@ select.input {
 .pipeline-mini-table {
   display: flex;
   flex-direction: column;
+  min-width: 280px;
 }
 
 .pipeline-mini-row {
@@ -4661,16 +4672,18 @@ select.input {
   text-decoration: underline;
 }
 
-/* Pipeline responsive */
-@media (max-width: 900px) {
-  .pipeline {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
+/* Pipeline responsive — connectors horizontal in stacked layout */
+.pipeline-connector {
+  flex-direction: row;
+  padding: 0.75rem 0;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+@media (min-width: 1100px) {
   .pipeline-connector {
-    flex-direction: row;
-    padding: 0.75rem 0;
-    gap: 0.4rem;
+    flex-direction: column;
+    padding: 0.5rem;
   }
 }
 

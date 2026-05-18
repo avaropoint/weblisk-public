@@ -4320,26 +4320,28 @@ select.input {
   align-items: stretch;
   gap: 0.75rem;
   margin-top: 2.5rem;
+  overflow: visible;
 }
 
-@media (min-width: 768px) and (max-width: 1199px) {
+#blueprint-pipeline .section-inner {
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
   .pipeline {
-    max-width: 600px;
+    max-width: 540px;
     margin-left: auto;
     margin-right: auto;
-  }
-  .pipeline-stage-preview .code-body {
-    max-height: none;
-    overflow-y: visible;
   }
 }
 
 @media (min-width: 1200px) {
   .pipeline {
     display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
+    grid-template-columns: 1.1fr auto 1fr auto 0.9fr;
     align-items: start;
-    gap: 0;
+    gap: 0.5rem;
+    max-width: none;
   }
 }
 
@@ -4347,10 +4349,16 @@ select.input {
   background: var(--wl-surface);
   border: 1px solid var(--wl-border);
   border-radius: var(--wl-radius-xl);
-  padding: 1.25rem;
+  padding: 1rem;
   position: relative;
   min-width: 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 1200px) {
+  .pipeline-stage {
+    padding: 1.25rem;
+  }
 }
 
 .pipeline-stage:hover {
@@ -4437,20 +4445,19 @@ select.input {
 }
 .pipeline-stage-preview .code-body {
   padding: 0.75rem;
-  max-height: 280px;
+  max-height: 260px;
   overflow-y: auto;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 .pipeline-stage-preview .code-body pre {
-  font-size: 0.72rem;
-  line-height: 1.55;
+  font-size: 0.68rem;
+  line-height: 1.5;
   overflow-wrap: break-word;
 }
 
 @media (min-width: 1200px) {
   .pipeline-stage-preview .code-body {
-    max-height: none;
-    overflow-y: visible;
+    max-height: 360px;
   }
 }
 
@@ -4465,7 +4472,7 @@ select.input {
   background: var(--wl-code-bg);
   border-radius: var(--wl-radius);
   padding: 0.6rem 0.75rem;
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
 }
@@ -4492,12 +4499,12 @@ select.input {
 
 .pipeline-layer-code {
   font-family: var(--wl-mono);
-  font-size: 0.68rem;
-  line-height: 1.5;
+  font-size: 0.65rem;
+  line-height: 1.45;
   color: var(--wl-code-text);
   white-space: pre-wrap;
   word-break: break-word;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Pipeline connectors */
@@ -4527,7 +4534,7 @@ select.input {
   border: 1px solid var(--wl-border);
   border-radius: var(--wl-radius-lg);
   padding: 0.75rem;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .pipeline-mini-hero {
@@ -4707,7 +4714,7 @@ select.input {
 @media (min-width: 1200px) {
   .pipeline-connector {
     flex-direction: column;
-    padding: 0.5rem;
+    padding: 0.5rem 0.25rem;
     align-self: center;
   }
 }

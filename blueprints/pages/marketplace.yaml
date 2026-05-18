@@ -82,21 +82,7 @@ coming_soon:
     cta_secondary:
       label: "Explore the Docs"
       href: "/docs/"
-  preview:
-    heading: "What to expect"
-    items:
-      - title: "Blueprints & Templates"
-        icon_color: purple
-        description: "Domain controller blueprints and pre-configured hub templates. Buy once, generate for any language or platform."
-      - title: "Agents"
-        icon_color: green
-        description: "Standalone agent blueprints — PDF extractors, translation agents, sentiment analyzers."
-      - title: "Live Capabilities"
-        icon_color: cyan
-        description: "Invoke agent capabilities hosted on provider hubs over federation. Pay per request or subscription."
-      - title: "Data Contracts"
-        icon_color: orange
-        description: "Reusable, audited data contracts for compliant data exchange — GDPR, HIPAA, financial reporting."
+  preview: null  # Removed — keeping coming soon hero only
 
 # ─── Future Vision: Full Marketplace ────────────────────────
 # When the marketplace launches, replace the coming_soon sections with:

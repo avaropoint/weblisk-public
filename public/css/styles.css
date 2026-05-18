@@ -4322,7 +4322,19 @@ select.input {
   margin-top: 2.5rem;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 768px) and (max-width: 1199px) {
+  .pipeline {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pipeline-stage-preview .code-body {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (min-width: 1200px) {
   .pipeline {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -4337,6 +4349,7 @@ select.input {
   border-radius: var(--wl-radius-xl);
   padding: 1.25rem;
   position: relative;
+  min-width: 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -4426,13 +4439,15 @@ select.input {
   padding: 0.75rem;
   max-height: 280px;
   overflow-y: auto;
+  overflow-x: auto;
 }
 .pipeline-stage-preview .code-body pre {
   font-size: 0.72rem;
   line-height: 1.55;
+  overflow-wrap: break-word;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .pipeline-stage-preview .code-body {
     max-height: none;
     overflow-y: visible;
@@ -4689,7 +4704,7 @@ select.input {
 }
 
 /* Pipeline responsive — connectors vertical in grid layout */
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .pipeline-connector {
     flex-direction: column;
     padding: 0.5rem;

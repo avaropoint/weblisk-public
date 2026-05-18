@@ -1035,12 +1035,11 @@ sections:
   - id: cta
     type: cta-section
     background: soft
-    headline: "Start with one blueprint. Own one domain. Expand from there."
+    headline: "One blueprint. Full ownership. Start here."
     description: >-
-      You don't have to rebuild everything. Pick a domain that matters
-      to your business, describe how it should work, and generate a
-      system you fully own. The framework is open source. The generated
-      code is yours. Your data stays where you put it.
+      Describe a domain. Generate a system you own — code, data,
+      infrastructure. Open source framework. Your code. Your data.
+      No lock-in.
     attributes:
       data-reveal: true
     actions:

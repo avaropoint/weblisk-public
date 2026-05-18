@@ -445,17 +445,35 @@ sections:
           title: domains/contacts.yaml
           content: |
             domain: contacts
+            version: 1.0.0
+
             entities:
               - name: Contact
                 fields:
+                  - name: name
+                    type: string
+                    required: true
                   - name: email
                     type: string
+                    format: email
                     unique: true
                   - name: company
                     ref: Company
+                  - name: tags
+                    type: string[]
+                operations: [create, read, update, delete, list]
                 access:
                   read: [owner, team]
                   write: [owner]
+                  delete: [owner]
+
+            ui:
+              list:
+                columns: [name, email, company, tags]
+                search: [name, email]
+                sort: name
+              form:
+                layout: single-column
       - id: generated
         number: 2
         badge: { text: "Generated", color: agent, icon: bolt }
@@ -465,36 +483,47 @@ sections:
             label: API
             border_color: pink
             content: |
-              export async function createContact(req) {
-                const data = await validate(req, ContactSchema);
-                await enforce(req.user, 'write', 'Contact');
-                return db.contacts.insert(data);
-              }
+              // routes/contacts.ts — full CRUD
+              router.post('/contacts', auth, validate(CreateContact), create);
+              router.get('/contacts', auth, paginate, list);
+              router.get('/contacts/:id', auth, ownership, read);
+              router.put('/contacts/:id', auth, ownership, validate(UpdateContact), update);
+              router.delete('/contacts/:id', auth, ownership, remove);
           - id: schema
             label: Schema
             border_color: blue
             content: |
+              -- migrations/001_contacts.sql
               CREATE TABLE contacts (
-                id UUID PRIMARY KEY,
-                email TEXT UNIQUE NOT NULL,
-                company_id UUID REFERENCES companies(id)
+                id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                name       TEXT NOT NULL,
+                email      TEXT UNIQUE NOT NULL,
+                company_id UUID REFERENCES companies(id),
+                tags       TEXT[] DEFAULT '{}',
+                owner_id   UUID NOT NULL REFERENCES users(id)
               );
-          - id: client
-            label: Client
+          - id: ui
+            label: UI
             border_color: yellow
             content: |
-              import { createForm } from 'weblisk/ui';
-              export default createForm('Contact', ContactSchema);
+              // components/ContactList.tsx
+              export default function ContactList() {
+                const { data, search, sort } = useContacts();
+                return <DataTable columns={['name','email','company','tags']}
+                  data={data} onSearch={search} onSort={sort} />;
+              }
       - id: rendered
         number: 3
         badge: { text: "Live", color: output, animated: pulse }
         label: Running Service
         preview:
-          type: mini-service
-          badge: "contacts domain — live"
-          headline: "POST /api/contacts"
-          subheadline: "Validated · Access-controlled · Schema-enforced"
-          cta: "201 Created →"
+          type: mini-crud
+          title: Contacts
+          columns: [Name, Email, Company, Tags]
+          rows:
+            - [Sarah Chen, sarah@acme.io, Acme Corp, lead]
+            - [James Park, james@volta.dev, Volta, partner]
+            - [Priya Sharma, priya@lunar.co, Lunar, client]
     caption: >-
       This page was generated from a blueprint. Click the </> on any
       section to X-Ray the blueprint source and generated code side by side.

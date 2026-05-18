@@ -364,17 +364,35 @@
               </div>
               <div class="code-body">
                 <pre><span class="syn-k">domain:</span> <span class="syn-s">contacts</span>
+<span class="syn-k">version:</span> <span class="syn-s">1.0.0</span>
+
 <span class="syn-k">entities:</span>
   <span class="syn-k">- name:</span> <span class="syn-s">Contact</span>
     <span class="syn-k">fields:</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">name</span>
+        <span class="syn-k">type:</span> <span class="syn-s">string</span>
+        <span class="syn-k">required:</span> <span class="syn-s">true</span>
       <span class="syn-k">- name:</span> <span class="syn-s">email</span>
         <span class="syn-k">type:</span> <span class="syn-s">string</span>
+        <span class="syn-k">format:</span> <span class="syn-s">email</span>
         <span class="syn-k">unique:</span> <span class="syn-s">true</span>
       <span class="syn-k">- name:</span> <span class="syn-s">company</span>
         <span class="syn-k">ref:</span> <span class="syn-s">Company</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">tags</span>
+        <span class="syn-k">type:</span> <span class="syn-s">string[]</span>
+    <span class="syn-k">operations:</span> <span class="syn-s">[create, read, update, delete, list]</span>
     <span class="syn-k">access:</span>
       <span class="syn-k">read:</span> <span class="syn-s">[owner, team]</span>
-      <span class="syn-k">write:</span> <span class="syn-s">[owner]</span></pre>
+      <span class="syn-k">write:</span> <span class="syn-s">[owner]</span>
+      <span class="syn-k">delete:</span> <span class="syn-s">[owner]</span>
+
+<span class="syn-k">ui:</span>
+  <span class="syn-k">list:</span>
+    <span class="syn-k">columns:</span> <span class="syn-s">[name, email, company, tags]</span>
+    <span class="syn-k">search:</span> <span class="syn-s">[name, email]</span>
+    <span class="syn-k">sort:</span> <span class="syn-s">name</span>
+  <span class="syn-k">form:</span>
+    <span class="syn-k">layout:</span> <span class="syn-s">single-column</span></pre>
               </div>
             </div>
           </div>
@@ -397,28 +415,37 @@
               <div class="pipeline-layer pipeline-layer-html" data-layer="api">
                 <span class="pipeline-layer-tag">API</span>
                 <div class="pipeline-layer-code">
-                  <span class="syn-k">export async function</span> <span class="syn-f">createContact</span>(req) {<br>
-                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">const</span> data = <span class="syn-k">await</span> <span class="syn-f">validate</span>(req, ContactSchema);<br>
-                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">await</span> <span class="syn-f">enforce</span>(req.user, <span class="syn-s">'write'</span>, <span class="syn-s">'Contact'</span>);<br>
-                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">return</span> db.contacts.<span class="syn-f">insert</span>(data);<br>
-                  }
+                  <span class="syn-c">// routes/contacts.ts — full CRUD</span><br>
+                  <span class="syn-k">router</span>.<span class="syn-f">post</span>(<span class="syn-s">'/contacts'</span>, auth, validate(CreateContact), create);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/contacts'</span>, auth, paginate, list);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/contacts/:id'</span>, auth, ownership, read);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">put</span>(<span class="syn-s">'/contacts/:id'</span>, auth, ownership, validate(UpdateContact), update);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">delete</span>(<span class="syn-s">'/contacts/:id'</span>, auth, ownership, remove);
                 </div>
               </div>
               <div class="pipeline-layer pipeline-layer-css" data-layer="schema">
                 <span class="pipeline-layer-tag">Schema</span>
                 <div class="pipeline-layer-code">
+                  <span class="syn-c">-- migrations/001_contacts.sql</span><br>
                   <span class="syn-k">CREATE TABLE</span> <span class="syn-t">contacts</span> (<br>
-                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">id</span> <span class="syn-s">UUID PRIMARY KEY</span>,<br>
-                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">email</span> <span class="syn-s">TEXT UNIQUE NOT NULL</span>,<br>
-                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">company_id</span> <span class="syn-s">UUID REFERENCES companies(id)</span><br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">id</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">UUID PRIMARY KEY DEFAULT gen_random_uuid()</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">TEXT NOT NULL</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">TEXT UNIQUE NOT NULL</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">company_id</span>&nbsp;<span class="syn-s">UUID REFERENCES companies(id)</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">tags</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">TEXT[] DEFAULT '{}'</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">owner_id</span>&nbsp;&nbsp;&nbsp;<span class="syn-s">UUID NOT NULL REFERENCES users(id)</span><br>
                   );
                 </div>
               </div>
-              <div class="pipeline-layer pipeline-layer-js" data-layer="client">
-                <span class="pipeline-layer-tag">Client</span>
+              <div class="pipeline-layer pipeline-layer-js" data-layer="ui">
+                <span class="pipeline-layer-tag">UI</span>
                 <div class="pipeline-layer-code">
-                  <span class="syn-k">import</span> { createForm } <span class="syn-k">from</span> <span class="syn-s">'weblisk/ui'</span>;<br>
-                  <span class="syn-k">export default</span> <span class="syn-f">createForm</span>(<span class="syn-s">'Contact'</span>, ContactSchema);
+                  <span class="syn-c">// components/ContactList.tsx</span><br>
+                  <span class="syn-k">export default function</span> <span class="syn-f">ContactList</span>() {<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">const</span> { data, search, sort } = <span class="syn-f">useContacts</span>();<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">return</span> &lt;<span class="syn-t">DataTable</span> <span class="syn-a">columns</span>={[<span class="syn-s">'name'</span>,<span class="syn-s">'email'</span>,<span class="syn-s">'company'</span>,<span class="syn-s">'tags'</span>]}<br>
+                  <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syn-a">data</span>={data} <span class="syn-a">onSearch</span>={search} <span class="syn-a">onSort</span>={sort} /&gt;;<br>
+                  }
                 </div>
               </div>
             </div>
@@ -438,11 +465,28 @@
             </div>
             <div class="pipeline-stage-label">Running Service</div>
             <div class="pipeline-stage-preview pipeline-rendered">
-              <div class="pipeline-mini-hero">
-                <span class="pipeline-mini-badge">contacts domain — live</span>
-                <strong>POST /api/contacts</strong>
-                <span class="pipeline-mini-sub">Validated · Access-controlled · Schema-enforced</span>
-                <span class="pipeline-mini-btn">201 Created →</span>
+              <div class="pipeline-mini-crud">
+                <div class="pipeline-mini-toolbar">
+                  <span class="pipeline-mini-title">Contacts</span>
+                  <span class="pipeline-mini-actions">
+                    <span class="pipeline-mini-search-icon" aria-hidden="true">⌕</span>
+                    <span class="pipeline-mini-add-btn">+ New</span>
+                  </span>
+                </div>
+                <div class="pipeline-mini-table">
+                  <div class="pipeline-mini-row pipeline-mini-header-row">
+                    <span>Name</span><span>Email</span><span>Company</span><span>Tags</span>
+                  </div>
+                  <div class="pipeline-mini-row">
+                    <span>Sarah Chen</span><span>sarah@acme.io</span><span>Acme Corp</span><span class="pipeline-mini-tag">lead</span>
+                  </div>
+                  <div class="pipeline-mini-row">
+                    <span>James Park</span><span>james@volta.dev</span><span>Volta</span><span class="pipeline-mini-tag">partner</span>
+                  </div>
+                  <div class="pipeline-mini-row">
+                    <span>Priya Sharma</span><span>priya@lunar.co</span><span>Lunar</span><span class="pipeline-mini-tag">client</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

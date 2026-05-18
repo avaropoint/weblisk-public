@@ -4447,12 +4447,13 @@ select.input {
   padding: 0.75rem;
   max-height: 260px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 .pipeline-stage-preview .code-body pre {
   font-size: 0.68rem;
   line-height: 1.5;
-  overflow-wrap: break-word;
+  white-space: pre;
+  min-width: max-content;
 }
 
 @media (min-width: 1200px) {
@@ -4502,9 +4503,10 @@ select.input {
   font-size: 0.65rem;
   line-height: 1.45;
   color: var(--wl-code-text);
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow: visible;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.25rem;
 }
 
 /* Pipeline connectors */
@@ -4606,7 +4608,8 @@ select.input {
 }
 
 .pipeline-mini-search-icon {
-  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
   color: var(--wl-text-muted);
 }
 

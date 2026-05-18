@@ -360,10 +360,10 @@
             <div class="pipeline-stage-preview code-window">
               <div class="code-header">
                 <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
-                <span class="code-title">domains/contacts.yaml</span>
+                <span class="code-title">domains/crm.yaml</span>
               </div>
               <div class="code-body">
-                <pre><span class="syn-k">domain:</span> <span class="syn-s">contacts</span>
+                <pre><span class="syn-k">domain:</span> <span class="syn-s">crm</span>
 <span class="syn-k">version:</span> <span class="syn-s">1.0.0</span>
 
 <span class="syn-k">entities:</span>
@@ -415,12 +415,12 @@
               <div class="pipeline-layer pipeline-layer-html" data-layer="api">
                 <span class="pipeline-layer-tag">API</span>
                 <div class="pipeline-layer-code">
-                  <span class="syn-c">// routes/contacts.ts — full CRUD</span><br>
-                  <span class="syn-k">router</span>.<span class="syn-f">post</span>(<span class="syn-s">'/contacts'</span>, auth, validate(CreateContact), create);<br>
-                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/contacts'</span>, auth, paginate, list);<br>
-                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/contacts/:id'</span>, auth, ownership, read);<br>
-                  <span class="syn-k">router</span>.<span class="syn-f">put</span>(<span class="syn-s">'/contacts/:id'</span>, auth, ownership, validate(UpdateContact), update);<br>
-                  <span class="syn-k">router</span>.<span class="syn-f">delete</span>(<span class="syn-s">'/contacts/:id'</span>, auth, ownership, remove);
+                  <span class="syn-c">// routes/crm/contacts.ts — full CRUD</span><br>
+                  <span class="syn-k">router</span>.<span class="syn-f">post</span>(<span class="syn-s">'/crm/contacts'</span>, auth, validate(CreateContact), create);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/crm/contacts'</span>, auth, paginate, list);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/crm/contacts/:id'</span>, auth, ownership, read);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">put</span>(<span class="syn-s">'/crm/contacts/:id'</span>, auth, ownership, validate(UpdateContact), update);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">delete</span>(<span class="syn-s">'/crm/contacts/:id'</span>, auth, ownership, remove);
                 </div>
               </div>
               <div class="pipeline-layer pipeline-layer-css" data-layer="schema">
@@ -469,7 +469,7 @@
                 <div class="pipeline-mini-toolbar">
                   <span class="pipeline-mini-title">Contacts</span>
                   <span class="pipeline-mini-actions">
-                    <span class="pipeline-mini-search-icon" aria-hidden="true">⌕</span>
+                    <span class="pipeline-mini-search-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
                     <span class="pipeline-mini-add-btn">+ New</span>
                   </span>
                 </div>

@@ -442,9 +442,9 @@ sections:
         label: Blueprint
         preview:
           language: yaml
-          title: domains/contacts.yaml
+          title: domains/crm.yaml
           content: |
-            domain: contacts
+            domain: crm
             version: 1.0.0
 
             entities:
@@ -483,12 +483,12 @@ sections:
             label: API
             border_color: pink
             content: |
-              // routes/contacts.ts — full CRUD
-              router.post('/contacts', auth, validate(CreateContact), create);
-              router.get('/contacts', auth, paginate, list);
-              router.get('/contacts/:id', auth, ownership, read);
-              router.put('/contacts/:id', auth, ownership, validate(UpdateContact), update);
-              router.delete('/contacts/:id', auth, ownership, remove);
+              // routes/crm/contacts.ts — full CRUD
+              router.post('/crm/contacts', auth, validate(CreateContact), create);
+              router.get('/crm/contacts', auth, paginate, list);
+              router.get('/crm/contacts/:id', auth, ownership, read);
+              router.put('/crm/contacts/:id', auth, ownership, validate(UpdateContact), update);
+              router.delete('/crm/contacts/:id', auth, ownership, remove);
           - id: schema
             label: Schema
             border_color: blue

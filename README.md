@@ -27,7 +27,7 @@ weblisk-public/
 ├── images/                     Static assets & brand PNGs
 ├── docs/                       Client framework documentation
 │   ├── index.html              Docs home
-│   ├── quick-start.html        Quick start guide
+│   ├── quickstart.html        Quick start guide
 │   ├── installation.html       CLI installation
 │   ├── project-structure.html  Project layout
 │   ├── signals.html            Reactive signals

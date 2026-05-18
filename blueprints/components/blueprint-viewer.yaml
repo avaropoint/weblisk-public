@@ -1,0 +1,59 @@
+# Blueprint Viewer Component
+# Activated by ?blueprint query parameter to show the YAML blueprint
+# source for the current page — like browser View Source but for specs.
+# The drawer/toggle button has been removed; blueprint viewing is now
+# accessed via ?blueprint=true or the x-ray section inspector.
+# Extends: standards/islands (protocol, data, behavior)
+
+name: blueprint-viewer
+type: island
+extends: standards/islands
+hydrate: idle            # Load after initial paint — not critical path
+status: active
+version: 3.0.0
+
+# Island binding (per standards/islands spec)
+agent: gateway           # Fetches from the gateway's blueprint API
+protocol: request        # One-shot request/response (no persistent connection)
+auth: none               # Blueprint source is public
+
+props:
+  blueprint_path: { type: string, required: true }  # Path to YAML, e.g. "pages/home.yaml"
+
+data:
+  format: text
+  content_type: text/yaml
+  schema:
+    type: string         # Raw YAML content (not parsed into object)
+
+structure:
+  element: div
+  style: "display: contents"
+  aria_hidden: true
+  notes: >
+    No visible UI. The island only activates when ?blueprint is present
+    in the URL, delegating to blueprint-mode.js for the full-page view.
+
+behavior:
+  source_view:
+    trigger: "?blueprint query parameter"
+    keyboard_shortcut: "Cmd/Ctrl+Shift+B"
+    module: blueprint-mode.js
+    description: >
+      Full-page "View Blueprint Source" — like browser View Source
+      but shows the YAML specification that produced the page.
+    steps:
+      - Hides all page content (fixed overlay covers viewport)
+      - Shows top bar with Blueprint Source label, file path, Copy button, and Close button
+      - Fetches full YAML blueprint and renders with syntax highlighting
+      - Line numbers in left gutter
+      - Copy button copies raw YAML to clipboard
+      - Close button (or Escape) removes query param and returns to rendered page
+      - Keyboard shortcut Cmd/Ctrl+Shift+B toggles from any page
+  fetch_strategy:
+    primary: "/api/blueprint/{blueprint_path}"
+    fallback: "/blueprints/{blueprint_path}"
+    notes: >
+      Always attempt API route first (works with both wrangler dev and
+      production). Falls back to direct file path for weblisk dev which
+      serves from filesystem without the gateway worker.

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standards — Weblisk Platform</title>
+  <meta name="description"
+    content="9 standards that define how developers describe projects with YAML blueprints: project structure, global identity, code conventions, theme tokens, pages, components, islands, assets, and connections.">
+  <link rel="canonical" href="https://weblisk.dev/platform/standards.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Standards — Weblisk Platform">
+  <meta property="og:description"
+    content="9 project standards that govern how developers build with the framework. YAML blueprints describe intent. The LLM generates implementation.">
+  <meta property="og:url" content="https://weblisk.dev/platform/standards.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Standards — Weblisk Platform">
+  <meta name="twitter:description"
+    content="9 project standards that govern how developers build with the framework. YAML blueprints describe intent. The LLM generates implementation.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Standards — Weblisk Platform",
+    "description": "9 project standards that govern how developers build with the Weblisk framework using YAML blueprints.",
+    "url": "https://weblisk.dev/platform/standards.html",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Platform", "item": "https://weblisk.dev/platform/" },
+      { "@type": "ListItem", "position": 3, "name": "Standards", "item": "https://weblisk.dev/platform/standards.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link active" aria-current="page">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Platform navigation">
+      <h3>Platform</h3>
+      <nav aria-label="Platform overview links">
+        <a href="/platform/">Overview</a>
+        <a href="/platform/protocol.html">Protocol</a>
+        <a href="/platform/architecture.html">Architecture</a>
+        <a href="/platform/agents.html">Agents</a>
+        <a href="/platform/patterns.html">Patterns</a>
+        <a href="/platform/schemas.html">Schemas</a>
+        <a href="/platform/standards.html" aria-current="page" class="active">Standards</a>
+        <a href="/platform/client.html">Client Framework</a>
+        <a href="/platform/security.html">Security &amp; Governance</a>
+      </nav>
+      <h3>Resources</h3>
+      <nav aria-label="Platform resource links">
+        <a href="/docs/">Documentation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/marketplace/">Marketplace</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Standards</h1>
+      <p class="lead">Standards govern how developers build with the framework. They define the YAML vocabulary for describing projects — from project structure to page layouts to interactive islands. These are best practices, not hard requirements.</p>
+
+      <h2>Standards vs Schemas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Schemas</th>
+            <th>Standards</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nature</strong></td>
+            <td>Enforced specification</td>
+            <td>Best practice guidance</td>
+          </tr>
+          <tr>
+            <td><strong>Scope</strong></td>
+            <td>Framework internals</td>
+            <td>Developer projects</td>
+          </tr>
+          <tr>
+            <td><strong>Validation</strong></td>
+            <td>Machine-checked</td>
+            <td>Developer judgment</td>
+          </tr>
+          <tr>
+            <td><strong>Target</strong></td>
+            <td>Blueprint authors (framework)</td>
+            <td>Project authors (users)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Standards Index</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Standard</th>
+            <th>Covers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>project-structure</strong></td>
+            <td>How to organize a blueprint-driven project</td>
+          </tr>
+          <tr>
+            <td><strong>global</strong></td>
+            <td>Project identity, brand, policies, dependencies</td>
+          </tr>
+          <tr>
+            <td><strong>code</strong></td>
+            <td>Code generation conventions and repeatability</td>
+          </tr>
+          <tr>
+            <td><strong>theme</strong></td>
+            <td>Design tokens, typography, spacing, breakpoints</td>
+          </tr>
+          <tr>
+            <td><strong>pages</strong></td>
+            <td>Describing routes, layouts, sections, SEO, structured data</td>
+          </tr>
+          <tr>
+            <td><strong>components</strong></td>
+            <td>Reusable UI: props, slots, variants, accessibility</td>
+          </tr>
+          <tr>
+            <td><strong>islands</strong></td>
+            <td>Interactive regions: agent binding, real-time, auth</td>
+          </tr>
+          <tr>
+            <td><strong>assets</strong></td>
+            <td>Static files, generated media, references</td>
+          </tr>
+          <tr>
+            <td><strong>connections</strong></td>
+            <td>External integrations, protocols, data sources</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Guiding Principles</h2>
+      <ol>
+        <li><strong>Describe intent, not implementation.</strong> YAML says what you want. The LLM decides how to build it. Patterns constrain the how.</li>
+        <li><strong>Everything inherits from global.</strong> Brand colors, a11y level, SEO policy — declared once, applied everywhere.</li>
+        <li><strong>Escape hatches exist.</strong> Write code directly and mark <code>managed: false</code>. The framework respects manual overrides.</li>
+        <li><strong>Zero ambiguity.</strong> A new developer should read <code>blueprints/</code> and understand the entire project.</li>
+        <li><strong>Composability over complexity.</strong> Many small blueprints &gt; one giant blueprint.</li>
+      </ol>
+
+      <h2>The Generation Pipeline</h2>
+      <p>There is no traditional build step. The LLM is the compiler. YAML is the source code. Production services — APIs, data models, business logic, and interfaces — are the compiled output.</p>
+      <ol>
+        <li><strong>global.yaml</strong> — Project identity, brand, policies (loaded first, always)</li>
+        <li><strong>code.yaml</strong> — Code conventions (loaded second, constrains all output)</li>
+        <li><strong>theme.yaml</strong> — Design tokens derived from global brand</li>
+        <li><strong>Individual blueprints</strong> — Pages, components, islands, etc.</li>
+      </ol>
+      <p>The LLM receives: <code>global + code + theme + target blueprint + patterns</code> and produces files that conform to all constraints simultaneously.</p>
+
+      <h2>Three Project Modes</h2>
+      <p>A developer picks their complexity. A portfolio is 3 blueprints. A SaaS app is 30. The structure scales because each blueprint is self-contained.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>What You Describe</th>
+            <th>What You Get</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Client-only</strong></td>
+            <td>global + code + pages</td>
+            <td>Static HTML/CSS/JS, CDN import map</td>
+          </tr>
+          <tr>
+            <td><strong>Client + Islands</strong></td>
+            <td>Above + islands</td>
+            <td>Static site + interactive regions bound to agents</td>
+          </tr>
+          <tr>
+            <td><strong>Full stack</strong></td>
+            <td>Above + domains + agents</td>
+            <td>Complete hub with client and server</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="docs-nav-footer">
+        <a href="/platform/schemas.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Schemas</a>
+        <a href="/platform/client.html">Client Framework <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

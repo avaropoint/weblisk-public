@@ -1,16 +1,26 @@
 # ── Deploy: Public Website ────────────────────────────────────
 #
-# Publishes the static site to the weblisk-public R2 bucket
-# and deploys the Worker that serves weblisk.dev.
+# Publishes the blueprint-driven site to Cloudflare:
+#   R2:     Static files + blueprints
+#   Worker: Gateway serving weblisk.dev
+#   KV:     Edge cache (invalidated on deploy)
 #
-# Publishes to:
-#   weblisk-public R2 bucket (static files)
-#   weblisk-public Worker (serves weblisk.dev)
+# Environments:
+#   main push      → production (weblisk-public bucket, weblisk.dev routes)
+#   pull_request   → preview   (weblisk-public-preview bucket, *.workers.dev)
+#
+# Structure:
+#   public/     → R2 root (static files served by Worker)
+#   blueprints/ → R2 blueprints/ prefix (served by Blueprint API)
+#   workers/    → Cloudflare Worker (gateway + agents)
 
 name: Deploy
 
 on:
   push:
+    branches: [main]
+
+  pull_request:
     branches: [main]
 
   workflow_dispatch:
@@ -19,10 +29,23 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set environment
+        id: env
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "target=preview" >> "$GITHUB_OUTPUT"
+            echo "bucket=weblisk-public-preview" >> "$GITHUB_OUTPUT"
+            echo "wrangler_env=--env preview" >> "$GITHUB_OUTPUT"
+          else
+            echo "target=production" >> "$GITHUB_OUTPUT"
+            echo "bucket=weblisk-public" >> "$GITHUB_OUTPUT"
+            echo "wrangler_env=" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Upload to R2
         env:
@@ -30,7 +53,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
         run: |
-          BUCKET="s3://weblisk-public"
+          BUCKET="s3://${{ steps.env.outputs.bucket }}"
 
           upload() {
             aws s3 cp "$1" "${BUCKET}/$2" \
@@ -39,11 +62,12 @@ jobs:
               --no-progress
           }
 
-          # Build list of site files to upload (allowlist approach)
-          SITE_FILES=$(mktemp)
-          find . -type f \( \
+          # ── Upload public/ directory (static site files) ──
+          echo "[${{ steps.env.outputs.target }}] Uploading public/ files..."
+          find ./public -type f \( \
             -name '*.html' -o \
             -name '*.css' -o \
+            -name '*.js' -o \
             -name '*.svg' -o \
             -name '*.png' -o \
             -name '*.jpg' -o \
@@ -56,24 +80,9 @@ jobs:
             -name 'manifest.webmanifest' -o \
             -name 'robots.txt' -o \
             -name 'llms.txt' \
-          \) \
-            -not -path './.git/*' \
-            -not -path './.github/*' \
-            -not -path './.vscode/*' \
-            -not -path './workers/*' \
-          > "$SITE_FILES"
+          \) | while read -r file; do
+            key="${file#./public/}"
 
-          # Also include JS files under js/ only (not workers/, not root)
-          find ./js -type f -name '*.js' >> "$SITE_FILES" 2>/dev/null || true
-
-          # Include sw.js at root
-          [ -f ./sw.js ] && echo "./sw.js" >> "$SITE_FILES"
-
-          cat "$SITE_FILES" | while read -r file; do
-            # Strip leading ./
-            key="${file#./}"
-
-            # Determine MIME type
             case "$file" in
               *.html)  mime="text/html" ;;
               *.css)   mime="text/css" ;;
@@ -94,9 +103,15 @@ jobs:
 
             upload "$file" "$key" "$mime"
           done
+          echo "✓ Public files uploaded"
 
-          rm -f "$SITE_FILES"
-          echo "✓ Site files uploaded to R2"
+          # ── Upload blueprints/ (for Blueprint API) ──
+          echo "Uploading blueprints/..."
+          find ./blueprints -type f -name '*.yaml' -o -name '*.yml' | while read -r file; do
+            key="${file#./}"
+            upload "$file" "$key" "text/yaml"
+          done
+          echo "✓ Blueprints uploaded"
 
       - name: Clean stale files from R2
         env:
@@ -104,13 +119,14 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
         run: |
-          BUCKET="s3://weblisk-public"
+          BUCKET="s3://${{ steps.env.outputs.bucket }}"
 
-          # Build set of local keys (same allowlist as upload step)
           LOCAL_KEYS=$(mktemp)
-          find . -type f \( \
+
+          find ./public -type f \( \
             -name '*.html' -o \
             -name '*.css' -o \
+            -name '*.js' -o \
             -name '*.svg' -o \
             -name '*.png' -o \
             -name '*.jpg' -o \
@@ -123,22 +139,17 @@ jobs:
             -name 'manifest.webmanifest' -o \
             -name 'robots.txt' -o \
             -name 'llms.txt' \
-          \) \
-            -not -path './.git/*' \
-            -not -path './.github/*' \
-            -not -path './.vscode/*' \
-            -not -path './workers/*' \
-          | sed 's|^\./||' > "$LOCAL_KEYS"
-          find ./js -type f -name '*.js' 2>/dev/null | sed 's|^\./||' >> "$LOCAL_KEYS" || true
-          [ -f ./sw.js ] && echo "sw.js" >> "$LOCAL_KEYS"
+          \) | sed 's|^\./public/||' >> "$LOCAL_KEYS"
+
+          find ./blueprints -type f \( -name '*.yaml' -o -name '*.yml' \) \
+            | sed 's|^\./||' >> "$LOCAL_KEYS"
+
           sort -o "$LOCAL_KEYS" "$LOCAL_KEYS"
 
-          # List all keys currently in R2
           REMOTE_KEYS=$(mktemp)
           aws s3 ls "${BUCKET}/" --recursive --endpoint-url "$R2_ENDPOINT" \
             | awk '{print $4}' | sort > "$REMOTE_KEYS"
 
-          # Delete keys in R2 that don't exist locally
           STALE=$(comm -23 "$REMOTE_KEYS" "$LOCAL_KEYS")
           if [ -n "$STALE" ]; then
             echo "Removing stale files from R2:"
@@ -152,9 +163,19 @@ jobs:
 
           rm -f "$LOCAL_KEYS" "$REMOTE_KEYS"
 
+      - name: Invalidate KV cache
+        if: steps.env.outputs.target == 'production'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          wranglerVersion: "4"
+          command: kv bulk delete --namespace-id=${{ secrets.KV_NAMESPACE_ID }} --force <(echo '[]') || true
+
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          wranglerVersion: "4.81.1"
+          wranglerVersion: "4"
+          command: deploy ${{ steps.env.outputs.wrangler_env }}

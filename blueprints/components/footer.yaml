@@ -1,0 +1,76 @@
+# Footer Component
+# Renders the site-wide footer with brand, nav columns, social, and copyright.
+
+type: component
+name: footer
+hydrate: none
+status: active
+
+props:
+  columns: { type: array, required: false }
+
+content:
+  copyright: "© 2026 Made with ♥ by Avaropoint"
+  tagline: >
+    Open-source tools. Code you own. Describe once, generate forever.
+  columns:
+    - heading: Platform
+      links:
+        - label: Overview
+          path: /platform/
+        - label: Protocol
+          path: /platform/protocol.html
+        - label: Architecture
+          path: /platform/architecture.html
+        - label: Agents
+          path: /platform/agents.html
+        - label: Security
+          path: /platform/security.html
+    - heading: Ecosystem
+      links:
+        - label: Marketplace
+          path: /marketplace/
+        - label: Documentation
+          path: /docs/
+        - label: Quick Start
+          path: /docs/quickstart.html
+    - heading: Community
+      links:
+        - label: GitHub
+          url: https://github.com/avaropoint/weblisk
+        - label: X (Twitter)
+          url: https://x.com/weblisk
+        - label: Discord
+          url: https://discord.gg/5CetAq9EgZ
+        - label: Sponsor
+          url: https://github.com/sponsors/avaropoint
+
+structure:
+  element: footer
+  class: footer
+  children:
+    - type: footer-brand
+      logo: /images/mark/logo.svg
+      text: Weblisk
+      tagline: content.tagline
+    - type: footer-columns
+      source: content.columns
+    - type: footer-bottom
+      copyright: content.copyright
+      social:
+        - platform: github
+          url: global.yaml#social.github
+        - platform: twitter
+          url: global.yaml#social.twitter
+        - platform: discord
+          url: global.yaml#social.discord
+      powered_by:
+        text: Powered by Weblisk
+        href: /docs/
+
+accessibility:
+  role: contentinfo
+  aria_label: "Site footer"
+  nav_columns:
+    role: navigation
+    aria_label: "Footer navigation"

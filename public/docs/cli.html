@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLI Reference — Weblisk</title>
+  <meta name="description"
+    content="Weblisk CLI reference: 19 command groups covering project scaffolding, server generation, blueprints, identity, operations, federation, marketplace, and deployment.">
+  <link rel="canonical" href="https://weblisk.dev/docs/cli.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CLI Reference — Weblisk">
+  <meta property="og:description"
+    content="Weblisk CLI reference: 19 command groups covering project scaffolding, server generation, blueprints, identity, operations, federation, marketplace, and deployment. Single standalone binary.">
+  <meta property="og:url" content="https://weblisk.dev/docs/cli.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CLI Reference — Weblisk">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="twitter:description" content="Weblisk CLI reference: 19 command groups covering project scaffolding, server generation, blueprints, identity, operations, federation, marketplace, and deployment. Single standalone binary.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="theme-color" content="#1a1f36">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta property="article:published_time" content="2026-04-23T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "CLI Reference — Weblisk",
+    "description": "The Weblisk CLI is a single standalone binary — no runtime, no package manager, no dependencies.",
+    "url": "https://weblisk.dev/docs/cli.html",
+    "datePublished": "2026-01-15",
+    "dateModified": "2026-04-29",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+  { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Weblisk",
+        "item": "https://weblisk.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Documentation",
+        "item": "https://weblisk.dev/docs/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "CLI Reference",
+        "item": "https://weblisk.dev/docs/cli.html"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link active" aria-current="page">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+      <h3>Getting Started</h3>
+      <nav aria-label="Getting started links">
+        <a href="/docs/">Overview</a>
+        <a href="/docs/installation.html">Installation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/docs/project-structure.html">Project Structure</a>
+      </nav>
+      <h3>Framework</h3>
+      <nav aria-label="Framework documentation links">
+        <a href="/docs/blueprints.html">Blueprints</a>
+        <a href="/docs/agents.html">Agents</a>
+        <a href="/docs/governance.html">Governance</a>
+        <a href="/docs/federation.html">Federation</a>
+        <a href="/docs/migrations.html">Migrations</a>
+      </nav>
+      <h3>Client Framework</h3>
+      <nav aria-label="Client framework documentation links">
+        <a href="/docs/signals.html">Signals</a>
+        <a href="/docs/islands.html">Islands</a>
+        <a href="/docs/hydration.html">Hydration</a>
+        <a href="/docs/components.html">Components</a>
+        <a href="/docs/scheduler.html">Scheduler</a>
+        <a href="/docs/workers.html">Workers</a>
+        <a href="/docs/devtools.html">DevTools</a>
+      </nav>
+      <h3>Data &amp; State</h3>
+      <nav aria-label="Data and state documentation links">
+        <a href="/docs/state.html">State Management</a>
+        <a href="/docs/store.html">Local-First Store</a>
+      </nav>
+      <h3>Navigation</h3>
+      <nav aria-label="Navigation documentation links">
+        <a href="/docs/routing.html">Routing &amp; Guards</a>
+        <a href="/docs/transitions.html">View Transitions</a>
+      </nav>
+      <h3>Networking</h3>
+      <nav aria-label="Networking documentation links">
+        <a href="/docs/fetch.html">Fetch</a>
+        <a href="/docs/realtime.html">Realtime</a>
+        <a href="/docs/analytics.html">Analytics</a>
+      </nav>
+      <h3>Security &amp; Performance</h3>
+      <nav aria-label="Security and performance documentation links">
+        <a href="/docs/security.html">Security</a>
+        <a href="/docs/performance.html">Performance</a>
+        <a href="/docs/pwa.html">PWA</a>
+      </nav>
+      <h3>UI &amp; A11y</h3>
+      <nav aria-label="UI and accessibility documentation links">
+        <a href="/docs/ui.html">UI Components</a>
+        <a href="/docs/a11y.html">Accessibility</a>
+      </nav>
+      <h3>Tools</h3>
+      <nav aria-label="Tools documentation links">
+        <a href="/docs/cli.html" aria-current="page" class="active">CLI Reference</a>
+        <a href="/docs/testing.html">Testing</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>CLI Reference</h1>
+      <p class="lead">The Weblisk CLI is a single standalone binary — no runtime, no package manager, no dependencies. Two command surfaces: <strong>Development</strong> (scaffold, generate, run) and <strong>Operations</strong> (manage a running hub).</p>
+
+      <!-- ─── Command Overview ─── -->
+      <h2>Command Groups</h2>
+      <table>
+        <thead><tr><th>Group</th><th>Surface</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><a href="#project">Project</a></td><td>Development</td><td>Scaffold, dev, build, vendor, doctor, secrets</td></tr>
+          <tr><td><a href="#server">Server</a></td><td>Development</td><td>Generate and run hub components</td></tr>
+          <tr><td><a href="#blueprint">Blueprint</a></td><td>Development</td><td>Update, validate, apply patterns</td></tr>
+          <tr><td><a href="#identity">Identity</a></td><td>Development</td><td>ML-DSA-65 operator keys and registration</td></tr>
+          <tr><td><a href="#status">Status</a></td><td>Operations</td><td>Hub health overview</td></tr>
+          <tr><td><a href="#agents-ops">Agents</a></td><td>Operations</td><td>List, describe, deregister agents</td></tr>
+          <tr><td><a href="#domains-ops">Domains</a></td><td>Operations</td><td>List and describe domain controllers</td></tr>
+          <tr><td><a href="#workflows">Workflows</a></td><td>Operations</td><td>List and describe active workflows</td></tr>
+          <tr><td><a href="#approvals">Approvals</a></td><td>Operations</td><td>Human-in-the-loop accept/reject</td></tr>
+          <tr><td><a href="#strategies">Strategies</a></td><td>Operations</td><td>Goal tracking and lifecycle loop</td></tr>
+          <tr><td><a href="#observations">Observations</a></td><td>Operations</td><td>Lifecycle loop metrics and trends</td></tr>
+          <tr><td><a href="#federation">Federation</a></td><td>Operations</td><td>Peer trust, data contracts</td></tr>
+          <tr><td><a href="#operators">Operators</a></td><td>Operations</td><td>Manage operator access and roles</td></tr>
+          <tr><td><a href="#audit">Audit</a></td><td>Operations</td><td>Stream/query audit log</td></tr>
+          <tr><td><a href="#marketplace">Marketplace</a></td><td>Operations</td><td>Search, buy, publish capabilities</td></tr>
+          <tr><td><a href="#test">Test</a></td><td>Development</td><td>Conformance tests and mock orchestrator</td></tr>
+          <tr><td><a href="#deploy">Deploy</a></td><td>Operations</td><td>Rollback deployments</td></tr>
+          <tr><td><a href="#deps">Dependencies</a></td><td>Development</td><td>Audit deps for vulnerabilities</td></tr>
+          <tr><td><a href="#policy">Policy</a></td><td>Development</td><td>Validate and test gateway policies</td></tr>
+        </tbody>
+      </table>
+      <p>All operations commands require an authenticated operator identity (<code>weblisk operator init</code> + <code>operator register</code>). All commands support <code>--json</code> for machine-readable output.</p>
+
+      <!-- ─── Project Commands ─── -->
+      <h2 id="project">Project Commands</h2>
+
+      <h3><code>weblisk new &lt;name&gt;</code></h3>
+      <p>Scaffold a new project from weblisk-templates:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk new my-hub --template server/starter
+<span class="syn-s">✓ Created my-hub/ from weblisk-templates/server/starter</span>
+<span class="syn-s">✓ .gitignore generated (secrets, keys, tokens excluded)</span>
+<span class="syn-s">✓ Run: cd my-hub &amp;&amp; weblisk doctor</span>
+
+<span class="syn-c"># Combine multiple templates (files are merged)</span>
+<span class="syn-p">$</span> weblisk new my-app --template client/blog --template server/starter</pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--template &lt;path&gt;</code></td><td>Template path (e.g. <code>server/starter</code>, <code>client/blog</code>). Repeatable.</td></tr>
+          <tr><td><code>--local</code></td><td>Include client framework files locally instead of CDN</td></tr>
+          <tr><td><code>--lib &lt;path&gt;</code></td><td>Custom path for local framework files</td></tr>
+        </tbody>
+      </table>
+      <p>Template resolution: local project → configured template sources → <a href="https://github.com/avaropoint/weblisk-templates" rel="noopener noreferrer">weblisk-templates</a> core.</p>
+
+      <h3><code>weblisk dev</code></h3>
+      <p>Start a development server with file watching and live reload:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk dev --port 3000
+<span class="syn-s">✓ Dev server running at http://localhost:3000</span>
+<span class="syn-s">  Watching for changes...</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--port &lt;n&gt;</code></td><td>Port to serve on (default: <code>5500</code>)</td></tr>
+        </tbody>
+      </table>
+      <p>For client projects: file watching + live reload. For server projects: builds and runs the hub with restart-on-change.</p>
+
+      <h3><code>weblisk build</code></h3>
+      <p>Build production-ready output:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk build --minify --fingerprint
+<span class="syn-s">✓ Built to dist/ (minified, fingerprinted)</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--minify</code></td><td>Minify HTML, CSS, and JavaScript</td></tr>
+          <tr><td><code>--fingerprint</code></td><td>Content-hash asset filenames for cache busting</td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>weblisk vendor</code></h3>
+      <p>Download all client framework modules from CDN into your project for local use:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk vendor --dest lib/weblisk
+<span class="syn-s">✓ Downloaded 52 modules to lib/weblisk/</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk doctor</code></h3>
+      <p>Validate project health — checks config, .gitignore, secrets, and blueprint schemas:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk doctor
+<span class="syn-s">✓ .gitignore excludes .weblisk/secrets/, .weblisk/keys/, .weblisk/token, .env</span>
+<span class="syn-s">✓ .weblisk/config.yaml valid</span>
+<span class="syn-s">✓ Secret file permissions correct (0600)</span>
+<span class="syn-s">⚠ Secret 'LLM_API_KEY' declared by seo-analyzer but not set</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk secret</code></h3>
+      <p>Manage agent secrets securely. Secrets are stored in <code>.weblisk/secrets/{agent}/{KEY}</code> with 0600 file permissions.</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk secret list
+<span class="syn-s">AGENT           SECRET        STATUS</span>
+<span class="syn-s">seo-analyzer    LLM_API_KEY   ✓ set</span>
+<span class="syn-s">cron            WEBHOOK_URL   ✗ missing</span>
+
+<span class="syn-p">$</span> weblisk secret set cron WEBHOOK_URL
+<span class="syn-s">Enter value: ********</span>
+<span class="syn-s">✓ Secret stored: .weblisk/secrets/cron/WEBHOOK_URL</span>
+
+<span class="syn-p">$</span> weblisk secret get seo-analyzer LLM_API_KEY --confirm
+<span class="syn-s">⚠ WARNING: This prints a secret to the terminal.</span>
+<span class="syn-s">sk-abc...xyz</span>
+
+<span class="syn-p">$</span> weblisk secret rotate seo-analyzer LLM_API_KEY
+<span class="syn-s">Enter new value: ********</span>
+<span class="syn-s">✓ Secret rotated: .weblisk/secrets/seo-analyzer/LLM_API_KEY</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Subcommand</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>list</code></td><td>Show all declared secrets and their set/missing status</td></tr>
+          <tr><td><code>set &lt;agent&gt; &lt;KEY&gt;</code></td><td>Set a secret (interactive prompt — never passed as argument)</td></tr>
+          <tr><td><code>get &lt;agent&gt; &lt;KEY&gt; --confirm</code></td><td>Print a secret (requires --confirm flag)</td></tr>
+          <tr><td><code>delete &lt;agent&gt; &lt;KEY&gt;</code></td><td>Remove a secret file</td></tr>
+          <tr><td><code>rotate &lt;agent&gt; &lt;KEY&gt;</code></td><td>Trigger rotation handler or prompt for new value</td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>weblisk version</code></h3>
+      <p>Print the CLI version and build info.</p>
+
+      <!-- ─── Server Commands ─── -->
+      <h2 id="server">Server Commands</h2>
+      <p>Generate and run hub components from YAML specs.</p>
+
+      <h3><code>weblisk server init</code></h3>
+      <p>Read all YAML specs and generate the complete hub implementation via LLM dispatch:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk server init --platform go
+<span class="syn-s">Reading .weblisk/config.yaml, domains/*, agents/*...</span>
+<span class="syn-s">Dispatching to LLM for code generation...</span>
+<span class="syn-s">✓ Generated orchestrator, gateway, 1 domain, 2 agents</span>
+<span class="syn-s">✓ Platform: Go</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--platform &lt;p&gt;</code></td><td>Target platform: <code>go</code> (default), <code>cloudflare</code>, <code>node</code>, <code>rust</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>weblisk server start</code></h3>
+      <p>Build and start all hub components declared in <code>.weblisk/config.yaml</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk server start
+<span class="syn-s">✓ Orchestrator running on :9800</span>
+<span class="syn-s">✓ Gateway running on :9900</span>
+<span class="syn-s">✓ Domain 'seo' running on :9700</span>
+<span class="syn-s">✓ Agent 'seo-analyzer' registered</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk server verify</code></h3>
+      <p>Confirm orchestrator health and all registered components.</p>
+
+      <h3><code>weblisk agent create &lt;name&gt;</code></h3>
+      <p>Generate agent code from <code>agents/{name}/agent.yaml</code> spec via LLM dispatch:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk agent create seo-analyzer --platform go
+<span class="syn-s">✓ Generated agent code: agents/seo-analyzer/main.go</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk agent start &lt;name&gt;</code></h3>
+      <p>Build and run a single agent.</p>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--orch &lt;url&gt;</code></td><td>Orchestrator URL</td></tr>
+          <tr><td><code>--port &lt;n&gt;</code></td><td>Port for agent to listen on</td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>weblisk agent verify &lt;name&gt;</code> / <code>weblisk agent list</code></h3>
+      <p>Verify an agent is healthy or list all locally scaffolded agents.</p>
+
+      <h3><code>weblisk domain create &lt;name&gt;</code> / <code>weblisk domain start &lt;name&gt;</code></h3>
+      <p>Generate domain controller code from <code>domains/{name}/domain.yaml</code> and run it.</p>
+
+      <h3><code>weblisk gateway create</code> / <code>weblisk gateway start</code></h3>
+      <p>Generate and run the application gateway from hub configuration.</p>
+
+      <!-- ─── Blueprint Commands ─── -->
+      <h2 id="blueprint">Blueprint Commands</h2>
+
+      <h3><code>weblisk blueprint update</code></h3>
+      <p>Re-fetch all cached blueprint sources (local → configured → core).</p>
+
+      <h3><code>weblisk validate</code></h3>
+      <p>Check all blueprints for compliance — validates frontmatter, sections, types, and dependencies:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk validate
+<span class="syn-s">Validating 6 blueprints...</span>
+<span class="syn-s">  domains/seo/domain.yaml          Certified ✓</span>
+<span class="syn-s">  agents/seo-analyzer/agent.yaml   Compliant ✓</span>
+<span class="syn-s">  agents/cron/agent.yaml           Compliant ✓</span>
+<span class="syn-s">✓ 6 blueprints validated (0 errors, 0 warnings)</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--deps</code></td><td>Also validate lockfile integrity</td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>weblisk pattern apply &lt;name&gt;</code></h3>
+      <p>Read a pattern blueprint and apply it to the project via LLM dispatch with target context.</p>
+
+      <!-- ─── Identity Commands ─── -->
+      <h2 id="identity">Identity Commands</h2>
+      <p>Operator identity uses ML-DSA-65 (post-quantum). No passwords, no shared secrets.</p>
+
+      <h3><code>weblisk operator init</code></h3>
+      <p>Generate an ML-DSA-65 key pair for operator authentication:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk operator init
+<span class="syn-s">Enter passphrase (min 12 characters): ********</span>
+<span class="syn-s">Confirm passphrase: ********</span>
+<span class="syn-s">✓ Key pair generated:</span>
+<span class="syn-s">  Private: ~/.weblisk/keys/operator.key (encrypted, 0600)</span>
+<span class="syn-s">  Public:  ~/.weblisk/keys/operator.pub</span></pre>
+        </div>
+      </div>
+      <p>Private key is encrypted with Argon2id + AES-256-GCM. Passphrase cannot be skipped or passed as a CLI argument. Use <code>--force</code> to overwrite existing keys.</p>
+
+      <h3><code>weblisk operator register</code></h3>
+      <p>Register your public key with an orchestrator to obtain an access token:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk operator register --orch http://localhost:9800
+<span class="syn-s">✓ Registered as admin (first operator — auto-approved)</span>
+<span class="syn-s">  Token stored: ~/.weblisk/token (expires in 24h, auto-refresh)</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk operator token</code></h3>
+      <p>Display or refresh the current token (auto-refreshes when &lt; 1 hour remaining).</p>
+
+      <h3><code>weblisk operator rotate</code></h3>
+      <p>Rotate the operator key pair (registers new public key, invalidates old).</p>
+
+      <!-- ─── Status Commands ─── -->
+      <h2 id="status">Status Commands</h2>
+
+      <h3><code>weblisk status</code></h3>
+      <p>System overview — calls <code>GET /v1/admin/overview</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk status
+<span class="syn-s">Hub: my-hub (http://localhost:9800)</span>
+<span class="syn-s">Health: ● green (score: 98/100)</span>
+
+<span class="syn-s">AGENTS            STATUS     DOMAIN        TASKS(24h)    ERRORS</span>
+<span class="syn-s">seo-analyzer      ● online   seo           142           0</span>
+<span class="syn-s">content-writer    ● online   content       87            2</span>
+<span class="syn-s">cron              ● online   infra         24            0</span>
+
+<span class="syn-s">DOMAINS           AGENTS    WORKFLOWS     PENDING APPROVALS</span>
+<span class="syn-s">seo               2         3 active      1</span>
+<span class="syn-s">content           1         1 active      0</span>
+
+<span class="syn-s">FEDERATION        PEERS     ACTIVE CONTRACTS</span>
+<span class="syn-s">                  2         3</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--watch</code></td><td>Continuous refresh (5-second poll)</td></tr>
+          <tr><td><code>--json</code></td><td>Machine-readable output</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ─── Agents Operations ─── -->
+      <h2 id="agents-ops">Agent Operations</h2>
+
+      <h3><code>weblisk agents list</code></h3>
+      <p>List all registered agents on the hub.</p>
+
+      <h3><code>weblisk agents describe &lt;name&gt;</code></h3>
+      <p>Full detail for a single agent — capabilities, metrics, health, domain assignment.</p>
+
+      <h3><code>weblisk agents deregister &lt;name&gt;</code></h3>
+      <p>Remove an agent from the orchestrator. Requires <code>--confirm</code> or interactive name confirmation. Running tasks are drained before removal.</p>
+
+      <!-- ─── Domains Operations ─── -->
+      <h2 id="domains-ops">Domain Operations</h2>
+
+      <h3><code>weblisk domains list</code> / <code>weblisk domains describe &lt;name&gt;</code></h3>
+      <p>List or inspect domain controllers — shows assigned agents, active workflows, and routing rules.</p>
+
+      <!-- ─── Workflows ─── -->
+      <h2 id="workflows">Workflow Operations</h2>
+
+      <h3><code>weblisk workflows list</code></h3>
+      <p>List active and recent workflows:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk workflows list
+<span class="syn-s">ID        DOMAIN    NAME         STATUS      STARTED              PHASE</span>
+<span class="syn-s">wf-001    seo       seo-audit    running     2026-04-25 10:30:01  scan (2/3)</span>
+<span class="syn-s">wf-002    content   blog-post    paused      2026-04-25 10:25:00  approval</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk workflows describe &lt;id&gt;</code></h3>
+      <p>Full detail including phase history, timing, and outputs.</p>
+
+      <!-- ─── Approvals ─── -->
+      <h2 id="approvals">Approval Operations</h2>
+      <p>Human-in-the-loop governance — agents request approval before high-impact actions.</p>
+
+      <h3><code>weblisk approvals list</code></h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk approvals list
+<span class="syn-s">ID        AGENT           ACTION              PRIORITY    WAITING</span>
+<span class="syn-s">rec-001   seo-analyzer    Update title tag    normal      12m</span>
+<span class="syn-s">rec-002   content-writer  Publish blog post   critical    2h</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk approvals describe &lt;id&gt;</code></h3>
+      <p>View full recommendation detail before deciding.</p>
+
+      <h3><code>weblisk approvals accept &lt;id&gt;</code></h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk approvals accept rec-001
+<span class="syn-s">✓ Approved: Update title tag on /about.html</span>
+<span class="syn-s">  Agent 'seo-analyzer' will execute within 60s.</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk approvals reject &lt;id&gt;</code></h3>
+      <p>Reject a recommendation. Requires <code>--reason</code>:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk approvals reject rec-002 --reason "Content not ready for publication"
+<span class="syn-s">✓ Rejected: Publish blog post (reason logged)</span></pre>
+        </div>
+      </div>
+
+      <!-- ─── Strategies ─── -->
+      <h2 id="strategies">Strategy Commands</h2>
+      <p>Strategies define goals that drive the observe→orient→decide→act lifecycle loop.</p>
+
+      <h3><code>weblisk strategies list</code></h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk strategies list
+<span class="syn-s">ID         NAME                       STATUS    PRIORITY  PROGRESS</span>
+<span class="syn-s">strat-001  Improve organic traffic    active    1         67%</span>
+<span class="syn-s">strat-002  Reduce page load time      active    2         45%</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk strategies create</code> / <code>describe &lt;id&gt;</code> / <code>update &lt;id&gt;</code> / <code>delete &lt;id&gt;</code></h3>
+      <p>Full CRUD for strategies. <code>delete</code> archives (admin only, requires confirmation). Archived strategies stop generating workflows but remain queryable.</p>
+
+      <!-- ─── Observations ─── -->
+      <h2 id="observations">Observation Commands</h2>
+
+      <h3><code>weblisk observations list</code></h3>
+      <p>Browse observation history from the lifecycle loop:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk observations list --strategy strat-001 --since 24h
+<span class="syn-s">TIME        AGENT           STRATEGY    TARGET          FINDING</span>
+<span class="syn-s">10:30:01    seo-analyzer    strat-001   /about.html     Missing meta description</span>
+<span class="syn-s">09:15:00    perf-auditor    strat-002   /products       LCP 4.2s (above 2.5s threshold)</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk observations trends</code></h3>
+      <p>View metric trend data for a strategy over time:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk observations trends --strategy strat-001 --range 30d
+<span class="syn-s">Strategy: strat-001 (Improve organic traffic)</span>
+
+<span class="syn-s">METRIC            7d AGO    CURRENT   TREND     GOAL</span>
+<span class="syn-s">organic_sessions  13800     14200     +2.9%     16800</span>
+<span class="syn-s">bounce_rate       0.45      0.42      -6.7%     0.35</span></pre>
+        </div>
+      </div>
+
+      <!-- ─── Federation ─── -->
+      <h2 id="federation">Federation Commands</h2>
+      <p>Manage hub-to-hub trust relationships and data contracts.</p>
+
+      <h3><code>weblisk federations peers</code></h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk federations peers
+<span class="syn-s">NAME           TIER      JURISDICTION  STATUS   CAPABILITIES      EXPIRES</span>
+<span class="syn-s">partner-corp   partner   US            active   seo:audit         2026-07-15</span>
+<span class="syn-s">acme-eu        private   EU            active   content:analyze   2026-06-20</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk federations pending</code></h3>
+      <p>View incoming peering requests.</p>
+
+      <h3><code>weblisk federations accept &lt;id&gt;</code> / <code>reject &lt;id&gt;</code></h3>
+      <p>Accept or reject a federation peering request.</p>
+
+      <h3><code>weblisk federations revoke &lt;name&gt;</code></h3>
+      <p>Revoke all trust with a peer. Requires interactive name confirmation. Active tasks are terminated.</p>
+
+      <h3><code>weblisk federations describe &lt;name&gt;</code></h3>
+      <p>Full peer detail including data contract, capabilities, jurisdiction, and 30-day metrics.</p>
+
+      <h3><code>weblisk federations contracts</code></h3>
+      <p>List all active data contracts across federation peers — shows inbound/outbound fields, jurisdiction, and retention policy.</p>
+
+      <!-- ─── Operators ─── -->
+      <h2 id="operators">Operator Commands</h2>
+      <p>Manage operator access (admin only).</p>
+
+      <h3><code>weblisk operators list</code></h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk operators list
+<span class="syn-s">NAME    ROLE     STATUS    REGISTERED</span>
+<span class="syn-s">alice   admin    active    2026-01-15T09:00:00Z</span>
+<span class="syn-s">bob     viewer   revoked   2026-02-20T14:30:00Z</span>
+<span class="syn-s">carol   admin    active    2026-03-01T11:00:00Z</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk operators describe &lt;name&gt;</code></h3>
+      <p>Full operator detail — role, status, key ID, last active time.</p>
+
+      <h3><code>weblisk operators revoke &lt;name&gt;</code></h3>
+      <p>Revoke an operator's access. Invalidates their public key and all tokens. Cannot revoke yourself or the last admin.</p>
+
+      <h3><code>weblisk operators role &lt;name&gt; &lt;role&gt;</code></h3>
+      <p>Change an operator's role. Valid roles: <code>admin</code>, <code>operator</code>, <code>auditor</code>, <code>viewer</code>. Cannot demote yourself.</p>
+
+      <!-- ─── Audit ─── -->
+      <h2 id="audit">Audit Commands</h2>
+
+      <h3><code>weblisk audit</code></h3>
+      <p>Stream or query the audit log:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk audit --follow --since 1h
+<span class="syn-s">TIME        ACTOR           ACTION      TARGET          DETAIL</span>
+<span class="syn-s">10:30:01    orchestrator    task        seo-analyzer    Forwarded seo-audit task</span>
+<span class="syn-s">10:30:00    alice           approve     rec-001         Accepted: Update title tag</span>
+<span class="syn-s">10:25:12    orchestrator    task        content-analyzer Forwarded content-audit task</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--follow</code></td><td>Tail the log in real time</td></tr>
+          <tr><td><code>--actor &lt;name&gt;</code></td><td>Filter by actor</td></tr>
+          <tr><td><code>--action &lt;type&gt;</code></td><td>Filter by action type</td></tr>
+          <tr><td><code>--since &lt;duration&gt;</code></td><td>Filter by time (e.g. <code>1h</code>, <code>7d</code>)</td></tr>
+          <tr><td><code>--limit &lt;n&gt;</code></td><td>Limit number of results</td></tr>
+          <tr><td><code>--export &lt;json|csv&gt;</code></td><td>Export format</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ─── Marketplace ─── -->
+      <h2 id="marketplace">Marketplace Commands</h2>
+      <p>Search, purchase, and publish capabilities on the <a href="/marketplace/">Weblisk Marketplace</a>.</p>
+
+      <h3><code>weblisk marketplace search &lt;query&gt;</code></h3>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk marketplace search "demand forecasting"
+<span class="syn-s">ID        NAME                        TYPE          SELLER        PRICE       RATING</span>
+<span class="syn-s">mkt-001   Demand Forecasting Agent    capability    acme-ai       $0.02/req   4.8★</span>
+<span class="syn-s">mkt-002   Supply Chain Optimizer      capability    logicorp      $0.05/req   4.5★</span>
+<span class="syn-s">mkt-003   Inventory Predictor         installable   predict-co    $99/mo      4.2★</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk marketplace describe &lt;id&gt;</code></h3>
+      <p>Full listing detail — capabilities, data contract, jurisdiction, pricing, reviews.</p>
+
+      <h3><code>weblisk marketplace buy &lt;id&gt;</code></h3>
+      <p>Purchase a capability or asset. Without flags, shows contract and pricing for interactive review:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk marketplace buy mkt-001 --accept-contract --accept-pricing
+<span class="syn-s">✓ Purchase confirmed.</span>
+<span class="syn-s">  Type:   live capability</span>
+<span class="syn-s">  Access: federation peering initiated with acme-ai</span></pre>
+        </div>
+      </div>
+
+      <h3><code>weblisk marketplace install &lt;id&gt;</code></h3>
+      <p>Download and generate a purchased installable asset (not for live capabilities).</p>
+
+      <h3><code>weblisk marketplace list</code></h3>
+      <p>List active purchases and subscriptions with 30-day costs.</p>
+
+      <h3><code>weblisk marketplace publish</code></h3>
+      <p>Publish a capability or asset to the marketplace from a listing config YAML.</p>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--type &lt;t&gt;</code></td><td><code>capability</code> (live service) or <code>installable</code> (blueprint asset)</td></tr>
+          <tr><td><code>--config &lt;file&gt;</code></td><td>Path to listing configuration YAML</td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>weblisk marketplace update &lt;id&gt;</code> / <code>delist &lt;id&gt;</code></h3>
+      <p>Update pricing/metadata or delist a published listing. Delisting notifies active buyers; existing contracts honored until expiry.</p>
+
+      <h3><code>weblisk marketplace dashboard</code></h3>
+      <p>Seller metrics — revenue, requests, active buyers, ratings for your listings.</p>
+
+      <h3><code>weblisk marketplace collaborations</code> / <code>usage &lt;id&gt;</code> / <code>terminate &lt;id&gt;</code></h3>
+      <p>Manage active collaborations (live capability connections). <code>terminate</code> initiates a 7-day grace period.</p>
+
+      <!-- ─── Test Commands ─── -->
+      <h2 id="test">Test Commands</h2>
+
+      <h3><code>weblisk test conformance</code></h3>
+      <p>Run protocol conformance tests against a running system:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk test conformance --orch http://localhost:9800
+<span class="syn-s">Level 1 — Protocol Basics (12 tests)</span>
+<span class="syn-s">  ✓ L1-01  POST /v1/register accepts valid manifest</span>
+<span class="syn-s">  ✓ L1-02  POST /v1/register rejects unsigned request</span>
+<span class="syn-s">Level 2 — Behavior (18 tests) ... ✓</span>
+<span class="syn-s">Level 3 — Integration (8 tests) ... ✓</span>
+<span class="syn-s">Results: 38/38 passed</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--orch &lt;url&gt;</code></td><td>Orchestrator URL to test against</td></tr>
+          <tr><td><code>--level &lt;n&gt;</code></td><td>Run specific level only (1, 2, or 3)</td></tr>
+          <tr><td><code>--test &lt;id&gt;</code></td><td>Run a single test by ID (e.g. <code>L1-03</code>)</td></tr>
+          <tr><td><code>--verbose</code></td><td>Show request/response details</td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>weblisk test mock-orchestrator</code></h3>
+      <p>Start a lightweight mock orchestrator for local agent development (registration and discovery only — does not forward tasks).</p>
+
+      <!-- ─── Deploy Commands ─── -->
+      <h2 id="deploy">Deploy Commands</h2>
+
+      <h3><code>weblisk deploy rollback</code></h3>
+      <p>Roll back a deployed environment to a previous version:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk deploy rollback --env production
+<span class="syn-s">Rolling back production to previous version (v1.1.0 → v1.0.9)...</span>
+<span class="syn-s">✓ Rollback complete. Current version: v1.0.9</span></pre>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>--env &lt;name&gt;</code></td><td>Target environment (required)</td></tr>
+          <tr><td><code>--version &lt;v&gt;</code></td><td>Specific version to roll back to (default: previous)</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ─── Dependencies ─── -->
+      <h2 id="deps">Dependency Commands</h2>
+
+      <h3><code>weblisk deps audit</code></h3>
+      <p>Audit project dependencies for security vulnerabilities and policy compliance:</p>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">Terminal</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">$</span> weblisk deps audit
+<span class="syn-s">✓ go.sum matches go.mod (47 dependencies, all pinned)</span>
+<span class="syn-s">✓ No known vulnerabilities (checked against OSV database)</span>
+<span class="syn-s">✓ No new dependencies since last audit</span>
+
+<span class="syn-c"># Audit a specific package</span>
+<span class="syn-p">$</span> weblisk deps audit github.com/example/lib
+<span class="syn-s">  License:       MIT ✓</span>
+<span class="syn-s">  Last release:  2026-03-15 (47 days ago) ✓</span>
+<span class="syn-s">  CVEs:          none ✓</span>
+<span class="syn-s">  Verdict:       APPROVED</span></pre>
+        </div>
+      </div>
+
+      <!-- ─── Policy ─── -->
+      <h2 id="policy">Policy Commands</h2>
+
+      <h3><code>weblisk policy validate</code></h3>
+      <p>Validate the gateway policy file (<code>policies.yaml</code>) for syntax and semantic errors — checks for conflicts, unreachable rules, and missing role references.</p>
+
+      <h3><code>weblisk policy test</code></h3>
+      <p>Run policy assertions from <code>policies_test.yaml</code> against sample requests. Exit code 1 if any assertion fails.</p>
+
+      <!-- ─── Configuration ─── -->
+      <h2>Configuration</h2>
+      <p>Config resolution order (highest priority first):</p>
+      <ol>
+        <li>Command-line flags: <code>--orch http://localhost:9800</code></li>
+        <li>Environment variable (implementation-defined)</li>
+        <li>Project config: <code>.weblisk/config.json</code></li>
+        <li>User config: <code>~/.weblisk/config.json</code></li>
+      </ol>
+      <div class="code-window">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-title">.weblisk/config.json</span>
+        </div>
+        <div class="code-body">
+          <pre><span class="syn-p">{</span>
+  <span class="syn-a">"orchestrator_url"</span><span class="syn-p">:</span> <span class="syn-s">"http://localhost:9800"</span><span class="syn-p">,</span>
+  <span class="syn-a">"operator_name"</span><span class="syn-p">:</span> <span class="syn-s">"alice"</span><span class="syn-p">,</span>
+  <span class="syn-a">"default_format"</span><span class="syn-p">:</span> <span class="syn-s">"table"</span>
+<span class="syn-p">}</span></pre>
+        </div>
+      </div>
+
+      <!-- ─── Auth Flow ─── -->
+      <h2>Authentication Flow</h2>
+      <p>Every operations command that calls the orchestrator follows this flow:</p>
+      <ol>
+        <li>Load operator private key from <code>~/.weblisk/keys/operator.key</code></li>
+        <li>Load token from <code>~/.weblisk/token</code></li>
+        <li>Check expiry — auto-refresh if &lt; 1 hour remaining</li>
+        <li>Set <code>Authorization: Bearer &lt;token&gt;</code> on request</li>
+        <li>On 401 → refresh token → retry once</li>
+        <li>If refresh fails → print "Session expired. Run: <code>weblisk operator register</code>"</li>
+      </ol>
+
+      <!-- ─── Exit Codes ─── -->
+      <h2>Exit Codes</h2>
+      <table>
+        <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>0</code></td><td>Success</td></tr>
+          <tr><td><code>1</code></td><td>General error (invalid arguments, missing config)</td></tr>
+          <tr><td><code>2</code></td><td>Authentication error (no keys, expired token, rejected)</td></tr>
+          <tr><td><code>3</code></td><td>Connection error (orchestrator unreachable)</td></tr>
+          <tr><td><code>4</code></td><td>Not found (agent, workflow, strategy not found)</td></tr>
+          <tr><td><code>5</code></td><td>Permission denied (role insufficient)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="docs-nav-footer">
+        <a href="/docs/a11y.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Accessibility</a>
+        <a href="/docs/testing.html">Testing <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14"></i></a>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+</body>
+
+</html>

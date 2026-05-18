@@ -1,0 +1,131 @@
+# Marketplace Page Blueprint — Template
+# The marketplace page (/marketplace/) MUST conform to this structure.
+# Currently in "coming soon" state; future sections documented below.
+#
+# Related blueprints:
+#   Navigation  → ../components/navigation.yaml
+#   Footer      → ../components/footer.yaml
+#   Shell       → ../islands/shell.yaml
+#   Theme       → ../theme.yaml
+
+name: marketplace-page-template
+type: page-template
+extends: standards/pages
+path_prefix: /marketplace/
+status: coming-soon
+version: 1.0.0
+
+# ─── Required <head> Elements ───────────────────────────────
+head:
+  required:
+    - doctype: "<!doctype html>"
+    - html_attrs: 'lang="en" dir="ltr"'
+    - charset: "UTF-8"
+    - viewport: "width=device-width, initial-scale=1.0"
+    - title: "Marketplace — Weblisk"
+    - meta_description: true
+    - canonical: "https://weblisk.dev/marketplace/"
+    - og_type: website
+    - og_title: true
+    - og_description: true
+    - og_url: true
+    - og_site_name: Weblisk
+    - og_image: "https://weblisk.dev/images/social/og-image.png?v=2"
+    - og_image_width: 1200
+    - og_image_height: 630
+    - og_locale: en_US
+    - twitter_card: summary_large_image
+    - twitter_title: true
+    - twitter_site: "@weblisk"
+    - twitter_description: true
+    - twitter_image: true
+    - theme_color: "#1a1f36"
+    - robots: "index, follow"
+    - author: Avaropoint
+    - favicon: "/images/favicon.svg"
+    - apple_touch_icon: "/images/apple-touch-icon.png"
+    - manifest: "/manifest.webmanifest"
+    - preconnect: "https://cdn.weblisk.dev"
+    - stylesheet: "/css/styles.css"
+    - theme_script: 'document.documentElement.dataset.theme = localStorage.getItem("wl-theme") || "light"'
+    - importmap: '{ "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }'
+  structured_data:
+    - type: WebPage
+    - type: BreadcrumbList
+
+# ─── Required <body> Structure ──────────────────────────────
+body:
+  required_order:
+    - skip_link: '<a href="#main-content" class="wl-skip-link">Skip to main content</a>'
+    - navbar:
+        element: nav
+        class: navbar
+        data_island: "/js/islands/nav.js"
+        data_hydrate: load
+        active: marketplace
+    - content_area:
+        element: main
+        id: main-content
+    - footer:
+        component: ../components/footer.yaml
+    - shell_script: '<script type="module" src="/js/islands/shell.js"></script>'
+
+# ─── Current State: Coming Soon ─────────────────────────────
+coming_soon:
+  hero:
+    badge: "Coming Soon"
+    heading: "The Weblisk Marketplace"
+    description: "Buy, sell, and share blueprints, agents, templates, and live capabilities across the hub network."
+    cta_primary:
+      label: "Follow on GitHub"
+      href: "https://github.com/avaropoint/weblisk"
+    cta_secondary:
+      label: "Explore the Docs"
+      href: "/docs/"
+  preview: null  # Removed — keeping coming soon hero only
+
+# ─── Future Vision: Full Marketplace ────────────────────────
+# When the marketplace launches, replace the coming_soon sections with:
+future:
+  listing_types:
+    - capabilities: "Live, invocable agent capabilities over federation"
+    - blueprints: "Domain controller or agent blueprints"
+    - templates: "Pre-configured hub templates"
+    - agents: "Standalone agent blueprints"
+    - data_contracts: "Reusable, audited data contracts"
+  delivery_models:
+    - live: "Buyer hub calls provider hub over federation"
+    - installable: "Buyer downloads and generates into their own hub"
+  pricing_models:
+    - free
+    - one_time
+    - per_invocation
+    - monthly_subscription
+    - tiered
+    - revenue_share
+    - custom
+  features:
+    - search_and_discovery: "CLI + UI + federation search"
+    - verified_reviews: "ML-DSA-65 signed reviews"
+    - seller_analytics: "Revenue, downloads, usage metrics"
+    - cli_integration: "Full marketplace access from terminal"
+    - registry_visibility: "Public, partner, and private listings"
+
+# ─── Validation Rules ───────────────────────────────────────
+validation:
+  - rule: all-paths-absolute
+    description: "All asset paths must be absolute (start with /)"
+  - rule: theme-script-in-head
+    description: "Theme FOUC prevention script must be in <head>"
+  - rule: importmap-present
+    description: "ES module importmap must be in <head>"
+  - rule: skip-link-first-child
+    description: "Skip link must be first child of <body>"
+  - rule: shell-script-last
+    description: "shell.js must be last script before </body>"
+  - rule: footer-links-valid
+    description: "All footer links must resolve to existing pages"
+  - rule: storage-key-consistent
+    description: "Theme localStorage key must be 'wl-theme'"
+  - rule: structured-data-present
+    description: "WebPage and BreadcrumbList JSON-LD must be in <head>"

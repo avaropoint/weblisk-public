@@ -1,17 +1,67 @@
-# Weblisk Public Website — Cloudflare Worker + R2
-# Minimal Worker serves static files from R2 with index.html fallback.
-# account_id read from CLOUDFLARE_ACCOUNT_ID env var
+# Weblisk Public Website — Cloudflare Worker + R2 + KV
+# Gateway serves weblisk.dev from R2, with KV edge caching
+# and agent routing. See: architecture/gateway.md
 
 name = "weblisk-public"
 main = "workers/site.js"
 compatibility_date = "2026-04-01"
 
-# Serve weblisk.dev via this Worker
 routes = [
   { pattern = "weblisk.dev/*", zone_name = "weblisk.dev" },
   { pattern = "weblisk.dev", zone_name = "weblisk.dev" }
 ]
 
+# ── R2: file storage (static assets + blueprints) ──
 [[r2_buckets]]
 binding = "SITE"
 bucket_name = "weblisk-public"
+preview_bucket_name = "weblisk-public-preview"
+
+# ── KV: edge cache (service directory, hot responses) ──
+[[kv_namespaces]]
+binding = "CACHE"
+id = "7606e97b0b2b46369fc120a9667b7ecc"
+preview_id = "e0440485b33e41be9e062c12b6ab1639"
+
+[vars]
+WL_VERSION = "1.0.0"
+WL_AI_MODEL = "claude-sonnet-4-20250514"
+WL_AI_BASE_URL = "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37ff60425/weblisk-ai/anthropic"
+WL_ENVIRONMENT = "production"
+
+# WL_AI_KEY is a secret — set via: npx wrangler secret put WL_AI_KEY
+# Until set, the website domain controller returns simulated responses.
+
+# ── Durable Objects: orchestrator (agent registry, service directory) ──
+[durable_objects]
+bindings = [
+  { name = "ORCHESTRATOR", class_name = "Orchestrator" }
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Orchestrator"]
+
+# ── Preview environment ──
+[env.preview]
+name = "weblisk-public-preview"
+routes = []
+
+[[env.preview.r2_buckets]]
+binding = "SITE"
+bucket_name = "weblisk-public-preview"
+
+[[env.preview.kv_namespaces]]
+binding = "CACHE"
+id = "e0440485b33e41be9e062c12b6ab1639"
+
+[env.preview.durable_objects]
+bindings = [
+  { name = "ORCHESTRATOR", class_name = "Orchestrator" }
+]
+
+[env.preview.vars]
+WL_VERSION = "1.0.0"
+WL_AI_MODEL = "claude-sonnet-4-20250514"
+WL_AI_BASE_URL = "https://gateway.ai.cloudflare.com/v1/2cabe7bc419e2b0fa22cc2b37ff60425/weblisk-ai/anthropic"
+WL_ENVIRONMENT = "preview"

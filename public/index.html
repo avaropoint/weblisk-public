@@ -1,0 +1,1388 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weblisk — The Open Ecosystem for Agentic Services</title>
+  <meta name="description"
+    content="The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Define what you need as blueprints — AI translates them to production code in any language or platform.">
+  <link rel="canonical" href="https://weblisk.dev/">
+  <meta name="keywords"
+    content="agentic services, autonomous domains, blueprint-driven, AI agent platform, federated agents, zero dependency, code generation, service orchestration, blueprint specification, open platform, data sovereignty, domain agents, infrastructure agents">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weblisk — The Open Ecosystem for Agentic Services">
+  <meta property="og:description"
+    content="The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Blueprints in, production code out — in any language or platform.">
+  <meta property="og:url" content="https://weblisk.dev/">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Weblisk — The open ecosystem for agentic services. Define what you need as blueprints. AI translates them to code.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weblisk — The Open Ecosystem for Agentic Services">
+  <meta name="twitter:description"
+    content="The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Blueprints in, production code out — in any language or platform.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://avaropoint.com/#org",
+    "name": "Avaropoint",
+    "url": "https://avaropoint.com",
+    "logo": "https://weblisk.dev/images/mark/dark/icon-dark-512.png",
+    "sameAs": [
+      "https://github.com/avaropoint",
+      "https://x.com/weblisk",
+      "https://discord.gg/5CetAq9EgZ"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://weblisk.dev/#website",
+    "name": "Weblisk",
+    "url": "https://weblisk.dev",
+    "description": "The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Blueprints in, production code out.",
+    "publisher": { "@id": "https://avaropoint.com/#org" },
+    "inLanguage": "en"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://weblisk.dev/#app",
+    "name": "Weblisk",
+    "description": "The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Define what you need as blueprints — AI translates them to production code in any language or platform of your choice.",
+    "url": "https://weblisk.dev",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "license": "https://opensource.org/licenses/MIT",
+    "softwareVersion": "1.0.0",
+    "programmingLanguage": ["Go", "Rust", "Node.js"],
+    "codeRepository": "https://github.com/avaropoint/weblisk",
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Weblisk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weblisk is the first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Define what you need as blueprints — AI translates them to production code in any language or platform of your choice. The framework is MIT-licensed. The code you generate belongs entirely to you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Weblisk Blueprints?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Blueprints are structured descriptions of what you want to build — your business logic, security rules, data models, integrations, and deployment targets — written in a format that both people and agents understand. Anyone on your team can read and shape them. Agents use blueprints to generate complete production systems. The framework is open source. The code it generates belongs to you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why use Weblisk instead of AI code generators like Claude or ChatGPT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI code generators lose context between sessions — every prompt starts from scratch. Weblisk blueprints give AI a permanent, structured description to generate from. Define once, generate forever. No re-prompting, no hallucinated architecture, no context drift."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Weblisk compare to SaaS platforms?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SaaS platforms offer convenience, but you trade control of your data, roadmap, and costs. With Weblisk, you describe your exact requirements as blueprints and generate systems you fully own. Your data stays where you put it, and you decide how it moves in and out of your organization."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Weblisk free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Weblisk framework — all specifications, the CLI, and the client framework — is free and MIT-licensed. Any code you generate with it is yours to use however you choose. The Weblisk Marketplace enables buying and selling community-created blueprints, agents, and templates so you can start from proven patterns instead of building from scratch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Weblisk protect my data and handle upgrades?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Migrations in Weblisk are blueprint-versioned and agent-orchestrated across your entire stack — data, infrastructure, agents, and configuration. Every change is diffed, validated, and reversible. Your data stays where you put it — no vendor-managed migrations, no surprise breaking changes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Weblisk govern AI agents?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weblisk enforces non-bypassable boundaries at four checkpoints — message, storage, external, and response — on every operation. Agents cannot circumvent these boundaries regardless of their framework or behavior. Policies are monotonic (can only add restrictions, never loosen), behavioral fingerprinting detects anomalous patterns, and quarantine escalation isolates compromised agents automatically. This governance layer works with any AI framework while ensuring nothing crosses boundaries without explicit consent."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What platforms does Weblisk support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weblisk blueprints generate production code for any language or platform — Go, Rust, Node.js, and Cloudflare Workers ship today, with community and marketplace generators extending support further. One blueprint, any target — switch platforms without rewriting your application."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar (generated from components/nav.yaml) ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link active" aria-current="page">Home</a>
+        <a href="/platform/" class="nav-link">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ─── Hero (sections[0]: hero) ─── -->
+    <section id="hero" class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner">
+        <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> v1.0 — Zero dependencies, open source</span>
+        <h1 id="hero-heading">The open ecosystem for agentic services.</h1>
+        <p class="hero-sub">
+          The first open-source platform to unify a secure, collaborative hub and marketplace of autonomous agents. Define what you need as blueprints — AI translates them to production code in any language or platform of your choice.
+        </p>
+        <div class="hero-actions">
+          <a href="/docs/quickstart.html" class="btn btn-primary">
+            Get Started
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+          <a href="/platform/" class="btn btn-outline">How It Works</a>
+        </div>
+        <div class="install-cmd">
+          <span class="prompt" aria-hidden="true">$</span>
+          <code>curl -fsSL https://cdn.weblisk.dev/install.sh | sh</code>
+          <button class="copy-btn" type="button" aria-label="Copy install command"
+            data-copy="curl -fsSL https://cdn.weblisk.dev/install.sh | sh">
+            <i aria-hidden="true" class="wl-icon wl-i-copy wl-icon-16"></i>
+          </button>
+        </div>
+        <div class="hero-trust">
+          <span class="hero-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Build it, consume it, or publish it
+          </span>
+          <span class="hero-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Your data never leaves your control
+          </span>
+          <span class="hero-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Open source, MIT-licensed
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Stats (sections[1]: stats-bar) ─── -->
+    <section id="stats" class="section section-soft" aria-label="Key metrics" data-reveal>
+      <div class="section-inner">
+        <div class="stats-bar" data-island="/js/islands/stat-counter.js" data-hydrate="visible">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="stat-number" data-count="0">0</div>
+            <div class="stat-label">Runtime Dependencies</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="stat-number" data-count="97" data-suffix="+">97+</div>
+            <div class="stat-label">Ready-Made Blueprints</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="stat-number" data-count="7" data-suffix="+">7+</div>
+            <div class="stat-label">Transparent Layers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="stat-number" data-count="40" data-suffix="+">40+</div>
+            <div class="stat-label">Reusable Patterns</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="stat-number" data-count="11" data-suffix="+">11+</div>
+            <div class="stat-label">Built-In Agents</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Blueprints (sections[2]: concept-section) ─── -->
+    <section id="blueprints" class="section" aria-labelledby="blueprint-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Blueprints</span>
+          <h2 id="blueprint-heading">Blueprints are the structure of any idea.</h2>
+          <p>A blueprint is a structured description of what you want to build — your data models, security rules, integrations, and business logic — written in a format that both people and agents understand. No programming required. Define it once, generate from it in any language, for any platform. When requirements change, update the blueprint and regenerate.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Anyone Can Read It</h3>
+            <p>Blueprints aren't code — they're structured descriptions anyone on your team can read. Founders, product managers, developers, and stakeholders all shape the same document. Your business logic is visible, not buried.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>One Source of Truth</h3>
+            <p>Security rules, data models, integrations, deployment targets — everything about your project lives in one versioned place. No scattered docs. No diagrams that drift from reality. One blueprint, always current.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Define Once, Generate Forever</h3>
+            <p>No re-prompting. No lost context. The blueprint holds your requirements permanently — generate from it whenever you need, in any language, for any platform. Need to switch from Node to Go? Change the target, keep the blueprint.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Context That Doesn't Expire</h3>
+            <p>AI chat memory fades between sessions. Blueprints don't. They hold your full system context — compliance checks, security boundaries, migration paths — so agents generate consistent, verifiable systems every time.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3>The Knowledge Stays</h3>
+            <p>People move on — roles change, contributors rotate. The blueprint holds every decision and why it was made. Any person or AI can pick up where the last one left off. Your institutional knowledge lives in the spec, not in someone's head.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Upgrades Without Rewrites</h3>
+            <p>When your system evolves, the blueprint evolves with it. Every migration is versioned, validated, and reversible. Update the spec, regenerate, deploy — no rewrite required.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Generative UI/UX (sections[3]: blueprint-pipeline) ─── -->
+    <section id="blueprint-pipeline" class="section" aria-labelledby="pipeline-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">How It Works</span>
+          <h2 id="pipeline-heading">Details your blueprints need to make it work your way.</h2>
+          <p>A blueprint describes what you need — entities, fields, access rules, integrations. Agents read that blueprint and generate production code: API endpoints, data models, validation, and UI. Every layer is visible, every decision traceable back to your spec.</p>
+        </div>
+        <div class="pipeline" data-island="/js/islands/pipeline.js" data-hydrate="visible">
+          <div class="pipeline-stage pipeline-stage-active" data-stage="blueprint">
+            <div class="pipeline-stage-header">
+              <span class="pipeline-stage-number">1</span>
+              <span class="pipeline-stage-badge pipeline-badge-human">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                You write
+              </span>
+            </div>
+            <div class="pipeline-stage-label">Blueprint</div>
+            <div class="pipeline-stage-preview code-window">
+              <div class="code-header">
+                <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                <span class="code-title">domains/crm.yaml</span>
+              </div>
+              <div class="code-body">
+                <pre><span class="syn-k">domain:</span> <span class="syn-s">crm</span>
+<span class="syn-k">version:</span> <span class="syn-s">1.0.0</span>
+
+<span class="syn-k">entities:</span>
+  <span class="syn-k">- name:</span> <span class="syn-s">Contact</span>
+    <span class="syn-k">fields:</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">name</span>
+        <span class="syn-k">type:</span> <span class="syn-s">string</span>
+        <span class="syn-k">required:</span> <span class="syn-s">true</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">email</span>
+        <span class="syn-k">type:</span> <span class="syn-s">string</span>
+        <span class="syn-k">format:</span> <span class="syn-s">email</span>
+        <span class="syn-k">unique:</span> <span class="syn-s">true</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">company</span>
+        <span class="syn-k">ref:</span> <span class="syn-s">Company</span>
+      <span class="syn-k">- name:</span> <span class="syn-s">tags</span>
+        <span class="syn-k">type:</span> <span class="syn-s">string[]</span>
+    <span class="syn-k">operations:</span> <span class="syn-s">[create, read, update, delete, list]</span>
+    <span class="syn-k">access:</span>
+      <span class="syn-k">read:</span> <span class="syn-s">[owner, team]</span>
+      <span class="syn-k">write:</span> <span class="syn-s">[owner]</span>
+      <span class="syn-k">delete:</span> <span class="syn-s">[owner]</span>
+
+<span class="syn-k">ui:</span>
+  <span class="syn-k">list:</span>
+    <span class="syn-k">columns:</span> <span class="syn-s">[name, email, company, tags]</span>
+    <span class="syn-k">search:</span> <span class="syn-s">[name, email]</span>
+    <span class="syn-k">sort:</span> <span class="syn-s">name</span>
+  <span class="syn-k">form:</span>
+    <span class="syn-k">layout:</span> <span class="syn-s">single-column</span></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-connector" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Agents process</span>
+          </div>
+
+          <div class="pipeline-stage" data-stage="generated">
+            <div class="pipeline-stage-header">
+              <span class="pipeline-stage-number">2</span>
+              <span class="pipeline-stage-badge pipeline-badge-agent">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Generated
+              </span>
+            </div>
+            <div class="pipeline-stage-label">Code Layers</div>
+            <div class="pipeline-layers">
+              <div class="pipeline-layer pipeline-layer-html" data-layer="api">
+                <span class="pipeline-layer-tag">API</span>
+                <div class="pipeline-layer-code">
+                  <span class="syn-c">// routes/crm/contacts.ts — full CRUD</span><br>
+                  <span class="syn-k">router</span>.<span class="syn-f">post</span>(<span class="syn-s">'/crm/contacts'</span>, auth, validate(CreateContact), create);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/crm/contacts'</span>, auth, paginate, list);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">get</span>(<span class="syn-s">'/crm/contacts/:id'</span>, auth, ownership, read);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">put</span>(<span class="syn-s">'/crm/contacts/:id'</span>, auth, ownership, validate(UpdateContact), update);<br>
+                  <span class="syn-k">router</span>.<span class="syn-f">delete</span>(<span class="syn-s">'/crm/contacts/:id'</span>, auth, ownership, remove);
+                </div>
+              </div>
+              <div class="pipeline-layer pipeline-layer-css" data-layer="schema">
+                <span class="pipeline-layer-tag">Schema</span>
+                <div class="pipeline-layer-code">
+                  <span class="syn-c">-- migrations/001_contacts.sql</span><br>
+                  <span class="syn-k">CREATE TABLE</span> <span class="syn-t">contacts</span> (<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">id</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">UUID PRIMARY KEY DEFAULT gen_random_uuid()</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">TEXT NOT NULL</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">TEXT UNIQUE NOT NULL</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">company_id</span>&nbsp;<span class="syn-s">UUID REFERENCES companies(id)</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">tags</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-s">TEXT[] DEFAULT '{}'</span>,<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-a">owner_id</span>&nbsp;&nbsp;&nbsp;<span class="syn-s">UUID NOT NULL REFERENCES users(id)</span><br>
+                  );
+                </div>
+              </div>
+              <div class="pipeline-layer pipeline-layer-js" data-layer="ui">
+                <span class="pipeline-layer-tag">UI</span>
+                <div class="pipeline-layer-code">
+                  <span class="syn-c">// components/ContactList.tsx</span><br>
+                  <span class="syn-k">export default function</span> <span class="syn-f">ContactList</span>() {<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">const</span> { data, search, sort } = <span class="syn-f">useContacts</span>();<br>
+                  <span class="syn-t">&nbsp;&nbsp;</span><span class="syn-k">return</span> &lt;<span class="syn-t">DataTable</span> <span class="syn-a">columns</span>={[<span class="syn-s">'name'</span>,<span class="syn-s">'email'</span>,<span class="syn-s">'company'</span>,<span class="syn-s">'tags'</span>]}<br>
+                  <span class="syn-t">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syn-a">data</span>={data} <span class="syn-a">onSearch</span>={search} <span class="syn-a">onSort</span>={sort} /&gt;;<br>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-connector" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Deploys</span>
+          </div>
+
+          <div class="pipeline-stage" data-stage="rendered">
+            <div class="pipeline-stage-header">
+              <span class="pipeline-stage-number">3</span>
+              <span class="pipeline-stage-badge pipeline-badge-live">
+                Live
+              </span>
+            </div>
+            <div class="pipeline-stage-label">Running Service</div>
+            <div class="pipeline-stage-preview pipeline-rendered">
+              <div class="pipeline-mini-crud">
+                <div class="pipeline-mini-toolbar">
+                  <span class="pipeline-mini-title">Contacts</span>
+                  <span class="pipeline-mini-actions">
+                    <span class="pipeline-mini-search-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+                    <span class="pipeline-mini-add-btn">+ New</span>
+                  </span>
+                </div>
+                <div class="pipeline-mini-table">
+                  <div class="pipeline-mini-row pipeline-mini-header-row">
+                    <span>Name</span><span>Email</span><span>Company</span><span>Tags</span>
+                  </div>
+                  <div class="pipeline-mini-row">
+                    <span>Sarah Chen</span><span>sarah@acme.io</span><span>Acme Corp</span><span class="pipeline-mini-tag">lead</span>
+                  </div>
+                  <div class="pipeline-mini-row">
+                    <span>James Park</span><span>james@volta.dev</span><span>Volta</span><span class="pipeline-mini-tag">partner</span>
+                  </div>
+                  <div class="pipeline-mini-row">
+                    <span>Priya Sharma</span><span>priya@lunar.co</span><span>Lunar</span><span class="pipeline-mini-tag">client</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="pipeline-caption">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          This page was generated from a blueprint. Click the <code>&lt;/&gt;</code> on any section to X-Ray the blueprint source behind it.
+        </p>
+        <div class="pipeline-client-callout">
+          <div class="pipeline-client-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="pipeline-client-text">
+            <strong>Built using the Weblisk Client Framework</strong> — reactive islands that hydrate on demand with zero build dependencies, accept any blueprint-driven input, and connect directly to the agents that handle their logic. Every section on this page is a live island — specification in, reactive UI out.
+            <a href="/platform/client/">Learn about the client framework →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── The Workflow (sections[4]: workflow-section) ─── -->
+    <section id="the-workflow" class="section section-soft" aria-labelledby="workflow-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">The Workflow</span>
+          <h2 id="workflow-heading">Every blueprint is a domain expert. Build yours or use ours.</h2>
+          <p>A blueprint encodes the knowledge of the best architect, the best security engineer, the best data modeler — for any domain. Write one from scratch, fork one from the marketplace, or compose patterns together. Either way, you get production-grade systems that reflect deep expertise without needing to be the expert yourself.</p>
+        </div>
+        <div class="workflow-flow" data-reveal-stagger>
+          <!-- SVG workflow visualization -->
+          <svg class="workflow-svg" viewBox="0 0 1110 680" aria-label="Weblisk development workflow" role="img">
+            <defs>
+              <linearGradient id="wf-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--wl-primary)" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="var(--wl-primary)" stop-opacity="0.05"/>
+              </linearGradient>
+              <linearGradient id="wf-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--wl-accent)" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="var(--wl-accent)" stop-opacity="0.05"/>
+              </linearGradient>
+              <linearGradient id="wf-grad-3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--wl-success)" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="var(--wl-success)" stop-opacity="0.05"/>
+              </linearGradient>
+              <marker id="wf-arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0 L10 4 L0 8 Z" fill="var(--wl-primary)" opacity="0.5"/>
+              </marker>
+              <marker id="wf-arrow-return" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0 L10 4 L0 8 Z" fill="var(--wl-primary)" opacity="0.35"/>
+              </marker>
+            </defs>
+
+            <!-- Return arrow drawn FIRST so it renders behind step boxes -->
+            <path d="M860 580 L1060 580 Q1080 580 1080 560 L1080 30 Q1080 10 1060 10 L560 10 Q540 10 540 30 L540 40" stroke="var(--wl-primary)" stroke-width="1.5" stroke-opacity="0.25" stroke-dasharray="6 4" fill="none" marker-end="url(#wf-arrow-return)"/>
+            <text x="1090" y="300" class="workflow-return-label" fill="var(--wl-primary)" transform="rotate(-90 1090 300)">Continuous improvement</text>
+
+            <!-- Row 1: Steps 1-3 -->
+            <!-- Step 1: Initialize -->
+            <g class="workflow-node" data-step="init">
+              <rect x="20" y="40" width="320" height="160" rx="12" fill="url(#wf-grad-1)" stroke="var(--wl-primary)" stroke-width="1.5" class="workflow-rect"/>
+              <circle cx="56" cy="76" r="16" fill="var(--wl-primary)" opacity="0.12"/>
+              <text x="56" y="81" text-anchor="middle" class="workflow-step-num" fill="var(--wl-primary)">1</text>
+              <text x="80" y="81" class="workflow-title" fill="var(--wl-text)">Initialize</text>
+              <text x="40" y="110" class="workflow-desc" fill="var(--wl-text-muted)">One command scaffolds your project with</text>
+              <text x="40" y="126" class="workflow-desc" fill="var(--wl-text-muted)">blueprint structure, agent configs, and</text>
+              <text x="40" y="142" class="workflow-desc" fill="var(--wl-text-muted)">platform targets.</text>
+              <rect x="40" y="158" width="200" height="24" rx="4" fill="var(--wl-primary)" opacity="0.08"/>
+              <text x="50" y="174" class="workflow-cmd" fill="var(--wl-primary)">weblisk init my-project</text>
+            </g>
+
+            <!-- Arrow 1→2 -->
+            <line x1="340" y1="120" x2="370" y2="120" stroke="var(--wl-primary)" stroke-width="2" stroke-opacity="0.4" marker-end="url(#wf-arrow)"/>
+
+            <!-- Step 2: Source Blueprints -->
+            <g class="workflow-node" data-step="source">
+              <rect x="380" y="40" width="320" height="160" rx="12" fill="url(#wf-grad-2)" stroke="var(--wl-accent)" stroke-width="1.5" class="workflow-rect"/>
+              <circle cx="416" cy="76" r="16" fill="var(--wl-accent)" opacity="0.12"/>
+              <text x="416" y="81" text-anchor="middle" class="workflow-step-num" fill="var(--wl-accent)">2</text>
+              <text x="440" y="81" class="workflow-title" fill="var(--wl-text)">Source Blueprints</text>
+              <text x="400" y="110" class="workflow-desc" fill="var(--wl-text-muted)">Pull from the open marketplace, fork</text>
+              <text x="400" y="126" class="workflow-desc" fill="var(--wl-text-muted)">community blueprints, or write your own.</text>
+              <text x="400" y="142" class="workflow-desc" fill="var(--wl-text-muted)">Compose patterns, mix, extend anything.</text>
+              <rect x="400" y="158" width="240" height="24" rx="4" fill="var(--wl-accent)" opacity="0.08"/>
+              <text x="410" y="174" class="workflow-cmd" fill="var(--wl-accent)">weblisk add patterns/auth-token</text>
+            </g>
+
+            <!-- Arrow 2→3 -->
+            <line x1="700" y1="120" x2="730" y2="120" stroke="var(--wl-primary)" stroke-width="2" stroke-opacity="0.4" marker-end="url(#wf-arrow)"/>
+
+            <!-- Step 3: Build & Generate -->
+            <g class="workflow-node" data-step="build">
+              <rect x="740" y="40" width="320" height="160" rx="12" fill="url(#wf-grad-3)" stroke="var(--wl-success)" stroke-width="1.5" class="workflow-rect"/>
+              <circle cx="776" cy="76" r="16" fill="var(--wl-success)" opacity="0.12"/>
+              <text x="776" y="81" text-anchor="middle" class="workflow-step-num" fill="var(--wl-success)">3</text>
+              <text x="800" y="81" class="workflow-title" fill="var(--wl-text)">Build &amp; Generate</text>
+              <text x="760" y="110" class="workflow-desc" fill="var(--wl-text-muted)">Generate production code for any language</text>
+              <text x="760" y="126" class="workflow-desc" fill="var(--wl-text-muted)">or platform. Built-in targets ship today,</text>
+              <text x="760" y="142" class="workflow-desc" fill="var(--wl-text-muted)">custom generators extend the rest.</text>
+              <rect x="760" y="158" width="250" height="24" rx="4" fill="var(--wl-success)" opacity="0.08"/>
+              <text x="770" y="174" class="workflow-cmd" fill="var(--wl-success)">weblisk generate --lang go</text>
+            </g>
+
+            <!-- Arrow 3→4 (down) -->
+            <path d="M1060 200 L1060 260 Q1060 280 1040 280 L730 280" stroke="var(--wl-primary)" stroke-width="2" stroke-opacity="0.4" fill="none" marker-end="url(#wf-arrow)"/>
+
+            <!-- Row 2: Steps 4-6 (right to left) -->
+            <!-- Step 4: Transform & Migrate -->
+            <g class="workflow-node" data-step="migrate">
+              <rect x="400" y="270" width="320" height="160" rx="12" fill="url(#wf-grad-3)" stroke="var(--wl-success)" stroke-width="1.5" class="workflow-rect"/>
+              <circle cx="684" cy="306" r="16" fill="var(--wl-success)" opacity="0.12"/>
+              <text x="684" y="311" text-anchor="middle" class="workflow-step-num" fill="var(--wl-success)">4</text>
+              <text x="636" y="311" text-anchor="end" class="workflow-title" fill="var(--wl-text)">Transform &amp; Migrate</text>
+              <text x="420" y="340" class="workflow-desc" fill="var(--wl-text-muted)">Blueprint-versioned, agent-orchestrated</text>
+              <text x="420" y="356" class="workflow-desc" fill="var(--wl-text-muted)">migrations across data, infra, and agents.</text>
+              <text x="420" y="372" class="workflow-desc" fill="var(--wl-text-muted)">Every change diffed, validated, reversible.</text>
+              <rect x="420" y="388" width="240" height="24" rx="4" fill="var(--wl-success)" opacity="0.08"/>
+              <text x="430" y="404" class="workflow-cmd" fill="var(--wl-success)">weblisk migrate --validate</text>
+            </g>
+
+            <!-- Arrow 4→5 -->
+            <line x1="400" y1="350" x2="370" y2="350" stroke="var(--wl-primary)" stroke-width="2" stroke-opacity="0.4" marker-end="url(#wf-arrow)"/>
+
+            <!-- Step 5: Preview & Validate -->
+            <g class="workflow-node" data-step="preview">
+              <rect x="40" y="270" width="320" height="160" rx="12" fill="url(#wf-grad-2)" stroke="var(--wl-accent)" stroke-width="1.5" class="workflow-rect"/>
+              <circle cx="324" cy="306" r="16" fill="var(--wl-accent)" opacity="0.12"/>
+              <text x="324" y="311" text-anchor="middle" class="workflow-step-num" fill="var(--wl-accent)">5</text>
+              <text x="276" y="311" text-anchor="end" class="workflow-title" fill="var(--wl-text)">Preview &amp; Validate</text>
+              <text x="60" y="340" class="workflow-desc" fill="var(--wl-text-muted)">See exactly what ships before it goes live.</text>
+              <text x="60" y="356" class="workflow-desc" fill="var(--wl-text-muted)">Schema validation, security checks, quality</text>
+              <text x="60" y="372" class="workflow-desc" fill="var(--wl-text-muted)">gates. Full confidence before production.</text>
+              <rect x="60" y="388" width="220" height="24" rx="4" fill="var(--wl-accent)" opacity="0.08"/>
+              <text x="70" y="404" class="workflow-cmd" fill="var(--wl-accent)">weblisk preview --validate</text>
+            </g>
+
+            <!-- Arrow 5→6 (down + right to deploy) -->
+            <path d="M360 430 L360 490 Q360 510 380 510 L530 510" stroke="var(--wl-primary)" stroke-width="2" stroke-opacity="0.4" fill="none" marker-end="url(#wf-arrow)"/>
+
+            <!-- Step 6: Deploy & Monitor (centered bottom) -->
+            <g class="workflow-node workflow-node-deploy" data-step="deploy">
+              <rect x="540" y="500" width="320" height="160" rx="12" fill="var(--wl-primary)" fill-opacity="0.08" stroke="var(--wl-primary)" stroke-width="2" class="workflow-rect"/>
+              <circle cx="576" cy="536" r="16" fill="var(--wl-primary)" opacity="0.15"/>
+              <text x="576" y="541" text-anchor="middle" class="workflow-step-num" fill="var(--wl-primary)">6</text>
+              <text x="600" y="541" class="workflow-title" fill="var(--wl-text)">Deploy &amp; Monitor</text>
+              <text x="560" y="570" class="workflow-desc" fill="var(--wl-text-muted)">Push to production with auto-rollback.</text>
+              <text x="560" y="586" class="workflow-desc" fill="var(--wl-text-muted)">Real-time telemetry feeds back into agents</text>
+              <text x="560" y="602" class="workflow-desc" fill="var(--wl-text-muted)">for continuous improvement.</text>
+              <rect x="560" y="618" width="270" height="24" rx="4" fill="var(--wl-primary)" opacity="0.08"/>
+              <text x="570" y="634" class="workflow-cmd" fill="var(--wl-primary)">weblisk deploy --auto-rollback</text>
+            </g>
+          </svg>
+
+          <!-- Mobile fallback: stacked cards -->
+          <div class="workflow-mobile">
+            <div class="workflow-mobile-step">
+              <div class="workflow-mobile-marker"><span>1</span></div>
+              <div class="workflow-mobile-content">
+                <h3>Initialize</h3>
+                <p>One command scaffolds your project with blueprint structure, agent configs, and platform targets.</p>
+                <code>weblisk init my-project</code>
+              </div>
+            </div>
+            <div class="workflow-mobile-connector" aria-hidden="true"></div>
+            <div class="workflow-mobile-step">
+              <div class="workflow-mobile-marker"><span>2</span></div>
+              <div class="workflow-mobile-content">
+                <h3>Source Blueprints</h3>
+                <p>Pull from the open marketplace, fork community blueprints, or write your own. Compose patterns, mix, extend anything.</p>
+                <code>weblisk add patterns/auth-token</code>
+              </div>
+            </div>
+            <div class="workflow-mobile-connector" aria-hidden="true"></div>
+            <div class="workflow-mobile-step">
+              <div class="workflow-mobile-marker"><span>3</span></div>
+              <div class="workflow-mobile-content">
+                <h3>Build &amp; Generate</h3>
+                <p>Generate production code for any supported language or platform. Built-in targets ship today — custom generators extend the rest. One blueprint, infinite targets.</p>
+                <code>weblisk generate --lang go</code>
+              </div>
+            </div>
+            <div class="workflow-mobile-connector" aria-hidden="true"></div>
+            <div class="workflow-mobile-step">
+              <div class="workflow-mobile-marker"><span>4</span></div>
+              <div class="workflow-mobile-content">
+                <h3>Transform &amp; Migrate</h3>
+                <p>Blueprint-versioned, agent-orchestrated migrations across your entire stack — data, infrastructure, agents, and configuration. Every change diffed, validated, and reversible.</p>
+                <code>weblisk migrate --validate</code>
+              </div>
+            </div>
+            <div class="workflow-mobile-connector" aria-hidden="true"></div>
+            <div class="workflow-mobile-step">
+              <div class="workflow-mobile-marker"><span>5</span></div>
+              <div class="workflow-mobile-content">
+                <h3>Preview &amp; Validate</h3>
+                <p>See exactly what ships before it goes live. Schema validation, security checks, quality gates.</p>
+                <code>weblisk preview --validate</code>
+              </div>
+            </div>
+            <div class="workflow-mobile-connector" aria-hidden="true"></div>
+            <div class="workflow-mobile-step workflow-mobile-step-deploy">
+              <div class="workflow-mobile-marker"><span>6</span></div>
+              <div class="workflow-mobile-content">
+                <h3>Deploy &amp; Monitor</h3>
+                <p>Validated, versioned, deployed — with schema checks and automatic rollback. The loop never stops.</p>
+                <code>weblisk deploy --auto-rollback</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Architecture (sections[5]: content-section) ─── -->
+    <section id="architecture" class="section section-soft" aria-labelledby="arch-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Architecture</span>
+          <h2 id="arch-heading">Seven layers. All open. All yours.</h2>
+          <p>Weblisk exposes every layer — from wire protocol to marketplace — as open and specified. Each layer can wrap, connect to, or replace parts of your existing systems through governed data contracts. You decide which layers to use, extend, or swap out. The architecture is transparent because you should understand the systems you depend on.</p>
+        </div>
+        <div class="arch-diagram" data-island="/js/islands/arch-diagram.js" data-hydrate="visible">
+          <div class="arch-visual">
+            <svg viewBox="0 0 560 540" class="arch-svg" aria-label="Weblisk architecture layers">
+              <!-- Interconnection lines (drawn first, behind layers) -->
+              <!-- Vertical spine -->
+              <line x1="280" y1="60" x2="280" y2="480" class="arch-connector-spine"/>
+              <!-- Cross connections left -->
+              <line x1="80" y1="110" x2="80" y2="470" class="arch-connector-side"/>
+              <!-- Cross connections right -->
+              <line x1="480" y1="110" x2="480" y2="470" class="arch-connector-side"/>
+              <!-- Horizontal bridges -->
+              <line x1="80" y1="150" x2="480" y2="150" class="arch-connector-bridge"/>
+              <line x1="80" y1="290" x2="480" y2="290" class="arch-connector-bridge"/>
+              <line x1="80" y1="430" x2="480" y2="430" class="arch-connector-bridge"/>
+
+              <!-- Layer 1: Protocol -->
+              <g class="arch-layer" data-layer="protocol">
+                <rect x="30" y="0" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="26" text-anchor="middle" class="arch-layer-text">Protocol</text>
+                <text x="280" y="46" text-anchor="middle" class="arch-layer-sub">HTTP+JSON · Wire Format · Standard API Contracts</text>
+              </g>
+              <!-- Layer 2: Federation -->
+              <g class="arch-layer" data-layer="federation">
+                <rect x="30" y="70" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="96" text-anchor="middle" class="arch-layer-text">Federation</text>
+                <text x="280" y="116" text-anchor="middle" class="arch-layer-sub">ML-DSA-65 · Hub-to-Hub Trust · Post-Quantum Verification</text>
+              </g>
+              <!-- Layer 3: Schemas & Validation -->
+              <g class="arch-layer" data-layer="schemas">
+                <rect x="30" y="140" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="166" text-anchor="middle" class="arch-layer-text">Schemas &amp; Validation</text>
+                <text x="280" y="186" text-anchor="middle" class="arch-layer-sub">5 Compliance Tiers · Enforced Standards · Versioning</text>
+              </g>
+              <!-- Layer 4: Agents -->
+              <g class="arch-layer" data-layer="agents">
+                <rect x="30" y="210" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="236" text-anchor="middle" class="arch-layer-text">Agents</text>
+                <text x="280" y="256" text-anchor="middle" class="arch-layer-sub">Domain · Infrastructure · Task · Quality · Lifecycle</text>
+              </g>
+              <!-- Layer 5: Patterns -->
+              <g class="arch-layer" data-layer="patterns">
+                <rect x="30" y="280" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="306" text-anchor="middle" class="arch-layer-text">Patterns</text>
+                <text x="280" y="326" text-anchor="middle" class="arch-layer-sub">API · Auth · Governance · Webhooks · Workflows · Storage</text>
+              </g>
+              <!-- Layer 6: Platforms -->
+              <g class="arch-layer" data-layer="platforms">
+                <rect x="30" y="350" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="376" text-anchor="middle" class="arch-layer-text">Platforms</text>
+                <text x="280" y="396" text-anchor="middle" class="arch-layer-sub">Any language · Any platform · Extensible</text>
+              </g>
+              <!-- Layer 7: Marketplace & Hub Network -->
+              <g class="arch-layer" data-layer="ecosystem">
+                <rect x="30" y="420" width="500" height="60" rx="10" class="arch-rect"/>
+                <text x="280" y="446" text-anchor="middle" class="arch-layer-text">Marketplace &amp; Hub Network</text>
+                <text x="280" y="466" text-anchor="middle" class="arch-layer-sub">Open Blueprints · Templates · Community Hub · Collaboration</text>
+              </g>
+
+              <!-- Side dots showing interconnection -->
+              <circle cx="30" cy="30" r="4" class="arch-node" data-layer="protocol"/>
+              <circle cx="530" cy="30" r="4" class="arch-node" data-layer="protocol"/>
+              <circle cx="30" cy="100" r="4" class="arch-node" data-layer="federation"/>
+              <circle cx="530" cy="100" r="4" class="arch-node" data-layer="federation"/>
+              <circle cx="30" cy="170" r="4" class="arch-node" data-layer="schemas"/>
+              <circle cx="530" cy="170" r="4" class="arch-node" data-layer="schemas"/>
+              <circle cx="30" cy="240" r="4" class="arch-node" data-layer="agents"/>
+              <circle cx="530" cy="240" r="4" class="arch-node" data-layer="agents"/>
+              <circle cx="30" cy="310" r="4" class="arch-node" data-layer="patterns"/>
+              <circle cx="530" cy="310" r="4" class="arch-node" data-layer="patterns"/>
+              <circle cx="30" cy="380" r="4" class="arch-node" data-layer="platforms"/>
+              <circle cx="530" cy="380" r="4" class="arch-node" data-layer="platforms"/>
+              <circle cx="30" cy="450" r="4" class="arch-node" data-layer="ecosystem"/>
+              <circle cx="530" cy="450" r="4" class="arch-node" data-layer="ecosystem"/>
+            </svg>
+          </div>
+          <div class="arch-detail">
+            <div class="arch-detail-content" data-detail="protocol">
+              <h3>Protocol</h3>
+              <p>HTTP + JSON wire format that standardizes communication across every Weblisk project. Standard API contracts, consistent request/response shapes, and versioned endpoints — ensuring every agent, service, and hub speaks the same language.</p>
+              <a href="/platform/blueprints/protocol.html">Protocol specs →</a>
+            </div>
+            <div class="arch-detail-content" data-detail="federation" hidden>
+              <h3>Federation</h3>
+              <p>Post-quantum identity signing (ML-DSA-65, FIPS 204) with hub-to-hub cryptographic trust verification. Federation protocol enables collaboration across independent hubs — every message signed, every agent verified, every data contract enforced. Quantum-resistant by default.</p>
+              <a href="/platform/blueprints/federation.html">Federation specs →</a>
+            </div>
+            <div class="arch-detail-content" data-detail="schemas" hidden>
+              <h3>Schemas &amp; Validation</h3>
+              <p>Five compliance tiers — from sandbox to certified. Every blueprint runs through a 4-phase validation pipeline with 50+ checks before it can register, publish, or interact with other agents. Content hashing detects post-generation tampering. Enterprise standards, enforced automatically — not by trust, but by architecture.</p>
+              <a href="/platform/blueprints/schemas.html">Schema specs →</a>
+            </div>
+            <div class="arch-detail-content" data-detail="agents" hidden>
+              <h3>Agents</h3>
+              <p>11 infrastructure agents plus unlimited domain agents. Each sandboxed, portable, and AI-ready. Agents register capabilities, execute tasks, and collaborate autonomously across your entire system.</p>
+              <a href="/platform/agents/">Agent catalog →</a>
+            </div>
+            <div class="arch-detail-content" data-detail="patterns" hidden>
+              <h3>Patterns</h3>
+              <p>40 cross-cutting contracts — API, auth, governance, webhooks, workflows, storage, deployment, and more. Each pattern generates real endpoints with real security and real validation. Patterns compose together with explicit dependency contracts — policies can only add restrictions, never loosen them.</p>
+              <a href="/platform/blueprints/patterns.html">Pattern catalog →</a>
+            </div>
+            <div class="arch-detail-content" data-detail="platforms" hidden>
+              <h3>Platforms</h3>
+              <p>Blueprints target any language or platform. Go, Rust, Node.js, and Cloudflare Workers ship as built-in generators — community and marketplace authors can build generators for anything else. One blueprint, any target.</p>
+              <a href="/platform/">Explore platforms →</a>
+            </div>
+            <div class="arch-detail-content" data-detail="ecosystem" hidden>
+              <h3>Marketplace &amp; Hub Network</h3>
+              <p>Share blueprints on the open marketplace. Fork community templates. Collaborate across hubs with cryptographic data contracts. Build your own blueprints and publish them for others to compose into their projects.</p>
+              <a href="/marketplace/">Explore the marketplace →</a>
+            </div>
+            <p class="arch-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Hover or tap a layer to explore
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Governance (sections[6]: governance-section) ─── -->
+    <section id="governance" class="section" aria-labelledby="gov-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Governance</span>
+          <h2 id="gov-heading">You decide what enters and exits your system.</h2>
+          <p>AI is powerful — but power without boundaries is a liability. Weblisk's governance layer isn't a policy document. It's built into the architecture. Non-bypassable enforcement boundaries inspect every operation at every layer. Nothing enters or exits your system without explicit consent — not data, not agent actions, not external calls. You set the rules. The framework enforces them.</p>
+        </div>
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Non-Bypassable Enforcement</h3>
+            <p>Four checkpoints — message, storage, external, response — inspect every operation regardless of agent cooperation. This isn't middleware that can be skipped. It's a boundary built into the architecture that agents cannot circumvent, period.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Explicit Consent Boundaries</h3>
+            <p>Data doesn't move without permission. Agent actions don't execute without authorization. External services don't connect without policy. Every boundary crossing requires explicit consent defined in your blueprints — protecting your most valuable assets: your data and intellectual property.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <h3>Works With Any AI</h3>
+            <p>Not locked to specific frameworks. Weblisk wraps LangChain, CrewAI, Google ADK, or any other AI tool — unmodified — while enforcing governance at every boundary. Use whatever AI you want. The governance layer ensures it operates within your rules.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon orange">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <h3>Security That Only Gets Stronger</h3>
+            <p>Monotonic security means policies can only add restrictions — never loosen them. No configuration change, no prompt, no agent can reduce your security posture. Once a boundary is set, it holds. This is how enterprise security should work.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Rogue Agent Detection</h3>
+            <p>Behavioral fingerprinting identifies when agents deviate from expected patterns. Anomalous behavior triggers quarantine escalation — isolating compromised or malfunctioning agents before they can impact your system or your data.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h3>Data Sovereignty</h3>
+            <p>Your data stays where you put it. Blueprint-defined policies control exactly what enters and exits your organization. Cryptographic federation enables collaboration across trusted hub networks — with real data contracts, not handshake agreements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Comparison (sections[7]: comparison-table) ─── -->
+    <section id="comparison" class="section section-soft" aria-labelledby="compare-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Comparison</span>
+          <h2 id="compare-heading">Where Weblisk fits.</h2>
+          <p>You've got options — build from scratch, rent a SaaS platform, or paste together AI-generated snippets. Each has trade-offs. Weblisk gives you the flexibility to describe exactly what you need, generate code you own, and keep full control of your data.</p>
+        </div>
+        <div style="overflow-x: auto">
+          <table class="comparison-table" role="table">
+            <thead>
+              <tr>
+                <th scope="col">Capability</th>
+                <th scope="col" class="highlight col-highlight">Weblisk</th>
+                <th scope="col">Build from scratch</th>
+                <th scope="col">SaaS platform</th>
+                <th scope="col">AI code gen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Persistent specification</td>
+                <td class="yes col-highlight">97+ blueprints</td>
+                <td class="no">None</td>
+                <td class="no">Vendor-owned</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>You own the output</td>
+                <td class="yes col-highlight">100%</td>
+                <td class="yes">Yes</td>
+                <td class="no">Vendor lock-in</td>
+                <td class="partial">Fragile</td>
+              </tr>
+              <tr>
+                <td>AI governance</td>
+                <td class="yes col-highlight">Enforcement boundaries, quarantine</td>
+                <td class="no">None</td>
+                <td class="no">Vendor-controlled</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Specification enforcement</td>
+                <td class="yes col-highlight">4-phase pipeline, 50+ checks</td>
+                <td class="no">Manual code review</td>
+                <td class="no">N/A</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Security model</td>
+                <td class="yes col-highlight">ML-DSA-65, ABAC, post-quantum</td>
+                <td class="no">Build yourself</td>
+                <td class="partial">Shared tenancy</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Data sovereignty</td>
+                <td class="yes col-highlight">Blueprint-versioned, agent-orchestrated</td>
+                <td class="no">Manual scripts</td>
+                <td class="partial">Vendor-managed</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Runtime dependencies</td>
+                <td class="yes col-highlight">Zero</td>
+                <td class="no">Hundreds</td>
+                <td class="partial">Vendor-managed</td>
+                <td class="no">Hundreds</td>
+              </tr>
+              <tr>
+                <td>Agent orchestration</td>
+                <td class="yes col-highlight">Built-in</td>
+                <td class="no">Build yourself</td>
+                <td class="no">Vendor-controlled</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Federation</td>
+                <td class="yes col-highlight">Cryptographic hub-to-hub</td>
+                <td class="no">Custom integration</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Governance</td>
+                <td class="yes col-highlight">Schema-enforced, 5 tiers</td>
+                <td class="no">Manual policies</td>
+                <td class="partial">Vendor-defined</td>
+                <td class="no">None</td>
+              </tr>
+              <tr>
+                <td>Upgrade path</td>
+                <td class="yes col-highlight">Versioned, validated, reversible</td>
+                <td class="no">Rewrite</td>
+                <td class="partial">Vendor roadmap</td>
+                <td class="no">Re-prompt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Getting Started (sections[7]: getting-started) ─── -->
+    <section id="getting-started" class="section section-soft" aria-labelledby="gs-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Getting Started</span>
+          <h2 id="gs-heading">Up and running in minutes.</h2>
+          <p>Install the CLI, initialise a project, generate production code, and run it locally.</p>
+        </div>
+        <div class="gs-steps" data-reveal-stagger>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number purple" aria-hidden="true">1</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Install the CLI</h3>
+              <p>One command. No dependencies. Works on macOS, Linux, and WSL.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> curl -fsSL https://cdn.weblisk.dev/install.sh | sh
+<span class="syn-s">✓ Weblisk CLI installed to ~/.weblisk/bin/weblisk</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number cyan" aria-hidden="true">2</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Initialise your project</h3>
+              <p>Start from scratch or source a starter template — client, server, or full-stack. Use either, or combine both.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk init my-app --template server
+<span class="syn-s">✓ Created my-app/ from weblisk-templates/server</span>
+<span class="syn-s">✓ Blueprint scaffolding ready</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number green" aria-hidden="true">3</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Define and compose <span class="gs-step-badge">Optional</span></h3>
+              <p>Create domains, compose patterns, and shape blueprints to your exact requirements. Skip this if a starter already covers what you need.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk domain create chat \
+    --patterns api-ai,auth-token,realtime-chat
+<span class="syn-s">✓ Domain "chat" created with 3 patterns</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number orange" aria-hidden="true">4</div>
+              <div class="gs-step-line" aria-hidden="true"></div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Generate</h3>
+              <p>Generate production code — client and server components built from your blueprints in your target language.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk generate --lang go
+<span class="syn-s">✓ Generated 24 endpoints, 3 agents, 7 patterns</span>
+<span class="syn-s">✓ Output: ./generated/</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gs-step">
+            <div class="gs-step-marker">
+              <div class="gs-step-number purple" aria-hidden="true">5</div>
+            </div>
+            <div class="gs-step-content">
+              <h3>Run and deploy</h3>
+              <p>Start a local dev server to watch your results, then deploy to your target platform when you're ready.</p>
+              <div class="code-window gs-code">
+                <div class="code-header">
+                  <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                  <span class="code-title">Terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="syn-p">$</span> weblisk dev
+<span class="syn-s">✓ Dev server running at http://localhost:3000</span>
+<span class="syn-s">✓ Watching for changes...</span>
+
+<span class="syn-p">$</span> weblisk deploy --target cloudflare
+<span class="syn-s">✓ Deployed to production (validated, versioned)</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:2.5rem">
+          <a href="/docs/quickstart.html" class="btn btn-primary">
+            Read the Quick Start Guide
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Use Cases (sections[8]: content-section) ─── -->
+    <section id="use-cases" class="section" aria-labelledby="usecases-heading" data-reveal>
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label">Where to Start</span>
+          <h2 id="usecases-heading">Pick a domain. Own it completely.</h2>
+          <p>You don't need to replace everything at once. Pick one domain that matters to your business — contacts, content, support, operations — and describe exactly how it should work. Generate the system. Run it alongside what you already have. Expand when you're ready.</p>
+        </div>
+        <div class="feature-grid usecase-grid" data-reveal-stagger data-island="/js/islands/usecase-expand.js" data-hydrate="visible">
+          <div class="feature-card usecase-card" data-expandable>
+            <div class="feature-icon purple">
+              <i aria-hidden="true" class="wl-icon wl-i-chart wl-icon-24"></i>
+            </div>
+            <h3>Marketing &amp; Campaigns</h3>
+            <p>Manage your campaigns, content scheduling, and analytics your way — without per-seat pricing or vendor lock-in. Describe the workflows that match your team, generate the platform, own the data.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>7</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>24</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>3</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">api-ai</span>
+                <span class="usecase-tag">auth-token</span>
+                <span class="usecase-tag">scheduling</span>
+                <span class="usecase-tag">analytics</span>
+                <span class="usecase-tag">webhooks</span>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card usecase-card" data-expandable>
+            <div class="feature-icon cyan">
+              <i aria-hidden="true" class="wl-icon wl-i-refresh wl-icon-24"></i>
+            </div>
+            <h3>Operations &amp; Supply Chain</h3>
+            <p>Connect suppliers, track orders, and manage workflows — without expensive middleware. Describe your integration points, and agents generate the connectors, contracts, and audit trails.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>12</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>38</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>5</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">federation</span>
+                <span class="usecase-tag">webhooks</span>
+                <span class="usecase-tag">workflows</span>
+                <span class="usecase-tag">contracts</span>
+                <span class="usecase-tag">audit</span>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card usecase-card" data-expandable>
+            <div class="feature-icon green">
+              <i aria-hidden="true" class="wl-icon wl-i-bell wl-icon-24"></i>
+            </div>
+            <h3>Support &amp; Service</h3>
+            <p>Build a support system shaped to your business — AI routing, live chat, SLA tracking. Your customer data stays on your infrastructure, and the system evolves as your needs do.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>9</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>31</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>4</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">api-ai</span>
+                <span class="usecase-tag">realtime-chat</span>
+                <span class="usecase-tag">sla-monitor</span>
+                <span class="usecase-tag">routing</span>
+                <span class="usecase-tag">multi-channel</span>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card usecase-card" data-expandable>
+            <div class="feature-icon orange">
+              <i aria-hidden="true" class="wl-icon wl-i-book wl-icon-24"></i>
+            </div>
+            <h3>Content &amp; Publishing</h3>
+            <p>A CMS shaped around your workflow — not the other way around. Define your content types, publishing rules, and delivery channels. No plugin bloat, no theme limitations — your content system, owned outright.</p>
+            <div class="usecase-detail" hidden>
+              <div class="usecase-stats">
+                <span class="usecase-stat"><strong>8</strong> Blueprints</span>
+                <span class="usecase-stat"><strong>28</strong> Endpoints</span>
+                <span class="usecase-stat"><strong>3</strong> Agents</span>
+              </div>
+              <div class="usecase-patterns">
+                <span class="usecase-tag">auth-token</span>
+                <span class="usecase-tag">api-crud</span>
+                <span class="usecase-tag">cdn-triggers</span>
+                <span class="usecase-tag">ai-writing</span>
+                <span class="usecase-tag">quality</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA (sections[9]: cta-section) ─── -->
+    <section id="cta" class="section section-soft" aria-labelledby="cta-heading" data-reveal>
+      <div class="section-inner" style="text-align:center;max-width:760px;margin:0 auto">
+        <h2 id="cta-heading">One blueprint. Full ownership. Start here.</h2>
+        <p style="margin-bottom:1.5rem">Describe a domain. Generate a system you own — code, data, infrastructure. Open source framework. Your code. Your data. No lock-in.</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a href="/docs/quickstart.html" class="btn btn-primary">
+            Start Building
+            <i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-16"></i>
+          </a>
+          <a href="/marketplace/" class="btn btn-outline">Explore the Marketplace</a>
+        </div>
+        <p class="cta-roadmap">Built-in targets ship today. Extensible to any language or platform via custom generators.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Blueprint Source (?blueprint=true activates full-page view) ─── -->
+  <div data-island="/js/islands/blueprint-viewer.js" data-hydrate="idle"
+    data-props='{"blueprint_path":"pages/home.yaml"}'
+    style="display:contents" aria-hidden="true"></div>
+
+  <!-- ─── X-Ray (section inspector) ─── -->
+  <div data-island="/js/islands/xray.js" data-hydrate="idle"
+    data-props='{"blueprint_path":"pages/home.yaml"}'
+    style="display:contents" aria-hidden="true"></div>
+
+  <!-- ─── Footer (generated from components/footer.yaml) ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+
+  <!-- Island bootstrap — works without CDN hydration -->
+  <script type="module">
+    const base = new URL('.', import.meta.url).href;
+
+    // Scroll reveal animations
+    import(base + 'js/islands/scroll-reveal.js')
+      .then(m => m.default())
+      .catch(err => console.warn('[scroll-reveal] init failed:', err));
+
+    // Split-pane demo (tab switching)
+    const splitEl = document.querySelector('[data-island*="split-demo"]');
+    if (splitEl) {
+      import(base + 'js/islands/split-demo.js')
+        .then(m => m.default(splitEl))
+        .catch(err => console.warn('[split-demo] hydration failed:', err));
+    }
+
+    // Pipeline animation
+    const pipelineEl = document.querySelector('[data-island*="pipeline"]');
+    if (pipelineEl) {
+      import(base + 'js/islands/pipeline.js')
+        .then(m => m.default(pipelineEl))
+        .catch(err => console.warn('[pipeline] hydration failed:', err));
+    }
+
+    // Autonomous loop cycle
+    const loopEl = document.querySelector('[data-island*="loop-cycle"]');
+    if (loopEl) {
+      import(base + 'js/islands/loop-cycle.js')
+        .then(m => m.default(loopEl))
+        .catch(err => console.warn('[loop-cycle] hydration failed:', err));
+    }
+
+    // Architecture diagram (layer hover)
+    const archEl = document.querySelector('[data-island*="arch-diagram"]');
+    if (archEl) {
+      import(base + 'js/islands/arch-diagram.js')
+        .then(m => m.default(archEl))
+        .catch(err => console.warn('[arch-diagram] hydration failed:', err));
+    }
+
+    // Use case expandable cards
+    const usecaseEl = document.querySelector('[data-island*="usecase-expand"]');
+    if (usecaseEl) {
+      import(base + 'js/islands/usecase-expand.js')
+        .then(m => m.default(usecaseEl))
+        .catch(err => console.warn('[usecase-expand] hydration failed:', err));
+    }
+
+    // Stat counter animation
+    const statsEl = document.querySelector('[data-island*="stat-counter"]');
+    if (statsEl) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          import(base + 'js/islands/stat-counter.js')
+            .then(m => m.default(statsEl))
+            .catch(err => console.warn('[stat-counter] hydration failed:', err));
+        }
+      }, { threshold: 0.3 });
+      observer.observe(statsEl);
+    }
+
+    // Blueprint tabs (tabbed code viewer)
+    const tabsEl = document.querySelector('[data-island*="blueprint-tabs"]');
+    if (tabsEl) {
+      import(base + 'js/islands/blueprint-tabs.js')
+        .then(m => m.default(tabsEl))
+        .catch(err => console.warn('[blueprint-tabs] hydration failed:', err));
+    }
+
+    // X-Ray (section inspector)
+    const xrayEl = document.querySelector('[data-island*="xray"]');
+    if (xrayEl) {
+      import(base + 'js/islands/xray.js')
+        .then(m => m.default(xrayEl))
+        .catch(err => console.warn('[xray] hydration failed:', err));
+    }
+
+    // Blueprint viewer (floating drawer + ?blueprint source view)
+    const viewer = document.querySelector('[data-island*="blueprint-viewer"]');
+    if (viewer) {
+      import(base + 'js/islands/blueprint-viewer.js')
+        .then(m => m.default(viewer))
+        .catch(err => {
+          console.warn('[blueprint-viewer] hydration failed:', err);
+          // Fallback: if ?blueprint param present, load source view directly
+          if (new URLSearchParams(location.search).has('blueprint')) {
+            import(base + 'js/islands/blueprint-mode.js')
+              .then(bp => bp.default(viewer, 'pages/home.yaml'));
+          }
+        });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+# Docs Page Blueprint — Template
+# All pages under /docs/ MUST conform to this structure.
+# Individual docs pages extend this with their specific content.
+#
+# Related blueprints:
+#   Navigation  → ../components/navigation.yaml
+#   Footer      → ../components/footer.yaml
+#   Shell       → ../islands/shell.yaml
+#   Theme       → ../theme.yaml
+#   Code        → ../code.yaml
+
+name: docs-page-template
+type: page-template
+extends: standards/pages
+path_prefix: /docs/
+status: active
+version: 1.0.0
+
+# ─── Required <head> Elements ───────────────────────────────
+# Every docs page MUST include all of these in this order.
+head:
+  required:
+    - doctype: "<!DOCTYPE html>"
+    - html_attrs: 'lang="en" dir="ltr"'
+    - charset: "UTF-8"
+    - viewport: "width=device-width, initial-scale=1.0"
+    - title: "{Page Title} — Weblisk"
+    - meta_description: true
+    - canonical: "https://weblisk.dev/docs/{slug}.html"
+    - og_type: article
+    - og_title: "{Page Title} — Weblisk"
+    - og_description: true
+    - og_url: true
+    - og_site_name: Weblisk
+    - og_image: "https://weblisk.dev/images/social/og-image.png?v=2"
+    - og_image_width: 1200
+    - og_image_height: 630
+    - og_locale: en_US
+    - twitter_card: summary_large_image
+    - twitter_title: true
+    - twitter_site: "@weblisk"
+    - twitter_description: true
+    - twitter_image: true
+    - theme_color: "#1a1f36"
+    - robots: "index, follow"
+    - author: Avaropoint
+    - article_published_time: true
+    - article_modified_time: true
+    - favicon: "/images/favicon.svg"
+    - apple_touch_icon: "/images/apple-touch-icon.png"
+    - structured_data_article: true
+    - structured_data_breadcrumb: true
+    - manifest: "/manifest.webmanifest"
+    - preconnect: "https://cdn.weblisk.dev"
+    - stylesheet: "/css/styles.css"
+    - theme_script: 'document.documentElement.dataset.theme = localStorage.getItem("wl-theme") || "light"'
+    - importmap: '{ "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }'
+
+# ─── Required <body> Structure ──────────────────────────────
+body:
+  required_order:
+    - skip_link: '<a href="#main-content" class="wl-skip-link">Skip to main content</a>'
+    - navbar:
+        element: nav
+        class: navbar
+        data_island: "/js/islands/nav.js"
+        data_hydrate: load
+        active: docs
+    - docs_layout:
+        element: div
+        class: docs-layout
+        children:
+          - sidebar:
+              element: aside
+              class: docs-sidebar
+              aria_label: Documentation navigation
+          - main_content:
+              element: main
+              class: docs-content
+              id: main-content
+    - footer:
+        component: ../components/footer.yaml
+    - shell_script: '<script type="module" src="/js/islands/shell.js"></script>'
+
+# ─── Feature Demo Pattern (for pages with interactive demos) ─
+# Pages that include feature-demo blocks MUST follow this structure:
+feature_demo:
+  wrapper: '<section data-island="/js/islands/features-{topic}.js" data-hydrate="idle">'
+  inner: '<div data-island="/js/islands/feature.js" data-hydrate="idle">'
+  block_structure:
+    - heading: h2
+    - description: p (lead paragraph)
+    - demo_block:
+        class: feature-demo
+        children:
+          - toolbar:
+              class: feature-demo-toolbar
+              contains: [preview_tab, code_tab, viewport_buttons, copy_button]
+          - preview_panel:
+              class: feature-demo-preview
+          - code_panel:
+              class: feature-demo-code
+              children:
+                - code_tabs: ".code-tabs"
+                - code_window: ".code-window"
+    - api_reference:
+        element: table
+        class: api-table
+        columns: [Name, Type, Description]
+
+# ─── Code Window Pattern (for sections without demos) ────────
+code_window:
+  class: code-window
+  children:
+    - header: ".code-header span"
+    - body: ".code-body pre code"
+  syntax_classes:
+    - syn-k: keyword
+    - syn-p: punctuation
+    - syn-s: string
+    - syn-f: function
+    - syn-c: comment
+    - syn-n: number
+    - syn-t: tag
+    - syn-a: attribute
+
+# ─── Docs Sidebar Navigation ────────────────────────────────
+sidebar:
+  sections:
+    - heading: Getting Started
+      links:
+        - { label: Quick Start, path: /docs/quickstart.html }
+        - { label: Installation, path: /docs/installation.html }
+        - { label: Project Structure, path: /docs/project-structure.html }
+    - heading: Core
+      links:
+        - { label: Signals, path: /docs/signals.html }
+        - { label: State, path: /docs/state.html }
+        - { label: Store, path: /docs/store.html }
+        - { label: Components, path: /docs/components.html }
+        - { label: Islands, path: /docs/islands.html }
+        - { label: Routing, path: /docs/routing.html }
+        - { label: Transitions, path: /docs/transitions.html }
+    - heading: Networking
+      links:
+        - { label: Fetch, path: /docs/fetch.html }
+        - { label: Realtime, path: /docs/realtime.html }
+    - heading: Performance
+      links:
+        - { label: Performance, path: /docs/performance.html }
+        - { label: Workers, path: /docs/workers.html }
+        - { label: Scheduler, path: /docs/scheduler.html }
+        - { label: Hydration, path: /docs/hydration.html }
+    - heading: Security & A11y
+      links:
+        - { label: Security, path: /docs/security.html }
+        - { label: Accessibility, path: /docs/a11y.html }
+    - heading: Platform
+      links:
+        - { label: PWA, path: /docs/pwa.html }
+        - { label: Blueprints, path: /docs/blueprints.html }
+        - { label: Agents, path: /docs/agents.html }
+        - { label: CLI, path: /docs/cli.html }
+        - { label: Testing, path: /docs/testing.html }
+        - { label: DevTools, path: /docs/devtools.html }
+        - { label: Analytics, path: /docs/analytics.html }
+        - { label: Federation, path: /docs/federation.html }
+        - { label: Governance, path: /docs/governance.html }
+        - { label: Migrations, path: /docs/migrations.html }
+
+# ─── Structured Data Requirements ───────────────────────────
+structured_data:
+  - type: TechArticle
+    required_fields: [headline, description, url, datePublished, dateModified, author, publisher, isPartOf]
+    author_ref: "https://avaropoint.com/#org"
+    publisher_ref: "https://avaropoint.com/#org"
+    website_ref: "https://weblisk.dev/#website"
+  - type: BreadcrumbList
+    items:
+      - { position: 1, name: Weblisk, item: "https://weblisk.dev/" }
+      - { position: 2, name: Documentation, item: "https://weblisk.dev/docs/" }
+      - { position: 3, name: "{Page Title}", item: "https://weblisk.dev/docs/{slug}.html" }
+
+# ─── Validation Rules ───────────────────────────────────────
+validation:
+  - rule: all-paths-absolute
+    description: "All asset paths must be absolute (start with /), never relative (./)"
+  - rule: theme-script-in-head
+    description: "Theme FOUC prevention script must be in <head> before any render"
+  - rule: importmap-present
+    description: "ES module importmap must be in <head>"
+  - rule: skip-link-first-child
+    description: "Skip link must be first child of <body>"
+  - rule: shell-script-last
+    description: "shell.js must be last script before </body>"
+  - rule: footer-links-valid
+    description: "All footer links must resolve to existing pages"
+  - rule: nav-active-state
+    description: "Docs nav link must have class='active' and aria-current='page'"
+  - rule: storage-key-consistent
+    description: "Theme localStorage key must be 'wl-theme' everywhere"

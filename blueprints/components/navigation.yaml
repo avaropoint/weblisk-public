@@ -1,0 +1,63 @@
+# Navigation Component
+# Renders the top navbar with site links, social, and theme toggle.
+
+type: component
+name: navigation
+hydrate: load
+status: active
+
+props:
+  active_path: { type: string, required: true }
+
+links:
+  - label: Home
+    path: /
+  - label: Platform
+    path: /platform/
+  - label: Marketplace
+    path: /marketplace/
+  - label: Docs
+    path: /docs/
+
+structure:
+  element: nav
+  class: navbar
+  aria_label: Main navigation
+  children:
+    - element: div
+      class: navbar-inner
+      children:
+        - type: brand-link
+          logo: /images/mark/logo.svg
+          text: Weblisk
+          version: v1.0
+        - type: nav-links
+          source: links
+        - type: nav-actions
+          social:
+            - platform: github
+              url: global.yaml#social.github
+            - platform: twitter
+              url: global.yaml#social.twitter
+          theme_toggle: true
+          mobile_toggle: true
+
+behavior:
+  - mobile menu toggle (hamburger to close, aria-expanded)
+  - theme toggle (light/dark, persists to localStorage via state.js signal)
+  - active link highlighting from props.active_path
+  - sidebar injection for responsive navigation on docs pages
+
+accessibility:
+  role: navigation
+  aria_label: "Main navigation"
+  keyboard: tab-through-links
+  focus: true
+  mobile_menu:
+    aria_expanded: true
+    focus_trap: true
+
+dependencies:
+  runtime:
+    - weblisk
+    - ../state.js

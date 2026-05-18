@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security &amp; Governance — Weblisk Platform</title>
+  <meta name="description"
+    content="Non-bypassable enforcement boundaries, six trust boundaries, behavioral fingerprinting, rogue agent detection, quarantine escalation, and monotonic security guarantees.">
+  <link rel="canonical" href="https://weblisk.dev/platform/security.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Security & Governance — Weblisk Platform">
+  <meta property="og:description"
+    content="Governance is architecture. A non-bypassable enforcement layer inspects every operation at four structural boundaries. No agent escapes it.">
+  <meta property="og:url" content="https://weblisk.dev/platform/security.html">
+  <meta property="og:site_name" content="Weblisk">
+  <meta property="og:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Security & Governance — Weblisk Platform">
+  <meta name="twitter:description"
+    content="Governance is architecture. A non-bypassable enforcement layer inspects every operation at four structural boundaries. No agent escapes it.">
+  <meta name="twitter:image" content="https://weblisk.dev/images/social/og-image.png?v=2">
+  <meta name="twitter:site" content="@weblisk">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Avaropoint">
+  <meta name="theme-color" content="#1a1f36">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.weblisk.dev" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('wl-theme') || 'light'</script>
+  <script type="importmap">
+    { "imports": { "weblisk": "https://cdn.weblisk.dev/weblisk.js", "weblisk/": "https://cdn.weblisk.dev/" } }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Security & Governance — Weblisk Platform",
+    "description": "Non-bypassable enforcement boundaries, six trust boundaries, behavioral fingerprinting, and monotonic security guarantees.",
+    "url": "https://weblisk.dev/platform/security.html",
+    "author": { "@id": "https://avaropoint.com/#org" },
+    "isPartOf": { "@id": "https://weblisk.dev/#website" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Weblisk", "item": "https://weblisk.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Platform", "item": "https://weblisk.dev/platform/" },
+      { "@type": "ListItem", "position": 3, "name": "Security & Governance", "item": "https://weblisk.dev/platform/security.html" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="wl-skip-link">Skip to main content</a>
+
+  <!-- ─── Navbar ─── -->
+  <nav class="navbar" aria-label="Main navigation" data-island="/js/islands/nav.js" data-hydrate="load">
+    <div class="navbar-inner">
+      <a href="/" class="brand">
+        <img src="/images/mark/logo.svg" alt="Weblisk" width="28" height="28">
+        <span>Weblisk</span>
+        <span class="version-badge">v1.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/platform/" class="nav-link active" aria-current="page">Platform</a>
+        <a href="/marketplace/" class="nav-link">Marketplace</a>
+        <a href="/docs/" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-social">
+          <a href="https://github.com/avaropoint/weblisk" title="GitHub" aria-label="GitHub repository" rel="noopener noreferrer">
+            <i aria-hidden="true" class="wl-icon wl-i-github wl-icon-18"></i>
+          </a>
+          <a href="https://x.com/weblisk" title="X (Twitter)" aria-label="X (Twitter)" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+        </div>
+        <button id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <i aria-hidden="true" class="wl-icon wl-i-moon wl-icon-18" id="theme-icon"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i aria-hidden="true" class="wl-icon wl-i-menu wl-icon-20"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Platform navigation">
+      <h3>Platform</h3>
+      <nav aria-label="Platform overview links">
+        <a href="/platform/">Overview</a>
+        <a href="/platform/protocol.html">Protocol</a>
+        <a href="/platform/architecture.html">Architecture</a>
+        <a href="/platform/agents.html">Agents</a>
+        <a href="/platform/patterns.html">Patterns</a>
+        <a href="/platform/schemas.html">Schemas</a>
+        <a href="/platform/standards.html">Standards</a>
+        <a href="/platform/client.html">Client Framework</a>
+        <a href="/platform/security.html" aria-current="page" class="active">Security &amp; Governance</a>
+      </nav>
+      <h3>Resources</h3>
+      <nav aria-label="Platform resource links">
+        <a href="/docs/">Documentation</a>
+        <a href="/docs/quickstart.html">Quick Start</a>
+        <a href="/marketplace/">Marketplace</a>
+      </nav>
+    </aside>
+
+    <main class="docs-content" id="main-content">
+      <h1>Security &amp; Governance</h1>
+      <p class="lead">Every AI framework lets agents act. Weblisk is the first where governance is architecture — a non-bypassable enforcement layer inspects every operation at four structural boundaries. No agent escapes it.</p>
+
+      <h2>The Enforcement Layer</h2>
+      <p>The enforcement layer sits between agents and every resource they touch. It inspects operations at four structural boundaries:</p>
+      <ol>
+        <li><strong>Message boundary</strong> — all inter-agent communication</li>
+        <li><strong>Storage boundary</strong> — all data persistence operations</li>
+        <li><strong>External boundary</strong> — all outbound network calls</li>
+        <li><strong>Response boundary</strong> — all data returned to clients</li>
+      </ol>
+
+      <h3>Design Invariants</h3>
+      <ul>
+        <li><strong>Structural non-bypassability</strong> — agents MUST NOT have any path to resources that bypasses enforcement. This is a platform invariant, not a policy.</li>
+        <li><strong>Verify both input and output</strong> — validates operations before execution AND responses after</li>
+        <li><strong>Declared authority only</strong> — agents can only perform operations they declared in their manifest AND that match their active data contract</li>
+        <li><strong>Fail-closed at every boundary</strong> — if enforcement cannot evaluate a request, the request is denied</li>
+      </ul>
+      <p>The enforcement layer is <strong>not</strong> a policy engine (that's the <code>policy</code> pattern). It is <strong>not</strong> a safety classifier (that's the <code>safety</code> pattern). It is the structural mechanism that ensures those patterns are applied <em>regardless of agent cooperation</em>.</p>
+
+      <h2>Six Trust Boundaries</h2>
+      <p>The threat model identifies 6 trust boundaries — transitions where security context changes and enforcement must validate:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Boundary</th>
+            <th>Threat Surface</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Browser ↔ App Gateway</strong></td>
+            <td>Untrusted external clients — XSS, CSRF, session hijacking, injection</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>App Gateway ↔ Agents</strong></td>
+            <td>Internal network — privilege escalation, unauthorized agent access, token forgery</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Agents ↔ Storage</strong></td>
+            <td>Data persistence — SQL injection, scope violation, unauthorized table access</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Operator ↔ Admin Gateway</strong></td>
+            <td>Privileged access — credential theft, config tampering, audit log manipulation</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Hub ↔ Hub Federation</strong></td>
+            <td>Cross-organization — man-in-the-middle, trust exploitation, data exfiltration</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Enforcement Layer</strong></td>
+            <td>Policy decision — bypass attempts, rule manipulation, timing attacks</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Every boundary has defined threats, mitigations, and monitoring requirements specified in the threat model.</p>
+
+      <h2>Monotonic Security</h2>
+      <p>Security policies can only <strong>add restrictions</strong>, never loosen them. No configuration change, no operator command, no agent request can reduce the security posture of a running hub.</p>
+      <ul>
+        <li>New restrictions: applied immediately</li>
+        <li>Removal of restrictions: requires hub restart with explicit operator authorization</li>
+        <li>Policy conflicts: the more restrictive policy always wins</li>
+      </ul>
+
+      <h2>Behavioral Fingerprinting</h2>
+      <p>Agents are fingerprinted at registration. The enforcement layer maintains a behavioral profile for each agent based on:</p>
+      <ul>
+        <li>Manifest declarations (capabilities, namespaces, collaborators)</li>
+        <li>Communication patterns (which agents it talks to, frequency, payload sizes)</li>
+        <li>Storage access patterns (which tables, read/write ratio, query patterns)</li>
+        <li>Event publishing patterns (namespaces, scopes, frequency)</li>
+      </ul>
+      <p>Changes to manifest, capabilities, or behavioral patterns are detected and flagged before they can affect cross-boundary interactions. Anomalous behavior triggers investigation or quarantine.</p>
+
+      <h2>Quarantine &amp; Escalation</h2>
+      <p>When an agent exhibits compromised or anomalous behavior, it can be quarantined before impact spreads:</p>
+      <ol>
+        <li><strong>Detection</strong> — behavioral fingerprint drift, manifest violation, or enforcement boundary violation</li>
+        <li><strong>Isolation</strong> — agent loses messaging, storage, external access. Only health endpoint remains active.</li>
+        <li><strong>Investigation</strong> — audit log review, behavioral comparison, manifest inspection</li>
+        <li><strong>Resolution</strong> — agent is cleared and restored, or deregistered and flagged</li>
+      </ol>
+      <p>Quarantine orders are published as <code>system.agent.quarantined</code> events. All other agents are notified immediately.</p>
+
+      <h2>Post-Quantum Cryptography</h2>
+      <p>Weblisk uses exclusively post-quantum algorithms. No RSA, no ECDSA, no Ed25519, no classical Diffie-Hellman.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Purpose</th>
+            <th>Algorithm</th>
+            <th>Standard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Digital signatures</td>
+            <td><strong>ML-DSA-65</strong> (CRYSTALS-Dilithium)</td>
+            <td>FIPS 204</td>
+          </tr>
+          <tr>
+            <td>Key encapsulation</td>
+            <td><strong>ML-KEM-768</strong> (CRYSTALS-Kyber)</td>
+            <td>FIPS 203</td>
+          </tr>
+          <tr>
+            <td>Backup signatures</td>
+            <td><strong>SLH-DSA-SHA2-128s</strong> (SPHINCS+)</td>
+            <td>FIPS 205</td>
+          </tr>
+          <tr>
+            <td>Symmetric encryption</td>
+            <td><strong>AES-256-GCM</strong></td>
+            <td>FIPS 197</td>
+          </tr>
+          <tr>
+            <td>Key derivation</td>
+            <td><strong>Argon2id</strong></td>
+            <td>RFC 9106</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Per NIST IR 8547, all elliptic curve and RSA algorithms will be deprecated by 2030 and removed by 2035. Weblisk is ready today.</p>
+
+      <h2>Data Sovereignty</h2>
+      <p>Federation data contracts ensure data never leaves its permitted jurisdiction:</p>
+      <ul>
+        <li><strong>Data minimization by construction</strong> — contracts declare the minimum viable data set. Fields not in the contract are stripped before crossing boundaries.</li>
+        <li><strong>Sovereignty-aware routing</strong> — tasks involving regulated data are only routed to agents within the permitted jurisdiction.</li>
+        <li><strong>Non-repudiation</strong> — every cross-boundary message is signed by both sending and receiving orchestrator. Full chain of custody is auditable.</li>
+        <li><strong>Fail-closed boundaries</strong> — federation data contracts reject unknown fields, not ignore them.</li>
+      </ul>
+
+      <div class="docs-nav-footer">
+        <a href="/platform/client.html"><i aria-hidden="true" class="wl-icon wl-i-arrow wl-icon-14" style="transform:rotate(180deg)"></i> Client Framework</a>
+        <span></span>
+      </div>
+    </main>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <img src="/images/mark/logo.svg" alt="Weblisk" width="24" height="24">
+            <span>Weblisk</span>
+          </a>
+          <p class="footer-tagline">Open-source tools. Code you own. Describe once, generate forever.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h3>Platform</h3>
+            <a href="/platform/">Overview</a>
+            <a href="/platform/protocol.html">Protocol</a>
+            <a href="/platform/architecture.html">Architecture</a>
+            <a href="/platform/agents.html">Agents</a>
+            <a href="/platform/security.html">Security</a>
+          </div>
+          <div class="footer-col">
+            <h3>Ecosystem</h3>
+            <a href="/marketplace/">Marketplace</a>
+            <a href="/docs/">Documentation</a>
+            <a href="/docs/quickstart.html">Quick Start</a>
+          </div>
+          <div class="footer-col">
+            <h3>Community</h3>
+            <a href="https://github.com/avaropoint/weblisk" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/weblisk" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://discord.gg/5CetAq9EgZ" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/sponsors/avaropoint" rel="noopener noreferrer">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>&copy; 2026 Made with <span class="heart" aria-label="love">&hearts;</span> by <a href="https://avaropoint.com">Avaropoint</a></span>
+          <span class="footer-inline-social">
+            <a href="https://github.com/avaropoint/weblisk" aria-label="GitHub" rel="noopener noreferrer"><i aria-hidden="true" class="wl-icon wl-i-github wl-icon-16"></i></a>
+            <a href="https://x.com/weblisk" aria-label="X (Twitter)" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+            <a href="https://discord.gg/5CetAq9EgZ" aria-label="Discord" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          </span>
+        </div>
+        <a href="/docs/" class="powered-by">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Powered by Weblisk
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/islands/shell.js"></script>
+</body>
+
+</html>

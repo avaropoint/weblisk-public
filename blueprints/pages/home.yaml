@@ -1,0 +1,1054 @@
+# Homepage — Weblisk
+# This blueprint is the single source of truth for the weblisk.dev homepage.
+# The generated HTML at /public/index.html MUST match this specification.
+#
+# Related blueprints:
+#   Design tokens         → ../theme.yaml
+#   Components            → ../components/{nav,footer,blueprint-viewer}.yaml
+
+name: home
+type: page
+extends: standards/pages
+path: /
+status: active
+version: 2.1.0
+
+# SEO
+seo:
+  title: "Weblisk — The Open Ecosystem for Agentic Services"
+  description: >
+    The first open-source platform to unify a secure, collaborative
+    hub and marketplace of autonomous agents. Define what you need
+    as blueprints — AI translates them to production code in any
+    language or platform of your choice.
+  canonical: "https://weblisk.dev/"
+  keywords:
+    - agentic services
+    - autonomous domains
+    - blueprint-driven
+    - AI agent platform
+    - federated agents
+    - zero dependency
+    - code generation
+    - service orchestration
+    - blueprint specification
+    - open platform
+    - data sovereignty
+    - domain agents
+    - infrastructure agents
+  robots: "index, follow"
+  author: Avaropoint
+  theme_color: "#1a1f36"
+  open_graph:
+    type: website
+    title: "Weblisk — The Open Ecosystem for Agentic Services"
+    description: >
+      The first open-source platform to unify a secure, collaborative
+      hub and marketplace of autonomous agents. Blueprints in,
+      production code out — in any language or platform.
+    url: "https://weblisk.dev/"
+    site_name: Weblisk
+    image: "https://weblisk.dev/images/social/og-image.png?v=2"
+    image_width: 1200
+    image_height: 630
+    image_type: image/png
+    image_alt: >-
+      Weblisk — The open ecosystem for agentic services. Define
+      what you need as blueprints. AI translates them to code.
+    locale: en_US
+  twitter:
+    card: summary_large_image
+    title: "Weblisk — The Open Ecosystem for Agentic Services"
+    description: >
+      The first open-source platform to unify a secure, collaborative
+      hub and marketplace of autonomous agents. Blueprints in,
+      production code out — in any language or platform.
+    image: "https://weblisk.dev/images/social/og-image.png?v=2"
+    site: "@weblisk"
+  structured_data:
+    - type: Organization
+      id: "https://avaropoint.com/#org"
+      name: Avaropoint
+      url: "https://avaropoint.com"
+      logo: "https://weblisk.dev/images/mark/dark/icon-dark-512.png"
+      sameAs:
+        - "https://github.com/avaropoint"
+        - "https://x.com/weblisk"
+        - "https://discord.gg/5CetAq9EgZ"
+    - type: WebSite
+      id: "https://weblisk.dev/#website"
+      name: Weblisk
+      url: "https://weblisk.dev"
+      description: >
+        Weblisk is a zero-dependency open-source framework for defining
+        and orchestrating agentic services — autonomous, interconnected
+        domains that power your business. Build it, consume it, or
+        publish it.
+      publisher: "https://avaropoint.com/#org"
+      inLanguage: en
+    - type: SoftwareApplication
+      id: "https://weblisk.dev/#app"
+      name: Weblisk
+      description: >
+        Weblisk is a zero-dependency open-source framework for defining
+        and orchestrating agentic services — autonomous, interconnected
+        domains that power your business. Describe a service as a
+        blueprint. Build it, consume it, or publish it to the
+        marketplace.
+      url: "https://weblisk.dev"
+      category: DeveloperApplication
+      os: Any
+      price: "0"
+      currency: USD
+      license: "https://opensource.org/licenses/MIT"
+      version: "1.0.0"
+      languages: [Go, Rust, "Node.js"]
+      repository: "https://github.com/avaropoint/weblisk"
+      partOf: "https://weblisk.dev/#website"
+    - type: FAQPage
+      questions:
+        - q: What is Weblisk?
+          a: >
+            Weblisk is a zero-dependency open-source framework for
+            defining and orchestrating agentic services — autonomous,
+            interconnected domains that power your business. Describe a
+            service as a blueprint. Build it, consume it, or publish it
+            to the marketplace. You decide what runs, where it runs,
+            and how your data is managed.
+        - q: What are Weblisk Blueprints?
+          a: >
+            Blueprints are structured descriptions of what you want to
+            build — your business logic, security rules, data models,
+            integrations, and deployment targets — written in a format
+            that both people and agents understand. Anyone on your team
+            can read and shape them. Agents use blueprints to generate
+            complete production systems. The framework is open source.
+            The code it generates belongs to you.
+        - q: Why use Weblisk instead of AI code generators like Claude or ChatGPT?
+          a: >
+            AI code generators lose context between sessions — every
+            prompt starts from scratch. Weblisk blueprints give AI a
+            permanent, structured description to generate from. Define
+            once, generate forever. No re-prompting, no hallucinated
+            architecture, no context drift.
+        - q: How does Weblisk compare to SaaS platforms?
+          a: >
+            SaaS platforms offer convenience, but you trade control of
+            your data, roadmap, and costs. With Weblisk, you describe
+            your exact requirements as blueprints and generate systems
+            you fully own. Your data stays where you put it, and you
+            decide how it moves in and out of your organization.
+        - q: Is Weblisk free?
+          a: >
+            Yes. The Weblisk framework — all specifications, the CLI,
+            and the client framework — is free and MIT-licensed. Any
+            code you generate with it is yours to use however you
+            choose. The Weblisk Marketplace enables buying and selling
+            community-created blueprints, agents, and templates so you
+            can start from proven patterns instead of building from
+            scratch.
+        - q: How does Weblisk protect my data and handle upgrades?
+          a: >
+            Migrations in Weblisk are blueprint-versioned and
+            agent-orchestrated across your entire stack — data,
+            infrastructure, agents, and configuration. Every change is
+            diffed, validated, and reversible. Your data stays where
+            you put it — no vendor-managed migrations, no surprise
+            breaking changes.
+        - q: How does Weblisk govern AI agents?
+          a: >
+            Weblisk enforces non-bypassable boundaries at four
+            checkpoints — message, storage, external, and response —
+            on every operation. Agents cannot circumvent these boundaries
+            regardless of their framework or behavior. Policies are
+            monotonic (can only add restrictions, never loosen),
+            behavioral fingerprinting detects anomalous patterns, and
+            quarantine escalation isolates compromised agents
+            automatically. This governance layer works with any AI
+            framework while ensuring nothing crosses boundaries without
+            explicit consent.
+        - q: What platforms does Weblisk support?
+          a: >
+            Weblisk blueprints generate production code for any language
+            or platform — Go, Rust, Node.js, and Cloudflare Workers
+            ship today, with community and marketplace generators
+            extending support further. One blueprint, any target —
+            switch platforms without rewriting your application.
+
+layout: full-width
+components:
+  - nav
+  - footer
+  - blueprint-viewer
+  - xray
+
+# ── Responsive Design Rules ──────────────────────────────────────────────────
+# These constraints MUST be satisfied by the generated CSS.
+responsive:
+  global:
+    - body and html MUST have overflow-x: hidden to prevent horizontal scroll
+    - All sections use padding (not fixed widths) for horizontal spacing
+    - Code blocks (pre) MUST have overflow-x: auto and max-width: 100%
+    - Grid children MUST have min-width: 0 to prevent grid blowout
+    - The install_command element MUST wrap or scroll on narrow viewports
+
+  breakpoints:
+    desktop: ">= 1024px"
+    tablet: "768px – 1023px"
+    phone: "481px – 767px"
+    small_phone: "<= 480px"
+
+  rules:
+    - selector: ".section-inner"
+      constraints:
+        - overflow: hidden (contain child overflow)
+        - max-width: var(--wl-max-width) with auto margins
+
+    - selector: ".install-cmd"
+      constraints:
+        - max-width: 100% on all viewports
+        - overflow-x: auto with hidden scrollbar on small screens
+        - word-break or horizontal scroll when content exceeds container
+
+    - selector: ".gs-step-content .code-window"
+      constraints:
+        - min-width: 0 (prevent grid blowout)
+        - code-body pre: overflow-x auto, max-width 100%
+
+    - selector: ".split-pane"
+      constraints:
+        - Children get min-width: 0 to prevent grid overflow
+        - Stacks vertically below 768px
+
+    - selector: ".code-window, .code-body pre"
+      constraints:
+        - max-width: 100% at all breakpoints
+        - overflow-x: auto on pre elements
+
+    - selector: ".xray-showcase"
+      constraints:
+        - Stacks at 900px
+        - Code layers truncate with overflow: hidden
+
+    - selector: ".comparison-table"
+      constraints:
+        - Wrapped in overflow-x: auto container
+        - min-width on table for horizontal scroll on small screens
+
+sections:
+
+  # Hero
+  - id: hero
+    type: hero
+    badge:
+      text: "v1.0 — Zero dependencies, open source"
+      icon: dot
+    headline: "The open ecosystem for agentic services."
+    subheadline: >
+      The first open-source platform to unify a secure, collaborative
+      hub and marketplace of autonomous agents. Define what you need
+      as blueprints — AI translates them to production code in any
+      language or platform of your choice.
+    actions:
+      - label: Get Started
+        href: /docs/quickstart.html
+        style: primary
+      - label: How It Works
+        href: /platform/
+        style: outline
+    trust_signals:
+      - icon: file-text
+        text: Build it, consume it, or publish it
+      - icon: bolt
+        text: Your data never leaves your control
+      - icon: shield
+        text: Open source, MIT-licensed
+    install_command: "curl -fsSL https://cdn.weblisk.dev/install.sh | sh"
+    styles:
+      install_cmd:
+        margin_bottom: 1.5rem
+      trust_signals:
+        layout: flex-row-center
+        gap: 1.5rem
+        wrap: true
+        margin_top: 0.5rem
+        item:
+          display: inline-flex
+          align_items: center
+          gap: 0.4rem
+          font_size: 0.85rem
+          font_weight: 500
+          color: var(--wl-text-muted)
+          icon_color: var(--wl-primary)
+          icon_size: 16
+      trust_signal_icons:
+        type: inline-svg
+        stroke_width: 2
+        size: 16
+        icons:
+          describe_once:
+            description: Document with lines
+            paths:
+              - path: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              - polyline: "14 2 14 8 20 8"
+              - line: { x1: 16, y1: 13, x2: 8, y2: 13 }
+              - line: { x1: 16, y1: 17, x2: 8, y2: 17 }
+          generate_forever:
+            description: Shuffle/branch arrows
+            paths:
+              - polyline: "16 3 21 3 21 8"
+              - line: { x1: 4, y1: 20, x2: 21, y2: 3 }
+              - polyline: "21 16 21 21 16 21"
+              - line: { x1: 15, y1: 15, x2: 21, y2: 21 }
+              - line: { x1: 4, y1: 4, x2: 9, y2: 9 }
+          own_everything:
+            description: Shield
+            paths:
+              - path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+
+  # Stats
+  - id: stats
+    type: stats-bar
+    background: soft
+    attributes:
+      data-reveal: true
+    island: stat-counter.js
+    hydrate: visible
+    items:
+      - value: "0"
+        label: Runtime Dependencies
+        icon:
+          description: Shield with checkmark
+          paths:
+            - path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+            - polyline: "9 12 11 14 15 10"
+      - value: "97+"
+        label: Ready-Made Blueprints
+        icon:
+          description: Document with lines
+          paths:
+            - path: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            - polyline: "14 2 14 8 20 8"
+            - line: { x1: 16, y1: 13, x2: 8, y2: 13 }
+            - line: { x1: 16, y1: 17, x2: 8, y2: 17 }
+      - value: "7+"
+        label: Transparent Layers
+        icon:
+          description: Stacked layers
+          paths:
+            - path: "M12 2L2 7l10 5 10-5-10-5z"
+            - path: "M2 17l10 5 10-5"
+            - path: "M2 12l10 5 10-5"
+      - value: "40+"
+        label: Reusable Patterns
+        icon:
+          description: Grid of four squares
+          paths:
+            - rect: { x: 3, y: 3, width: 7, height: 7 }
+            - rect: { x: 14, y: 3, width: 7, height: 7 }
+            - rect: { x: 14, y: 14, width: 7, height: 7 }
+            - rect: { x: 3, y: 14, width: 7, height: 7 }
+      - value: "11+"
+        label: Built-In Agents
+        icon:
+          description: Lightning bolt
+          paths:
+            - polygon: "13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+
+  # What Is a Blueprint?
+  - id: blueprints
+    type: content-section
+    label: Blueprints
+    headline: "Blueprints are the structure of any idea."
+    description: >
+      A blueprint is a structured description of what you want to build
+      — your data models, security rules, integrations, and business
+      logic — written in a format that both people and agents understand.
+      No programming required. Define it once, generate from it in any
+      language, for any platform. When requirements change, update the
+      blueprint and regenerate.
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
+    cards:
+      - icon: edit
+        color: purple
+        title: "Anyone Can Read It"
+        text: >
+          Blueprints aren't code — they're structured descriptions
+          anyone on your team can read. Founders, product managers,
+          developers, and stakeholders all shape the same document.
+          Your business logic is visible, not buried.
+      - icon: layers
+        color: cyan
+        title: "One Source of Truth"
+        text: >
+          Security rules, data models, integrations, deployment targets
+          — everything about your project lives in one versioned place.
+          No scattered docs. No diagrams that drift from reality. One
+          blueprint, always current.
+      - icon: check
+        color: green
+        title: "Define Once, Generate Forever"
+        text: >
+          No re-prompting. No lost context. The blueprint holds your
+          requirements permanently — generate from it whenever you
+          need, in any language, for any platform. Need to switch from
+          Node to Go? Change the target, keep the blueprint.
+      - icon: bolt
+        color: orange
+        title: "Context That Doesn't Expire"
+        text: >
+          AI chat memory fades between sessions. Blueprints don't.
+          They hold your full system context — compliance checks,
+          security boundaries, migration paths — so agents generate
+          consistent, verifiable systems every time.
+      - icon: globe
+        color: cyan
+        title: "The Knowledge Stays"
+        text: >
+          People move on — roles change, contributors rotate. The
+          blueprint holds every decision and why it was made. Any
+          person or AI can pick up where the last one left off. Your
+          institutional knowledge lives in the spec, not in someone's
+          head.
+      - icon: shield
+        color: green
+        title: "Upgrades Without Rewrites"
+        text: >
+          When your system evolves, the blueprint evolves with it.
+          Every migration is versioned, validated, and reversible.
+          Update the spec, regenerate, deploy — no rewrite required.
+
+  # Generative UI/UX
+  - id: blueprint-pipeline
+    type: pipeline-showcase
+    label: How It Works
+    headline: "Details your blueprints need to make it work your way."
+    description: >
+      A blueprint describes what you need — entities, fields, access
+      rules, integrations. Agents read that blueprint and generate
+      production code: API endpoints, data models, validation, and UI.
+      Every layer is visible, every decision traceable back to your spec.
+    attributes:
+      data-reveal: true
+    island: pipeline.js
+    hydrate: visible
+    stages:
+      - id: blueprint
+        number: 1
+        badge: { text: "You write", color: human, icon: user }
+        label: Blueprint
+        preview:
+          language: yaml
+          title: domains/crm.yaml
+          content: |
+            domain: crm
+            version: 1.0.0
+
+            entities:
+              - name: Contact
+                fields:
+                  - name: name
+                    type: string
+                    required: true
+                  - name: email
+                    type: string
+                    format: email
+                    unique: true
+                  - name: company
+                    ref: Company
+                  - name: tags
+                    type: string[]
+                operations: [create, read, update, delete, list]
+                access:
+                  read: [owner, team]
+                  write: [owner]
+                  delete: [owner]
+
+            ui:
+              list:
+                columns: [name, email, company, tags]
+                search: [name, email]
+                sort: name
+              form:
+                layout: single-column
+      - id: generated
+        number: 2
+        badge: { text: "Generated", color: agent, icon: bolt }
+        label: Code Layers
+        layers:
+          - id: api
+            label: API
+            border_color: pink
+            content: |
+              // routes/crm/contacts.ts — full CRUD
+              router.post('/crm/contacts', auth, validate(CreateContact), create);
+              router.get('/crm/contacts', auth, paginate, list);
+              router.get('/crm/contacts/:id', auth, ownership, read);
+              router.put('/crm/contacts/:id', auth, ownership, validate(UpdateContact), update);
+              router.delete('/crm/contacts/:id', auth, ownership, remove);
+          - id: schema
+            label: Schema
+            border_color: blue
+            content: |
+              -- migrations/001_contacts.sql
+              CREATE TABLE contacts (
+                id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                name       TEXT NOT NULL,
+                email      TEXT UNIQUE NOT NULL,
+                company_id UUID REFERENCES companies(id),
+                tags       TEXT[] DEFAULT '{}',
+                owner_id   UUID NOT NULL REFERENCES users(id)
+              );
+          - id: ui
+            label: UI
+            border_color: yellow
+            content: |
+              // components/ContactList.tsx
+              export default function ContactList() {
+                const { data, search, sort } = useContacts();
+                return <DataTable columns={['name','email','company','tags']}
+                  data={data} onSearch={search} onSort={sort} />;
+              }
+      - id: rendered
+        number: 3
+        badge: { text: "Live", color: output, animated: pulse }
+        label: Running Service
+        preview:
+          type: mini-crud
+          title: Contacts
+          columns: [Name, Email, Company, Tags]
+          rows:
+            - [Sarah Chen, sarah@acme.io, Acme Corp, lead]
+            - [James Park, james@volta.dev, Volta, partner]
+            - [Priya Sharma, priya@lunar.co, Lunar, client]
+    caption: >-
+      This page was generated from a blueprint. Click the </> on any
+      section to X-Ray the blueprint source and generated code side by side.
+    connectors:
+      - label: Agents process
+        style: compact
+      - label: Renders
+        style: compact
+    client_framework_callout:
+      headline: "Built using the Weblisk Client Framework"
+      description: >-
+        Reactive islands that hydrate on demand with zero build dependencies, accept any blueprint-driven
+        input, and connect directly to the agents that handle their logic.
+        Every section on this page is a live island — specification in,
+        reactive UI out.
+      link: /platform/client/
+
+  # The Workflow
+  - id: the-workflow
+    type: content-section
+    background: soft
+    label: The Workflow
+    headline: "Every blueprint is a domain expert. Build yours or use ours."
+    description: >
+      A blueprint encodes the knowledge of the best architect, the best
+      security engineer, the best data modeler — for any domain. Write one
+      from scratch, fork one from the marketplace, or compose patterns
+      together. Either way, you get production-grade systems that reflect
+      deep expertise without needing to be the expert yourself.
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
+    cards:
+      - icon: terminal
+        title: "Initialize"
+        text: >
+          One command scaffolds your project with blueprint structure,
+          agent configs, and platform targets.
+        spec: "weblisk init my-project"
+      - icon: download
+        title: "Source Blueprints"
+        text: >
+          Pull from the open marketplace, fork community blueprints,
+          or write your own. Compose patterns, mix, extend anything.
+        spec: "weblisk add patterns/auth-token"
+      - icon: bolt
+        title: "Build & Generate"
+        text: >
+          Generate production code for any supported language or
+          platform. Built-in targets ship today — custom generators
+          extend the rest. One blueprint, infinite targets.
+        spec: "weblisk generate --lang go"
+      - icon: refresh
+        title: "Transform & Migrate"
+        text: >
+          Blueprint-versioned, agent-orchestrated migrations across
+          your entire stack — data, infrastructure, agents, and
+          configuration. Every change diffed, validated, and reversible.
+        spec: "weblisk migrate --validate"
+      - icon: eye
+        title: "Preview & Validate"
+        text: >
+          See exactly what ships before it goes live. Schema validation,
+          security checks, quality gates.
+        spec: "weblisk preview --validate"
+      - icon: cloud-upload
+        title: "Deploy & Monitor"
+        text: >
+          Validated, versioned, deployed — with schema checks and
+          automatic rollback. The loop never stops.
+        spec: "weblisk deploy --auto-rollback"
+    loop_label: "Continuous improvement — domain-expert agents monitor every layer, the loop never stops"
+
+  # Architecture
+  - id: architecture
+    type: content-section
+    background: soft
+    label: Architecture
+    headline: "Seven layers. All open. All yours."
+    description: >
+      Weblisk exposes every layer — from wire protocol to marketplace —
+      as open and specified. Each layer can wrap, connect to, or replace
+      parts of your existing systems through governed data contracts.
+      You decide which layers to use, extend, or swap out. The
+      architecture is transparent because you should understand the
+      systems you depend on.
+    attributes:
+      data-reveal: true
+    interactive_diagram:
+      island: arch-diagram.js
+      hydrate: visible
+      svg_viewbox: "0 0 560 540"
+      layers:
+        - id: protocol
+          label: "Protocol"
+          sublabel: "HTTP+JSON · Wire Format · Standard API Contracts"
+          rect: { x: 30, y: 0, width: 500, height: 60 }
+          detail:
+            title: "Protocol"
+            text: >
+              HTTP + JSON wire format that standardizes communication
+              across every Weblisk project. Standard API contracts,
+              consistent request/response shapes, and versioned endpoints.
+            link:
+              label: Protocol specs →
+              href: /platform/blueprints/protocol.html
+        - id: federation
+          label: "Federation"
+          sublabel: "ML-DSA-65 · Hub-to-Hub Trust · Post-Quantum Verification"
+          rect: { x: 30, y: 70, width: 500, height: 60 }
+          detail:
+            title: "Federation"
+            text: >
+              Post-quantum identity signing (ML-DSA-65, FIPS 204) with
+              hub-to-hub cryptographic trust verification. Federation
+              protocol enables collaboration across independent hubs —
+              every message signed, every agent verified, every data
+              contract enforced. Quantum-resistant by default.
+            link:
+              label: Federation specs →
+              href: /platform/blueprints/federation.html
+        - id: schemas
+          label: "Schemas & Validation"
+          sublabel: "5 Compliance Tiers · Enforced Standards · Versioning"
+          rect: { x: 30, y: 140, width: 500, height: 60 }
+          detail:
+            title: "Schemas & Validation"
+            text: >
+              Five compliance tiers — from sandbox to certified. Every
+              blueprint runs through a 4-phase validation pipeline with
+              50+ checks before it can register, publish, or interact
+              with other agents. Content hashing detects post-generation
+              tampering. Enterprise standards, enforced automatically —
+              not by trust, but by architecture.
+            link:
+              label: Schema specs →
+              href: /platform/blueprints/schemas.html
+        - id: agents
+          label: "Agents"
+          sublabel: "Domain · Infrastructure · Task · Quality · Lifecycle"
+          rect: { x: 30, y: 210, width: 500, height: 60 }
+          detail:
+            title: "Agents"
+            text: >
+              11 infrastructure agents plus unlimited domain agents.
+              Each sandboxed, portable, and AI-ready. Agents register
+              capabilities, execute tasks, and collaborate autonomously
+              across your entire system.
+            link:
+              label: Agent catalog →
+              href: /platform/agents/
+        - id: patterns
+          label: "Patterns"
+          sublabel: "API · Auth · Governance · Webhooks · Workflows · Storage"
+          rect: { x: 30, y: 280, width: 500, height: 60 }
+          detail:
+            title: "Patterns"
+            text: >
+              40 cross-cutting contracts — API, auth, governance,
+              webhooks, workflows, storage, deployment, and more.
+              Each pattern generates real endpoints with real security
+              and real validation. Patterns compose together with explicit
+              dependency contracts — policies can only add restrictions,
+              never loosen them.
+            link:
+              label: Pattern catalog →
+              href: /platform/blueprints/patterns.html
+        - id: platforms
+          label: "Platforms"
+          sublabel: "Any language · Any platform · Extensible"
+          rect: { x: 30, y: 350, width: 500, height: 60 }
+          detail:
+            title: "Platforms"
+            text: >
+              Blueprints target any language or platform. Go, Rust,
+              Node.js, and Cloudflare Workers ship as built-in
+              generators — community and marketplace authors can build
+              generators for anything else. One blueprint, any target.
+            link:
+              label: Explore platforms →
+              href: /platform/
+        - id: ecosystem
+          label: "Marketplace & Hub Network"
+          sublabel: "Open Blueprints · Templates · Community Hub · Collaboration"
+          rect: { x: 30, y: 420, width: 500, height: 60 }
+          detail:
+            title: "Marketplace & Hub Network"
+            text: >
+              Share blueprints on the open marketplace. Fork community
+              templates. Collaborate across hubs with cryptographic
+              data contracts. Build your own blueprints and publish
+              them for others to compose into their projects.
+            link:
+              label: Explore the marketplace →
+              href: /marketplace/
+      hint: "Hover or tap a layer to explore"
+
+  # Governance
+  - id: governance
+    type: content-section
+    label: Governance
+    headline: "You decide what enters and exits your system."
+    description: >
+      AI is powerful — but power without boundaries is a liability.
+      Weblisk's governance layer isn't a policy document. It's built
+      into the architecture. Non-bypassable enforcement boundaries
+      inspect every operation at every layer. Nothing enters or exits
+      your system without explicit consent — not data, not agent
+      actions, not external calls. You set the rules. The framework
+      enforces them.
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
+    cards:
+      - icon: shield
+        color: purple
+        title: "Non-Bypassable Enforcement"
+        text: >
+          Four checkpoints — message, storage, external, response —
+          inspect every operation regardless of agent cooperation.
+          This isn't middleware that can be skipped. It's a boundary
+          built into the architecture that agents cannot circumvent,
+          period.
+      - icon: lock
+        color: cyan
+        title: "Explicit Consent Boundaries"
+        text: >
+          Data doesn't move without permission. Agent actions don't
+          execute without authorization. External services don't
+          connect without policy. Every boundary crossing requires
+          explicit consent defined in your blueprints — protecting
+          your most valuable assets: your data and intellectual
+          property.
+      - icon: link
+        color: green
+        title: "Works With Any AI"
+        text: >
+          Not locked to specific frameworks. Weblisk wraps LangChain,
+          CrewAI, Google ADK, or any other AI tool — unmodified —
+          while enforcing governance at every boundary. Use whatever
+          AI you want. The governance layer ensures it operates
+          within your rules.
+      - icon: trending-up
+        color: orange
+        title: "Security That Only Gets Stronger"
+        text: >
+          Monotonic security means policies can only add restrictions —
+          never loosen them. No configuration change, no prompt, no
+          agent can reduce your security posture. Once a boundary is
+          set, it holds. This is how enterprise security should work.
+      - icon: eye
+        color: purple
+        title: "Rogue Agent Detection"
+        text: >
+          Behavioral fingerprinting identifies when agents deviate
+          from expected patterns. Anomalous behavior triggers
+          quarantine escalation — isolating compromised or
+          malfunctioning agents before they can impact your system
+          or your data.
+      - icon: database
+        color: cyan
+        title: "Data Sovereignty"
+        text: >
+          Your data stays where you put it. Blueprint-defined
+          policies control exactly what enters and exits your
+          organization. Cryptographic federation enables collaboration
+          across trusted hub networks — with real data contracts, not
+          handshake agreements.
+
+  # Comparison
+  - id: comparison
+    type: comparison-table
+    background: soft
+    label: Comparison
+    headline: "Where Weblisk fits."
+    description: >-
+      You've got options — build from scratch, rent a SaaS platform,
+      or paste together AI-generated snippets. Each has trade-offs.
+      Weblisk gives you the flexibility to describe exactly what you
+      need, generate code you own, and keep full control of your data.
+    attributes:
+      data-reveal: true
+    highlight_column: Weblisk
+    columns:
+      - Weblisk
+      - Build from scratch
+      - SaaS platform
+      - AI code gen
+    rows:
+      - feature: Persistent specification
+        values: ["97+ blueprints", "None", "Vendor-owned", "None"]
+      - feature: You own the output
+        values: ["100%", "Yes", "Vendor lock-in", "Fragile"]
+      - feature: AI governance
+        values: ["Enforcement boundaries, quarantine", "None", "Vendor-controlled", "None"]
+      - feature: Specification enforcement
+        values: ["4-phase pipeline, 50+ checks", "Manual code review", "N/A", "None"]
+      - feature: Security model
+        values: ["ML-DSA-65, ABAC, post-quantum", "Build yourself", "Shared tenancy", "None"]
+      - feature: Data sovereignty
+        values: ["Blueprint-versioned, agent-orchestrated", "Manual scripts", "Vendor-managed", "None"]
+      - feature: Runtime dependencies
+        values: ["Zero", "Hundreds", "Vendor-managed", "Hundreds"]
+      - feature: Agent orchestration
+        values: ["Built-in", "Build yourself", "Vendor-controlled", "No"]
+      - feature: Federation
+        values: ["Cryptographic hub-to-hub", "Custom integration", "No", "No"]
+      - feature: Governance
+        values: ["Schema-enforced, 5 tiers", "Manual policies", "Vendor-defined", "None"]
+      - feature: Upgrade path
+        values: ["Versioned, validated, reversible", "Rewrite", "Vendor roadmap", "Re-prompt"]
+
+  # Getting Started
+  - id: getting-started
+    type: getting-started
+    background: soft
+    label: Getting Started
+    headline: "Up and running in minutes."
+    description: >
+      Install the CLI, initialise a project, generate production
+      code, and run it locally.
+    attributes:
+      data-reveal: true
+    steps_attributes:
+      data-reveal-stagger: true
+    layout: vertical-timeline
+    steps:
+      - number: 1
+        color: purple
+        title: Install the CLI
+        description: >
+          One command. No dependencies. Works on macOS, Linux, and WSL.
+        code:
+          title: Terminal
+          content: |
+            $ curl -fsSL https://cdn.weblisk.dev/install.sh | sh
+            ✓ Weblisk CLI installed to ~/.weblisk/bin/weblisk
+      - number: 2
+        color: cyan
+        title: Initialise your project
+        description: >
+          Start from scratch or source a starter template — client,
+          server, or full-stack. Use either, or combine both.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk init my-app --template server
+            ✓ Created my-app/ from weblisk-templates/server
+            ✓ Blueprint scaffolding ready
+      - number: 3
+        color: green
+        title: Define and compose
+        optional: true
+        description: >
+          Create domains, compose patterns, and shape blueprints to
+          your exact requirements. Skip this if a starter already
+          covers what you need.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk domain create chat \
+                --patterns api-ai,auth-token,realtime-chat
+            ✓ Domain "chat" created with 3 patterns
+      - number: 4
+        color: orange
+        title: Generate
+        description: >
+          Generate production code — client and server components
+          built from your blueprints in your target language.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk generate --lang go
+            ✓ Generated 24 endpoints, 3 agents, 7 patterns
+            ✓ Output: ./generated/
+      - number: 5
+        color: purple
+        title: Run and deploy
+        description: >
+          Start a local dev server to watch your results, then deploy
+          to your target platform when you're ready.
+        code:
+          title: Terminal
+          content: |
+            $ weblisk dev
+            ✓ Dev server running at http://localhost:3000
+            ✓ Watching for changes...
+
+            $ weblisk deploy --target cloudflare
+            ✓ Deployed to production (validated, versioned)
+    cta:
+      label: Read the Quick Start Guide
+      href: /docs/quickstart.html
+      style: primary
+
+  # Use Cases
+  - id: use-cases
+    type: content-section
+    label: Where to Start
+    headline: "Pick a domain. Own it completely."
+    description: >
+      You don't need to replace everything at once. Pick one domain
+      that matters to your business — contacts, content, support,
+      operations — and describe exactly how it should work. Generate
+      the system. Run it alongside what you already have. Expand when
+      you're ready.
+    attributes:
+      data-reveal: true
+    cards_attributes:
+      data-reveal-stagger: true
+    island: usecase-expand.js
+    hydrate: visible
+    cards:
+      - icon: chart
+        color: purple
+        title: Marketing & Campaigns
+        text: >
+          Manage your campaigns, content scheduling, and analytics
+          your way — without per-seat pricing or vendor lock-in.
+          Describe the workflows that match your team, generate the
+          platform, own the data.
+        expandable: true
+        detail:
+          stats:
+            - value: 7
+              label: Blueprints
+            - value: 24
+              label: Endpoints
+            - value: 3
+              label: Agents
+          patterns:
+            - api-ai
+            - auth-token
+            - scheduling
+            - analytics
+            - webhooks
+      - icon: refresh
+        color: cyan
+        title: Operations & Supply Chain
+        text: >
+          Connect suppliers, track orders, and manage workflows —
+          without expensive middleware. Describe your integration
+          points, and agents generate the connectors, contracts,
+          and audit trails.
+        expandable: true
+        detail:
+          stats:
+            - value: 12
+              label: Blueprints
+            - value: 38
+              label: Endpoints
+            - value: 5
+              label: Agents
+          patterns:
+            - federation
+            - webhooks
+            - workflows
+            - contracts
+            - audit
+      - icon: bell
+        color: green
+        title: Support & Service
+        text: >
+          Build a support system shaped to your business — AI routing,
+          live chat, SLA tracking. Your customer data stays on your
+          infrastructure, and the system evolves as your needs do.
+        expandable: true
+        detail:
+          stats:
+            - value: 9
+              label: Blueprints
+            - value: 31
+              label: Endpoints
+            - value: 4
+              label: Agents
+          patterns:
+            - api-ai
+            - realtime-chat
+            - sla-monitor
+            - routing
+            - multi-channel
+      - icon: book
+        color: orange
+        title: Content & Publishing
+        text: >
+          A CMS shaped around your workflow — not the other way around.
+          Define your content types, publishing rules, and delivery
+          channels. No plugin bloat, no theme limitations — your
+          content system, owned outright.
+        expandable: true
+        detail:
+          stats:
+            - value: 8
+              label: Blueprints
+            - value: 28
+              label: Endpoints
+            - value: 3
+              label: Agents
+          patterns:
+            - auth-token
+            - api-crud
+            - cdn-triggers
+            - ai-writing
+            - quality
+
+  # CTA
+  - id: cta
+    type: cta-section
+    background: soft
+    headline: "One blueprint. Full ownership. Start here."
+    description: >-
+      Describe a domain. Generate a system you own — code, data,
+      infrastructure. Open source framework. Your code. Your data.
+      No lock-in.
+    attributes:
+      data-reveal: true
+    actions:
+      - label: Start Building
+        href: /docs/quickstart.html
+        style: primary
+      - label: Explore the Marketplace
+        href: /marketplace/
+        style: outline
+    roadmap_note: >-
+      Built-in targets ship today. Extensible to any language or
+      platform via custom generators.

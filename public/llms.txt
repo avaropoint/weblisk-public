@@ -1,10 +1,10 @@
 # Weblisk
 
-> A full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints. Structured specifications define your exact requirements across security, data, integrations, and deployments — and agents generate production code you fully own. 97+ specifications. Zero vendor lock-in.
+> A zero-dependency open-source framework for defining and orchestrating agentic services — autonomous, interconnected domains that power your business. Build it, consume it, or publish it.
 
 ## About
 
-Weblisk is a full stack zero dependency open-source, MIT-licensed framework for building complete software systems from declarative blueprints. Define your requirements once as structured specifications, and domain-expert agents generate production code in Go, Rust, Node.js, or Cloudflare Workers. The framework is open source. The code you generate is yours.
+Weblisk is a zero-dependency open-source, MIT-licensed framework for defining and orchestrating agentic services. Describe a service as a blueprint — your data models, security rules, integrations, and business logic. Agents read those blueprints and generate production code you fully own. Build it, consume it, or publish it to the marketplace. The framework is open source. The code you generate is yours.
 
 Weblisk is created and maintained by Avaropoint.
 
@@ -101,7 +101,7 @@ Blueprint-versioned, agent-orchestrated migrations protect your data across ever
 ## FAQ
 
 ### What is Weblisk?
-Weblisk is a full stack zero dependency open-source framework built around the idea that enterprise software needs blueprints — structured specifications that give AI the context it needs to generate real systems. 97+ interlocking blueprints capture your exact requirements — security models, data schemas, integrations, deployments — and domain-expert agents generate production code you fully own. The framework is MIT-licensed. The code you generate belongs entirely to you.
+Weblisk is a zero-dependency open-source framework for defining and orchestrating agentic services — autonomous, interconnected domains that power your business. Describe a service as a blueprint. Build it, consume it, or publish it to the marketplace. You decide what runs, where it runs, and how your data is managed. The framework is MIT-licensed. The code you generate belongs entirely to you.
 
 ### What are Weblisk Blueprints?
 Blueprints are structured specifications that define how your application works — from security models and API contracts to agent behaviour and deployment targets. Anyone can read them. They are consumed by humans, LLMs, and CI/CD pipelines to generate complete implementations in Go, Node.js, Rust, or Cloudflare Workers.
@@ -113,7 +113,7 @@ SaaS platforms rent you features through subscriptions — you depend on their r
 Blueprint-versioned, agent-orchestrated migrations across your entire stack — data, infrastructure, agents, and configuration. Every deployment is diffed, validated, and reversible. Change management and deprecation lifecycles are built into the specification — not bolted on after the fact.
 
 ### What platforms does Weblisk support?
-Weblisk starts with Cloudflare Workers as the primary deployment target, with reference implementations in Go, Rust, and Node.js. One specification corpus generates production code for any platform — AWS, GCP, Azure, and beyond.
+Go, Rust, Node.js, and Cloudflare Workers ship as built-in generators. The platform is extensible — community and marketplace authors can build generators for any language or platform.
 
 ### Is Weblisk free?
 Yes. The framework, specifications, and CLI are free and MIT-licensed. The Weblisk Marketplace enables composing, buying, and selling community-created blueprints, agents, and templates.
